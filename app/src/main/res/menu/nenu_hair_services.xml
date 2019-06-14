@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_hair_haircut"
+        android:title="@string/hair_title_haircut" />
+
+    <item
+        android:id="@+id/menu_hair_extension"
+        android:title="@string/hair_title_extension" />
+
+    <item
+        android:id="@+id/menu_hair_styling"
+        android:title="@string/hair_title_styling" />
+
+    <item
+        android:id="@+id/menu_hair_straightening"
+        android:title="@string/hair_title_straightening" />
+
+    <item
+        android:id="@+id/menu_hair_dyeing"
+        android:title="@string/hair_title_dyeing" />
+
+    <item
+        android:id="@+id/menu_hair_braids"
+        android:title="@string/hair_title_braids" />
+</menu>

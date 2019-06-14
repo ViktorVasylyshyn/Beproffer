@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/bnm_images_gallery"
+        android:icon="@drawable/bottom_navigation_bar_child_selector_gallery"
+        android:title=""
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/bnm_search"
+        android:icon="@drawable/bottom_navigation_bar_child_selector_search"
+        android:title=""
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/bnm_profile"
+        android:icon="@drawable/bottom_navigation_bar_child_selector_profile"
+        android:title=""
+        app:showAsAction="ifRoom"/>
+
+</menu>

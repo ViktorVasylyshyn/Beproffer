@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorAccent">#980C8922</color>
+
+    <!--list items' colors-->
+    <color name="color_base_text">#30312F</color>
+    <color name="color_base_text_70per">#B230312F</color>
+    <color name="color_base_button_text_white">#FFFFFF</color>
+    <color name="color_base_green">#0c8922</color>
+    <color name="color_base_transparent">#00FFFFFF</color>
+
+    <!--Backgrounds-->
+    <color name="color_background_grey">#E6E6E6</color>
+    <color name="color_background_white">#FFFFFF</color>
+    <color name="color_bnb_background_start">#000ED145</color>
+    <color name="color_bnb_background_end">#0c8922</color>
+    <color name="color_pop_up_menu_background">#FFFFFF</color>
+
+
+    <color name="colorPrimary">#0c8922</color>
+    <color name="colorPrimaryDark">#494E4E</color>
+
+    <color name="colorIconGrey">#979E95</color>
+
+    <color name="colorBackgroundGradientStart">#F0F5EF</color>
+    <color name="colorBackgroundGradientEnd">#B0B6B0</color>
+
+    <color name="greyLightGradientStart">#66FFFFFF</color>
+    <color name="greyLightGradientEnd">#B2FFFFFF</color>
+
+    <color name="colorTextDarkGrey">#30312F</color>
+    <color name="colorTextLightGrey">#80525552</color>
+
+</resources>

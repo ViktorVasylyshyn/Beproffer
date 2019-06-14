@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="showProgress"
+            type="android.databinding.ObservableBoolean" />
+
+        <variable
+            name="userData"
+            type="com.beproffer.beproffer.data.models.UserData" />
+
+        <variable
+            name="fragmentCallback"
+            type="com.beproffer.beproffer.presentation.profile.profile.ProfileFragmentCallback" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/profile_image_quarter"
+            android:layout_marginTop="@dimen/profile_image_half"
+            android:layout_marginEnd="@dimen/profile_image_quarter"
+            android:background="@drawable/rectangle_white_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/profile_image">
+
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base_padding_small"
+                android:layout_marginTop="@dimen/profile_image_half"
+                android:layout_marginEnd="@dimen/base_padding_small"
+                android:layout_marginBottom="@dimen/base_padding_small"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="@dimen/base_padding_medium"
+                android:singleLine="true"
+                android:text="@{userData.userName}"
+                android:textColor="@color/colorTextDarkGrey"
+                android:textSize="@dimen/base_text_size_big"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/profile_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/base_margin_small"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="@dimen/base_padding_small"
+                android:text="@{userData.userEmail}"
+                android:textColor="@color/color_base_text_70per"
+                android:textSize="@dimen/base_text_size_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_name" />
+
+            <TextView
+                android:id="@+id/profile_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/base_margin_small"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="@dimen/base_padding_small"
+                android:text="@{userData.userPhone}"
+                android:textColor="@color/colorTextLightGrey"
+                android:textSize="@dimen/base_text_size_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_email" />
+
+            <TextView
+                android:id="@+id/profile_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/base_padding_small"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="@dimen/base_padding_small"
+                android:text="@string/kyiv"
+                android:textColor="@color/color_base_text_70per"
+                android:textSize="@dimen/base_text_size_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_phone" />
+
+            <TextView
+                android:id="@+id/profile_user_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/base_margin_small"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="2"
+                android:padding="@dimen/base_padding_small"
+                android:text="@{userData.userInfo}"
+                android:textColor="@color/colorTextLightGrey"
+                android:textSize="@dimen/base_text_size_small"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_location" />
+
+            <ImageView
+                android:id="@+id/profile_storage"
+                android:layout_width="@dimen/profile_image_half"
+                android:layout_height="@dimen/profile_image_half"
+                android:onClick="@{fragmentCallback::onPerformNavigationClick}"
+                android:src="@drawable/ic_my_gallery"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@+id/profile_contacts"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/profile_contacts"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/profile_contacts"
+                android:layout_width="@dimen/profile_image_half"
+                android:layout_height="@dimen/profile_image_half"
+                android:layout_margin="@dimen/base_margin_small"
+                android:onClick="@{fragmentCallback::onPerformNavigationClick}"
+                android:src="@drawable/ic_contacts"
+                app:layout_constraintEnd_toStartOf="@+id/profile_contact_requests"
+                app:layout_constraintStart_toEndOf="@+id/profile_storage"
+                app:layout_constraintTop_toBottomOf="@+id/profile_user_description"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/profile_contact_requests"
+                android:layout_width="@dimen/profile_image_half"
+                android:layout_height="@dimen/profile_image_half"
+                android:onClick="@{fragmentCallback::onPerformNavigationClick}"
+                android:src="@drawable/ic_contact_requests"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/profile_contacts"
+                app:layout_constraintTop_toTopOf="@+id/profile_contacts"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/profile_logout"
+                android:layout_width="@dimen/profile_image_half"
+                android:layout_height="@dimen/profile_image_half"
+                android:layout_margin="@dimen/base_margin_small"
+                android:onClick="@{(view)->fragmentCallback.onLogOutClick()}"
+                android:src="@drawable/ic_log_out"
+                app:layout_constraintEnd_toStartOf="@+id/profile_info"
+                app:layout_constraintStart_toEndOf="@+id/profile_settings"
+                app:layout_constraintTop_toBottomOf="@+id/profile_contacts"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/profile_settings"
+                android:layout_width="@dimen/profile_image_half"
+                android:layout_height="@dimen/profile_image_half"
+                android:layout_margin="@dimen/base_margin_small"
+                android:onClick="@{fragmentCallback::onPerformNavigationClick}"
+                android:src="@drawable/ic_settings"
+                app:layout_constraintEnd_toStartOf="@+id/profile_logout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_storage"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/profile_info"
+                android:layout_width="@dimen/profile_image_half"
+                android:layout_height="@dimen/profile_image_half"
+                android:layout_margin="@dimen/base_margin_small"
+                android:onClick="@{fragmentCallback::onPerformNavigationClick}"
+                android:src="@drawable/ic_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/profile_logout"
+                app:layout_constraintTop_toBottomOf="@+id/profile_contact_requests"
+                tools:ignore="ContentDescription" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/profile_image"
+            android:layout_height="@dimen/profile_image"
+            android:layout_marginTop="@dimen/base_margin_medium"
+            android:src="@{userData.userProfileImageUrl}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/profile_gender"
+            android:layout_width="@dimen/profile_image_quarter"
+            android:layout_height="@dimen/profile_image_quarter"
+            android:layout_margin="@dimen/base_margin_small"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+            app:layout_constraintEnd_toStartOf="@+id/profile_image"
+            app:setGenderImage="@{userData.userGender}"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_grey_background"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_extra_small"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_gender"
+            app:layout_constraintEnd_toEndOf="@+id/profile_gender"
+            app:layout_constraintStart_toStartOf="@+id/profile_gender"
+            app:layout_constraintTop_toBottomOf="@+id/profile_gender"
+            app:setGenderTitle="@{userData.userGender}" />
+
+        <ImageView
+            android:id="@+id/profile_edit"
+            android:layout_width="@dimen/profile_image_quarter"
+            android:layout_height="@dimen/profile_image_quarter"
+            android:layout_margin="@dimen/base_margin_small"
+            android:onClick="@{fragmentCallback :: onPerformNavigationClick}"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+            app:layout_constraintStart_toEndOf="@+id/profile_image"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_grey_background"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_extra_small"
+            android:textStyle="bold"
+            android:text="@string/hint_edit_outfield"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_edit"
+            app:layout_constraintEnd_toEndOf="@+id/profile_edit"
+            app:layout_constraintStart_toStartOf="@+id/profile_edit"
+            app:layout_constraintTop_toBottomOf="@+id/profile_edit" />
+
+        <ProgressBar
+            android:id="@+id/profile_progress_bar"
+            android:layout_width="@dimen/profile_image_half"
+            android:layout_height="@dimen/profile_image_half"
+            android:theme="@style/Widget.AppCompat.ProgressBar"
+            android:visibility="@{showProgress ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

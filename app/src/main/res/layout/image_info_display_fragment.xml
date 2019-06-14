@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="showProgress"
+            type="android.databinding.ObservableBoolean"/>
+
+        <variable
+            name="fragmentCallback"
+            type="com.beproffer.beproffer.presentation.swimg.info.ImageInfoDisplayFragmentCallback" />
+
+        <variable
+            name="imageItem"
+            type="com.beproffer.beproffer.data.models.SwipeImageItem" />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/image_info_display_constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="@{(view)->fragmentCallback.onPerformBackNavigationClick()}"
+        tools:context=".presentation.swimg.info.ImageInfoDisplayFragment">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/image_info_display_constraint_layout_internal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/profile_image_quarter"
+            android:layout_marginEnd="@dimen/profile_image_quarter"
+            android:background="@drawable/rectangle_white_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/image_info_display_type_image"
+                android:layout_width="@dimen/profile_image_half"
+                android:layout_height="@dimen/profile_image_half"
+                android:layout_margin="@dimen/base_margin_small"
+                app:layout_constraintEnd_toStartOf="@+id/image_info_display_gender_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setTypeImage="@{imageItem.type}"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_base_text"
+                android:textSize="@dimen/base_text_size_extra_small"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/image_info_display_type_image"
+                app:layout_constraintEnd_toEndOf="@+id/image_info_display_type_image"
+                app:layout_constraintStart_toStartOf="@+id/image_info_display_type_image"
+                app:layout_constraintTop_toBottomOf="@+id/image_info_display_type_image"
+                app:setTypeTitle="@{imageItem.subtype}" />
+
+            <ImageView
+                android:id="@+id/image_info_display_gender_image"
+                android:layout_width="@dimen/profile_image_half"
+                android:layout_height="@dimen/profile_image_half"
+                android:layout_margin="@dimen/base_margin_small"
+                app:layout_constraintEnd_toStartOf="@+id/image_info_display_duration_image"
+                app:layout_constraintStart_toEndOf="@+id/image_info_display_type_image"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setGenderImage="@{imageItem.gender}"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/image_info_display_gender_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_base_text"
+                android:textSize="@dimen/base_text_size_extra_small"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/image_info_display_gender_image"
+                app:layout_constraintEnd_toEndOf="@+id/image_info_display_gender_image"
+                app:layout_constraintStart_toStartOf="@+id/image_info_display_gender_image"
+                app:layout_constraintTop_toBottomOf="@+id/image_info_display_gender_image"
+                app:setGenderTitle="@{imageItem.gender}" />
+
+            <ImageView
+                android:id="@+id/image_info_display_duration_image"
+                android:layout_width="@dimen/profile_image_half"
+                android:layout_height="@dimen/profile_image_half"
+                android:layout_margin="@dimen/base_margin_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_info_display_gender_image"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setDurationImage="@{imageItem.duration}"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_base_text"
+                android:textSize="@dimen/base_text_size_extra_small"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/image_info_display_duration_image"
+                app:layout_constraintEnd_toEndOf="@+id/image_info_display_duration_image"
+                app:layout_constraintStart_toStartOf="@+id/image_info_display_duration_image"
+                app:layout_constraintTop_toBottomOf="@+id/image_info_display_duration_image"
+                app:setDurationTitle="@{imageItem.duration}" />
+
+            <TextView
+                android:id="@+id/image_info_display_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/base_margin_small"
+                android:text="@{imageItem.description}"
+                android:textColor="@color/color_base_text"
+                android:textSize="@dimen/base_text_size_big"
+                android:textStyle="italic"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_info_display_gender_title" />
+
+            <TextView
+                android:id="@+id/image_info_display_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/base_margin_small"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:text="@{imageItem.price}"
+                android:textColor="@color/color_base_text"
+                android:textSize="@dimen/base_text_size_big"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_info_display_description" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/base_margin_small"
+                android:text="@string/title_price"
+                android:textColor="@color/color_base_text"
+                android:textSize="@dimen/base_text_size_small"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/image_info_display_price"
+                app:layout_constraintEnd_toStartOf="@+id/image_info_display_price"
+                app:layout_constraintTop_toTopOf="@+id/image_info_display_price" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/base_margin_small"
+                android:text="@string/hint_currency_outfield"
+                android:textColor="@color/color_base_text"
+                android:textSize="@dimen/base_text_size_small"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/image_info_display_price"
+                app:layout_constraintStart_toEndOf="@+id/image_info_display_price"
+                app:layout_constraintTop_toTopOf="@+id/image_info_display_price" />
+
+            <ImageView
+                android:id="@+id/image_info_display_send_contact_request_image"
+                android:layout_width="@dimen/profile_image_half"
+                android:layout_height="@dimen/profile_image_half"
+                android:layout_margin="@dimen/base_margin_small"
+                android:onClick="@{(view)->fragmentCallback.onSendContactRequestClick()}"
+                android:src="@drawable/ic_request_contact"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_info_display_price"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/image_info_display_contact_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/title_ask_for_phone"
+                android:textSize="@dimen/base_text_size_extra_small"
+                android:textColor="@color/color_base_text"
+                app:layout_constraintStart_toStartOf="@+id/image_info_display_send_contact_request_image"
+                app:layout_constraintEnd_toEndOf="@+id/image_info_display_send_contact_request_image"
+                app:layout_constraintTop_toBottomOf="@+id/image_info_display_send_contact_request_image"
+                app:layout_constraintBottom_toBottomOf="@+id/image_info_display_send_contact_request_image"
+                />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/image_info_display_progress_bar"
+            android:layout_width="@dimen/profile_image_half"
+            android:layout_height="@dimen/profile_image_half"
+            android:theme="@style/Widget.AppCompat.ProgressBar"
+            android:visibility="@{showProgress ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

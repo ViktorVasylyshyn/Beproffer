@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.beproffer.beproffer.data.models.ConfirmedContactItem" />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/base_margin_small"
+        android:background="@drawable/rectangle_white_background">
+
+        <ImageView
+            android:id="@+id/confirmed_contact_item_image"
+            android:layout_width="@dimen/profile_image_half"
+            android:layout_height="@dimen/profile_image_half"
+            android:layout_margin="@dimen/base_margin_small"
+            android:src="@{item.contactImageUrl}"
+            app:layout_constraintBottom_toTopOf="@+id/confirmed_contact_item_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/confirmed_contact_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{item.contactName}"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_big"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/confirmed_contact_item_image"/>
+
+        <TextView
+            android:id="@+id/confirmed_contact_item_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:text="@{item.contactPhone}"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_big"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/confirmed_contact_item_image"
+            app:layout_constraintTop_toBottomOf="@+id/confirmed_contact_item_name"/>
+
+        <TextView
+            android:id="@+id/confirmed_contact_item_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:gravity="center"
+            android:text="@{item.contactInfo}"
+            android:textColor="@color/color_base_text_70per"
+            android:textSize="@dimen/base_text_size_small"
+            android:textStyle="italic|bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirmed_contact_item_phone" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--profile user image-->
+    <dimen name="profile_image">160dp</dimen>
+    <dimen name="profile_image_three_quarters">120dp</dimen>
+    <dimen name="profile_image_half">80dp</dimen>
+    <dimen name="profile_image_quarter">40dp</dimen>
+
+
+    <!--Text-->
+    <dimen name="base_text_size_big">20sp</dimen>
+    <dimen name="base_text_size_small">16sp</dimen>
+    <dimen name="base_text_size_extra_small">10sp</dimen>
+
+
+    <!--Margins-->
+    <dimen name="base_margin_extra_small">4dp</dimen>
+    <dimen name="base_margin_small">8dp</dimen>
+    <dimen name="base_margin_medium">16dp</dimen>
+    <dimen name="base_margin_big">32dp</dimen>
+    <dimen name="bnb_hints_margin">64dp</dimen>
+
+
+    <!--Paddings-->
+    <dimen name="base_padding_medium">8dp</dimen>
+    <dimen name="base_padding_small">4dp</dimen>
+
+
+    <!--list item image-->
+    <dimen name="list_item_image_width">128dp</dimen>
+    <dimen name="list_item_image_height">192dp</dimen>
+    <dimen name="list_item_description_width">192dp</dimen>
+
+
+    <!--specialists edit fragment image-->
+    <dimen name="specialist_edit_fragment_image_width">128dp</dimen>
+    <dimen name="specialist_edit_fragment_image_height">192dp</dimen>
+
+
+    <!--Radius-->
+    <dimen name="radius_rectangle_background_small">8dp</dimen>
+    <dimen name="radius_rectangle_background_extra_small">4dp</dimen>
+
+</resources>

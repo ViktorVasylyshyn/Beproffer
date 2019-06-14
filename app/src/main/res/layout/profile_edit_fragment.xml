@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="showProgress"
+            type="android.databinding.ObservableBoolean"/>
+
+        <variable
+            name="userData"
+            type="com.beproffer.beproffer.data.models.UserData" />
+
+        <variable
+            name="fragmentCallback"
+            type="com.beproffer.beproffer.presentation.profile.profile_edit.ProfileEditFragmentCallback" />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.profile.profile_edit.ProfileEditFragment">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutEditFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/profile_image_quarter"
+            android:layout_marginEnd="@dimen/profile_image_quarter"
+            android:layout_marginTop="@dimen/profile_image_half"
+            android:background="@drawable/rectangle_grey_background"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/profile_image_half" />
+
+            <EditText
+                android:id="@+id/edit_fragment_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/base_margin_small"
+                android:background="@drawable/rectangle_white_background"
+                android:hint="@string/name_infield"
+                android:maxLength="50"
+                android:maxLines="1"
+                android:inputType="text"
+                android:text="@={userData.userName}"
+                android:textColor="@color/color_base_text"
+                android:textColorHint="@color/color_base_text_70per"
+                android:textSize="@dimen/base_text_size_big"
+                android:textStyle="italic"
+                tools:ignore="Autofill" />
+
+            <EditText
+                android:id="@+id/edit_fragment_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/base_margin_small"
+                android:background="@drawable/rectangle_white_background"
+                android:hint="@string/phone_infield"
+                android:inputType="phone"
+                android:maxLength="20"
+                android:maxLines="1"
+                android:text="@={userData.userPhone}"
+                android:textColor="@color/color_base_text"
+                android:textColorHint="@color/color_base_text_70per"
+                android:textSize="@dimen/base_text_size_big"
+                android:textStyle="italic"
+                tools:ignore="Autofill" />
+
+            <EditText
+                android:id="@+id/edit_fragment_about_me"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/base_margin_small"
+                android:background="@drawable/rectangle_white_background"
+                android:hint="@string/hint_about_me_infield"
+                android:maxLength="100"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:inputType="text"
+                android:text="@={userData.userInfo}"
+                android:textColor="@color/color_base_text"
+                android:textColorHint="@color/color_base_text_70per"
+                android:textSize="@dimen/base_text_size_big"
+                android:textStyle="italic"
+                tools:ignore="Autofill" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/edit_fragment_image"
+            android:layout_width="@dimen/profile_image"
+            android:layout_height="@dimen/profile_image"
+            android:onClick="@{(view) -> fragmentCallback.onSetProfileImageClick()}"
+            android:src="@{userData.userProfileImageUrl}"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayoutEditFragment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/linearLayoutEditFragment"
+            tools:ignore="ContentDescription" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_gradient_grey_background"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_fragment_image"
+            app:layout_constraintStart_toEndOf="@+id/edit_fragment_image"
+            app:layout_constraintTop_toTopOf="@+id/edit_fragment_image">
+
+            <ImageView
+                android:id="@+id/edit_fragment_accept_image_button"
+                android:layout_width="@dimen/profile_image_half"
+                android:layout_height="@dimen/profile_image_half"
+                android:onClick="@{(view)->fragmentCallback.onCheckUserDataClick()}"
+                android:src="@drawable/ic_check_mark"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_gradient_grey_background"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_fragment_image"
+            app:layout_constraintEnd_toStartOf="@+id/edit_fragment_image"
+            app:layout_constraintTop_toTopOf="@+id/edit_fragment_image">
+
+            <ImageView
+                android:id="@+id/edit_fragment_gender_image_button"
+                android:layout_width="@dimen/profile_image_half"
+                android:layout_height="@dimen/profile_image_half"
+                android:onClick="@{(view)->fragmentCallback.onChangeUserGenderClick()}"
+                app:setGenderImage="@{userData.userGender}"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/edit_fragment_progress_bar"
+            android:layout_width="@dimen/profile_image_half"
+            android:layout_height="@dimen/profile_image_half"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:theme="@style/Widget.AppCompat.ProgressBar"
+            android:visibility="@{showProgress ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/edit_fragment_bottom_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_small"
+            android:layout_marginEnd="@dimen/base_margin_small"
+            android:layout_marginBottom="@dimen/bnb_hints_margin"
+            android:background="@drawable/rectangle_grey_background"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_big"
+            android:visibility="gone"
+            android:textStyle="italic"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</layout>

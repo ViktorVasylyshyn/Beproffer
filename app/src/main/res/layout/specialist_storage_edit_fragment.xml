@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="showProgress"
+            type="android.databinding.ObservableBoolean" />
+
+        <variable
+            name="item"
+            type="com.beproffer.beproffer.data.models.StorageImageItem" />
+
+        <variable
+            name="fragmentCallback"
+            type="com.beproffer.beproffer.presentation.specstorage.edit.SpecialistStorageEditFragmentCallback" />
+
+        <variable
+            name="viewModel"
+            type="com.beproffer.beproffer.presentation.specstorage.edit.SpecialistStorageEditFragmentViewModel" />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.specstorage.edit.SpecialistStorageEditFragment">
+
+        <ImageView
+            android:id="@+id/specialist_storage_edit_image"
+            android:layout_width="@dimen/specialist_edit_fragment_image_width"
+            android:layout_height="@dimen/specialist_edit_fragment_image_height"
+            android:layout_margin="@dimen/base_margin_small"
+            android:onClick="@{(view) -> fragmentCallback.setImage()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadImageFromDb="@{item.url}"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/specialist_storage_edit_type_image"
+            android:layout_width="@dimen/profile_image_half"
+            android:layout_height="@dimen/profile_image_half"
+            android:layout_marginStart="@dimen/base_margin_small"
+            android:layout_marginTop="@dimen/base_margin_small"
+            android:layout_marginEnd="@dimen/base_margin_small"
+            app:layout_constraintStart_toEndOf="@id/specialist_storage_edit_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setTypeImage="@{item.type}"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/specialist_storage_edit_type_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_grey_background"
+            android:padding="@dimen/base_padding_small"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_small"
+            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_type_image"
+            app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_type_image"
+            app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_type_image"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_type_image"
+            app:setTypeTitle="@{item.subtype}" />
+
+        <ImageView
+            android:id="@+id/specialist_storage_edit_gender_image"
+            android:layout_width="@dimen/profile_image_half"
+            android:layout_height="@dimen/profile_image_half"
+            android:layout_marginStart="@dimen/base_margin_small"
+            android:layout_marginTop="@dimen/base_margin_small"
+            app:layout_constraintStart_toEndOf="@id/specialist_storage_edit_image"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_type_title"
+            app:setGenderImage="@{item.gender}"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/specialist_storage_edit_gender_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_grey_background"
+            android:padding="@dimen/base_padding_small"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_small"
+            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_gender_image"
+            app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_gender_image"
+            app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_gender_image"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_gender_image"
+            app:setGenderTitle="@{item.gender}" />
+
+        <ImageView
+            android:id="@+id/specialist_storage_edit_duration_image"
+            android:layout_width="@dimen/profile_image_half"
+            android:layout_height="@dimen/profile_image_half"
+            android:layout_margin="@dimen/base_margin_small"
+            app:layout_constraintStart_toEndOf="@id/specialist_storage_edit_image"
+            app:layout_constraintTop_toBottomOf="@id/specialist_storage_edit_gender_title"
+            app:setDurationImage="@{item.duration}"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/specialist_storage_edit_duration_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_grey_background"
+            android:padding="@dimen/base_padding_small"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_small"
+            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_duration_image"
+            app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_duration_image"
+            app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_duration_image"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_image"
+            app:setDurationTitle="@{item.duration}" />
+
+        <EditText
+            android:id="@+id/specialist_storage_edit_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:background="@drawable/rectangle_white_background"
+            android:hint="@string/hint_price_infield"
+            android:inputType="number"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:padding="@dimen/base_margin_small"
+            android:text="@={item.price}"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_big"
+            app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_duration_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_image"
+            tools:ignore="Autofill" />
+
+        <HorizontalScrollView
+            android:id="@+id/specialist_storage_edit_type_scroll"
+            android:layout_width="@dimen/profile_image_three_quarters"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_type_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_type_image"
+            app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_type_image">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/specialist_storage_edit_haircut_icon"
+                    android:layout_width="@dimen/profile_image_quarter"
+                    android:layout_height="@dimen/profile_image_quarter"
+                    android:layout_marginTop="@dimen/base_margin_small"
+                    android:onClick="@{viewModel::onTypeButtonClick}"
+                    android:src="@drawable/ic_haircut"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/specialist_storage_edit_haircut_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_grey_background"
+                    android:text="@string/hint_hair_outfield"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_extra_small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_haircut_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_haircut_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_haircut_icon" />
+
+                <ImageView
+                    android:id="@+id/specialist_storage_edit_nails_icon"
+                    android:layout_width="@dimen/profile_image_quarter"
+                    android:layout_height="@dimen/profile_image_quarter"
+                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:onClick="@{viewModel::onTypeButtonClick}"
+                    android:src="@drawable/ic_nails"
+                    app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_makeup_icon"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_haircut_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_haircut_icon"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_grey_background"
+                    android:text="@string/hint_nails_outfield"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_extra_small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_nails_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_nails_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_nails_icon" />
+
+                <ImageView
+                    android:id="@+id/specialist_storage_edit_makeup_icon"
+                    android:layout_width="@dimen/profile_image_quarter"
+                    android:layout_height="@dimen/profile_image_quarter"
+                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:onClick="@{viewModel::onTypeButtonClick}"
+                    android:src="@drawable/ic_makeup"
+                    app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_barber_icon"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_nails_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_nails_icon"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_grey_background"
+                    android:text="@string/hint_makeup_outfield"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_extra_small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_makeup_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_makeup_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_makeup_icon" />
+
+                <ImageView
+                    android:id="@+id/specialist_storage_edit_barber_icon"
+                    android:layout_width="@dimen/profile_image_quarter"
+                    android:layout_height="@dimen/profile_image_quarter"
+                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:onClick="@{viewModel::onTypeButtonClick}"
+                    android:src="@drawable/ic_barbershop"
+                    app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_tattoo_piercing_icon"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_makeup_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_makeup_icon"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_grey_background"
+                    android:text="@string/hint_barber_outfield"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_extra_small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_barber_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_barber_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_barber_icon" />
+
+                <ImageView
+                    android:id="@+id/specialist_storage_edit_tattoo_piercing_icon"
+                    android:layout_width="@dimen/profile_image_quarter"
+                    android:layout_height="@dimen/profile_image_quarter"
+                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:onClick="@{viewModel::onTypeButtonClick}"
+                    android:src="@drawable/ic_tattoo_piercing"
+                    app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_fitness_icon"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_barber_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_barber_icon"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_grey_background"
+                    android:text="@string/hint_tattoo_outfield"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_extra_small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_tattoo_piercing_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_tattoo_piercing_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_tattoo_piercing_icon" />
+
+                <ImageView
+                    android:id="@+id/specialist_storage_edit_fitness_icon"
+                    android:layout_width="@dimen/profile_image_quarter"
+                    android:layout_height="@dimen/profile_image_quarter"
+                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:onClick="@{viewModel::onTypeButtonClick}"
+                    android:src="@drawable/ic_fitness"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_tattoo_piercing_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_tattoo_piercing_icon"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_grey_background"
+                    android:text="@string/hint_fitness_outfield"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_extra_small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_fitness_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_fitness_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_fitness_icon" />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+        </HorizontalScrollView>
+
+        <ImageView
+            android:layout_width="@dimen/base_margin_big"
+            android:layout_height="@dimen/profile_image_quarter"
+            android:src="@drawable/ic_arrow_left"
+            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_type_scroll"
+            app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_type_scroll"
+            app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_type_scroll"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="@dimen/base_margin_big"
+            android:layout_height="@dimen/profile_image_quarter"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="@id/specialist_storage_edit_type_scroll"
+            app:layout_constraintStart_toEndOf="@id/specialist_storage_edit_type_scroll"
+            app:layout_constraintTop_toTopOf="@id/specialist_storage_edit_type_scroll"
+            tools:ignore="ContentDescription" />
+
+        <HorizontalScrollView
+            android:id="@+id/specialist_storage_edit_gender_scroll"
+            android:layout_width="@dimen/profile_image_three_quarters"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_gender_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_gender_image"
+            app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_gender_image">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/specialist_storage_edit_gender_male_icon"
+                    android:layout_width="@dimen/profile_image_quarter"
+                    android:layout_height="@dimen/profile_image_quarter"
+                    android:layout_marginTop="@dimen/base_margin_small"
+                    android:onClick="@{viewModel::onGenderIconClick}"
+                    android:src="@drawable/ic_gender_sign_male"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_grey_background"
+                    android:text="@string/title_gender_male"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_extra_small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_gender_male_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_gender_male_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_gender_male_icon" />
+
+                <ImageView
+                    android:id="@+id/specialist_storage_edit_gender_female_icon"
+                    android:layout_width="@dimen/profile_image_quarter"
+                    android:layout_height="@dimen/profile_image_quarter"
+                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:onClick="@{viewModel::onGenderIconClick}"
+                    android:src="@drawable/ic_gender_sign_female"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_gender_male_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_gender_male_icon"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_grey_background"
+                    android:text="@string/title_gender_female"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_extra_small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_gender_female_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_gender_female_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_gender_female_icon" />
+
+                <ImageView
+                    android:id="@+id/specialist_storage_edit_gender_all_icon"
+                    android:layout_width="@dimen/profile_image_quarter"
+                    android:layout_height="@dimen/profile_image_quarter"
+                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:onClick="@{viewModel::onGenderIconClick}"
+                    android:src="@drawable/ic_gender_sign_any"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_gender_female_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_gender_female_icon"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_grey_background"
+                    android:text="@string/title_gender_all_genders"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_extra_small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_gender_all_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_gender_all_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_gender_all_icon" />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+        </HorizontalScrollView>
+
+        <ImageView
+            android:layout_width="@dimen/base_margin_big"
+            android:layout_height="@dimen/profile_image_quarter"
+            android:src="@drawable/ic_arrow_left"
+            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_gender_scroll"
+            app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_gender_scroll"
+            app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_gender_scroll"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="@dimen/base_margin_big"
+            android:layout_height="@dimen/profile_image_quarter"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="@id/specialist_storage_edit_gender_scroll"
+            app:layout_constraintStart_toEndOf="@id/specialist_storage_edit_gender_scroll"
+            app:layout_constraintTop_toTopOf="@id/specialist_storage_edit_gender_scroll"
+            tools:ignore="ContentDescription" />
+
+        <HorizontalScrollView
+            android:id="@+id/specialist_storage_edit_duration_scroll"
+            android:layout_width="@dimen/profile_image_three_quarters"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_duration_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_duration_image"
+            app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_duration_image">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/specialist_storage_edit_duration_30_min_icon"
+                    android:layout_width="@dimen/profile_image_quarter"
+                    android:layout_height="@dimen/profile_image_quarter"
+                    android:layout_marginTop="@dimen/base_margin_small"
+                    android:onClick="@{viewModel::onDurationIconClick}"
+                    android:src="@drawable/ic_duration_30_min"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_grey_background"
+                    android:text="@string/title_duration_30_min"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_extra_small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_duration_30_min_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_duration_30_min_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_30_min_icon" />
+
+                <ImageView
+                    android:id="@+id/specialist_storage_edit_duration_45_min_icon"
+                    android:layout_width="@dimen/profile_image_quarter"
+                    android:layout_height="@dimen/profile_image_quarter"
+                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:onClick="@{viewModel::onDurationIconClick}"
+                    android:src="@drawable/ic_duration_45_min"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_duration_30_min_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_duration_30_min_icon"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_grey_background"
+                    android:text="@string/title_duration_45_min"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_extra_small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_duration_45_min_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_duration_45_min_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_45_min_icon" />
+
+                <ImageView
+                    android:id="@+id/specialist_storage_edit_duration_60_min_icon"
+                    android:layout_width="@dimen/profile_image_quarter"
+                    android:layout_height="@dimen/profile_image_quarter"
+                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:onClick="@{viewModel::onDurationIconClick}"
+                    android:src="@drawable/ic_duration_60_min"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_duration_45_min_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_duration_45_min_icon"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_grey_background"
+                    android:text="@string/title_duration_60_min"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_extra_small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_duration_60_min_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_duration_60_min_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_60_min_icon" />
+
+                <ImageView
+                    android:id="@+id/specialist_storage_edit_duration_90_min_icon"
+                    android:layout_width="@dimen/profile_image_quarter"
+                    android:layout_height="@dimen/profile_image_quarter"
+                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:onClick="@{viewModel::onDurationIconClick}"
+                    android:src="@drawable/ic_duration_90_min"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_duration_60_min_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_duration_60_min_icon"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_grey_background"
+                    android:text="@string/title_duration_90_min"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_extra_small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_duration_90_min_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_duration_90_min_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_90_min_icon" />
+
+                <ImageView
+                    android:id="@+id/specialist_storage_edit_duration_120_min_icon"
+                    android:layout_width="@dimen/profile_image_quarter"
+                    android:layout_height="@dimen/profile_image_quarter"
+                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:onClick="@{viewModel::onDurationIconClick}"
+                    android:src="@drawable/ic_duration_120_min"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_duration_90_min_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_duration_90_min_icon"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_grey_background"
+                    android:text="@string/title_duration_120_min"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_extra_small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_duration_120_min_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_duration_120_min_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_120_min_icon" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </HorizontalScrollView>
+
+        <ImageView
+            android:layout_width="@dimen/base_margin_big"
+            android:layout_height="@dimen/profile_image_quarter"
+            android:src="@drawable/ic_arrow_left"
+            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_duration_scroll"
+            app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_duration_scroll"
+            app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_duration_scroll"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="@dimen/base_margin_big"
+            android:layout_height="@dimen/profile_image_quarter"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="@id/specialist_storage_edit_duration_scroll"
+            app:layout_constraintStart_toEndOf="@id/specialist_storage_edit_duration_scroll"
+            app:layout_constraintTop_toTopOf="@id/specialist_storage_edit_duration_scroll"
+            tools:ignore="ContentDescription" />
+
+        <EditText
+            android:id="@+id/specialist_storage_edit_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:background="@drawable/rectangle_white_background"
+            android:hint="@string/hint_description_infield"
+            android:inputType="text"
+            android:maxLength="100"
+            android:lines="3"
+            android:text="@={item.description}"
+            android:textColor="@color/color_base_text"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_title"
+            tools:ignore="Autofill" />
+
+        <ImageView
+            android:layout_width="@dimen/profile_image_half"
+            android:layout_height="@dimen/profile_image_half"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/base_margin_small"
+            android:layout_marginEnd="@dimen/base_margin_small"
+            android:onClick="@{(view) -> fragmentCallback.checkImageData()}"
+            android:src="@drawable/ic_check_mark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_description"
+            tools:ignore="ContentDescription" />
+
+        <ProgressBar
+            android:id="@+id/specialist_storage_edit_progress_bar"
+            android:layout_width="@dimen/profile_image_half"
+            android:layout_height="@dimen/profile_image_half"
+            android:layout_gravity="center"
+            android:theme="@style/Widget.AppCompat.ProgressBar"
+            android:visibility="@{showProgress ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

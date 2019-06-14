@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--App's name-->
+    <string name="app_name">Beproffer</string>
+
+
+    <!--Hints-->
+    <string name="name_infield">имя</string>
+    <string name="email_infield">email</string>
+    <string name="password_infield">пароль</string>
+    <string name="phone_infield">тел.</string>
+    <string name="hint_price_infield">цена(грн)</string>
+    <string name="hint_description_infield">описание(до 100 символов)</string>
+    <string name="hint_about_me_infield">про меня(до 100 символов)</string>
+
+    <string name="hint_currency_outfield">грн</string>
+    <string name="hint_min_outfield">мин</string>
+    <string name="hint_hair_outfield">ВОЛОСЫ</string>
+    <string name="hint_nails_outfield">НОГТИ</string>
+    <string name="hint_makeup_outfield">МАКИЯЖ</string>
+    <string name="hint_fitness_outfield">ФИТНЕС</string>
+    <string name="hint_barber_outfield">БАРБЕРШОП</string>
+    <string name="hint_tattoo_outfield">ТАТУИРОВКИ</string>
+    <string name="hint_type_outfield">ВИД УСЛУГИ</string>
+    <string name="hint_gender_outfield">ПОЛ</string>
+    <string name="hint_edit_outfield">РЕД</string>
+    <string name="hint_outfield_delete_profile">Введите свой email и нажмите \"Удалить\" если хотите удалить свой профайл в Beproffer. Удаленный профайл не подлежит восстановлению, но можно будет создать новый.</string>
+    <string name="hint_outfield_clear_browsing_history">Нажмите дважды \"Очистить\", чтобы очистить историю просмотров и увидеть все доступные изображения снова.</string>
+    <string name="hint_outfield_forgot_password">Забыли пароль? Нажмите, чтобы изменить его.</string>
+    <string name="hint_outfield_change_password">Чтобы сменить пароль - введите свой email в поле ввода и нажмите \"Изменить\". Вам придет сообщение для смены пароля на этот email.</string>
+    <string name="hint_outfield_settings_reset_password">Нажмите \"Сбросить\" если хотите изменить пароль своего профайла. Вы будете перенаправлены в соответствующее меню(произойдет выход из профайла).</string>
+    <string name="hint_outfield_agree_to">Регистрируясь в приложении Beproffer Вы подтверждаете, что ознакомились и согласны с его</string>
+
+    <string name="hint_outfield_terms_of_service">
+        <a href="http://lawfulness.kiev.ua/reestratsiya-tov">Условиями Использования</a>
+    </string>
+    <string name="hint_outfield_and">и</string>
+    <string name="hint_outfield_privacy_policy">
+        <a href="http://lawfulness.kiev.ua/reestratsiya-tov">Политикой Конфиденциальности.</a>
+    </string>
+
+
+    <!--Titles-->
+    <string name="title_duration">ДЛИТЕЛЬНОСТЬ</string>
+    <string name="title_confirmed_contacts">КОНТАКТЫ</string>
+    <string name="title_contact_requests">ЗАПРОСЫ</string>
+    <string name="title_login">ЛОГИН</string>
+    <string name="title_price">ЦЕНА</string>
+    <string name="title_customer_registration">НОВЫЙ КЛИЕНТ</string>
+    <string name="title_specialist_registration">НОВЫЙ МАСТЕР</string>
+    <string name="title_ask_for_phone">УЗНАТЬ ТЕЛ МАСТЕРА</string>
+    <string name="title_specialist_type">МАСТЕР</string>
+    <string name="title_customer_type">КЛИЕНТ</string>
+    <string name="title_add_image">ДОБАВИТЬ ИЗОБРАЖЕНИЕ</string>
+    <string name="title_service_type">ВИД УСЛУГИ</string>
+    <string name="title_delete">Удалить</string>
+    <string name="title_clear">Очистить</string>
+    <string name="title_reset_password">Сбросить</string>
+
+    <string name="title_gender_unknown">ПОЛ</string>
+    <string name="title_gender_male">МУЖСК</string>
+    <string name="title_gender_female">ЖЕНСК</string>
+    <string name="title_gender_all_genders">ВСЕ</string>
+
+    <string name="title_duration_30_min">30мин</string>
+    <string name="title_duration_45_min">45мин</string>
+    <string name="title_duration_60_min">60мин</string>
+    <string name="title_duration_90_min">90мин</string>
+    <string name="title_duration_120_min">120мин</string>
+
+    <string name="title_search_fragment">КАКИЕ УСЛУГИ ВЫ ИЩИТЕ?</string>
+    <string name="title_specialist_storage_fragment">МОИ РАБОТЫ</string>
+
+
+    <!--/*Start/SignIn/Registration/e.t.s.*/-->
+    <string name="app_availability">Приложение доступно, пока что, только в г.Киев(Украина).</string>
+    <string name="register_as_customer">Новый клиент</string>
+    <string name="register_as_specialist">Новый мастер</string>
+
+
+    <!--Menu Titles-->
+    <string name="hair_title_haircut">СТРИЖКА</string>
+    <string name="hair_title_extension">НАРАЩИВАНИЕ ВОЛОС</string>
+    <string name="hair_title_styling">ПРИЧЕСКИ, УКЛАДКИ</string>
+    <string name="hair_title_straightening">ВЫПРЯМЛЕНИЕ</string>
+    <string name="hair_title_dyeing">ОКРАШИВАНИЕ</string>
+    <string name="hair_title_braids">КОСИЧКИ, ДРЕДЫ</string>
+
+    <string name="nails_title_manicure">МАНИКЮР</string>
+    <string name="nails_title_pedicure">ПЕДИКЮР</string>
+    <string name="nails_title_extension">НАРАЩИВАНИЕ НОГТЕЙ</string>
+
+    <string name="makeup_title_makeup">МАКИЯЖ</string>
+    <string name="makeup_title_permanent_makeup">ПЕРМАНЕТНЫЙ МАКИЯЖ</string>
+    <string name="makeup_title_eyelash_extension">НАРЩИВАНИЕ РЕСНИЦ</string>
+    <string name="makeup_title_eyebrow_styling">КОРРЕКЦИЯ БРОВЕЙ</string>
+
+    <string name="tattoo_title_tattoo">ТАТУИРОВКИ</string>
+    <string name="tattoo_title_piercing">ПИРСИНГ</string>
+    <string name="tattoo_title_bodyart">БОДИАРТ</string>
+    <string name="tattoo_title_temporary_tattoo">ВРЕМЕННЫЕ ТАТУИРОВКИ</string>
+
+    <string name="fitness_title_trainer">ПЕРСОНАЛЬНЫЙ ТРЕНЕР</string>
+
+    <string name="barber_title_barber">БАРБЕРШОП</string>
+
+    <!--Bottom navigation bar titles-->
+
+
+    <!--Toasts-->
+    <string name="toast_select_image">Пожалуйста, выберите изображение.</string>
+    <string name="toast_select_type">Пожалуйста, выберите вид услуги.</string>
+    <string name="toast_enter_name">Пожалуйста, введите имя.</string>
+    <string name="toast_enter_phone">Пожалуйста, введите номер телефона.</string>
+    <string name="toast_determine_gender">Определите, для какого пола актуальна услуга.</string>
+    <string name="toast_select_duration">Пожалуйста, выберите длительность сеанса.</string>
+    <string name="toast_enter_price">Пожалуйста, выберите цену услуги.</string>
+    <string name="toast_enter_description">Пожалуйста, введите описание услуги.</string>
+
+    <string name="toast_define_search_request">Пожалуйста, определите параметры поиска.</string>
+    <string name="toast_define_search_params">Все параметры должны быть заданы.</string>
+
+    <string name="toast_error_has_occurred">Ой. кажется произошла ошибка. Попробуйте снова.</string>
+    <string name="toast_error_image_dbkey">Ошибка сохранения ключа изображения.</string>
+    <string name="toast_error_search_request">Что-то не так с параметрами поиска. Задайте их еще раз.</string>
+    <string name="toast_error_login">Ошибка входа. Проверте правильность логина и пароля.</string>
+    <string name="toast_error_registration">Ошибка регистрации. Попробуйте снова.</string>
+    <string name="toast_error_check_password">Проверте правильность пароля.</string>
+    <string name="toast_error_check_fields_data">Проверьте правильность введенных данных.</string>
+    <string name="toast_contact_delete_access">Нажмите еще раз, если хотите удалить контакт.</string>
+    <string name="toast_browsing_history_delete_access">Нажмите еще раз, чтобы очистить историю просмотров.</string>
+    <string name="toast_browsing_history_cleared">История просмотров очищена.</string>
+    <string name="toast_request_sent">Запрос отправлен.</string>
+    <string name="toast_request_for_registered">Доступно только зарегистрированным пользователям.</string>
+    <string name="toast_no_available_images">Закончились доступные изображения. Измените критерии поиска или попробуйте позже.</string>
+    <string name="toast_profile_deleted">Профайл удален.</string>
+    <string name="toast_sign_up_email_verification">Проверьте свою электронную почту и подтвердите регистрацию.</string>
+    <string name="toast_sign_in_verify_email_first">Вам сначала нужно подтвердить адрес своей электронной почты.</string>
+    <string name="toast_reset_password_check_your_email">Сообщение для смены пароля отправлено. Проверте свою электронную почту для завершения смены пароля.</string>
+    <string name="toast_no_internet_connection">Подключитесь пожалуйста к интерету.</string>
+    <string name="toast_contact_confirmed">Контакт подтвержден.</string>
+    <string name="toast_contact_denied">Контакт отклонен.</string>
+
+    <string name="error_message_exception_sign_up_weak_password">Придумайте более надежный пароль.</string>
+    <string name="error_message_exception_sign_up_invalid_credentials">Неправильный формат адреса электронной почты.</string><!--Имэйл имеет неправильный формат-->
+    <string name="error_message_exception_sign_up_collision">Профайл с таким электронным адресом уже существует.</string>
+    <string name="error_message_exception_sign_in_invalid_user">Профайла с такой электронной почтой не существует.</string>
+    <string name="error_message_exception_sign_in_invalid_credentials">Введен неверный пароль.</string>
+    <string name="error_message_enter_email">Сначала введите email.</string>
+    <string name="error_message_delete_profile_wrong_email">Неправильный email.</string>
+
+    <string name="search">Поиск</string>
+    <string name="kyiv">Киев, Украина.</string>
+
+    <!--special hints-->
+    <string name="hint_specialist_phone_1">Убедитесь, что номер телефона указан правильно. Он будет показываться потенциальным клиентам.</string>
+
+
+    <!--new-->
+
+</resources>

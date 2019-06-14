@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_nails_manicure"
+        android:title="@string/nails_title_manicure" />
+
+    <item
+        android:id="@+id/menu_nails_pedicure"
+        android:title="@string/nails_title_pedicure" />
+
+    <item
+        android:id="@+id/menu_nails_extension"
+        android:title="@string/nails_title_extension" />
+</menu>

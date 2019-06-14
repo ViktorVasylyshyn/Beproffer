@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "998936821161",
+    "firebase_url": "https://beproffer-d2a03.firebaseio.com",
+    "project_id": "beproffer-d2a03",
+    "storage_bucket": "beproffer-d2a03.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998936821161:android:c145ae4cfd2ce458",
+        "android_client_info": {
+          "package_name": "com.beproffer.beproffer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "998936821161-u56kl74bpmpm3l29nl3aqd38e9grissk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.beproffer.beproffer",
+            "certificate_hash": "6010f2f8f3782812556e66b8c17e3cba40dcdc0f"
+          }
+        },
+        {
+          "client_id": "998936821161-54i8umjep0en9jtbkbkrrd25onedvvk6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3GbgoDGYMjrcGf_fBshP2ZVUJ5ullJQU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "998936821161-54i8umjep0en9jtbkbkrrd25onedvvk6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

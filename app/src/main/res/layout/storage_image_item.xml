@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="image"
+            type="com.beproffer.beproffer.data.models.StorageImageItem" />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/base_margin_extra_small"
+        android:background="@drawable/rectangle_white_background"
+        android:padding="@dimen/base_padding_small">
+
+        <ImageView
+            android:id="@+id/storage_image_item_image"
+            android:layout_width="@dimen/list_item_image_width"
+            android:layout_height="@dimen/list_item_image_height"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadImageFromDb="@{image.url}"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/storage_image_item_type_image"
+            android:layout_width="@dimen/profile_image_quarter"
+            android:layout_height="@dimen/profile_image_quarter"
+            android:layout_margin="@dimen/base_margin_small"
+            app:layout_constraintStart_toEndOf="@+id/storage_image_item_image"
+            app:layout_constraintTop_toTopOf="@+id/storage_image_item_image"
+            app:setTypeImage="@{image.type}"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/storage_image_item_type_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_big"
+            app:layout_constraintBottom_toBottomOf="@+id/storage_image_item_type_image"
+            app:layout_constraintStart_toEndOf="@+id/storage_image_item_type_image"
+            app:layout_constraintTop_toTopOf="@+id/storage_image_item_type_image"
+            app:setTypeTitle="@{image.subtype}" />
+
+        <TextView
+            android:id="@+id/storage_image_item_price_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:text="@string/title_price"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_big"
+            app:layout_constraintStart_toEndOf="@+id/storage_image_item_image"
+            app:layout_constraintTop_toBottomOf="@id/storage_image_item_type_image" />
+
+        <TextView
+            android:id="@+id/storage_image_item_price_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{image.price}"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_big"
+            app:layout_constraintBottom_toBottomOf="@+id/storage_image_item_price_title"
+            app:layout_constraintStart_toEndOf="@+id/storage_image_item_price_title"
+            app:layout_constraintTop_toTopOf="@+id/storage_image_item_price_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_small"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/hint_currency_outfield"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_big"
+            app:layout_constraintBottom_toBottomOf="@+id/storage_image_item_price_value"
+            app:layout_constraintStart_toEndOf="@+id/storage_image_item_price_value" />
+
+        <ImageView
+            android:id="@+id/storage_image_item_duration_icon"
+            android:layout_width="@dimen/profile_image_quarter"
+            android:layout_height="@dimen/profile_image_quarter"
+            android:layout_margin="@dimen/base_margin_small"
+            app:layout_constraintStart_toEndOf="@+id/storage_image_item_image"
+            app:layout_constraintTop_toBottomOf="@+id/storage_image_item_price_title"
+            app:setDurationImage="@{image.duration}"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/storage_image_item_duration_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{image.duration}"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_big"
+            app:layout_constraintStart_toEndOf="@+id/storage_image_item_duration_icon"
+            app:layout_constraintTop_toTopOf="@+id/storage_image_item_duration_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/storage_image_item_duration_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_base_text"
+            android:layout_margin="@dimen/base_margin_small"
+            android:text="@string/hint_min_outfield"
+            android:textSize="@dimen/base_text_size_big"
+            app:layout_constraintStart_toEndOf="@+id/storage_image_item_duration_value"
+            app:layout_constraintTop_toTopOf="@+id/storage_image_item_duration_value"
+            app:layout_constraintBottom_toBottomOf="@+id/storage_image_item_duration_value"/>
+
+        <ImageView
+            android:layout_width="@dimen/profile_image_quarter"
+            android:layout_height="@dimen/profile_image_quarter"
+            android:layout_margin="@dimen/base_margin_small"
+            app:setGenderImage="@{image.gender}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/storage_image_item_description"
+            android:layout_width="@dimen/list_item_description_width"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="@{image.description}"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_small"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/storage_image_item_image"
+            app:layout_constraintTop_toBottomOf="@+id/storage_image_item_duration_value" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

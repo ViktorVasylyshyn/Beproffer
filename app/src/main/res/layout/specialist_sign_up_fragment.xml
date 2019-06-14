@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="showProgress"
+            type="android.databinding.ObservableBoolean" />
+
+        <variable
+            name="fragmentCallback"
+            type="com.beproffer.beproffer.presentation.sign_in_up.specialist_reg.SpecialistSignUpFragmentCallback" />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.sign_in_up.specialist_reg.SpecialistSignUpFragment">
+
+        <TextView
+            android:id="@+id/specialist_sign_up_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:text="@string/register_as_specialist"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_big"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/specialist_sign_up_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:background="@drawable/rectangle_white_background"
+            android:hint="@string/name_infield"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:padding="@dimen/base_padding_medium"
+            android:textSize="@dimen/base_text_size_big"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_title"
+            tools:ignore="Autofill,TextFields" />
+
+        <EditText
+            android:id="@+id/specialist_sign_up_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:background="@drawable/rectangle_white_background"
+            android:hint="@string/email_infield"
+            android:inputType="textEmailAddress"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:padding="@dimen/base_padding_medium"
+            android:textSize="@dimen/base_text_size_big"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_name"
+            tools:ignore="Autofill,TextFields" />
+
+        <EditText
+            android:id="@+id/specialist_sign_up_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:background="@drawable/rectangle_white_background"
+            android:hint="@string/phone_infield"
+            android:inputType="phone"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:padding="@dimen/base_padding_medium"
+            android:textSize="@dimen/base_text_size_big"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_email"
+            tools:ignore="Autofill" />
+
+        <EditText
+            android:id="@+id/specialist_sign_up_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:background="@drawable/rectangle_white_background"
+            android:hint="@string/password_infield"
+            android:inputType="textPassword"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:padding="@dimen/base_padding_medium"
+            android:textSize="@dimen/base_text_size_big"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_phone"
+            tools:ignore="Autofill,TextFields" />
+
+        <EditText
+            android:id="@+id/specialist_sign_up_pass_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:background="@drawable/rectangle_white_background"
+            android:hint="@string/password_infield"
+            android:inputType="textPassword"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:padding="@dimen/base_padding_medium"
+            android:textSize="@dimen/base_text_size_big"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_pass"
+            tools:ignore="Autofill,TextFields" />
+
+        <TextView
+            android:id="@+id/specialist_sign_up_agree_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:text="@string/hint_outfield_agree_to"
+            android:textSize="@dimen/base_text_size_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_pass_confirm" />
+
+        <TextView
+            android:id="@+id/specialist_sign_up_terms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:text="@string/hint_outfield_terms_of_service"
+            android:textSize="@dimen/base_text_size_small"
+            app:layout_constraintEnd_toStartOf="@+id/specialist_sign_up_and"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_agree_to" />
+
+        <TextView
+            android:id="@+id/specialist_sign_up_and"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:text="@string/hint_outfield_and"
+            android:textSize="@dimen/base_text_size_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_agree_to" />
+
+        <TextView
+            android:id="@+id/specialist_sign_up_privacy_policy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:text="@string/hint_outfield_privacy_policy"
+            android:textSize="@dimen/base_text_size_small"
+            app:layout_constraintStart_toEndOf="@+id/specialist_sign_up_and"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_agree_to" />
+
+        <ImageView
+            android:id="@+id/specialist_sign_up_image_button"
+            android:layout_width="@dimen/profile_image_half"
+            android:layout_height="@dimen/profile_image_half"
+            android:layout_margin="@dimen/base_margin_medium"
+            android:background="@drawable/rectangle_white_background"
+            android:onClick="@{(view) -> fragmentCallback.onSignUpClick()}"
+            android:src="@drawable/ic_check_mark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_and"
+            tools:ignore="ContentDescription" />
+
+        <ProgressBar
+            android:id="@+id/specialist_sign_up_progress_bar"
+            android:layout_width="@dimen/profile_image_half"
+            android:layout_height="@dimen/profile_image_half"
+            android:layout_gravity="center"
+            android:theme="@style/Widget.AppCompat.ProgressBar"
+            android:visibility="@{showProgress ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/specialist_sign_up_hint_availability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_small"
+            android:layout_marginEnd="@dimen/base_margin_small"
+            android:layout_marginBottom="@dimen/bnb_hints_margin"
+            android:background="@drawable/rectangle_white_background"
+            android:text="@string/app_availability"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_small"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_medium"
+            android:background="@drawable/rectangle_white_background"
+            android:gravity="center"
+            android:text="@string/hint_specialist_phone_1"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_small"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/specialist_sign_up_hint_availability"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

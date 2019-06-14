@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="showProgress"
+            type="android.databinding.ObservableBoolean" />
+
+        <variable
+            name="fragmentCallback"
+            type="com.beproffer.beproffer.presentation.sign_in_up.login.SingInFragmentCallback" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.sign_in_up.login.SignInFragment">
+
+        <EditText
+            android:id="@+id/sign_in_fragment_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_small"
+            android:layout_marginTop="@dimen/profile_image_quarter"
+            android:layout_marginEnd="@dimen/base_margin_small"
+            android:layout_marginBottom="@dimen/base_margin_small"
+            android:background="@drawable/rectangle_white_background"
+            android:hint="@string/email_infield"
+            android:inputType="textEmailAddress"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:padding="@dimen/base_padding_small"
+            android:textSize="@dimen/base_text_size_big"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="Autofill" />
+
+        <EditText
+            android:id="@+id/sign_in_fragment_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:background="@drawable/rectangle_white_background"
+            android:hint="@string/password_infield"
+            android:inputType="textPassword"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:padding="@dimen/base_padding_small"
+            android:textSize="@dimen/base_text_size_big"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_fragment_email"
+            tools:ignore="Autofill" />
+
+        <Button
+            android:id="@+id/sign_in_fragment_button_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/profile_image_quarter"
+            android:background="@drawable/button_background_green_rectangle"
+            android:onClick="@{(view) -> fragmentCallback.onSignInClick()}"
+            android:padding="@dimen/base_padding_small"
+            android:text="@string/title_login"
+            android:textColor="@color/color_base_button_text_white"
+            android:textSize="@dimen/base_text_size_small"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_fragment_password" />
+
+        <TextView
+            android:id="@+id/sign_in_fragment_change_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_big"
+            android:gravity="center"
+            android:onClick="@{(view) -> fragmentCallback.onChangePasswordClick()}"
+            android:text="@string/hint_outfield_forgot_password"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/base_text_size_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sign_in_fragment_button_login" />
+
+        <Button
+            android:id="@+id/sign_in_fragment_customer_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/profile_image_half"
+            android:background="@drawable/button_background_green_rectangle"
+            android:onClick="@{(view) -> fragmentCallback.onCustomerSignUpClick()}"
+            android:padding="@dimen/base_padding_small"
+            android:text="@string/title_customer_registration"
+            android:textColor="@color/color_base_button_text_white"
+            android:textSize="@dimen/base_text_size_small"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_fragment_change_password" />
+
+        <Button
+            android:id="@+id/sign_in_fragment_specialist_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/base_margin_big"
+            android:background="@drawable/button_background_green_rectangle"
+            android:onClick="@{(view) -> fragmentCallback.onSpecialistSignUpClick()}"
+            android:padding="@dimen/base_padding_small"
+            android:text="@string/title_specialist_registration"
+            android:textColor="@color/color_base_button_text_white"
+            android:textSize="@dimen/base_text_size_small"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_fragment_customer_sign_up" />
+
+        <ProgressBar
+            android:id="@+id/sign_in_fragment_progress_bar"
+            android:layout_width="@dimen/profile_image_half"
+            android:layout_height="@dimen/profile_image_half"
+            android:theme="@style/Widget.AppCompat.ProgressBar"
+            android:visibility="@{showProgress ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_small"
+            android:layout_marginEnd="@dimen/base_margin_small"
+            android:layout_marginBottom="@dimen/profile_image_half"
+            android:background="@drawable/rectangle_white_background"
+            android:gravity="center"
+            android:padding="@dimen/base_padding_small"
+            android:text="@string/app_availability"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_small"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
