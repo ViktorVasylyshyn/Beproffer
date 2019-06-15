@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.beproffer.beproffer.di.AppComponent;
 import com.beproffer.beproffer.di.DaggerAppComponent;
+import com.squareup.leakcanary.LeakCanary;
 
 public class App extends Application {
 
@@ -12,6 +13,10 @@ public class App extends Application {
     @Override
     public void onCreate(){
         super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
         component = DaggerAppComponent.create();
     }
     public static AppComponent getComponent(){
