@@ -12,6 +12,7 @@ import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SignInFragmentBinding;
 import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
@@ -98,6 +99,7 @@ public class SignInFragment extends BaseFragment {
                     mBinding.signInFragmentPassword.setError(getResources().getText(R.string.error_message_exception_sign_in_invalid_credentials));
                     mBinding.signInFragmentPassword.requestFocus();
                 } catch (Exception e) {
+                    Crashlytics.getInstance().crash();
                     showToast(R.string.toast_error_login);
                 }
             }

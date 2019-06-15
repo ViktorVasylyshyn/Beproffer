@@ -15,6 +15,7 @@ import com.beproffer.beproffer.data.models.UserData;
 import com.beproffer.beproffer.databinding.SpecialistSignUpFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
 import com.beproffer.beproffer.util.Const;
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -87,6 +88,7 @@ public class SpecialistSignUpFragment extends BaseFragment {
                         }
                     });
                 } catch (NullPointerException e) {
+                    Crashlytics.getInstance().crash();
                     showProgress(false);
                     showToast(R.string.toast_error_has_occurred);
                 }
@@ -104,6 +106,7 @@ public class SpecialistSignUpFragment extends BaseFragment {
                     mBinding.specialistSignUpEmail.setError(getResources().getText(R.string.error_message_exception_sign_up_collision));
                     mBinding.specialistSignUpEmail.requestFocus();
                 } catch (Exception e) {
+                    Crashlytics.getInstance().crash();
                     showToast(R.string.toast_error_registration);
                 }
             }

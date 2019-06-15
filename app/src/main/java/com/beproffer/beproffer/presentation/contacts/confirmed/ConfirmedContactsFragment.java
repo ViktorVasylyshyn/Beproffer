@@ -16,6 +16,7 @@ import com.beproffer.beproffer.data.models.ConfirmedContactItem;
 import com.beproffer.beproffer.databinding.ConfirmedContactsFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserDataFragment;
 import com.beproffer.beproffer.presentation.contacts.adapter.ConfirmedContactsItemAdapter;
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
