@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/bnm_images_gallery"
-        android:icon="@drawable/bottom_navigation_bar_child_selector_gallery"
+        android:icon="@drawable/bottom_navigation_bar_child_selector_swipe_images"
         android:title=""
         app:showAsAction="ifRoom" />
 

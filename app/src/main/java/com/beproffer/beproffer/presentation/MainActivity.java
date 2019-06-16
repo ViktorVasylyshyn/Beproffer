@@ -8,13 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.beproffer.beproffer.App;
 import com.beproffer.beproffer.R;
-import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseUser;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-
-import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
 
