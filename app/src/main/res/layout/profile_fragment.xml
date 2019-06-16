@@ -24,6 +24,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/background_green"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:adjustViewBounds="true"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="ContentDescription" />
+
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraint_layout"
             android:layout_width="match_parent"
@@ -207,48 +217,48 @@
             android:id="@+id/profile_gender"
             android:layout_width="@dimen/profile_image_quarter"
             android:layout_height="@dimen/profile_image_quarter"
-            android:layout_margin="@dimen/base_margin_small"
             app:layout_constraintBottom_toBottomOf="@+id/profile_image"
             app:layout_constraintEnd_toStartOf="@+id/profile_image"
+            app:layout_constraintStart_toStartOf="@+id/profile_image"
             app:setGenderImage="@{userData.userGender}"
             tools:ignore="ContentDescription" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/gradient_grey_background"
-            android:textColor="@color/color_base_text"
-            android:textSize="@dimen/base_text_size_extra_small"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/profile_gender"
-            app:layout_constraintEnd_toEndOf="@+id/profile_gender"
-            app:layout_constraintStart_toStartOf="@+id/profile_gender"
-            app:layout_constraintTop_toBottomOf="@+id/profile_gender"
-            app:setGenderTitle="@{userData.userGender}" />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/gradient_grey_background"-->
+            <!--android:textColor="@color/color_base_text"-->
+            <!--android:textSize="@dimen/base_text_size_extra_small"-->
+            <!--android:textStyle="bold"-->
+            <!--app:layout_constraintBottom_toBottomOf="@+id/profile_gender"-->
+            <!--app:layout_constraintEnd_toEndOf="@+id/profile_gender"-->
+            <!--app:layout_constraintStart_toStartOf="@+id/profile_gender"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/profile_gender"-->
+            <!--app:setGenderTitle="@{userData.userGender}" />-->
 
         <ImageView
             android:id="@+id/profile_edit"
             android:layout_width="@dimen/profile_image_quarter"
             android:layout_height="@dimen/profile_image_quarter"
-            android:layout_margin="@dimen/base_margin_small"
             android:onClick="@{fragmentCallback :: onPerformNavigationClick}"
             android:src="@drawable/ic_edit"
             app:layout_constraintBottom_toBottomOf="@+id/profile_image"
             app:layout_constraintStart_toEndOf="@+id/profile_image"
+            app:layout_constraintEnd_toEndOf="@+id/profile_image"
             tools:ignore="ContentDescription" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/gradient_grey_background"
-            android:textColor="@color/color_base_text"
-            android:textSize="@dimen/base_text_size_extra_small"
-            android:textStyle="bold"
-            android:text="@string/hint_edit_outfield"
-            app:layout_constraintBottom_toBottomOf="@+id/profile_edit"
-            app:layout_constraintEnd_toEndOf="@+id/profile_edit"
-            app:layout_constraintStart_toStartOf="@+id/profile_edit"
-            app:layout_constraintTop_toBottomOf="@+id/profile_edit" />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/gradient_grey_background"-->
+            <!--android:textColor="@color/color_base_text"-->
+            <!--android:textSize="@dimen/base_text_size_extra_small"-->
+            <!--android:textStyle="bold"-->
+            <!--android:text="@string/hint_edit_outfield"-->
+            <!--app:layout_constraintBottom_toBottomOf="@+id/profile_edit"-->
+            <!--app:layout_constraintEnd_toEndOf="@+id/profile_edit"-->
+            <!--app:layout_constraintStart_toStartOf="@+id/profile_edit"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/profile_edit" />-->
 
         <ProgressBar
             android:id="@+id/profile_progress_bar"

@@ -48,19 +48,21 @@ public class CustomerSignUpFragment extends BaseFragment {
     }
 
     public void createUser() {
-        showProgress(true);
+        if(!checkInternetConnection()){
+            showToast(R.string.toast_no_internet_connection);
+            return;
+        }
         if (!mBinding.customerSignUpPass.getText().toString().equals(mBinding.customerSignUpPassConfirm.getText().toString())) {
             showToast(R.string.toast_error_check_password);
-            showProgress(false);
             return;
         }
         if (mBinding.customerSignUpName.getText().toString().isEmpty()
                 || mBinding.customerSignUpEmail.getText().toString().isEmpty()
                 || mBinding.customerSignUpPass.getText().toString().isEmpty()) {
             showToast(R.string.toast_error_check_fields_data);
-            showProgress(false);
             return;
         }
+        showProgress(true);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(mBinding.customerSignUpEmail.getText().toString()
                 , mBinding.customerSignUpPass.getText().toString()).addOnCompleteListener(requireActivity(), task -> {

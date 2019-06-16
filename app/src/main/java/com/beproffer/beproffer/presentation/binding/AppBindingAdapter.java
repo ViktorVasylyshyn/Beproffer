@@ -40,7 +40,7 @@ public class AppBindingAdapter {
     public static void showGenderImage(ImageView view, String gender) {
         int resId;
         if (gender == null) {
-            resId = R.drawable.ic_gender_sign_unknown;
+            resId = R.drawable.ic_question_sign;
         } else {
             switch (gender) {
                 case Const.MALE:
@@ -86,7 +86,7 @@ public class AppBindingAdapter {
     public static void showTypeImage(ImageView view, String type) {
         int resId;
         if (type == null) {
-            resId = R.drawable.ic_gender_sign_unknown;
+            resId = R.drawable.ic_question_sign;
         } else {
             switch (type) {
                 case Const.HAI:
@@ -195,7 +195,7 @@ public class AppBindingAdapter {
     public static void showDurationImage(ImageView view, String duration) {
         int resId;
         if (duration == null) {
-            resId = R.drawable.ic_gender_sign_unknown;
+            resId = R.drawable.ic_question_sign;
         } else {
             switch (duration) {
                 case Const.MIN30:

@@ -115,13 +115,17 @@ public class ProfileEditFragment extends BaseUserDataFragment {
                 bitmap = MediaStore.Images.Media
                         .getBitmap(requireActivity().getApplication().getContentResolver(), mResultUri);
             } catch (IOException e) {
+                showProgress(false);
                 showToast(R.string.toast_error_has_occurred);
             }
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 30, baos);
             byte[] data = baos.toByteArray();
             UploadTask uploadTask = filepath.putBytes(data);
-            uploadTask.addOnFailureListener(e -> showToast(R.string.toast_error_has_occurred));
+            uploadTask.addOnFailureListener(e -> {
+                showToast(R.string.toast_error_has_occurred);
+                showProgress(false);
+            });
             uploadTask.addOnSuccessListener(taskSnapshot -> filepath.getDownloadUrl().addOnSuccessListener(url -> {
                 mCurrentUserData.setUserProfileImageUrl(url.toString());
                 finalizeUserDataSaving();
