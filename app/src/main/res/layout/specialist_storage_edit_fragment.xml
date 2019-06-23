@@ -57,7 +57,6 @@
             android:id="@+id/specialist_storage_edit_type_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_grey_background"
             android:padding="@dimen/base_padding_small"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_small"
@@ -82,7 +81,6 @@
             android:id="@+id/specialist_storage_edit_gender_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_grey_background"
             android:padding="@dimen/base_padding_small"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_small"
@@ -101,20 +99,6 @@
             app:layout_constraintTop_toBottomOf="@id/specialist_storage_edit_gender_title"
             app:setDurationImage="@{item.duration}"
             tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/specialist_storage_edit_duration_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_grey_background"
-            android:padding="@dimen/base_padding_small"
-            android:textColor="@color/color_base_text"
-            android:textSize="@dimen/base_text_size_small"
-            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_duration_image"
-            app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_duration_image"
-            app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_duration_image"
-            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_image"
-            app:setDurationTitle="@{item.duration}" />
 
         <EditText
             android:id="@+id/specialist_storage_edit_price"
@@ -587,7 +571,7 @@
             android:textColor="@color/color_base_text"
             android:textStyle="italic"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_title"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_image"
             tools:ignore="Autofill" />
 
         <ImageView
@@ -596,7 +580,7 @@
             android:layout_alignParentTop="true"
             android:layout_margin="@dimen/base_margin_small"
             android:layout_marginEnd="@dimen/base_margin_small"
-            android:onClick="@{(view) -> fragmentCallback.checkImageData()}"
+            android:onClick="@{(view) -> fragmentCallback.confirmImageData()}"
             android:src="@drawable/ic_check_mark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

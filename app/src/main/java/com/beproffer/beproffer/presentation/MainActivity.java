@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     if (mUser != null) {
                         performNavigation(R.id.action_global_profileFragment, null);
                     } else {
-                        performNavigation(R.id.action_global_loginFragment, null);
+                        performNavigation(R.id.action_global_signInFragment, null);
                     }
                     return true;
                 default:

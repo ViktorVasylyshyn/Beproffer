@@ -10,9 +10,9 @@
         android:label="swipe_image_fragment"
         tools:layout="@layout/swipe_image_fragment" />
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.beproffer.beproffer.presentation.sign_in_up.login.SignInFragment"
-        android:label="login_fragment"
+        android:id="@+id/signInFragment"
+        android:name="com.beproffer.beproffer.presentation.sign_in_up.sign_in.SignInFragment"
+        android:label="sign_in_fragment"
         tools:layout="@layout/sign_in_fragment" />
     <fragment
         android:id="@+id/customerRegistrationFragment"
@@ -68,14 +68,15 @@
         app:popExitAnim="@anim/slide_out_right"
         app:popUpTo="@+id/swipeImageFragment" />
     <action
-        android:id="@+id/action_global_loginFragment"
-        app:destination="@id/loginFragment"
+        android:id="@+id/action_global_signInFragment"
+        app:destination="@id/signInFragment"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
-        app:launchSingleTop="true"
+        app:launchSingleTop="false"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/swipeImageFragment" />
+        app:popUpTo="@+id/swipeImageFragment"
+        app:popUpToInclusive="true" />
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.beproffer.beproffer.presentation.search.SearchFragment"
@@ -116,7 +117,7 @@
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/loginFragment" />
+        app:popUpTo="@+id/signInFragment" />
     <action
         android:id="@+id/action_global_specialistRegistrationFragment"
         app:destination="@id/specialistRegistrationFragment"
@@ -124,7 +125,7 @@
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/loginFragment" />
+        app:popUpTo="@+id/swipeImageFragment" />
     <action
         android:id="@+id/action_global_specialistStorageFragment"
         app:destination="@id/specialistStorageFragment"
@@ -203,5 +204,5 @@
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/loginFragment" />
+        app:popUpTo="@+id/signInFragment" />
 </navigation>

@@ -1,6 +1,8 @@
-package com.beproffer.beproffer.presentation.sign_in_up.login;
+package com.beproffer.beproffer.presentation.sign_in_up.sign_in;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -41,6 +43,16 @@ public class SignInFragment extends BaseFragment {
         public void onChangePasswordClick() {
             changePassword();
         }
+
+        @Override
+        public void onTermsClick() {
+            openDoc(R.string.href_privacy_policy);
+        }
+
+        @Override
+        public void onPrivacyPolicyClick() {
+            openDoc(R.string.href_privacy_policy);
+        }
     };
 
     @Override
@@ -56,6 +68,9 @@ public class SignInFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         mBinding.setShowProgress(mShowProgress);
         mBinding.setFragmentCallback(mCallback);
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            ((MainActivity)requireActivity()).popBackStack();
+        }
     }
 
     private void customerSignUp() {
@@ -73,6 +88,12 @@ public class SignInFragment extends BaseFragment {
     public void signIn() {
         if(!checkInternetConnection()){
             showToast(R.string.toast_no_internet_connection);
+            return;
+        }
+
+        if(mBinding.signInFragmentEmail.getText().toString().isEmpty() ||
+        mBinding.signInFragmentPassword.getText().toString().isEmpty()){
+            showToast(R.string.toast_error_login);
             return;
         }
         showProgress(true);
@@ -106,6 +127,11 @@ public class SignInFragment extends BaseFragment {
                 }
             }
         });
+    }
+
+    private void openDoc(int resId) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(resId)));
+        startActivity(browserIntent);
     }
 
     @Override

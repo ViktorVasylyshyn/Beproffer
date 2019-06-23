@@ -31,14 +31,14 @@
     <string name="hint_outfield_change_password">Щоб змінити пароль, ведіть свій email в поле вводу і натисніть \"Змінити\". Ви отримаєте повідомлення для зміни паролю на цю адресу.</string>
     <string name="hint_outfield_settings_reset_password">Натисніть \"Скинути\" якщо хочете змінити палоль від свого профпйлу. Ви будете скеровані до відповідного меню(відбудеться вихід з профайлу).</string>
     <string name="hint_outfield_agree_to">Реєструючись в додатку Beproffer Ви підтвержуєте, що ознайомилися і погоджуєтесь з його</string>
+    <string name="hint_outfield_not_sign_up_agree_to">Користуючись додатком Beproffer без реєстрації Ви підтвержуєте що ознайомилися і погоджуєтесь з нашими</string>
 
-    <string name="hint_outfield_terms_of_service">
-        <a href="http://lawfulness.kiev.ua/reestratsiya-tov">Умовами Користування</a>
-    </string>
-    <string name="hint_outfield_and">та</string>
-    <string name="hint_outfield_privacy_policy">
-        <a href="http://lawfulness.kiev.ua/reestratsiya-tov">Політикою Конфіденційності.</a>
-    </string>
+    <string name="href_terms_of_service">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5-%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-beproffer</string>
+    <string name="href_terms_of_service_title_0">Умовами Користування</string>
+    <string name="href_terms_of_service_title_1">Умови Користування</string>
+    <string name="href_privacy_policy">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0-%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8</string>
+    <string name="href_privacy_policy_title_0">Політикою Конфіденційності</string>
+    <string name="href_privacy_policy_title_1">Політика Конфіденційності</string>
 
 
     <!--Titles-->
@@ -52,7 +52,7 @@
     <string name="title_ask_for_phone">НОМЕР ТЕЛ СПЕЦІАЛІСТА</string>
     <string name="title_specialist_type">СПЕЦІАЛІСТ</string>
     <string name="title_customer_type">КЛІЄНТ</string>
-    <string name="title_add_image">ДОДАТИ ЗОБРАЖЕННЯ</string>
+    <string name="title_add_image">ДОДАТИ</string>
     <string name="title_service_type">ВИД СЕРВІСУ</string>
     <string name="title_delete">Видалити</string>
     <string name="title_clear">Обнулити</string>
@@ -141,6 +141,7 @@
     <string name="toast_no_internet_connection">Підключіться, будь ласка, до інтернету.</string>
     <string name="toast_contact_confirmed">Контакт підтвержено.</string>
     <string name="toast_contact_denied">В контакті відмовлено.</string>
+    <string name="toast_would_you_like_to_donate">Поки що можна завантажити 5 зображень максимально.</string>
 
 
     <string name="error_message_exception_sign_up_weak_password">Захистіть свій профайл більш надійним паролем.</string>

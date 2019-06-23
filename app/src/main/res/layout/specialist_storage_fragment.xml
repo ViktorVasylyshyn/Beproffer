@@ -20,9 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/base_margin_small"
-        android:layout_marginStart="@dimen/base_margin_small"
-        android:layout_marginEnd="@dimen/base_margin_small"
-        android:layout_marginBottom="@dimen/profile_image_half"
         android:background="@color/color_background_grey"
         tools:context=".presentation.specstorage.SpecialistStorageFragment">
 
@@ -51,7 +48,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_white_background"
             android:text="@string/title_add_image"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_small"
@@ -65,8 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/profile_image_quarter"
-            android:visibility="gone"
-            android:layout_marginBottom="@dimen/base_margin_big"
+            android:layout_marginBottom="@dimen/profile_image_half"
             android:onClick="@{(view)-> fragmentCallback.onAddNewImageClick()}"
             android:src="@drawable/ic_add"
             app:layout_constraintBottom_toBottomOf="parent"

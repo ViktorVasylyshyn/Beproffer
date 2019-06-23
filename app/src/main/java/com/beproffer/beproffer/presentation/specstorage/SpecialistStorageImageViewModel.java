@@ -25,7 +25,7 @@ public class SpecialistStorageImageViewModel extends ViewModel {
     private List<StorageImageItem> mStorageImageItemsList = new ArrayList<>();
     private MutableLiveData<List<StorageImageItem>> mStorageImageItemsListLiveData = new MutableLiveData<>();
 
-    public void syncDataWithFirebase(FloatingActionButton button, ProgressBar progressBar) {
+    public void syncDataWithFirebase() {
         if (mStorageImageItemsList.isEmpty()) {
             FirebaseDatabase.getInstance().getReference()
                     .child(Const.USERS)
@@ -41,37 +41,27 @@ public class SpecialistStorageImageViewModel extends ViewModel {
                                 }
                             }
                             mStorageImageItemsListLiveData.setValue(mStorageImageItemsList);
-                            floatingButtonDisplaying(button, progressBar);
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                             Log.d(Const.ERROR, "SpecialistStorageImageViewModel onCancelled");
-                            button.hide();
                         }
                     });
-        } else {
-            floatingButtonDisplaying(button, progressBar);
         }
-    }
-
-    private void floatingButtonDisplaying(FloatingActionButton button, ProgressBar progressBar) {
-        if (mStorageImageItemsList.size() < 5) {
-            button.show();
-        }
-        progressBar.setVisibility(View.GONE);
     }
 
     public void addSingleStorageImageItem(StorageImageItem storageImageItem) {
-        if(mStorageImageItemsList.size() <5){
-            mStorageImageItemsList.add(storageImageItem);
-            return;
-        }
+        boolean replacementOccured = false;
         for (int i = 0; i < mStorageImageItemsList.size(); i++) {
             if (mStorageImageItemsList.get(i).getKey().equals(storageImageItem.getKey())) {
                 mStorageImageItemsList.set(i, storageImageItem);
-                return;
+                replacementOccured = true;
             }
+        }
+        if(!replacementOccured && mStorageImageItemsList.size() <5){
+            mStorageImageItemsList.add(storageImageItem);
+            return;
         }
         mStorageImageItemsListLiveData.setValue(mStorageImageItemsList);
     }

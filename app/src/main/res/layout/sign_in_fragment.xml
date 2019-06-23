@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,14 +12,14 @@
 
         <variable
             name="fragmentCallback"
-            type="com.beproffer.beproffer.presentation.sign_in_up.login.SingInFragmentCallback" />
+            type="com.beproffer.beproffer.presentation.sign_in_up.sign_in.SingInFragmentCallback" />
     </data>
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.sign_in_up.login.SignInFragment">
+        tools:context=".presentation.sign_in_up.sign_in.SignInFragment">
 
         <EditText
             android:id="@+id/sign_in_fragment_email"
@@ -88,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/profile_image_half"
+            android:layout_margin="@dimen/profile_image_three_quarters"
             android:background="@drawable/button_background_green_rectangle"
             android:onClick="@{(view) -> fragmentCallback.onCustomerSignUpClick()}"
             android:padding="@dimen/base_padding_small"
@@ -131,9 +132,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/base_margin_small"
-            android:layout_marginEnd="@dimen/base_margin_small"
-            android:layout_marginBottom="@dimen/profile_image_half"
+            android:layout_marginBottom="@dimen/profile_image_three_quarters"
             android:background="@drawable/rectangle_white_background"
             android:gravity="center"
             android:padding="@dimen/base_padding_small"
@@ -143,5 +142,30 @@
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent" />
 
+        <TextView
+            android:id="@+id/sign_in_terms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:onClick="@{(view) -> fragmentCallback.onTermsClick()}"
+            android:text="@string/href_terms_of_service_title_1"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/base_text_size_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_fragment_change_password" />
+
+        <TextView
+            android:id="@+id/sign_in_privacy_policy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:onClick="@{(view) -> fragmentCallback.onPrivacyPolicyClick()}"
+            android:text="@string/href_privacy_policy_title_1"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/base_text_size_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_terms" />
     </android.support.constraint.ConstraintLayout>
 </layout>
