@@ -4,5 +4,5 @@ public interface SpecialistStorageEditFragmentCallback {
 
     void setImage();
 
-    void checkImageData();
+    void confirmImageData();
 }

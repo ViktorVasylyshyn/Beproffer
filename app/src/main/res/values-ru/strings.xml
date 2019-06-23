@@ -31,14 +31,13 @@
     <string name="hint_outfield_change_password">Чтобы сменить пароль - введите свой email в поле ввода и нажмите \"Изменить\". Вам придет сообщение для смены пароля на этот email.</string>
     <string name="hint_outfield_settings_reset_password">Нажмите \"Сбросить\" если хотите изменить пароль своего профайла. Вы будете перенаправлены в соответствующее меню(произойдет выход из профайла).</string>
     <string name="hint_outfield_agree_to">Регистрируясь в приложении Beproffer Вы подтверждаете, что ознакомились и согласны с его</string>
-
-    <string name="hint_outfield_terms_of_service">
-        <a href="http://lawfulness.kiev.ua/reestratsiya-tov">Условиями Использования</a>
-    </string>
-    <string name="hint_outfield_and">и</string>
-    <string name="hint_outfield_privacy_policy">
-        <a href="http://lawfulness.kiev.ua/reestratsiya-tov">Политикой Конфиденциальности.</a>
-    </string>
+    <string name="hint_outfield_not_sign_up_agree_to">Используя приложение Beproffer без регистрации, Вы подтверждаете, что ознакомились и согласны с нашими</string>
+    <string name="href_terms_of_service">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5-%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-beproffer</string>
+    <string name="href_terms_of_service_title_0">Условиями Использования</string>
+    <string name="href_terms_of_service_title_1">Условия Использования</string>
+    <string name="href_privacy_policy">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0-%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8</string>
+    <string name="href_privacy_policy_title_0">Политикой Конфиденциальности</string>
+    <string name="href_privacy_policy_title_1">Политикой Конфиденциальности</string>
 
 
     <!--Titles-->
@@ -52,7 +51,7 @@
     <string name="title_ask_for_phone">УЗНАТЬ ТЕЛ МАСТЕРА</string>
     <string name="title_specialist_type">МАСТЕР</string>
     <string name="title_customer_type">КЛИЕНТ</string>
-    <string name="title_add_image">ДОБАВИТЬ ИЗОБРАЖЕНИЕ</string>
+    <string name="title_add_image">ДОБАВИТЬ</string>
     <string name="title_service_type">ВИД УСЛУГИ</string>
     <string name="title_delete">Удалить</string>
     <string name="title_clear">Очистить</string>
@@ -141,9 +140,10 @@
     <string name="toast_no_internet_connection">Подключитесь пожалуйста к интерету.</string>
     <string name="toast_contact_confirmed">Контакт подтвержден.</string>
     <string name="toast_contact_denied">Контакт отклонен.</string>
+    <string name="toast_would_you_like_to_donate">Пока что, можно загрузить 5 изображений максимум.</string>
 
     <string name="error_message_exception_sign_up_weak_password">Придумайте более надежный пароль.</string>
-    <string name="error_message_exception_sign_up_invalid_credentials">Неправильный формат адреса электронной почты.</string><!--Имэйл имеет неправильный формат-->
+    <string name="error_message_exception_sign_up_invalid_credentials">Неправильный формат адреса электронной почты.</string>
     <string name="error_message_exception_sign_up_collision">Профайл с таким электронным адресом уже существует.</string>
     <string name="error_message_exception_sign_in_invalid_user">Профайла с такой электронной почтой не существует.</string>
     <string name="error_message_exception_sign_in_invalid_credentials">Введен неверный пароль.</string>

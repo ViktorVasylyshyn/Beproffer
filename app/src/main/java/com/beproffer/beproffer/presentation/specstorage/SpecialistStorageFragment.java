@@ -49,20 +49,21 @@ public class SpecialistStorageFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         mBinding.setFragmentCallback(mCallback);
         mBinding.setShowProgress(mShowProgress);
-        showProgress(true);
 
         mNavController = Navigation.findNavController(requireActivity(), R.id.navigation_fragment_container);
 
-        SpecialistStorageImageViewModel specialistStorageImageViewModel = ViewModelProviders.of(requireActivity()).get(SpecialistStorageImageViewModel.class);
-        specialistStorageImageViewModel.getStorageImagesItemsList().observe(this, data -> {
-            if (data != null) {
-                mImageItemsList = data;
-                mImageAdapter.setData(mImageItemsList);
-            }
-            showProgress(false);
-        });
-
-        specialistStorageImageViewModel.syncDataWithFirebase(mBinding.specialistStorageAddImageButton, mBinding.specialistStorageProgressBar);
+        if (mImageItemsList == null) {
+            showProgress(true);
+            SpecialistStorageImageViewModel specialistStorageImageViewModel = ViewModelProviders.of(requireActivity()).get(SpecialistStorageImageViewModel.class);
+            specialistStorageImageViewModel.getStorageImagesItemsList().observe(this, data -> {
+                if (data != null) {
+                    mImageItemsList = data;
+                    mImageAdapter.setData(mImageItemsList);
+                }
+                showProgress(false);
+            });
+            specialistStorageImageViewModel.syncDataWithFirebase();
+        }
     }
 
     private void initRecyclerView() {
@@ -73,6 +74,10 @@ public class SpecialistStorageFragment extends BaseFragment {
     }
 
     public void addNewImage() {
+        if(mImageItemsList != null && mImageItemsList.size() >= 5){
+            showToast(R.string.toast_would_you_like_to_donate);
+            return;
+        }
         ViewModelProviders.of(requireActivity()).get(SpecialistStorageEditFragmentViewModel.class)
                 .setStorageImageItem(new StorageImageItem(
                         null,
@@ -84,7 +89,7 @@ public class SpecialistStorageFragment extends BaseFragment {
                         null,
                         null,
                         null));
-        performNavigation();
+        performNavigationForEdit();
     }
 
     private void setupList() {
@@ -94,10 +99,10 @@ public class SpecialistStorageFragment extends BaseFragment {
     private void loadImageDetails(@Nullable View view, StorageImageItem storageImageItem) {
         ViewModelProviders.of(requireActivity()).get(SpecialistStorageEditFragmentViewModel.class)
                 .setStorageImageItem(storageImageItem);
-        performNavigation();
+        performNavigationForEdit();
     }
 
-    private void performNavigation() {
+    private void performNavigationForEdit() {
         mNavController.navigate(R.id.action_global_specialistStorageEditFragment);
     }
 }

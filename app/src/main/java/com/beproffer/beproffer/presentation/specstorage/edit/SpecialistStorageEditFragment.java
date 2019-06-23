@@ -23,6 +23,7 @@ import com.beproffer.beproffer.databinding.SpecialistStorageEditFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
 import com.beproffer.beproffer.presentation.specstorage.SpecialistStorageImageViewModel;
 import com.beproffer.beproffer.util.Const;
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -54,7 +55,7 @@ public class SpecialistStorageEditFragment extends BaseFragment {
         }
 
         @Override
-        public void checkImageData() {
+        public void confirmImageData() {
             checkServiceImageData();
         }
     };
@@ -71,8 +72,8 @@ public class SpecialistStorageEditFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        showProgress(true);
         mBinding.setShowProgress(mShowProgress);
+        showProgress(true);
         mViewModel = ViewModelProviders.of(requireActivity()).get(SpecialistStorageEditFragmentViewModel.class);
         mBinding.setViewModel(mViewModel);
         mBinding.setFragmentCallback(mCallback);
@@ -144,12 +145,14 @@ public class SpecialistStorageEditFragment extends BaseFragment {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(activity.getApplication().getContentResolver(), mResultUri);
             } catch (IOException e) {
-                Log.d(Const.ERROR, "exception SpecialistStorageEditFragment saveNewImageData");
+                Crashlytics.getInstance().crash();
+                showToast(R.string.toast_error_has_occurred);
             }
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             try {
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
             } catch (NullPointerException e) {
+                Crashlytics.getInstance().crash();
                 showToast(R.string.toast_error_has_occurred);
             }
             byte[] data = baos.toByteArray();
@@ -191,6 +194,7 @@ public class SpecialistStorageEditFragment extends BaseFragment {
                     mImageItem.setUrl(mResultUri.toString());
                 }
             } catch (NullPointerException e) {
+                Crashlytics.getInstance().crash();
                 showToast(R.string.toast_error_has_occurred);
             }
             mBinding.setItem(mImageItem);

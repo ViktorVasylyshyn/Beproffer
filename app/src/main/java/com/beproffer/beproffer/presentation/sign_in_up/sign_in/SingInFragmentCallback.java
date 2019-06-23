@@ -1,4 +1,4 @@
-package com.beproffer.beproffer.presentation.sign_in_up.login;
+package com.beproffer.beproffer.presentation.sign_in_up.sign_in;
 
 public interface SingInFragmentCallback {
     void onSignInClick();
@@ -8,4 +8,8 @@ public interface SingInFragmentCallback {
     void onSpecialistSignUpClick();
 
     void onChangePasswordClick();
+
+    void onTermsClick();
+
+    void onPrivacyPolicyClick();
 }

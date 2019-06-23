@@ -109,20 +109,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
-            android:text="@string/hint_outfield_terms_of_service"
+            android:textColor="@color/colorAccent"
+            android:text="@string/href_terms_of_service_title_0"
+            android:onClick="@{(view) -> fragmentCallback.onTermsClick()}"
             android:textSize="@dimen/base_text_size_small"
-            app:layout_constraintEnd_toStartOf="@+id/customer_sign_up_and"
-            app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_agree_to" />
-
-        <TextView
-            android:id="@+id/customer_sign_up_and"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
-            android:text="@string/hint_outfield_and"
-            android:textSize="@dimen/base_text_size_small"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_agree_to" />
 
         <TextView
@@ -130,10 +122,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
-            android:text="@string/hint_outfield_privacy_policy"
+            android:textColor="@color/colorAccent"
+            android:text="@string/href_privacy_policy_title_0"
             android:textSize="@dimen/base_text_size_small"
-            app:layout_constraintStart_toEndOf="@+id/customer_sign_up_and"
-            app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_agree_to" />
+            android:onClick="@{(view) -> fragmentCallback.onPrivacyPolicyClick()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_terms" />
 
         <ImageView
             android:id="@+id/customer_sign_up_image_button"
@@ -145,7 +140,7 @@
             android:src="@drawable/ic_check_mark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_and"
+            app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_privacy_policy"
             tools:ignore="ContentDescription" />
 
         <ProgressBar

@@ -1,6 +1,8 @@
 package com.beproffer.beproffer.presentation.sign_in_up.specialist_reg;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,7 +29,22 @@ public class SpecialistSignUpFragment extends BaseFragment {
 
     private SpecialistSignUpFragmentBinding mBinding;
 
-    private SpecialistSignUpFragmentCallback mCallback = this::createUser;
+    private SpecialistSignUpFragmentCallback mCallback = new SpecialistSignUpFragmentCallback() {
+        @Override
+        public void onSignUpClick() {
+            createUser();
+        }
+
+        @Override
+        public void onPrivacyPolicyClick() {
+            openDoc(R.string.href_privacy_policy);
+        }
+
+        @Override
+        public void onTermsClick() {
+            openDoc(R.string.href_terms_of_service);
+        }
+    };
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -48,7 +65,7 @@ public class SpecialistSignUpFragment extends BaseFragment {
     }
 
     public void createUser() {
-        if(!checkInternetConnection()){
+        if (!checkInternetConnection()) {
             showToast(R.string.toast_no_internet_connection);
             return;
         }
@@ -84,7 +101,7 @@ public class SpecialistSignUpFragment extends BaseFragment {
                                             null),
                                     requireActivity(),
                                     mShowProgress,
-                                    R.id.action_global_loginFragment);
+                                    R.id.action_global_signInFragment);
                             showToast(R.string.toast_sign_up_email_verification);
                         }
                     });
@@ -110,5 +127,10 @@ public class SpecialistSignUpFragment extends BaseFragment {
                 }
             }
         });
+    }
+
+    private void openDoc(int resId) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(resId)));
+        startActivity(browserIntent);
     }
 }
