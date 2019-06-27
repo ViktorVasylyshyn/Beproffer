@@ -20,31 +20,39 @@
     <string name="hint_nails_outfield">НОГТИ</string>
     <string name="hint_makeup_outfield">МАКИЯЖ</string>
     <string name="hint_fitness_outfield">ФИТНЕС</string>
-    <string name="hint_barber_outfield">БАРБЕРШОП</string>
-    <string name="hint_tattoo_outfield">ТАТУИРОВКИ</string>
+    <string name="hint_barber_outfield">БАРБЕР</string>
+    <string name="hint_tattoo_outfield">ТАТУ</string>
     <string name="hint_type_outfield">ВИД УСЛУГИ</string>
     <string name="hint_gender_outfield">ПОЛ</string>
     <string name="hint_edit_outfield">РЕД</string>
-    <string name="hint_outfield_delete_profile">Введите свой email и нажмите \"Удалить\" если хотите удалить свой профайл в Beproffer. Удаленный профайл не подлежит восстановлению, но можно будет создать новый.</string>
-    <string name="hint_outfield_clear_browsing_history">Нажмите дважды \"Очистить\", чтобы очистить историю просмотров и увидеть все доступные изображения снова.</string>
+    <string name="hint_outfield_delete_profile">Введите свой email и нажмите \"Удалить\" для удаления текущего профайла в Beproffer. Удаленный профайл нельзя восстановить, но можно будет создать новый.</string>
+    <string name="hint_outfield_clear_browsing_history">Нажмите дважды \"Очистить\", чтобы очистить историю просмотров.</string>
     <string name="hint_outfield_forgot_password">Забыли пароль? Нажмите, чтобы изменить его.</string>
     <string name="hint_outfield_change_password">Чтобы сменить пароль - введите свой email в поле ввода и нажмите \"Изменить\". Вам придет сообщение для смены пароля на этот email.</string>
-    <string name="hint_outfield_settings_reset_password">Нажмите \"Сбросить\" если хотите изменить пароль своего профайла. Вы будете перенаправлены в соответствующее меню(произойдет выход из профайла).</string>
+    <string name="hint_outfield_settings_reset_password">Нажмите \"Сбросить\" для изменения пароля(произойдет выход из профайла в соответствующее меню).</string>
     <string name="hint_outfield_agree_to">Регистрируясь в приложении Beproffer Вы подтверждаете, что ознакомились и согласны с его</string>
     <string name="hint_outfield_not_sign_up_agree_to">Используя приложение Beproffer без регистрации, Вы подтверждаете, что ознакомились и согласны с нашими</string>
+    <string name="hint_outfield_contact_us_title">Свяжитесь с нами, если у вас есть вопросы.</string>
+    <string name="hint_outfield_contact_us_email">beproffer.llc@gmail.com</string>
+    <string name="hint_outfield_use_correct_name_format">Используйте ваши имя и фамилию, для лучшего представления вашего профайла.</string>
+
+
     <string name="href_terms_of_service">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5-%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-beproffer</string>
     <string name="href_terms_of_service_title_0">Условиями Использования</string>
     <string name="href_terms_of_service_title_1">Условия Использования</string>
     <string name="href_privacy_policy">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0-%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8</string>
     <string name="href_privacy_policy_title_0">Политикой Конфиденциальности</string>
-    <string name="href_privacy_policy_title_1">Политикой Конфиденциальности</string>
+    <string name="href_privacy_policy_title_1">Политика Конфиденциальности</string>
+    <string name="href_official_site_title">Beproffer.com</string>
+    <string name="href_official_site">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F</string>
+
 
 
     <!--Titles-->
     <string name="title_duration">ДЛИТЕЛЬНОСТЬ</string>
     <string name="title_confirmed_contacts">КОНТАКТЫ</string>
     <string name="title_contact_requests">ЗАПРОСЫ</string>
-    <string name="title_login">ЛОГИН</string>
+    <string name="title_sign_in">ЛОГИН</string>
     <string name="title_price">ЦЕНА</string>
     <string name="title_customer_registration">НОВЫЙ КЛИЕНТ</string>
     <string name="title_specialist_registration">НОВЫЙ МАСТЕР</string>
@@ -112,10 +120,11 @@
     <string name="toast_select_type">Пожалуйста, выберите вид услуги.</string>
     <string name="toast_enter_name">Пожалуйста, введите имя.</string>
     <string name="toast_enter_phone">Пожалуйста, введите номер телефона.</string>
-    <string name="toast_determine_gender">Определите, для какого пола актуальна услуга.</string>
+    <string name="toast_determine_your_gender">Укажите пожалуйста свой пол.</string>
     <string name="toast_select_duration">Пожалуйста, выберите длительность сеанса.</string>
     <string name="toast_enter_price">Пожалуйста, выберите цену услуги.</string>
     <string name="toast_enter_description">Пожалуйста, введите описание услуги.</string>
+    <string name="toast_determine_gender">Определите, для какого пола актуальна услуга.</string>
 
     <string name="toast_define_search_request">Пожалуйста, определите параметры поиска.</string>
     <string name="toast_define_search_params">Все параметры должны быть заданы.</string>
@@ -141,6 +150,8 @@
     <string name="toast_contact_confirmed">Контакт подтвержден.</string>
     <string name="toast_contact_denied">Контакт отклонен.</string>
     <string name="toast_would_you_like_to_donate">Пока что, можно загрузить 5 изображений максимум.</string>
+    <string name="toast_no_any_contacts">У Вас, пока что, нет контактов.</string>
+    <string name="toast_no_any_contact_requests">У Вас, пока что, нет запросов.</string>
 
     <string name="error_message_exception_sign_up_weak_password">Придумайте более надежный пароль.</string>
     <string name="error_message_exception_sign_up_invalid_credentials">Неправильный формат адреса электронной почты.</string>
@@ -149,12 +160,15 @@
     <string name="error_message_exception_sign_in_invalid_credentials">Введен неверный пароль.</string>
     <string name="error_message_enter_email">Сначала введите email.</string>
     <string name="error_message_delete_profile_wrong_email">Неправильный email.</string>
+    <string name="error_message_wrong_phone_number_format">Неверный формат номера телефона.</string>
+    <string name="error_message_wrong_name_format">слишком короткое имя.</string>
 
     <string name="search">Поиск</string>
     <string name="kyiv">Киев, Украина.</string>
 
     <!--special hints-->
     <string name="hint_specialist_phone_1">Убедитесь, что номер телефона указан правильно. Он будет показываться потенциальным клиентам.</string>
+    <string name="hint_any_1">Создайте надежный пароль используя цыфры, буквы и символы.</string>
 
 
     <!--new-->

@@ -31,6 +31,9 @@
     <string name="hint_outfield_settings_reset_password">Tap \"Reset\" if you want to change your password. You will be signed out and redirected to the appropriate menu.</string>
     <string name="hint_outfield_agree_to">By signing up, you agree to Beproffer\'s</string>
     <string name="hint_outfield_not_sign_up_agree_to">By using Beproffer without signing up, you agree to our</string>
+    <string name="hint_outfield_contact_us_title">Contact us if you have any questions.</string>
+    <string name="hint_outfield_contact_us_email">beproffer.llc@gmail.com</string>
+    <string name="hint_outfield_use_correct_name_format">Use your first and last name for better representation of your profile.</string>
 
     <!--Refs-->
     <string name="href_terms_of_service_title_0">Terms of Service</string>
@@ -39,12 +42,15 @@
     <string name="href_privacy_policy_title_1">Privacy Policy</string>
     <string name="href_terms_of_service">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5-%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-beproffer</string>
     <string name="href_privacy_policy">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0-%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8</string>
+    <string name="href_official_site_title">Beproffer.com</string>
+    <string name="href_official_site">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F</string>
+
 
     <!--Titles-->
     <string name="title_duration">DURATION</string>
     <string name="title_confirmed_contacts">CONTACTS</string>
     <string name="title_contact_requests">CONTACT REQUESTS</string>
-    <string name="title_login">LOGIN</string>
+    <string name="title_sign_in">sign in</string>
     <string name="title_price">PRICE</string>
     <string name="title_customer_registration">NEW CUSTOMER</string>
     <string name="title_specialist_registration">NEW SPECIALIST</string>
@@ -112,10 +118,11 @@
     <string name="toast_select_type">Please select the service type.</string>
     <string name="toast_enter_name">Please enter your name.</string>
     <string name="toast_enter_phone">Please enter the phone number.</string>
-    <string name="toast_determine_gender">Please, determine the gender which the service is relevant for.</string>
     <string name="toast_select_duration">Please select the session duration.</string>
+    <string name="toast_determine_your_gender">Please select you gender.</string>
     <string name="toast_enter_price">Please enter the service price.</string>
     <string name="toast_enter_description">Please enter the service description.</string>
+    <string name="toast_determine_gender">Please, determine the gender which the service is relevant for.</string>
 
     <string name="toast_define_search_request">Please define the search request.</string>
     <string name="toast_define_search_params">All search params must be set.</string>
@@ -139,6 +146,9 @@
     <string name="toast_request_for_registered">The function is available only for registered users.</string>
     <string name="toast_reset_password_check_your_email">We sent you a message. Please check your inbox and complete the password changing.</string>
     <string name="toast_no_internet_connection">There is no internet connection. :( </string>
+    <string name="toast_no_any_contacts">No any contacts for now.</string>
+    <string name="toast_no_any_contact_requests">No any contact requests for now.</string>
+    <string name="toast_would_you_like_to_donate">You can add only 5 images for now.</string>
 
     <string name="error_message_exception_sign_up_weak_password">Please, create more complicated password.</string>
     <string name="error_message_exception_sign_up_invalid_credentials">Invalid credentials.</string>
@@ -147,7 +157,8 @@
     <string name="error_message_exception_sign_in_invalid_credentials">Incorrect password or email address.</string>
     <string name="error_message_enter_email">Enter your email first.</string>
     <string name="error_message_delete_profile_wrong_email">Incorrect email.</string>
-    <string name="toast_would_you_like_to_donate">You can add only 5 images for now.</string>
+    <string name="error_message_wrong_phone_number_format">Incorrect format of phone number.</string>
+    <string name="error_message_wrong_name_format">Name is too short.</string>
 
     <string name="search">Search</string>
     <string name="kyiv">Kyiv, Ukraine.</string>
@@ -158,7 +169,7 @@
     <!--new-->
     <string name="toast_contact_confirmed">Contact confirmed.</string>
     <string name="toast_contact_denied">Contact denied.</string>
-
     <string name="hint_specialist_phone_1">Make sure your phone number is correct. It will be shown to your potential customers.</string>
+    <string name="hint_any_1">Make sure your password is strong.</string>
 
 </resources>

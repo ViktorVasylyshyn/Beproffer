@@ -20,18 +20,22 @@
     <string name="hint_nails_outfield">НІГТІ</string>
     <string name="hint_makeup_outfield">МАКІЯЖ</string>
     <string name="hint_fitness_outfield">ФІТНЕС</string>
-    <string name="hint_barber_outfield">БАРБЕРШОП</string>
-    <string name="hint_tattoo_outfield">ТАТУЮВАННЯ</string>
+    <string name="hint_barber_outfield">БАРБЕР</string>
+    <string name="hint_tattoo_outfield">ТАТУ</string>
     <string name="hint_type_outfield">ВИД</string>
     <string name="hint_edit_outfield">РЕД</string>
     <string name="hint_gender_outfield">СТАТЬ</string>
-    <string name="hint_outfield_clear_browsing_history">Натисніть двічі \"Обнулити\" якщо хочете обнулити історію перегладів і передивитися всі Зображення ще раз.</string>
-    <string name="hint_outfield_delete_profile">Введіть свій email і настисніть \"Видалити\", якщо хочете видалити свій профайл в Beproffer. Видалений профайл не можна відновити, але можна буде створити новий.</string>
+    <string name="hint_outfield_clear_browsing_history">Натисніть двічі \"Обнулити\" якщо хочете обнулити історію перегладів.</string>
+    <string name="hint_outfield_delete_profile">Введіть свій email і настисніть \"Видалити\", для видалення цього профайлу з Beproffer. Видалений профайл не можна відновити, але можна буде створити новий.</string>
     <string name="hint_outfield_forgot_password">Забули свій пароль? Натисніть щоб змінити.</string>
     <string name="hint_outfield_change_password">Щоб змінити пароль, ведіть свій email в поле вводу і натисніть \"Змінити\". Ви отримаєте повідомлення для зміни паролю на цю адресу.</string>
-    <string name="hint_outfield_settings_reset_password">Натисніть \"Скинути\" якщо хочете змінити палоль від свого профпйлу. Ви будете скеровані до відповідного меню(відбудеться вихід з профайлу).</string>
+    <string name="hint_outfield_settings_reset_password">Натисніть \"Скинути\" для зміни паролю(відбудеться вихід з профайлу в меню зміни паролю).</string>
     <string name="hint_outfield_agree_to">Реєструючись в додатку Beproffer Ви підтвержуєте, що ознайомилися і погоджуєтесь з його</string>
     <string name="hint_outfield_not_sign_up_agree_to">Користуючись додатком Beproffer без реєстрації Ви підтвержуєте що ознайомилися і погоджуєтесь з нашими</string>
+    <string name="hint_outfield_contact_us_title">Зв\'яжіться з нами, якщо маєте питання.</string>
+    <string name="hint_outfield_contact_us_email">beproffer.llc@gmail.com</string>
+    <string name="hint_outfield_use_correct_name_format">Використовуйте ваші ім\'я та прізвище, для кращого представлення вашого профайлу.</string>
+
 
     <string name="href_terms_of_service">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5-%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-beproffer</string>
     <string name="href_terms_of_service_title_0">Умовами Користування</string>
@@ -39,13 +43,15 @@
     <string name="href_privacy_policy">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0-%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8</string>
     <string name="href_privacy_policy_title_0">Політикою Конфіденційності</string>
     <string name="href_privacy_policy_title_1">Політика Конфіденційності</string>
+    <string name="href_official_site_title">Beproffer.com</string>
+    <string name="href_official_site">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F</string>
 
 
     <!--Titles-->
     <string name="title_duration">ТРИВАЛІСТЬ</string>
     <string name="title_confirmed_contacts">КОНТАКТИ</string>
     <string name="title_contact_requests">ЗАПИТИ КОНТАКТУ</string>
-    <string name="title_login">ВХІД</string>
+    <string name="title_sign_in">ВХІД</string>
     <string name="title_price">ЦІНА</string>
     <string name="title_customer_registration">НОВИЙ КЛІЄНТ</string>
     <string name="title_specialist_registration">НОВИЙ СПЕЦІАЛІСТ</string>
@@ -74,7 +80,7 @@
 
 
     <!--/*Start/SignIn/Registration/e.t.s.*/-->
-    <string name="app_availability">Додаток, поки що, актуальний тільки у м.Суми(Україна).</string>
+    <string name="app_availability">Додаток, поки що, актуальний тільки у м.Київ(Україна).</string>
     <string name="register_as_customer">Новий клієнт.</string>
     <string name="register_as_specialist">Новий спеціаліст.</string>
 
@@ -113,6 +119,7 @@
     <string name="toast_select_type">Будь ласка, зазначте вид послуги.</string>
     <string name="toast_enter_name">Будь ласка, введіть ім\'я.</string>
     <string name="toast_enter_phone">Будь ласка, введіть номер телефону.</string>
+    <string name="toast_determine_your_gender">Будь ласка зазначте свою стать.</string>
     <string name="toast_determine_gender">Будь ласка, зазначте стать для якої призначена послуга.</string>
     <string name="toast_select_duration">Будь ласка, зазначте тривалість сеансу.</string>
     <string name="toast_enter_price">Будь ласка, зазначте ціну сеансу.</string>
@@ -142,6 +149,8 @@
     <string name="toast_contact_confirmed">Контакт підтвержено.</string>
     <string name="toast_contact_denied">В контакті відмовлено.</string>
     <string name="toast_would_you_like_to_donate">Поки що можна завантажити 5 зображень максимально.</string>
+    <string name="toast_no_any_contacts">Наразі контактів немає.</string>
+    <string name="toast_no_any_contact_requests">Наразі запитів немає.</string>
 
 
     <string name="error_message_exception_sign_up_weak_password">Захистіть свій профайл більш надійним паролем.</string>
@@ -151,14 +160,17 @@
     <string name="error_message_exception_sign_in_invalid_credentials">Невірний пароль.</string>
     <string name="error_message_enter_email">Спочатку введіть email.</string>
     <string name="error_message_delete_profile_wrong_email">Неправильний email.</string>
+    <string name="error_message_wrong_phone_number_format">Невірний формат номеру телефону.</string>
+    <string name="error_message_wrong_name_format">Закоротке ім\'я.</string>
 
     <string name="search">Пошук</string>
-    <string name="kyiv">Суми, Україна.</string>
+    <string name="kyiv">Київ, Україна.</string>
 
 
     <!--special hints-->
 
     <string name="hint_specialist_phone_1">Впевніться, що номер телефону правильний. Він буде показуватися потенційним клієнтам.</string>
+    <string name="hint_any_1">Створіть надійний пароль, використовуючи літери, цифри та символи.</string>
 
 
     <!--new-->

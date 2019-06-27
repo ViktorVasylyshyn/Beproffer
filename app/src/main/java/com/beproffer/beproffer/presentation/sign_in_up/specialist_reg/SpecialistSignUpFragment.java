@@ -69,12 +69,24 @@ public class SpecialistSignUpFragment extends BaseFragment {
             showToast(R.string.toast_no_internet_connection);
             return;
         }
+        if(mBinding.specialistSignUpName.getText().toString().length() < 4){
+            mBinding.specialistSignUpName.requestFocus();
+            mBinding.specialistSignUpName.setError(getResources().getText(R.string.error_message_wrong_name_format));
+            mBinding.specialistSignUpBottomHint.setText(R.string.hint_outfield_use_correct_name_format);
+            return;
+        }
+
+        if(6 > mBinding.specialistSignUpPhone.length() &&  mBinding.specialistSignUpPhone.length() > 13){
+            mBinding.specialistSignUpPhone.requestFocus();
+            mBinding.specialistSignUpPhone.setError(getResources().getText(R.string.error_message_wrong_phone_number_format));
+            mBinding.specialistSignUpBottomHint.setText(R.string.hint_specialist_phone_1);
+            return;
+        }
         if (!mBinding.specialistSignUpPass.getText().toString().equals(mBinding.specialistSignUpPassConfirm.getText().toString())) {
             showToast(R.string.toast_error_check_password);
             return;
         }
-        if (mBinding.specialistSignUpName.getText().toString().isEmpty()
-                || mBinding.specialistSignUpEmail.getText().toString().isEmpty()
+        if (mBinding.specialistSignUpEmail.getText().toString().isEmpty()
                 || mBinding.specialistSignUpPass.getText().toString().isEmpty()) {
             showToast(R.string.toast_error_check_fields_data);
             return;

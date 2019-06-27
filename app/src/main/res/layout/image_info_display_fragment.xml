@@ -34,7 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/profile_image_quarter"
             android:layout_marginEnd="@dimen/profile_image_quarter"
-            android:background="@drawable/rectangle_white_background"
+            android:padding="@dimen/base_padding_small"
+            android:background="@drawable/button_background_green_stroke_rectangle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,22 +43,21 @@
 
             <ImageView
                 android:id="@+id/image_info_display_type_image"
-                android:layout_width="@dimen/profile_image_half"
-                android:layout_height="@dimen/profile_image_half"
+                android:layout_width="@dimen/icons_size_normal_width"
+                android:layout_height="@dimen/icons_size_normal_height"
                 android:layout_margin="@dimen/base_margin_small"
-                app:layout_constraintEnd_toStartOf="@+id/image_info_display_gender_image"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/image_info_display_duration_image"
+                app:layout_constraintStart_toEndOf="@+id/image_info_display_gender_image"
                 app:layout_constraintTop_toTopOf="parent"
                 app:setTypeImage="@{imageItem.type}"
                 tools:ignore="ContentDescription" />
 
             <TextView
+                android:id="@+id/image_info_display_type_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_base_text"
-                android:textSize="@dimen/base_text_size_extra_small"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/image_info_display_type_image"
+                android:textSize="@dimen/base_text_size_medium"
                 app:layout_constraintEnd_toEndOf="@+id/image_info_display_type_image"
                 app:layout_constraintStart_toStartOf="@+id/image_info_display_type_image"
                 app:layout_constraintTop_toBottomOf="@+id/image_info_display_type_image"
@@ -65,50 +65,25 @@
 
             <ImageView
                 android:id="@+id/image_info_display_gender_image"
-                android:layout_width="@dimen/profile_image_half"
-                android:layout_height="@dimen/profile_image_half"
+                android:layout_width="@dimen/icons_size_normal_width"
+                android:layout_height="@dimen/icons_size_normal_height"
                 android:layout_margin="@dimen/base_margin_small"
-                app:layout_constraintEnd_toStartOf="@+id/image_info_display_duration_image"
-                app:layout_constraintStart_toEndOf="@+id/image_info_display_type_image"
+                app:layout_constraintEnd_toStartOf="@+id/image_info_display_type_image"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:setGenderImage="@{imageItem.gender}"
                 tools:ignore="ContentDescription" />
 
-            <TextView
-                android:id="@+id/image_info_display_gender_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/color_base_text"
-                android:textSize="@dimen/base_text_size_extra_small"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/image_info_display_gender_image"
-                app:layout_constraintEnd_toEndOf="@+id/image_info_display_gender_image"
-                app:layout_constraintStart_toStartOf="@+id/image_info_display_gender_image"
-                app:layout_constraintTop_toBottomOf="@+id/image_info_display_gender_image"
-                app:setGenderTitle="@{imageItem.gender}" />
-
             <ImageView
                 android:id="@+id/image_info_display_duration_image"
-                android:layout_width="@dimen/profile_image_half"
-                android:layout_height="@dimen/profile_image_half"
+                android:layout_width="@dimen/icons_size_normal_width"
+                android:layout_height="@dimen/icons_size_normal_height"
                 android:layout_margin="@dimen/base_margin_small"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/image_info_display_gender_image"
+                app:layout_constraintStart_toEndOf="@+id/image_info_display_type_image"
                 app:layout_constraintTop_toTopOf="parent"
                 app:setDurationImage="@{imageItem.duration}"
                 tools:ignore="ContentDescription" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/color_base_text"
-                android:textSize="@dimen/base_text_size_extra_small"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/image_info_display_duration_image"
-                app:layout_constraintEnd_toEndOf="@+id/image_info_display_duration_image"
-                app:layout_constraintStart_toStartOf="@+id/image_info_display_duration_image"
-                app:layout_constraintTop_toBottomOf="@+id/image_info_display_duration_image"
-                app:setDurationTitle="@{imageItem.duration}" />
 
             <TextView
                 android:id="@+id/image_info_display_description"
@@ -122,7 +97,7 @@
                 android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_info_display_gender_title" />
+                app:layout_constraintTop_toBottomOf="@+id/image_info_display_type_title" />
 
             <TextView
                 android:id="@+id/image_info_display_price"
@@ -139,14 +114,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_info_display_description" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:layout_width="@dimen/icons_size_small_width"
+                android:layout_height="@dimen/icons_size_small_height"
                 android:layout_margin="@dimen/base_margin_small"
-                android:text="@string/title_price"
-                android:textColor="@color/color_base_text"
-                android:textSize="@dimen/base_text_size_small"
-                android:textStyle="bold"
+                android:src="@drawable/ic_money_sign"
                 app:layout_constraintBottom_toBottomOf="@+id/image_info_display_price"
                 app:layout_constraintEnd_toStartOf="@+id/image_info_display_price"
                 app:layout_constraintTop_toTopOf="@+id/image_info_display_price" />
@@ -157,17 +129,18 @@
                 android:layout_margin="@dimen/base_margin_small"
                 android:text="@string/hint_currency_outfield"
                 android:textColor="@color/color_base_text"
-                android:textSize="@dimen/base_text_size_small"
-                android:textStyle="bold"
+                android:textSize="@dimen/base_text_size_medium"
                 app:layout_constraintBottom_toBottomOf="@+id/image_info_display_price"
                 app:layout_constraintStart_toEndOf="@+id/image_info_display_price"
                 app:layout_constraintTop_toTopOf="@+id/image_info_display_price" />
 
             <ImageView
                 android:id="@+id/image_info_display_send_contact_request_image"
-                android:layout_width="@dimen/profile_image_half"
-                android:layout_height="@dimen/profile_image_half"
+                android:layout_width="@dimen/icons_size_normal_width"
+                android:layout_height="@dimen/icons_size_normal_height"
                 android:layout_margin="@dimen/base_margin_small"
+                android:padding="@dimen/base_padding_small"
+                android:background="@drawable/button_background_green_stroke_rectangle"
                 android:onClick="@{(view)->fragmentCallback.onSendContactRequestClick()}"
                 android:src="@drawable/ic_request_contact"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -181,12 +154,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/title_ask_for_phone"
-                android:textSize="@dimen/base_text_size_extra_small"
+                android:textSize="@dimen/base_text_size_small"
                 android:textColor="@color/color_base_text"
                 app:layout_constraintStart_toStartOf="@+id/image_info_display_send_contact_request_image"
                 app:layout_constraintEnd_toEndOf="@+id/image_info_display_send_contact_request_image"
                 app:layout_constraintTop_toBottomOf="@+id/image_info_display_send_contact_request_image"
-                app:layout_constraintBottom_toBottomOf="@+id/image_info_display_send_contact_request_image"
                 />
 
         </android.support.constraint.ConstraintLayout>

@@ -71,7 +71,7 @@ public class SearchFragmentViewModel extends ViewModel {
             case R.id.search_gender_female_icon:
                 gender = Const.FEMALE;
                 break;
-            case R.id.search_gender_unisex_icon:
+            case R.id.search_gender_any_icon:
                 gender = Const.ALLGEND;
                 break;
             default:

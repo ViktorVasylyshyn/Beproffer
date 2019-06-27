@@ -43,7 +43,7 @@
             android:hint="@string/name_infield"
             android:maxLength="50"
             android:maxLines="1"
-            android:padding="@dimen/base_padding_medium"
+            android:padding="@dimen/base_padding_small"
             android:textSize="@dimen/base_text_size_big"
             app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_title"
             tools:ignore="Autofill,TextFields" />
@@ -58,7 +58,7 @@
             android:inputType="textEmailAddress"
             android:maxLength="50"
             android:maxLines="1"
-            android:padding="@dimen/base_padding_medium"
+            android:padding="@dimen/base_padding_small"
             android:textSize="@dimen/base_text_size_big"
             app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_name"
             tools:ignore="Autofill,TextFields" />
@@ -73,7 +73,7 @@
             android:inputType="textPassword"
             android:maxLength="50"
             android:maxLines="1"
-            android:padding="@dimen/base_padding_medium"
+            android:padding="@dimen/base_padding_small"
             android:textSize="@dimen/base_text_size_big"
             app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_email"
             tools:ignore="Autofill,TextFields" />
@@ -88,7 +88,7 @@
             android:inputType="textPassword"
             android:maxLength="50"
             android:maxLines="1"
-            android:padding="@dimen/base_padding_medium"
+            android:padding="@dimen/base_padding_small"
             android:textSize="@dimen/base_text_size_big"
             app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_pass"
             tools:ignore="Autofill,TextFields" />
@@ -98,8 +98,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
+            android:gravity="center"
             android:text="@string/hint_outfield_agree_to"
-            android:textSize="@dimen/base_text_size_small"
+            android:textSize="@dimen/base_text_size_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_pass_confirm" />
@@ -112,7 +113,7 @@
             android:textColor="@color/colorAccent"
             android:text="@string/href_terms_of_service_title_0"
             android:onClick="@{(view) -> fragmentCallback.onTermsClick()}"
-            android:textSize="@dimen/base_text_size_small"
+            android:textSize="@dimen/base_text_size_medium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_agree_to" />
@@ -121,10 +122,10 @@
             android:id="@+id/customer_sign_up_privacy_policy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
+            android:layout_margin="@dimen/base_margin_extra_small"
             android:textColor="@color/colorAccent"
             android:text="@string/href_privacy_policy_title_0"
-            android:textSize="@dimen/base_text_size_small"
+            android:textSize="@dimen/base_text_size_medium"
             android:onClick="@{(view) -> fragmentCallback.onPrivacyPolicyClick()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -132,10 +133,10 @@
 
         <ImageView
             android:id="@+id/customer_sign_up_image_button"
-            android:layout_width="@dimen/profile_image_half"
-            android:layout_height="@dimen/profile_image_half"
+            android:layout_width="@dimen/icons_size_normal_width"
+            android:layout_height="@dimen/icons_size_normal_height"
             android:layout_margin="@dimen/base_margin_medium"
-            android:background="@drawable/rectangle_white_background"
+            android:background="@drawable/button_background_green_stroke_rectangle"
             android:onClick="@{(view) -> fragmentCallback.onSignUpClick()}"
             android:src="@drawable/ic_check_mark"
             app:layout_constraintEnd_toEndOf="parent"
@@ -156,19 +157,34 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/customer_sign_up_hint_availability"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base_margin_small"
             android:layout_marginEnd="@dimen/base_margin_small"
-            android:layout_marginBottom="@dimen/bnb_hints_margin"
-            android:background="@drawable/rectangle_white_background"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/bnb_floating_button_bottom_margin"
             android:text="@string/app_availability"
             android:textColor="@color/color_base_text"
-            android:textSize="@dimen/base_text_size_small"
+            android:textSize="@dimen/base_text_size_medium"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/customer_sign_up_bottom_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_medium"
+            android:gravity="center"
+            android:text="@string/hint_any_1"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_medium"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/customer_sign_up_hint_availability"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
