@@ -41,7 +41,7 @@
     <!--list item image-->
     <dimen name="list_item_image_width">96dp</dimen>
     <dimen name="list_item_image_height">128dp</dimen>
-    <dimen name="list_item_description_width">160dp</dimen>
+    <dimen name="list_item_description_width">168dp</dimen>
 
 
     <!--specialists edit fragment image-->

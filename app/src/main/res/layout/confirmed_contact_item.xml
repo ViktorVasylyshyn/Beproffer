@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/base_margin_small"
-        android:background="@drawable/rectangle_white_background">
+        android:background="@drawable/button_background_green_stroke_rectangle">
 
         <ImageView
             android:id="@+id/confirmed_contact_item_image"
@@ -60,7 +60,7 @@
             android:gravity="center"
             android:text="@{item.contactInfo}"
             android:textColor="@color/color_base_text_70per"
-            android:textSize="@dimen/base_text_size_small"
+            android:textSize="@dimen/base_text_size_medium"
             android:textStyle="italic|bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

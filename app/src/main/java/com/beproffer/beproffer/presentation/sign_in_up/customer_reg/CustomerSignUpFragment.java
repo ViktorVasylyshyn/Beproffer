@@ -69,12 +69,17 @@ public class CustomerSignUpFragment extends BaseFragment {
             showToast(R.string.toast_no_internet_connection);
             return;
         }
+        if(mBinding.customerSignUpName.getText().toString().length() < 4){
+            mBinding.customerSignUpName.requestFocus();
+            mBinding.customerSignUpName.setError(getResources().getText(R.string.error_message_wrong_name_format));
+            mBinding.customerSignUpBottomHint.setText(R.string.hint_outfield_use_correct_name_format);
+            return;
+        }
         if (!mBinding.customerSignUpPass.getText().toString().equals(mBinding.customerSignUpPassConfirm.getText().toString())) {
             showToast(R.string.toast_error_check_password);
             return;
         }
-        if (mBinding.customerSignUpName.getText().toString().isEmpty()
-                || mBinding.customerSignUpEmail.getText().toString().isEmpty()
+        if (mBinding.customerSignUpEmail.getText().toString().isEmpty()
                 || mBinding.customerSignUpPass.getText().toString().isEmpty()) {
             showToast(R.string.toast_error_check_fields_data);
             return;

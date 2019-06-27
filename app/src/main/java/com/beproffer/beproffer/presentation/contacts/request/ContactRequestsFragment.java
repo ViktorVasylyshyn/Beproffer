@@ -71,8 +71,8 @@ public class ContactRequestsFragment extends BaseUserDataFragment {
                     mContactRequestList.add(data.getValue(ContactRequestItem.class));
                 }
                 mContactRequestAdapter.setData(mContactRequestList);
-                showProgress(false);
             }
+            showProgress(false);
         });
     }
 

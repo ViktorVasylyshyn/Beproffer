@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <!--размеры под эту протность взяты как исходные. все остальные умножаются на определенный коэфициэнт-->
+
     <!--profile user image-->
     <dimen name="profile_image">128dp</dimen>
     <dimen name="profile_image_three_quarters">96dp</dimen>

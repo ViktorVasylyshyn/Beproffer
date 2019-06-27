@@ -73,7 +73,6 @@ public class ProfileEditFragment extends BaseUserDataFragment {
         mBinding.setUserData(mCurrentUserData);
         if (mCurrentUserType.equals(Const.SPEC)) {
             mBinding.editFragmentBottomHint.setText(R.string.hint_specialist_phone_1);
-            mBinding.editFragmentBottomHint.setVisibility(View.VISIBLE);
         }
         showProgress(false);
     }
@@ -88,7 +87,7 @@ public class ProfileEditFragment extends BaseUserDataFragment {
             return;
         }
         if (mCurrentUserData.getUserGender() == null) {
-            showToast(R.string.toast_determine_gender);
+            showToast(R.string.toast_determine_your_gender);
             return;
         }
         if (mCurrentUserData.getUserType().equals(Const.SPEC)) {
@@ -103,6 +102,22 @@ public class ProfileEditFragment extends BaseUserDataFragment {
     }
 
     private void saveUserData() {
+        if (!checkInternetConnection()) {
+            showToast(R.string.toast_no_internet_connection);
+            return;
+        }
+        if(mCurrentUserData.getUserPhone().length() < 5 ||  mCurrentUserData.getUserPhone().length() > 13){
+            mBinding.editFragmentPhone.requestFocus();
+            mBinding.editFragmentPhone.setError(getResources().getText(R.string.error_message_wrong_phone_number_format));
+            mBinding.editFragmentBottomHint.setText(R.string.hint_specialist_phone_1);
+            return;
+        }
+        if(mCurrentUserData.getUserName().length() < 4){
+            mBinding.editFragmentName.requestFocus();
+            mBinding.editFragmentName.setError(getResources().getText(R.string.error_message_wrong_name_format));
+            mBinding.editFragmentBottomHint.setText(R.string.hint_outfield_use_correct_name_format);
+            return;
+        }
         showProgress(true);
         if (mResultUri != null) {
             StorageReference filepath = FirebaseStorage.getInstance().getReference()

@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/base_margin_small"
-        android:background="@drawable/rectangle_white_background"
+        android:background="@drawable/button_background_green_stroke_rectangle"
         android:orientation="vertical">
 
         <android.support.constraint.ConstraintLayout
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
             android:textColor="@color/color_base_text_70per"
-            android:textSize="@dimen/base_text_size_small"
+            android:textSize="@dimen/base_text_size_medium"
             android:textStyle="italic|bold"
             app:layout_constraintStart_toEndOf="@+id/contact_request_item_image"
             app:layout_constraintTop_toBottomOf="@+id/contact_request_item_name"

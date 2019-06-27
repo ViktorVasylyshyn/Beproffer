@@ -18,6 +18,23 @@ public class InfoFragment extends BaseFragment {
 
     private InfoFragmentLayoutBinding mBinding;
 
+    private InfoFragmentCallback mCallback = new InfoFragmentCallback() {
+        @Override
+        public void onOfficialSiteClick() {
+            openDoc(R.string.href_official_site);
+        }
+
+        @Override
+        public void onUseTermsClick() {
+            openDoc(R.string.href_terms_of_service);
+        }
+
+        @Override
+        public void onPrivacyClick() {
+            openDoc(R.string.href_privacy_policy);
+        }
+    };
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -29,9 +46,7 @@ public class InfoFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        mBinding.infoFragmentTerms.setOnClickListener(v -> openDoc(R.string.href_terms_of_service));
-        mBinding.infoFragmentPrivacyPolicy.setOnClickListener(v -> openDoc(R.string.href_privacy_policy));
+        mBinding.setFragmentCallback(mCallback);
     }
 
     private void openDoc(int resId) {

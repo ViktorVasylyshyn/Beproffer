@@ -45,7 +45,11 @@ public class ProfileFragment extends BaseUserDataFragment {
         super.onActivityCreated(savedInstanceState);
         mBinding.setFragmentCallback(mCallback);
         mBinding.setShowProgress(mShowProgress);
-        initUserData();
+        if(FirebaseAuth.getInstance() == null){
+            ((MainActivity)requireActivity()).performNavigation(R.id.action_global_signInFragment, null);
+        }else {
+            initUserData();
+        }
     }
 
     @Override

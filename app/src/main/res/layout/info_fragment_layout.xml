@@ -2,18 +2,76 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+    <variable
+
+        name="fragmentCallback"
+        type="com.beproffer.beproffer.presentation.info.InfoFragmentCallback" />
+
+    </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/info_fragment_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_margin="@dimen/base_margin_big"
+            android:textSize="@dimen/base_text_size_huge"
+            android:textStyle="bold"
+            android:textColor="@color/color_base_text_70per"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-            android:id="@+id/info_fragment_terms"
+            android:id="@+id/info_fragment_app_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/href_official_site_title"
+            android:textSize="@dimen/base_text_size_medium"
+            android:textColor="@color/colorAccent"
+            android:onClick="@{(view)->fragmentCallback.onOfficialSiteClick()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/info_fragment_app_name" />
+
+        <TextView
+            android:id="@+id/info_fragment_contact_us_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_outfield_contact_us_title"
+            android:textSize="@dimen/base_text_size_big"
+            android:gravity="center"
+            android:textStyle="italic"
+            android:textColor="@color/color_base_text"
+            android:layout_margin="@dimen/base_margin_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/info_fragment_app_link" />
+
+        <TextView
+            android:id="@+id/info_fragment_contact_us_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/hint_outfield_contact_us_email"
+            android:textSize="@dimen/base_text_size_medium"
+            android:textColor="@color/color_base_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/info_fragment_contact_us_title" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/href_terms_of_service_title_1"
-            android:textSize="@dimen/base_text_size_small"
+            android:textSize="@dimen/base_text_size_medium"
             android:textColor="@color/colorAccent"
+            android:onClick="@{(view)->fragmentCallback.onUseTermsClick()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/info_fragment_privacy_policy" />
@@ -23,9 +81,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/profile_image_half"
+            android:onClick="@{(view)->fragmentCallback.onPrivacyClick()}"
             android:textColor="@color/colorAccent"
             android:text="@string/href_privacy_policy_title_1"
-            android:textSize="@dimen/base_text_size_small"
+            android:textSize="@dimen/base_text_size_medium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
