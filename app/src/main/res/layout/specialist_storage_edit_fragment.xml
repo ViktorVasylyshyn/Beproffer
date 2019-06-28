@@ -597,6 +597,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/specialist_storage_edit_bottom_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_small"
+            android:layout_marginEnd="@dimen/base_margin_small"
+            android:text="@string/hint_any_image"
+            android:layout_marginBottom="@dimen/bnb_floating_button_bottom_margin"
+            android:background="@drawable/rectangle_grey_background"
+            android:gravity="center"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_medium"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
     </android.support.constraint.ConstraintLayout>
 
 </layout>

@@ -50,7 +50,11 @@ public class InfoFragment extends BaseFragment {
     }
 
     private void openDoc(int resId) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(resId)));
-        startActivity(browserIntent);
+        if(checkInternetConnection()){
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(resId)));
+            startActivity(browserIntent);
+        }else {
+            showToast(R.string.toast_no_internet_connection);
+        }
     }
 }

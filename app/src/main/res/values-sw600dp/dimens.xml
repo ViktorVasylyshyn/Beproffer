@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+
+    <!--1.5-->
     <!--profile user image-->
     <dimen name="profile_image">196dp</dimen>
     <dimen name="profile_image_three_quarters">144dp</dimen>
@@ -22,16 +24,16 @@
     <dimen name="base_margin_big">24dp</dimen>
 
     <!--Bottom Navigation Bar-->
-    <dimen name="design_bottom_navigation_height" tools:override="true">72dp</dimen>
+    <dimen name="design_bottom_navigation_height" tools:override="true">60dp</dimen>
     <dimen name="bnb_floating_button_bottom_margin">72dp</dimen> <!--may be similar as design_bottom_navigation_height or bigger-->
-    <dimen name="bnb_hints_margin">48dp</dimen>
-    <dimen name="bnb_icon_size">60dp</dimen>
+    <dimen name="bnb_hints_margin">36dp</dimen>
+    <dimen name="bnb_icon_size">48dp</dimen>
 
     <!--Icons-->
-    <dimen name="icons_size_normal_width">60dp</dimen>
-    <dimen name="icons_size_normal_height">60dp</dimen>
-    <dimen name="icons_size_small_width">48dp</dimen>
-    <dimen name="icons_size_small_height">48dp</dimen>
+    <dimen name="icons_size_normal_width">48dp</dimen>
+    <dimen name="icons_size_normal_height">48dp</dimen>
+    <dimen name="icons_size_small_width">36dp</dimen>
+    <dimen name="icons_size_small_height">36dp</dimen>
 
     <!--Paddings-->
     <dimen name="base_padding_medium">12dp</dimen>

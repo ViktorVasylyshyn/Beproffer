@@ -22,16 +22,16 @@
     <dimen name="base_margin_big">32dp</dimen>
 
     <!--Bottom Navigation Bar-->
-    <dimen name="design_bottom_navigation_height" tools:override="true">96dp</dimen>
+    <dimen name="design_bottom_navigation_height" tools:override="true">80dp</dimen>
     <dimen name="bnb_floating_button_bottom_margin">96dp</dimen> <!--may be similar as design_bottom_navigation_height or bigger-->
-    <dimen name="bnb_hints_margin">64dp</dimen>
-    <dimen name="bnb_icon_size">80dp</dimen>
+    <dimen name="bnb_hints_margin">48dp</dimen>
+    <dimen name="bnb_icon_size">64dp</dimen>
 
     <!--Icons-->
-    <dimen name="icons_size_normal_width">80dp</dimen>
-    <dimen name="icons_size_normal_height">80dp</dimen>
-    <dimen name="icons_size_small_width">64dp</dimen>
-    <dimen name="icons_size_small_height">64dp</dimen>
+    <dimen name="icons_size_normal_width">64dp</dimen>
+    <dimen name="icons_size_normal_height">64dp</dimen>
+    <dimen name="icons_size_small_width">48dp</dimen>
+    <dimen name="icons_size_small_height">48dp</dimen>
 
     <!--Paddings-->
     <dimen name="base_padding_medium">16dp</dimen>
