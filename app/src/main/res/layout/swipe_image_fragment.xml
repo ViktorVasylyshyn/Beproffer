@@ -11,6 +11,7 @@
         android:id="@+id/image_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/bnb_icon_size"
         app:rotation_degrees="15.5"
         tools:context=".presentation.MainActivity" />
 

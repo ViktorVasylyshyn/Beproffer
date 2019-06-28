@@ -178,7 +178,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_medium"
             android:gravity="center"
-            android:text="@string/hint_any_1"
+            android:text="@string/hint_any_strong_password"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_medium"
             android:textStyle="italic"

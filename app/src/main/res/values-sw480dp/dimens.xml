@@ -7,7 +7,6 @@
     <dimen name="profile_image_half">64dp</dimen>
     <dimen name="profile_image_quarter">32dp</dimen>
 
-
     <!--Text-->
     <dimen name="base_text_size_huge">24sp</dimen>
     <dimen name="base_text_size_big">16sp</dimen>
@@ -22,16 +21,16 @@
     <dimen name="base_margin_big">16dp</dimen>
 
     <!--Bottom Navigation Bar-->
-    <dimen name="design_bottom_navigation_height" tools:override="true">48dp</dimen>
+    <dimen name="design_bottom_navigation_height" tools:override="true">40dp</dimen>
     <dimen name="bnb_floating_button_bottom_margin">48dp</dimen> <!--may be similar as design_bottom_navigation_height or bigger-->
-    <dimen name="bnb_hints_margin">32dp</dimen>
-    <dimen name="bnb_icon_size">40dp</dimen>
+    <dimen name="bnb_hints_margin">24dp</dimen>
+    <dimen name="bnb_icon_size">32dp</dimen>
 
     <!--Icons-->
-    <dimen name="icons_size_normal_width">40dp</dimen>
-    <dimen name="icons_size_normal_height">40dp</dimen>
-    <dimen name="icons_size_small_width">32dp</dimen>
-    <dimen name="icons_size_small_height">32dp</dimen>
+    <dimen name="icons_size_normal_width">32dp</dimen>
+    <dimen name="icons_size_normal_height">32dp</dimen>
+    <dimen name="icons_size_small_width">24dp</dimen>
+    <dimen name="icons_size_small_height">24dp</dimen>
 
     <!--Paddings-->
     <dimen name="base_padding_medium">8dp</dimen>

@@ -80,6 +80,7 @@ public class ProfileEditFragment extends BaseUserDataFragment {
     public void checkUserData() {
         if (null == mResultUri && mCurrentUserData.getUserProfileImageUrl() == null) {
             showToast(R.string.toast_select_image);
+            mBinding.editFragmentBottomHint.setText(R.string.hint_any_image);
             return;
         }
         if (mBinding.editFragmentName.getText().toString().isEmpty() && mCurrentUserData.getUserName() == null) {

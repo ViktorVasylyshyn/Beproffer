@@ -45,16 +45,6 @@
             android:layout_margin="@dimen/base_margin_small"
             app:layout_constraintTop_toBottomOf="@+id/specialist_storage_title"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_add_image"
-            android:textColor="@color/color_base_text"
-            android:textSize="@dimen/base_text_size_medium"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/specialist_storage_add_image_button"
-            app:layout_constraintStart_toStartOf="@+id/specialist_storage_add_image_button"
-            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_add_image_button" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/specialist_storage_add_image_button"

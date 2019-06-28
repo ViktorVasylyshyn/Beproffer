@@ -32,6 +32,7 @@ import java.util.List;
 import static android.content.Context.MODE_PRIVATE;
 
 public class SwipeImageFragment extends BaseUserDataFragment {
+
     private BrowsingHistoryViewModel mBrowsingHistoryViewModel;
     private View view;
 
@@ -61,7 +62,8 @@ public class SwipeImageFragment extends BaseUserDataFragment {
             obtainRequestParams();
         }
         /*get request params for search*/
-        mImageItems = new ArrayList<>();
+        if (mImageItems == null)
+            mImageItems = new ArrayList<>();
         swipeImageAdapter = new SwipeImageAdapter(requireActivity(), R.layout.swipe_image_item, mImageItems);
         SwipeFlingAdapterView flingImageContainer = view.findViewById(R.id.image_frame);
         flingImageContainer.setAdapter(swipeImageAdapter);
@@ -172,17 +174,17 @@ public class SwipeImageFragment extends BaseUserDataFragment {
 
     private void segregateImageForRegistered(DataSnapshot snapshotItem) throws NullPointerException {
 
-            if (mRequestParams.get(Const.GENDER).equals(Const.ALLGEND)) {
-                if (!mBrowsingHistoryUrlList.contains(snapshotItem.child(Const.SERIMGURL).getValue().toString())) {
-                    addImageToAdapter(snapshotItem);
-                }
-            } else {
-                if (!mBrowsingHistoryUrlList.contains(snapshotItem.child(Const.SERIMGURL).getValue().toString()) &&
-                        snapshotItem.child(Const.GENDER).getValue().toString().equals(mRequestParams.get(Const.GENDER))) {
-
-                    addImageToAdapter(snapshotItem);
-                }
+        if (mRequestParams.get(Const.GENDER).equals(Const.ALLGEND)) {
+            if (!mBrowsingHistoryUrlList.contains(snapshotItem.child(Const.SERIMGURL).getValue().toString())) {
+                addImageToAdapter(snapshotItem);
             }
+        } else {
+            if (!mBrowsingHistoryUrlList.contains(snapshotItem.child(Const.SERIMGURL).getValue().toString()) &&
+                    snapshotItem.child(Const.GENDER).getValue().toString().equals(mRequestParams.get(Const.GENDER))) {
+
+                addImageToAdapter(snapshotItem);
+            }
+        }
     }
 
     private void segregateImageDataForNotRegistered(DataSnapshot snapshotItem) throws NullPointerException {

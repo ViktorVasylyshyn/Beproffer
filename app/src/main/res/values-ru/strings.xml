@@ -35,6 +35,7 @@
     <string name="hint_outfield_contact_us_title">Свяжитесь с нами, если у вас есть вопросы.</string>
     <string name="hint_outfield_contact_us_email">beproffer.llc@gmail.com</string>
     <string name="hint_outfield_use_correct_name_format">Используйте ваши имя и фамилию, для лучшего представления вашего профайла.</string>
+    <string name="hint_any_image">Используйте изображение размером до 1 мб, чтобы оно корректно отображалось.</string>
 
 
     <string name="href_terms_of_service">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5-%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-beproffer</string>
@@ -168,7 +169,7 @@
 
     <!--special hints-->
     <string name="hint_specialist_phone_1">Убедитесь, что номер телефона указан правильно. Он будет показываться потенциальным клиентам.</string>
-    <string name="hint_any_1">Создайте надежный пароль используя цыфры, буквы и символы.</string>
+    <string name="hint_any_strong_password">Создайте надежный пароль используя цыфры, буквы и символы.</string>
 
 
     <!--new-->
