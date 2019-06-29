@@ -2,18 +2,23 @@ package com.beproffer.beproffer.presentation.swimg;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.SharedPreferences;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.browsing_history.BrowsingHistoryModel;
 import com.beproffer.beproffer.data.browsing_history.BrowsingHistoryViewModel;
 import com.beproffer.beproffer.data.browsing_history.BrowsingHistoryViewModelFactory;
 import com.beproffer.beproffer.data.models.SwipeImageItem;
+import com.beproffer.beproffer.databinding.SwipeImageFragmentBinding;
 import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseUserDataFragment;
 import com.beproffer.beproffer.presentation.swimg.adapter.SwipeImageAdapter;
@@ -33,8 +38,9 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SwipeImageFragment extends BaseUserDataFragment {
 
+    private SwipeImageFragmentBinding mBinding;
+
     private BrowsingHistoryViewModel mBrowsingHistoryViewModel;
-    private View view;
 
     private SwipeImageAdapter swipeImageAdapter;
     private List<SwipeImageItem> mImageItems;
@@ -46,13 +52,15 @@ public class SwipeImageFragment extends BaseUserDataFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.swipe_image_fragment, container, false);
-        return view;
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.swipe_image_fragment, container, false);
+        mBinding.setLifecycleOwner(this);
+        return mBinding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mBinding.setShowProgress(mShowProgress);
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             initUserData();
@@ -65,7 +73,7 @@ public class SwipeImageFragment extends BaseUserDataFragment {
         if (mImageItems == null)
             mImageItems = new ArrayList<>();
         swipeImageAdapter = new SwipeImageAdapter(requireActivity(), R.layout.swipe_image_item, mImageItems);
-        SwipeFlingAdapterView flingImageContainer = view.findViewById(R.id.image_frame);
+        SwipeFlingAdapterView flingImageContainer = mBinding.imageFrame;
         flingImageContainer.setAdapter(swipeImageAdapter);
 
         flingImageContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
@@ -78,11 +86,13 @@ public class SwipeImageFragment extends BaseUserDataFragment {
             @Override
             public void onLeftCardExit(Object dataObject) {
                 onCardExit(dataObject);
+                onCardExitAnim(false);
             }
 
             @Override
             public void onRightCardExit(Object dataObject) {
                 onCardExit(dataObject);
+                onCardExitAnim(true);
             }
 
             @Override
@@ -265,6 +275,25 @@ public class SwipeImageFragment extends BaseUserDataFragment {
     private void changeSearchParams() {
         showToast(R.string.toast_no_available_images);
         ((MainActivity) requireActivity()).performNavigation(R.id.action_global_searchFragment, null);
+    }
+
+    private void onCardExitAnim(boolean isRightExit) {
+        int animId;
+        ImageView image;
+        if (isRightExit) {
+            animId = R.anim.swipe_out_right;
+            image = mBinding.swipeImageLikeImage;
+        } else {
+            image = mBinding.swipeImageDislikeImage;
+            animId = R.anim.swipe_out_left;
+        }
+        try {
+            Animation animation;
+            animation = AnimationUtils.loadAnimation(requireContext(), animId);
+            image.startAnimation(animation);
+        } catch (NullPointerException e) {
+            showToast(R.string.toast_error_has_occurred);
+        }
     }
 
     @Override
