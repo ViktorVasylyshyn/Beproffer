@@ -118,7 +118,8 @@ public class SwipeImageFragment extends BaseUserDataFragment {
             getImagesToAdapter();
         }
         if (mImageItems.isEmpty()) {
-            changeSearchParams();
+            showToast(R.string.toast_no_available_images);
+            navigateTo(R.id.action_global_searchFragment);
         }
     }
 
@@ -224,7 +225,7 @@ public class SwipeImageFragment extends BaseUserDataFragment {
         }
         if (searchRequestData == null) {
             showToast(R.string.toast_define_search_request);
-            navigateToSearchRequestFragment();
+            navigateTo(R.id.action_global_searchFragment);
             return;
         }
         try {
@@ -233,14 +234,14 @@ public class SwipeImageFragment extends BaseUserDataFragment {
             mRequestParams.put(Const.SERVTYPE, searchRequestData.getString(Const.SERVTYPE, null));
             mRequestParams.put(Const.GENDER, searchRequestData.getString(Const.GENDER, null));
         } catch (NullPointerException e) {
-            navigateToSearchRequestFragment();
+            navigateTo(R.id.action_global_searchFragment);
             showToast(R.string.toast_error_search_request);
         }
         /*if search request params are not correct or equals null - we go to the search fragment to define params*/
         if (mRequestParams == null || mRequestParams.containsValue(null) || mRequestParams.size() != 3) {
             showProgress(false);
             showToast(R.string.toast_define_search_request);
-            navigateToSearchRequestFragment();
+            navigateTo(R.id.action_global_searchFragment);
         } else {
             if (mCurrentUser != null && mCurrentUserData != null) {
                 /*obtaining browsing history via viewmodel from room local db if user is authed*/
@@ -261,20 +262,13 @@ public class SwipeImageFragment extends BaseUserDataFragment {
         }
     }
 
-    private void navigateToSearchRequestFragment() {
-        ((MainActivity) requireActivity()).performNavigation(R.id.action_global_searchFragment, null);
-
-    }
-
     private void displayImageInfo(Object dataObject) {
-        /*переделать через вьюмодел!!!!!*/
         ViewModelProviders.of(requireActivity()).get(ImageItemTransfer.class).setImageItem((SwipeImageItem) dataObject);
-        ((MainActivity) requireActivity()).performNavigation(R.id.action_global_imageInfoDisplayFragment, null);
+        navigateTo(R.id.action_swipeImageFragment_to_imageInfoDisplayFragment);
     }
 
-    private void changeSearchParams() {
-        showToast(R.string.toast_no_available_images);
-        ((MainActivity) requireActivity()).performNavigation(R.id.action_global_searchFragment, null);
+    private void navigateTo(int destinationId){
+        ((MainActivity) requireActivity()).performNavigation(destinationId, null);
     }
 
     private void onCardExitAnim(boolean isRightExit) {

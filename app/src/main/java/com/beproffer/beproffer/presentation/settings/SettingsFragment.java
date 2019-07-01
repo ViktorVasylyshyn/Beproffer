@@ -113,6 +113,6 @@ public class SettingsFragment extends BaseUserDataFragment {
 
     private void resetPassword() {
         mAuth.signOut();
-        ((MainActivity) requireActivity()).performNavigation(R.id.action_global_resetPasswordFragment, null);
+        ((MainActivity) requireActivity()).performNavigation(R.id.action_settingsFragment_to_resetPasswordFragment, null);
     }
 }

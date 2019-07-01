@@ -7,7 +7,7 @@ public interface SingInFragmentCallback {
 
     void onSpecialistSignUpClick();
 
-    void onChangePasswordClick();
+    void onResetPasswordClick();
 
     void onTermsClick();
 

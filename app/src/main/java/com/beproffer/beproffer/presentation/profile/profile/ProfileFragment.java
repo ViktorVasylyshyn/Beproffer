@@ -70,22 +70,22 @@ public class ProfileFragment extends BaseUserDataFragment {
         int res = 0;
         switch (view.getId()) {
             case R.id.profile_contacts:
-                res = R.id.action_global_confirmedContactsFragment;
+                res = R.id.action_profileFragment_to_confirmedContactsFragment;
                 break;
             case R.id.profile_contact_requests:
-                res = R.id.action_global_contactRequestsFragment;
+                res = R.id.action_profileFragment_to_contactRequestsFragment;
                 break;
             case R.id.profile_storage:
-                res = R.id.action_global_specialistStorageFragment;
+                res = R.id.action_profileFragment_to_specialistStorageFragment;
                 break;
             case R.id.profile_edit:
-                res = R.id.action_global_profileEditFragment;
+                res = R.id.action_profileFragment_to_profileEditFragment;
                 break;
             case R.id.profile_settings:
-                res = R.id.action_global_settingsFragment;
+                res = R.id.action_profileFragment_to_settingsFragment;
                 break;
             case R.id.profile_info:
-                res = R.id.action_global_infoFragment;
+                res = R.id.action_profileFragment_to_infoFragment;
                 break;
             default:
                 showToast(R.string.toast_error_has_occurred);
