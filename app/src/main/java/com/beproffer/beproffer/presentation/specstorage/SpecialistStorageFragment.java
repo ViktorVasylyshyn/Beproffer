@@ -103,7 +103,7 @@ public class SpecialistStorageFragment extends BaseFragment {
     }
 
     private void performNavigationForEdit() {
-        mNavController.navigate(R.id.action_global_specialistStorageEditFragment);
+        mNavController.navigate(R.id.action_specialistStorageFragment_to_specialistStorageEditFragment);
     }
 }
 

@@ -31,17 +31,17 @@ public class SignInFragment extends BaseFragment {
 
         @Override
         public void onCustomerSignUpClick() {
-            customerSignUp();
+            navigateTo(R.id.action_signInFragment_to_customerRegistrationFragment);
         }
 
         @Override
         public void onSpecialistSignUpClick() {
-            specialistSignUp();
+            navigateTo(R.id.action_signInFragment_to_specialistRegistrationFragment);
         }
 
         @Override
-        public void onChangePasswordClick() {
-            changePassword();
+        public void onResetPasswordClick() {
+            navigateTo(R.id.action_settingsFragment_to_resetPasswordFragment);
         }
 
         @Override
@@ -73,16 +73,8 @@ public class SignInFragment extends BaseFragment {
         }
     }
 
-    private void customerSignUp() {
-        ((MainActivity) requireActivity()).performNavigation(R.id.action_global_customerRegistrationFragment, null);
-    }
-
-    private void specialistSignUp() {
-        ((MainActivity) requireActivity()).performNavigation(R.id.action_global_specialistRegistrationFragment, null);
-    }
-
-    private void changePassword(){
-        ((MainActivity)requireActivity()).performNavigation(R.id.action_global_resetPasswordFragment, null);
+    private void navigateTo(int destinationId){
+        ((MainActivity) requireActivity()).performNavigation(destinationId, null);
     }
 
     public void signIn() {

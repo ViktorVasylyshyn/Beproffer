@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_medium"
             android:gravity="center"
-            android:onClick="@{(view) -> fragmentCallback.onChangePasswordClick()}"
+            android:onClick="@{(view) -> fragmentCallback.onResetPasswordClick()}"
             android:text="@string/hint_outfield_forgot_password"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/base_text_size_medium"

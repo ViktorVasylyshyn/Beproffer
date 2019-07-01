@@ -8,12 +8,38 @@
         android:id="@+id/swipeImageFragment"
         android:name="com.beproffer.beproffer.presentation.swimg.SwipeImageFragment"
         android:label="swipe_image_fragment"
-        tools:layout="@layout/swipe_image_fragment" />
+        tools:layout="@layout/swipe_image_fragment" >
+        <action
+            android:id="@+id/action_swipeImageFragment_to_imageInfoDisplayFragment"
+            app:destination="@id/imageInfoDisplayFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.beproffer.beproffer.presentation.sign_in_up.sign_in.SignInFragment"
         android:label="sign_in_fragment"
-        tools:layout="@layout/sign_in_fragment" />
+        tools:layout="@layout/sign_in_fragment">
+        <action
+            android:id="@+id/action_signInFragment_to_customerRegistrationFragment"
+            app:destination="@id/customerRegistrationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_signInFragment_to_specialistRegistrationFragment"
+            app:destination="@id/specialistRegistrationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/customerRegistrationFragment"
         android:name="com.beproffer.beproffer.presentation.sign_in_up.customer_reg.CustomerSignUpFragment"
@@ -33,7 +59,56 @@
         android:id="@+id/profileFragment"
         android:name="com.beproffer.beproffer.presentation.profile.profile.ProfileFragment"
         android:label="profile_fragment"
-        tools:layout="@layout/profile_fragment" />
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_specialistStorageFragment"
+            app:destination="@id/specialistStorageFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_profileFragment_to_profileEditFragment"
+            app:destination="@id/profileEditFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_profileFragment_to_infoFragment"
+            app:destination="@id/infoFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_profileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_profileFragment_to_confirmedContactsFragment"
+            app:destination="@id/confirmedContactsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_profileFragment_to_contactRequestsFragment"
+            app:destination="@id/contactRequestsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/profileEditFragment"
         android:name="com.beproffer.beproffer.presentation.profile.profile_edit.ProfileEditFragment"
@@ -43,7 +118,16 @@
         android:id="@+id/specialistStorageFragment"
         android:name="com.beproffer.beproffer.presentation.specstorage.SpecialistStorageFragment"
         android:label="specialist_storage_fragment"
-        tools:layout="@layout/specialist_storage_fragment" />
+        tools:layout="@layout/specialist_storage_fragment" >
+        <action
+            android:id="@+id/action_specialistStorageFragment_to_specialistStorageEditFragment"
+            app:destination="@id/specialistStorageEditFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/specialistStorageEditFragment"
         android:name="com.beproffer.beproffer.presentation.specstorage.edit.SpecialistStorageEditFragment"
@@ -57,7 +141,8 @@
         app:launchSingleTop="true"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/swipeImageFragment" />
+        app:popUpTo="@+id/swipeImageFragment"
+        app:popUpToInclusive="true" />
     <action
         android:id="@+id/action_global_profileFragment"
         app:destination="@id/profileFragment"
@@ -66,13 +151,14 @@
         app:launchSingleTop="true"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/swipeImageFragment" />
+        app:popUpTo="@+id/swipeImageFragment"
+        app:popUpToInclusive="true" />
     <action
         android:id="@+id/action_global_signInFragment"
         app:destination="@id/signInFragment"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
-        app:launchSingleTop="false"
+        app:launchSingleTop="true"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"
         app:popUpTo="@+id/swipeImageFragment"
@@ -102,107 +188,28 @@
         android:name="com.beproffer.beproffer.presentation.contacts.request.ContactRequestsFragment"
         android:label="contact_requests_fragment"
         tools:layout="@layout/contact_requests_fragment" />
-    <action
-        android:id="@+id/action_global_imageInfoDisplayFragment"
-        app:destination="@id/imageInfoDisplayFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/swipeImageFragment" />
-    <action
-        android:id="@+id/action_global_customerRegistrationFragment"
-        app:destination="@id/customerRegistrationFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/signInFragment" />
-    <action
-        android:id="@+id/action_global_specialistRegistrationFragment"
-        app:destination="@id/specialistRegistrationFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/swipeImageFragment" />
-    <action
-        android:id="@+id/action_global_specialistStorageFragment"
-        app:destination="@id/specialistStorageFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/profileFragment" />
-    <action
-        android:id="@+id/action_global_specialistStorageEditFragment"
-        app:destination="@id/specialistStorageEditFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/specialistStorageFragment" />
-    <action
-        android:id="@+id/action_global_profileEditFragment"
-        app:destination="@id/profileEditFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/profileFragment" />
-    <action
-        android:id="@+id/action_global_confirmedContactsFragment"
-        app:destination="@id/confirmedContactsFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/profileFragment" />
-    <action
-        android:id="@+id/action_global_contactRequestsFragment"
-        app:destination="@id/contactRequestsFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/profileFragment" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.beproffer.beproffer.presentation.settings.SettingsFragment"
         android:label="settings_fragment_layout"
-        tools:layout="@layout/settings_fragment_layout" />
-    <action
-        android:id="@+id/action_global_settingsFragment"
-        app:destination="@id/settingsFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/profileFragment" />
+        tools:layout="@layout/settings_fragment_layout" >
+        <action
+            android:id="@+id/action_settingsFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.beproffer.beproffer.presentation.info.InfoFragment"
         android:label="info_fragment_layout"
         tools:layout="@layout/info_fragment_layout" />
-    <action
-        android:id="@+id/action_global_infoFragment"
-        app:destination="@id/infoFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/profileFragment" />
     <fragment
         android:id="@+id/resetPasswordFragment"
         android:name="com.beproffer.beproffer.presentation.sign_in_up.change_password.ResetPasswordFragment"
         android:label="reset_password_fragment"
         tools:layout="@layout/reset_password_fragment" />
-    <action
-        android:id="@+id/action_global_resetPasswordFragment"
-        app:destination="@id/resetPasswordFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/signInFragment" />
 </navigation>

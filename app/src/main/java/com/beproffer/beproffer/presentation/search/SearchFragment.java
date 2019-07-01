@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SearchFragmentBinding;
+import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
 import com.beproffer.beproffer.presentation.swimg.SearchRequestViewModel;
 import com.beproffer.beproffer.util.Const;
@@ -20,8 +21,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Map;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -31,7 +30,6 @@ public class SearchFragment extends BaseFragment {
 
     private String gender = null;
 
-    private NavController navController;
 
     private Map<String, String> mSearchRequestMap;
 
@@ -57,7 +55,6 @@ public class SearchFragment extends BaseFragment {
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             mCurrentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         }
-        navController = Navigation.findNavController(requireActivity(), R.id.navigation_fragment_container);
 
         mSearchFragmentViewModel.getSearchRequest().observe(this, request -> {
             mSearchRequestMap = request;
@@ -154,7 +151,7 @@ public class SearchFragment extends BaseFragment {
             BottomNavigationView bottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView);
             bottomNavigationView.getMenu().findItem(R.id.bnm_images_gallery).setChecked(true);
 
-            navController.navigate(R.id.action_global_swipeImageFragment);
+            ((MainActivity)requireActivity()).performNavigation(R.id.action_global_swipeImageFragment, null);
         } else {
             showToast(R.string.toast_define_search_params);
         }
