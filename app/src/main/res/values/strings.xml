@@ -34,6 +34,8 @@
     <string name="hint_outfield_contact_us_title">Contact us if you have any questions.</string>
     <string name="hint_outfield_contact_us_email">beproffer.llc@gmail.com</string>
     <string name="hint_outfield_use_correct_name_format">Use your first and last name for better representation of your profile.</string>
+    <string name="hint_outfield_confirm">confirm</string>
+    <string name="hint_outfield_deny">deny</string>
 
     <!--Refs-->
     <string name="href_terms_of_service_title_0">Terms of Service</string>
@@ -109,6 +111,9 @@
     <string name="fitness_title_trainer">PERSONAL TRAINER</string>
 
     <string name="barber_title_barber">BARBER\'S</string>
+
+    <string name="confirmed_contact_menu_call">call</string>
+    <string name="confirmed_contact_menu_delete">delete</string>
 
     <!--Bottom navigation bar titles-->
 

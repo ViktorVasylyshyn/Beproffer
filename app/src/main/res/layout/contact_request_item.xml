@@ -18,25 +18,6 @@
         android:background="@drawable/button_background_green_stroke_rectangle"
         android:orientation="vertical">
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/contact_request_item_deny_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/rectangle_gradient_red"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:layout_width="@dimen/base_margin_medium"
-                android:layout_height="@dimen/profile_image_three_quarters"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription" />
-
-        </android.support.constraint.ConstraintLayout>
-
         <ImageView
             android:id="@+id/contact_request_item_image"
             android:layout_width="@dimen/profile_image_half"
@@ -75,25 +56,6 @@
             app:layout_constraintStart_toEndOf="@+id/contact_request_item_image"
             app:layout_constraintTop_toBottomOf="@+id/contact_request_item_name"
             app:showUserType="@{item.requestType}" />
-
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/rectangle_gradient_green"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:layout_width="@dimen/base_margin_medium"
-                android:layout_height="@dimen/profile_image_three_quarters"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription" />
-
-        </android.support.constraint.ConstraintLayout>
 
 
     </android.support.constraint.ConstraintLayout>

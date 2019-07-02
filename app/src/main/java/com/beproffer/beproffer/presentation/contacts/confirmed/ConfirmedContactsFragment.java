@@ -1,11 +1,14 @@
 package com.beproffer.beproffer.presentation.contacts.confirmed;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,7 @@ import com.beproffer.beproffer.data.models.ConfirmedContactItem;
 import com.beproffer.beproffer.databinding.ConfirmedContactsFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserDataFragment;
 import com.beproffer.beproffer.presentation.contacts.adapter.ConfirmedContactsItemAdapter;
+import com.beproffer.beproffer.util.DefineServiceType;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
@@ -30,9 +34,6 @@ public class ConfirmedContactsFragment extends BaseUserDataFragment {
     private ConfirmedContactsFragmentBinding mBinding;
 
     private ConfirmedContactsViewModel mConfirmedContactsViewModel;
-
-
-    int delContactAccess = 0;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -72,19 +73,28 @@ public class ConfirmedContactsFragment extends BaseUserDataFragment {
     }
 
     private void initClickListener() {
-        mConfirmedContactsAdapter.setOnItemClickListener(this::deleteContact);
+        mConfirmedContactsAdapter.setOnItemClickListener(this::onItemClick);
     }
 
-    private void deleteContact(@Nullable View view, ConfirmedContactItem item, int position) {
-        if (delContactAccess > 2) {
-            mConfirmedContactsViewModel.deleteContact(mCurrentUserData, item.getContactUid());
-            mConfirmedContactsList.remove(position);
-            mConfirmedContactsAdapter.setData(mConfirmedContactsList);
-            delContactAccess = 0;
-            return;
-        }
-        delContactAccess++;
-        showToast(R.string.toast_contact_delete_access);
+    private void onItemClick(View view, ConfirmedContactItem item, int position) {
+
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+        popupMenu.getMenuInflater().inflate(R.menu.confirmed_contact_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(menuItem -> {
+            switch (menuItem.getItemId()) {
+                case R.id.confirmed_contact_menu_call:
+                    startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + item.getContactPhone())));
+                    break;
+                case R.id.confirmed_contact_menu_delete:
+                    mConfirmedContactsViewModel.deleteContact(mCurrentUserData, item.getContactUid());
+                    mConfirmedContactsList.remove(position);
+                    mConfirmedContactsAdapter.setData(mConfirmedContactsList);
+                    showToast(R.string.toast_contact_delete_access);
+                    break;
+            }
+            return true;
+        });
+        popupMenu.show();
     }
 
     private void initRecyclerView() {
