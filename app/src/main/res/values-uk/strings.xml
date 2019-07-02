@@ -36,6 +36,8 @@
     <string name="hint_outfield_contact_us_email">beproffer.llc@gmail.com</string>
     <string name="hint_outfield_use_correct_name_format">Використовуйте ваші ім\'я та прізвище, для кращого представлення вашого профайлу.</string>
     <string name="hint_any_image">Використовуйте, будь ласка, зображення розміром до 1 мб, для його правильного відображення.</string>
+    <string name="hint_outfield_confirm">прийняти</string>
+    <string name="hint_outfield_deny">відхилити</string>
 
 
     <string name="href_terms_of_service">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5-%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-beproffer</string>
@@ -111,6 +113,9 @@
     <string name="fitness_title_trainer">ПЕРСОНАЛЬНИЙ ТРЕНЕР</string>
 
     <string name="barber_title_barber">БАРБЕРШОП</string>
+
+    <string name="confirmed_contact_menu_call">Задзвонити</string>
+    <string name="confirmed_contact_menu_delete">Видалити</string>
 
     <!--Bottom navigation bar titles-->
 

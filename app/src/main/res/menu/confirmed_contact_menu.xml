@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/confirmed_contact_menu_call"
+        android:title="@string/confirmed_contact_menu_call" />
+    <item
+        android:id="@+id/confirmed_contact_menu_delete"
+        android:title="@string/confirmed_contact_menu_delete" />
+
+</menu>
