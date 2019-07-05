@@ -1,6 +1,6 @@
 package com.beproffer.beproffer.presentation.specstorage;
 
-public interface SpecialistStorageFragmentCallback {
+public interface SpecialistGalleryFragmentCallback {
 
     void onAddNewImageClick();
 }

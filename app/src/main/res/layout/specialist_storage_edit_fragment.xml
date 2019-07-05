@@ -13,7 +13,7 @@
 
         <variable
             name="item"
-            type="com.beproffer.beproffer.data.models.StorageImageItem" />
+            type="com.beproffer.beproffer.data.models.SpecialistGalleryImageItem" />
 
         <variable
             name="fragmentCallback"
@@ -21,14 +21,14 @@
 
         <variable
             name="viewModel"
-            type="com.beproffer.beproffer.presentation.specstorage.edit.SpecialistStorageEditFragmentViewModel" />
+            type="com.beproffer.beproffer.presentation.specstorage.edit.SpecialistGalleryEditFragmentViewModel" />
 
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.specstorage.edit.SpecialistStorageEditFragment">
+        tools:context=".presentation.specstorage.edit.SpecialistGalleryEditFragment">
 
         <ImageView
             android:id="@+id/specialist_storage_edit_image"

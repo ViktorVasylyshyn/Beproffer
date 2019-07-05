@@ -153,7 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/title_ask_for_phone"
+                android:text="@string/title_send_contact_request"
                 android:textSize="@dimen/base_text_size_small"
                 android:textColor="@color/color_base_text"
                 app:layout_constraintStart_toStartOf="@+id/image_info_display_send_contact_request_image"

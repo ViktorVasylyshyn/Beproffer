@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 
-public class UserData {
+public class UserInfo {
 
     private String userId;
     private String userType;
@@ -15,10 +15,10 @@ public class UserData {
     private String userProfileImageUrl;
     private String userInfo;
 
-    public UserData() {
+    public UserInfo() {
     }
 
-    public UserData(@NonNull String userId, String userType, String userName,
+    public UserInfo(@NonNull String userId, String userType, String userName,
                     String userEmail, @Nullable String userGender, @Nullable String userPhone,
                     @Nullable String userProfileImageUrl, @Nullable String userInfo) {
         this.userId = userId;

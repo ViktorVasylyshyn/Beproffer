@@ -3,7 +3,7 @@ package com.beproffer.beproffer.data.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class StorageImageItem implements Parcelable {
+public class SpecialistGalleryImageItem implements Parcelable {
     private String key;
     private String url;
     private String uid;
@@ -14,11 +14,11 @@ public class StorageImageItem implements Parcelable {
     private String description;
     private String gender;
 
-    public StorageImageItem(){
+    public SpecialistGalleryImageItem(){
 
     }
 
-    public StorageImageItem(String url, String key, String uid, String type, String subtype, String price, String duration, String description, String gender) {
+    public SpecialistGalleryImageItem(String url, String key, String uid, String type, String subtype, String price, String duration, String description, String gender) {
         this.url = url;
         this.key = key;
         this.uid = uid;
@@ -30,7 +30,7 @@ public class StorageImageItem implements Parcelable {
         this.gender = gender;
     }
 
-    protected StorageImageItem(Parcel in) {
+    protected SpecialistGalleryImageItem(Parcel in) {
         key = in.readString();
         url = in.readString();
         uid = in.readString();
@@ -42,15 +42,15 @@ public class StorageImageItem implements Parcelable {
         gender = in.readString();
     }
 
-    public static final Creator<StorageImageItem> CREATOR = new Creator<StorageImageItem>() {
+    public static final Creator<SpecialistGalleryImageItem> CREATOR = new Creator<SpecialistGalleryImageItem>() {
         @Override
-        public StorageImageItem createFromParcel(Parcel in) {
-            return new StorageImageItem(in);
+        public SpecialistGalleryImageItem createFromParcel(Parcel in) {
+            return new SpecialistGalleryImageItem(in);
         }
 
         @Override
-        public StorageImageItem[] newArray(int size) {
-            return new StorageImageItem[size];
+        public SpecialistGalleryImageItem[] newArray(int size) {
+            return new SpecialistGalleryImageItem[size];
         }
     };
 

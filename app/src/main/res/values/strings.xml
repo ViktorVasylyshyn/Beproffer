@@ -56,7 +56,10 @@
     <string name="title_price">PRICE</string>
     <string name="title_customer_registration">NEW CUSTOMER</string>
     <string name="title_specialist_registration">NEW SPECIALIST</string>
-    <string name="title_ask_for_phone">GET SPECIALISTS\' PHONE NUMBER</string>
+    <string name="title_send_contact_request">GET SPECIALISTS\' PHONE NUMBER</string>
+    <string name="title_request_already_sent">SENT</string>
+    <string name="title_contact_already_available">YOU HAVE THE PHONE NUM TO THIS SPECIALIST ALREADY</string>
+    <string name="title_max_num_of_contacts">THE MAX NUM OF CONTACTS IS 10</string>
     <string name="title_specialist_type">SPECIALIST</string>
     <string name="title_customer_type">CUSTOMER</string>
     <string name="title_add_image">ADD</string>
@@ -151,9 +154,11 @@
     <string name="toast_request_for_registered">The function is available only for registered users.</string>
     <string name="toast_reset_password_check_your_email">We sent you a message. Please check your inbox and complete the password changing.</string>
     <string name="toast_no_internet_connection">There is no internet connection. :( </string>
-    <string name="toast_no_any_contacts">No any contacts for now.</string>
-    <string name="toast_no_any_contact_requests">No any contact requests for now.</string>
+    <string name="toast_no_any_contacts">You have no contacts yet.</string>
+    <string name="toast_no_any_contact_requests">You have no contact requests yet.</string>
     <string name="toast_would_you_like_to_donate">You can add only 5 images for now.</string>
+    <string name="toast_user_data_updated">User data updated successfully.</string>
+    <string name="toast_image_data_updated">Image data updated successfully.</string>
 
     <string name="error_message_exception_sign_up_weak_password">Please, create more complicated password.</string>
     <string name="error_message_exception_sign_up_invalid_credentials">Invalid credentials.</string>
@@ -163,7 +168,7 @@
     <string name="error_message_enter_email">Enter your email first.</string>
     <string name="error_message_delete_profile_wrong_email">Incorrect email.</string>
     <string name="error_message_wrong_phone_number_format">Incorrect format of phone number.</string>
-    <string name="error_message_wrong_name_format">Name is too short.</string>
+    <string name="error_message_wrong_name_format">The name is too short.</string>
 
     <string name="search">Search</string>
     <string name="kyiv">Kyiv, Ukraine.</string>

@@ -7,7 +7,7 @@
 
         <variable
             name="image"
-            type="com.beproffer.beproffer.data.models.StorageImageItem" />
+            type="com.beproffer.beproffer.data.models.SpecialistGalleryImageItem" />
 
     </data>
 

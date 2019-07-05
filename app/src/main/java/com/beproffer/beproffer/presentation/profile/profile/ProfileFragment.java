@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.ProfileFragmentBinding;
 import com.beproffer.beproffer.presentation.MainActivity;
-import com.beproffer.beproffer.presentation.base.BaseUserDataFragment;
+import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ProfileFragment extends BaseUserDataFragment {
+public class ProfileFragment extends BaseUserInfoFragment {
 
     private ProfileFragmentBinding mBinding;
 
@@ -54,10 +54,10 @@ public class ProfileFragment extends BaseUserDataFragment {
 
     @Override
     public void applyUserData() {
-        if (mCurrentUserData.getUserType().equals(Const.SPEC)) {
+        if (mCurrentUserInfo.getUserType().equals(Const.SPEC)) {
             adaptProfileForSpecialist();
         }
-        mBinding.setUserData(mCurrentUserData);
+        mBinding.setUserInfo(mCurrentUserInfo);
         showProgress(false);
     }
 

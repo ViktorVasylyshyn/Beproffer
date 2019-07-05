@@ -13,7 +13,7 @@ public class Const {
 
     public static final String INFO = "userInfo"; /*global child*/
     public static final String CONTACT = "contact";
-    public static final String REQUEST = "request";
+    public static final String INREQUEST = "inrequest";
     public static final String SERVICES = "services"; /*service image's data*/
 
     public static final String PROFIMGURL = "profImageUrl"; /*urls of profile images */
@@ -91,6 +91,8 @@ public class Const {
 
     /*request code*/
     public static final int REQUEST_CODE_1 = 1;
+
+    public static final int CONTACTS_NUM = 10; /*max num of available contacts*/
 
 
 }

@@ -15,12 +15,10 @@ import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SearchFragmentBinding;
 import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
-import com.beproffer.beproffer.presentation.swimg.SearchRequestViewModel;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Map;
-
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -130,15 +128,12 @@ public class SearchFragment extends BaseFragment {
         if (mSearchRequestMap != null) {
             mSearchRequestMap.put(Const.GENDER, gender);
 
-            new SearchRequestViewModel().setSearchRequestLiveData(mSearchRequestMap);
-
             if (mCurrentUserId != null) {
                 SharedPreferences.Editor editor = requireActivity().getSharedPreferences(mCurrentUserId, MODE_PRIVATE).edit();
                 editor.putString(Const.GENDER, gender);
                 editor.putString(Const.SERVTYPE, mSearchRequestMap.get(Const.SERVTYPE));
                 editor.putString(Const.SERVSBTP, mSearchRequestMap.get(Const.SERVSBTP));
                 editor.apply();
-
 
             } else {
                 SharedPreferences.Editor editor = requireActivity().getSharedPreferences("unknownUserRequest", MODE_PRIVATE).edit();

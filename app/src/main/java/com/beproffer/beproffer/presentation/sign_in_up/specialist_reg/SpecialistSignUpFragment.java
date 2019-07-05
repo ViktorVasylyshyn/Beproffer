@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.SaveUserData;
-import com.beproffer.beproffer.data.models.UserData;
+import com.beproffer.beproffer.data.models.UserInfo;
 import com.beproffer.beproffer.databinding.SpecialistSignUpFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
 import com.beproffer.beproffer.util.Const;
@@ -103,7 +103,7 @@ public class SpecialistSignUpFragment extends BaseFragment {
                             requireContext().getSharedPreferences(currentUserId, MODE_PRIVATE).edit().putString(Const.USERTYPE,
                                     Const.SPEC).apply();
                             new SaveUserData().saveUserDataToDatabase(currentUserId,
-                                    new UserData(currentUserId,
+                                    new UserInfo(currentUserId,
                                             Const.SPEC,
                                             mBinding.specialistSignUpName.getText().toString(),
                                             mBinding.specialistSignUpEmail.getText().toString(),

@@ -58,7 +58,10 @@
     <string name="title_price">ЦІНА</string>
     <string name="title_customer_registration">НОВИЙ КЛІЄНТ</string>
     <string name="title_specialist_registration">НОВИЙ СПЕЦІАЛІСТ</string>
-    <string name="title_ask_for_phone">НОМЕР ТЕЛ СПЕЦІАЛІСТА</string>
+    <string name="title_send_contact_request">НОМЕР ТЕЛ СПЕЦІАЛІСТА</string>
+    <string name="title_request_already_sent">ВІДПРАВЛЕНО</string>
+    <string name="title_contact_already_available">НОМЕР ТЕЛЕФОНУ ВЖЕ Є В КОНТАКТАХ</string>
+    <string name="title_max_num_of_contacts">НАЖАЛЬ, ПОКИ ЩО МОЖНА МАТИ, ОДНОЧАСНО, ДО 10 КОНТАКТІВ</string>
     <string name="title_specialist_type">СПЕЦІАЛІСТ</string>
     <string name="title_customer_type">КЛІЄНТ</string>
     <string name="title_add_image">ДОДАТИ</string>
@@ -157,6 +160,8 @@
     <string name="toast_would_you_like_to_donate">Поки що можна завантажити 5 зображень максимально.</string>
     <string name="toast_no_any_contacts">Наразі контактів немає.</string>
     <string name="toast_no_any_contact_requests">Наразі запитів немає.</string>
+    <string name="toast_user_data_updated">Дані користувача успішно змінені.</string>
+    <string name="toast_image_data_updated">Дані зображення успішно змінені.</string>
 
 
     <string name="error_message_exception_sign_up_weak_password">Захистіть свій профайл більш надійним паролем.</string>

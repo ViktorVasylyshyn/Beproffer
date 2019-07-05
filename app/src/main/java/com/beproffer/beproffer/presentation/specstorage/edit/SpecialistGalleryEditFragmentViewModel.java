@@ -7,25 +7,27 @@ import android.support.v7.widget.PopupMenu;
 import android.view.View;
 
 import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.data.models.StorageImageItem;
+import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
 import com.beproffer.beproffer.util.Const;
 import com.beproffer.beproffer.util.DefineServiceType;
 
 import java.util.Map;
 
-public class SpecialistStorageEditFragmentViewModel extends ViewModel {
+public class SpecialistGalleryEditFragmentViewModel extends ViewModel {
 
-    private StorageImageItem mStorageImageItem;
+    /*пока что, временно, оставлю этот вью модел для обработки тех задачь, которые здесь прописаны*/
 
-    private MutableLiveData<StorageImageItem> mStorageImageItemLiveData = new MutableLiveData<>();
+    private SpecialistGalleryImageItem mSpecialistGalleryImageItem;
 
-    public void setStorageImageItem(StorageImageItem storageImageItem) {
-        mStorageImageItem = storageImageItem;
+    private MutableLiveData<SpecialistGalleryImageItem> mStorageImageItemLiveData = new MutableLiveData<>();
+
+    public void setStorageImageItem(SpecialistGalleryImageItem specialistGalleryImageItem) {
+        mSpecialistGalleryImageItem = specialistGalleryImageItem;
         updateStorageImageItemLiveData();
 
     }
 
-    LiveData<StorageImageItem> getStorageImageItem() {
+    LiveData<SpecialistGalleryImageItem> getStorageImageItem() {
         return mStorageImageItemLiveData;
     }
 
@@ -58,8 +60,8 @@ public class SpecialistStorageEditFragmentViewModel extends ViewModel {
         popupMenu.getMenuInflater().inflate(requiredMenuRes, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             Map<String, String> serviceType = new DefineServiceType(view.getContext()).setRequest(menuItem);
-            mStorageImageItem.setType(serviceType.get(Const.SERVTYPE));
-            mStorageImageItem.setSubtype(serviceType.get(Const.SERVSBTP));
+            mSpecialistGalleryImageItem.setType(serviceType.get(Const.SERVTYPE));
+            mSpecialistGalleryImageItem.setSubtype(serviceType.get(Const.SERVSBTP));
             updateStorageImageItemLiveData();
             return true;
         });
@@ -81,7 +83,7 @@ public class SpecialistStorageEditFragmentViewModel extends ViewModel {
             default:
                 throw new IllegalArgumentException(Const.UNKNSTAT);
         }
-        mStorageImageItem.setGender(gender);
+        mSpecialistGalleryImageItem.setGender(gender);
         updateStorageImageItemLiveData();
     }
 
@@ -107,12 +109,12 @@ public class SpecialistStorageEditFragmentViewModel extends ViewModel {
                 throw new IllegalArgumentException(Const.UNKNSTAT);
         }
 
-        mStorageImageItem.setDuration(duration);
+        mSpecialistGalleryImageItem.setDuration(duration);
         updateStorageImageItemLiveData();
     }
 
     private void updateStorageImageItemLiveData() {
-        mStorageImageItemLiveData.setValue(mStorageImageItem);
+        mStorageImageItemLiveData.setValue(mSpecialistGalleryImageItem);
     }
 
 }

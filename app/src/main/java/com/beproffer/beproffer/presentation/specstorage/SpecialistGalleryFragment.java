@@ -12,28 +12,25 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.data.models.StorageImageItem;
+import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
 import com.beproffer.beproffer.databinding.SpecialistStorageFragmentBinding;
+import com.beproffer.beproffer.presentation.MainActivity;
+import com.beproffer.beproffer.presentation.UserDataViewModel;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
-import com.beproffer.beproffer.presentation.specstorage.adapter.StorageImageItemAdapter;
-import com.beproffer.beproffer.presentation.specstorage.edit.SpecialistStorageEditFragmentViewModel;
+import com.beproffer.beproffer.presentation.specstorage.adapter.GalleryImageItemAdapter;
+import com.beproffer.beproffer.presentation.specstorage.edit.SpecialistGalleryEditFragmentViewModel;
 
 import java.util.List;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+public class SpecialistGalleryFragment extends BaseFragment {
 
-public class SpecialistStorageFragment extends BaseFragment {
+    private GalleryImageItemAdapter mImageAdapter = new GalleryImageItemAdapter();
 
-    private StorageImageItemAdapter mImageAdapter = new StorageImageItemAdapter();
-
-    private List<StorageImageItem> mImageItemsList;
+    private List<SpecialistGalleryImageItem> mImageItemsList;
 
     private SpecialistStorageFragmentBinding mBinding;
 
-    private NavController mNavController;
-
-    private SpecialistStorageFragmentCallback mCallback = this::addNewImage;
+    private SpecialistGalleryFragmentCallback mCallback = this::addNewImage;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -50,19 +47,14 @@ public class SpecialistStorageFragment extends BaseFragment {
         mBinding.setFragmentCallback(mCallback);
         mBinding.setShowProgress(mShowProgress);
 
-        mNavController = Navigation.findNavController(requireActivity(), R.id.navigation_fragment_container);
-
         if (mImageItemsList == null) {
-            showProgress(true);
-            SpecialistStorageImageViewModel specialistStorageImageViewModel = ViewModelProviders.of(requireActivity()).get(SpecialistStorageImageViewModel.class);
-            specialistStorageImageViewModel.getStorageImagesItemsList().observe(this, data -> {
+            UserDataViewModel userDataViewModel = ViewModelProviders.of(requireActivity()).get(UserDataViewModel.class);
+            userDataViewModel.getSpecialistGalleryData().observe(this, data -> {
                 if (data != null) {
                     mImageItemsList = data;
                     mImageAdapter.setData(mImageItemsList);
                 }
-                showProgress(false);
             });
-            specialistStorageImageViewModel.syncDataWithFirebase();
         }
     }
 
@@ -78,8 +70,8 @@ public class SpecialistStorageFragment extends BaseFragment {
             showToast(R.string.toast_would_you_like_to_donate);
             return;
         }
-        ViewModelProviders.of(requireActivity()).get(SpecialistStorageEditFragmentViewModel.class)
-                .setStorageImageItem(new StorageImageItem(
+        ViewModelProviders.of(requireActivity()).get(SpecialistGalleryEditFragmentViewModel.class)
+                .setStorageImageItem(new SpecialistGalleryImageItem(
                         null,
                         "image" + (mImageItemsList.size() + 1),
                         null,
@@ -96,14 +88,14 @@ public class SpecialistStorageFragment extends BaseFragment {
         mImageAdapter.setOnItemClickListener(this::loadImageDetails);
     }
 
-    private void loadImageDetails(@Nullable View view, StorageImageItem storageImageItem) {
-        ViewModelProviders.of(requireActivity()).get(SpecialistStorageEditFragmentViewModel.class)
-                .setStorageImageItem(storageImageItem);
+    private void loadImageDetails(@Nullable View view, SpecialistGalleryImageItem specialistGalleryImageItem) {
+        ViewModelProviders.of(requireActivity()).get(SpecialistGalleryEditFragmentViewModel.class)
+                .setStorageImageItem(specialistGalleryImageItem);
         performNavigationForEdit();
     }
 
     private void performNavigationForEdit() {
-        mNavController.navigate(R.id.action_specialistStorageFragment_to_specialistStorageEditFragment);
+        ((MainActivity)requireActivity()).performNavigation(R.id.action_specialistStorageFragment_to_specialistStorageEditFragment, null);
     }
 }
 

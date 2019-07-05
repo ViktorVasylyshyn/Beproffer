@@ -1,5 +1,5 @@
 package com.beproffer.beproffer.presentation.contacts.request;
 
-public interface ContactRequestFragmentCallback {
+public interface IncomingContactRequestsFragmentCallback {
     void onConfirmAllContactsClick();
 }

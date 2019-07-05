@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="com.beproffer.beproffer.data.models.ConfirmedContactItem" />
+            type="com.beproffer.beproffer.data.models.ContactItem" />
 
     </data>
 
@@ -17,18 +17,18 @@
         android:background="@drawable/button_background_green_stroke_rectangle">
 
         <ImageView
-            android:id="@+id/confirmed_contact_item_image"
+            android:id="@+id/contact_item_image"
             android:layout_width="@dimen/profile_image_half"
             android:layout_height="@dimen/profile_image_half"
             android:layout_margin="@dimen/base_margin_small"
             android:src="@{item.contactImageUrl}"
-            app:layout_constraintBottom_toTopOf="@+id/confirmed_contact_item_info"
+            app:layout_constraintBottom_toTopOf="@+id/contact_item_info"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/confirmed_contact_item_name"
+            android:id="@+id/contact_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
@@ -38,10 +38,10 @@
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_big"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/confirmed_contact_item_image"/>
+            app:layout_constraintStart_toEndOf="@+id/contact_item_image"/>
 
         <TextView
-            android:id="@+id/confirmed_contact_item_phone"
+            android:id="@+id/contact_item_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
@@ -49,11 +49,11 @@
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_big"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/confirmed_contact_item_image"
-            app:layout_constraintTop_toBottomOf="@+id/confirmed_contact_item_name"/>
+            app:layout_constraintStart_toEndOf="@+id/contact_item_image"
+            app:layout_constraintTop_toBottomOf="@+id/contact_item_name"/>
 
         <TextView
-            android:id="@+id/confirmed_contact_item_info"
+            android:id="@+id/contact_item_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
@@ -65,7 +65,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/confirmed_contact_item_phone" />
+            app:layout_constraintTop_toBottomOf="@+id/contact_item_phone" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

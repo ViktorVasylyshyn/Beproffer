@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.beproffer.beproffer.data.models.ContactRequestItem" />
+            type="com.beproffer.beproffer.data.models.IncomingContactRequestItem" />
 
     </data>
 
