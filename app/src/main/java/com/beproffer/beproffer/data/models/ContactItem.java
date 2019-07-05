@@ -1,6 +1,6 @@
 package com.beproffer.beproffer.data.models;
 
-public class ConfirmedContactItem {
+public class ContactItem {
 
     private String contactUid;
     private String contactName;
@@ -8,11 +8,11 @@ public class ConfirmedContactItem {
     private String contactImageUrl;
     private String contactInfo;
 
-    private ConfirmedContactItem(){
+    private ContactItem(){
 
     }
 
-    public ConfirmedContactItem(String contactUid, String contactName, String contactPhone, String contactInfo, String contactImageUrl) {
+    public ContactItem(String contactUid, String contactName, String contactPhone, String contactInfo, String contactImageUrl) {
         this.contactUid = contactUid;
         this.contactName = contactName;
         this.contactPhone = contactPhone;

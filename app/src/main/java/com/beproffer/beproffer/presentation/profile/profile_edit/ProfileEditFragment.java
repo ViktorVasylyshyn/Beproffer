@@ -18,7 +18,7 @@ import com.beproffer.beproffer.data.SaveUserData;
 import com.beproffer.beproffer.databinding.ProfileEditFragmentBinding;
 import com.beproffer.beproffer.util.ChangeGenderHelper;
 import com.beproffer.beproffer.presentation.MainActivity;
-import com.beproffer.beproffer.presentation.base.BaseUserDataFragment;
+import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -27,7 +27,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-public class ProfileEditFragment extends BaseUserDataFragment {
+public class ProfileEditFragment extends BaseUserInfoFragment {
 
     private ProfileEditFragmentBinding mBinding;
 
@@ -70,29 +70,28 @@ public class ProfileEditFragment extends BaseUserDataFragment {
 
     @Override
     public void applyUserData() {
-        mBinding.setUserData(mCurrentUserData);
-        if (mCurrentUserType.equals(Const.SPEC)) {
+        mBinding.setUserInfo(mCurrentUserInfo);
+        if (mCurrentUserInfo.getUserGender().equals(Const.SPEC)) {
             mBinding.editFragmentBottomHint.setText(R.string.hint_specialist_phone_1);
         }
-        showProgress(false);
     }
 
     public void checkUserData() {
-        if (null == mResultUri && mCurrentUserData.getUserProfileImageUrl() == null) {
+        if (null == mResultUri && mCurrentUserInfo.getUserProfileImageUrl() == null) {
             showToast(R.string.toast_select_image);
             mBinding.editFragmentBottomHint.setText(R.string.hint_any_image);
             return;
         }
-        if (mBinding.editFragmentName.getText().toString().isEmpty() && mCurrentUserData.getUserName() == null) {
+        if (mBinding.editFragmentName.getText().toString().isEmpty() && mCurrentUserInfo.getUserName() == null) {
             showToast(R.string.toast_enter_name);
             return;
         }
-        if (mCurrentUserData.getUserGender() == null) {
+        if (mCurrentUserInfo.getUserGender() == null) {
             showToast(R.string.toast_determine_your_gender);
             return;
         }
-        if (mCurrentUserData.getUserType().equals(Const.SPEC)) {
-            if (mCurrentUserData.getUserPhone() != null || !mBinding.editFragmentPhone.getText().toString().isEmpty()) {
+        if (mCurrentUserInfo.getUserType().equals(Const.SPEC)) {
+            if (mCurrentUserInfo.getUserPhone() != null || !mBinding.editFragmentPhone.getText().toString().isEmpty()) {
                 saveUserData();
             } else {
                 showToast(R.string.toast_enter_phone);
@@ -107,59 +106,19 @@ public class ProfileEditFragment extends BaseUserDataFragment {
             showToast(R.string.toast_no_internet_connection);
             return;
         }
-        if(mCurrentUserData.getUserPhone().length() < 5 ||  mCurrentUserData.getUserPhone().length() > 13){
+        if(mCurrentUserInfo.getUserPhone().length() < 5 ||  mCurrentUserInfo.getUserPhone().length() > 13){
             mBinding.editFragmentPhone.requestFocus();
             mBinding.editFragmentPhone.setError(getResources().getText(R.string.error_message_wrong_phone_number_format));
             mBinding.editFragmentBottomHint.setText(R.string.hint_specialist_phone_1);
             return;
         }
-        if(mCurrentUserData.getUserName().length() < 4){
+        if(mCurrentUserInfo.getUserName().length() < 4){
             mBinding.editFragmentName.requestFocus();
             mBinding.editFragmentName.setError(getResources().getText(R.string.error_message_wrong_name_format));
             mBinding.editFragmentBottomHint.setText(R.string.hint_outfield_use_correct_name_format);
             return;
         }
-        showProgress(true);
-        if (mResultUri != null) {
-            StorageReference filepath = FirebaseStorage.getInstance().getReference()
-                    .child(Const.PROF)
-                    .child(mCurrentUserData.getUserType())
-                    .child(mCurrentUserData.getUserId())
-                    .child(mCurrentUserData.getUserId());
-            Bitmap bitmap = null;
-            try {
-                bitmap = MediaStore.Images.Media
-                        .getBitmap(requireActivity().getApplication().getContentResolver(), mResultUri);
-            } catch (IOException e) {
-                showProgress(false);
-                showToast(R.string.toast_error_has_occurred);
-            }
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 30, baos);
-            byte[] data = baos.toByteArray();
-            UploadTask uploadTask = filepath.putBytes(data);
-            uploadTask.addOnFailureListener(e -> {
-                showToast(R.string.toast_error_has_occurred);
-                showProgress(false);
-            });
-            uploadTask.addOnSuccessListener(taskSnapshot -> filepath.getDownloadUrl().addOnSuccessListener(url -> {
-                mCurrentUserData.setUserProfileImageUrl(url.toString());
-                finalizeUserDataSaving();
-            }));
-        } else {
-            finalizeUserDataSaving();
-        }
-    }
-
-    private void finalizeUserDataSaving() {
-        mUserDataViewModel.setUserData(mCurrentUserData);
-
-        new SaveUserData().saveUserDataToDatabase(mCurrentUserData.getUserId()
-                , mCurrentUserData, requireActivity()
-                , mShowProgress
-                , 0);
-
-        ((MainActivity) requireActivity()).popBackStack();
+        mUserDataViewModel.updateUserInfo(mCurrentUserInfo, mResultUri);
     }
 
     public void setProfileImage() {
@@ -177,8 +136,8 @@ public class ProfileEditFragment extends BaseUserDataFragment {
                     return;
                 }
                 mResultUri = data.getData();
-                mCurrentUserData.setUserProfileImageUrl(mResultUri.toString());
-                mBinding.setUserData(mCurrentUserData);
+                mCurrentUserInfo.setUserProfileImageUrl(mResultUri.toString());
+                mBinding.setUserInfo(mCurrentUserInfo);
             } catch (NullPointerException e) {
                 showToast(R.string.toast_error_has_occurred);
             }
@@ -186,7 +145,7 @@ public class ProfileEditFragment extends BaseUserDataFragment {
     }
 
     public void changeUserGender() {
-        mCurrentUserData.setUserGender(new ChangeGenderHelper().changeGender(mCurrentUserData.getUserGender()));
-        mBinding.setUserData(mCurrentUserData);
+        mCurrentUserInfo.setUserGender(new ChangeGenderHelper().changeGender(mCurrentUserInfo.getUserGender()));
+        mBinding.setUserInfo(mCurrentUserInfo);
     }
 }

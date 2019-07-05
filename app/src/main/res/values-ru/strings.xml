@@ -59,7 +59,10 @@
     <string name="title_price">ЦЕНА</string>
     <string name="title_customer_registration">НОВЫЙ КЛИЕНТ</string>
     <string name="title_specialist_registration">НОВЫЙ МАСТЕР</string>
-    <string name="title_ask_for_phone">УЗНАТЬ ТЕЛ МАСТЕРА</string>
+    <string name="title_send_contact_request">УЗНАТЬ ТЕЛ МАСТЕРА</string>
+    <string name="title_request_already_sent">ОТПРАВЛЕНО</string>
+    <string name="title_contact_already_available">ТЕЛ ЭТОГО СПЕЦИАЛИСТА УЖЕ ЕСТЬ В КОНТАКТАХ</string>
+    <string name="title_max_num_of_contacts">ПОКА ЧТО, МОЖНО ИМЕТЬ ОДНОВРЕМЕННО ДО 10 КОНТАКТОВ</string>
     <string name="title_specialist_type">МАСТЕР</string>
     <string name="title_customer_type">КЛИЕНТ</string>
     <string name="title_add_image">ДОБАВИТЬ</string>
@@ -158,6 +161,8 @@
     <string name="toast_would_you_like_to_donate">Пока что, можно загрузить 5 изображений максимум.</string>
     <string name="toast_no_any_contacts">У Вас, пока что, нет контактов.</string>
     <string name="toast_no_any_contact_requests">У Вас, пока что, нет запросов.</string>
+    <string name="toast_user_data_updated">Данные пользователя успешно изменены.</string>
+    <string name="toast_image_data_updated">Данные изображения успешно изменены.</string>
 
     <string name="error_message_exception_sign_up_weak_password">Придумайте более надежный пароль.</string>
     <string name="error_message_exception_sign_up_invalid_credentials">Неправильный формат адреса электронной почты.</string>

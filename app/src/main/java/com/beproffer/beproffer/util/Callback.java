@@ -2,16 +2,16 @@ package com.beproffer.beproffer.util;
 
 import android.view.View;
 
-import com.beproffer.beproffer.data.models.ConfirmedContactItem;
-import com.beproffer.beproffer.data.models.StorageImageItem;
+import com.beproffer.beproffer.data.models.ContactItem;
+import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
 
 public interface Callback {
 
     interface  OnImageClickListener {
-        void onImageClicked(View view, StorageImageItem image);
+        void onImageClicked(View view, SpecialistGalleryImageItem image);
     }
 
     interface  OnContactClickListener {
-        void onContactClicked(View view, ConfirmedContactItem item, int position);
+        void onContactClicked(View view, ContactItem item);
     }
 }

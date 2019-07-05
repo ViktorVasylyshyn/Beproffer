@@ -12,8 +12,8 @@
             type="android.databinding.ObservableBoolean" />
 
         <variable
-            name="userData"
-            type="com.beproffer.beproffer.data.models.UserData" />
+            name="userInfo"
+            type="com.beproffer.beproffer.data.models.UserInfo" />
 
         <variable
             name="fragmentCallback"
@@ -59,7 +59,7 @@
                 android:maxLines="1"
                 android:padding="@dimen/base_padding_small"
                 android:singleLine="true"
-                android:text="@{userData.userName}"
+                android:text="@{userInfo.userName}"
                 android:textColor="@color/colorTextDarkGrey"
                 android:textSize="@dimen/base_text_size_big"
                 android:textStyle="bold"
@@ -74,7 +74,7 @@
                 android:layout_margin="@dimen/base_margin_small"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@{userData.userEmail}"
+                android:text="@{userInfo.userEmail}"
                 android:textColor="@color/color_base_text_70per"
                 android:textSize="@dimen/base_text_size_medium"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +88,7 @@
                 android:layout_margin="@dimen/base_margin_small"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@{userData.userPhone}"
+                android:text="@{userInfo.userPhone}"
                 android:textColor="@color/colorTextLightGrey"
                 android:textSize="@dimen/base_text_size_medium"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -118,7 +118,7 @@
                 android:gravity="center"
                 android:maxLines="2"
                 android:padding="@dimen/base_padding_small"
-                android:text="@{userData.userInfo}"
+                android:text="@{userInfo.userInfo}"
                 android:textColor="@color/colorTextLightGrey"
                 android:textSize="@dimen/base_text_size_medium"
                 android:textStyle="italic"
@@ -213,7 +213,7 @@
             android:layout_width="@dimen/profile_image"
             android:layout_height="@dimen/profile_image"
             android:layout_marginTop="@dimen/base_margin_medium"
-            android:src="@{userData.userProfileImageUrl}"
+            android:src="@{userInfo.userProfileImageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -226,7 +226,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/profile_image"
             app:layout_constraintEnd_toStartOf="@+id/profile_image"
             app:layout_constraintStart_toStartOf="@+id/constraint_layout"
-            app:setGenderImage="@{userData.userGender}"
+            app:setGenderImage="@{userInfo.userGender}"
             tools:ignore="ContentDescription" />
 
         <ImageView

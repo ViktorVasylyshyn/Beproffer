@@ -116,7 +116,7 @@
         tools:layout="@layout/profile_edit_fragment" />
     <fragment
         android:id="@+id/specialistStorageFragment"
-        android:name="com.beproffer.beproffer.presentation.specstorage.SpecialistStorageFragment"
+        android:name="com.beproffer.beproffer.presentation.specstorage.SpecialistGalleryFragment"
         android:label="specialist_storage_fragment"
         tools:layout="@layout/specialist_storage_fragment" >
         <action
@@ -130,7 +130,7 @@
     </fragment>
     <fragment
         android:id="@+id/specialistStorageEditFragment"
-        android:name="com.beproffer.beproffer.presentation.specstorage.edit.SpecialistStorageEditFragment"
+        android:name="com.beproffer.beproffer.presentation.specstorage.edit.SpecialistGalleryEditFragment"
         android:label="specialist_storage_edit_fragment"
         tools:layout="@layout/specialist_storage_edit_fragment" />
     <action
@@ -180,14 +180,14 @@
         app:popUpToInclusive="true" />
     <fragment
         android:id="@+id/confirmedContactsFragment"
-        android:name="com.beproffer.beproffer.presentation.contacts.confirmed.ConfirmedContactsFragment"
+        android:name="com.beproffer.beproffer.presentation.contacts.confirmed.ContactsFragment"
         android:label="confirmed_contacts_fragment"
-        tools:layout="@layout/confirmed_contacts_fragment" />
+        tools:layout="@layout/contacts_fragment" />
     <fragment
         android:id="@+id/contactRequestsFragment"
-        android:name="com.beproffer.beproffer.presentation.contacts.request.ContactRequestsFragment"
+        android:name="com.beproffer.beproffer.presentation.contacts.request.IncomingContactRequestsFragment"
         android:label="contact_requests_fragment"
-        tools:layout="@layout/contact_requests_fragment" />
+        tools:layout="@layout/incoming_contact_requests_fragment" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.beproffer.beproffer.presentation.settings.SettingsFragment"

@@ -1,109 +1,107 @@
 package com.beproffer.beproffer.presentation;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.util.Log;
+import android.support.annotation.Nullable;
 
-import com.beproffer.beproffer.data.models.UserData;
+import com.beproffer.beproffer.data.firebase.UserDataRepository;
+import com.beproffer.beproffer.data.models.ContactItem;
+import com.beproffer.beproffer.data.models.IncomingContactRequestItem;
+import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
+import com.beproffer.beproffer.data.models.UserInfo;
 import com.beproffer.beproffer.data.firebase.auth.FirebaseAuthLiveData;
-import com.beproffer.beproffer.util.Const;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import static android.content.Context.MODE_PRIVATE;
+import java.util.List;
+import java.util.Map;
 
-public class UserDataViewModel extends ViewModel {
+public class UserDataViewModel extends AndroidViewModel {
+
+    private UserDataRepository mRepository;
+
+    private LiveData<UserInfo> mUserInfoLiveData;
 
     private FirebaseAuthLiveData mFirebaseAuthLiveData = new FirebaseAuthLiveData();
 
-    private MutableLiveData<String> mCurrentUserTypeLiveData = new MutableLiveData<>();
+    public UserDataViewModel(@NonNull Application application) {
+        super(application);
+        mRepository = new UserDataRepository(application);
 
-    private MutableLiveData<UserData> mCurrentUserDataLiveData = new MutableLiveData<>();
-
+        if(mUserInfoLiveData == null)
+            mUserInfoLiveData = mRepository.getUserInfoLiveData();
+    }
 
     public LiveData<FirebaseUser> getFirebaseAuthLiveData() {
         return mFirebaseAuthLiveData;
     }
 
-    public LiveData<String> getCurrentUserType() {
-        return mCurrentUserTypeLiveData;
+    public LiveData<UserInfo> getUserInfoLiveData() {
+        return mUserInfoLiveData;
     }
 
-    public LiveData<UserData> getUserData() {
-        return mCurrentUserDataLiveData;
+    public void updateUserInfo(UserInfo updatedUserInfo, @Nullable Uri updatedImageUri) {
+        mRepository.updateUserInfo(updatedUserInfo, updatedImageUri);
     }
 
-    public void setUserData(UserData currentUserData){
-        mCurrentUserDataLiveData.setValue(currentUserData);
+    public LiveData<List<SpecialistGalleryImageItem>> getSpecialistGalleryData(){
+        return mRepository.getSpecialistGalleryImagesList();
     }
 
-    public void defineUserType(Context context, String currentUserId) {
-
-        if (context.getSharedPreferences(currentUserId, MODE_PRIVATE).getString(Const.USERTYPE, null) != null) {
-            String currentUserType = context.getSharedPreferences(currentUserId, MODE_PRIVATE)
-                    .getString(Const.USERTYPE, null);
-            mCurrentUserTypeLiveData.setValue(currentUserType);
-            loadUserDataFromFirebase(currentUserType);
-        } else {
-            FirebaseDatabase.getInstance().getReference().child(Const.USERS).child(Const.SPEC)
-                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                if (dataSnapshot.hasChild(currentUserId)) {
-                                    mCurrentUserTypeLiveData.setValue(Const.SPEC);
-                                    saveUserType(context, currentUserId, Const.SPEC);
-                                } else {
-                                    mCurrentUserTypeLiveData.setValue(Const.CUST);
-                                    saveUserType(context, currentUserId, Const.CUST);
-                                }
-                                loadUserDataFromFirebase(mCurrentUserTypeLiveData.getValue());
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Log.d(Const.ERROR, "Cant define currentUserType via firebase");
-                        }
-                    });
-        }
+    public void updateSpecialistGallery(SpecialistGalleryImageItem newItem, @Nullable Uri resultUri){
+        mRepository.updateSpecialistGallery(newItem, resultUri);
     }
 
-    private void saveUserType(Context context, String currentUserId, String currentUserType) {
-        context.getSharedPreferences(currentUserId, MODE_PRIVATE).edit().putString(Const.USERTYPE,
-                currentUserType).apply();
+    public LiveData<Map<String, ContactItem>> getContacts(){
+        return mRepository.getContacts();
+    }
+
+    public LiveData<List<IncomingContactRequestItem>> getIncomingContactRequests(){
+        return mRepository.getIncomingContactRequests();
+    }
+
+    public void handleIncomingContactRequest(UserInfo currentUserInfo, IncomingContactRequestItem handledItem, boolean confirm){
+        mRepository.handleIncomingContactRequest(currentUserInfo, handledItem, confirm);
+    }
+
+    public void deleteContact(ContactItem deletedContact){
+        mRepository.deleteContact(deletedContact);
+    }
+
+    public LiveData<Boolean> getShowProgress(){
+        return mRepository.getShowProgress();
+    }
+
+    public LiveData<Integer> getShowToast() {
+        return mRepository.getShowToast();
+    }
+
+    public LiveData<Boolean> getHideKeybourd() {
+        return mRepository.getHideKeyboard();
+    }
+
+    public LiveData<Boolean> getPopBackStack() {
+        return mRepository.getPopBackStack();
+    }
+
+    public void resetTrigger(@Nullable Boolean toast, @Nullable Boolean keyboard, @Nullable Boolean backStack){
+        /*параметр может быть или null(не трогать) или false(обнулить значение)*/
+        mRepository.resetTrigger(toast, keyboard, backStack);
+    }
+
+    public void sendContactRequest(IncomingContactRequestItem incomingContactRequestItem, String specialistId){
+        mRepository.sendContactRequest(incomingContactRequestItem, specialistId);
+    }
+
+    public LiveData<Map<String, Boolean>> getOutgoingContactRequests(){
+        return mRepository.getOutgoingContactRequests();
     }
 
 
-    private void loadUserDataFromFirebase(String currentUserType) {
-        if (mCurrentUserDataLiveData.getValue() != null){
-            return;
-        }
-        FirebaseDatabase.getInstance().getReference().child(Const.USERS).child(currentUserType)
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(Const.INFO)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            mCurrentUserDataLiveData.postValue(dataSnapshot.getValue(UserData.class));
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
-    }
-
-    public void resetUserData(){
-        mCurrentUserDataLiveData.setValue(null);
+    public void resetUserData() {
+        mRepository.resetLocalUserData();
     }
 
 }

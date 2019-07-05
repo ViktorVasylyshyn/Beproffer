@@ -12,7 +12,7 @@
 
         <variable
             name="fragmentCallback"
-            type="com.beproffer.beproffer.presentation.contacts.request.ContactRequestFragmentCallback" />
+            type="com.beproffer.beproffer.presentation.contacts.request.IncomingContactRequestsFragmentCallback" />
     </data>
 
     <android.support.constraint.ConstraintLayout

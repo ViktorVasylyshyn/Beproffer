@@ -20,7 +20,7 @@ import com.beproffer.beproffer.data.browsing_history.BrowsingHistoryViewModelFac
 import com.beproffer.beproffer.data.models.SwipeImageItem;
 import com.beproffer.beproffer.databinding.SwipeImageFragmentBinding;
 import com.beproffer.beproffer.presentation.MainActivity;
-import com.beproffer.beproffer.presentation.base.BaseUserDataFragment;
+import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.swimg.adapter.SwipeImageAdapter;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +36,7 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class SwipeImageFragment extends BaseUserDataFragment {
+public class SwipeImageFragment extends BaseUserInfoFragment {
 
     private SwipeImageFragmentBinding mBinding;
 
@@ -65,7 +65,7 @@ public class SwipeImageFragment extends BaseUserDataFragment {
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             initUserData();
         } else {
-            mCurrentUserData = null;
+            mCurrentUserInfo = null;
             mBrowsingHistoryUrlList = null;
             obtainRequestParams();
         }
@@ -218,8 +218,8 @@ public class SwipeImageFragment extends BaseUserDataFragment {
 
     private void obtainRequestParams() {
         SharedPreferences searchRequestData;
-        if (mCurrentUser != null && mCurrentUserData != null) {
-            searchRequestData = requireActivity().getSharedPreferences(mCurrentUserData.getUserId(), MODE_PRIVATE);
+        if (mCurrentUser != null && mCurrentUserInfo != null) {
+            searchRequestData = requireActivity().getSharedPreferences(mCurrentUserInfo.getUserId(), MODE_PRIVATE);
         } else {
             searchRequestData = requireActivity().getSharedPreferences("unknownUserRequest", MODE_PRIVATE);
         }
@@ -243,7 +243,7 @@ public class SwipeImageFragment extends BaseUserDataFragment {
             showToast(R.string.toast_define_search_request);
             navigateTo(R.id.action_global_searchFragment);
         } else {
-            if (mCurrentUser != null && mCurrentUserData != null) {
+            if (mCurrentUser != null && mCurrentUserInfo != null) {
                 /*obtaining browsing history via viewmodel from room local db if user is authed*/
                 showProgress(true);
                 mBrowsingHistoryViewModel = ViewModelProviders.of(requireActivity(),
