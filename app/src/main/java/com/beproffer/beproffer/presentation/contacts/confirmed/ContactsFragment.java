@@ -2,6 +2,7 @@ package com.beproffer.beproffer.presentation.contacts.confirmed;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableBoolean;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,6 +26,8 @@ import java.util.Map;
 
 public class ContactsFragment extends BaseUserInfoFragment {
 
+    public final ObservableBoolean mShowNoContacts = new ObservableBoolean(false);
+
     private ContactsItemAdapter mContactsAdapter = new ContactsItemAdapter();
 
     private List<ContactItem> mContactsList;
@@ -44,6 +47,7 @@ public class ContactsFragment extends BaseUserInfoFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mBinding.setShowProgress(mShowProgress);
+        mBinding.setShowNoContacts(mShowNoContacts);
 
         initUserData();
     }
@@ -51,13 +55,14 @@ public class ContactsFragment extends BaseUserInfoFragment {
     @Override
     public void applyUserData() {
         mUserDataViewModel.getContacts().observe(this, contacts -> {
-            if (contacts != null && contacts.size() > 0) {
+            if (contacts != null) {
+                mContactsList = new ArrayList<>();
                 for (Map.Entry<String, ContactItem> entry : contacts.entrySet()) {
-                    mContactsList = new ArrayList<>();
                     mContactsList.add(entry.getValue());
                 }
-                mContactsAdapter.setData(mContactsList);
+                mShowNoContacts.set(contacts.isEmpty());
             }
+            mContactsAdapter.setData(mContactsList);
         });
     }
 
@@ -85,7 +90,7 @@ public class ContactsFragment extends BaseUserInfoFragment {
 
     private void initRecyclerView() {
         initClickListener();
-        RecyclerView contactRequestRecyclerView = mBinding.confirmedContactsRecyclerView;
+        RecyclerView contactRequestRecyclerView = mBinding.contactsRecyclerView;
         contactRequestRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         contactRequestRecyclerView.setAdapter(mContactsAdapter);
     }

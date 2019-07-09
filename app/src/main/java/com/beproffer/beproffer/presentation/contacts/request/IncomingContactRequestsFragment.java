@@ -1,6 +1,7 @@
 package com.beproffer.beproffer.presentation.contacts.request;
 
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableBoolean;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,14 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
+import com.beproffer.beproffer.data.models.ContactItem;
 import com.beproffer.beproffer.data.models.IncomingContactRequestItem;
 import com.beproffer.beproffer.databinding.IncomingContactRequestsFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.contacts.adapter.IncomingContactRequestsItemAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class IncomingContactRequestsFragment extends BaseUserInfoFragment {
+
+    public final ObservableBoolean mShowNoIncomingContactRequests = new ObservableBoolean(false);
 
     private IncomingContactRequestsItemAdapter mIncomingContactRequestsAdapter = new IncomingContactRequestsItemAdapter();
 
@@ -45,6 +51,7 @@ public class IncomingContactRequestsFragment extends BaseUserInfoFragment {
         super.onActivityCreated(savedInstanceState);
         mBinding.setFragmentCallback(mCallback);
         mBinding.setShowProgress(mShowProgress);
+        mBinding.setShowNoContactRequests(mShowNoIncomingContactRequests);
 
         initUserData();
 
@@ -53,13 +60,13 @@ public class IncomingContactRequestsFragment extends BaseUserInfoFragment {
 
     @Override
     public void applyUserData() {
-        obtainContactRequests();
-    }
-
-    private void obtainContactRequests() {
         mUserDataViewModel.getIncomingContactRequests().observe(this, list -> {
-            if (list != null && !list.isEmpty()) {
-                mIncomingContactRequestsList = list;
+            if (list != null) {
+                mIncomingContactRequestsList = new ArrayList<>();
+                for (Map.Entry<String, IncomingContactRequestItem> entry : list.entrySet()) {
+                    mIncomingContactRequestsList.add(entry.getValue());
+                }
+                mShowNoIncomingContactRequests.set(list.isEmpty());
             }
             mIncomingContactRequestsAdapter.setData(mIncomingContactRequestsList);
         });

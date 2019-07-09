@@ -1,6 +1,5 @@
 package com.beproffer.beproffer.presentation.specstorage;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,14 +14,14 @@ import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
 import com.beproffer.beproffer.databinding.SpecialistStorageFragmentBinding;
 import com.beproffer.beproffer.presentation.MainActivity;
-import com.beproffer.beproffer.presentation.UserDataViewModel;
-import com.beproffer.beproffer.presentation.base.BaseFragment;
+import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.specstorage.adapter.GalleryImageItemAdapter;
-import com.beproffer.beproffer.presentation.specstorage.edit.SpecialistGalleryEditFragmentViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class SpecialistGalleryFragment extends BaseFragment {
+public class SpecialistGalleryFragment extends BaseUserInfoFragment {
 
     private GalleryImageItemAdapter mImageAdapter = new GalleryImageItemAdapter();
 
@@ -47,11 +46,18 @@ public class SpecialistGalleryFragment extends BaseFragment {
         mBinding.setFragmentCallback(mCallback);
         mBinding.setShowProgress(mShowProgress);
 
+        initUserData();
+    }
+
+    @Override
+    public void applyUserData() {
         if (mImageItemsList == null) {
-            UserDataViewModel userDataViewModel = ViewModelProviders.of(requireActivity()).get(UserDataViewModel.class);
-            userDataViewModel.getSpecialistGalleryData().observe(this, data -> {
+            mUserDataViewModel.getSpecialistGalleryData().observe(this, data -> {
                 if (data != null) {
-                    mImageItemsList = data;
+                    mImageItemsList = new ArrayList<>();
+                    for (Map.Entry<String, SpecialistGalleryImageItem> entry : data.entrySet()) {
+                        mImageItemsList.add(entry.getValue());
+                    }
                     mImageAdapter.setData(mImageItemsList);
                 }
             });
@@ -70,8 +76,7 @@ public class SpecialistGalleryFragment extends BaseFragment {
             showToast(R.string.toast_would_you_like_to_donate);
             return;
         }
-        ViewModelProviders.of(requireActivity()).get(SpecialistGalleryEditFragmentViewModel.class)
-                .setStorageImageItem(new SpecialistGalleryImageItem(
+        mUserDataViewModel.setEditableGalleryItem(new SpecialistGalleryImageItem(
                         null,
                         "image" + (mImageItemsList.size() + 1),
                         null,
@@ -85,12 +90,11 @@ public class SpecialistGalleryFragment extends BaseFragment {
     }
 
     private void setupList() {
-        mImageAdapter.setOnItemClickListener(this::loadImageDetails);
+        mImageAdapter.setOnItemClickListener(this::setEditableGalleryItem);
     }
 
-    private void loadImageDetails(@Nullable View view, SpecialistGalleryImageItem specialistGalleryImageItem) {
-        ViewModelProviders.of(requireActivity()).get(SpecialistGalleryEditFragmentViewModel.class)
-                .setStorageImageItem(specialistGalleryImageItem);
+    private void setEditableGalleryItem(@Nullable View view, SpecialistGalleryImageItem editableItem) {
+        mUserDataViewModel.setEditableGalleryItem(editableItem);
         performNavigationForEdit();
     }
 

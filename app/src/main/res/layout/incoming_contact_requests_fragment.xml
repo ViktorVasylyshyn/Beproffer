@@ -11,6 +11,10 @@
             type="android.databinding.ObservableBoolean"/>
 
         <variable
+            name="showNoContactRequests"
+            type="android.databinding.ObservableBoolean"/>
+
+        <variable
             name="fragmentCallback"
             type="com.beproffer.beproffer.presentation.contacts.request.IncomingContactRequestsFragmentCallback" />
     </data>
@@ -117,6 +121,19 @@
             android:src="@drawable/ic_confirm_all"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/specialist_storage_no_incoming_contact_requests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/toast_no_any_contact_requests"
+            android:textSize="@dimen/base_text_size_big"
+            android:textStyle="italic"
+            android:visibility="@{showNoContactRequests ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

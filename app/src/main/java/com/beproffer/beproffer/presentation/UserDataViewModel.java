@@ -46,7 +46,7 @@ public class UserDataViewModel extends AndroidViewModel {
         mRepository.updateUserInfo(updatedUserInfo, updatedImageUri);
     }
 
-    public LiveData<List<SpecialistGalleryImageItem>> getSpecialistGalleryData(){
+    public LiveData<Map<String, SpecialistGalleryImageItem>> getSpecialistGalleryData(){
         return mRepository.getSpecialistGalleryImagesList();
     }
 
@@ -54,11 +54,23 @@ public class UserDataViewModel extends AndroidViewModel {
         mRepository.updateSpecialistGallery(newItem, resultUri);
     }
 
+    public LiveData<SpecialistGalleryImageItem> getEditableGalleryItem(){
+        return mRepository.getEditableGalleryItem();
+    }
+
+    public void setEditableGalleryItem(SpecialistGalleryImageItem editableItem){
+        mRepository.setEditableGalleryItem(editableItem);
+    }
+
+    public void deleteNotRelevantImageData(SpecialistGalleryImageItem updatedItem, String primordialItemType, String primordialItemSubtype){
+        mRepository.deleteNotRelevantImageData(updatedItem, primordialItemType, primordialItemSubtype);
+    }
+
     public LiveData<Map<String, ContactItem>> getContacts(){
         return mRepository.getContacts();
     }
 
-    public LiveData<List<IncomingContactRequestItem>> getIncomingContactRequests(){
+    public LiveData<Map<String, IncomingContactRequestItem>> getIncomingContactRequests(){
         return mRepository.getIncomingContactRequests();
     }
 
@@ -78,7 +90,7 @@ public class UserDataViewModel extends AndroidViewModel {
         return mRepository.getShowToast();
     }
 
-    public LiveData<Boolean> getHideKeybourd() {
+    public LiveData<Boolean> getHideKeyboard() {
         return mRepository.getHideKeyboard();
     }
 
@@ -86,9 +98,9 @@ public class UserDataViewModel extends AndroidViewModel {
         return mRepository.getPopBackStack();
     }
 
-    public void resetTrigger(@Nullable Boolean toast, @Nullable Boolean keyboard, @Nullable Boolean backStack){
-        /*параметр может быть или null(не трогать) или false(обнулить значение)*/
-        mRepository.resetTrigger(toast, keyboard, backStack);
+    public void resetTrigger(@Nullable Boolean resetToastValue, @Nullable Boolean resetHideKeyboardValue, @Nullable Boolean resetBackStackValue){
+        /*параметр может быть или null(не трогать) или true(обнулить значение)*/
+        mRepository.resetTrigger(resetToastValue, resetHideKeyboardValue, resetBackStackValue);
     }
 
     public void sendContactRequest(IncomingContactRequestItem incomingContactRequestItem, String specialistId){

@@ -50,5 +50,16 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
+        <ProgressBar
+            android:id="@+id/swipe_image_progress_bar"
+            android:layout_width="@dimen/profile_image_half"
+            android:layout_height="@dimen/profile_image_half"
+            android:theme="@style/Widget.AppCompat.ProgressBar"
+            android:visibility="@{showProgress ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </android.support.constraint.ConstraintLayout>
 </layout>

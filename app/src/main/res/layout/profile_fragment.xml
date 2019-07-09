@@ -171,13 +171,13 @@
                 tools:ignore="ContentDescription" />
 
             <ImageView
-                android:id="@+id/profile_logout"
+                android:id="@+id/profile_info"
                 android:layout_width="@dimen/icons_size_normal_width"
                 android:layout_height="@dimen/icons_size_normal_height"
                 android:layout_margin="@dimen/base_margin_small"
-                android:onClick="@{(view)->fragmentCallback.onLogOutClick()}"
-                android:src="@drawable/ic_log_out"
-                app:layout_constraintEnd_toStartOf="@+id/profile_info"
+                android:onClick="@{fragmentCallback :: onPerformNavigationClick}"
+                android:src="@drawable/ic_info"
+                app:layout_constraintEnd_toStartOf="@+id/profile_edit"
                 app:layout_constraintStart_toEndOf="@+id/profile_settings"
                 app:layout_constraintTop_toBottomOf="@+id/profile_contacts"
                 tools:ignore="ContentDescription" />
@@ -189,20 +189,20 @@
                 android:layout_margin="@dimen/base_margin_small"
                 android:onClick="@{fragmentCallback::onPerformNavigationClick}"
                 android:src="@drawable/ic_settings"
-                app:layout_constraintEnd_toStartOf="@+id/profile_logout"
+                app:layout_constraintEnd_toStartOf="@+id/profile_info"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profile_storage"
                 tools:ignore="ContentDescription" />
 
             <ImageView
-                android:id="@+id/profile_info"
+                android:id="@+id/profile_edit"
                 android:layout_width="@dimen/icons_size_normal_width"
                 android:layout_height="@dimen/icons_size_normal_height"
                 android:layout_margin="@dimen/base_margin_small"
                 android:onClick="@{fragmentCallback::onPerformNavigationClick}"
-                android:src="@drawable/ic_info"
+                android:src="@drawable/ic_edit"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/profile_logout"
+                app:layout_constraintStart_toEndOf="@+id/profile_info"
                 app:layout_constraintTop_toBottomOf="@+id/profile_contact_requests"
                 tools:ignore="ContentDescription" />
 
@@ -220,24 +220,14 @@
             tools:ignore="ContentDescription" />
 
         <ImageView
-            android:id="@+id/profile_gender"
-            android:layout_width="@dimen/icons_size_small_width"
-            android:layout_height="@dimen/icons_size_small_height"
-            app:layout_constraintBottom_toBottomOf="@+id/profile_image"
-            app:layout_constraintEnd_toStartOf="@+id/profile_image"
-            app:layout_constraintStart_toStartOf="@+id/constraint_layout"
-            app:setGenderImage="@{userInfo.userGender}"
-            tools:ignore="ContentDescription" />
-
-        <ImageView
-            android:id="@+id/profile_edit"
-            android:layout_width="@dimen/icons_size_small_width"
-            android:layout_height="@dimen/icons_size_small_height"
-            android:onClick="@{fragmentCallback :: onPerformNavigationClick}"
-            android:src="@drawable/ic_edit"
-            app:layout_constraintBottom_toBottomOf="@+id/profile_image"
-            app:layout_constraintStart_toEndOf="@+id/profile_image"
-            app:layout_constraintEnd_toEndOf="@id/constraint_layout"
+            android:id="@+id/profile_sign_out"
+            android:layout_width="@dimen/icons_size_normal_width"
+            android:layout_height="@dimen/icons_size_normal_height"
+            android:layout_margin="@dimen/base_margin_medium"
+            android:onClick="@{(view)->fragmentCallback.onLogOutClick()}"
+            android:src="@drawable/ic_log_out"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <ProgressBar

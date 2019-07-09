@@ -40,21 +40,21 @@ public class BaseUserInfoFragment extends BaseFragment {
             if(resId == null)
                 return;
             showToast(resId);
-            mUserDataViewModel.resetTrigger(false, null, null );
+            mUserDataViewModel.resetTrigger(true, null, null );
         });
 
-        mUserDataViewModel.getHideKeybourd().observe(this, hide ->{
+        mUserDataViewModel.getHideKeyboard().observe(this, hide ->{
             if(hide == null)
                 return;
             hideKeyboard(requireActivity());
-            mUserDataViewModel.resetTrigger(null, false, null );
+            mUserDataViewModel.resetTrigger(null, true, null );
         });
 
         mUserDataViewModel.getPopBackStack().observe(this, back ->{
             if(back == null)
                 return;
             popBackStack();
-            mUserDataViewModel.resetTrigger(null, null, false );
+            mUserDataViewModel.resetTrigger(null, null, true );
         });
     }
 
