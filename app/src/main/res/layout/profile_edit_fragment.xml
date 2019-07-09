@@ -115,7 +115,7 @@
             android:background="@drawable/rectangle_white_background"
             android:ellipsize="end"
             android:hint="@string/hint_about_me_infield"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:maxLength="100"
             android:maxLines="3"
             android:text="@={userInfo.userInfo}"

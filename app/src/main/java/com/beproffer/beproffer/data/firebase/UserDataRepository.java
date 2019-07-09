@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.ContactItem;
@@ -28,9 +27,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -38,6 +35,8 @@ import static android.content.Context.MODE_PRIVATE;
 public class UserDataRepository {
 
     private Application mApplication;
+
+    private DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference();
 
     private DataSnapshot mUserDataSnapShot;
 
@@ -51,13 +50,14 @@ public class UserDataRepository {
 
     private MutableLiveData<UserInfo> mUserInfoLiveData = new MutableLiveData<>();
 
-    private List<SpecialistGalleryImageItem> mSpecialistGalleryImageItemsList = new ArrayList<>();
-    private MutableLiveData<List<SpecialistGalleryImageItem>> mSpecialistGalleryImageItemsListLiveData = new MutableLiveData<>();
+    private Map<String, SpecialistGalleryImageItem> mSpecialistGalleryImageItemsMap = new HashMap<>();
+    private MutableLiveData<Map<String, SpecialistGalleryImageItem>> mSpecialistGalleryImageItemsMapLiveData = new MutableLiveData<>();
+    private MutableLiveData<SpecialistGalleryImageItem> mEditableGalleryItemLiveData = new MutableLiveData<>();
 
     private Map<String, ContactItem> mContactsMap = new HashMap<>();
     private MutableLiveData<Map<String, ContactItem>> mContactsMapLiveData = new MutableLiveData<>();
-    private List<IncomingContactRequestItem> mIncomingContactRequestsList = new ArrayList<>();
-    private MutableLiveData<List<IncomingContactRequestItem>> mIncomingContactRequestsListLiveData = new MutableLiveData<>();
+    private Map<String, IncomingContactRequestItem> mIncomingContactRequestsMap = new HashMap<>();
+    private MutableLiveData<Map<String, IncomingContactRequestItem>> mIncomingContactRequestsMapLiveData = new MutableLiveData<>();
     private Map<String, Boolean> mOutgoingContactRequests = new HashMap<>();
     private MutableLiveData<Map<String, Boolean>> mOutgoingContactRequestsLiveData = new MutableLiveData<>();
 
@@ -104,15 +104,13 @@ public class UserDataRepository {
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     mShowProgress.setValue(false);
-                    Log.d(Const.ERROR, "Cant define currentUserType via firebase");
                 }
             });
         }
     }
 
     private void loadUserDataSnapShot() {
-        FirebaseDatabase.getInstance().getReference()
-                .child(Const.USERS)
+        mDatabaseRef.child(Const.USERS)
                 .child(mCurrentUserType)
                 .child(mCurrentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -148,6 +146,14 @@ public class UserDataRepository {
         }
     }
 
+    public LiveData<SpecialistGalleryImageItem> getEditableGalleryItem() {
+        return mEditableGalleryItemLiveData;
+    }
+
+    public void setEditableGalleryItem(SpecialistGalleryImageItem editableItem) {
+        mEditableGalleryItemLiveData.setValue(editableItem);
+    }
+
     private void saveProfileImageToStorage(UserInfo updatedUserInfo, Uri updatesImageUri) {
         /*в сохранении изображения сервиса для специалиста и изображения профайла присутствует много
          * одинакового кода. пока что я незнаю как решить этот вопрос, так как в илучае успешного сохранения
@@ -161,18 +167,18 @@ public class UserDataRepository {
         try {
             bitmap = MediaStore.Images.Media.getBitmap(mApplication.getContentResolver(), updatesImageUri);
         } catch (IOException e) {
-            feedBackToUi(false, R.string.toast_error_has_occurred, true, false);
+            feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
         }
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
         } catch (NullPointerException e) {
-            feedBackToUi(false, R.string.toast_error_has_occurred, true, false);
+            feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
         }
         byte[] data = baos.toByteArray();
         UploadTask uploadTask = filepath.putBytes(data);
         uploadTask.addOnFailureListener(e -> {
-            feedBackToUi(false, R.string.toast_error_has_occurred, true, false);
+            feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
         });
         uploadTask.addOnSuccessListener(taskSnapshot -> filepath.getDownloadUrl()
                 .addOnSuccessListener(url -> {
@@ -185,8 +191,7 @@ public class UserDataRepository {
         /*изменяем инфо юзера в базе данных. если из базы приходит ответ об удачной замене, то меняем
          инфо юзера локально, чтобы не делать повторный запрос в базу за обновленными данными*/
         if (mCurrentUserId != null && mCurrentUserType != null)
-            FirebaseDatabase.getInstance().getReference()
-                    .child(Const.USERS)
+            mDatabaseRef.child(Const.USERS)
                     .child(mCurrentUserType)
                     .child(mCurrentUserId)
                     .child(Const.INFO)
@@ -197,22 +202,26 @@ public class UserDataRepository {
                     });
     }
 
-    public LiveData<List<SpecialistGalleryImageItem>> getSpecialistGalleryImagesList() {
-        mShowProgress.setValue(true);
+    public LiveData<Map<String, SpecialistGalleryImageItem>> getSpecialistGalleryImagesList() {
         if (mCurrentUserType.equals(Const.SPEC)
                 && mUserDataSnapShot.hasChild(Const.IMAGES)
-                && mSpecialistGalleryImageItemsList.isEmpty()) {
+                && mSpecialistGalleryImageItemsMap.isEmpty()) {
             obtainSpecialistGalleryImagesData();
         }
 
-        return mSpecialistGalleryImageItemsListLiveData;
+        return mSpecialistGalleryImageItemsMapLiveData;
     }
 
     private void obtainSpecialistGalleryImagesData() {
+        mShowProgress.setValue(true);
         for (DataSnapshot data : mUserDataSnapShot.child(Const.IMAGES).getChildren()) {
-            mSpecialistGalleryImageItemsList.add(data.getValue(SpecialistGalleryImageItem.class));
+            try {
+                mSpecialistGalleryImageItemsMap.put(data.getKey(), data.getValue(SpecialistGalleryImageItem.class));
+            } catch (NullPointerException e) {
+                feedBackToUi(false, R.string.toast_error_has_occurred, null, null);
+            }
         }
-        mSpecialistGalleryImageItemsListLiveData.setValue(mSpecialistGalleryImageItemsList);
+        mSpecialistGalleryImageItemsMapLiveData.setValue(mSpecialistGalleryImageItemsMap);
         mShowProgress.setValue(false);
     }
 
@@ -239,18 +248,18 @@ public class UserDataRepository {
         try {
             bitmap = MediaStore.Images.Media.getBitmap(mApplication.getContentResolver(), resultUri);
         } catch (IOException e) {
-            feedBackToUi(false, R.string.toast_error_has_occurred, true, false);
+            feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
         }
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
         } catch (NullPointerException e) {
-            feedBackToUi(false, R.string.toast_error_has_occurred, true, false);
+            feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
         }
         byte[] data = baos.toByteArray();
         UploadTask uploadTask = filepath.putBytes(data);
         uploadTask.addOnFailureListener(e -> {
-            feedBackToUi(false, R.string.toast_error_has_occurred, true, false);
+            feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
         });
         uploadTask.addOnSuccessListener(taskSnapshot -> filepath.getDownloadUrl()
                 .addOnSuccessListener(url -> saveImageDataToRealtimeDb(updatedItem, url.toString())));
@@ -266,8 +275,7 @@ public class UserDataRepository {
             updatedItem.setUid(mCurrentUserId);
         }
         /*2. Сохраняем данные в раздел "services"*/
-        FirebaseDatabase.getInstance().getReference()
-                .child(Const.SERVICES)
+        mDatabaseRef.child(Const.SERVICES)
                 .child(updatedItem.getType())
                 .child(updatedItem.getSubtype())
                 .child(mCurrentUserId)
@@ -275,8 +283,7 @@ public class UserDataRepository {
                 .setValue(updatedItem).addOnSuccessListener(aVoid -> {
         });
         /*3. Сохраняем данные в раздел юзера "images" */
-        FirebaseDatabase.getInstance().getReference()
-                .child(Const.USERS)
+        mDatabaseRef.child(Const.USERS)
                 .child(Const.SPEC)
                 .child(mCurrentUserId)
                 .child(Const.IMAGES)
@@ -284,21 +291,19 @@ public class UserDataRepository {
                 .setValue(updatedItem).addOnSuccessListener(aVoid -> updateSpecialistGalleryImagesData(updatedItem));
     }
 
+    public void deleteNotRelevantImageData(SpecialistGalleryImageItem updatedItem, String primordialItemType, String primordialItemSubtype) {
+        mDatabaseRef.child(Const.SERVICES)
+                .child(primordialItemType)
+                .child(primordialItemSubtype)
+                .child(mCurrentUserId)
+                .child(mSpecialistGalleryImageItemsMap.get(updatedItem.getKey()).getKey())
+                .removeValue().addOnCompleteListener(task -> updateSpecialistGalleryImagesData(updatedItem));
+    }
+
     private void updateSpecialistGalleryImagesData(SpecialistGalleryImageItem updatedItem) {
         /*4. Добавляем или заменяем данные в списке, который подается локально на RecyclerView*/
-        /*может со временем это дело переделать через ХэшМэп и просто удалять или заменять по ключу*/
-        boolean replacementOccured = false;
-        for (int i = 0; i < mSpecialistGalleryImageItemsList.size(); i++) {
-            if (mSpecialistGalleryImageItemsList.get(i).getKey().equals(updatedItem.getKey())) {
-                mSpecialistGalleryImageItemsList.set(i, updatedItem);
-                replacementOccured = true;
-            }
-        }
-        if (!replacementOccured && mSpecialistGalleryImageItemsList.size() < 5) {
-            mSpecialistGalleryImageItemsList.add(updatedItem);
-            return;
-        }
-        mSpecialistGalleryImageItemsListLiveData.setValue(mSpecialistGalleryImageItemsList);
+        mSpecialistGalleryImageItemsMap.put(updatedItem.getKey(), updatedItem);
+        mSpecialistGalleryImageItemsMapLiveData.setValue(mSpecialistGalleryImageItemsMap);
         feedBackToUi(false, R.string.toast_image_data_updated, true, true);
     }
 
@@ -311,7 +316,7 @@ public class UserDataRepository {
                 }
                 mContactsMapLiveData.setValue(mContactsMap);
             } catch (NullPointerException e) {
-                feedBackToUi(false, R.string.toast_error_has_occurred, false, false);
+                feedBackToUi(false, R.string.toast_error_has_occurred, null, null);
             }
         }
         mShowProgress.setValue(false);
@@ -320,8 +325,7 @@ public class UserDataRepository {
 
     public void deleteContact(ContactItem deletedContact) {
         mShowProgress.setValue(true);
-        FirebaseDatabase.getInstance().getReference()
-                .child(Const.USERS)
+        mDatabaseRef.child(Const.USERS)
                 .child(mCurrentUserType)
                 .child(mCurrentUserId)
                 .child(Const.CONTACT)
@@ -329,25 +333,30 @@ public class UserDataRepository {
             mContactsMap.remove(deletedContact.getContactUid());
             mContactsMapLiveData.setValue(mContactsMap);
             mShowProgress.setValue(false);
+            feedBackToUi(false, R.string.toast_contact_deleted, null, null);
         });
     }
 
-    public LiveData<List<IncomingContactRequestItem>> getIncomingContactRequests() {
+    public LiveData<Map<String, IncomingContactRequestItem>> getIncomingContactRequests() {
         mShowProgress.setValue(true);
-        if (mUserDataSnapShot.hasChild(Const.INREQUEST) && mIncomingContactRequestsList.isEmpty()) {
+        if (mUserDataSnapShot.hasChild(Const.INREQUEST) && mIncomingContactRequestsMap.isEmpty()) {
             for (DataSnapshot data : mUserDataSnapShot.child(Const.INREQUEST).getChildren()) {
-                mIncomingContactRequestsList.add(data.getValue(IncomingContactRequestItem.class));
+                try {
+                    mIncomingContactRequestsMap.put(data.getValue(IncomingContactRequestItem.class).getRequestUid(), data.getValue(IncomingContactRequestItem.class));
+                } catch (NullPointerException e) {
+                    feedBackToUi(false, R.string.toast_error_has_occurred, null, null);
+                }
             }
-            mIncomingContactRequestsListLiveData.setValue(mIncomingContactRequestsList);
+            mIncomingContactRequestsMapLiveData.setValue(mIncomingContactRequestsMap);
         }
         mShowProgress.setValue(false);
-        return mIncomingContactRequestsListLiveData;
+        return mIncomingContactRequestsMapLiveData;
     }
 
     public void handleIncomingContactRequest(UserInfo currentUserInfo, IncomingContactRequestItem handledItem, boolean confirm) {
         mShowProgress.setValue(true);
         if (confirm) {
-            FirebaseDatabase.getInstance().getReference().child(Const.USERS).
+            mDatabaseRef.child(Const.USERS).
                     child(handledItem.getRequestType()).
                     child(handledItem.getRequestUid()).
                     child(Const.CONTACT).
@@ -356,27 +365,27 @@ public class UserDataRepository {
                             currentUserInfo.getUserName(),
                             currentUserInfo.getUserPhone(),
                             currentUserInfo.getUserInfo(),
-                            currentUserInfo.getUserProfileImageUrl())).addOnSuccessListener(aVoid -> deleteIncomingContactRequestData(handledItem));
+                            currentUserInfo.getUserProfileImageUrl())).addOnSuccessListener(aVoid -> deleteIncomingContactRequestData(handledItem, true));
         } else {
-            deleteIncomingContactRequestData(handledItem);
+            deleteIncomingContactRequestData(handledItem, false);
         }
     }
 
-    private void deleteIncomingContactRequestData(IncomingContactRequestItem handledItem) {
-        FirebaseDatabase.getInstance().getReference()
-                .child(Const.USERS)
+    private void deleteIncomingContactRequestData(IncomingContactRequestItem handledItem, boolean confirmed) {
+        mDatabaseRef.child(Const.USERS)
                 .child(Const.SPEC)
                 .child(mCurrentUserId)
                 .child(Const.INREQUEST)
                 .child(handledItem.getRequestUid()).removeValue().addOnSuccessListener(aVoid -> {
-                    for (int i = 0; i < mIncomingContactRequestsList.size(); i++) {
-                        if (mIncomingContactRequestsList.get(i).getRequestUid().equals(handledItem.getRequestUid())) {
-                            mIncomingContactRequestsList.remove(i);
-                            return;
-                        }
+                    mIncomingContactRequestsMap.remove(handledItem.getRequestUid());
+                    mIncomingContactRequestsMapLiveData.setValue(mIncomingContactRequestsMap);
+                    int toastRes;
+                    if (confirmed) {
+                        toastRes = R.string.toast_contact_confirmed;
+                    } else {
+                        toastRes = R.string.toast_contact_denied;
                     }
-                    mIncomingContactRequestsListLiveData.setValue(mIncomingContactRequestsList);
-                    mShowProgress.setValue(false);
+                    feedBackToUi(false, toastRes, null, null);
                 }
         );
     }
@@ -384,8 +393,7 @@ public class UserDataRepository {
     public void sendContactRequest(IncomingContactRequestItem incomingContactRequestItem, String specialistId) {
         mShowProgress.setValue(true);
         try {
-            FirebaseDatabase.getInstance().getReference()
-                    .child(Const.USERS)
+            mDatabaseRef.child(Const.USERS)
                     .child(Const.SPEC)
                     .child(specialistId)
                     .child(Const.INREQUEST)
@@ -400,7 +408,6 @@ public class UserDataRepository {
             });
         } catch (NullPointerException e) {
             mShowProgress.setValue(false);
-            Log.d(Const.ERROR, "UserDataRepository sendContactRequest");
         }
     }
 
@@ -414,12 +421,12 @@ public class UserDataRepository {
         mCurrentUserType = null;
         mUserInfoLiveData.setValue(null);
         mUserDataSnapShot = null;
-        mIncomingContactRequestsList = new ArrayList<>();
-        mIncomingContactRequestsListLiveData.setValue(mIncomingContactRequestsList);
+        mIncomingContactRequestsMap = new HashMap<>();
+        mIncomingContactRequestsMapLiveData.setValue(mIncomingContactRequestsMap);
         mContactsMap = new HashMap<>();
         mContactsMapLiveData.setValue(mContactsMap);
-        mSpecialistGalleryImageItemsList = new ArrayList<>();
-        mSpecialistGalleryImageItemsListLiveData.setValue(mSpecialistGalleryImageItemsList);
+        mSpecialistGalleryImageItemsMap = new HashMap<>();
+        mSpecialistGalleryImageItemsMapLiveData.setValue(mSpecialistGalleryImageItemsMap);
         mShowProgress.setValue(false);
     }
 
@@ -439,15 +446,14 @@ public class UserDataRepository {
         return mPopBackStack;
     }
 
-    public void resetTrigger(@Nullable Boolean toast, @Nullable Boolean keyboard, @Nullable Boolean backStack) {
-        /*параметр может быть или null(не трогать) или false(обнулить значение)*/
-        if (toast != null) {
+    public void resetTrigger(@Nullable Boolean resetToastValue, @Nullable Boolean resetHideKeyboardValue, @Nullable Boolean resetBackStackValue) {
+        if (resetToastValue != null && resetToastValue) {
             mShowToast.setValue(null);
         }
-        if (keyboard != null) {
+        if (resetHideKeyboardValue != null && resetHideKeyboardValue) {
             mHideKeyboard.setValue(null);
         }
-        if (backStack != null) {
+        if (resetBackStackValue != null && resetBackStackValue) {
             mPopBackStack.setValue(null);
         }
     }
@@ -456,16 +462,18 @@ public class UserDataRepository {
                               @Nullable Integer toastResId,
                               @Nullable Boolean hideKeyboard,
                               @Nullable Boolean popBackStack) {
+
         if (showProgress != null) {
             mShowProgress.setValue(showProgress);
         }
         if (toastResId != null) {
             mShowToast.setValue(toastResId);
         }
-        if (hideKeyboard != null) {
+        /*null - не трогать, true - скрыть*/
+        if (hideKeyboard != null && hideKeyboard) {
             mHideKeyboard.setValue(true);
         }
-        if (popBackStack != null) {
+        if (popBackStack != null && popBackStack) {
             mPopBackStack.setValue(true);
         }
     }

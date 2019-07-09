@@ -11,6 +11,10 @@
             name="showProgress"
             type="android.databinding.ObservableBoolean" />
 
+        <variable
+            name="showNoContacts"
+            type="android.databinding.ObservableBoolean"/>
+
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -19,7 +23,7 @@
         tools:context=".presentation.contacts.confirmed.ContactsFragment">
 
         <TextView
-            android:id="@+id/confirmed_contacts_title"
+            android:id="@+id/contacts_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
@@ -32,21 +36,34 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/confirmed_contacts_recycler_view"
+            android:id="@+id/contacts_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
             android:scrollbars="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/confirmed_contacts_title">
+            app:layout_constraintTop_toBottomOf="@+id/contacts_title">
 
         </android.support.v7.widget.RecyclerView>
 
         <ProgressBar
-            android:id="@+id/confirmed_contacts_progress_bar"
+            android:id="@+id/contacts_progress_bar"
             android:layout_width="@dimen/profile_image_half"
             android:layout_height="@dimen/profile_image_half"
             android:theme="@style/Widget.AppCompat.ProgressBar"
             android:visibility="@{showProgress ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/contacts_no_contacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/toast_no_any_contacts"
+            android:textSize="@dimen/base_text_size_big"
+            android:textStyle="italic"
+            android:visibility="@{showNoContacts ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

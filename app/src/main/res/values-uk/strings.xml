@@ -144,7 +144,7 @@
     <string name="toast_error_registration">Помилка реєстрації. Спробуйте знову.</string>
     <string name="toast_error_check_password">Перевірте пароль.</string>
     <string name="toast_error_check_fields_data">Будь ласка перевірте правильність введених даних.</string>
-    <string name="toast_contact_delete_access">Натисніть ще раз, щоб видалити контакт.</string>
+    <string name="toast_contact_deleted">Контакт видалено.</string>
     <string name="toast_browsing_history_delete_access">Натисніть ще раз, щоб видалити історію переглядів.</string>
     <string name="toast_browsing_history_cleared">історію переглядів видалено.</string>
     <string name="toast_sign_up_email_verification">Перевірте свою електронну пошту і підтвердіть реєстрацію.</string>

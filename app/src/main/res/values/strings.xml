@@ -142,7 +142,7 @@
     <string name="toast_error_registration">Registration failed. Please, try again.</string>
     <string name="toast_error_check_password">Please, check the password.</string>
     <string name="toast_error_check_fields_data">Please, check the data accuracy.</string>
-    <string name="toast_contact_delete_access">Tap one more time if you want to delete contact.</string>
+    <string name="toast_contact_deleted">Contact deleted.</string>
     <string name="toast_browsing_history_delete_access">Tap one more time if you want to see all images again.</string>
     <string name="toast_browsing_history_cleared">Browsing history was cleared.</string>
     <string name="toast_no_available_images">There are no available images. Please, change the search parameters or try again later.</string>
