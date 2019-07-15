@@ -61,7 +61,6 @@ public class Const {
     public static final String TAT = "TAT"; /*menu_tattoo*/
     public static final String TATTAT = "TATTAT"; /*submenu_tattoo*/
     public static final String TATPIE = "TATPIE"; /*submenu_piercing*/
-    public static final String TATART = "TATART"; /*submenu_body_art*/
     public static final String TATTEM = "TATTEM"; /*submenu_temporary_tattoo*/
 
     public static final String BAR = "BAR"; /*menu_beards*/
@@ -88,11 +87,16 @@ public class Const {
     /*Log and system title*/
     public static final String ERROR = "ERROR";
     public static final String UNKNSTAT = "unknown state";
+    public static final String UNKNOWN_USER_REQUEST = "unknownUserRequest";/*ключ для получения
+    параметров запроса из SharedPref для не зарегистрированного пользователя*/
 
     /*request code*/
     public static final int REQUEST_CODE_1 = 1;
 
     public static final int CONTACTS_NUM = 10; /*max num of available contacts*/
+    public static final int SEARCH_PARAMS_NUM = 3; /*num of search params*/
+
+    public static final int MAX_NUM_OF_IMAGES_IN_ADAPTER = 20; /*max num of image items in swipe card adapter*/
 
 
 }

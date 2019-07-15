@@ -96,11 +96,6 @@ public class DefineServiceType {
                 serviceSubtype = Const.TATPIE;
                 serviceTitle = context.getResources().getString(R.string.tattoo_title_piercing);
                 break;
-            case R.id.menu_tattoo_bodyart:
-                serviceType = Const.TAT;
-                serviceSubtype = Const.TATART;
-                serviceTitle = context.getResources().getString(R.string.tattoo_title_bodyart);
-                break;
             case R.id.menu_tattoo_temporary_tattoo:
                 serviceType = Const.TAT;
                 serviceSubtype = Const.TATTEM;

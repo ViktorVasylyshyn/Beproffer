@@ -10,10 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.data.browsing_history.BrowsingHistoryViewModel;
 import com.beproffer.beproffer.databinding.SettingsFragmentLayoutBinding;
 import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
+import com.beproffer.beproffer.presentation.swimg.SwipeImagesViewModel;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -23,6 +23,8 @@ public class SettingsFragment extends BaseUserInfoFragment {
     private SettingsFragmentLayoutBinding mBinding;
 
     private boolean mDeleteViewsHistoryAccess;
+
+    private SwipeImagesViewModel mSwipeImagesViewModel;
 
     private FirebaseAuth mAuth;
 
@@ -61,13 +63,27 @@ public class SettingsFragment extends BaseUserInfoFragment {
 
     private void clearBrowsingHistory() {
         if (mDeleteViewsHistoryAccess) {
-            ViewModelProviders.of(requireActivity()).get(BrowsingHistoryViewModel.class).deletoWholeBrowsingHistory();
-            showToast(R.string.toast_browsing_history_cleared);
-            mDeleteViewsHistoryAccess = false;
-            return;
+            if (mSwipeImagesViewModel == null) {
+                mSwipeImagesViewModel = ViewModelProviders.of(requireActivity()).get(SwipeImagesViewModel.class);
+            }
+            /*актив\неактив прогресс бар*/
+            mSwipeImagesViewModel.getShowProgress().observe(getViewLifecycleOwner(), progress -> {
+                if (progress == null)
+                    return;
+                showProgress(progress);
+            });
+            /*показ тостов*/
+            mSwipeImagesViewModel.getShowToast().observe(getViewLifecycleOwner(), resId -> {
+                if (resId == null)
+                    return;
+                showToast(resId);
+                mSwipeImagesViewModel.resetTriggers(true, null);
+            });
+            mSwipeImagesViewModel.clearBrowsingHistory();
+        }else {
+            showToast(R.string.toast_browsing_history_delete_access);
+            mDeleteViewsHistoryAccess = true;
         }
-        showToast(R.string.toast_browsing_history_delete_access);
-        mDeleteViewsHistoryAccess = true;
     }
 
     private void deleteProfile() {

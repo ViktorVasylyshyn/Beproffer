@@ -170,9 +170,6 @@ public class AppBindingAdapter {
                 case Const.TATPIE:
                     resId = R.string.tattoo_title_piercing;
                     break;
-                case Const.TATART:
-                    resId = R.string.tattoo_title_bodyart;
-                    break;
                 case Const.TATTEM:
                     resId = R.string.tattoo_title_temporary_tattoo;
                     break;

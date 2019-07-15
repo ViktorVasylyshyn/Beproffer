@@ -1,5 +1,7 @@
 package com.beproffer.beproffer.data.models;
 
+import java.util.Objects;
+
 public class SwipeImageItem {
     private String uid;
     private String url;
@@ -67,10 +69,10 @@ public class SwipeImageItem {
     public String getUrl() {
         return url;
     }
+
     public void setUrl(String url) {
         this.url = url;
     }
-
 
     public String getType() {
         return type;
@@ -96,4 +98,21 @@ public class SwipeImageItem {
         this.gender = gender;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof SwipeImageItem)) {
+            return false;
+        }
+        SwipeImageItem image = (SwipeImageItem) o;
+        return  Objects.equals(uid, image.uid) &&
+                Objects.equals(url, image.url);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(uid, url);
+    }
 }

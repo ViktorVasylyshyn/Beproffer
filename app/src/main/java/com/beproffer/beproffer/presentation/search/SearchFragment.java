@@ -26,7 +26,7 @@ public class SearchFragment extends BaseFragment {
 
     private String mCurrentUserId;
 
-    private String gender = null;
+    private String mRequestGender = null;
 
 
     private Map<String, String> mSearchRequestMap;
@@ -59,7 +59,7 @@ public class SearchFragment extends BaseFragment {
             updateImageService();
         });
         mSearchFragmentViewModel.getSearchRequestGender().observe(this, gend -> {
-            gender = gend;
+            mRequestGender = gend;
             setGender();
         });
     }
@@ -99,10 +99,10 @@ public class SearchFragment extends BaseFragment {
 
 
     public void setGender() {
-        if (gender != null) {
+        if (mRequestGender != null) {
             int titleId = 0;
             int imageId = 0;
-            switch (gender) {
+            switch (mRequestGender) {
                 case Const.MALE:
                     titleId = R.string.title_gender_male;
                     imageId = R.drawable.ic_gender_sign_male;
@@ -126,18 +126,18 @@ public class SearchFragment extends BaseFragment {
 
     public void applySearchRequest() {
         if (mSearchRequestMap != null) {
-            mSearchRequestMap.put(Const.GENDER, gender);
+            mSearchRequestMap.put(Const.GENDER, mRequestGender);
 
             if (mCurrentUserId != null) {
                 SharedPreferences.Editor editor = requireActivity().getSharedPreferences(mCurrentUserId, MODE_PRIVATE).edit();
-                editor.putString(Const.GENDER, gender);
+                editor.putString(Const.GENDER, mRequestGender);
                 editor.putString(Const.SERVTYPE, mSearchRequestMap.get(Const.SERVTYPE));
                 editor.putString(Const.SERVSBTP, mSearchRequestMap.get(Const.SERVSBTP));
                 editor.apply();
 
             } else {
-                SharedPreferences.Editor editor = requireActivity().getSharedPreferences("unknownUserRequest", MODE_PRIVATE).edit();
-                editor.putString(Const.GENDER, gender);
+                SharedPreferences.Editor editor = requireActivity().getSharedPreferences(Const.UNKNOWN_USER_REQUEST, MODE_PRIVATE).edit();
+                editor.putString(Const.GENDER, mRequestGender);
                 editor.putString(Const.SERVTYPE, mSearchRequestMap.get(Const.SERVTYPE));
                 editor.putString(Const.SERVSBTP, mSearchRequestMap.get(Const.SERVSBTP));
                 editor.apply();
