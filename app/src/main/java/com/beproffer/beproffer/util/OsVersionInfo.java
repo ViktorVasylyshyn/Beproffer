@@ -8,7 +8,7 @@ public class OsVersionInfo {
 
     }
 
-    public static boolean hasLollopop() {
+    public static boolean hasLollipop() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 

@@ -27,7 +27,6 @@ public class SwipeImageAdapter extends ArrayAdapter<SwipeImageItem> {
         }
         ImageView swipeImage = convertView.findViewById(R.id.swipe_image);
 
-//        swipeName.setText(swipeImageItem.getUserName());
         Glide.with(getContext()).load(swipeImageItem.getUrl()).into(swipeImage);
 
         return convertView;

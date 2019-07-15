@@ -23,34 +23,34 @@ public class BaseUserInfoFragment extends BaseFragment {
         }
 
         mUserDataViewModel = ViewModelProviders.of(requireActivity()).get(UserDataViewModel.class);
-        mUserDataViewModel.getFirebaseAuthLiveData().observe(this, user -> {
+        mUserDataViewModel.getFirebaseAuthLiveData().observe(getViewLifecycleOwner(), user -> {
             if (user != null) {
                 mCurrentUser = user;
                 obtainUserInfo();
             }
         });
         
-        mUserDataViewModel.getShowProgress().observe(this, progress -> {
+        mUserDataViewModel.getShowProgress().observe(getViewLifecycleOwner(), progress -> {
             if(progress == null)
                 return;
             showProgress(progress);
         });
 
-        mUserDataViewModel.getShowToast().observe(this, resId ->{
+        mUserDataViewModel.getShowToast().observe(getViewLifecycleOwner(), resId ->{
             if(resId == null)
                 return;
             showToast(resId);
             mUserDataViewModel.resetTrigger(true, null, null );
         });
 
-        mUserDataViewModel.getHideKeyboard().observe(this, hide ->{
+        mUserDataViewModel.getHideKeyboard().observe(getViewLifecycleOwner(), hide ->{
             if(hide == null)
                 return;
             hideKeyboard(requireActivity());
             mUserDataViewModel.resetTrigger(null, true, null );
         });
 
-        mUserDataViewModel.getPopBackStack().observe(this, back ->{
+        mUserDataViewModel.getPopBackStack().observe(getViewLifecycleOwner(), back ->{
             if(back == null)
                 return;
             popBackStack();
@@ -59,7 +59,7 @@ public class BaseUserInfoFragment extends BaseFragment {
     }
 
     public void obtainUserInfo() {
-        mUserDataViewModel.getUserInfoLiveData().observe(this, userInfo -> {
+        mUserDataViewModel.getUserInfoLiveData().observe(getViewLifecycleOwner(), userInfo -> {
             if (userInfo != null) {
                 mCurrentUserInfo = userInfo;
                 applyUserData();

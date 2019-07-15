@@ -15,7 +15,6 @@ import com.beproffer.beproffer.data.models.UserInfo;
 import com.beproffer.beproffer.data.firebase.auth.FirebaseAuthLiveData;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.List;
 import java.util.Map;
 
 public class UserDataViewModel extends AndroidViewModel {

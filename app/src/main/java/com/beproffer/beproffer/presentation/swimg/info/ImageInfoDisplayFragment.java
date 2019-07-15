@@ -14,6 +14,7 @@ import com.beproffer.beproffer.data.models.ContactItem;
 import com.beproffer.beproffer.data.models.IncomingContactRequestItem;
 import com.beproffer.beproffer.data.models.SwipeImageItem;
 import com.beproffer.beproffer.databinding.ImageInfoDisplayFragmentBinding;
+import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.swimg.ImageItemTransfer;
 import com.beproffer.beproffer.util.Const;
@@ -120,6 +121,6 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
     }
 
     public void performBackNavigation() {
-        requireActivity().getSupportFragmentManager().popBackStack();
+        ((MainActivity)requireActivity()).performNavigation(R.id.action_global_swipeImageFragment, null);
     }
 }
