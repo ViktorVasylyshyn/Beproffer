@@ -3,6 +3,7 @@ package com.beproffer.beproffer.presentation.base;
 import android.arch.lifecycle.ViewModelProviders;
 
 import com.beproffer.beproffer.R;
+import com.beproffer.beproffer.data.firebase.auth.FirebaseAuthViewModel;
 import com.beproffer.beproffer.data.models.UserInfo;
 import com.beproffer.beproffer.presentation.UserDataViewModel;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,40 +23,44 @@ public class BaseUserInfoFragment extends BaseFragment {
             return;
         }
 
-        mUserDataViewModel = ViewModelProviders.of(requireActivity()).get(UserDataViewModel.class);
-        mUserDataViewModel.getFirebaseAuthLiveData().observe(getViewLifecycleOwner(), user -> {
+        FirebaseAuthViewModel firebaseAuthViewModel = ViewModelProviders.of(requireActivity()).get(FirebaseAuthViewModel.class);
+        firebaseAuthViewModel.getFirebaseAuthLiveData().observe(getViewLifecycleOwner(), user -> {
             if (user != null) {
                 mCurrentUser = user;
-                obtainUserInfo();
+                initObservers();
             }
         });
-        
+    }
+
+    private void initObservers(){
+        mUserDataViewModel = ViewModelProviders.of(requireActivity()).get(UserDataViewModel.class);
         mUserDataViewModel.getShowProgress().observe(getViewLifecycleOwner(), progress -> {
-            if(progress == null)
+            if (progress == null)
                 return;
             showProgress(progress);
         });
 
-        mUserDataViewModel.getShowToast().observe(getViewLifecycleOwner(), resId ->{
-            if(resId == null)
+        mUserDataViewModel.getShowToast().observe(getViewLifecycleOwner(), resId -> {
+            if (resId == null)
                 return;
             showToast(resId);
-            mUserDataViewModel.resetTrigger(true, null, null );
+            mUserDataViewModel.resetTrigger(true, null, null);
         });
 
-        mUserDataViewModel.getHideKeyboard().observe(getViewLifecycleOwner(), hide ->{
-            if(hide == null)
+        mUserDataViewModel.getHideKeyboard().observe(getViewLifecycleOwner(), hide -> {
+            if (hide == null)
                 return;
             hideKeyboard(requireActivity());
-            mUserDataViewModel.resetTrigger(null, true, null );
+            mUserDataViewModel.resetTrigger(null, true, null);
         });
 
-        mUserDataViewModel.getPopBackStack().observe(getViewLifecycleOwner(), back ->{
-            if(back == null)
+        mUserDataViewModel.getPopBackStack().observe(getViewLifecycleOwner(), back -> {
+            if (back == null)
                 return;
             popBackStack();
-            mUserDataViewModel.resetTrigger(null, null, true );
+            mUserDataViewModel.resetTrigger(null, null, true);
         });
+        obtainUserInfo();
     }
 
     public void obtainUserInfo() {

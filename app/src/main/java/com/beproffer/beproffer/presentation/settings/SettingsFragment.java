@@ -110,7 +110,6 @@ public class SettingsFragment extends BaseUserInfoFragment {
                                 setValue(mCurrentUserInfo.getUserType()).addOnCompleteListener(task1 -> {
                             mUserDataViewModel.resetUserData();
                             showToast(R.string.toast_profile_deleted);
-                            ((MainActivity) requireActivity()).resetUser();
                             ((MainActivity) requireActivity()).performNavigation(R.id.action_global_swipeImageFragment, null);
                         });
                     } else {

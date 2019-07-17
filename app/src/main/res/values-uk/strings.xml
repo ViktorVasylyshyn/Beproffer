@@ -161,6 +161,7 @@
     <string name="toast_no_any_contact_requests">Наразі запитів немає.</string>
     <string name="toast_user_data_updated">Дані користувача успішно змінені.</string>
     <string name="toast_image_data_updated">Дані зображення успішно змінені.</string>
+    <string name="toast_guest_mode">Ви увійшли як гість.</string>
 
 
     <string name="error_message_exception_sign_up_weak_password">Захистіть свій профайл більш надійним паролем.</string>

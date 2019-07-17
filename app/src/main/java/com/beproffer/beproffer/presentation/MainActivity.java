@@ -1,6 +1,5 @@
 package com.beproffer.beproffer.presentation;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -8,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.beproffer.beproffer.App;
 import com.beproffer.beproffer.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import androidx.navigation.NavController;
@@ -16,20 +16,12 @@ import androidx.navigation.Navigation;
 public class MainActivity extends AppCompatActivity {
 
     private NavController mNavController;
-    private FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         App.getComponent().injectMainActivity(this);
-        UserDataViewModel mUserDataViewModel = ViewModelProviders.of(MainActivity.this).get(UserDataViewModel.class);
-
-        mUserDataViewModel.getFirebaseAuthLiveData().observe(this, user -> {
-            if (user != null) {
-                mUser = user;
-            }
-        });
 
         initBottomNavigationMenu();
         mNavController = Navigation.findNavController(this, R.id.navigation_fragment_container);
@@ -46,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                     performNavigation(R.id.action_global_searchFragment, null);
                     return true;
                 case R.id.bnm_profile:
-                    if (mUser != null) {
+                    if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                         performNavigation(R.id.action_global_profileFragment, null);
                     } else {
                         performNavigation(R.id.action_global_signInFragment, null);
@@ -59,9 +51,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void resetUser() {
-        mUser = null;
-    }
 
     public void performNavigation(int layoutId, @Nullable Bundle args) {
         if (args != null) {

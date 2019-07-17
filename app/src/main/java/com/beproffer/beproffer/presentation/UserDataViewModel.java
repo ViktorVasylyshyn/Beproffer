@@ -23,18 +23,12 @@ public class UserDataViewModel extends AndroidViewModel {
 
     private LiveData<UserInfo> mUserInfoLiveData;
 
-    private FirebaseAuthLiveData mFirebaseAuthLiveData = new FirebaseAuthLiveData();
-
     public UserDataViewModel(@NonNull Application application) {
         super(application);
         mRepository = new UserDataRepository(application);
 
         if(mUserInfoLiveData == null)
             mUserInfoLiveData = mRepository.getUserInfoLiveData();
-    }
-
-    public LiveData<FirebaseUser> getFirebaseAuthLiveData() {
-        return mFirebaseAuthLiveData;
     }
 
     public LiveData<UserInfo> getUserInfoLiveData() {

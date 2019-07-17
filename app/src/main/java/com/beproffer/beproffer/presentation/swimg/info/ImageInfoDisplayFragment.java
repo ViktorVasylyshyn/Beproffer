@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.swimg.ImageItemTransfer;
 import com.beproffer.beproffer.util.Const;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Map;
 
@@ -56,19 +58,20 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
 
         obtainImageItem();
 
-        initUserData();
+        if (FirebaseAuth.getInstance().getCurrentUser() != null)
+            initUserData();
     }
 
     @Override
     public void applyUserData() {
         mUserDataViewModel.getContacts().observe(this, contactItems -> {
-            if(contactItems != null){
+            if (contactItems != null) {
                 mContacts = contactItems;
                 syncDataWithUi();
             }
         });
         mUserDataViewModel.getOutgoingContactRequests().observe(this, contactRequests -> {
-            if(contactRequests != null)
+            if (contactRequests != null)
                 mOutgoingContactRequests = contactRequests;
             syncDataWithUi();
         });
@@ -85,22 +88,27 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
         });
     }
 
-    private void syncDataWithUi(){
-        if(mOutgoingContactRequests != null && mOutgoingContactRequests.containsKey(mItem.getUid())){
+    private void syncDataWithUi() {
+        if (mOutgoingContactRequests != null && mOutgoingContactRequests.containsKey(mItem.getUid())) {
             requestButtonIsInactive(R.string.title_request_already_sent);
             return;
         }
-        if(mContacts != null && mContacts.containsKey(mItem.getUid())){
+        if (mContacts != null && mContacts.containsKey(mItem.getUid())) {
             requestButtonIsInactive(R.string.title_contact_already_available);
             return;
         }
-        if(mContacts != null && mContacts.size() > Const.CONTACTS_NUM){
+        if (mContacts != null && mContacts.size() > Const.CONTACTS_NUM) {
             requestButtonIsInactive(R.string.title_max_num_of_contacts);
         }
 
     }
 
     public void sendContactRequest() {
+        if (mCurrentUser == null)
+            Log.d(Const.INFO, "1");
+        if (mCurrentUserInfo == null)
+            Log.d(Const.INFO, "2");
+
         if (mCurrentUser == null || mCurrentUserInfo == null) {
             showToast(R.string.toast_request_for_registered);
             return;
@@ -121,6 +129,6 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
     }
 
     public void performBackNavigation() {
-        ((MainActivity)requireActivity()).performNavigation(R.id.action_global_swipeImageFragment, null);
+        ((MainActivity) requireActivity()).performNavigation(R.id.action_global_swipeImageFragment, null);
     }
 }

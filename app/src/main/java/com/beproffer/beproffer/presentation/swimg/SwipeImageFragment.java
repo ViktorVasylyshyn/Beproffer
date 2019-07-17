@@ -47,12 +47,18 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
         mBinding.setShowProgress(mShowProgress);
 
         if (savedInstanceState == null) {
-            if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                initUserData();
+            } else {
+                showToast(R.string.toast_guest_mode);
                 mCurrentUserInfo = null;    /*хз как это дело сработает*/
                 connectToRepository();      /*обратить на это внимание*/
-                return;
             }
-            initUserData();
+        } else {
+            if (mImageItemsList != null && mImageItemsList.size() > 0)
+                initAdapter();
+            if (mImageItemsList != null && mImageItemsList.size() == 0)
+                connectToRepository();
         }
     }
 
@@ -62,6 +68,12 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
     }
 
     private void connectToRepository() {
+        if (!checkInternetConnection()) {
+            /*сделать здесь переход, на какой нить фрагмент*/
+            showToast(R.string.toast_no_internet_connection);
+            return;
+        }
+
         if (mSwipeImagesViewModel == null) {
             mSwipeImagesViewModel = ViewModelProviders.of(requireActivity()).get(SwipeImagesViewModel.class);
         }
@@ -164,6 +176,7 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
         ViewModelProviders.of(requireActivity()).get(ImageItemTransfer.class).setImageItem((SwipeImageItem) dataObject);
         ((MainActivity) requireActivity()).performNavigation(R.id.action_swipeImageFragment_to_imageInfoDisplayFragment, null);
     }
+
 
     @Override
     public void onPause() {

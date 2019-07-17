@@ -158,6 +158,7 @@
     <string name="toast_would_you_like_to_donate">You can add only 5 images for now.</string>
     <string name="toast_user_data_updated">User data updated successfully.</string>
     <string name="toast_image_data_updated">Image data updated successfully.</string>
+    <string name="toast_guest_mode">Guest mode.</string>
 
     <string name="error_message_exception_sign_up_weak_password">Please, create more complicated password.</string>
     <string name="error_message_exception_sign_up_invalid_credentials">Invalid credentials.</string>

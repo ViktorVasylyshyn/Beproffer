@@ -96,7 +96,6 @@ public class ProfileFragment extends BaseUserInfoFragment {
     public void logOut() {
         mUserDataViewModel.resetUserData();
         FirebaseAuth.getInstance().signOut();
-        ((MainActivity) requireActivity()).resetUser();
         ((MainActivity) requireActivity()).performNavigation(R.id.action_global_swipeImageFragment, null);
     }
 }

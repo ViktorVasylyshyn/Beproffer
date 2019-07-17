@@ -24,10 +24,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SearchFragment extends BaseFragment {
 
-    private String mCurrentUserId;
-
     private String mRequestGender = null;
-
 
     private Map<String, String> mSearchRequestMap;
 
@@ -46,19 +43,15 @@ public class SearchFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        SearchFragmentViewModel mSearchFragmentViewModel = ViewModelProviders.of(this).get(SearchFragmentViewModel.class);
+        SearchFragmentViewModel mSearchFragmentViewModel = ViewModelProviders.of(requireActivity()).get(SearchFragmentViewModel.class);
         mBinding.setSearchFragmentViewModel(mSearchFragmentViewModel);
         mBinding.setFragmentCallback(mCallback);
 
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            mCurrentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        }
-
-        mSearchFragmentViewModel.getSearchRequest().observe(this, request -> {
+        mSearchFragmentViewModel.getSearchRequest().observe(getViewLifecycleOwner(), request -> {
             mSearchRequestMap = request;
             updateImageService();
         });
-        mSearchFragmentViewModel.getSearchRequestGender().observe(this, gend -> {
+        mSearchFragmentViewModel.getSearchRequestGender().observe(getViewLifecycleOwner(), gend -> {
             mRequestGender = gend;
             setGender();
         });
@@ -128,13 +121,12 @@ public class SearchFragment extends BaseFragment {
         if (mSearchRequestMap != null) {
             mSearchRequestMap.put(Const.GENDER, mRequestGender);
 
-            if (mCurrentUserId != null) {
-                SharedPreferences.Editor editor = requireActivity().getSharedPreferences(mCurrentUserId, MODE_PRIVATE).edit();
+            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                SharedPreferences.Editor editor = requireActivity().getSharedPreferences(FirebaseAuth.getInstance().getCurrentUser().getUid(), MODE_PRIVATE).edit();
                 editor.putString(Const.GENDER, mRequestGender);
                 editor.putString(Const.SERVTYPE, mSearchRequestMap.get(Const.SERVTYPE));
                 editor.putString(Const.SERVSBTP, mSearchRequestMap.get(Const.SERVSBTP));
                 editor.apply();
-
             } else {
                 SharedPreferences.Editor editor = requireActivity().getSharedPreferences(Const.UNKNOWN_USER_REQUEST, MODE_PRIVATE).edit();
                 editor.putString(Const.GENDER, mRequestGender);
@@ -146,7 +138,7 @@ public class SearchFragment extends BaseFragment {
             BottomNavigationView bottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView);
             bottomNavigationView.getMenu().findItem(R.id.bnm_images_gallery).setChecked(true);
 
-            ((MainActivity)requireActivity()).performNavigation(R.id.action_global_swipeImageFragment, null);
+            ((MainActivity) requireActivity()).performNavigation(R.id.action_global_swipeImageFragment, null);
         } else {
             showToast(R.string.toast_define_search_params);
         }

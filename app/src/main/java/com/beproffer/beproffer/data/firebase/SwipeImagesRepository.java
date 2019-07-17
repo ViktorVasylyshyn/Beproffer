@@ -49,8 +49,9 @@ public class SwipeImagesRepository {
 
     public SwipeImagesRepository(Application application) {
         mApplication = application;
-        if (mUser == null)
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             mUser = FirebaseAuth.getInstance().getCurrentUser();
+        }
         if (mRequestParams == null) {
             obtainRequestParams(mApplication);
         } else {
@@ -63,7 +64,8 @@ public class SwipeImagesRepository {
     }
 
     public void deleteObservedImageItem(SwipeImageItem item) {
-        mBrowsingHistoryRepository.insert(new BrowsingHistoryModel(item.getUrl(), item.getType()));
+        if (mUser != null)
+            mBrowsingHistoryRepository.insert(new BrowsingHistoryModel(item.getUrl(), item.getType()));
         mSwipeImageItemsList.remove(0);
         mSwipeImageItemsLiveData.setValue(mSwipeImageItemsList);
     }
@@ -91,7 +93,7 @@ public class SwipeImagesRepository {
             return;
         }
         /*if search request params are not correct or equals null - we go to the search fragment to define params*/
-        if (checkRequestParams()) {
+        if (!checkRequestParams()) {
             feedBackToUi(false, R.string.toast_define_search_request, R.id.action_global_searchFragment);
             return;
         }
@@ -116,12 +118,12 @@ public class SwipeImagesRepository {
                 } else {
                     mActualBrowsingHistory = browsingHistory;
                     /*проверяем на то, пустой ли список. если да - то дальше фильтруем -
-                    * наполняем список новыми изображениями(ведь количество объектор в списке ограничено).
-                    * Так, чтобы со снимка фб в mSwipeImageItemsList не добавлялись объекты, которые там уже есть
-                    * здесь и нужна эта проверка. пыталя сделать проверку нв equals(в том числе и пере
-                    * определял equals & hashcode), непосредственно
-                    * перед помещением в список, но чето нихуя не получилось. так что, пока что так оставлю. */
-                    if (mSwipeImageItemsList.isEmpty()){
+                     * наполняем список новыми изображениями(ведь количество объектор в списке ограничено).
+                     * Так, чтобы со снимка фб в mSwipeImageItemsList не добавлялись объекты, которые там уже есть
+                     * здесь и нужна эта проверка. пыталя сделать проверку нв equals(в том числе и пере
+                     * определял equals & hashcode), непосредственно
+                     * перед помещением в список, но чето нихуя не получилось. так что, пока что так оставлю. */
+                    if (mSwipeImageItemsList.isEmpty()) {
                         filterOutItemsForAdapter();
                     }
                 }
@@ -133,16 +135,19 @@ public class SwipeImagesRepository {
         mActualBrowsingHistory = null;
         feedBackToUi(false, R.string.toast_browsing_history_cleared, null);
     }
+
     private boolean checkRequestParams() {
-        return mRequestParams == null || mRequestParams.containsValue(null) || mRequestParams.size() != Const.SEARCH_PARAMS_NUM;
+        return mRequestParams != null && !mRequestParams.containsValue(null) && mRequestParams.size() == Const.SEARCH_PARAMS_NUM;
     }
 
     public void obtainImagesFromDb() {
         mShowProgress.setValue(true);
-        if (checkRequestParams()) {
+        if (!checkRequestParams()) {
             obtainRequestParams(mApplication);
+            return;
         }
         try {
+            Log.d(Const.INFO, "17");
             FirebaseDatabase.getInstance().getReference()
                     .child(Const.SERVICES)
                     .child(mRequestParams.get(Const.SERVTYPE))
@@ -160,6 +165,8 @@ public class SwipeImagesRepository {
                             }
 
                             mActualDataSnapshot = dataSnapshot;
+
+                            filterOutItemsForAdapter();
                         }
 
                         @Override
@@ -204,7 +211,7 @@ public class SwipeImagesRepository {
                 return;
             }
         }
-        if(!mSwipeImageItemsList.isEmpty()) {
+        if (!mSwipeImageItemsList.isEmpty()) {
             mShowProgress.setValue(false);
             return;
         }
