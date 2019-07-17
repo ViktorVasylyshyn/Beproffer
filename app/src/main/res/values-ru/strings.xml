@@ -144,6 +144,7 @@
     <string name="toast_error_registration">Ошибка регистрации. Попробуйте снова.</string>
     <string name="toast_error_check_password">Проверте правильность пароля.</string>
     <string name="toast_error_check_fields_data">Проверьте правильность введенных данных.</string>
+    <string name="toast_error_user_data_saving_failure">Данные пользователя не сохранились. Свяжитесь с поддержкой.</string>
     <string name="toast_contact_deleted">Контакт удален.</string>
     <string name="toast_browsing_history_delete_access">Нажмите еще раз, чтобы очистить историю просмотров.</string>
     <string name="toast_browsing_history_cleared">История просмотров очищена.</string>

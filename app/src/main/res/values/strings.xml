@@ -141,6 +141,7 @@
     <string name="toast_error_registration">Registration failed. Please, try again.</string>
     <string name="toast_error_check_password">Please, check the password.</string>
     <string name="toast_error_check_fields_data">Please, check the data accuracy.</string>
+    <string name="toast_error_user_data_saving_failure">User data saving failure. Please, contact to support.</string>
     <string name="toast_contact_deleted">Contact deleted.</string>
     <string name="toast_browsing_history_delete_access">Tap one more time if you want to see all images again.</string>
     <string name="toast_browsing_history_cleared">Browsing history was cleared.</string>
@@ -159,6 +160,7 @@
     <string name="toast_user_data_updated">User data updated successfully.</string>
     <string name="toast_image_data_updated">Image data updated successfully.</string>
     <string name="toast_guest_mode">Guest mode.</string>
+
 
     <string name="error_message_exception_sign_up_weak_password">Please, create more complicated password.</string>
     <string name="error_message_exception_sign_up_invalid_credentials">Invalid credentials.</string>

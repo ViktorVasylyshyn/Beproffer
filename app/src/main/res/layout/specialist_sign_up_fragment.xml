@@ -13,14 +13,14 @@
 
         <variable
             name="fragmentCallback"
-            type="com.beproffer.beproffer.presentation.sign_in_up.specialist_reg.SpecialistSignUpFragmentCallback" />
+            type="com.beproffer.beproffer.presentation.sign_in_up.specialist_sign_up.SpecialistSignUpFragmentCallback" />
 
     </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.sign_in_up.specialist_reg.SpecialistSignUpFragment">
+        tools:context=".presentation.sign_in_up.specialist_sign_up.SpecialistSignUpFragment">
 
         <TextView
             android:id="@+id/specialist_sign_up_title"

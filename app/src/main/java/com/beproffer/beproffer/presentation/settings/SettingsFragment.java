@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +78,6 @@ public class SettingsFragment extends BaseUserInfoFragment {
                 if (resId == null)
                     return;
                 showToast(resId);
-                mSwipeImagesViewModel.resetTriggers(true, null);
             });
             mSwipeImagesViewModel.clearBrowsingHistory();
         }else {
@@ -109,6 +109,10 @@ public class SettingsFragment extends BaseUserInfoFragment {
                                 child(mCurrentUser.getUid()).
                                 setValue(mCurrentUserInfo.getUserType()).addOnCompleteListener(task1 -> {
                             mUserDataViewModel.resetUserData();
+
+                            if(task1.isCanceled())
+                                Log.d(Const.INFO, task1.toString());
+
                             showToast(R.string.toast_profile_deleted);
                             ((MainActivity) requireActivity()).performNavigation(R.id.action_global_swipeImageFragment, null);
                         });

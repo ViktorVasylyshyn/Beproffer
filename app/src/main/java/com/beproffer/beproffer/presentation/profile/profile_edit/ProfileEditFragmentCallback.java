@@ -5,6 +5,4 @@ public interface ProfileEditFragmentCallback {
     void onSetProfileImageClick();
 
     void onCheckUserDataClick();
-
-    void onChangeUserGenderClick();
 }

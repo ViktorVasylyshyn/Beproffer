@@ -42,12 +42,12 @@
     </fragment>
     <fragment
         android:id="@+id/customerRegistrationFragment"
-        android:name="com.beproffer.beproffer.presentation.sign_in_up.customer_reg.CustomerSignUpFragment"
+        android:name="com.beproffer.beproffer.presentation.sign_in_up.customer_sign_up.CustomerSignUpFragment"
         android:label="customer_registration_fragment"
         tools:layout="@layout/customer_sign_up_fragment" />
     <fragment
         android:id="@+id/specialistRegistrationFragment"
-        android:name="com.beproffer.beproffer.presentation.sign_in_up.specialist_reg.SpecialistSignUpFragment"
+        android:name="com.beproffer.beproffer.presentation.sign_in_up.specialist_sign_up.SpecialistSignUpFragment"
         android:label="specialist_registration_fragment"
         tools:layout="@layout/specialist_sign_up_fragment" />
     <fragment

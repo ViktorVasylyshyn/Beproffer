@@ -10,7 +10,6 @@ public class UserInfo {
     private String userType;
     private String userName;
     private String userEmail;
-    private String userGender;
     private String userPhone;
     private String userProfileImageUrl;
     private String userInfo;
@@ -19,14 +18,13 @@ public class UserInfo {
     }
 
     public UserInfo(@NonNull String userId, String userType, String userName,
-                    String userEmail, @Nullable String userGender, @Nullable String userPhone,
+                    String userEmail, @Nullable String userPhone,
                     @Nullable String userProfileImageUrl, @Nullable String userInfo) {
         this.userId = userId;
         this.userType = userType;
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPhone = userPhone;
-        this.userGender = userGender;
         this.userProfileImageUrl = userProfileImageUrl;
         this.userInfo = userInfo;
     }
@@ -62,14 +60,6 @@ public class UserInfo {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
-    }
-
-    public String getUserGender() {
-        return userGender;
-    }
-
-    public void setUserGender(String userGender) {
-        this.userGender = userGender;
     }
 
     public String getUserPhone() {

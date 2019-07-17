@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.beproffer.beproffer.di.AppComponent;
 import com.beproffer.beproffer.di.DaggerAppComponent;
+import com.google.firebase.FirebaseApp;
 import com.squareup.leakcanary.LeakCanary;
 
 public class App extends Application {
@@ -13,6 +14,7 @@ public class App extends Application {
     @Override
     public void onCreate(){
         super.onCreate();
+        FirebaseApp.initializeApp(this);
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
         }

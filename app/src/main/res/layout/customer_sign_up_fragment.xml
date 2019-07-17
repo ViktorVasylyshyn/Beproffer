@@ -12,14 +12,14 @@
 
         <variable
             name="fragmentCallback"
-            type="com.beproffer.beproffer.presentation.sign_in_up.customer_reg.CustomerSignUpFragmentCallback" />
+            type="com.beproffer.beproffer.presentation.sign_in_up.customer_sign_up.CustomerSignUpFragmentCallback" />
     </data>
 
     <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.sign_in_up.customer_reg.CustomerSignUpFragment">
+        tools:context=".presentation.sign_in_up.customer_sign_up.CustomerSignUpFragment">
 
         <TextView
             android:id="@+id/customer_sign_up_title"

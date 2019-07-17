@@ -3,10 +3,8 @@ package com.beproffer.beproffer.presentation.profile.profile_edit;
 import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -14,18 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.data.SaveUserData;
 import com.beproffer.beproffer.databinding.ProfileEditFragmentBinding;
-import com.beproffer.beproffer.util.ChangeGenderHelper;
-import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.util.Const;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 public class ProfileEditFragment extends BaseUserInfoFragment {
 
@@ -42,11 +31,6 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
         @Override
         public void onCheckUserDataClick() {
             checkUserData();
-        }
-
-        @Override
-        public void onChangeUserGenderClick() {
-            changeUserGender();
         }
     };
 
@@ -71,7 +55,7 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
     @Override
     public void applyUserData() {
         mBinding.setUserInfo(mCurrentUserInfo);
-        if (mCurrentUserInfo.getUserGender().equals(Const.SPEC)) {
+        if (mCurrentUserInfo.getUserType().equals(Const.SPEC)) {
             mBinding.editFragmentBottomHint.setText(R.string.hint_specialist_phone_1);
         }
     }
@@ -84,10 +68,6 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
         }
         if (mBinding.editFragmentName.getText().toString().isEmpty() && mCurrentUserInfo.getUserName() == null) {
             showToast(R.string.toast_enter_name);
-            return;
-        }
-        if (mCurrentUserInfo.getUserGender() == null) {
-            showToast(R.string.toast_determine_your_gender);
             return;
         }
         if (mCurrentUserInfo.getUserType().equals(Const.SPEC)) {
@@ -106,13 +86,13 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
             showToast(R.string.toast_no_internet_connection);
             return;
         }
-        if(mCurrentUserInfo.getUserPhone().length() < 5 ||  mCurrentUserInfo.getUserPhone().length() > 13){
+        if (mCurrentUserInfo.getUserPhone().length() < 5 || mCurrentUserInfo.getUserPhone().length() > 13) {
             mBinding.editFragmentPhone.requestFocus();
             mBinding.editFragmentPhone.setError(getResources().getText(R.string.error_message_wrong_phone_number_format));
             mBinding.editFragmentBottomHint.setText(R.string.hint_specialist_phone_1);
             return;
         }
-        if(mCurrentUserInfo.getUserName().length() < 4){
+        if (mCurrentUserInfo.getUserName().length() < 4) {
             mBinding.editFragmentName.requestFocus();
             mBinding.editFragmentName.setError(getResources().getText(R.string.error_message_wrong_name_format));
             mBinding.editFragmentBottomHint.setText(R.string.hint_outfield_use_correct_name_format);
@@ -142,10 +122,5 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
                 showToast(R.string.toast_error_has_occurred);
             }
         }
-    }
-
-    public void changeUserGender() {
-        mCurrentUserInfo.setUserGender(new ChangeGenderHelper().changeGender(mCurrentUserInfo.getUserGender()));
-        mBinding.setUserInfo(mCurrentUserInfo);
     }
 }

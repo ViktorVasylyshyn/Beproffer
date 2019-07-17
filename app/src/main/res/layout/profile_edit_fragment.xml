@@ -37,35 +37,10 @@
             android:background="@drawable/button_background_green_stroke_rectangle"
             android:onClick="@{(view) -> fragmentCallback.onSetProfileImageClick()}"
             android:src="@{userInfo.userProfileImageUrl}"
-            app:layout_constraintEnd_toStartOf="@+id/edit_fragment_gender_image_button"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
-
-        <ImageView
-            android:id="@+id/edit_fragment_gender_image_button"
-            android:layout_width="@dimen/icons_size_normal_width"
-            android:layout_height="@dimen/icons_size_normal_height"
-            android:background="@drawable/button_background_green_stroke_rectangle"
-            android:onClick="@{(view)->fragmentCallback.onChangeUserGenderClick()}"
-            app:layout_constraintBottom_toBottomOf="@+id/edit_fragment_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/edit_fragment_image"
-            app:layout_constraintTop_toTopOf="@+id/edit_fragment_image"
-            app:setGenderImage="@{userInfo.userGender}"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/specialist_storage_edit_gender_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/base_padding_small"
-            android:textColor="@color/color_base_text"
-            android:textSize="@dimen/base_text_size_medium"
-            app:layout_constraintEnd_toEndOf="@+id/edit_fragment_gender_image_button"
-            app:layout_constraintStart_toStartOf="@+id/edit_fragment_gender_image_button"
-            app:layout_constraintTop_toBottomOf="@+id/edit_fragment_gender_image_button"
-            app:setGenderTitle="@{userInfo.userGender}" />
 
         <EditText
             android:id="@+id/edit_fragment_name"
