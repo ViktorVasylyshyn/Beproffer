@@ -143,6 +143,7 @@
     <string name="toast_error_registration">Помилка реєстрації. Спробуйте знову.</string>
     <string name="toast_error_check_password">Перевірте пароль.</string>
     <string name="toast_error_check_fields_data">Будь ласка перевірте правильність введених даних.</string>
+    <string name="toast_error_user_data_saving_failure">Дані користувача не збереглися. зв\'яжіться з підтримкою.</string>
     <string name="toast_contact_deleted">Контакт видалено.</string>
     <string name="toast_browsing_history_delete_access">Натисніть ще раз, щоб видалити історію переглядів.</string>
     <string name="toast_browsing_history_cleared">історію переглядів видалено.</string>
