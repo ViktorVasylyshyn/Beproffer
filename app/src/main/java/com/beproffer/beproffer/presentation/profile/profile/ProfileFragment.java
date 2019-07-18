@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.ProfileFragmentBinding;
-import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,7 +45,7 @@ public class ProfileFragment extends BaseUserInfoFragment {
         mBinding.setFragmentCallback(mCallback);
         mBinding.setShowProgress(mShowProgress);
         if(FirebaseAuth.getInstance() == null){
-            ((MainActivity)requireActivity()).performNavigation(R.id.action_global_signInFragment, null);
+            performNavigation(R.id.action_global_signInFragment);
         }else {
             initUserData();
         }
@@ -90,12 +89,12 @@ public class ProfileFragment extends BaseUserInfoFragment {
             default:
                 showToast(R.string.toast_error_has_occurred);
         }
-        ((MainActivity) requireActivity()).performNavigation(res, null);
+        performNavigation(res);
     }
 
     public void logOut() {
         mUserDataViewModel.resetUserData();
         FirebaseAuth.getInstance().signOut();
-        ((MainActivity) requireActivity()).performNavigation(R.id.action_global_swipeImageFragment, null);
+        performNavigation(R.id.action_global_swipeImageFragment);
     }
 }

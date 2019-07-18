@@ -6,7 +6,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.beproffer.beproffer.data.models.SwipeImageItem;
 
-public class ImageItemTransfer extends ViewModel {
+public class ImageItemTransferViewModel extends ViewModel {
 
     private MutableLiveData<SwipeImageItem> item = new MutableLiveData<>();
 

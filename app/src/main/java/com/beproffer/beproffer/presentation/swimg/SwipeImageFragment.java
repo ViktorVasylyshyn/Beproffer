@@ -15,10 +15,8 @@ import android.widget.ImageView;
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.SwipeImageItem;
 import com.beproffer.beproffer.databinding.SwipeImageFragmentBinding;
-import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.swimg.adapter.SwipeImageAdapter;
-import com.google.firebase.auth.FirebaseAuth;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.List;
@@ -47,7 +45,7 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
         mBinding.setShowProgress(mShowProgress);
 
         if (savedInstanceState == null) {
-            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            if (getFirebaseUser() != null) {
                 initUserData();
             } else {
                 showToast(R.string.toast_guest_mode);
@@ -107,7 +105,7 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
             if (destinationId == null)
                 return;
             mSwipeImagesViewModel.resetTriggers(null, true);
-            ((MainActivity) requireActivity()).performNavigation(destinationId, null);
+            performNavigation(destinationId);
         });
 
     }
@@ -173,8 +171,8 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
     }
 
     private void displayImageInfo(Object dataObject) {
-        ViewModelProviders.of(requireActivity()).get(ImageItemTransfer.class).setImageItem((SwipeImageItem) dataObject);
-        ((MainActivity) requireActivity()).performNavigation(R.id.action_swipeImageFragment_to_imageInfoDisplayFragment, null);
+        ViewModelProviders.of(requireActivity()).get(ImageItemTransferViewModel.class).setImageItem((SwipeImageItem) dataObject);
+        performNavigation(R.id.action_swipeImageFragment_to_imageInfoDisplayFragment);
     }
 
 

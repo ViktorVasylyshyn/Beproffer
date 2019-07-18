@@ -183,6 +183,7 @@
     <string name="toast_contact_denied">Contact denied.</string>
     <string name="hint_specialist_phone_1">Make sure your phone number is correct. It will be shown to your potential customers.</string>
     <string name="hint_any_strong_password">Make sure your password is strong.</string>
+    <string name="hint_any_browsing_history">Browsing history filter available for signed up users only.</string>
     <string name="hint_any_image">Please use images up to 1 mb for it correct display.</string>
 
 </resources>

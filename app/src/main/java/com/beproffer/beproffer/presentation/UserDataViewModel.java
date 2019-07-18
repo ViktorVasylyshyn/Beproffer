@@ -12,8 +12,6 @@ import com.beproffer.beproffer.data.models.ContactItem;
 import com.beproffer.beproffer.data.models.IncomingContactRequestItem;
 import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
 import com.beproffer.beproffer.data.models.UserInfo;
-import com.beproffer.beproffer.data.firebase.auth.FirebaseAuthLiveData;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Map;
 

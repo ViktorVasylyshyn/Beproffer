@@ -5,7 +5,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +14,9 @@ import com.beproffer.beproffer.data.models.ContactItem;
 import com.beproffer.beproffer.data.models.IncomingContactRequestItem;
 import com.beproffer.beproffer.data.models.SwipeImageItem;
 import com.beproffer.beproffer.databinding.ImageInfoDisplayFragmentBinding;
-import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
-import com.beproffer.beproffer.presentation.swimg.ImageItemTransfer;
+import com.beproffer.beproffer.presentation.swimg.ImageItemTransferViewModel;
 import com.beproffer.beproffer.util.Const;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Map;
 
@@ -58,7 +55,7 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
 
         obtainImageItem();
 
-        if (FirebaseAuth.getInstance().getCurrentUser() != null)
+        if (getFirebaseUser() != null)
             initUserData();
     }
 
@@ -80,7 +77,7 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
     }
 
     private void obtainImageItem() {
-        ViewModelProviders.of(requireActivity()).get(ImageItemTransfer.class).getImageItem().observe(this, item -> {
+        ViewModelProviders.of(requireActivity()).get(ImageItemTransferViewModel.class).getImageItem().observe(this, item -> {
             if (item != null) {
                 mItem = item;
                 mBinding.setImageItem(mItem);
@@ -104,12 +101,7 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
     }
 
     public void sendContactRequest() {
-        if (mCurrentUser == null)
-            Log.d(Const.INFO, "1");
-        if (mCurrentUserInfo == null)
-            Log.d(Const.INFO, "2");
-
-        if (mCurrentUser == null || mCurrentUserInfo == null) {
+        if (getFirebaseUser() == null || mCurrentUserInfo == null) {
             showToast(R.string.toast_request_for_registered);
             return;
         }
@@ -129,6 +121,6 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
     }
 
     public void performBackNavigation() {
-        ((MainActivity) requireActivity()).performNavigation(R.id.action_global_swipeImageFragment, null);
+        performNavigation(R.id.action_global_swipeImageFragment);
     }
 }

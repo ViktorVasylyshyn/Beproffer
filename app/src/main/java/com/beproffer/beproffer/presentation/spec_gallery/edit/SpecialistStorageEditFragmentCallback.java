@@ -1,4 +1,4 @@
-package com.beproffer.beproffer.presentation.specstorage.edit;
+package com.beproffer.beproffer.presentation.spec_gallery.edit;
 
 import android.view.View;
 

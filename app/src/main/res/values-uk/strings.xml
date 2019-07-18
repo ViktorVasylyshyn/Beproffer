@@ -36,6 +36,7 @@
     <string name="hint_outfield_contact_us_email">beproffer.llc@gmail.com</string>
     <string name="hint_outfield_use_correct_name_format">Використовуйте ваші ім\'я та прізвище, для кращого представлення вашого профайлу.</string>
     <string name="hint_any_image">Використовуйте, будь ласка, зображення розміром до 1 мб, для його правильного відображення.</string>
+    <string name="hint_any_browsing_history">Фільтрування переглянутих зображень можливе для зареєстрованих користувачів.</string>
     <string name="hint_outfield_confirm">прийняти</string>
     <string name="hint_outfield_deny">відхилити</string>
 

@@ -14,20 +14,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.data.SaveUserData;
-import com.beproffer.beproffer.data.models.UserInfo;
 import com.beproffer.beproffer.databinding.CustomerSignUpFragmentBinding;
-import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
 import com.beproffer.beproffer.presentation.sign_in_up.SignUpViewModel;
 import com.beproffer.beproffer.util.Const;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class CustomerSignUpFragment extends BaseFragment {
 
@@ -109,7 +99,7 @@ public class CustomerSignUpFragment extends BaseFragment {
             if (destinationId == null)
                 return;
             mSignUpViewModel.resetTriggers(null, true, null);
-            ((MainActivity) requireActivity()).performNavigation(destinationId, null);
+            performNavigation(destinationId);
         });
         mSignUpViewModel.getErrorMessageId().observe(getViewLifecycleOwner(), errorMessageId -> {
             if (errorMessageId == null)
@@ -161,11 +151,11 @@ public class CustomerSignUpFragment extends BaseFragment {
         }
     }
 
-    private void openDoc(int resId){
-        if(checkInternetConnection()){
+    private void openDoc(int resId) {
+        if (checkInternetConnection()) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(resId)));
             startActivity(browserIntent);
-        }else {
+        } else {
             showToast(R.string.toast_no_internet_connection);
         }
     }

@@ -1,4 +1,4 @@
-package com.beproffer.beproffer.presentation.specstorage;
+package com.beproffer.beproffer.presentation.spec_gallery;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -13,9 +13,8 @@ import android.view.ViewGroup;
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
 import com.beproffer.beproffer.databinding.SpecialistStorageFragmentBinding;
-import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
-import com.beproffer.beproffer.presentation.specstorage.adapter.GalleryImageItemAdapter;
+import com.beproffer.beproffer.presentation.spec_gallery.adapter.GalleryImageItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,7 +98,7 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
     }
 
     private void performNavigationForEdit() {
-        ((MainActivity)requireActivity()).performNavigation(R.id.action_specialistStorageFragment_to_specialistStorageEditFragment, null);
+        performNavigation(R.id.action_specialistStorageFragment_to_specialistStorageEditFragment);
     }
 }
 

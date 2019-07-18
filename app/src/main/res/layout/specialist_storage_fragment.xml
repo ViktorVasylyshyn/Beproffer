@@ -13,7 +13,7 @@
 
         <variable
             name="fragmentCallback"
-            type="com.beproffer.beproffer.presentation.specstorage.SpecialistGalleryFragmentCallback" />
+            type="com.beproffer.beproffer.presentation.spec_gallery.SpecialistGalleryFragmentCallback" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/base_margin_small"
         android:background="@color/color_background_grey"
-        tools:context=".presentation.specstorage.SpecialistGalleryFragment">
+        tools:context=".presentation.spec_gallery.SpecialistGalleryFragment">
 
         <TextView
             android:id="@+id/specialist_storage_title"
