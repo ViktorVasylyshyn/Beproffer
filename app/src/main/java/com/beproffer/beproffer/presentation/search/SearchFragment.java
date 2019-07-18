@@ -13,10 +13,8 @@ import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SearchFragmentBinding;
-import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
 import com.beproffer.beproffer.util.Const;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Map;
 
@@ -121,8 +119,8 @@ public class SearchFragment extends BaseFragment {
         if (mSearchRequestMap != null) {
             mSearchRequestMap.put(Const.GENDER, mRequestGender);
 
-            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                SharedPreferences.Editor editor = requireActivity().getSharedPreferences(FirebaseAuth.getInstance().getCurrentUser().getUid(), MODE_PRIVATE).edit();
+            if (getFirebaseUser() != null) {
+                SharedPreferences.Editor editor = requireActivity().getSharedPreferences(getFirebaseUser().getUid(), MODE_PRIVATE).edit();
                 editor.putString(Const.GENDER, mRequestGender);
                 editor.putString(Const.SERVTYPE, mSearchRequestMap.get(Const.SERVTYPE));
                 editor.putString(Const.SERVSBTP, mSearchRequestMap.get(Const.SERVSBTP));
@@ -138,7 +136,7 @@ public class SearchFragment extends BaseFragment {
             BottomNavigationView bottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView);
             bottomNavigationView.getMenu().findItem(R.id.bnm_images_gallery).setChecked(true);
 
-            ((MainActivity) requireActivity()).performNavigation(R.id.action_global_swipeImageFragment, null);
+            performNavigation(R.id.action_global_swipeImageFragment);
         } else {
             showToast(R.string.toast_define_search_params);
         }

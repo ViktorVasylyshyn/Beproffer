@@ -14,20 +14,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.data.SaveUserData;
-import com.beproffer.beproffer.data.models.UserInfo;
 import com.beproffer.beproffer.databinding.SpecialistSignUpFragmentBinding;
-import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
 import com.beproffer.beproffer.presentation.sign_in_up.SignUpViewModel;
 import com.beproffer.beproffer.util.Const;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class SpecialistSignUpFragment extends BaseFragment {
 
@@ -112,7 +102,7 @@ public class SpecialistSignUpFragment extends BaseFragment {
         mSignUpViewModel.getNavigationId().observe(getViewLifecycleOwner(), destinationId -> {
             if (destinationId == null)
                 return;
-            ((MainActivity) requireActivity()).performNavigation(destinationId, null);
+            performNavigation(destinationId);
             mSignUpViewModel.resetTriggers(null, true, null);
         });
         mSignUpViewModel.getErrorMessageId().observe(getViewLifecycleOwner(), errorMessageId -> {

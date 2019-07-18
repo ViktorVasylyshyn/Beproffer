@@ -1,4 +1,4 @@
-package com.beproffer.beproffer.presentation.specstorage.adapter;
+package com.beproffer.beproffer.presentation.spec_gallery.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

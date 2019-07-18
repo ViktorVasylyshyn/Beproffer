@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SettingsFragmentLayoutBinding;
-import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.swimg.SwipeImagesViewModel;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SettingsFragment extends BaseUserInfoFragment {
@@ -80,7 +80,7 @@ public class SettingsFragment extends BaseUserInfoFragment {
                 showToast(resId);
             });
             mSwipeImagesViewModel.clearBrowsingHistory();
-        }else {
+        } else {
             showToast(R.string.toast_browsing_history_delete_access);
             mDeleteViewsHistoryAccess = true;
         }
@@ -98,23 +98,24 @@ public class SettingsFragment extends BaseUserInfoFragment {
              помещается соответствующая запись с его айди и типом юзера. но при этом, его данные остаются в
              базе данных и в хранилище картинок. на даный момент предполагается ручное
               удаление данных юзера. со временем сделать удаление более граммотно*/
-            if (mCurrentUser != null && mBinding.settingsDeleteAccountEmail.getText().toString().equals(mCurrentUser.getEmail())) {
+            FirebaseUser currentUser = getFirebaseUser();
+            if (currentUser != null && mBinding.settingsDeleteAccountEmail.getText().toString().equals(currentUser.getEmail())) {
                 showProgress(true);
-                mCurrentUser.delete().addOnCompleteListener(task -> {
+                currentUser.delete().addOnCompleteListener(task -> {
                     showProgress(false);
                     if (task.isSuccessful()) {
                         FirebaseDatabase.getInstance().getReference().
                                 child(Const.USERS).
                                 child(Const.DELETED).
-                                child(mCurrentUser.getUid()).
+                                child(currentUser.getUid()).
                                 setValue(mCurrentUserInfo.getUserType()).addOnCompleteListener(task1 -> {
                             mUserDataViewModel.resetUserData();
 
-                            if(task1.isCanceled())
+                            if (task1.isCanceled())
                                 Log.d(Const.INFO, task1.toString());
 
                             showToast(R.string.toast_profile_deleted);
-                            ((MainActivity) requireActivity()).performNavigation(R.id.action_global_swipeImageFragment, null);
+                            performNavigation(R.id.action_global_swipeImageFragment);
                         });
                     } else {
                         showToast(R.string.toast_error_has_occurred);
@@ -132,6 +133,6 @@ public class SettingsFragment extends BaseUserInfoFragment {
 
     private void resetPassword() {
         mAuth.signOut();
-        ((MainActivity) requireActivity()).performNavigation(R.id.action_settingsFragment_to_resetPasswordFragment, null);
+        performNavigation(R.id.action_settingsFragment_to_resetPasswordFragment);
     }
 }

@@ -116,7 +116,7 @@
         tools:layout="@layout/profile_edit_fragment" />
     <fragment
         android:id="@+id/specialistStorageFragment"
-        android:name="com.beproffer.beproffer.presentation.specstorage.SpecialistGalleryFragment"
+        android:name="com.beproffer.beproffer.presentation.spec_gallery.SpecialistGalleryFragment"
         android:label="specialist_storage_fragment"
         tools:layout="@layout/specialist_storage_fragment" >
         <action
@@ -130,7 +130,7 @@
     </fragment>
     <fragment
         android:id="@+id/specialistStorageEditFragment"
-        android:name="com.beproffer.beproffer.presentation.specstorage.edit.SpecialistGalleryEditFragment"
+        android:name="com.beproffer.beproffer.presentation.spec_gallery.edit.SpecialistGalleryEditFragment"
         android:label="specialist_storage_edit_fragment"
         tools:layout="@layout/specialist_storage_edit_fragment" />
     <action

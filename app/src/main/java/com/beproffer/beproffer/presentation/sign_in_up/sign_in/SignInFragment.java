@@ -68,13 +68,13 @@ public class SignInFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         mBinding.setShowProgress(mShowProgress);
         mBinding.setFragmentCallback(mCallback);
-        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+        if(getFirebaseUser() != null){
             ((MainActivity)requireActivity()).popBackStack();
         }
     }
 
     private void navigateTo(int destinationId){
-        ((MainActivity) requireActivity()).performNavigation(destinationId, null);
+        performNavigation(destinationId);
     }
 
     public void signIn() {
@@ -98,7 +98,7 @@ public class SignInFragment extends BaseFragment {
                 if (auth.getCurrentUser() != null) {
                     showProgress(false);
                     if(auth.getCurrentUser().isEmailVerified()){
-                        ((MainActivity) requireActivity()).performNavigation(R.id.action_global_profileFragment, null);
+                        performNavigation(R.id.action_global_profileFragment);
                     }else {
                         auth.signOut();
                         showToast(R.string.toast_sign_in_verify_email_first);

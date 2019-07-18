@@ -3,16 +3,12 @@ package com.beproffer.beproffer.presentation.base;
 import android.arch.lifecycle.ViewModelProviders;
 
 import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.data.firebase.auth.FirebaseAuthViewModel;
 import com.beproffer.beproffer.data.models.UserInfo;
 import com.beproffer.beproffer.presentation.UserDataViewModel;
-import com.google.firebase.auth.FirebaseUser;
 
 public class BaseUserInfoFragment extends BaseFragment {
 
     public UserDataViewModel mUserDataViewModel;
-
-    public FirebaseUser mCurrentUser;
 
     public UserInfo mCurrentUserInfo;
 
@@ -23,13 +19,8 @@ public class BaseUserInfoFragment extends BaseFragment {
             return;
         }
 
-        FirebaseAuthViewModel firebaseAuthViewModel = ViewModelProviders.of(requireActivity()).get(FirebaseAuthViewModel.class);
-        firebaseAuthViewModel.getFirebaseAuthLiveData().observe(getViewLifecycleOwner(), user -> {
-            if (user != null) {
-                mCurrentUser = user;
-                initObservers();
-            }
-        });
+        if(getFirebaseUser()!=null)
+            initObservers();
     }
 
     private void initObservers(){
@@ -73,5 +64,7 @@ public class BaseUserInfoFragment extends BaseFragment {
     }
 
     public void applyUserData() {
+        /*предполагается что во фрагментах наследниках, в этом методе будет размещаться логика, которая
+        * должна начать соверщаться, когда данные юзера получены*/
     }
 }
