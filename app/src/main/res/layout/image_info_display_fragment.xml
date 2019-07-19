@@ -5,11 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
 
         <variable
             name="showProgress"
-            type="android.databinding.ObservableBoolean"/>
+            type="android.databinding.ObservableBoolean" />
 
         <variable
             name="fragmentCallback"
@@ -28,14 +29,37 @@
         android:onClick="@{(view)->fragmentCallback.onPerformBackNavigationClick()}"
         tools:context=".presentation.swimg.info.ImageInfoDisplayFragment">
 
+        <ImageView
+            android:id="@+id/image_info_display_vote_prohibited_content"
+            android:layout_width="@dimen/icons_size_normal_width"
+            android:layout_height="@dimen/icons_size_normal_height"
+            android:layout_margin="@dimen/base_margin_big"
+            android:onClick="@{(view)->fragmentCallback.onVoteClick()}"
+            android:src="@drawable/ic_vote"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/image_info_display_vote_top_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:gravity="center"
+            android:padding="@dimen/base_padding_small"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_medium"
+            android:textStyle="italic"
+            app:layout_constraintTop_toBottomOf="@+id/image_info_display_vote_prohibited_content" />
+
         <android.support.constraint.ConstraintLayout
             android:id="@+id/image_info_display_constraint_layout_internal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/profile_image_quarter"
             android:layout_marginEnd="@dimen/profile_image_quarter"
-            android:padding="@dimen/base_padding_small"
             android:background="@drawable/button_background_green_stroke_rectangle"
+            android:padding="@dimen/base_padding_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -90,11 +114,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/base_margin_small"
+                android:gravity="center"
                 android:text="@{imageItem.description}"
                 android:textColor="@color/color_base_text"
                 android:textSize="@dimen/base_text_size_big"
                 android:textStyle="italic"
-                android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_info_display_type_title" />
@@ -139,9 +163,9 @@
                 android:layout_width="@dimen/icons_size_normal_width"
                 android:layout_height="@dimen/icons_size_normal_height"
                 android:layout_margin="@dimen/base_margin_small"
-                android:padding="@dimen/base_padding_small"
                 android:background="@drawable/button_background_green_stroke_rectangle"
                 android:onClick="@{(view)->fragmentCallback.onSendContactRequestClick()}"
+                android:padding="@dimen/base_padding_small"
                 android:src="@drawable/ic_request_contact"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -154,12 +178,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/title_send_contact_request"
-                android:textSize="@dimen/base_text_size_small"
                 android:textColor="@color/color_base_text"
-                app:layout_constraintStart_toStartOf="@+id/image_info_display_send_contact_request_image"
+                android:textSize="@dimen/base_text_size_small"
                 app:layout_constraintEnd_toEndOf="@+id/image_info_display_send_contact_request_image"
-                app:layout_constraintTop_toBottomOf="@+id/image_info_display_send_contact_request_image"
-                />
+                app:layout_constraintStart_toStartOf="@+id/image_info_display_send_contact_request_image"
+                app:layout_constraintTop_toBottomOf="@+id/image_info_display_send_contact_request_image" />
 
         </android.support.constraint.ConstraintLayout>
 

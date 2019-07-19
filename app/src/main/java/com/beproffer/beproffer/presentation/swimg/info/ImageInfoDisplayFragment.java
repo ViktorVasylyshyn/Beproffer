@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,9 @@ import com.beproffer.beproffer.databinding.ImageInfoDisplayFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.swimg.ImageItemTransferViewModel;
 import com.beproffer.beproffer.util.Const;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Map;
 
@@ -36,6 +40,11 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
         @Override
         public void onPerformBackNavigationClick() {
             performBackNavigation();
+        }
+
+        @Override
+        public void onVoteClick() {
+            handleOnVoteClick();
         }
     };
 
@@ -118,6 +127,40 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
         mBinding.imageInfoDisplaySendContactRequestImage.setImageResource(R.drawable.ic_request_contact_inact);
         mBinding.imageInfoDisplaySendContactRequestImage.setClickable(false);
         mBinding.imageInfoDisplayContactTextView.setText(hintRes);
+    }
+
+    private void handleOnVoteClick() {
+        if (getFirebaseUser() == null || mCurrentUserInfo == null) {
+            showToast(R.string.toast_request_for_registered);
+            return;
+        }
+        if (!checkInternetConnection()) {
+            showToast(R.string.toast_no_internet_connection);
+            return;
+        }
+        showProgress(true);
+        PopupMenu popupMenu = new PopupMenu(requireActivity(), mBinding.imageInfoDisplayVoteProhibitedContent);
+        popupMenu.getMenuInflater().inflate(R.menu.nenu_vote, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(menuItem -> {
+            if (menuItem.getItemId() == R.id.menu_prohibited_content) {
+                FirebaseDatabase.getInstance().getReference()
+                        .child(Const.SERVICES)
+                        .child(Const.VOTES)
+                        .child(mCurrentUserInfo.getUserId())
+                        .setValue(mItem)
+                        .addOnSuccessListener(aVoid -> {
+                            mBinding.imageInfoDisplayVoteTopHint.setText(R.string.hint_any_prohibited_content);
+                            showProgress(false);
+                        }).addOnFailureListener(e -> {
+                            showToast(R.string.toast_error_has_occurred);
+                    mBinding.imageInfoDisplayVoteTopHint.setText(e.getMessage());
+                            showProgress(false);
+                        });
+            }
+            return true;
+        });
+        popupMenu.show();
+
     }
 
     public void performBackNavigation() {

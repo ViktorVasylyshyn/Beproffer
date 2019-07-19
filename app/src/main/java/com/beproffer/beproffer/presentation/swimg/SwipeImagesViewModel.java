@@ -57,6 +57,4 @@ public class SwipeImagesViewModel extends AndroidViewModel {
         /*параметр может быть или null(не трогать) или true(обнулить значение)*/
         mRepository.resetTriggers(resetToastValue, resetPerformNavigation);
     }
-
-
 }

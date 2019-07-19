@@ -5,7 +5,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,25 +100,23 @@ public class SettingsFragment extends BaseUserInfoFragment {
             FirebaseUser currentUser = getFirebaseUser();
             if (currentUser != null && mBinding.settingsDeleteAccountEmail.getText().toString().equals(currentUser.getEmail())) {
                 showProgress(true);
-                currentUser.delete().addOnCompleteListener(task -> {
-                    showProgress(false);
-                    if (task.isSuccessful()) {
-                        FirebaseDatabase.getInstance().getReference().
-                                child(Const.USERS).
-                                child(Const.DELETED).
-                                child(currentUser.getUid()).
-                                setValue(mCurrentUserInfo.getUserType()).addOnCompleteListener(task1 -> {
+                FirebaseDatabase.getInstance().getReference().
+                        child(Const.USERS).
+                        child(Const.DELETED).
+                        child(currentUser.getUid()).
+                        setValue(mCurrentUserInfo.getUserType())
+                        .addOnSuccessListener(task -> currentUser.delete().addOnSuccessListener(deleted -> {
+                            showProgress(false);
                             mUserDataViewModel.resetUserData();
-
-                            if (task1.isCanceled())
-                                Log.d(Const.INFO, task1.toString());
-
-                            showToast(R.string.toast_profile_deleted);
                             performNavigation(R.id.action_global_swipeImageFragment);
-                        });
-                    } else {
-                        showToast(R.string.toast_error_has_occurred);
-                    }
+                            showToast(R.string.toast_profile_deleted);
+                        }).addOnFailureListener(e -> {
+                            showProgress(false);
+                            mBinding.settingsDeleteAccountButton.setError(e.getMessage());
+                            showToast(R.string.toast_error_has_occurred);
+                        })).addOnFailureListener(e -> {
+                    showProgress(false);
+                    showToast(R.string.toast_error_has_occurred);
                 });
             } else {
                 showProgress(false);

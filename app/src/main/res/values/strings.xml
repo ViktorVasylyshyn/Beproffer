@@ -34,6 +34,11 @@
     <string name="hint_outfield_contact_us_title">Contact us if you have any questions.</string>
     <string name="hint_outfield_contact_us_email">beproffer.llc@gmail.com</string>
     <string name="hint_outfield_use_correct_name_format">Use your first and last name for better representation of your profile.</string>
+    <string name="hint_specialist_phone_1">Make sure your phone number is correct. It will be shown to your potential customers.</string>
+    <string name="hint_any_strong_password">Make sure your password is strong.</string>
+    <string name="hint_any_browsing_history">Browsing history filter available for signed up users only.</string>
+    <string name="hint_any_image">Please use images up to 1 mb for it correct display.</string>
+    <string name="hint_any_prohibited_content">Thank you for your help. Quality content in Beproffer one of our main goals.</string>
     <string name="hint_outfield_confirm">confirm</string>
     <string name="hint_outfield_deny">deny</string>
 
@@ -117,6 +122,8 @@
     <string name="confirmed_contact_menu_call">call</string>
     <string name="confirmed_contact_menu_delete">delete</string>
 
+    <string name="vote_prohibited_content">Prohibited content.</string>
+
     <!--Bottom navigation bar titles-->
 
 
@@ -159,6 +166,8 @@
     <string name="toast_would_you_like_to_donate">You can add only 5 images for now.</string>
     <string name="toast_user_data_updated">User data updated successfully.</string>
     <string name="toast_image_data_updated">Image data updated successfully.</string>
+    <string name="toast_contact_confirmed">Contact confirmed.</string>
+    <string name="toast_contact_denied">Contact denied.</string>
     <string name="toast_guest_mode">Guest mode.</string>
 
 
@@ -174,16 +183,5 @@
 
     <string name="search">Search</string>
     <string name="kyiv">Kyiv, Ukraine.</string>
-
-
-    <!--special hints-->
-
-    <!--new-->
-    <string name="toast_contact_confirmed">Contact confirmed.</string>
-    <string name="toast_contact_denied">Contact denied.</string>
-    <string name="hint_specialist_phone_1">Make sure your phone number is correct. It will be shown to your potential customers.</string>
-    <string name="hint_any_strong_password">Make sure your password is strong.</string>
-    <string name="hint_any_browsing_history">Browsing history filter available for signed up users only.</string>
-    <string name="hint_any_image">Please use images up to 1 mb for it correct display.</string>
 
 </resources>

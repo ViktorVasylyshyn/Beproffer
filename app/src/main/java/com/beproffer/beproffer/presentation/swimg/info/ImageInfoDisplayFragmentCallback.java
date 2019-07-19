@@ -4,4 +4,6 @@ public interface ImageInfoDisplayFragmentCallback {
     void onSendContactRequestClick();
 
     void onPerformBackNavigationClick();
+
+    void onVoteClick();
 }

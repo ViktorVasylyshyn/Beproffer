@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.beproffer.beproffer.data.models.SwipeImageItem;
 import com.beproffer.beproffer.databinding.SwipeImageFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.swimg.adapter.SwipeImageAdapter;
+import com.beproffer.beproffer.util.Const;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.List;
@@ -44,19 +46,19 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
         super.onActivityCreated(savedInstanceState);
         mBinding.setShowProgress(mShowProgress);
 
-        if (savedInstanceState == null) {
-            if (getFirebaseUser() != null) {
-                initUserData();
-            } else {
-                showToast(R.string.toast_guest_mode);
-                mCurrentUserInfo = null;    /*хз как это дело сработает*/
-                connectToRepository();      /*обратить на это внимание*/
-            }
+        if (getFirebaseUser() != null) {
+            initUserData();
         } else {
-            if (mImageItemsList != null && mImageItemsList.size() > 0)
-                initAdapter();
-            if (mImageItemsList != null && mImageItemsList.size() == 0)
+            if (mImageItemsList == null) {
                 connectToRepository();
+                return;
+            }
+            if (mImageItemsList.size() > 0) {
+                initAdapter();
+                return;
+            }
+            connectToRepository();
+
         }
     }
 
@@ -80,8 +82,6 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
             if (list == null)
                 return;
             mImageItemsList = list;
-//            if(mImageItemsList.isEmpty())
-//                mSwipeImagesViewModel.filterOutItemsForAdapter();
             if (mSwipeImageAdapter == null) {
                 initAdapter();
             } else {

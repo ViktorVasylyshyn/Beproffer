@@ -37,6 +37,7 @@
     <string name="hint_outfield_use_correct_name_format">Используйте ваши имя и фамилию, для лучшего представления вашего профайла.</string>
     <string name="hint_any_image">Используйте изображение размером до 1 мб, чтобы оно корректно отображалось.</string>
     <string name="hint_any_browsing_history">Фильтрация просмотренных изображений доступна для зарегистрированных пользователей.</string>
+    <string name="hint_any_prohibited_content">Спасибо за вашу помощь. Качественный контент в Beproffer одна из основных наших целей.</string>
     <string name="hint_outfield_confirm">принять</string>
     <string name="hint_outfield_deny">отклонить</string>
 
@@ -120,6 +121,8 @@
 
     <string name="confirmed_contact_menu_call">Позвонить</string>
     <string name="confirmed_contact_menu_delete">Удалить</string>
+
+    <string name="vote_prohibited_content">Запрещенный контент.</string>
 
     <!--Bottom navigation bar titles-->
 

@@ -147,7 +147,6 @@ public class SwipeImagesRepository {
             return;
         }
         try {
-            Log.d(Const.INFO, "17");
             FirebaseDatabase.getInstance().getReference()
                     .child(Const.SERVICES)
                     .child(mRequestParams.get(Const.SERVTYPE))

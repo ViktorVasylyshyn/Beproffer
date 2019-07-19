@@ -21,6 +21,7 @@ public class Const {
 
     public static final String GENDER = "gender";
     public static final String IMAGES = "images"; /*child with user images' urls*/
+    public static final String VOTES = "votes"; /*directory for claims about prohibited content*/
 
     /*list of observed urls*/
     public static final String OBSERV = "observ";
