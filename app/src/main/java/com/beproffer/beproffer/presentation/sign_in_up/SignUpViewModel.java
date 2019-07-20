@@ -18,6 +18,10 @@ public class SignUpViewModel extends AndroidViewModel {
         return mRepository.getShowProgress();
     }
 
+    public LiveData<Boolean> getProcessing(){
+        return mRepository.getProcessing();
+    }
+
     public LiveData<Integer> getToastId() {
         return mRepository.getToastRes();
     }

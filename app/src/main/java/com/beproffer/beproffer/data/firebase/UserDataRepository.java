@@ -44,6 +44,7 @@ public class UserDataRepository {
     private String mCurrentUserType;
 
     private MutableLiveData<Boolean> mShowProgress = new MutableLiveData<>();
+    private MutableLiveData<Boolean> mProcessing = new MutableLiveData<>();
     private MutableLiveData<Integer> mShowToast = new MutableLiveData<>();
     private MutableLiveData<Boolean> mHideKeyboard = new MutableLiveData<>();
     private MutableLiveData<Boolean> mPopBackStack = new MutableLiveData<>();
@@ -139,6 +140,7 @@ public class UserDataRepository {
 
     public void updateUserInfo(UserInfo updatedUserInfo, @Nullable Uri updatedImageUri) {
         mShowProgress.setValue(true);
+        mProcessing.setValue(true);
         if (updatedImageUri != null) {
             saveProfileImageToStorage(updatedUserInfo, updatedImageUri);
         } else {
@@ -167,17 +169,20 @@ public class UserDataRepository {
         try {
             bitmap = MediaStore.Images.Media.getBitmap(mApplication.getContentResolver(), updatesImageUri);
         } catch (IOException e) {
+            mProcessing.setValue(false);
             feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
         }
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
         } catch (NullPointerException e) {
+            mProcessing.setValue(false);
             feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
         }
         byte[] data = baos.toByteArray();
         UploadTask uploadTask = filepath.putBytes(data);
         uploadTask.addOnFailureListener(e -> {
+            mProcessing.setValue(false);
             feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
         });
         uploadTask.addOnSuccessListener(taskSnapshot -> filepath.getDownloadUrl()
@@ -198,6 +203,7 @@ public class UserDataRepository {
                     .setValue(updatedUserInfo)
                     .addOnSuccessListener(aVoid -> {
                         mUserInfoLiveData.setValue(updatedUserInfo);
+                        mProcessing.setValue(false);
                         feedBackToUi(false, R.string.toast_user_data_updated, true, null);
                     });
     }
@@ -228,6 +234,7 @@ public class UserDataRepository {
     /*сохранение измененного или добавленного изображения проходит в несколько шагов*/
     public void updateSpecialistGallery(SpecialistGalleryImageItem updatedItem, @Nullable Uri resultUri) {
         mShowProgress.setValue(true);
+        mProcessing.setValue(true);
         /*1. Если изображение изменялось и Uri != null,то сначала сохраняем новое изображение в Storage*/
         if (resultUri != null) {
             saveServiceImageToStorage(updatedItem, resultUri);
@@ -248,17 +255,20 @@ public class UserDataRepository {
         try {
             bitmap = MediaStore.Images.Media.getBitmap(mApplication.getContentResolver(), resultUri);
         } catch (IOException e) {
+            mProcessing.setValue(false);
             feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
         }
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
         } catch (NullPointerException e) {
+            mProcessing.setValue(false);
             feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
         }
         byte[] data = baos.toByteArray();
         UploadTask uploadTask = filepath.putBytes(data);
         uploadTask.addOnFailureListener(e -> {
+            mProcessing.setValue(false);
             feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
         });
         uploadTask.addOnSuccessListener(taskSnapshot -> filepath.getDownloadUrl()
@@ -304,6 +314,7 @@ public class UserDataRepository {
         /*4. Добавляем или заменяем данные в списке, который подается локально на RecyclerView*/
         mSpecialistGalleryImageItemsMap.put(updatedItem.getKey(), updatedItem);
         mSpecialistGalleryImageItemsMapLiveData.setValue(mSpecialistGalleryImageItemsMap);
+        mProcessing.setValue(false);
         feedBackToUi(false, R.string.toast_image_data_updated, true, true);
     }
 
@@ -433,6 +444,8 @@ public class UserDataRepository {
     public LiveData<Boolean> getShowProgress() {
         return mShowProgress;
     }
+
+    public LiveData<Boolean> getProcessing(){return  mProcessing;}
 
     public LiveData<Integer> getShowToast() {
         return mShowToast;

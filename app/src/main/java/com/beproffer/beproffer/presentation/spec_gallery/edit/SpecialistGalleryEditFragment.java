@@ -81,14 +81,14 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
     private void obtainStorageImageItem() {
         mUserDataViewModel.getEditableGalleryItem().observe(this, item -> {
             /*получаем изначальные type и subtype, чтобы потом проверить -
-            * изменились ли они после изменения обьекта. если да - это значит что актуальные данные
+             * изменились ли они после изменения обьекта. если да - это значит что актуальные данные
              * о обьекте записалсь в новую ветку в бд. соответственно из старой их нужно удалить.*/
             try {
-                if(item.getType() != null && item.getSubtype() != null){
+                if (item.getType() != null && item.getSubtype() != null) {
                     mPrimordialItemType = item.getType();
                     mPrimordialItemSubtype = item.getSubtype();
                 }
-            } catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 Crashlytics.getInstance().crash();
             }
             mUpdatedImageItem = item;
@@ -163,15 +163,20 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
     }
 
     private void saveNewImageData() {
+        if(mProcessing.get()){
+            showToast(R.string.toast_processing);
+            return;
+        }
+        mUserDataViewModel.updateSpecialistGallery(mUpdatedImageItem, mResultUri);
         /*сравнением тип услуги начального обьекта и измененного.проверяем, изменился ли тип услуги.
          * если изменился - удаляем данные по старому адресу*/
-        mUserDataViewModel.updateSpecialistGallery(mUpdatedImageItem, mResultUri);
-        mUserDataViewModel.deleteNotRelevantImageData(mUpdatedImageItem, mPrimordialItemType, mPrimordialItemSubtype);
+        if (!mPrimordialItemSubtype.equals(mUpdatedImageItem.getSubtype()))
+            mUserDataViewModel.deleteNotRelevantImageData(mUpdatedImageItem, mPrimordialItemType, mPrimordialItemSubtype);
     }
 
     public void setServiceGender(View view) {
         String gender;
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.specialist_storage_edit_gender_male_icon:
                 gender = Const.MALE;
                 break;
@@ -188,9 +193,9 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
         mBinding.setItem(mUpdatedImageItem);
     }
 
-    public void setServiceDuration(View view){
+    public void setServiceDuration(View view) {
         String duration;
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.specialist_storage_edit_duration_30_min_icon:
                 duration = Const.MIN30;
                 break;

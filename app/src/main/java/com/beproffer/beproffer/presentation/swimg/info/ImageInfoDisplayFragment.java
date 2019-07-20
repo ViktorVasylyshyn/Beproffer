@@ -18,8 +18,6 @@ import com.beproffer.beproffer.databinding.ImageInfoDisplayFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.swimg.ImageItemTransferViewModel;
 import com.beproffer.beproffer.util.Const;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Map;
@@ -138,11 +136,17 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
             showToast(R.string.toast_no_internet_connection);
             return;
         }
-        showProgress(true);
-        PopupMenu popupMenu = new PopupMenu(requireActivity(), mBinding.imageInfoDisplayVoteProhibitedContent);
+        if (mProcessing.get()) {
+            showToast(R.string.toast_processing);
+            return;
+        }
+
+        PopupMenu popupMenu = new PopupMenu(requireActivity(), mBinding.imageInfoDisplayVote);
         popupMenu.getMenuInflater().inflate(R.menu.nenu_vote, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             if (menuItem.getItemId() == R.id.menu_prohibited_content) {
+                mProcessing.set(true);
+                showProgress(true);
                 FirebaseDatabase.getInstance().getReference()
                         .child(Const.SERVICES)
                         .child(Const.VOTES)
@@ -151,11 +155,15 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
                         .addOnSuccessListener(aVoid -> {
                             mBinding.imageInfoDisplayVoteTopHint.setText(R.string.hint_any_prohibited_content);
                             showProgress(false);
+                            mProcessing.set(false);
+                            mBinding.imageInfoDisplayVote.setImageResource(R.drawable.ic_vote_inactive);
+                            mBinding.imageInfoDisplayVote.setClickable(false);
                         }).addOnFailureListener(e -> {
-                            showToast(R.string.toast_error_has_occurred);
+                    showToast(R.string.toast_error_has_occurred);
                     mBinding.imageInfoDisplayVoteTopHint.setText(e.getMessage());
-                            showProgress(false);
-                        });
+                    showProgress(false);
+                    mProcessing.set(false);
+                });
             }
             return true;
         });

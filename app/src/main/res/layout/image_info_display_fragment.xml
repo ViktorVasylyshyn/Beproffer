@@ -30,7 +30,7 @@
         tools:context=".presentation.swimg.info.ImageInfoDisplayFragment">
 
         <ImageView
-            android:id="@+id/image_info_display_vote_prohibited_content"
+            android:id="@+id/image_info_display_vote"
             android:layout_width="@dimen/icons_size_normal_width"
             android:layout_height="@dimen/icons_size_normal_height"
             android:layout_margin="@dimen/base_margin_big"
@@ -50,7 +50,7 @@
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_medium"
             android:textStyle="italic"
-            app:layout_constraintTop_toBottomOf="@+id/image_info_display_vote_prohibited_content" />
+            app:layout_constraintTop_toBottomOf="@+id/image_info_display_vote" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/image_info_display_constraint_layout_internal"
