@@ -46,7 +46,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.bnm_search:
                 break;
             case R.id.bnm_profile:
-                break;
+                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                    performNavigation(R.id.action_global_profileFragment, null);
+                } else {
+                    performNavigation(R.id.action_global_signInFragment, null);
+                }                break;
         }
     };
 

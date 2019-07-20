@@ -25,7 +25,7 @@ public class UserDataViewModel extends AndroidViewModel {
         super(application);
         mRepository = new UserDataRepository(application);
 
-        if(mUserInfoLiveData == null)
+        if (mUserInfoLiveData == null)
             mUserInfoLiveData = mRepository.getUserInfoLiveData();
     }
 
@@ -37,44 +37,48 @@ public class UserDataViewModel extends AndroidViewModel {
         mRepository.updateUserInfo(updatedUserInfo, updatedImageUri);
     }
 
-    public LiveData<Map<String, SpecialistGalleryImageItem>> getSpecialistGalleryData(){
+    public LiveData<Map<String, SpecialistGalleryImageItem>> getSpecialistGalleryData() {
         return mRepository.getSpecialistGalleryImagesList();
     }
 
-    public void updateSpecialistGallery(SpecialistGalleryImageItem newItem, @Nullable Uri resultUri){
+    public void updateSpecialistGallery(SpecialistGalleryImageItem newItem, @Nullable Uri resultUri) {
         mRepository.updateSpecialistGallery(newItem, resultUri);
     }
 
-    public LiveData<SpecialistGalleryImageItem> getEditableGalleryItem(){
+    public LiveData<SpecialistGalleryImageItem> getEditableGalleryItem() {
         return mRepository.getEditableGalleryItem();
     }
 
-    public void setEditableGalleryItem(SpecialistGalleryImageItem editableItem){
+    public void setEditableGalleryItem(SpecialistGalleryImageItem editableItem) {
         mRepository.setEditableGalleryItem(editableItem);
     }
 
-    public void deleteNotRelevantImageData(SpecialistGalleryImageItem updatedItem, String primordialItemType, String primordialItemSubtype){
+    public void deleteNotRelevantImageData(SpecialistGalleryImageItem updatedItem, String primordialItemType, String primordialItemSubtype) {
         mRepository.deleteNotRelevantImageData(updatedItem, primordialItemType, primordialItemSubtype);
     }
 
-    public LiveData<Map<String, ContactItem>> getContacts(){
+    public LiveData<Map<String, ContactItem>> getContacts() {
         return mRepository.getContacts();
     }
 
-    public LiveData<Map<String, IncomingContactRequestItem>> getIncomingContactRequests(){
+    public LiveData<Map<String, IncomingContactRequestItem>> getIncomingContactRequests() {
         return mRepository.getIncomingContactRequests();
     }
 
-    public void handleIncomingContactRequest(UserInfo currentUserInfo, IncomingContactRequestItem handledItem, boolean confirm){
+    public void handleIncomingContactRequest(UserInfo currentUserInfo, IncomingContactRequestItem handledItem, boolean confirm) {
         mRepository.handleIncomingContactRequest(currentUserInfo, handledItem, confirm);
     }
 
-    public void deleteContact(ContactItem deletedContact){
+    public void deleteContact(ContactItem deletedContact) {
         mRepository.deleteContact(deletedContact);
     }
 
-    public LiveData<Boolean> getShowProgress(){
+    public LiveData<Boolean> getShowProgress() {
         return mRepository.getShowProgress();
+    }
+
+    public LiveData<Boolean> getProcessing() {
+        return mRepository.getProcessing();
     }
 
     public LiveData<Integer> getShowToast() {
@@ -89,16 +93,16 @@ public class UserDataViewModel extends AndroidViewModel {
         return mRepository.getPopBackStack();
     }
 
-    public void resetTrigger(@Nullable Boolean resetToastValue, @Nullable Boolean resetHideKeyboardValue, @Nullable Boolean resetBackStackValue){
+    public void resetTrigger(@Nullable Boolean resetToastValue, @Nullable Boolean resetHideKeyboardValue, @Nullable Boolean resetBackStackValue) {
         /*параметр может быть или null(не трогать) или true(обнулить значение)*/
         mRepository.resetTrigger(resetToastValue, resetHideKeyboardValue, resetBackStackValue);
     }
 
-    public void sendContactRequest(IncomingContactRequestItem incomingContactRequestItem, String specialistId){
+    public void sendContactRequest(IncomingContactRequestItem incomingContactRequestItem, String specialistId) {
         mRepository.sendContactRequest(incomingContactRequestItem, specialistId);
     }
 
-    public LiveData<Map<String, Boolean>> getOutgoingContactRequests(){
+    public LiveData<Map<String, Boolean>> getOutgoingContactRequests() {
         return mRepository.getOutgoingContactRequests();
     }
 

@@ -169,6 +169,7 @@
     <string name="toast_contact_confirmed">Contact confirmed.</string>
     <string name="toast_contact_denied">Contact denied.</string>
     <string name="toast_guest_mode">Guest mode.</string>
+    <string name="toast_processing">Wait a second, please. Processing…</string>
 
 
     <string name="error_message_exception_sign_up_weak_password">Please, create more complicated password.</string>

@@ -168,6 +168,8 @@
     <string name="toast_user_data_updated">Данные пользователя успешно изменены.</string>
     <string name="toast_image_data_updated">Данные изображения успешно изменены.</string>
     <string name="toast_guest_mode">Вы вошли как гость.</string>
+    <string name="toast_processing">Подождите пожалуйста. Обработка данных…</string>
+
 
     <string name="error_message_exception_sign_up_weak_password">Придумайте более надежный пароль.</string>
     <string name="error_message_exception_sign_up_invalid_credentials">Неправильный формат адреса электронной почты.</string>

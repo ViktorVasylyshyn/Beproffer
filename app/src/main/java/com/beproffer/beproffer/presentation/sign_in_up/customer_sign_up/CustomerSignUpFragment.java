@@ -64,6 +64,10 @@ public class CustomerSignUpFragment extends BaseFragment {
             showToast(R.string.toast_no_internet_connection);
             return;
         }
+        if(mProcessing.get()){
+            showToast(R.string.toast_processing);
+            return;
+        }
         if (mBinding.customerSignUpEmail.getText().toString().isEmpty()
                 || mBinding.customerSignUpPass.getText().toString().isEmpty()) {
             showErrorMessage(R.string.toast_error_check_fields_data);
@@ -86,6 +90,11 @@ public class CustomerSignUpFragment extends BaseFragment {
         mSignUpViewModel.getShowProgress().observe(getViewLifecycleOwner(), progress -> {
             if (progress != null)
                 showProgress(progress);
+        });
+        /*блокировать повторное нажатие на кнопку, если предыдущий запрос в процессе выполнения*/
+        mSignUpViewModel.getProcessing().observe(getViewLifecycleOwner(), processing ->{
+            if(processing != null)
+                processing(processing);
         });
         /*показ тостов*/
         mSignUpViewModel.getToastId().observe(getViewLifecycleOwner(), toastId -> {
@@ -158,5 +167,11 @@ public class CustomerSignUpFragment extends BaseFragment {
         } else {
             showToast(R.string.toast_no_internet_connection);
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        hideKeyboard(requireActivity());
     }
 }

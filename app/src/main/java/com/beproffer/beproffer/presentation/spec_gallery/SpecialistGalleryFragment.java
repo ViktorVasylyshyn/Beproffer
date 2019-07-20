@@ -85,7 +85,7 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
                         null,
                         null,
                         null));
-        performNavigationForEdit();
+        performNavigation(R.id.action_specialistStorageFragment_to_specialistStorageEditFragment);
     }
 
     private void setupList() {
@@ -94,10 +94,6 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
 
     private void setEditableGalleryItem(@Nullable View view, SpecialistGalleryImageItem editableItem) {
         mUserDataViewModel.setEditableGalleryItem(editableItem);
-        performNavigationForEdit();
-    }
-
-    private void performNavigationForEdit() {
         performNavigation(R.id.action_specialistStorageFragment_to_specialistStorageEditFragment);
     }
 }

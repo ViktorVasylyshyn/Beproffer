@@ -22,9 +22,11 @@ public class SignUpRepository {
 
     private MutableLiveData<Integer> mToastRes = new MutableLiveData<>();
     private MutableLiveData<Boolean> mShowProgress = new MutableLiveData<>();
+    /*нужно для контроля частых нажатий на кнопки*/
+    private MutableLiveData<Boolean> mProcessing = new MutableLiveData<>();
     private MutableLiveData<Integer> mNavigationId = new MutableLiveData<>();
-    private MutableLiveData<Integer> mErrorMessageId = new MutableLiveData<>();/*устанавливает фокус
-    на поле, которое требует изменения и выдает соответствующее сообщение рядом*/
+    /*устанавливает фокус на поле, которое требует изменения и выдает соответствующее сообщение рядом*/
+    private MutableLiveData<Integer> mErrorMessageId = new MutableLiveData<>();
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
@@ -34,7 +36,7 @@ public class SignUpRepository {
 
     public void signUpNewUser(String userEmail, String userPassword,
                               String userName, String userType, String userPhone) {
-        feedBackToUi(true, null, null, null);
+        feedBackToUi(true, null, null, null, true);
         mAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(signUpTask -> {
             if (signUpTask.isSuccessful()) {
                 try {
@@ -55,27 +57,27 @@ public class SignUpRepository {
                     });
                 } catch (NullPointerException e) {
                     feedBackToUi(false, R.string.toast_error_has_occurred,
-                            null, null);
+                            null, null, false);
                 }
             } else {
                 try {
                     throw signUpTask.getException();
                 } catch (FirebaseAuthWeakPasswordException weakPassword) {
                     feedBackToUi(false, null, null,
-                            R.string.error_message_exception_sign_up_weak_password);
+                            R.string.error_message_exception_sign_up_weak_password, false);
                 } catch (FirebaseAuthInvalidCredentialsException invalidCredential) {
                     feedBackToUi(false, null, null,
-                            R.string.error_message_exception_sign_up_invalid_credentials);
+                            R.string.error_message_exception_sign_up_invalid_credentials, false);
                 } catch (FirebaseAuthUserCollisionException userCollision) {
                     feedBackToUi(false, null, null,
-                            R.string.error_message_exception_sign_up_collision);
+                            R.string.error_message_exception_sign_up_collision, false);
                 } catch (Exception e) {
                     feedBackToUi(false, R.string.toast_error_registration,
-                            null, null);
+                            null, null, false);
                 }
             }
         }).addOnFailureListener(e -> feedBackToUi(false,
-                R.string.toast_error_user_data_saving_failure, null, null));
+                R.string.toast_error_user_data_saving_failure, null, null, false));
     }
 
     public void saveUserDataToDatabase(UserInfo userInfo) {
@@ -85,9 +87,9 @@ public class SignUpRepository {
                 .child(userInfo.getUserId())
                 .child(Const.INFO)
                 .setValue(userInfo).addOnSuccessListener(aVoid -> feedBackToUi(false,
-                R.string.toast_sign_up_email_verification, R.id.action_global_signInFragment, null))
+                R.string.toast_sign_up_email_verification, R.id.action_global_signInFragment, null, false))
                 .addOnFailureListener(e -> feedBackToUi(false,
-                        R.string.toast_error_user_data_saving_failure, null, null));
+                        R.string.toast_error_user_data_saving_failure, null, null, false));
     }
 
     public LiveData<Integer> getToastRes() {
@@ -96,6 +98,10 @@ public class SignUpRepository {
 
     public LiveData<Boolean> getShowProgress() {
         return mShowProgress;
+    }
+
+    public LiveData<Boolean> getProcessing(){
+        return mProcessing;
     }
 
     public LiveData<Integer> getNavigationId() {
@@ -109,7 +115,8 @@ public class SignUpRepository {
     private void feedBackToUi(@Nullable Boolean showProgress,
                               @Nullable Integer toastId,
                               @Nullable Integer navigationId,
-                              @Nullable Integer errorMessageId) {
+                              @Nullable Integer errorMessageId,
+                              @Nullable Boolean processing) {
         if (showProgress != null)
             mShowProgress.setValue(showProgress);
         if (toastId != null)
@@ -118,6 +125,10 @@ public class SignUpRepository {
             mNavigationId.setValue(navigationId);
         if (errorMessageId != null)
             mErrorMessageId.setValue(errorMessageId);
+        /*юлокирование повторных запросов если предыдущий идентичный в процессе выполнения*/
+        if (processing != null){
+            mProcessing.setValue(processing);
+        }
     }
 
     public void resetTriggers(@Nullable Boolean resetToastIdValue,

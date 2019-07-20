@@ -18,6 +18,8 @@ public class BaseFragment extends Fragment {
 
     public final ObservableBoolean mShowProgress = new ObservableBoolean(false);
 
+    public final ObservableBoolean mProcessing = new ObservableBoolean(false);
+
     public boolean checkInternetConnection() {
         return hasInternetConnection(requireContext());
     }
@@ -39,21 +41,26 @@ public class BaseFragment extends Fragment {
         }
     }
 
-    public void popBackStack(){
-        ((MainActivity)requireActivity()).popBackStack();
+    public void popBackStack() {
+        ((MainActivity) requireActivity()).popBackStack();
     }
 
-    public void performNavigation(int destinationId){
+    public void performNavigation(int destinationId) {
         /*пока что на вход этому методу подается только айди пункта назначения. если вдруг в будущем
-        * появится надобность на передачу аргументов - допишем второй параметр*/
-        ((MainActivity)requireActivity()).performNavigation(destinationId, null);
+         * появится надобность на передачу аргументов - допишем второй параметр*/
+        ((MainActivity) requireActivity()).performNavigation(destinationId, null);
     }
 
     /*существует специальный листенер, который слушает юзера. поначалу у меня так и было, но из-за
-    * того, что я чайник, в некоторых моментах получались конфузы, и я не знал, как их решить. поэтому
-    * пока что делаю мануальную проверку юзера, без листенера. а когда будут над кодом работать люди,
-    * которые в этом соображают лучше - сделают прослушивание через листенер, по человечески.*/
-    public FirebaseUser getFirebaseUser(){
+     * того, что я чайник, в некоторых моментах получались конфузы, и я не знал, как их решить. поэтому
+     * пока что делаю мануальную проверку юзера, без листенера. а когда будут над кодом работать люди,
+     * которые в этом соображают лучше - сделают прослушивание через листенер, по человечески.*/
+    public FirebaseUser getFirebaseUser() {
         return FirebaseAuth.getInstance().getCurrentUser();
+    }
+
+    /*нужно, для контроля частых нажатий на кнопки*/
+    public void processing(boolean processing) {
+        mProcessing.set(processing);
     }
 }

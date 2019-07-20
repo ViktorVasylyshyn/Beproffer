@@ -30,7 +30,11 @@ public class BaseUserInfoFragment extends BaseFragment {
                 return;
             showProgress(progress);
         });
-
+        mUserDataViewModel.getProcessing().observe(getViewLifecycleOwner(), processing -> {
+            if (processing == null)
+                return;
+            processing(processing);
+        });
         mUserDataViewModel.getShowToast().observe(getViewLifecycleOwner(), resId -> {
             if (resId == null)
                 return;

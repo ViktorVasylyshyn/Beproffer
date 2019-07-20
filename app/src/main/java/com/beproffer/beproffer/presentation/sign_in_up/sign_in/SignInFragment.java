@@ -31,17 +31,17 @@ public class SignInFragment extends BaseFragment {
 
         @Override
         public void onCustomerSignUpClick() {
-            navigateTo(R.id.action_signInFragment_to_customerRegistrationFragment);
+            performNavigation(R.id.action_signInFragment_to_customerRegistrationFragment);
         }
 
         @Override
         public void onSpecialistSignUpClick() {
-            navigateTo(R.id.action_signInFragment_to_specialistRegistrationFragment);
+            performNavigation(R.id.action_signInFragment_to_specialistRegistrationFragment);
         }
 
         @Override
         public void onResetPasswordClick() {
-            navigateTo(R.id.action_settingsFragment_to_resetPasswordFragment);
+            performNavigation(R.id.action_settingsFragment_to_resetPasswordFragment);
         }
 
         @Override
@@ -68,44 +68,47 @@ public class SignInFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         mBinding.setShowProgress(mShowProgress);
         mBinding.setFragmentCallback(mCallback);
-        if(getFirebaseUser() != null){
-            ((MainActivity)requireActivity()).popBackStack();
+        if (getFirebaseUser() != null) {
+            ((MainActivity) requireActivity()).popBackStack();
         }
     }
 
-    private void navigateTo(int destinationId){
-        performNavigation(destinationId);
-    }
-
     public void signIn() {
-        if(!checkInternetConnection()){
+        if (mProcessing.get()) {
+            showToast(R.string.toast_processing);
+            return;
+        }
+        if (!checkInternetConnection()) {
             showToast(R.string.toast_no_internet_connection);
             return;
         }
 
-        if(mBinding.signInFragmentEmail.getText().toString().isEmpty() ||
-        mBinding.signInFragmentPassword.getText().toString().isEmpty()){
+        if (mBinding.signInFragmentEmail.getText().toString().isEmpty() ||
+                mBinding.signInFragmentPassword.getText().toString().isEmpty()) {
             showToast(R.string.toast_error_login);
             return;
         }
         showProgress(true);
-
+        processing(true);
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
         auth.signInWithEmailAndPassword(mBinding.signInFragmentEmail.getText().toString(), mBinding.signInFragmentPassword.getText()
-                        .toString()).addOnCompleteListener(requireActivity(), task -> {
+                .toString()).addOnCompleteListener(requireActivity(), task -> {
             if (task.isSuccessful()) {
                 if (auth.getCurrentUser() != null) {
                     showProgress(false);
-                    if(auth.getCurrentUser().isEmailVerified()){
+                    processing(false);
+                    hideKeyboard(requireActivity());
+                    if (auth.getCurrentUser().isEmailVerified()) {
                         performNavigation(R.id.action_global_profileFragment);
-                    }else {
+                    } else {
                         auth.signOut();
                         showToast(R.string.toast_sign_in_verify_email_first);
                     }
                 }
             } else {
                 showProgress(false);
+                processing(false);
                 try {
                     throw task.getException();
                 } catch (FirebaseAuthInvalidUserException weakPassword) {
@@ -122,17 +125,19 @@ public class SignInFragment extends BaseFragment {
     }
 
     private void openDoc(int resId) {
-        if(checkInternetConnection()){
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(resId)));
-            startActivity(browserIntent);
-        }else {
+        if (!checkInternetConnection()) {
             showToast(R.string.toast_no_internet_connection);
+            return;
         }
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(resId)));
+        startActivity(browserIntent);
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
         showProgress(false);
+        processing(false);
     }
 }
