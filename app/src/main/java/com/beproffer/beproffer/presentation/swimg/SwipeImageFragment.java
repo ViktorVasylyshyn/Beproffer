@@ -5,7 +5,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import com.beproffer.beproffer.data.models.SwipeImageItem;
 import com.beproffer.beproffer.databinding.SwipeImageFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.swimg.adapter.SwipeImageAdapter;
-import com.beproffer.beproffer.util.Const;
+import com.beproffer.beproffer.presentation.swimg.search_sheet.SearchSheetDialog;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.List;
@@ -33,6 +32,8 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
 
     private SwipeImagesViewModel mSwipeImagesViewModel;
 
+    private SwipeImageFragmentCallback mCallback = this::searchSheet;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -45,20 +46,23 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mBinding.setShowProgress(mShowProgress);
+        mBinding.setSearch(mCallback);
 
         if (getFirebaseUser() != null) {
-            initUserData();
+            if (mImageItemsList == null) {
+                initUserData();
+                return;
+            }
+            if (!mImageItemsList.isEmpty())
+                initAdapter();
         } else {
             if (mImageItemsList == null) {
                 connectToRepository();
                 return;
             }
-            if (mImageItemsList.size() > 0) {
+            if (!mImageItemsList.isEmpty()) {
                 initAdapter();
-                return;
             }
-            connectToRepository();
-
         }
     }
 
@@ -101,11 +105,11 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
             mSwipeImagesViewModel.resetTriggers(true, null);
         });
         /*получение команд и айди для совершения перехода*/
-        mSwipeImagesViewModel.getPerformNavigation().observe(getViewLifecycleOwner(), destinationId -> {
-            if (destinationId == null)
+        mSwipeImagesViewModel.getPerformNavigation().observe(getViewLifecycleOwner(), performSearch -> {
+            if (performSearch == null)
                 return;
             mSwipeImagesViewModel.resetTriggers(null, true);
-            performNavigation(destinationId);
+            searchSheet();
         });
 
     }
@@ -173,6 +177,11 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
     private void displayImageInfo(Object dataObject) {
         ViewModelProviders.of(requireActivity()).get(ImageItemTransferViewModel.class).setImageItem((SwipeImageItem) dataObject);
         performNavigation(R.id.action_swipeImageFragment_to_imageInfoDisplayFragment);
+    }
+
+    private void searchSheet() {
+        SearchSheetDialog searchSheet = new SearchSheetDialog();
+        searchSheet.show(requireActivity().getSupportFragmentManager(), "searchSheet");
     }
 
 

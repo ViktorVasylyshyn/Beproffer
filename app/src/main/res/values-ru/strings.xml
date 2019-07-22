@@ -3,6 +3,8 @@
 
     <!--App's name-->
     <string name="app_name">Beproffer</string>
+    <string name="app_name_low_case">beproffer</string>
+
 
 
     <!--Hints-->
@@ -55,8 +57,8 @@
 
     <!--Titles-->
     <string name="title_duration">ДЛИТЕЛЬНОСТЬ</string>
-    <string name="title_confirmed_contacts">КОНТАКТЫ</string>
-    <string name="title_contact_requests">ЗАПРОСЫ</string>
+    <string name="title_confirmed_contacts">Контакты</string>
+    <string name="title_new_customers_title">Клиенты</string>
     <string name="title_sign_in">ЛОГИН</string>
     <string name="title_price">ЦЕНА</string>
     <string name="title_customer_registration">НОВЫЙ КЛИЕНТ</string>
@@ -86,6 +88,11 @@
 
     <string name="title_search_fragment">КАКИЕ УСЛУГИ ВЫ ИЩИТЕ?</string>
     <string name="title_specialist_storage_fragment">МОИ РАБОТЫ</string>
+
+    <string name="title_search">Искать</string>
+
+    <string name="title_for">для</string>
+
 
 
     <!--/*Start/SignIn/Registration/e.t.s.*/-->

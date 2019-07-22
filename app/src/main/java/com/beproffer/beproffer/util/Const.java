@@ -87,6 +87,8 @@ public class Const {
 
     /*Log and system title*/
     public static final String ERROR = "ERROR";
+    public static final String CUSTOMERS = "customers";/*эти две константы нужны для определения*/
+    public static final String CONTACTS = "contacts";/*..какая часть экрана контактов активна*/
     public static final String UNKNSTAT = "unknown state";
     public static final String UNKNOWN_USER_REQUEST = "unknownUserRequest";/*ключ для получения
     параметров запроса из SharedPref для не зарегистрированного пользователя*/

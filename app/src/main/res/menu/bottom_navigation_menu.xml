@@ -10,8 +10,8 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/bnm_search"
-        android:icon="@drawable/bottom_navigation_bar_child_selector_search"
+        android:id="@+id/bnm_contacts"
+        android:icon="@drawable/bottom_navigation_bar_child_selector_contacts"
         android:title=""
         app:showAsAction="ifRoom"/>
 

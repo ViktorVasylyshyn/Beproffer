@@ -9,10 +9,11 @@
     <color name="color_base_button_text_white">#FFFFFF</color>
     <color name="color_base_green">#0c8922</color>
     <color name="color_base_transparent">#00FFFFFF</color>
-    <color name="color_icons_bnb">#FFFFFF</color>
+    <color name="color_icons_bnb">#0c8922</color>
 
     <!--Backgrounds-->
     <color name="color_background_grey">#E6E6E6</color>
+    <color name="color_background_grey_dark">#B8B8B8</color>
     <color name="color_background_white">#FFFFFF</color>
     <color name="color_bnb_background_start">#00FFFFFF</color>
     <color name="color_bnb_background_end">#FFFFFF</color>

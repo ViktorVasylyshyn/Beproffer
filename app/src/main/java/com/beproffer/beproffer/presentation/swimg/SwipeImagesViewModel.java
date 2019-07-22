@@ -26,10 +26,6 @@ public class SwipeImagesViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<SwipeImageItem>> getSwipeImageItemsList() {
-        if (mSwipeImageItemsList == null )
-            mSwipeImageItemsList = mRepository.getSwipeImageItemsListLiveData();
-        if(mSwipeImageItemsList.getValue() != null && mSwipeImageItemsList.getValue().size() == 0)
-            mRepository.obtainImagesFromDb();
         return mSwipeImageItemsList;
     }
 
@@ -41,12 +37,16 @@ public class SwipeImagesViewModel extends AndroidViewModel {
         return mRepository.getShowToast();
     }
 
-    public LiveData<Integer> getPerformNavigation() {
-        return mRepository.getPerformNavigation();
+    public LiveData<Boolean> getPerformNavigation() {
+        return mRepository.getPerformSearch();
     }
 
     public void deleteObservedImageItem(SwipeImageItem item) {
         mRepository.deleteObservedImageItem(item);
+    }
+
+    public void refreshItems(){
+        mRepository.refreshItems();
     }
 
     public void clearBrowsingHistory(){

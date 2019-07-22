@@ -3,6 +3,8 @@
 
     <!--App's name-->
     <string name="app_name">Beproffer</string>
+    <string name="app_name_low_case">beproffer</string>
+
 
 
     <!--Hints-->
@@ -54,8 +56,7 @@
 
     <!--Titles-->
     <string name="title_duration">ТРИВАЛІСТЬ</string>
-    <string name="title_confirmed_contacts">КОНТАКТИ</string>
-    <string name="title_contact_requests">ЗАПИТИ КОНТАКТУ</string>
+    <string name="title_confirmed_contacts">Контакти</string>
     <string name="title_sign_in">ВХІД</string>
     <string name="title_price">ЦІНА</string>
     <string name="title_customer_registration">НОВИЙ КЛІЄНТ</string>
@@ -85,6 +86,9 @@
 
     <string name="title_search_fragment">ЯКИЙ СЕРВІС ВИ ШУКАЄТЕ?</string>
     <string name="title_specialist_storage_fragment">МОЇ ЗОБРАЖЕННЯ</string>
+    <string name="title_search">Шукати</string>
+    <string name="title_for">для</string>
+
 
 
     <!--/*Start/SignIn/Registration/e.t.s.*/-->
@@ -189,6 +193,7 @@
 
     <string name="hint_specialist_phone_1">Впевніться, що номер телефону правильний. Він буде показуватися потенційним клієнтам.</string>
     <string name="hint_any_strong_password">Створіть надійний пароль, використовуючи літери, цифри та символи.</string>
+    <string name="title_new_customers_title">Клієнти</string>
 
 
     <!--new-->

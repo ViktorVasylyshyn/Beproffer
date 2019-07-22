@@ -92,22 +92,6 @@
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_profileFragment_to_confirmedContactsFragment"
-            app:destination="@id/confirmedContactsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:launchSingleTop="true"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_profileFragment_to_contactRequestsFragment"
-            app:destination="@id/contactRequestsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:launchSingleTop="true"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/profileEditFragment"
@@ -164,31 +148,6 @@
         app:popUpTo="@+id/swipeImageFragment"
         app:popUpToInclusive="true" />
     <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.beproffer.beproffer.presentation.search.SearchFragment"
-        android:label="search_fragment"
-        tools:layout="@layout/search_fragment" />
-    <action
-        android:id="@+id/action_global_searchFragment"
-        app:destination="@id/searchFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:launchSingleTop="true"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/swipeImageFragment"
-        app:popUpToInclusive="true" />
-    <fragment
-        android:id="@+id/confirmedContactsFragment"
-        android:name="com.beproffer.beproffer.presentation.contacts.confirmed.ContactsFragment"
-        android:label="confirmed_contacts_fragment"
-        tools:layout="@layout/contacts_fragment" />
-    <fragment
-        android:id="@+id/contactRequestsFragment"
-        android:name="com.beproffer.beproffer.presentation.contacts.request.IncomingContactRequestsFragment"
-        android:label="contact_requests_fragment"
-        tools:layout="@layout/incoming_contact_requests_fragment" />
-    <fragment
         android:id="@+id/settingsFragment"
         android:name="com.beproffer.beproffer.presentation.settings.SettingsFragment"
         android:label="settings_fragment_layout"
@@ -212,4 +171,19 @@
         android:name="com.beproffer.beproffer.presentation.sign_in_up.change_password.ResetPasswordFragment"
         android:label="reset_password_fragment"
         tools:layout="@layout/reset_password_fragment" />
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="com.beproffer.beproffer.presentation.contacts.confirmed.ContactsFragment"
+        android:label="contacts_fragment"
+        tools:layout="@layout/contacts_fragment" />
+    <action
+        android:id="@+id/action_global_contactsFragment"
+        app:destination="@id/contactsFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:launchSingleTop="true"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        app:popUpTo="@+id/swipeImageFragment"
+        app:popUpToInclusive="true" />
 </navigation>

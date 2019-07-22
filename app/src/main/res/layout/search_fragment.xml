@@ -87,7 +87,7 @@
         <ScrollView
             android:id="@+id/search_scroll_service_view"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/search_fragment_scroll_view_height"
+            android:layout_height="@dimen/bsl_scroll_view_width"
             app:layout_constraintEnd_toEndOf="@+id/search_type_title"
             app:layout_constraintStart_toStartOf="@+id/search_type_title"
             app:layout_constraintTop_toBottomOf="@+id/search_type_arrow_up">
@@ -247,7 +247,7 @@
         <ScrollView
             android:id="@+id/search_gender_scroll_view"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/search_fragment_scroll_view_height"
+            android:layout_height="@dimen/bsl_scroll_view_width"
             app:layout_constraintEnd_toEndOf="@+id/search_gender_title"
             app:layout_constraintStart_toStartOf="@+id/search_gender_title"
             app:layout_constraintTop_toBottomOf="@+id/search_gender_arrow_up">

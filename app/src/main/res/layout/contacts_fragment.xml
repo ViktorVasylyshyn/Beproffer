@@ -22,18 +22,37 @@
         android:layout_height="match_parent"
         tools:context=".presentation.contacts.confirmed.ContactsFragment">
 
-        <TextView
-            android:id="@+id/contacts_title"
+        <LinearLayout
+            android:id="@+id/contacts_bookmarks_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
-            android:maxLines="1"
-            android:padding="@dimen/base_padding_medium"
-            android:text="@string/title_confirmed_contacts"
-            android:textSize="@dimen/base_text_size_big"
+            android:background="@drawable/button_background_grey_stroke_rectangle"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/contacts_contacts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/base_padding_small"
+                android:maxLines="1"
+                android:text="@string/title_confirmed_contacts"
+                android:textSize="@dimen/base_text_size_big" />
+
+            <TextView
+                android:id="@+id/contacts_contact_requests"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/base_padding_small"
+                android:maxLines="1"
+                android:visibility="gone"
+                android:text="@string/title_new_customers_title"
+                android:textSize="@dimen/base_text_size_big" />
+
+        </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/contacts_recycler_view"
@@ -41,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
             android:scrollbars="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/contacts_title">
+            app:layout_constraintTop_toBottomOf="@+id/contacts_bookmarks_layout">
 
         </android.support.v7.widget.RecyclerView>
 
@@ -60,7 +79,6 @@
             android:id="@+id/contacts_no_contacts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/toast_no_any_contacts"
             android:textSize="@dimen/base_text_size_big"
             android:textStyle="italic"
             android:visibility="@{showNoContacts ? View.VISIBLE : View.GONE}"

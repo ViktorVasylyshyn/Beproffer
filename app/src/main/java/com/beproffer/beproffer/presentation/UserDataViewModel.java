@@ -9,7 +9,7 @@ import android.support.annotation.Nullable;
 
 import com.beproffer.beproffer.data.firebase.UserDataRepository;
 import com.beproffer.beproffer.data.models.ContactItem;
-import com.beproffer.beproffer.data.models.IncomingContactRequestItem;
+import com.beproffer.beproffer.data.models.ContactRequestItem;
 import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
 import com.beproffer.beproffer.data.models.UserInfo;
 
@@ -61,12 +61,12 @@ public class UserDataViewModel extends AndroidViewModel {
         return mRepository.getContacts();
     }
 
-    public LiveData<Map<String, IncomingContactRequestItem>> getIncomingContactRequests() {
-        return mRepository.getIncomingContactRequests();
+    public LiveData<Map<String, ContactRequestItem>> getIncomingContactRequests() {
+        return mRepository.getContactRequests();
     }
 
-    public void handleIncomingContactRequest(UserInfo currentUserInfo, IncomingContactRequestItem handledItem, boolean confirm) {
-        mRepository.handleIncomingContactRequest(currentUserInfo, handledItem, confirm);
+    public void handleIncomingContactRequest(ContactRequestItem handledItem, boolean confirm) {
+        mRepository.handleIncomingContactRequest(handledItem, confirm);
     }
 
     public void deleteContact(ContactItem deletedContact) {
@@ -98,8 +98,8 @@ public class UserDataViewModel extends AndroidViewModel {
         mRepository.resetTrigger(resetToastValue, resetHideKeyboardValue, resetBackStackValue);
     }
 
-    public void sendContactRequest(IncomingContactRequestItem incomingContactRequestItem, String specialistId) {
-        mRepository.sendContactRequest(incomingContactRequestItem, specialistId);
+    public void sendContactRequest(ContactRequestItem contactRequestItem, String specialistId) {
+        mRepository.sendContactRequest(contactRequestItem, specialistId);
     }
 
     public LiveData<Map<String, Boolean>> getOutgoingContactRequests() {

@@ -40,7 +40,7 @@ public class SwipeImagesRepository {
 
     private MutableLiveData<Boolean> mShowProgress = new MutableLiveData<>();
     private MutableLiveData<Integer> mShowToast = new MutableLiveData<>();
-    private MutableLiveData<Integer> mPerformNavigation = new MutableLiveData<>();
+    private MutableLiveData<Boolean> mPerformSearch = new MutableLiveData<>();
 
     private Map<String, String> mRequestParams;
 
@@ -60,6 +60,10 @@ public class SwipeImagesRepository {
     }
 
     public LiveData<List<SwipeImageItem>> getSwipeImageItemsListLiveData() {
+       if (mSwipeImageItemsList == null )
+            obtainRequestParams(mApplication);
+        if(mSwipeImageItemsList != null && mSwipeImageItemsList.size() == 0)
+            obtainImagesFromDb();
         return mSwipeImageItemsLiveData;
     }
 
@@ -73,6 +77,7 @@ public class SwipeImagesRepository {
     /*пытаемся получить параметры для пользователя или гостя. согласно этим параметрам, будет сделан запрос в Firebase.*/
     private void obtainRequestParams(Application application) {
         mShowProgress.setValue(true);
+        mSwipeImageItemsList = new ArrayList<>();
         SharedPreferences searchRequestData;
         if (mUser != null) {
             searchRequestData = application.getSharedPreferences(mUser.getUid(), MODE_PRIVATE);
@@ -80,7 +85,7 @@ public class SwipeImagesRepository {
             searchRequestData = application.getSharedPreferences(Const.UNKNOWN_USER_REQUEST, MODE_PRIVATE);
         }
         if (searchRequestData == null) {
-            feedBackToUi(false, R.string.toast_define_search_request, R.id.action_global_searchFragment);
+            feedBackToUi(false, R.string.toast_define_search_request, true);
             return;
         }
         try {
@@ -89,12 +94,12 @@ public class SwipeImagesRepository {
             mRequestParams.put(Const.SERVTYPE, searchRequestData.getString(Const.SERVTYPE, null));
             mRequestParams.put(Const.GENDER, searchRequestData.getString(Const.GENDER, null));
         } catch (NullPointerException e) {
-            feedBackToUi(false, R.string.toast_error_search_request, R.id.action_global_searchFragment);
+            feedBackToUi(false, R.string.toast_error_search_request, true);
             return;
         }
         /*if search request params are not correct or equals null - we go to the search fragment to define params*/
         if (!checkRequestParams()) {
-            feedBackToUi(false, R.string.toast_define_search_request, R.id.action_global_searchFragment);
+            feedBackToUi(false, R.string.toast_define_search_request, true);
             return;
         }
         if (mUser != null && mActualBrowsingHistory == null) {
@@ -158,11 +163,10 @@ public class SwipeImagesRepository {
                                 feedBackToUi(false, R.string.toast_error_has_occurred, null);
                                 return;
                             }
-                            if (!dataSnapshot.hasChildren()) {
-                                feedBackToUi(false, R.string.toast_no_available_images, R.id.action_global_searchFragment);
+                            if (dataSnapshot.getChildrenCount() <1) {
+                                feedBackToUi(false, R.string.toast_no_available_images, true);
                                 return;
                             }
-
                             mActualDataSnapshot = dataSnapshot;
 
                             filterOutItemsForAdapter();
@@ -170,17 +174,14 @@ public class SwipeImagesRepository {
 
                         @Override
                         public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
                         }
 
                         @Override
                         public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
                         }
 
                         @Override
                         public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
                         }
 
                         @Override
@@ -214,7 +215,7 @@ public class SwipeImagesRepository {
             mShowProgress.setValue(false);
             return;
         }
-        feedBackToUi(false, R.string.toast_no_available_images, R.id.action_global_searchFragment);
+        feedBackToUi(false, R.string.toast_no_available_images, true);
     }
 
     private void filterOutItemsForSignedUp(DataSnapshot snapshotItem) {
@@ -246,6 +247,10 @@ public class SwipeImagesRepository {
         mSwipeImageItemsLiveData.setValue(mSwipeImageItemsList);
     }
 
+    public void refreshItems(){
+        obtainRequestParams(mApplication);
+    }
+
     public LiveData<Boolean> getShowProgress() {
         return mShowProgress;
     }
@@ -254,22 +259,22 @@ public class SwipeImagesRepository {
         return mShowToast;
     }
 
-    public LiveData<Integer> getPerformNavigation() {
-        return mPerformNavigation;
+    public LiveData<Boolean> getPerformSearch() {
+        return mPerformSearch;
     }
 
-    public void resetTriggers(@Nullable Boolean resetToastValue, @Nullable Boolean resetPerformNavigationValue) {
+    public void resetTriggers(@Nullable Boolean resetToastValue, @Nullable Boolean resetPerformSearch) {
         if (resetToastValue != null && resetToastValue) {
             mShowToast.setValue(null);
         }
-        if (resetPerformNavigationValue != null && resetPerformNavigationValue) {
-            mPerformNavigation.setValue(null);
+        if (resetPerformSearch != null && resetPerformSearch) {
+            mPerformSearch.setValue(null);
         }
     }
 
     private void feedBackToUi(@Nullable Boolean showProgress,
                               @Nullable Integer toastResId,
-                              @Nullable Integer performNavigation) {
+                              @Nullable Boolean performSearch) {
 
         if (showProgress != null) {
             mShowProgress.setValue(showProgress);
@@ -277,8 +282,8 @@ public class SwipeImagesRepository {
         if (toastResId != null) {
             mShowToast.setValue(toastResId);
         }
-        if (performNavigation != null) {
-            mPerformNavigation.setValue(performNavigation);
+        if (performSearch != null) {
+            mPerformSearch.setValue(performSearch);
         }
     }
 }

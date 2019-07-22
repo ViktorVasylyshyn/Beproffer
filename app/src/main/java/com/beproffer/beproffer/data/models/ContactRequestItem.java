@@ -1,20 +1,20 @@
 package com.beproffer.beproffer.data.models;
 
-public class IncomingContactRequestItem {
+public class ContactRequestItem {
 
     private String requestUid;
     private String requestType;
     private String requestName;
     private String requestImageUrl;
 
-    private IncomingContactRequestItem(){
+    private ContactRequestItem(){
 
     }
 
-    public IncomingContactRequestItem(String requestUid,
-                                      String requestType,
-                                      String requestName,
-                                      String requestImageUrl) {
+    public ContactRequestItem(String requestUid,
+                              String requestType,
+                              String requestName,
+                              String requestImageUrl) {
         this.requestUid = requestUid;
         this.requestType = requestType;
         this.requestName = requestName;

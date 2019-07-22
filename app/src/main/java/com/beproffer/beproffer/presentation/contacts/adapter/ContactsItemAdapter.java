@@ -51,12 +51,10 @@ public class ContactsItemAdapter extends RecyclerView.Adapter<ContactsItemAdapte
 
         private ContactItemBinding mBinding;
 
-
         ContactsItemViewHolder(ContactItemBinding binding) {
             super(binding.getRoot());
             this.mBinding = binding;
         }
-
 
         void bindData(final ContactItem contactItem, Callback.OnContactClickListener callback, int position) {
             mBinding.setItem(contactItem);
