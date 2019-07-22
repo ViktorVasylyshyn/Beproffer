@@ -11,7 +11,7 @@ import android.support.annotation.Nullable;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.ContactItem;
-import com.beproffer.beproffer.data.models.IncomingContactRequestItem;
+import com.beproffer.beproffer.data.models.ContactRequestItem;
 import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
 import com.beproffer.beproffer.data.models.UserInfo;
 import com.beproffer.beproffer.util.Const;
@@ -57,8 +57,8 @@ public class UserDataRepository {
 
     private Map<String, ContactItem> mContactsMap = new HashMap<>();
     private MutableLiveData<Map<String, ContactItem>> mContactsMapLiveData = new MutableLiveData<>();
-    private Map<String, IncomingContactRequestItem> mIncomingContactRequestsMap = new HashMap<>();
-    private MutableLiveData<Map<String, IncomingContactRequestItem>> mIncomingContactRequestsMapLiveData = new MutableLiveData<>();
+    private Map<String, ContactRequestItem> mContactRequestsMap = new HashMap<>();
+    private MutableLiveData<Map<String, ContactRequestItem>> mContactRequestsMapLiveData = new MutableLiveData<>();
     private Map<String, Boolean> mOutgoingContactRequests = new HashMap<>();
     private MutableLiveData<Map<String, Boolean>> mOutgoingContactRequestsLiveData = new MutableLiveData<>();
 
@@ -329,6 +329,8 @@ public class UserDataRepository {
             } catch (NullPointerException e) {
                 feedBackToUi(false, R.string.toast_error_has_occurred, null, null);
             }
+        }else {
+            mContactsMapLiveData.setValue(mContactsMap);
         }
         mShowProgress.setValue(false);
         return mContactsMapLiveData;
@@ -348,23 +350,26 @@ public class UserDataRepository {
         });
     }
 
-    public LiveData<Map<String, IncomingContactRequestItem>> getIncomingContactRequests() {
+    public LiveData<Map<String, ContactRequestItem>> getContactRequests() {
         mShowProgress.setValue(true);
-        if (mUserDataSnapShot.hasChild(Const.INREQUEST) && mIncomingContactRequestsMap.isEmpty()) {
+        if (mUserDataSnapShot.hasChild(Const.INREQUEST) && mContactRequestsMap.isEmpty()) {
             for (DataSnapshot data : mUserDataSnapShot.child(Const.INREQUEST).getChildren()) {
                 try {
-                    mIncomingContactRequestsMap.put(data.getValue(IncomingContactRequestItem.class).getRequestUid(), data.getValue(IncomingContactRequestItem.class));
+                    mContactRequestsMap.put(data.getValue(ContactRequestItem.class).getRequestUid(), data.getValue(ContactRequestItem.class));
                 } catch (NullPointerException e) {
                     feedBackToUi(false, R.string.toast_error_has_occurred, null, null);
                 }
             }
-            mIncomingContactRequestsMapLiveData.setValue(mIncomingContactRequestsMap);
+            mContactRequestsMapLiveData.setValue(mContactRequestsMap);
+        }else {
+            mContactRequestsMapLiveData.setValue(mContactRequestsMap);
         }
         mShowProgress.setValue(false);
-        return mIncomingContactRequestsMapLiveData;
+        return mContactRequestsMapLiveData;
     }
 
-    public void handleIncomingContactRequest(UserInfo currentUserInfo, IncomingContactRequestItem handledItem, boolean confirm) {
+    public void handleIncomingContactRequest(ContactRequestItem handledItem, boolean confirm) {
+        UserInfo currentUserInfo = mUserInfoLiveData.getValue();
         mShowProgress.setValue(true);
         if (confirm) {
             mDatabaseRef.child(Const.USERS).
@@ -382,14 +387,14 @@ public class UserDataRepository {
         }
     }
 
-    private void deleteIncomingContactRequestData(IncomingContactRequestItem handledItem, boolean confirmed) {
+    private void deleteIncomingContactRequestData(ContactRequestItem handledItem, boolean confirmed) {
         mDatabaseRef.child(Const.USERS)
                 .child(Const.SPEC)
                 .child(mCurrentUserId)
                 .child(Const.INREQUEST)
                 .child(handledItem.getRequestUid()).removeValue().addOnSuccessListener(aVoid -> {
-                    mIncomingContactRequestsMap.remove(handledItem.getRequestUid());
-                    mIncomingContactRequestsMapLiveData.setValue(mIncomingContactRequestsMap);
+                    mContactRequestsMap.remove(handledItem.getRequestUid());
+                    mContactRequestsMapLiveData.setValue(mContactRequestsMap);
                     int toastRes;
                     if (confirmed) {
                         toastRes = R.string.toast_contact_confirmed;
@@ -401,7 +406,7 @@ public class UserDataRepository {
         );
     }
 
-    public void sendContactRequest(IncomingContactRequestItem incomingContactRequestItem, String specialistId) {
+    public void sendContactRequest(ContactRequestItem contactRequestItem, String specialistId) {
         mShowProgress.setValue(true);
         try {
             mDatabaseRef.child(Const.USERS)
@@ -409,7 +414,7 @@ public class UserDataRepository {
                     .child(specialistId)
                     .child(Const.INREQUEST)
                     .child(mCurrentUserId)
-                    .setValue(incomingContactRequestItem).addOnSuccessListener(aVoid -> {
+                    .setValue(contactRequestItem).addOnSuccessListener(aVoid -> {
                 mOutgoingContactRequests.put(specialistId, true);
                 /*исходящие запросы сохраняются только в течении текущего сеанса. стоит только
                  * пользователю перезайти в приложение, и история обновляется. возможно это мы
@@ -432,8 +437,8 @@ public class UserDataRepository {
         mCurrentUserType = null;
         mUserInfoLiveData.setValue(null);
         mUserDataSnapShot = null;
-        mIncomingContactRequestsMap = new HashMap<>();
-        mIncomingContactRequestsMapLiveData.setValue(mIncomingContactRequestsMap);
+        mContactRequestsMap = new HashMap<>();
+        mContactRequestsMapLiveData.setValue(mContactRequestsMap);
         mContactsMap = new HashMap<>();
         mContactsMapLiveData.setValue(mContactsMap);
         mSpecialistGalleryImageItemsMap = new HashMap<>();

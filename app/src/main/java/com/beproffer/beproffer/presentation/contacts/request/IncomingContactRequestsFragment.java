@@ -13,23 +13,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.data.models.ContactItem;
-import com.beproffer.beproffer.data.models.IncomingContactRequestItem;
+import com.beproffer.beproffer.data.models.ContactRequestItem;
 import com.beproffer.beproffer.databinding.IncomingContactRequestsFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
-import com.beproffer.beproffer.presentation.contacts.adapter.IncomingContactRequestsItemAdapter;
+import com.beproffer.beproffer.presentation.contacts.adapter.ContactRequestItemAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class IncomingContactRequestsFragment extends BaseUserInfoFragment {
 
     public final ObservableBoolean mShowNoIncomingContactRequests = new ObservableBoolean(false);
 
-    private IncomingContactRequestsItemAdapter mIncomingContactRequestsAdapter = new IncomingContactRequestsItemAdapter();
+    private ContactRequestItemAdapter mIncomingContactRequestsAdapter = new ContactRequestItemAdapter();
 
-    private List<IncomingContactRequestItem> mIncomingContactRequestsList;
+    private List<ContactRequestItem> mIncomingContactRequestsList;
 
     private IncomingContactRequestsFragmentBinding mBinding;
 
@@ -60,16 +57,7 @@ public class IncomingContactRequestsFragment extends BaseUserInfoFragment {
 
     @Override
     public void applyUserData() {
-        mUserDataViewModel.getIncomingContactRequests().observe(this, list -> {
-            if (list != null) {
-                mIncomingContactRequestsList = new ArrayList<>();
-                for (Map.Entry<String, IncomingContactRequestItem> entry : list.entrySet()) {
-                    mIncomingContactRequestsList.add(entry.getValue());
-                }
-                mShowNoIncomingContactRequests.set(list.isEmpty());
-            }
-            mIncomingContactRequestsAdapter.setData(mIncomingContactRequestsList);
-        });
+
     }
 
     private void itemTouch() {
@@ -96,12 +84,12 @@ public class IncomingContactRequestsFragment extends BaseUserInfoFragment {
         }).attachToRecyclerView(mIncomingContactRequestsRecyclerView);
     }
 
-    private void handleContactRequest(boolean confirm, IncomingContactRequestItem handledItem){
-        mUserDataViewModel.handleIncomingContactRequest(mCurrentUserInfo, handledItem, confirm);
+    private void handleContactRequest(boolean confirm, ContactRequestItem handledItem){
+        mUserDataViewModel.handleIncomingContactRequest(handledItem, confirm);
     }
 
     public void confirmAllContacts() {
-        for (IncomingContactRequestItem item : mIncomingContactRequestsList) {
+        for (ContactRequestItem item : mIncomingContactRequestsList) {
             handleContactRequest(true, item);
         }
     }

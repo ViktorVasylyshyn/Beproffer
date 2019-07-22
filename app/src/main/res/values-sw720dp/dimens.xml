@@ -60,6 +60,6 @@
     <dimen name="base_stroke_medium">4dp</dimen>
     <dimen name="base_stroke_small">2dp</dimen>
 
-    <dimen name="search_fragment_scroll_view_height">256dp</dimen>
+    <dimen name="bsl_scroll_view_width">256dp</dimen>
 
 </resources>

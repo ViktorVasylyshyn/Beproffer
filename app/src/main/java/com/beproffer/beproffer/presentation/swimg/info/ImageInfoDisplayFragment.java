@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.ContactItem;
-import com.beproffer.beproffer.data.models.IncomingContactRequestItem;
+import com.beproffer.beproffer.data.models.ContactRequestItem;
 import com.beproffer.beproffer.data.models.SwipeImageItem;
 import com.beproffer.beproffer.databinding.ImageInfoDisplayFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
@@ -113,7 +113,7 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
             return;
         }
 
-        mUserDataViewModel.sendContactRequest(new IncomingContactRequestItem(mCurrentUserInfo.getUserId()
+        mUserDataViewModel.sendContactRequest(new ContactRequestItem(mCurrentUserInfo.getUserId()
                 , mCurrentUserInfo.getUserType()
                 , mCurrentUserInfo.getUserName()
                 , mCurrentUserInfo.getUserProfileImageUrl()), mItem.getUid());

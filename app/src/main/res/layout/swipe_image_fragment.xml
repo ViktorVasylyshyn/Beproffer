@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -9,20 +9,46 @@
             name="showProgress"
             type="android.databinding.ObservableBoolean" />
 
+        <variable
+            name="search"
+            type="com.beproffer.beproffer.presentation.swimg.SwipeImageFragmentCallback" />
+
     </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.swimg.SwipeImageFragment">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name_low_case"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="@dimen/base_text_size_huge"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:layout_width="@dimen/bnb_icon_size"
+            android:layout_height="@dimen/bnb_icon_size"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_search_active"
+            android:layout_marginEnd="@dimen/base_margin_medium"
+            tools:ignore="ContentDescription"
+            android:onClick="@{(view) -> search.onSearchClick()}"/>
 
         <com.lorentzos.flingswipe.SwipeFlingAdapterView
             android:id="@+id/image_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/bnb_icon_size"
+            android:layout_marginTop="@dimen/bnb_icon_size"
+            android:layout_marginStart="@dimen/base_margin_small"
+            android:layout_marginEnd="@dimen/base_margin_small"
             app:rotation_degrees="15.5"
             tools:context=".presentation.MainActivity" />
 
@@ -32,7 +58,7 @@
             android:layout_height="@dimen/profile_image_quarter"
             android:layout_marginBottom="@dimen/profile_image_half"
             android:background="@drawable/circle_gradient_grey_background"
-            android:src="@drawable/ic_like"
+            android:src="@drawable/ic_plus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -44,7 +70,7 @@
             android:layout_height="@dimen/profile_image_quarter"
             android:layout_marginBottom="@dimen/profile_image_half"
             android:background="@drawable/circle_gradient_grey_background"
-            android:src="@drawable/ic_dislike"
+            android:src="@drawable/ic_exit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

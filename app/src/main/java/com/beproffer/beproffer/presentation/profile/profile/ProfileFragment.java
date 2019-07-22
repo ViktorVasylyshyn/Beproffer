@@ -62,18 +62,11 @@ public class ProfileFragment extends BaseUserInfoFragment {
 
     private void adaptProfileForSpecialist() {
         mBinding.profileStorage.setVisibility(View.VISIBLE);
-        mBinding.profileContactRequests.setVisibility(View.VISIBLE);
     }
 
     public void performNavigation(View view) {
         int res = 0;
         switch (view.getId()) {
-            case R.id.profile_contacts:
-                res = R.id.action_profileFragment_to_confirmedContactsFragment;
-                break;
-            case R.id.profile_contact_requests:
-                res = R.id.action_profileFragment_to_contactRequestsFragment;
-                break;
             case R.id.profile_storage:
                 res = R.id.action_profileFragment_to_specialistStorageFragment;
                 break;

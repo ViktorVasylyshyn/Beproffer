@@ -2,6 +2,7 @@
 
     <!--App's name-->
     <string name="app_name">Beproffer</string>
+    <string name="app_name_low_case">beproffer</string>
 
 
     <!--Hints-->
@@ -55,8 +56,8 @@
 
     <!--Titles-->
     <string name="title_duration">DURATION</string>
-    <string name="title_confirmed_contacts">CONTACTS</string>
-    <string name="title_contact_requests">CONTACT REQUESTS</string>
+    <string name="title_confirmed_contacts">Contacts</string>
+    <string name="title_new_customers_title">Customers</string>
     <string name="title_sign_in">sign in</string>
     <string name="title_price">PRICE</string>
     <string name="title_customer_registration">NEW CUSTOMER</string>
@@ -74,9 +75,9 @@
     <string name="title_reset_password">Reset</string>
 
     <string name="title_gender_unknown">GENDER</string>
-    <string name="title_gender_male">MALE</string>
-    <string name="title_gender_female">FEMALE</string>
-    <string name="title_gender_all_genders">ANY</string>
+    <string name="title_gender_male">Male</string>
+    <string name="title_gender_female">Female</string>
+    <string name="title_gender_all_genders">Both</string>
 
     <string name="title_duration_30_min">30min</string>
     <string name="title_duration_45_min">45min</string>
@@ -86,6 +87,8 @@
 
     <string name="title_search_fragment">WHAT ARE YOU LOOKING FOR?</string>
     <string name="title_specialist_storage_fragment">MY WORKS</string>
+    <string name="title_search">Search</string>
+    <string name="title_for">for</string>
 
 
     <!--/*Start/SignIn/Registration/e.t.s.*/-->
