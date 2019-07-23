@@ -34,19 +34,6 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="ContentDescription" />
 
-        <TextView
-            android:id="@+id/profile_app_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name_low_case"
-            android:layout_margin="@dimen/base_margin_extra_small"
-            android:textColor="@color/color_base_button_text_white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textSize="@dimen/base_text_size_huge"
-            android:textStyle="bold"/>
-
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraint_layout"
             android:layout_width="match_parent"
@@ -190,11 +177,11 @@
             android:id="@+id/profile_image"
             android:layout_width="@dimen/profile_image"
             android:layout_height="@dimen/profile_image"
-            android:layout_marginTop="@dimen/base_margin_medium"
+            android:layout_marginTop="@dimen/icons_size_normal_height"
             android:src="@{userInfo.userProfileImageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_app_title"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <ImageView
@@ -231,6 +218,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/profile_bottom_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_small"
+            android:layout_marginEnd="@dimen/base_margin_small"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/bnb_floating_button_bottom_margin"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_medium"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
     </android.support.constraint.ConstraintLayout>
 </layout>
