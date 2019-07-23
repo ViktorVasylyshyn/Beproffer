@@ -155,7 +155,7 @@ public class AppBindingAdapter {
                     resId = R.string.makeup_title_makeup;
                     break;
                 case Const.MAKPER:
-                    resId = R.string.makeup_title_makeup;
+                    resId = R.string.makeup_title_permanent_makeup;
                     break;
                 case Const.MAKEEX:
                     resId = R.string.makeup_title_eyelash_extension;

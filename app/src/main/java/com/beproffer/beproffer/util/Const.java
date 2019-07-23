@@ -98,8 +98,12 @@ public class Const {
 
     public static final int CONTACTS_NUM = 10; /*max num of available contacts*/
     public static final int SEARCH_PARAMS_NUM = 3; /*num of search params*/
+    public static final int IMAGES_BASE_SET_COUNT = 5; /*num of search params*/
+
 
     public static final int MAX_NUM_OF_IMAGES_IN_ADAPTER = 20; /*max num of image items in swipe card adapter*/
+    public static final int ANIMDUR = 1000; /*анимация для карточки состоит из двух этапов вправо - назад,
+     потом влево - назад. это задержка перед включением второй анимации*/
 
 
 }

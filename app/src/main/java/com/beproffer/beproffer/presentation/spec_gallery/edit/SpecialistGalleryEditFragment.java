@@ -56,6 +56,16 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
         public void confirmImageData() {
             checkServiceImageData();
         }
+
+        @Override
+        public void onTermsClick() {
+            if (checkInternetConnection()) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.href_terms_of_service)));
+                startActivity(browserIntent);
+            } else {
+                showToast(R.string.toast_no_internet_connection);
+            }
+        }
     };
 
     @Override

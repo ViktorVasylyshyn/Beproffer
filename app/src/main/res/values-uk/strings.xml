@@ -4,6 +4,8 @@
     <!--App's name-->
     <string name="app_name">Beproffer</string>
     <string name="app_name_low_case">beproffer</string>
+    <string name="app_version">v 0.9.0</string>
+    <string name="app_all_rights_reserved">Copyright 2019 "Beproffer" LLC. Всі права захищені.</string>
 
 
 
@@ -37,16 +39,19 @@
     <string name="hint_outfield_contact_us_title">Зв\'яжіться з нами, якщо маєте питання.</string>
     <string name="hint_outfield_contact_us_email">beproffer.llc@gmail.com</string>
     <string name="hint_outfield_use_correct_name_format">Використовуйте ваші ім\'я та прізвище, для кращого представлення вашого профайлу.</string>
-    <string name="hint_any_image">Використовуйте, будь ласка, зображення розміром до 1 мб, для його правильного відображення.</string>
     <string name="hint_any_browsing_history">Фільтрування переглянутих зображень можливе для зареєстрованих користувачів.</string>
     <string name="hint_any_prohibited_content">Дякуємо за допомогу. Якісний контент в Beproffer - одна з наших головних цілей.</string>
+    <string name="hint_any_image_size">Для кращого відображення вікористовуйте зображення роозміром до 1 мб.</string>
+    <string name="hint_any_add_more_personal_info">Додайте більше інформації про себе, щоб ваш профіль був більш привабливий.</string>
+    <string name="hint_specialist_add_more_images">Додайте зображення своїх послуг, щоб знайти клієнтів.</string>
     <string name="hint_outfield_confirm">прийняти</string>
     <string name="hint_outfield_deny">відхилити</string>
 
 
     <string name="href_terms_of_service">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5-%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-beproffer</string>
-    <string name="href_terms_of_service_title_0">Умовами Користування</string>
-    <string name="href_terms_of_service_title_1">Умови Користування</string>
+    <string name="href_terms_of_service_title_0">Умовами Використання</string>
+    <string name="href_terms_of_service_title_1">Умови Використання</string>
+    <string name="href_terms_of_service_title_2">Умовах Використання</string>
     <string name="href_privacy_policy">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0-%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8</string>
     <string name="href_privacy_policy_title_0">Політикою Конфіденційності</string>
     <string name="href_privacy_policy_title_1">Політика Конфіденційності</string>
@@ -98,36 +103,43 @@
 
 
     <!--Menu Titles-->
-    <string name="hair_title_haircut">СТРИЖКИ</string>
-    <string name="hair_title_extension">НАРОЩУВАННЯ ВОЛОССЯ</string>
-    <string name="hair_title_styling">ЗАЧІСКИ</string>
-    <string name="hair_title_straightening">ВИПРЯМЛЕННЯ</string>
-    <string name="hair_title_dyeing">ФАРБУВАННЯ</string>
-    <string name="hair_title_braids">КОСИ, ДРЕДИ</string>
+    <string name="hair_title_haircut">Стрижки</string>
+    <string name="hair_title_extension">Нарощування Волосся</string>
+    <string name="hair_title_styling">Зачіски</string>
+    <string name="hair_title_straightening">Випрямлення</string>
+    <string name="hair_title_dyeing">Фарбування</string>
+    <string name="hair_title_braids">Коси, Дреди</string>
 
-    <string name="nails_title_manicure">МАНІКЮР</string>
-    <string name="nails_title_pedicure">ПЕДИКЮР</string>
-    <string name="nails_title_extension">НАРОЩУВАННЯ НІГТІВ</string>
+    <string name="nails_title_manicure">Манікюр</string>
+    <string name="nails_title_pedicure">Педикюр</string>
+    <string name="nails_title_extension">Нарощування Нігтів</string>
 
-    <string name="makeup_title_makeup">МАКІЯЖ</string>
-    <string name="makeup_title_permanent_makeup">ПЕРМАНЕНТНИЙ МАКІЯЖ</string>
-    <string name="makeup_title_eyelash_extension">НАРОЩУВАННЯ ВІЙ</string>
-    <string name="makeup_title_eyebrow_styling">КОРЕКЦІЯ БРІВ</string>
+    <string name="makeup_title_makeup">Макіяж</string>
+    <string name="makeup_title_permanent_makeup">Перманентний Макіяж</string>
+    <string name="makeup_title_eyelash_extension">Нарощування Вій</string>
+    <string name="makeup_title_eyebrow_styling">Корекція Брів</string>
 
-    <string name="tattoo_title_tattoo">ТАТУЮВАННЯ</string>
-    <string name="tattoo_title_piercing">ПІРСИНГ</string>
-    <string name="tattoo_title_temporary_tattoo">ТИМЧАСОВІ ТАТУЮВАННЯ</string>
+    <string name="tattoo_title_tattoo">Татуювання</string>
+    <string name="tattoo_title_piercing">Пірсинг</string>
+    <string name="tattoo_title_temporary_tattoo">Тимчасові Татуювання</string>
 
-    <string name="fitness_title_trainer">ПЕРСОНАЛЬНИЙ ТРЕНЕР</string>
+    <string name="fitness_title_trainer">Персональний Тренер</string>
 
-    <string name="barber_title_barber">БАРБЕРШОП</string>
+    <string name="barber_title_barber">Барбершоп</string>
 
     <string name="confirmed_contact_menu_call">Задзвонити</string>
     <string name="confirmed_contact_menu_delete">Видалити</string>
 
     <string name="vote_prohibited_content">Заборонений контент.</string>
 
-    <!--Bottom navigation bar titles-->
+
+    <!--Image Upload Requirements-->
+    <string name="iur_requirements">Зверніть увагу</string>
+    <string name="iur_requirements_1">1. Для кращого відображення слід вікористовувати зображення роозміром до 500 кб і пропоціями 16:9 або 18:9. Велике, непропрорційне зображення може бути обтяте чи погано відображене.</string>
+    <string name="iur_requirements_2">2. Зображення повинно відображати послугу, відповідно розділу, в якому знаходиться.</string>
+    <string name="iur_requirements_3">3. Зображення повинно відображати результат особисто вашої роботи. Забороняються додаткові редагування зображення(крім обтиняння), і розміщення на ньому номерів телефону, надписів, логотипів, облич людей, дітей, особистих даних тощо.</string>
+    <string name="iur_requirements_4">4. Інформація про послугу повинна бути правдива, зрозуміла, однозначна.</string>
+    <string name="iur_requirements_n">Детальніше про вимоги до контенту в</string>
 
 
     <!--Toasts-->

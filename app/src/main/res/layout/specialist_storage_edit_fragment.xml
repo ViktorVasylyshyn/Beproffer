@@ -42,9 +42,8 @@
             android:id="@+id/specialist_storage_edit_type_image"
             android:layout_width="@dimen/icons_size_normal_width"
             android:layout_height="@dimen/icons_size_normal_height"
-            android:layout_marginStart="@dimen/base_margin_small"
-            android:layout_marginTop="@dimen/base_margin_small"
-            android:layout_marginEnd="@dimen/base_margin_small"
+            android:layout_margin="@dimen/base_margin_extra_small"
+            app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_gender_image"
             app:layout_constraintStart_toEndOf="@id/specialist_storage_edit_image"
             app:layout_constraintTop_toTopOf="parent"
             app:setTypeImage="@{item.type}"
@@ -54,10 +53,8 @@
             android:id="@+id/specialist_storage_edit_type_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/base_padding_small"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_medium"
-            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_type_image"
             app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_type_image"
             app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_type_image"
             app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_type_image"
@@ -67,10 +64,10 @@
             android:id="@+id/specialist_storage_edit_gender_image"
             android:layout_width="@dimen/icons_size_normal_width"
             android:layout_height="@dimen/icons_size_normal_height"
-            android:layout_marginStart="@dimen/base_margin_small"
-            android:layout_marginTop="@dimen/base_margin_small"
-            app:layout_constraintStart_toEndOf="@id/specialist_storage_edit_image"
-            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_type_title"
+            android:layout_margin="@dimen/base_margin_extra_small"
+            app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_duration_image"
+            app:layout_constraintStart_toEndOf="@id/specialist_storage_edit_type_image"
+            app:layout_constraintTop_toTopOf="parent"
             app:setGenderImage="@{item.gender}"
             tools:ignore="ContentDescription" />
 
@@ -78,10 +75,8 @@
             android:id="@+id/specialist_storage_edit_gender_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/base_padding_small"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_medium"
-            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_gender_image"
             app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_gender_image"
             app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_gender_image"
             app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_gender_image"
@@ -91,9 +86,10 @@
             android:id="@+id/specialist_storage_edit_duration_image"
             android:layout_width="@dimen/icons_size_normal_width"
             android:layout_height="@dimen/icons_size_normal_height"
-            android:layout_margin="@dimen/base_margin_small"
-            app:layout_constraintStart_toEndOf="@id/specialist_storage_edit_image"
-            app:layout_constraintTop_toBottomOf="@id/specialist_storage_edit_gender_title"
+            android:layout_margin="@dimen/base_margin_extra_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/specialist_storage_edit_gender_image"
+            app:layout_constraintTop_toTopOf="parent"
             app:setDurationImage="@{item.duration}"
             tools:ignore="ContentDescription" />
 
@@ -102,46 +98,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
+            android:gravity="center"
             android:hint="@string/hint_price_infield"
             android:inputType="number"
             android:maxLength="10"
             android:maxLines="1"
-            android:gravity="center"
             android:text="@={item.price}"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_big"
-            app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_duration_image"
+            app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_type_scroll"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_image"
             tools:ignore="Autofill" />
 
-        <HorizontalScrollView
+        <ScrollView
             android:id="@+id/specialist_storage_edit_type_scroll"
-            android:layout_width="@dimen/profile_image_three_quarters"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
-            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_type_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_type_image"
-            app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_type_image">
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/specialist_edit_fragment_scroll_height"
+            android:layout_margin="@dimen/base_margin_extra_small"
+            android:background="@drawable/button_background_grey_stroke_rectangle"
+            app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_type_image"
+            app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_type_image"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_type_title">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/specialist_storage_edit_haircut_icon"
                     android:layout_width="@dimen/icons_size_small_width"
                     android:layout_height="@dimen/icons_size_small_height"
-                    android:layout_marginTop="@dimen/base_margin_small"
+                    android:layout_margin="@dimen/base_margin_small"
                     android:onClick="@{fragmentCallback::onTypeButtonClick}"
                     android:src="@drawable/ic_haircut"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     tools:ignore="ContentDescription" />
 
                 <TextView
-                    android:id="@+id/specialist_storage_edit_haircut_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangle_grey_background"
@@ -157,12 +153,11 @@
                     android:id="@+id/specialist_storage_edit_nails_icon"
                     android:layout_width="@dimen/icons_size_small_width"
                     android:layout_height="@dimen/icons_size_small_height"
-                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:layout_marginTop="@dimen/base_margin_medium"
                     android:onClick="@{fragmentCallback::onTypeButtonClick}"
                     android:src="@drawable/ic_nails"
-                    app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_makeup_icon"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_haircut_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_haircut_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_haircut_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_haircut_icon"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -181,12 +176,11 @@
                     android:id="@+id/specialist_storage_edit_makeup_icon"
                     android:layout_width="@dimen/icons_size_small_width"
                     android:layout_height="@dimen/icons_size_small_height"
-                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:layout_marginTop="@dimen/base_margin_medium"
                     android:onClick="@{fragmentCallback::onTypeButtonClick}"
                     android:src="@drawable/ic_makeup"
-                    app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_barber_icon"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_nails_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_nails_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_haircut_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_nails_icon"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -205,12 +199,11 @@
                     android:id="@+id/specialist_storage_edit_barber_icon"
                     android:layout_width="@dimen/icons_size_small_width"
                     android:layout_height="@dimen/icons_size_small_height"
-                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:layout_marginTop="@dimen/base_margin_medium"
                     android:onClick="@{fragmentCallback::onTypeButtonClick}"
                     android:src="@drawable/ic_barbershop"
-                    app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_tattoo_piercing_icon"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_makeup_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_makeup_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_haircut_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_makeup_icon"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -229,12 +222,11 @@
                     android:id="@+id/specialist_storage_edit_tattoo_piercing_icon"
                     android:layout_width="@dimen/icons_size_small_width"
                     android:layout_height="@dimen/icons_size_small_height"
-                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:layout_marginTop="@dimen/base_margin_medium"
                     android:onClick="@{fragmentCallback::onTypeButtonClick}"
                     android:src="@drawable/ic_tattoo_piercing"
-                    app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_fitness_icon"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_barber_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_barber_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_haircut_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_barber_icon"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -253,12 +245,11 @@
                     android:id="@+id/specialist_storage_edit_fitness_icon"
                     android:layout_width="@dimen/icons_size_small_width"
                     android:layout_height="@dimen/icons_size_small_height"
-                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:layout_marginTop="@dimen/base_margin_medium"
                     android:onClick="@{fragmentCallback::onTypeButtonClick}"
                     android:src="@drawable/ic_fitness"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_tattoo_piercing_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_tattoo_piercing_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_haircut_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_tattoo_piercing_icon"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -273,52 +264,34 @@
                     app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_fitness_icon"
                     app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_fitness_icon" />
 
-
             </android.support.constraint.ConstraintLayout>
 
-        </HorizontalScrollView>
+        </ScrollView>
 
-        <ImageView
-            android:layout_width="@dimen/base_margin_big"
-            android:layout_height="@dimen/profile_image_quarter"
-            android:src="@drawable/ic_arrow_left"
-            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_type_scroll"
-            app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_type_scroll"
-            app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_type_scroll"
-            tools:ignore="ContentDescription" />
-
-        <ImageView
-            android:layout_width="@dimen/base_margin_big"
-            android:layout_height="@dimen/profile_image_quarter"
-            android:src="@drawable/ic_arrow_right"
-            app:layout_constraintBottom_toBottomOf="@id/specialist_storage_edit_type_scroll"
-            app:layout_constraintStart_toEndOf="@id/specialist_storage_edit_type_scroll"
-            app:layout_constraintTop_toTopOf="@id/specialist_storage_edit_type_scroll"
-            tools:ignore="ContentDescription" />
-
-        <HorizontalScrollView
+        <ScrollView
             android:id="@+id/specialist_storage_edit_gender_scroll"
-            android:layout_width="@dimen/profile_image_three_quarters"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
-            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_gender_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_gender_image"
-            app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_gender_image">
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/specialist_edit_fragment_scroll_height"
+            android:layout_margin="@dimen/base_margin_extra_small"
+            android:background="@drawable/button_background_grey_stroke_rectangle"
+            app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_gender_image"
+            app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_gender_image"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_gender_title">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/specialist_storage_edit_gender_male_icon"
                     android:layout_width="@dimen/icons_size_small_width"
                     android:layout_height="@dimen/icons_size_small_height"
-                    android:layout_marginTop="@dimen/base_margin_small"
+                    android:layout_margin="@dimen/base_margin_small"
                     android:onClick="@{fragmentCallback::onGenderButtonClick}"
                     android:src="@drawable/ic_gender_sign_male"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -337,11 +310,11 @@
                     android:id="@+id/specialist_storage_edit_gender_female_icon"
                     android:layout_width="@dimen/icons_size_small_width"
                     android:layout_height="@dimen/icons_size_small_height"
-                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:layout_marginTop="@dimen/base_margin_medium"
                     android:onClick="@{fragmentCallback::onGenderButtonClick}"
                     android:src="@drawable/ic_gender_sign_female"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_gender_male_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_gender_male_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_gender_male_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_gender_male_icon"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -360,11 +333,11 @@
                     android:id="@+id/specialist_storage_edit_gender_all_icon"
                     android:layout_width="@dimen/icons_size_small_width"
                     android:layout_height="@dimen/icons_size_small_height"
-                    android:layout_marginStart="@dimen/base_margin_extra_small"
+                    android:layout_marginTop="@dimen/base_margin_medium"
                     android:onClick="@{fragmentCallback::onGenderButtonClick}"
                     android:src="@drawable/ic_gender_sign_any"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_gender_female_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_gender_female_icon"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_gender_female_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_gender_female_icon"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -379,185 +352,91 @@
                     app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_gender_all_icon"
                     app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_gender_all_icon" />
 
-
             </android.support.constraint.ConstraintLayout>
 
-        </HorizontalScrollView>
+        </ScrollView>
 
-        <ImageView
-            android:layout_width="@dimen/base_margin_big"
-            android:layout_height="@dimen/profile_image_quarter"
-            android:src="@drawable/ic_arrow_left"
-            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_gender_scroll"
-            app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_gender_scroll"
-            app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_gender_scroll"
-            tools:ignore="ContentDescription" />
-
-        <ImageView
-            android:layout_width="@dimen/base_margin_big"
-            android:layout_height="@dimen/profile_image_quarter"
-            android:src="@drawable/ic_arrow_right"
-            app:layout_constraintBottom_toBottomOf="@id/specialist_storage_edit_gender_scroll"
-            app:layout_constraintStart_toEndOf="@id/specialist_storage_edit_gender_scroll"
-            app:layout_constraintTop_toTopOf="@id/specialist_storage_edit_gender_scroll"
-            tools:ignore="ContentDescription" />
-
-        <HorizontalScrollView
+        <ScrollView
             android:id="@+id/specialist_storage_edit_duration_scroll"
-            android:layout_width="@dimen/profile_image_three_quarters"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
-            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_duration_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_duration_image"
-            app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_duration_image">
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/specialist_edit_fragment_scroll_height"
+            android:background="@drawable/button_background_grey_stroke_rectangle"
+            app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_duration_image"
+            app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_duration_image"
+            app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_gender_scroll">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/specialist_storage_edit_duration_30_min_icon"
                     android:layout_width="@dimen/icons_size_small_width"
                     android:layout_height="@dimen/icons_size_small_height"
-                    android:layout_marginTop="@dimen/base_margin_small"
+                    android:layout_margin="@dimen/base_margin_small"
                     android:onClick="@{fragmentCallback::onDurationButtonClick}"
                     android:src="@drawable/ic_duration_30_min"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     tools:ignore="ContentDescription" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rectangle_grey_background"
-                    android:text="@string/title_duration_30_min"
-                    android:textColor="@color/color_base_text"
-                    android:textSize="@dimen/base_text_size_small"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_duration_30_min_icon"
-                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_duration_30_min_icon"
-                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_30_min_icon" />
 
                 <ImageView
                     android:id="@+id/specialist_storage_edit_duration_45_min_icon"
                     android:layout_width="@dimen/icons_size_small_width"
                     android:layout_height="@dimen/icons_size_small_height"
-                    android:layout_marginStart="@dimen/base_margin_extra_small"
                     android:onClick="@{fragmentCallback::onDurationButtonClick}"
                     android:src="@drawable/ic_duration_45_min"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_duration_30_min_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_duration_30_min_icon"
+                    android:layout_marginTop="@dimen/base_margin_small"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_duration_30_min_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_30_min_icon"
                     tools:ignore="ContentDescription" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rectangle_grey_background"
-                    android:text="@string/title_duration_45_min"
-                    android:textColor="@color/color_base_text"
-                    android:textSize="@dimen/base_text_size_small"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_duration_45_min_icon"
-                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_duration_45_min_icon"
-                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_45_min_icon" />
 
                 <ImageView
                     android:id="@+id/specialist_storage_edit_duration_60_min_icon"
                     android:layout_width="@dimen/icons_size_small_width"
                     android:layout_height="@dimen/icons_size_small_height"
-                    android:layout_marginStart="@dimen/base_margin_extra_small"
                     android:onClick="@{fragmentCallback::onDurationButtonClick}"
                     android:src="@drawable/ic_duration_60_min"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_duration_45_min_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_duration_45_min_icon"
+                    android:layout_marginTop="@dimen/base_margin_small"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_duration_30_min_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_45_min_icon"
                     tools:ignore="ContentDescription" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rectangle_grey_background"
-                    android:text="@string/title_duration_60_min"
-                    android:textColor="@color/color_base_text"
-                    android:textSize="@dimen/base_text_size_small"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_duration_60_min_icon"
-                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_duration_60_min_icon"
-                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_60_min_icon" />
 
                 <ImageView
                     android:id="@+id/specialist_storage_edit_duration_90_min_icon"
                     android:layout_width="@dimen/icons_size_small_width"
                     android:layout_height="@dimen/icons_size_small_height"
-                    android:layout_marginStart="@dimen/base_margin_extra_small"
                     android:onClick="@{fragmentCallback::onDurationButtonClick}"
                     android:src="@drawable/ic_duration_90_min"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_duration_60_min_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_duration_60_min_icon"
+                    android:layout_marginTop="@dimen/base_margin_small"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_duration_30_min_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_60_min_icon"
                     tools:ignore="ContentDescription" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rectangle_grey_background"
-                    android:text="@string/title_duration_90_min"
-                    android:textColor="@color/color_base_text"
-                    android:textSize="@dimen/base_text_size_small"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_duration_90_min_icon"
-                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_duration_90_min_icon"
-                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_90_min_icon" />
 
                 <ImageView
                     android:id="@+id/specialist_storage_edit_duration_120_min_icon"
                     android:layout_width="@dimen/icons_size_small_width"
                     android:layout_height="@dimen/icons_size_small_height"
-                    android:layout_marginStart="@dimen/base_margin_extra_small"
                     android:onClick="@{fragmentCallback::onDurationButtonClick}"
                     android:src="@drawable/ic_duration_120_min"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_duration_90_min_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_duration_90_min_icon"
+                    android:layout_marginTop="@dimen/base_margin_small"
+                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_duration_30_min_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_90_min_icon"
                     tools:ignore="ContentDescription" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rectangle_grey_background"
-                    android:text="@string/title_duration_120_min"
-                    android:textColor="@color/color_base_text"
-                    android:textSize="@dimen/base_text_size_small"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_duration_120_min_icon"
-                    app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_duration_120_min_icon"
-                    app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_120_min_icon" />
 
             </android.support.constraint.ConstraintLayout>
 
-        </HorizontalScrollView>
-
-        <ImageView
-            android:layout_width="@dimen/base_margin_big"
-            android:layout_height="@dimen/profile_image_quarter"
-            android:src="@drawable/ic_arrow_left"
-            app:layout_constraintBottom_toBottomOf="@+id/specialist_storage_edit_duration_scroll"
-            app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_duration_scroll"
-            app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_duration_scroll"
-            tools:ignore="ContentDescription" />
-
-        <ImageView
-            android:layout_width="@dimen/base_margin_big"
-            android:layout_height="@dimen/profile_image_quarter"
-            android:src="@drawable/ic_arrow_right"
-            app:layout_constraintBottom_toBottomOf="@id/specialist_storage_edit_duration_scroll"
-            app:layout_constraintStart_toEndOf="@id/specialist_storage_edit_duration_scroll"
-            app:layout_constraintTop_toTopOf="@id/specialist_storage_edit_duration_scroll"
-            tools:ignore="ContentDescription" />
+        </ScrollView>
 
         <EditText
             android:id="@+id/specialist_storage_edit_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_big"
+            android:layout_marginTop="@dimen/base_margin_small"
+            android:layout_marginBottom="@dimen/base_margin_small"
+            android:layout_marginStart="@dimen/base_margin_big"
+            android:layout_marginEnd="@dimen/base_margin_big"
             android:hint="@string/hint_description_infield"
             android:inputType="textMultiLine"
             android:maxLength="100"
@@ -570,18 +449,111 @@
             tools:ignore="Autofill" />
 
         <ImageView
+            android:id="@+id/specialist_storage_check_mark"
             android:layout_width="@dimen/icons_size_normal_width"
             android:layout_height="@dimen/icons_size_normal_height"
-            android:layout_alignParentTop="true"
             android:layout_margin="@dimen/base_margin_small"
-            android:layout_marginEnd="@dimen/base_margin_small"
+            android:background="@drawable/button_background_green_stroke_rectangle"
             android:onClick="@{(view) -> fragmentCallback.confirmImageData()}"
             android:src="@drawable/ic_check_mark"
-            android:background="@drawable/button_background_green_stroke_rectangle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_description"
             tools:ignore="ContentDescription" />
+
+        <ScrollView
+            android:id="@+id/specialist_storage_edit_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/specialist_edit_fragment_image_height"
+            android:layout_marginStart="@dimen/base_margin_medium"
+            android:layout_marginEnd="@dimen/base_margin_medium"
+            android:layout_marginBottom="@dimen/base_margin_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/button_background_grey_stroke_rectangle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/base_margin_extra_small"
+                    android:text="@string/iur_requirements"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_medium"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/base_margin_small"
+                    android:layout_marginEnd="@dimen/base_margin_small"
+                    android:text="@string/iur_requirements_1"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_medium"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/base_margin_small"
+                    android:layout_marginEnd="@dimen/base_margin_small"
+                    android:layout_marginTop="@dimen/base_margin_extra_small"
+                    android:text="@string/iur_requirements_2"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_medium"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/base_margin_small"
+                    android:layout_marginEnd="@dimen/base_margin_small"
+                    android:layout_marginTop="@dimen/base_margin_extra_small"
+                    android:text="@string/iur_requirements_3"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_medium"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/base_margin_small"
+                    android:layout_marginEnd="@dimen/base_margin_small"
+                    android:layout_marginTop="@dimen/base_margin_extra_small"
+                    android:text="@string/iur_requirements_4"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_medium"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/base_margin_small"
+                    android:layout_marginEnd="@dimen/base_margin_small"
+                    android:layout_marginTop="@dimen/base_margin_extra_small"
+                    android:text="@string/iur_requirements_n"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_medium"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/customer_sign_up_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/base_margin_small"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/href_terms_of_service_title_0"
+                    android:onClick="@{(view) -> fragmentCallback.onTermsClick()}"
+                    android:textSize="@dimen/base_text_size_medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_agree_to" />
+
+            </LinearLayout>
+        </ScrollView>
 
         <ProgressBar
             android:id="@+id/specialist_storage_edit_progress_bar"
@@ -595,20 +567,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/specialist_storage_edit_bottom_hint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/base_margin_small"
-            android:layout_marginEnd="@dimen/base_margin_small"
-            android:text="@string/hint_any_image"
-            android:layout_marginBottom="@dimen/bnb_floating_button_bottom_margin"
-            android:background="@drawable/rectangle_grey_background"
-            android:gravity="center"
-            android:textColor="@color/color_base_text"
-            android:textSize="@dimen/base_text_size_medium"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toBottomOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 

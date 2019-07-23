@@ -3,6 +3,7 @@ package com.beproffer.beproffer.presentation.swimg;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.beproffer.beproffer.databinding.SwipeImageFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.swimg.adapter.SwipeImageAdapter;
 import com.beproffer.beproffer.presentation.swimg.search_sheet.SearchSheetDialog;
+import com.beproffer.beproffer.util.Const;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.List;
@@ -119,6 +121,11 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
         SwipeFlingAdapterView flingImageContainer = mBinding.imageFrame;
         flingImageContainer.setAdapter(mSwipeImageAdapter);
 
+        /*подразумевается, что зарегистрированный юзер уже знает, что карточки можно свайпать в разные стороны
+        * и в дополнительных анимациях, как подсказках, не нуждается*/
+        if (getFirebaseUser() == null)
+            onCardHintAnimation(flingImageContainer);
+
         flingImageContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
@@ -149,6 +156,7 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
         flingImageContainer.setOnItemClickListener((itemPosition, dataObject) -> displayImageInfo(dataObject));
         /*попробовать здесь прописать анимацию для изображения. чтобы пользователь, войдя, понял
          * что это изображение нужно сбросить*/
+
     }
 
     private void onCardExit(Object imageItem) {
@@ -169,6 +177,20 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
             Animation animation;
             animation = AnimationUtils.loadAnimation(requireContext(), animId);
             image.startAnimation(animation);
+        } catch (NullPointerException e) {
+            showToast(R.string.toast_error_has_occurred);
+        }
+    }
+
+    private void onCardHintAnimation(View view) {
+        try {
+            Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_card_animation_right);
+            view.startAnimation(animation);
+            Handler handlerWordAnim = new Handler();
+            handlerWordAnim.postDelayed(() -> {
+                Animation animation1 = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_card_animation_left);
+                view.startAnimation(animation1);
+            }, Const.ANIMDUR);
         } catch (NullPointerException e) {
             showToast(R.string.toast_error_has_occurred);
         }

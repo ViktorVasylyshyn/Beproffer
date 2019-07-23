@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.ProfileFragmentBinding;
@@ -44,9 +46,9 @@ public class ProfileFragment extends BaseUserInfoFragment {
         super.onActivityCreated(savedInstanceState);
         mBinding.setFragmentCallback(mCallback);
         mBinding.setShowProgress(mShowProgress);
-        if(FirebaseAuth.getInstance() == null){
+        if (FirebaseAuth.getInstance() == null) {
             performNavigation(R.id.action_global_signInFragment);
-        }else {
+        } else {
             initUserData();
         }
     }
@@ -57,6 +59,9 @@ public class ProfileFragment extends BaseUserInfoFragment {
             adaptProfileForSpecialist();
         }
         mBinding.setUserInfo(mCurrentUserInfo);
+
+        hintsForUsers();
+
         showProgress(false);
     }
 
@@ -83,6 +88,35 @@ public class ProfileFragment extends BaseUserInfoFragment {
                 showToast(R.string.toast_error_has_occurred);
         }
         performNavigation(res);
+    }
+
+    private void hintsForUsers() {
+        /*просто анимация, типа юзерфрендли и все такое. нужно подтолкнуть человека к тем действиям, которые от
+         * него требуютсяю в случае специалиста - подмигивание значка галлереи. если там все нормально -
+         * проверяем есть ли описание профиля. предположим, что если описания нет, то профиль заполнен
+         * не до концаю для кастомера же проверяем только описание*/
+        if (mCurrentUserInfo.getUserType().equals(Const.SPEC)) {
+            mUserDataViewModel.getSpecialistGalleryData().observe(this, data -> {
+                if (data != null && data.size() < Const.IMAGES_BASE_SET_COUNT) {
+
+                    Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_blinking_icon_anim);
+                    mBinding.profileStorage.startAnimation(animation);
+                    mBinding.profileBottomHint.setText(R.string.hint_specialist_add_more_images);
+                } else {
+                    if (mCurrentUserInfo.getUserInfo() == null || mCurrentUserInfo.getUserInfo().isEmpty()) {
+                        Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_blinking_icon_anim);
+                        mBinding.profileEdit.startAnimation(animation);
+                        mBinding.profileBottomHint.setText(R.string.hint_any_add_more_personal_info);
+                    }
+                }
+            });
+        } else {
+            if (mCurrentUserInfo.getUserInfo() == null || mCurrentUserInfo.getUserInfo().isEmpty()) {
+                Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_blinking_icon_anim);
+                mBinding.profileEdit.startAnimation(animation);
+                mBinding.profileBottomHint.setText(R.string.hint_any_add_more_personal_info);
+            }
+        }
     }
 
     public void logOut() {

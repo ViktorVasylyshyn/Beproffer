@@ -3,6 +3,8 @@
     <!--App's name-->
     <string name="app_name">Beproffer</string>
     <string name="app_name_low_case">beproffer</string>
+    <string name="app_version">v 0.9.0</string>
+    <string name="app_all_rights_reserved">Copyright 2019 "Beproffer" LLC. All rights reserved.</string>
 
 
     <!--Hints-->
@@ -38,14 +40,17 @@
     <string name="hint_specialist_phone_1">Make sure your phone number is correct. It will be shown to your potential customers.</string>
     <string name="hint_any_strong_password">Make sure your password is strong.</string>
     <string name="hint_any_browsing_history">Browsing history filter available for signed up users only.</string>
-    <string name="hint_any_image">Please use images up to 1 mb for it correct display.</string>
     <string name="hint_any_prohibited_content">Thank you for your help. Quality content in Beproffer one of our main goals.</string>
+    <string name="hint_any_image_size">For better performance use images up to 500 kb.</string>
+    <string name="hint_any_add_more_personal_info">Add information about you, to make your profile more attractive.</string>
+    <string name="hint_specialist_add_more_images">Add more images to your gallery, to find more customers.</string>
     <string name="hint_outfield_confirm">confirm</string>
     <string name="hint_outfield_deny">deny</string>
 
     <!--Refs-->
-    <string name="href_terms_of_service_title_0">Terms of Service</string>
-    <string name="href_terms_of_service_title_1">Terms of Service</string>
+    <string name="href_terms_of_service_title_0">Terms of Use</string>
+    <string name="href_terms_of_service_title_1">Terms of Use</string>
+    <string name="href_terms_of_service_title_2">Terms of Use</string>
     <string name="href_privacy_policy_title_0">Privacy Policy</string>
     <string name="href_privacy_policy_title_1">Privacy Policy</string>
     <string name="href_terms_of_service">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5-%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-beproffer</string>
@@ -98,36 +103,43 @@
 
 
     <!--Menu Titles-->
-    <string name="hair_title_haircut">HAIRCUT</string>
-    <string name="hair_title_extension">HAIR EXTENSION</string>
-    <string name="hair_title_styling">STYLING</string>
-    <string name="hair_title_straightening">STRAIGHTENING</string>
-    <string name="hair_title_dyeing">DYEING</string>
-    <string name="hair_title_braids">BRAIDS, DREADLOCKS</string>
+    <string name="hair_title_haircut">Haircut</string>
+    <string name="hair_title_extension">Hair Extension</string>
+    <string name="hair_title_styling">Styling</string>
+    <string name="hair_title_straightening">Straightening</string>
+    <string name="hair_title_dyeing">Dyeing</string>
+    <string name="hair_title_braids">Braids, Dreadlocks</string>
 
-    <string name="nails_title_manicure">MANICURE</string>
-    <string name="nails_title_pedicure">PEDICURE</string>
-    <string name="nails_title_extension">NAILS EXTENSION</string>
+    <string name="nails_title_manicure">Manicure</string>
+    <string name="nails_title_pedicure">Pedicure</string>
+    <string name="nails_title_extension">Nails Extension</string>
 
-    <string name="makeup_title_makeup">MAKEUP</string>
-    <string name="makeup_title_permanent_makeup">PERMANENT MAKEUP</string>
-    <string name="makeup_title_eyelash_extension">EYELASH EXTENSION</string>
-    <string name="makeup_title_eyebrow_styling">EYEBROW STYLING</string>
+    <string name="makeup_title_makeup">Makeup</string>
+    <string name="makeup_title_permanent_makeup">Permanent Makeup</string>
+    <string name="makeup_title_eyelash_extension">Eyelash Extension</string>
+    <string name="makeup_title_eyebrow_styling">Eyebrow Styling</string>
 
-    <string name="tattoo_title_tattoo">TATTOO</string>
-    <string name="tattoo_title_piercing">PIERCING</string>
-    <string name="tattoo_title_temporary_tattoo">TEMPORARY TATTOO</string>
+    <string name="tattoo_title_tattoo">Tattoo</string>
+    <string name="tattoo_title_piercing">Piercing</string>
+    <string name="tattoo_title_temporary_tattoo">Temporary Tattoo</string>
 
-    <string name="fitness_title_trainer">PERSONAL TRAINER</string>
+    <string name="fitness_title_trainer">Personal Trainer</string>
 
-    <string name="barber_title_barber">BARBER\'S</string>
+    <string name="barber_title_barber">Barbershop</string>
 
     <string name="confirmed_contact_menu_call">call</string>
     <string name="confirmed_contact_menu_delete">delete</string>
 
     <string name="vote_prohibited_content">Prohibited content.</string>
 
-    <!--Bottom navigation bar titles-->
+
+    <!--Image Upload Requirements-->
+    <string name="iur_requirements">Notice that</string>
+    <string name="iur_requirements_1">1. For better performance use images up to 500 kb and 16:9 or 18:9 proportions. Huge or disproportionate images will be cropped or distorted.</string>
+    <string name="iur_requirements_2">2. Image must show service which section it posted.</string>
+    <string name="iur_requirements_3">3. The result of your personal work should be shown on the image. Image should\'t contain any editing, color changing, names, logos, faces, personal information etc.</string>
+    <string name="iur_requirements_4">4. Service information should be true and understandable.</string>
+    <string name="iur_requirements_n">More about upload content requirements in</string>
 
 
     <!--Toasts-->
