@@ -6,7 +6,6 @@ import android.arch.lifecycle.MutableLiveData;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.browsing_history.BrowsingHistoryModel;
@@ -219,7 +218,7 @@ public class SwipeImagesRepository {
     }
 
     private void filterOutItemsForSignedUp(DataSnapshot snapshotItem) {
-        if (mRequestParams.get(Const.GENDER).equals(Const.ALLGEND) && !mActualBrowsingHistory.contains(snapshotItem.child(Const.SERIMGURL).getValue().toString())) {
+        if (mRequestParams.get(Const.GENDER).equals(Const.BOTHGEND) && !mActualBrowsingHistory.contains(snapshotItem.child(Const.SERIMGURL).getValue().toString())) {
             addImageAdapterList(snapshotItem);
             return;
         }
@@ -230,7 +229,7 @@ public class SwipeImagesRepository {
     }
 
     private void filterOutItemsForGuest(DataSnapshot snapshotItem) {
-        if (mRequestParams.get(Const.GENDER).equals(Const.ALLGEND)) {
+        if (mRequestParams.get(Const.GENDER).equals(Const.BOTHGEND)) {
             addImageAdapterList(snapshotItem);
             return;
         }

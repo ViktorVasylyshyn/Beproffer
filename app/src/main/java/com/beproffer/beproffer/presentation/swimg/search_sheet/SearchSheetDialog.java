@@ -1,7 +1,6 @@
 package com.beproffer.beproffer.presentation.swimg.search_sheet;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -130,7 +129,7 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
                 mGender = Const.FEMALE;
                 break;
             case R.id.ssl_both_text_view:
-                mGender = Const.ALLGEND;
+                mGender = Const.BOTHGEND;
                 break;
             default:
                 throw new IllegalArgumentException(Const.UNKNSTAT);

@@ -147,6 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
             android:text="@string/title_for"
+            android:padding="@dimen/base_padding_small"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_medium"
             android:textStyle="italic"

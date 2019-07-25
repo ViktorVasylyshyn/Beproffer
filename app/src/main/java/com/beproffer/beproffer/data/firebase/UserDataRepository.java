@@ -315,7 +315,7 @@ public class UserDataRepository {
         mSpecialistGalleryImageItemsMap.put(updatedItem.getKey(), updatedItem);
         mSpecialistGalleryImageItemsMapLiveData.setValue(mSpecialistGalleryImageItemsMap);
         mProcessing.setValue(false);
-        feedBackToUi(false, R.string.toast_image_data_updated, true, true);
+        feedBackToUi(false, R.string.toast_image_data_updated, true, false);
     }
 
     public LiveData<Map<String, ContactItem>> getContacts() {

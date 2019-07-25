@@ -11,10 +11,13 @@ import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
 import com.beproffer.beproffer.databinding.SpecialistStorageEditFragmentBinding;
+import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.util.Const;
 import com.beproffer.beproffer.util.DefineServiceType;
@@ -55,6 +58,11 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
         @Override
         public void confirmImageData() {
             checkServiceImageData();
+        }
+
+        @Override
+        public void denyChanges() {
+            ((MainActivity)requireActivity()).popBackStack();
         }
 
         @Override
@@ -103,6 +111,9 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
             }
             mUpdatedImageItem = item;
             mBinding.setItem(mUpdatedImageItem);
+            setTypeScrollFocus();
+            setDurationScrollFocus();
+            setGenderLayoutFocus();
         });
     }
 
@@ -133,7 +144,6 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
         }
         saveNewImageData();
     }
-
 
     public void setServiceType(View view) {
         int requiredMenuRes;
@@ -167,6 +177,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
             mUpdatedImageItem.setType(serviceType.get(Const.SERVTYPE));
             mUpdatedImageItem.setSubtype(serviceType.get(Const.SERVSBTP));
             mBinding.setItem(mUpdatedImageItem);
+            setTypeScrollFocus();
             return true;
         });
         popupMenu.show();
@@ -187,20 +198,21 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
     public void setServiceGender(View view) {
         String gender;
         switch (view.getId()) {
-            case R.id.specialist_storage_edit_gender_male_icon:
+            case R.id.specialist_gallery_edit_gender_male:
                 gender = Const.MALE;
                 break;
-            case R.id.specialist_storage_edit_gender_female_icon:
+            case R.id.specialist_gallery_edit_gender_female:
                 gender = Const.FEMALE;
                 break;
-            case R.id.specialist_storage_edit_gender_all_icon:
-                gender = Const.ALLGEND;
+            case R.id.specialist_gallery_edit_gender_both:
+                gender = Const.BOTHGEND;
                 break;
             default:
                 throw new IllegalArgumentException(Const.UNKNSTAT);
         }
         mUpdatedImageItem.setGender(gender);
         mBinding.setItem(mUpdatedImageItem);
+        setGenderLayoutFocus();
     }
 
     public void setServiceDuration(View view) {
@@ -226,6 +238,106 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
         }
         mUpdatedImageItem.setDuration(duration);
         mBinding.setItem(mUpdatedImageItem);
+        setDurationScrollFocus();
+    }
+
+    /*пытался сделать через байндинг адаптер, чето ничего не получилось. так что делаю как умею.*/
+    private void setTypeScrollFocus() {
+        if (mUpdatedImageItem == null || mUpdatedImageItem.getType() == null)
+            return;
+        ImageView targetView;
+        switch (mUpdatedImageItem.getType()) {
+            case Const.HAI:
+                targetView = mBinding.specialistStorageEditHaircutIcon;
+                break;
+            case Const.NAI:
+                targetView = mBinding.specialistStorageEditNailsIcon;
+                break;
+            case Const.MAK:
+                targetView = mBinding.specialistStorageEditMakeupIcon;
+                break;
+            case Const.TAT:
+                targetView = mBinding.specialistStorageEditTattooPiercingIcon;
+                break;
+            case Const.BAR:
+                targetView = mBinding.specialistStorageEditBarberIcon;
+                break;
+            case Const.FIT:
+                targetView = mBinding.specialistStorageEditFitnessIcon;
+                break;
+            default:
+                throw new IllegalArgumentException(Const.UNKNSTAT);
+        }
+        mBinding.specialistStorageEditHaircutIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistStorageEditNailsIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistStorageEditMakeupIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistStorageEditTattooPiercingIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistStorageEditBarberIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistStorageEditFitnessIcon.setBackgroundResource(R.drawable.background_transparent);
+
+        targetView.getParent().requestChildFocus(targetView, targetView);
+        targetView.setBackgroundResource(R.drawable.button_background_green_stroke_rectangle);
+    }
+
+    private void setDurationScrollFocus() {
+        if (mUpdatedImageItem == null || mUpdatedImageItem.getDuration() == null)
+            return;
+        ImageView targetView;
+        switch (mUpdatedImageItem.getDuration()) {
+            case Const.MIN30:
+                targetView = mBinding.specialistStorageEditDuration30MinIcon;
+                break;
+            case Const.MIN45:
+                targetView = mBinding.specialistStorageEditDuration45MinIcon;
+                break;
+            case Const.MIN60:
+                targetView = mBinding.specialistStorageEditDuration60MinIcon;
+                break;
+            case Const.MIN90:
+                targetView = mBinding.specialistStorageEditDuration90MinIcon;
+                break;
+            case Const.MIN120:
+                targetView = mBinding.specialistStorageEditDuration120MinIcon;
+                break;
+            default:
+                throw new IllegalArgumentException(Const.UNKNSTAT);
+        }
+
+        mBinding.specialistStorageEditDuration30MinIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistStorageEditDuration45MinIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistStorageEditDuration60MinIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistStorageEditDuration90MinIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistStorageEditDuration120MinIcon.setBackgroundResource(R.drawable.background_transparent);
+
+        targetView.getParent().requestChildFocus(targetView, targetView);
+        targetView.setBackgroundResource(R.drawable.button_background_green_stroke_rectangle);
+    }
+
+
+
+    public void setGenderLayoutFocus() {
+        if (mUpdatedImageItem == null || mUpdatedImageItem.getGender() == null)
+            return;
+        TextView targetTextView;
+        switch (mUpdatedImageItem.getGender()) {
+            case Const.MALE:
+                targetTextView = mBinding.specialistGalleryEditGenderMale;
+                break;
+            case Const.FEMALE:
+                targetTextView = mBinding.specialistGalleryEditGenderFemale;
+                break;
+            case Const.BOTHGEND:
+                targetTextView = mBinding.specialistGalleryEditGenderBoth;
+                break;
+            default:
+                throw new IllegalArgumentException(Const.UNKNSTAT);
+        }
+
+        mBinding.specialistGalleryEditGenderMale.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistGalleryEditGenderFemale.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistGalleryEditGenderBoth.setBackgroundResource(R.drawable.background_transparent);
+
+        targetTextView.setBackgroundResource(R.drawable.button_background_green_stroke_rectangle);
     }
 
     private void setServiceImage() {
