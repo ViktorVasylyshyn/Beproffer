@@ -102,7 +102,7 @@ public class SearchFragment extends BaseFragment {
                     titleId = R.string.title_gender_female;
                     imageId = R.drawable.ic_gender_sign_female;
                     break;
-                case Const.ALLGEND:
+                case Const.BOTHGEND:
                     titleId = R.string.title_gender_all_genders;
                     imageId = R.drawable.ic_gender_sign_any;
                     break;

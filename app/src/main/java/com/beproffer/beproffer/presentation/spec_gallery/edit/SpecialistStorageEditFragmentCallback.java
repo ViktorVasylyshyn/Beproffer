@@ -14,5 +14,7 @@ public interface SpecialistStorageEditFragmentCallback {
 
     void confirmImageData();
 
+    void denyChanges();
+
     void onTermsClick();
 }

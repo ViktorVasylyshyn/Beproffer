@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/base_margin_extra_small"
-        android:background="@drawable/button_background_green_stroke_rectangle"
+        android:background="@drawable/button_background_grey_stroke_rectangle"
         android:padding="@dimen/base_padding_small">
 
         <ImageView

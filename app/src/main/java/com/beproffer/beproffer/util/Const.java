@@ -74,7 +74,7 @@ public class Const {
     /*genders*/
     public static final String MALE = "male"; /*male*/
     public static final String FEMALE = "female"; /*female*/
-    public static final String ALLGEND = "allGend"; /*all genders*/
+    public static final String BOTHGEND = "both"; /*all genders*/
 
 
     /*duration*/

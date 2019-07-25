@@ -72,7 +72,7 @@ public class SearchFragmentViewModel extends ViewModel {
                 gender = Const.FEMALE;
                 break;
             case R.id.search_gender_any_icon:
-                gender = Const.ALLGEND;
+                gender = Const.BOTHGEND;
                 break;
             default:
                 throw new IllegalArgumentException(Const.UNKNSTAT);

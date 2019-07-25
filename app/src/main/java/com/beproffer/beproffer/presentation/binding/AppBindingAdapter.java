@@ -4,11 +4,11 @@ import android.databinding.BindingAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.beproffer.beproffer.R;
+import com.beproffer.beproffer.util.Const;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
-import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.util.Const;
 
 public class AppBindingAdapter {
 
@@ -49,7 +49,7 @@ public class AppBindingAdapter {
                 case Const.FEMALE:
                     resId = R.drawable.ic_gender_sign_female;
                     break;
-                case Const.ALLGEND:
+                case Const.BOTHGEND:
                     resId = R.drawable.ic_gender_sign_any;
                     break;
                 default:
@@ -72,7 +72,7 @@ public class AppBindingAdapter {
                 case Const.FEMALE:
                     resId = R.string.title_gender_female;
                     break;
-                case Const.ALLGEND:
+                case Const.BOTHGEND:
                     resId = R.string.title_gender_all_genders;
                     break;
                 default:
