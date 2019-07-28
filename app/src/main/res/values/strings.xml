@@ -28,7 +28,7 @@
     <string name="hint_gender_outfield">GENDER</string>
     <string name="hint_edit_outfield">EDIT</string>
     <string name="hint_outfield_delete_profile">Enter your email and tap \"Delete\" if you want to delete your profile. It\'s impossible to restore the removed profile, but you can create the new one.</string>
-    <string name="hint_outfield_clear_browsing_history">Tap twice \"Clear\" if you want to clear your browsing history and to see all available images again.</string>
+    <string name="hint_outfield_clear_browsing_history">Tap \"Clear\" if you want to clear your browsing history and to see all available images again.</string>
     <string name="hint_outfield_forgot_password">Forgot your password? Tap here to change it.</string>
     <string name="hint_outfield_change_password">To change the password, you have to enter your email to the input field and tap \"Reset\". We will send you an email for password changing.</string>
     <string name="hint_outfield_settings_reset_password">Tap \"Reset\" if you want to change your password. You will be signed out and redirected to the appropriate menu.</string>
@@ -64,12 +64,13 @@
     <string name="title_confirmed_contacts">Contacts</string>
     <string name="title_new_customers_title">Customers</string>
     <string name="title_sign_in">sign in</string>
+    <string name="title_create_an_acc">or create new account</string>
     <string name="title_price">PRICE</string>
     <string name="title_customer_registration">NEW CUSTOMER</string>
     <string name="title_specialist_registration">NEW SPECIALIST</string>
     <string name="title_send_contact_request">GET SPECIALISTS\' PHONE NUMBER</string>
     <string name="title_request_already_sent">SENT</string>
-    <string name="title_contact_already_available">YOU HAVE THE PHONE NUM TO THIS SPECIALIST ALREADY</string>
+    <string name="title_contact_already_available">YOU ALREADY HAVE THIS NUMBER </string>
     <string name="title_max_num_of_contacts">THE MAX NUM OF CONTACTS IS 10</string>
     <string name="title_specialist_type">SPECIALIST</string>
     <string name="title_customer_type">CUSTOMER</string>
@@ -137,8 +138,9 @@
     <string name="iur_requirements">Notice that</string>
     <string name="iur_requirements_1">1. For better performance it\'s better to use images up to 500 KB and 16:9 or 18:9 proportions. Huge or disproportionate images will be cropped or distorted.</string>
     <string name="iur_requirements_2">2. The image must show the service which section it posted in.</string>
-    <string name="iur_requirements_3">3. The result of your personal work should be shown on the image. Image should\'t contain any editing, color changing, names, logos, faces, personal information etc.</string>
+    <string name="iur_requirements_3">3. The result of your personal work should be shown on the image. Image should\'t contain any editing, color changing, names, logos, personal information etc.</string>
     <string name="iur_requirements_4">4. Service information should be true and understandable.</string>
+    <string name="iur_requirements_5">5. The people depicted on the photo should give their permission to the publication of this photo in Beproffer.</string>
     <string name="iur_requirements_n">More about upload content requirements - </string>
 
 
@@ -165,7 +167,6 @@
     <string name="toast_error_check_fields_data">Please, check the data accuracy.</string>
     <string name="toast_error_user_data_saving_failure">User data saving failed. Please, contact to support.</string>
     <string name="toast_contact_deleted">Contact deleted.</string>
-    <string name="toast_browsing_history_delete_access">Tap one more time if you want to see all images again.</string>
     <string name="toast_browsing_history_cleared">Browsing history was cleared.</string>
     <string name="toast_no_available_images">There are no available images. Please, change the search parameters or try again later.</string>
 

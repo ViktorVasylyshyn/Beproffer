@@ -27,7 +27,6 @@
         tools:context=".presentation.spec_gallery.edit.SpecialistGalleryEditFragment">
 
         <ImageView
-            android:id="@+id/ssl_deny"
             android:layout_width="@dimen/bnb_icon_size"
             android:layout_height="@dimen/bnb_icon_size"
             android:layout_margin="@dimen/base_margin_small"
@@ -398,6 +397,17 @@
                     android:layout_marginTop="@dimen/base_margin_extra_small"
                     android:layout_marginEnd="@dimen/base_margin_small"
                     android:text="@string/iur_requirements_4"
+                    android:textColor="@color/color_base_text"
+                    android:textSize="@dimen/base_text_size_medium"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/base_margin_small"
+                    android:layout_marginTop="@dimen/base_margin_extra_small"
+                    android:layout_marginEnd="@dimen/base_margin_small"
+                    android:text="@string/iur_requirements_5"
                     android:textColor="@color/color_base_text"
                     android:textSize="@dimen/base_text_size_medium"
                     android:textStyle="italic" />

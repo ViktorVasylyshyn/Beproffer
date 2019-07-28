@@ -142,7 +142,7 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
         }
 
         PopupMenu popupMenu = new PopupMenu(requireActivity(), mBinding.imageInfoDisplayVote);
-        popupMenu.getMenuInflater().inflate(R.menu.nenu_vote, popupMenu.getMenu());
+        popupMenu.getMenuInflater().inflate(R.menu.menu_vote, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             if (menuItem.getItemId() == R.id.menu_prohibited_content) {
                 mProcessing.set(true);

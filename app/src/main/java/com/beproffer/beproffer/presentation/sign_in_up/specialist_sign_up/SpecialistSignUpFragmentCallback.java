@@ -7,4 +7,6 @@ public interface SpecialistSignUpFragmentCallback {
     void onPrivacyPolicyClick();
 
     void onTermsClick();
+
+    void denySigningUp();
 }

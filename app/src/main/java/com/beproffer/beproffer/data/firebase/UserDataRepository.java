@@ -204,17 +204,23 @@ public class UserDataRepository {
                     .addOnSuccessListener(aVoid -> {
                         mUserInfoLiveData.setValue(updatedUserInfo);
                         mProcessing.setValue(false);
-                        feedBackToUi(false, R.string.toast_user_data_updated, true, null);
+                        feedBackToUi(false, R.string.toast_user_data_updated, true, true);
                     });
     }
 
     public LiveData<Map<String, SpecialistGalleryImageItem>> getSpecialistGalleryImagesList() {
-        if (mCurrentUserType.equals(Const.SPEC)
-                && mUserDataSnapShot.hasChild(Const.IMAGES)
-                && mSpecialistGalleryImageItemsMap.isEmpty()) {
-            obtainSpecialistGalleryImagesData();
+        /*до этого не дойдет, ведь этот медод может запуститься исключительно для специалистов, но мало ли...*/
+        if(!mCurrentUserType.equals(Const.SPEC)){
+            mSpecialistGalleryImageItemsMapLiveData.setValue(mSpecialistGalleryImageItemsMap);
+            return mSpecialistGalleryImageItemsMapLiveData;
         }
 
+        if (mUserDataSnapShot.hasChild(Const.IMAGES) && mUserDataSnapShot.child(Const.IMAGES).hasChildren()  && mSpecialistGalleryImageItemsMap.isEmpty()) {
+            obtainSpecialistGalleryImagesData();
+        }
+        if (!mUserDataSnapShot.hasChild(Const.IMAGES) || !mUserDataSnapShot.child(Const.IMAGES).hasChildren()){
+            mSpecialistGalleryImageItemsMapLiveData.setValue(mSpecialistGalleryImageItemsMap);
+        }
         return mSpecialistGalleryImageItemsMapLiveData;
     }
 
@@ -315,7 +321,7 @@ public class UserDataRepository {
         mSpecialistGalleryImageItemsMap.put(updatedItem.getKey(), updatedItem);
         mSpecialistGalleryImageItemsMapLiveData.setValue(mSpecialistGalleryImageItemsMap);
         mProcessing.setValue(false);
-        feedBackToUi(false, R.string.toast_image_data_updated, true, false);
+        feedBackToUi(false, R.string.toast_image_data_updated, true, true);
     }
 
     public LiveData<Map<String, ContactItem>> getContacts() {

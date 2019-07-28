@@ -21,6 +21,38 @@
         android:layout_height="match_parent"
         tools:context=".presentation.sign_in_up.customer_sign_up.CustomerSignUpFragment">
 
+        <ImageView
+            android:layout_width="@dimen/bnb_icon_size"
+            android:layout_height="@dimen/bnb_icon_size"
+            android:layout_margin="@dimen/base_margin_small"
+            android:onClick="@{(view) -> fragmentCallback.denySigningUp()}"
+            android:src="@drawable/ic_exit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/customer_sign_up_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name_low_case"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/base_text_size_huge"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="@dimen/bnb_icon_size"
+            android:layout_height="@dimen/bnb_icon_size"
+            android:layout_margin="@dimen/base_margin_small"
+            android:onClick="@{(view) -> fragmentCallback.onSignUpClick()}"
+            android:src="@drawable/ic_check_mark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
         <TextView
             android:id="@+id/customer_sign_up_title"
             android:layout_width="wrap_content"
@@ -32,7 +64,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_logo" />
 
         <EditText
             android:id="@+id/customer_sign_up_name"
@@ -131,19 +163,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_terms" />
 
-        <ImageView
-            android:id="@+id/customer_sign_up_image_button"
-            android:layout_width="@dimen/icons_size_normal_width"
-            android:layout_height="@dimen/icons_size_normal_height"
-            android:layout_margin="@dimen/base_margin_medium"
-            android:background="@drawable/button_background_green_stroke_rectangle"
-            android:onClick="@{(view) -> fragmentCallback.onSignUpClick()}"
-            android:src="@drawable/ic_check_mark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_privacy_policy"
-            tools:ignore="ContentDescription" />
-
         <ProgressBar
             android:id="@+id/customer_sign_up_progress_bar"
             android:layout_width="@dimen/profile_image_half"
@@ -163,7 +182,7 @@
             android:layout_marginStart="@dimen/base_margin_small"
             android:layout_marginEnd="@dimen/base_margin_small"
             android:gravity="center"
-            android:layout_marginBottom="@dimen/bnb_floating_button_bottom_margin"
+            android:layout_marginBottom="@dimen/base_margin_small"
             android:text="@string/app_availability"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_medium"

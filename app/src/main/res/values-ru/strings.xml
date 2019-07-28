@@ -29,7 +29,7 @@
     <string name="hint_gender_outfield">ПОЛ</string>
     <string name="hint_edit_outfield">РЕД</string>
     <string name="hint_outfield_delete_profile">Введите свой email и нажмите \"Удалить\" для удаления текущего профайла в Beproffer. Удаленный профайл нельзя восстановить, но можно будет создать новый.</string>
-    <string name="hint_outfield_clear_browsing_history">Нажмите дважды \"Очистить\", чтобы очистить историю просмотров.</string>
+    <string name="hint_outfield_clear_browsing_history">Нажмите \"Очистить\", чтобы очистить историю просмотров.</string>
     <string name="hint_outfield_forgot_password">Забыли пароль? Нажмите, чтобы изменить его.</string>
     <string name="hint_outfield_change_password">Чтобы сменить пароль - введите свой email в поле ввода и нажмите \"Изменить\". Вам придет сообщение для смены пароля на этот email.</string>
     <string name="hint_outfield_settings_reset_password">Нажмите \"Сбросить\" для изменения пароля(произойдет выход из профайла в соответствующее меню).</string>
@@ -41,7 +41,7 @@
     <string name="hint_any_browsing_history">Фильтрация просмотренных изображений доступна для зарегистрированных пользователей.</string>
     <string name="hint_any_prohibited_content">Спасибо за вашу помощь. Качественный контент в Beproffer одна из основных наших целей.</string>
     <string name="hint_any_image_size">Для лучшего отображения используйте изображения до 1 мб.</string>
-    <string name="hint_any_add_more_personal_info">Добавьте больлше информации о себе, чтобы ваш профиль выглядел привлекательно.</string>
+    <string name="hint_any_add_more_personal_info">Добавьте больше информации о себе, чтобы ваш профиль выглядел привлекательно.</string>
     <string name="hint_specialist_add_more_images">Добавьте больше изображений своих услуг, чтобы найти клиентов.</string>
     <string name="hint_outfield_confirm">принять</string>
     <string name="hint_outfield_deny">отклонить</string>
@@ -63,6 +63,7 @@
     <string name="title_confirmed_contacts">Контакты</string>
     <string name="title_new_customers_title">Клиенты</string>
     <string name="title_sign_in">ЛОГИН</string>
+    <string name="title_create_an_acc">или создать новый аккаунт</string>
     <string name="title_price">ЦЕНА</string>
     <string name="title_customer_registration">НОВЫЙ КЛИЕНТ</string>
     <string name="title_specialist_registration">НОВЫЙ МАСТЕР</string>
@@ -140,6 +141,7 @@
     <string name="iur_requirements_2">2. Изображение должно отображать услугу согласно разделу, в котором оно находится.</string>
     <string name="iur_requirements_3">3. На изображении должен быть изображен результат лично вашей работы. Запрещается, дополнительное редактирование изображения(кроме обрезки), и размещение на нем номеров телефонов, надписей, логотипов, лиц людей, детей, персональный даных и т.д.</string>
     <string name="iur_requirements_4">4. Информация о услуге должна быть правдивой, понятной, однозначной.</string>
+    <string name="iur_requirements_5">5. Люди, изображенные на фотографиях, должны дать свое согласие на их публикацию в Beproffer.</string>
     <string name="iur_requirements_n">Детальнее о требованиях к контенту в</string>
 
 
@@ -166,7 +168,6 @@
     <string name="toast_error_check_fields_data">Проверьте правильность введенных данных.</string>
     <string name="toast_error_user_data_saving_failure">Данные пользователя не сохранились. Свяжитесь с поддержкой.</string>
     <string name="toast_contact_deleted">Контакт удален.</string>
-    <string name="toast_browsing_history_delete_access">Нажмите еще раз, чтобы очистить историю просмотров.</string>
     <string name="toast_browsing_history_cleared">История просмотров очищена.</string>
     <string name="toast_request_sent">Запрос отправлен.</string>
     <string name="toast_request_for_registered">Доступно только зарегистрированным пользователям.</string>

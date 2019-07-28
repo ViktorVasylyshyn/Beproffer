@@ -53,6 +53,11 @@ public class SignInFragment extends BaseFragment {
         public void onPrivacyPolicyClick() {
             openDoc(R.string.href_privacy_policy);
         }
+
+        @Override
+        public void denySigningIn() {
+            ((MainActivity)requireActivity()).onBottomNavigationBarItemClicked(R.id.bnm_images_gallery, null);
+        }
     };
 
     @Override

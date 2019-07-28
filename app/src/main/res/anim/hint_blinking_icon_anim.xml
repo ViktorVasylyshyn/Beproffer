@@ -8,6 +8,6 @@
         android:pivotX="50%"
         android:pivotY="50%"
         android:repeatMode="reverse"
-        android:repeatCount="3"
+        android:repeatCount="5"
         android:duration="@android:integer/config_mediumAnimTime"/>
 </set>

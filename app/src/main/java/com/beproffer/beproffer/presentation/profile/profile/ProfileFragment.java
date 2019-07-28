@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.ProfileFragmentBinding;
+import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,8 +47,8 @@ public class ProfileFragment extends BaseUserInfoFragment {
         super.onActivityCreated(savedInstanceState);
         mBinding.setFragmentCallback(mCallback);
         mBinding.setShowProgress(mShowProgress);
-        if (FirebaseAuth.getInstance() == null) {
-            performNavigation(R.id.action_global_signInFragment);
+        if (getFirebaseUser() == null) {
+            ((MainActivity)requireActivity()).onBottomNavigationBarItemClicked(R.id.bnm_images_gallery, R.string.toast_error_has_occurred);
         } else {
             initUserData();
         }
@@ -98,7 +99,6 @@ public class ProfileFragment extends BaseUserInfoFragment {
         if (mCurrentUserInfo.getUserType().equals(Const.SPEC)) {
             mUserDataViewModel.getSpecialistGalleryData().observe(this, data -> {
                 if (data != null && data.size() < Const.IMAGES_BASE_SET_COUNT) {
-
                     Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_blinking_icon_anim);
                     mBinding.profileStorage.startAnimation(animation);
                     mBinding.profileBottomHint.setText(R.string.hint_specialist_add_more_images);

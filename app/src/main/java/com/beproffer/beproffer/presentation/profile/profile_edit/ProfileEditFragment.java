@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.ProfileEditFragmentBinding;
+import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.util.Const;
 
@@ -31,6 +32,11 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
         @Override
         public void onCheckUserDataClick() {
             checkUserData();
+        }
+
+        @Override
+        public void denyChanges() {
+            ((MainActivity)requireActivity()).popBackStack();
         }
     };
 

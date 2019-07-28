@@ -83,6 +83,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void onBottomNavigationBarItemClicked(int menuItemId, @Nullable Integer toastRes){
+        bottomNavigationView.setSelectedItemId(menuItemId);
+        if(toastRes != null){
+            Toast.makeText(this, toastRes, Toast.LENGTH_LONG).show();
+        }
+    }
+
     public void popBackStack() {
         mNavController.popBackStack();
     }

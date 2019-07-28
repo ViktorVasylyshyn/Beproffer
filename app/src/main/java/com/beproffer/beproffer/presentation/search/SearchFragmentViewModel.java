@@ -31,22 +31,22 @@ public class SearchFragmentViewModel extends ViewModel {
         int requiredMenuRes = 0;
         switch (view.getId()) {
             case R.id.search_haircut_icon:
-                requiredMenuRes = R.menu.nenu_hair_services;
+                requiredMenuRes = R.menu.menu_hair_services;
                 break;
             case R.id.search_nails_icon:
-                requiredMenuRes = R.menu.nenu_nails_services;
+                requiredMenuRes = R.menu.menu_nails_services;
                 break;
             case R.id.search_makeup_icon:
-                requiredMenuRes = R.menu.nenu_makeup_services;
+                requiredMenuRes = R.menu.menu_makeup_services;
                 break;
             case R.id.search_tattoo_piercing_icon:
-                requiredMenuRes = R.menu.nenu_tattoo_services;
+                requiredMenuRes = R.menu.menu_tattoo_services;
                 break;
             case R.id.search_barber_icon:
-                requiredMenuRes = R.menu.nenu_barber_services;
+                requiredMenuRes = R.menu.menu_barber_services;
                 break;
             case R.id.search_fitness_icon:
-                requiredMenuRes = R.menu.nenu_fitness_services;
+                requiredMenuRes = R.menu.menu_fitness_services;
                 break;
             default:
                 throw new IllegalArgumentException(Const.UNKNSTAT);

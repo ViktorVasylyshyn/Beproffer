@@ -7,4 +7,6 @@ public interface CustomerSignUpFragmentCallback {
     void onPrivacyPolicyClick();
 
     void onTermsClick();
+
+    void denySigningUp();
 }

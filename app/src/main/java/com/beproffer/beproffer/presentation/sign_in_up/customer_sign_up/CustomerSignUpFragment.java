@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.CustomerSignUpFragmentBinding;
+import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
 import com.beproffer.beproffer.presentation.sign_in_up.SignUpViewModel;
 import com.beproffer.beproffer.util.Const;
@@ -39,6 +40,11 @@ public class CustomerSignUpFragment extends BaseFragment {
         @Override
         public void onTermsClick() {
             openDoc(R.string.href_terms_of_service);
+        }
+
+        @Override
+        public void denySigningUp() {
+            ((MainActivity)requireActivity()).popBackStack();
         }
     };
 
@@ -104,11 +110,11 @@ public class CustomerSignUpFragment extends BaseFragment {
             mSignUpViewModel.resetTriggers(true, null, null);
         });
         /*получение команд и айди для совершения перехода*/
-        mSignUpViewModel.getNavigationId().observe(getViewLifecycleOwner(), destinationId -> {
-            if (destinationId == null)
+        mSignUpViewModel.getPopBackStack().observe(getViewLifecycleOwner(), performPopBackStack -> {
+            if (performPopBackStack == null)
                 return;
             mSignUpViewModel.resetTriggers(null, true, null);
-            performNavigation(destinationId);
+            ((MainActivity) requireActivity()).popBackStack();
         });
         mSignUpViewModel.getErrorMessageId().observe(getViewLifecycleOwner(), errorMessageId -> {
             if (errorMessageId == null)

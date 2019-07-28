@@ -41,12 +41,16 @@ public class SwipeImagesViewModel extends AndroidViewModel {
         return mRepository.getPerformSearch();
     }
 
+    public LiveData<Boolean> getRefreshAdapter(){
+        return mRepository.getRefreshAdapter();
+    }
+
     public void deleteObservedImageItem(SwipeImageItem item) {
         mRepository.deleteObservedImageItem(item);
     }
 
-    public void refreshItems(){
-        mRepository.refreshItems();
+    public void refreshAdapter(){
+        mRepository.refreshAdapter();
     }
 
     public void clearBrowsingHistory(){

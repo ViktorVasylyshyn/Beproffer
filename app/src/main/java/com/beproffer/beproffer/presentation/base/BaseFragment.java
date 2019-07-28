@@ -3,11 +3,17 @@ package com.beproffer.beproffer.presentation.base;
 
 import android.app.Activity;
 import android.databinding.ObservableBoolean;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.presentation.MainActivity;
+import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -62,5 +68,11 @@ public class BaseFragment extends Fragment {
     /*нужно, для контроля частых нажатий на кнопки*/
     public void processing(boolean processing) {
         mProcessing.set(processing);
+    }
+
+    public void cooldown(View view){
+        view.setClickable(false);
+        Handler handlerWordAnim = new Handler();
+        handlerWordAnim.postDelayed(() -> view.setClickable(true), Const.COOLDOWNDUR);
     }
 }

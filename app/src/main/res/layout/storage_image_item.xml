@@ -41,14 +41,13 @@
             android:id="@+id/storage_image_item_type_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
+            android:layout_margin="@dimen/base_margin_extra_small"
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_big"
-            app:layout_constraintBottom_toBottomOf="@+id/storage_image_item_type_image"
-            app:layout_constraintStart_toEndOf="@+id/storage_image_item_type_image"
-            app:layout_constraintTop_toTopOf="@+id/storage_image_item_type_image"
+            app:layout_constraintStart_toStartOf="@+id/storage_image_item_type_image"
+            app:layout_constraintTop_toBottomOf="@+id/storage_image_item_type_image"
             app:setTypeTitle="@{image.subtype}" />
 
         <ImageView
@@ -59,7 +58,7 @@
             android:src="@drawable/ic_money_sign"
             android:textSize="@dimen/base_text_size_big"
             app:layout_constraintStart_toEndOf="@+id/storage_image_item_image"
-            app:layout_constraintTop_toBottomOf="@id/storage_image_item_type_image"
+            app:layout_constraintTop_toBottomOf="@id/storage_image_item_type_title"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -96,6 +95,7 @@
             app:setGenderImage="@{image.gender}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/storage_image_item_duration_icon"
             tools:ignore="ContentDescription" />
 
         <ImageView
@@ -103,8 +103,9 @@
             android:layout_width="@dimen/icons_size_small_width"
             android:layout_height="@dimen/icons_size_small_height"
             android:layout_margin="@dimen/base_margin_small"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/storage_image_item_gender_icon"
+            app:layout_constraintStart_toEndOf="@+id/storage_image_item_type_image"
+            app:layout_constraintEnd_toStartOf="@+id/storage_image_item_gender_icon"
+            app:layout_constraintTop_toTopOf="parent"
             app:setDurationImage="@{image.duration}"
             tools:ignore="ContentDescription" />
 
@@ -119,8 +120,7 @@
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_medium"
             android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/storage_image_item_image"
-            app:layout_constraintTop_toBottomOf="@+id/storage_image_item_duration_icon" />
+            app:layout_constraintTop_toBottomOf="@+id/storage_image_item_price_icon" />
     </android.support.constraint.ConstraintLayout>
 </layout>
