@@ -73,22 +73,22 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
         int requiredMenuRes = 0;
         switch (view.getId()) {
             case R.id.ssl_haircut_icon:
-                requiredMenuRes = R.menu.nenu_hair_services;
+                requiredMenuRes = R.menu.menu_hair_services;
                 break;
             case R.id.ssl_nails_icon:
-                requiredMenuRes = R.menu.nenu_nails_services;
+                requiredMenuRes = R.menu.menu_nails_services;
                 break;
             case R.id.ssl_makeup_icon:
-                requiredMenuRes = R.menu.nenu_makeup_services;
+                requiredMenuRes = R.menu.menu_makeup_services;
                 break;
             case R.id.ssl_tattoo_piercing_icon:
-                requiredMenuRes = R.menu.nenu_tattoo_services;
+                requiredMenuRes = R.menu.menu_tattoo_services;
                 break;
             case R.id.ssl_barber_icon:
-                requiredMenuRes = R.menu.nenu_barber_services;
+                requiredMenuRes = R.menu.menu_barber_services;
                 break;
             case R.id.ssl_fitness_icon:
-                requiredMenuRes = R.menu.nenu_fitness_services;
+                requiredMenuRes = R.menu.menu_fitness_services;
                 break;
             default:
                 throw new IllegalArgumentException(Const.UNKNSTAT);
@@ -143,7 +143,6 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
 
     public void applySearchRequest() {
         if (mTypeMap != null && mGender != null) {
-
             if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                 SharedPreferences.Editor editor = requireActivity().getSharedPreferences(FirebaseAuth.getInstance().getCurrentUser().getUid(), MODE_PRIVATE).edit();
                 editor.putString(Const.GENDER, mGender);
@@ -158,7 +157,8 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
                 editor.apply();
             }
 
-            ViewModelProviders.of(requireActivity()).get(SwipeImagesViewModel.class).refreshItems();
+            ViewModelProviders.of(requireActivity()).get(SwipeImagesViewModel.class).refreshAdapter();
+
 
             dismiss();
         } else {

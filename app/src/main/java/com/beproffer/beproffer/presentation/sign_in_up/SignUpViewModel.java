@@ -30,8 +30,8 @@ public class SignUpViewModel extends AndroidViewModel {
         return mRepository.getErrorMessageId();
     }
 
-    public LiveData<Integer> getNavigationId() {
-        return mRepository.getNavigationId();
+    public LiveData<Boolean> getPopBackStack() {
+        return mRepository.getPopBackStack();
     }
 
     public void signUpNewUser(String userEmail,
@@ -43,8 +43,8 @@ public class SignUpViewModel extends AndroidViewModel {
     }
 
     public void resetTriggers(@Nullable Boolean resetToastIdValue,
-                              @Nullable Boolean resetNavigationIdValue,
+                              @Nullable Boolean resetPopBackStackValue,
                               @Nullable Boolean resetErrorMessageIdValue) {
-        mRepository.resetTriggers(resetToastIdValue, resetNavigationIdValue, resetErrorMessageIdValue);
+        mRepository.resetTriggers(resetToastIdValue, resetPopBackStackValue, resetErrorMessageIdValue);
     }
 }

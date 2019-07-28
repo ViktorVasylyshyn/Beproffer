@@ -1,6 +1,7 @@
 package com.beproffer.beproffer.presentation.spec_gallery;
 
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableBoolean;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,6 +25,8 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
 
     private GalleryImageItemAdapter mImageAdapter = new GalleryImageItemAdapter();
 
+    private ObservableBoolean mShowButton = new ObservableBoolean();
+
     private List<SpecialistGalleryImageItem> mImageItemsList;
 
     private SpecialistStorageFragmentBinding mBinding;
@@ -44,14 +47,21 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
         super.onActivityCreated(savedInstanceState);
         mBinding.setFragmentCallback(mCallback);
         mBinding.setShowProgress(mShowProgress);
+        mBinding.setShowButton(mShowButton);
 
         initUserData();
     }
 
     @Override
     public void applyUserData() {
+        if(!checkInternetConnection()){
+            showToast(R.string.toast_no_internet_connection);
+            return;
+        }
         if (mImageItemsList == null) {
             mUserDataViewModel.getSpecialistGalleryData().observe(this, data -> {
+                mImageItemsList = new ArrayList<>();
+                mShowButton.set(true);
                 if (data != null) {
                     mImageItemsList = new ArrayList<>();
                     for (Map.Entry<String, SpecialistGalleryImageItem> entry : data.entrySet()) {
@@ -73,6 +83,7 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
     public void addNewImage() {
         if(mImageItemsList != null && mImageItemsList.size() >= 5){
             showToast(R.string.toast_would_you_like_to_donate);
+            cooldown(mBinding.specialistStorageAddImageButton);
             return;
         }
         mUserDataViewModel.setEditableGalleryItem(new SpecialistGalleryImageItem(

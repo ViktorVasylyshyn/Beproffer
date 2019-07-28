@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.SwipeImageItem;
@@ -50,21 +51,25 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
         mBinding.setShowProgress(mShowProgress);
         mBinding.setSearch(mCallback);
 
+        if (!checkInternetConnection()) {
+            /*сделать здесь переход, на какой нить фрагмент*/
+            showToast(R.string.toast_no_internet_connection);
+            return;
+        }
+
         if (getFirebaseUser() != null) {
             if (mImageItemsList == null) {
                 initUserData();
                 return;
             }
-            if (!mImageItemsList.isEmpty())
-                initAdapter();
         } else {
             if (mImageItemsList == null) {
                 connectToRepository();
                 return;
             }
-            if (!mImageItemsList.isEmpty()) {
-                initAdapter();
-            }
+        }
+        if (!mImageItemsList.isEmpty()) {
+            initAdapter();
         }
     }
 
@@ -90,8 +95,14 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
             mImageItemsList = list;
             if (mSwipeImageAdapter == null) {
                 initAdapter();
-            } else {
+            }else {
                 mSwipeImageAdapter.notifyDataSetChanged();
+            }
+        });
+        /*освежаем адаптер. нужно в случае, если создан новый поискавый запрос*/
+        mSwipeImagesViewModel.getRefreshAdapter().observe(getViewLifecycleOwner(), refresh -> {
+            if (refresh != null && refresh){
+                mSwipeImageAdapter = null;
             }
         });
         /*актив\неактив прогресс бар*/
@@ -122,7 +133,7 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
         flingImageContainer.setAdapter(mSwipeImageAdapter);
 
         /*подразумевается, что зарегистрированный юзер уже знает, что карточки можно свайпать в разные стороны
-        * и в дополнительных анимациях, как подсказках, не нуждается*/
+         * и в дополнительных анимациях, как подсказках, не нуждается*/
         if (getFirebaseUser() == null)
             onCardHintAnimation(flingImageContainer);
 
@@ -154,9 +165,6 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
 
         });
         flingImageContainer.setOnItemClickListener((itemPosition, dataObject) -> displayImageInfo(dataObject));
-        /*попробовать здесь прописать анимацию для изображения. чтобы пользователь, войдя, понял
-         * что это изображение нужно сбросить*/
-
     }
 
     private void onCardExit(Object imageItem) {
@@ -184,6 +192,7 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
 
     private void onCardHintAnimation(View view) {
         try {
+            Toast.makeText(requireActivity(), R.string.toast_guest_mode, Toast.LENGTH_SHORT).show();
             Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_card_animation_right);
             view.startAnimation(animation);
             Handler handlerWordAnim = new Handler();

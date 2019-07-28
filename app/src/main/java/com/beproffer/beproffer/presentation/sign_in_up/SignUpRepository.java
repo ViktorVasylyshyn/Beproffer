@@ -24,13 +24,13 @@ public class SignUpRepository {
     private MutableLiveData<Boolean> mShowProgress = new MutableLiveData<>();
     /*нужно для контроля частых нажатий на кнопки*/
     private MutableLiveData<Boolean> mProcessing = new MutableLiveData<>();
-    private MutableLiveData<Integer> mNavigationId = new MutableLiveData<>();
+    private MutableLiveData<Boolean> mPopBackStack = new MutableLiveData<>();
     /*устанавливает фокус на поле, которое требует изменения и выдает соответствующее сообщение рядом*/
     private MutableLiveData<Integer> mErrorMessageId = new MutableLiveData<>();
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-    public SignUpRepository(Application application){
+    public SignUpRepository(Application application) {
         mApplication = application;
     }
 
@@ -86,8 +86,10 @@ public class SignUpRepository {
                 .child(userInfo.getUserType())
                 .child(userInfo.getUserId())
                 .child(Const.INFO)
-                .setValue(userInfo).addOnSuccessListener(aVoid -> feedBackToUi(false,
-                R.string.toast_sign_up_email_verification, R.id.action_global_signInFragment, null, false))
+                .setValue(userInfo).addOnSuccessListener(aVoid -> {
+            FirebaseAuth.getInstance().signOut();
+            feedBackToUi(false, R.string.toast_sign_up_email_verification, true, null, false);
+        })
                 .addOnFailureListener(e -> feedBackToUi(false,
                         R.string.toast_error_user_data_saving_failure, null, null, false));
     }
@@ -100,12 +102,12 @@ public class SignUpRepository {
         return mShowProgress;
     }
 
-    public LiveData<Boolean> getProcessing(){
+    public LiveData<Boolean> getProcessing() {
         return mProcessing;
     }
 
-    public LiveData<Integer> getNavigationId() {
-        return mNavigationId;
+    public LiveData<Boolean> getPopBackStack() {
+        return mPopBackStack;
     }
 
     public LiveData<Integer> getErrorMessageId() {
@@ -114,32 +116,32 @@ public class SignUpRepository {
 
     private void feedBackToUi(@Nullable Boolean showProgress,
                               @Nullable Integer toastId,
-                              @Nullable Integer navigationId,
+                              @Nullable Boolean popBackStack,
                               @Nullable Integer errorMessageId,
                               @Nullable Boolean processing) {
         if (showProgress != null)
             mShowProgress.setValue(showProgress);
         if (toastId != null)
             mToastRes.setValue(toastId);
-        if (navigationId != null)
-            mNavigationId.setValue(navigationId);
+        if (popBackStack != null)
+            mPopBackStack.setValue(popBackStack);
         if (errorMessageId != null)
             mErrorMessageId.setValue(errorMessageId);
         /*юлокирование повторных запросов если предыдущий идентичный в процессе выполнения*/
-        if (processing != null){
+        if (processing != null) {
             mProcessing.setValue(processing);
         }
     }
 
     public void resetTriggers(@Nullable Boolean resetToastIdValue,
-                              @Nullable Boolean resetNavigationIdValue,
+                              @Nullable Boolean resetPopBackStackValue,
                               @Nullable Boolean resetErrorMessageIdValue) {
         /*true = reset parameter, null = ignore parameter*/
         if (resetToastIdValue != null && resetToastIdValue) {
             mToastRes.setValue(null);
         }
-        if (resetNavigationIdValue != null && resetNavigationIdValue) {
-            mNavigationId.setValue(null);
+        if (resetPopBackStackValue != null && resetPopBackStackValue) {
+            mPopBackStack.setValue(null);
         }
         if (resetErrorMessageIdValue != null)
             mErrorMessageId.setValue(null);

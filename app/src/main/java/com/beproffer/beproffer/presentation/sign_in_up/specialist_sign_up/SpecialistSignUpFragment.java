@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SpecialistSignUpFragmentBinding;
+import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
 import com.beproffer.beproffer.presentation.sign_in_up.SignUpViewModel;
 import com.beproffer.beproffer.util.Const;
@@ -40,6 +41,11 @@ public class SpecialistSignUpFragment extends BaseFragment {
         public void onTermsClick() {
             openDoc(R.string.href_terms_of_service);
         }
+
+        @Override
+        public void denySigningUp() {
+            ((MainActivity)requireActivity()).popBackStack();
+        }
     };
 
     @Override
@@ -64,7 +70,7 @@ public class SpecialistSignUpFragment extends BaseFragment {
             showToast(R.string.toast_no_internet_connection);
             return;
         }
-        if(mProcessing.get()){
+        if (mProcessing.get()) {
             showToast(R.string.toast_processing);
             return;
         }
@@ -96,8 +102,8 @@ public class SpecialistSignUpFragment extends BaseFragment {
                 showProgress(progress);
         });
         /*блокировать повторное нажатие на кнопку, если предыдущий запрос в процессе выполнения*/
-        mSignUpViewModel.getProcessing().observe(getViewLifecycleOwner(), processing ->{
-            if(processing != null)
+        mSignUpViewModel.getProcessing().observe(getViewLifecycleOwner(), processing -> {
+            if (processing != null)
                 processing(processing);
         });
         /*показ тостов*/
@@ -108,11 +114,11 @@ public class SpecialistSignUpFragment extends BaseFragment {
             mSignUpViewModel.resetTriggers(true, null, null);
         });
         /*получение команд и айди для совершения перехода*/
-        mSignUpViewModel.getNavigationId().observe(getViewLifecycleOwner(), destinationId -> {
-            if (destinationId == null)
+        mSignUpViewModel.getPopBackStack().observe(getViewLifecycleOwner(), performPopBackStack -> {
+            if (performPopBackStack == null)
                 return;
-            performNavigation(destinationId);
             mSignUpViewModel.resetTriggers(null, true, null);
+            ((MainActivity) requireActivity()).popBackStack();
         });
         mSignUpViewModel.getErrorMessageId().observe(getViewLifecycleOwner(), errorMessageId -> {
             if (errorMessageId == null)

@@ -12,6 +12,10 @@
             type="android.databinding.ObservableBoolean"/>
 
         <variable
+            name="showButton"
+            type="android.databinding.ObservableBoolean" />
+
+        <variable
             name="fragmentCallback"
             type="com.beproffer.beproffer.presentation.spec_gallery.SpecialistGalleryFragmentCallback" />
     </data>
@@ -56,6 +60,7 @@
             android:layout_marginBottom="@dimen/bnb_floating_button_bottom_margin"
             android:onClick="@{(view)-> fragmentCallback.onAddNewImageClick()}"
             android:src="@drawable/ic_add"
+            android:visibility="@{showButton ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 

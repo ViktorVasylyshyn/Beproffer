@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +22,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SettingsFragment extends BaseUserInfoFragment {
 
     private SettingsFragmentLayoutBinding mBinding;
-
-    private boolean mDeleteViewsHistoryAccess;
 
     private SwipeImagesViewModel mSwipeImagesViewModel;
 
@@ -62,27 +61,32 @@ public class SettingsFragment extends BaseUserInfoFragment {
     }
 
     private void clearBrowsingHistory() {
-        if (mDeleteViewsHistoryAccess) {
-            if (mSwipeImagesViewModel == null) {
-                mSwipeImagesViewModel = ViewModelProviders.of(requireActivity()).get(SwipeImagesViewModel.class);
+        PopupMenu popupMenu = new PopupMenu(requireActivity(), mBinding.settingsClearBrowsingHistoryButton);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_clear_browsing_history, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(menuItem -> {
+            if (menuItem.getItemId() == R.id.menu_clear_browsing_history_clear) {
+
+                if (mSwipeImagesViewModel == null) {
+                    mSwipeImagesViewModel = ViewModelProviders.of(requireActivity()).get(SwipeImagesViewModel.class);
+                }
+                /*актив\неактив прогресс бар*/
+                mSwipeImagesViewModel.getShowProgress().observe(getViewLifecycleOwner(), progress -> {
+                    if (progress == null)
+                        return;
+                    showProgress(progress);
+                });
+                /*показ тостов*/
+                mSwipeImagesViewModel.getShowToast().observe(getViewLifecycleOwner(), resId -> {
+                    if (resId == null)
+                        return;
+                    showToast(resId);
+                    mSwipeImagesViewModel.resetTriggers(true, null);
+                });
+                mSwipeImagesViewModel.clearBrowsingHistory();
             }
-            /*актив\неактив прогресс бар*/
-            mSwipeImagesViewModel.getShowProgress().observe(getViewLifecycleOwner(), progress -> {
-                if (progress == null)
-                    return;
-                showProgress(progress);
-            });
-            /*показ тостов*/
-            mSwipeImagesViewModel.getShowToast().observe(getViewLifecycleOwner(), resId -> {
-                if (resId == null)
-                    return;
-                showToast(resId);
-            });
-            mSwipeImagesViewModel.clearBrowsingHistory();
-        } else {
-            showToast(R.string.toast_browsing_history_delete_access);
-            mDeleteViewsHistoryAccess = true;
-        }
+            return true;
+        });
+        popupMenu.show();
     }
 
     private void deleteProfile() {

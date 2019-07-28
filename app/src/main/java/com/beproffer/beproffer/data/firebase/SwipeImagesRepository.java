@@ -40,6 +40,7 @@ public class SwipeImagesRepository {
     private MutableLiveData<Boolean> mShowProgress = new MutableLiveData<>();
     private MutableLiveData<Integer> mShowToast = new MutableLiveData<>();
     private MutableLiveData<Boolean> mPerformSearch = new MutableLiveData<>();
+    private MutableLiveData<Boolean> mRefreshAdapter = new MutableLiveData<>();
 
     private Map<String, String> mRequestParams;
 
@@ -135,6 +136,8 @@ public class SwipeImagesRepository {
     }
 
     public void clearBrowsingHistory() {
+        if (mBrowsingHistoryRepository == null)
+            mBrowsingHistoryRepository = new BrowsingHistoryRepository(mApplication, mRequestParams.get(Const.SERVTYPE));
         mBrowsingHistoryRepository.deleteWholeBrowsingHistory();
         mActualBrowsingHistory = null;
         feedBackToUi(false, R.string.toast_browsing_history_cleared, null);
@@ -246,8 +249,11 @@ public class SwipeImagesRepository {
         mSwipeImageItemsLiveData.setValue(mSwipeImageItemsList);
     }
 
-    public void refreshItems(){
+    public void refreshAdapter(){
         obtainRequestParams(mApplication);
+        mRefreshAdapter.setValue(true);
+        mRefreshAdapter.setValue(false);
+
     }
 
     public LiveData<Boolean> getShowProgress() {
@@ -260,6 +266,10 @@ public class SwipeImagesRepository {
 
     public LiveData<Boolean> getPerformSearch() {
         return mPerformSearch;
+    }
+
+    public LiveData<Boolean> getRefreshAdapter(){
+        return mRefreshAdapter;
     }
 
     public void resetTriggers(@Nullable Boolean resetToastValue, @Nullable Boolean resetPerformSearch) {

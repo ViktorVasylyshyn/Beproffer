@@ -149,22 +149,22 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
         int requiredMenuRes;
         switch (view.getId()) {
             case R.id.specialist_storage_edit_haircut_icon:
-                requiredMenuRes = R.menu.nenu_hair_services;
+                requiredMenuRes = R.menu.menu_hair_services;
                 break;
             case R.id.specialist_storage_edit_nails_icon:
-                requiredMenuRes = R.menu.nenu_nails_services;
+                requiredMenuRes = R.menu.menu_nails_services;
                 break;
             case R.id.specialist_storage_edit_makeup_icon:
-                requiredMenuRes = R.menu.nenu_makeup_services;
+                requiredMenuRes = R.menu.menu_makeup_services;
                 break;
             case R.id.specialist_storage_edit_barber_icon:
-                requiredMenuRes = R.menu.nenu_barber_services;
+                requiredMenuRes = R.menu.menu_barber_services;
                 break;
             case R.id.specialist_storage_edit_tattoo_piercing_icon:
-                requiredMenuRes = R.menu.nenu_tattoo_services;
+                requiredMenuRes = R.menu.menu_tattoo_services;
                 break;
             case R.id.specialist_storage_edit_fitness_icon:
-                requiredMenuRes = R.menu.nenu_fitness_services;
+                requiredMenuRes = R.menu.menu_fitness_services;
                 break;
             default:
                 throw new IllegalArgumentException(Const.UNKNSTAT);
@@ -191,7 +191,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
         mUserDataViewModel.updateSpecialistGallery(mUpdatedImageItem, mResultUri);
         /*сравнением тип услуги начального обьекта и измененного.проверяем, изменился ли тип услуги.
          * если изменился - удаляем данные по старому адресу*/
-        if (!mPrimordialItemSubtype.equals(mUpdatedImageItem.getSubtype()))
+        if (mPrimordialItemSubtype!=null && !mPrimordialItemSubtype.equals(mUpdatedImageItem.getSubtype()))
             mUserDataViewModel.deleteNotRelevantImageData(mUpdatedImageItem, mPrimordialItemType, mPrimordialItemSubtype);
     }
 
