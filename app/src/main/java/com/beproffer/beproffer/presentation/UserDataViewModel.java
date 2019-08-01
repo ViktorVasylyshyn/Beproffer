@@ -19,18 +19,13 @@ public class UserDataViewModel extends AndroidViewModel {
 
     private UserDataRepository mRepository;
 
-    private LiveData<UserInfo> mUserInfoLiveData;
-
     public UserDataViewModel(@NonNull Application application) {
         super(application);
         mRepository = new UserDataRepository(application);
-
-        if (mUserInfoLiveData == null)
-            mUserInfoLiveData = mRepository.getUserInfoLiveData();
     }
 
     public LiveData<UserInfo> getUserInfoLiveData() {
-        return mUserInfoLiveData;
+        return mRepository.getUserInfoLiveData();
     }
 
     public void updateUserInfo(UserInfo updatedUserInfo, @Nullable Uri updatedImageUri) {
@@ -111,4 +106,8 @@ public class UserDataViewModel extends AndroidViewModel {
         mRepository.resetLocalUserData();
     }
 
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+    }
 }

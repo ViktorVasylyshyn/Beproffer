@@ -186,6 +186,8 @@
     <string name="toast_image_data_updated">Данные изображения успешно изменены.</string>
     <string name="toast_guest_mode">Вы вошли как гость.</string>
     <string name="toast_processing">Подождите пожалуйста. Обработка данных…</string>
+    <string name="toast_no_any_service_items">Извините, но, пока что по этому запросу, публикаций нет.</string>
+
 
 
     <string name="error_message_exception_sign_up_weak_password">Придумайте более надежный пароль.</string>

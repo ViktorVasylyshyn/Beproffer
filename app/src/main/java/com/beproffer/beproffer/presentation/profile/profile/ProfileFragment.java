@@ -1,5 +1,6 @@
 package com.beproffer.beproffer.presentation.profile.profile;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.ProfileFragmentBinding;
 import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
+import com.beproffer.beproffer.presentation.swimg.SwipeImagesViewModel;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -122,6 +124,7 @@ public class ProfileFragment extends BaseUserInfoFragment {
     public void logOut() {
         mUserDataViewModel.resetUserData();
         FirebaseAuth.getInstance().signOut();
+        ViewModelProviders.of(requireActivity()).get(SwipeImagesViewModel.class).refreshAdapter();
         performNavigation(R.id.action_global_swipeImageFragment);
     }
 }

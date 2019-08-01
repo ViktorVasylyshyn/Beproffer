@@ -27,8 +27,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SearchSheetDialog extends BottomSheetDialogFragment {
 
-//    private SearchSheetListener mListener;
-
     private SearchSheetLayoutBinding mBinding;
 
     private Map<String, String> mTypeMap;

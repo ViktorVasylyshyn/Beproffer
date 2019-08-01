@@ -3,9 +3,11 @@ package com.beproffer.beproffer.data.firebase;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.browsing_history.BrowsingHistoryModel;
@@ -14,10 +16,10 @@ import com.beproffer.beproffer.data.models.SwipeImageItem;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,26 +34,24 @@ public class SwipeImagesRepository {
 
     private FirebaseUser mUser;
 
-    private DataSnapshot mActualDataSnapshot;
-
     private BrowsingHistoryRepository mBrowsingHistoryRepository;
     private List<String> mActualBrowsingHistory;
 
     private MutableLiveData<Boolean> mShowProgress = new MutableLiveData<>();
     private MutableLiveData<Integer> mShowToast = new MutableLiveData<>();
     private MutableLiveData<Boolean> mPerformSearch = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mRefreshAdapter = new MutableLiveData<>();
 
     private Map<String, String> mRequestParams;
+
+    private DataSnapshot mActualDataSnapshot;
 
     private List<SwipeImageItem> mSwipeImageItemsList = new ArrayList<>();
     private MutableLiveData<List<SwipeImageItem>> mSwipeImageItemsLiveData = new MutableLiveData<>();
 
+    private Observer mBrowsingHistoryObserver;
+
     public SwipeImagesRepository(Application application) {
         mApplication = application;
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            mUser = FirebaseAuth.getInstance().getCurrentUser();
-        }
         if (mRequestParams == null) {
             obtainRequestParams(mApplication);
         } else {
@@ -60,10 +60,8 @@ public class SwipeImagesRepository {
     }
 
     public LiveData<List<SwipeImageItem>> getSwipeImageItemsListLiveData() {
-       if (mSwipeImageItemsList == null )
-            obtainRequestParams(mApplication);
-        if(mSwipeImageItemsList != null && mSwipeImageItemsList.size() == 0)
-            obtainImagesFromDb();
+//        if (mSwipeImageItemsList != null && mSwipeImageItemsList.size() == 0)
+//            obtainImagesFromDb();
         return mSwipeImageItemsLiveData;
     }
 
@@ -73,12 +71,15 @@ public class SwipeImagesRepository {
         mSwipeImageItemsList.remove(0);
         mSwipeImageItemsLiveData.setValue(mSwipeImageItemsList);
     }
-
     /*пытаемся получить параметры для пользователя или гостя. согласно этим параметрам, будет сделан запрос в Firebase.*/
+
     private void obtainRequestParams(Application application) {
+        Log.d(Const.INFO, "obtainRequestParams");
         mShowProgress.setValue(true);
         mSwipeImageItemsList = new ArrayList<>();
+        mSwipeImageItemsLiveData.setValue(mSwipeImageItemsList);
         SharedPreferences searchRequestData;
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
         if (mUser != null) {
             searchRequestData = application.getSharedPreferences(mUser.getUid(), MODE_PRIVATE);
         } else {
@@ -103,6 +104,7 @@ public class SwipeImagesRepository {
             return;
         }
         if (mUser != null && mActualBrowsingHistory == null) {
+            Log.d(Const.INFO, "obtainRequestParams b hist");
             obtainBrowsingHistory();
             return;
         }
@@ -110,13 +112,12 @@ public class SwipeImagesRepository {
     }
 
     private void obtainBrowsingHistory() {
-        if (mBrowsingHistoryRepository == null)
-            mBrowsingHistoryRepository = new BrowsingHistoryRepository(mApplication, mRequestParams.get(Const.SERVTYPE));
-        /*я не уверен с этим обзервером. ситуация такова, что obtainImagesFromDb() должен запускатьсятогда,
-         * как у нас уже есть mActualBrowsingHistory, как это зарешать, так чтобы было правильно, я незнаю.
-         * на угад, сделал этот обзервер. но не уверен что правильно.*/
-        if (!mBrowsingHistoryRepository.getTargetBrowsingHistory().hasObservers())
-            mBrowsingHistoryRepository.getTargetBrowsingHistory().observeForever(browsingHistory -> {
+        Log.d(Const.INFO, "obtainBrowsingHistory");
+
+        mBrowsingHistoryObserver = new Observer<List<String>>() {
+            @Override
+            public void onChanged(@Nullable List<String> browsingHistory) {
+                Log.d(Const.INFO, "Browsing History changed");
                 if (mActualBrowsingHistory == null) {
                     mActualBrowsingHistory = browsingHistory;
                     obtainImagesFromDb();
@@ -132,7 +133,25 @@ public class SwipeImagesRepository {
                         filterOutItemsForAdapter();
                     }
                 }
-            });
+            }
+        };
+
+        try {
+            if (mBrowsingHistoryRepository != null && mBrowsingHistoryRepository.getTargetBrowsingHistory().hasObservers()) {
+                Log.d(Const.INFO, "obtainBrowsingHistory has observers");
+                mBrowsingHistoryRepository.getTargetBrowsingHistory().removeObserver(mBrowsingHistoryObserver);
+                mBrowsingHistoryRepository = null;
+            }
+            if(mBrowsingHistoryRepository == null){
+            mBrowsingHistoryRepository = new BrowsingHistoryRepository(mApplication, mRequestParams.get(Const.SERVTYPE));
+            /*я не уверен с этим обзервером. ситуация такова, что obtainImagesFromDb() должен запускатьсятогда,
+             * как у нас уже есть mActualBrowsingHistory, как это зарешать, так чтобы было правильно, я незнаю.
+             * на угад, сделал этот обзервер. но не уверен что правильно.*/
+            mBrowsingHistoryRepository.getTargetBrowsingHistory().observeForever(mBrowsingHistoryObserver);}
+        } catch (NullPointerException e) {
+            feedBackToUi(false, R.string.toast_error_has_occurred, null);
+        }
+
     }
 
     public void clearBrowsingHistory() {
@@ -140,6 +159,7 @@ public class SwipeImagesRepository {
             mBrowsingHistoryRepository = new BrowsingHistoryRepository(mApplication, mRequestParams.get(Const.SERVTYPE));
         mBrowsingHistoryRepository.deleteWholeBrowsingHistory();
         mActualBrowsingHistory = null;
+        obtainRequestParams(mApplication);
         feedBackToUi(false, R.string.toast_browsing_history_cleared, null);
     }
 
@@ -150,6 +170,7 @@ public class SwipeImagesRepository {
     public void obtainImagesFromDb() {
         mShowProgress.setValue(true);
         if (!checkRequestParams()) {
+            Log.d(Const.INFO, "!checkRequestParams()");
             obtainRequestParams(mApplication);
             return;
         }
@@ -158,32 +179,24 @@ public class SwipeImagesRepository {
                     .child(Const.SERVICES)
                     .child(mRequestParams.get(Const.SERVTYPE))
                     .child(mRequestParams.get(Const.SERVSBTP))
-                    .addChildEventListener(new ChildEventListener() {
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                             if (!dataSnapshot.exists()) {
-                                feedBackToUi(false, R.string.toast_error_has_occurred, null);
+                                feedBackToUi(false, R.string.toast_no_any_service_items, true);
                                 return;
                             }
-                            if (dataSnapshot.getChildrenCount() <1) {
+
+                            if (dataSnapshot.getChildrenCount() < 1) {
                                 feedBackToUi(false, R.string.toast_no_available_images, true);
                                 return;
                             }
+
                             mActualDataSnapshot = dataSnapshot;
 
                             filterOutItemsForAdapter();
-                        }
 
-                        @Override
-                        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        }
-
-                        @Override
-                        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                        }
-
-                        @Override
-                        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                         }
 
                         @Override
@@ -202,57 +215,60 @@ public class SwipeImagesRepository {
             return;
         }
         mShowProgress.setValue(true);
-        for (DataSnapshot snapshotItem : mActualDataSnapshot.getChildren()) {
-            if (mUser != null) {
-                filterOutItemsForSignedUp(snapshotItem);
-            } else {
-                filterOutItemsForGuest(snapshotItem);
-            }
+        for (DataSnapshot userSnapshotItem : mActualDataSnapshot.getChildren()) {
             if (mSwipeImageItemsList.size() > Const.MAX_NUM_OF_IMAGES_IN_ADAPTER) {
+                Log.d(Const.INFO, "list size is  > MAX_NUM_OF_IMAGES_IN_ADAPTER = " + mSwipeImageItemsList.size());
                 mShowProgress.setValue(false);
                 return;
             }
+            for (DataSnapshot serviceSnapshotItem : userSnapshotItem.getChildren()) {
+                if (mUser != null) {
+                    Log.d(Const.INFO, "filterOutItemsForAdapter children 1 ");
+                    filterOutItemsForSignedUp(serviceSnapshotItem.getValue(SwipeImageItem.class));
+                } else {
+                    Log.d(Const.INFO, "filterOutItemsForAdapter children 2");
+                    filterOutItemsForGuest(serviceSnapshotItem.getValue(SwipeImageItem.class));
+                }
+            }
         }
-        if (!mSwipeImageItemsList.isEmpty()) {
-            mShowProgress.setValue(false);
-            return;
+        if (mSwipeImageItemsList.isEmpty()) {
+            Log.d(Const.INFO, "filterOutItemsForAdapter no_available_images");
+            feedBackToUi(false, R.string.toast_no_available_images, true);
         }
-        feedBackToUi(false, R.string.toast_no_available_images, true);
+        mShowProgress.setValue(false);
     }
 
-    private void filterOutItemsForSignedUp(DataSnapshot snapshotItem) {
-        if (mRequestParams.get(Const.GENDER).equals(Const.BOTHGEND) && !mActualBrowsingHistory.contains(snapshotItem.child(Const.SERIMGURL).getValue().toString())) {
-            addImageAdapterList(snapshotItem);
-            return;
-        }
-        if (snapshotItem.child(Const.GENDER).getValue().toString().equals(mRequestParams.get(Const.GENDER)) &&
-                !mActualBrowsingHistory.contains(snapshotItem.child(Const.SERIMGURL).getValue().toString())) {
-            addImageAdapterList(snapshotItem);
+    private void filterOutItemsForSignedUp(SwipeImageItem imageItem) {
+        if (mRequestParams.get(Const.GENDER).equals(Const.BOTHGEND) &&
+                !mActualBrowsingHistory.contains(imageItem.getUrl())) {
+            addImageAdapterList(imageItem);
+        } else if (!mActualBrowsingHistory.contains(imageItem.getUrl())
+                && (imageItem.getGender().equals(mRequestParams.get(Const.GENDER)) || imageItem.getGender().equals(Const.BOTHGEND))) {
+            addImageAdapterList(imageItem);
         }
     }
 
-    private void filterOutItemsForGuest(DataSnapshot snapshotItem) {
+    private void filterOutItemsForGuest(SwipeImageItem imageItem) {
         if (mRequestParams.get(Const.GENDER).equals(Const.BOTHGEND)) {
-            addImageAdapterList(snapshotItem);
+            addImageAdapterList(imageItem);
             return;
         }
-        if (snapshotItem.child(Const.GENDER).getValue().toString().equals(mRequestParams.get(Const.GENDER))) {
-            addImageAdapterList(snapshotItem);
+        if (imageItem.getGender().equals(mRequestParams.get(Const.GENDER))) {
+            addImageAdapterList(imageItem);
         }
     }
 
-    private void addImageAdapterList(DataSnapshot snapshotItem) {
-        SwipeImageItem imageItem = snapshotItem.getValue(SwipeImageItem.class);
-        if (mSwipeImageItemsList.contains(imageItem))
-            return;
-        mSwipeImageItemsList.add(imageItem);
-        mSwipeImageItemsLiveData.setValue(mSwipeImageItemsList);
+    private void addImageAdapterList(SwipeImageItem imageItem) {
+        if (!mSwipeImageItemsList.contains(imageItem)) {
+            Log.d(Const.INFO, "addImageAdapterList item added");
+            mSwipeImageItemsList.add(imageItem);
+            mSwipeImageItemsLiveData.setValue(mSwipeImageItemsList);
+        }
     }
 
-    public void refreshAdapter(){
+    public void refreshAdapter() {
+        mActualBrowsingHistory = null;
         obtainRequestParams(mApplication);
-        mRefreshAdapter.setValue(true);
-        mRefreshAdapter.setValue(false);
 
     }
 
@@ -266,10 +282,6 @@ public class SwipeImagesRepository {
 
     public LiveData<Boolean> getPerformSearch() {
         return mPerformSearch;
-    }
-
-    public LiveData<Boolean> getRefreshAdapter(){
-        return mRefreshAdapter;
     }
 
     public void resetTriggers(@Nullable Boolean resetToastValue, @Nullable Boolean resetPerformSearch) {
@@ -292,6 +304,7 @@ public class SwipeImagesRepository {
             mShowToast.setValue(toastResId);
         }
         if (performSearch != null) {
+            Log.d(Const.INFO, "feedBackToUi");
             mPerformSearch.setValue(performSearch);
         }
     }

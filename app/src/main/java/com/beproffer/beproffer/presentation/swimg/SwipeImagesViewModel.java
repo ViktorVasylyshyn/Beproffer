@@ -37,12 +37,8 @@ public class SwipeImagesViewModel extends AndroidViewModel {
         return mRepository.getShowToast();
     }
 
-    public LiveData<Boolean> getPerformNavigation() {
+    public LiveData<Boolean> getPerformSearch() {
         return mRepository.getPerformSearch();
-    }
-
-    public LiveData<Boolean> getRefreshAdapter(){
-        return mRepository.getRefreshAdapter();
     }
 
     public void deleteObservedImageItem(SwipeImageItem item) {
@@ -57,8 +53,8 @@ public class SwipeImagesViewModel extends AndroidViewModel {
         mRepository.clearBrowsingHistory();
     }
 
-    public void resetTriggers(@Nullable Boolean resetToastValue, @Nullable Boolean resetPerformNavigation) {
+    public void resetTriggers(@Nullable Boolean resetToastValue, @Nullable Boolean resetPerformSearch) {
         /*параметр может быть или null(не трогать) или true(обнулить значение)*/
-        mRepository.resetTriggers(resetToastValue, resetPerformNavigation);
+        mRepository.resetTriggers(resetToastValue, resetPerformSearch);
     }
 }
