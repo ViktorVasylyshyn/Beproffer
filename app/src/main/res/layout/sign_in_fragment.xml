@@ -21,16 +21,6 @@
         android:layout_height="match_parent"
         tools:context=".presentation.sign_in_up.sign_in.SignInFragment">
 
-        <ImageView
-            android:layout_width="@dimen/bnb_icon_size"
-            android:layout_height="@dimen/bnb_icon_size"
-            android:layout_margin="@dimen/base_margin_small"
-            android:onClick="@{(view) -> fragmentCallback.denySigningIn()}"
-            android:src="@drawable/ic_exit"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
-
         <TextView
             android:id="@+id/sign_in_fragment_sign_up_logo"
             android:layout_width="wrap_content"
@@ -42,28 +32,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:layout_width="@dimen/bnb_icon_size"
-            android:layout_height="@dimen/bnb_icon_size"
-            android:layout_margin="@dimen/base_margin_small"
-            android:onClick="@{(view) -> fragmentCallback.onSignInClick()}"
-            android:src="@drawable/ic_check_mark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/sign_in_sign_in_hint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_medium"
-            android:text="@string/common_signin_button_text"
-            android:textColor="@color/color_base_text"
-            android:textSize="@dimen/base_text_size_medium"
-            app:layout_constraintTop_toBottomOf="@+id/sign_in_fragment_sign_up_logo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
 
         <EditText
             android:id="@+id/sign_in_fragment_email"
@@ -79,7 +47,7 @@
             android:maxLines="1"
             android:padding="@dimen/base_padding_small"
             android:textSize="@dimen/base_text_size_big"
-            app:layout_constraintTop_toBottomOf="@id/sign_in_sign_in_hint"
+            app:layout_constraintTop_toBottomOf="@id/sign_in_fragment_sign_up_logo"
             tools:ignore="Autofill" />
 
         <EditText
@@ -111,6 +79,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sign_in_fragment_password" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/base_margin_medium"
+            android:background="@drawable/button_background_green_stroke_rectangle"
+            android:onClick="@{(view) -> fragmentCallback.onSignInClick()}"
+            android:text="@string/common_signin_button_text"
+            android:paddingStart="@dimen/base_padding_small"
+            android:paddingEnd="@dimen/base_padding_small"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/base_text_size_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_fragment_change_password"
+            app:layout_constraintBottom_toTopOf="@+id/sign_in_create_account_hint"/>
+
         <TextView
             android:id="@+id/sign_in_create_account_hint"
             android:layout_width="wrap_content"
@@ -119,9 +104,9 @@
             android:text="@string/title_create_an_acc"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_medium"
-            app:layout_constraintTop_toBottomOf="@+id/sign_in_fragment_change_password"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/sign_in_fragment_customer_sign_up"/>
 
         <Button
             android:id="@+id/sign_in_fragment_customer_sign_up"
@@ -138,7 +123,8 @@
             android:textSize="@dimen/base_text_size_medium"
             app:layout_constraintEnd_toStartOf="@+id/sign_in_fragment_specialist_sign_up"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_in_create_account_hint" />
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_fragment_change_password"
+            app:layout_constraintBottom_toTopOf="@+id/sign_in_bottom_hint_1"/>
 
         <Button
             android:id="@+id/sign_in_fragment_specialist_sign_up"
@@ -155,7 +141,8 @@
             android:textSize="@dimen/base_text_size_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/sign_in_fragment_customer_sign_up"
-            app:layout_constraintTop_toBottomOf="@+id/sign_in_create_account_hint" />
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_fragment_change_password"
+            app:layout_constraintBottom_toTopOf="@+id/sign_in_bottom_hint_1"/>
 
         <ProgressBar
             android:id="@+id/sign_in_fragment_progress_bar"
@@ -192,12 +179,14 @@
             android:textSize="@dimen/base_text_size_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_in_terms" />
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_terms"/>
 
         <TextView
+            android:id="@+id/sign_in_bottom_hint_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
+            android:layout_marginStart="@dimen/base_margin_small"
+            android:layout_marginEnd="@dimen/base_margin_small"
             android:gravity="center"
             android:padding="@dimen/base_padding_small"
             android:text="@string/hint_any_browsing_history"

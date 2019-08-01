@@ -1,16 +1,23 @@
 package com.beproffer.beproffer.presentation.base;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.os.Handler;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.UserInfo;
 import com.beproffer.beproffer.presentation.UserDataViewModel;
+import com.beproffer.beproffer.util.Const;
 
 public class BaseUserInfoFragment extends BaseFragment {
 
     public UserDataViewModel mUserDataViewModel;
 
     public UserInfo mCurrentUserInfo;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
     public void initUserData() {
         if (!checkInternetConnection()) {
@@ -45,15 +52,17 @@ public class BaseUserInfoFragment extends BaseFragment {
         mUserDataViewModel.getHideKeyboard().observe(getViewLifecycleOwner(), hide -> {
             if (hide == null)
                 return;
-            hideKeyboard(requireActivity());
             mUserDataViewModel.resetTrigger(null, true, null);
+            hideKeyboard(requireActivity());
         });
 
         mUserDataViewModel.getPopBackStack().observe(getViewLifecycleOwner(), back -> {
             if (back == null)
                 return;
-            popBackStack();
             mUserDataViewModel.resetTrigger(null, null, true);
+            Handler handlerWordAnim = new Handler();
+            handlerWordAnim.postDelayed(this::popBackStack, Const.POPBACKSTACK_WAITING);
+
         });
         obtainUserInfo();
     }
@@ -69,6 +78,6 @@ public class BaseUserInfoFragment extends BaseFragment {
 
     public void applyUserData() {
         /*предполагается что во фрагментах наследниках, в этом методе будет размещаться логика, которая
-        * должна начать соверщаться, когда данные юзера получены*/
+        * должна начать совершаться, когда данные юзера получены*/
     }
 }

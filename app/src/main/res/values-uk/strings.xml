@@ -186,6 +186,7 @@
     <string name="toast_image_data_updated">Дані зображення успішно змінені.</string>
     <string name="toast_guest_mode">Ви увійшли як гість.</string>
     <string name="toast_processing">Зачекайте, будь ласка. Обробка даних…</string>
+    <string name="toast_no_any_service_items">Перепрошуемо, але, поки що, нема публікацій цього напрямку.</string>
 
 
 

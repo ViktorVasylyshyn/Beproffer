@@ -1,5 +1,6 @@
 package com.beproffer.beproffer.presentation.sign_in_up.sign_in;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SignInFragmentBinding;
 import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
+import com.beproffer.beproffer.presentation.swimg.SwipeImagesViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
@@ -52,11 +54,6 @@ public class SignInFragment extends BaseFragment {
         @Override
         public void onPrivacyPolicyClick() {
             openDoc(R.string.href_privacy_policy);
-        }
-
-        @Override
-        public void denySigningIn() {
-            ((MainActivity)requireActivity()).onBottomNavigationBarItemClicked(R.id.bnm_images_gallery, null);
         }
     };
 
@@ -106,6 +103,7 @@ public class SignInFragment extends BaseFragment {
                     hideKeyboard(requireActivity());
                     if (auth.getCurrentUser().isEmailVerified()) {
                         performNavigation(R.id.action_global_profileFragment);
+                        ViewModelProviders.of(requireActivity()).get(SwipeImagesViewModel.class).refreshAdapter();
                     } else {
                         auth.signOut();
                         showToast(R.string.toast_sign_in_verify_email_first);

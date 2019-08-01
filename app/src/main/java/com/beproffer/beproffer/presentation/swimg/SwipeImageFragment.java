@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.swimg.adapter.SwipeImageAdapter;
 import com.beproffer.beproffer.presentation.swimg.search_sheet.SearchSheetDialog;
 import com.beproffer.beproffer.util.Const;
+import com.google.firebase.auth.FirebaseUser;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.List;
@@ -32,6 +34,10 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
     private SwipeImageAdapter mSwipeImageAdapter;
 
     private List<SwipeImageItem> mImageItemsList;
+
+    private SearchSheetDialog searchSheet;
+
+    private FirebaseUser mCurrentUser;
 
     private SwipeImagesViewModel mSwipeImagesViewModel;
 
@@ -93,16 +99,10 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
             if (list == null)
                 return;
             mImageItemsList = list;
-            if (mSwipeImageAdapter == null) {
+            if (mSwipeImageAdapter == null || mImageItemsList.isEmpty()) {
                 initAdapter();
-            }else {
+            } else {
                 mSwipeImageAdapter.notifyDataSetChanged();
-            }
-        });
-        /*освежаем адаптер. нужно в случае, если создан новый поискавый запрос*/
-        mSwipeImagesViewModel.getRefreshAdapter().observe(getViewLifecycleOwner(), refresh -> {
-            if (refresh != null && refresh){
-                mSwipeImageAdapter = null;
             }
         });
         /*актив\неактив прогресс бар*/
@@ -118,7 +118,7 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
             mSwipeImagesViewModel.resetTriggers(true, null);
         });
         /*получение команд и айди для совершения перехода*/
-        mSwipeImagesViewModel.getPerformNavigation().observe(getViewLifecycleOwner(), performSearch -> {
+        mSwipeImagesViewModel.getPerformSearch().observe(getViewLifecycleOwner(), performSearch -> {
             if (performSearch == null)
                 return;
             mSwipeImagesViewModel.resetTriggers(null, true);
@@ -211,13 +211,15 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
     }
 
     private void searchSheet() {
-        SearchSheetDialog searchSheet = new SearchSheetDialog();
+        Log.d("DIALOG", "searchSheet");
+        if (searchSheet == null) {
+            Log.d("DIALOG", "searchSheet == null");
+            searchSheet = new SearchSheetDialog();
+        }
+        if (searchSheet.isAdded()) {
+            Log.d("DIALOG", "searchSheet show");
+            return;
+        }
         searchSheet.show(requireActivity().getSupportFragmentManager(), "searchSheet");
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
     }
 }

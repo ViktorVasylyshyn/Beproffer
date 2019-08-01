@@ -12,6 +12,4 @@ public interface SingInFragmentCallback {
     void onTermsClick();
 
     void onPrivacyPolicyClick();
-
-    void denySigningIn();
 }

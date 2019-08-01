@@ -68,12 +68,13 @@ public class UserDataRepository {
 
     public UserDataRepository(Application application) {
         mApplication = application;
-        mCurrentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        obtainUserType();
     }
 
     public LiveData<UserInfo> getUserInfoLiveData() {
+        if(mUserInfoLiveData.getValue() == null){
+            mCurrentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            obtainUserType();
+        }
         return mUserInfoLiveData;
     }
 
