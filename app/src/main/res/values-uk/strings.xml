@@ -31,7 +31,7 @@
     <string name="hint_gender_outfield">СТАТЬ</string>
     <string name="hint_outfield_clear_browsing_history">Натисніть \"Обнулити\" якщо хочете обнулити історію перегладів.</string>
     <string name="hint_outfield_delete_profile">Введіть свій email і настисніть \"Видалити\", для видалення цього профайлу з Beproffer. Видалений профайл не можна відновити, але можна буде створити новий.</string>
-    <string name="hint_outfield_forgot_password">Забули свій пароль? Натисніть щоб змінити.</string>
+    <string name="hint_outfield_forgot_password">Забули свій пароль?</string>
     <string name="hint_outfield_change_password">Щоб змінити пароль, ведіть свій email в поле вводу і натисніть \"Змінити\". Ви отримаєте повідомлення для зміни паролю на цю адресу.</string>
     <string name="hint_outfield_settings_reset_password">Натисніть \"Скинути\" для зміни паролю(відбудеться вихід з профайлу в меню зміни паролю).</string>
     <string name="hint_outfield_agree_to">Реєструючись в додатку Beproffer Ви підтвержуєте, що ознайомилися і погоджуєтесь з його</string>
@@ -57,20 +57,26 @@
     <string name="href_privacy_policy_title_1">Політика Конфіденційності</string>
     <string name="href_official_site_title">Beproffer.com</string>
     <string name="href_official_site">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F</string>
-
+    <string name="hint_join_us_on_social">Приєднуйся до нас в соціальних мережаж. Ділися своїми враженнями та пропозиціями. Посилання на офіційні групи знаходяться в розділі \"info\".</string>
+    <string name="href_telegram_chat_customers">https://t.me/beproffer_c</string>
+    <string name="href_telegram_chat_specialists">https://t.me/beproffer_s</string>
+    <string name="href_viber_chat_customers">https://invite.viber.com/?g2=AQATP13AdMH6M0oUzCUTcg75bBcL4qcWS72dKYPVLOL1fqTuHOB%2FXbsw%2BrHvZSLH</string>
+    <string name="href_viber_chat_specialists">https://invite.viber.com/?g2=AQAJVtpDxpdMMEoU3JqJjwNDXuNOM0GnZu%2FDu82uths%2FRhzGMfzEX7OChNW967CM</string>
 
     <!--Titles-->
     <string name="title_duration">ТРИВАЛІСТЬ</string>
-    <string name="title_confirmed_contacts">Контакти</string>
+    <string name="title_contacts_to_specialists">Спеціалісти</string>
+    <string name="title_new_customers_title">Запити</string>
     <string name="title_sign_in">ВХІД</string>
     <string name="title_create_an_acc">або створити новий аккаунт</string>
     <string name="title_price">ЦІНА</string>
     <string name="title_customer_registration">НОВИЙ КЛІЄНТ</string>
     <string name="title_specialist_registration">НОВИЙ СПЕЦІАЛІСТ</string>
-    <string name="title_send_contact_request">НОМЕР ТЕЛ СПЕЦІАЛІСТА</string>
+    <string name="title_send_contact_request">ЗВ\'ЯЗАТИСЯ ЗІ СПЕЦІАЛІСТОМ</string>
     <string name="title_request_already_sent">ВІДПРАВЛЕНО</string>
-    <string name="title_contact_already_available">НОМЕР ТЕЛЕФОНУ ВЖЕ Є В КОНТАКТАХ</string>
-    <string name="title_max_num_of_contacts">НАЖАЛЬ, ПОКИ ЩО МОЖНА МАТИ, ОДНОЧАСНО, ДО 10 КОНТАКТІВ</string>
+    <string name="title_contact_already_available">ВЖЕ Є В КОНТАКТАХ</string>
+    <string name="title_max_num_of_contacts">МАКСИМУМ</string>
+    <string name="title_this_is_your_image">ЦЕ ВАШЕ ЗОБРАЖЕННЯ</string>
     <string name="title_specialist_type">СПЕЦІАЛІСТ</string>
     <string name="title_customer_type">КЛІЄНТ</string>
     <string name="title_add_image">ДОДАТИ</string>
@@ -121,7 +127,6 @@
     <string name="makeup_title_eyebrow_styling">Корекція Брів</string>
 
     <string name="tattoo_title_tattoo">Татуювання</string>
-    <string name="tattoo_title_piercing">Пірсинг</string>
     <string name="tattoo_title_temporary_tattoo">Тимчасові Татуювання</string>
 
     <string name="fitness_title_trainer">Персональний Тренер</string>
@@ -208,7 +213,6 @@
 
     <string name="hint_specialist_phone_1">Впевніться, що номер телефону правильний. Він буде показуватися потенційним клієнтам.</string>
     <string name="hint_any_strong_password">Створіть надійний пароль, використовуючи літери, цифри та символи.</string>
-    <string name="title_new_customers_title">Клієнти</string>
 
 
     <!--new-->

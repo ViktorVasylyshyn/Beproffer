@@ -65,6 +65,9 @@ public class SettingsFragment extends BaseUserInfoFragment {
         popupMenu.getMenuInflater().inflate(R.menu.menu_clear_browsing_history, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             if (menuItem.getItemId() == R.id.menu_clear_browsing_history_clear) {
+                mBinding.settingsClearBrowsingHistoryButton.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
+                mBinding.settingsClearBrowsingHistoryButton.setTextColor(getResources().getColor(R.color.color_base_text_70per));
+                mBinding.settingsClearBrowsingHistoryButton.setClickable(false);
 
                 if (mSwipeImagesViewModel == null) {
                     mSwipeImagesViewModel = ViewModelProviders.of(requireActivity()).get(SwipeImagesViewModel.class);

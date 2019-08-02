@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
@@ -42,7 +43,7 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
         mBinding.sslHaircutIcon.setOnClickListener(v -> defineServiceType(mBinding.sslHaircutIcon));
         mBinding.sslNailsIcon.setOnClickListener(v -> defineServiceType(mBinding.sslNailsIcon));
         mBinding.sslMakeupIcon.setOnClickListener(v -> defineServiceType(mBinding.sslMakeupIcon));
-        mBinding.sslTattooPiercingIcon.setOnClickListener(v -> defineServiceType(mBinding.sslTattooPiercingIcon));
+        mBinding.sslTattooIcon.setOnClickListener(v -> defineServiceType(mBinding.sslTattooIcon));
         mBinding.sslBarberIcon.setOnClickListener(v -> defineServiceType(mBinding.sslBarberIcon));
         mBinding.sslFitnessIcon.setOnClickListener(v -> defineServiceType(mBinding.sslFitnessIcon));
 
@@ -52,7 +53,10 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
 
         mBinding.sslApply.setOnClickListener(v -> {
             if (mGender == null || mTypeMap == null) {
+                mBinding.sslApply.setClickable(false);
                 Toast.makeText(requireContext(), R.string.toast_define_search_params, Toast.LENGTH_SHORT).show();
+                Handler handler = new Handler();
+                handler.postDelayed(() -> mBinding.sslApply.setClickable(true), Const.COOLDOWNDUR_SHORT);
                 return;
             }
             applySearchRequest();
@@ -68,7 +72,7 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
 //    }
 
     private void defineServiceType(ImageView view) {
-        int requiredMenuRes = 0;
+        int requiredMenuRes;
         switch (view.getId()) {
             case R.id.ssl_haircut_icon:
                 requiredMenuRes = R.menu.menu_hair_services;
@@ -79,7 +83,7 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
             case R.id.ssl_makeup_icon:
                 requiredMenuRes = R.menu.menu_makeup_services;
                 break;
-            case R.id.ssl_tattoo_piercing_icon:
+            case R.id.ssl_tattoo_icon:
                 requiredMenuRes = R.menu.menu_tattoo_services;
                 break;
             case R.id.ssl_barber_icon:
@@ -106,7 +110,7 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
                 mBinding.sslHaircutIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
                 mBinding.sslNailsIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
                 mBinding.sslMakeupIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
-                mBinding.sslTattooPiercingIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
+                mBinding.sslTattooIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
                 mBinding.sslBarberIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
                 mBinding.sslFitnessIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
 

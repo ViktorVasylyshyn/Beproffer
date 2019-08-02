@@ -96,7 +96,7 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
             showToast(R.string.toast_processing);
             return;
         }
-        if (mCurrentUserInfo.getUserPhone().length() < 5 || mCurrentUserInfo.getUserPhone().length() > 13) {
+        if (mCurrentUserInfo.getUserPhone() != null && (mCurrentUserInfo.getUserPhone().length() < 5 || mCurrentUserInfo.getUserPhone().length() > 13)) {
             mBinding.editFragmentPhone.requestFocus();
             mBinding.editFragmentPhone.setError(getResources().getText(R.string.error_message_wrong_phone_number_format));
             mBinding.editFragmentBottomHint.setText(R.string.hint_specialist_phone_1);

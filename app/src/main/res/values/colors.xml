@@ -6,17 +6,12 @@
     <!--list items' colors-->
     <color name="color_base_text">#30312F</color>
     <color name="color_base_text_70per">#B230312F</color>
-    <color name="color_base_button_text_white">#FFFFFF</color>
-    <color name="color_base_green">#0c8922</color>
-    <color name="color_base_transparent">#00FFFFFF</color>
     <color name="color_icons_bnb">#0c8922</color>
 
     <!--Backgrounds-->
     <color name="color_background_grey">#E6E6E6</color>
     <color name="color_background_grey_dark">#B8B8B8</color>
     <color name="color_background_white">#FFFFFF</color>
-    <color name="color_bnb_background_start">#00FFFFFF</color>
-    <color name="color_bnb_background_end">#FFFFFF</color>
     <color name="color_pop_up_menu_background">#FFFFFF</color>
 
 
@@ -24,9 +19,6 @@
     <color name="colorPrimaryDark">#494E4E</color>
 
     <color name="colorIconGrey">#979E95</color>
-
-    <color name="colorBackgroundGradientStart">#F0F5EF</color>
-    <color name="colorBackgroundGradientEnd">#B0B6B0</color>
 
     <color name="greyLightGradientStart">#66FFFFFF</color>
     <color name="greyLightGradientEnd">#B2FFFFFF</color>

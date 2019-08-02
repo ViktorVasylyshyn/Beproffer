@@ -43,7 +43,7 @@ public class SignInFragment extends BaseFragment {
 
         @Override
         public void onResetPasswordClick() {
-            performNavigation(R.id.action_settingsFragment_to_resetPasswordFragment);
+            performNavigation(R.id.action_signInFragment_to_resetPasswordFragment);
         }
 
         @Override

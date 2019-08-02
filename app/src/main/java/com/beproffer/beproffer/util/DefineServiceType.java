@@ -17,9 +17,9 @@ public class DefineServiceType {
     }
 
     public Map<String, String> setRequest(MenuItem menuItem) {
-        String serviceType = null;
-        String serviceSubtype = null;
-        String serviceTitle = null;
+        String serviceType;
+        String serviceSubtype;
+        String serviceTitle;
         switch (menuItem.getItemId()) {
             case R.id.menu_hair_haircut:
                 serviceType = Const.HAI;
@@ -90,11 +90,6 @@ public class DefineServiceType {
                 serviceType = Const.TAT;
                 serviceSubtype = Const.TATTAT;
                 serviceTitle = context.getResources().getString(R.string.tattoo_title_tattoo);
-                break;
-            case R.id.menu_tattoo_piercing:
-                serviceType = Const.TAT;
-                serviceSubtype = Const.TATPIE;
-                serviceTitle = context.getResources().getString(R.string.tattoo_title_piercing);
                 break;
             case R.id.menu_tattoo_temporary_tattoo:
                 serviceType = Const.TAT;

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,6 @@ import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.swimg.adapter.SwipeImageAdapter;
 import com.beproffer.beproffer.presentation.swimg.search_sheet.SearchSheetDialog;
 import com.beproffer.beproffer.util.Const;
-import com.google.firebase.auth.FirebaseUser;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.List;
@@ -36,8 +34,6 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
     private List<SwipeImageItem> mImageItemsList;
 
     private SearchSheetDialog searchSheet;
-
-    private FirebaseUser mCurrentUser;
 
     private SwipeImagesViewModel mSwipeImagesViewModel;
 
@@ -134,8 +130,9 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
 
         /*подразумевается, что зарегистрированный юзер уже знает, что карточки можно свайпать в разные стороны
          * и в дополнительных анимациях, как подсказках, не нуждается*/
-        if (getFirebaseUser() == null)
+        if (getFirebaseUser() == null){
             onCardHintAnimation(flingImageContainer);
+        }
 
         flingImageContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
@@ -211,15 +208,11 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
     }
 
     private void searchSheet() {
-        Log.d("DIALOG", "searchSheet");
-        if (searchSheet == null) {
-            Log.d("DIALOG", "searchSheet == null");
-            searchSheet = new SearchSheetDialog();
+        if (searchSheet != null){
+            searchSheet.dismiss();
+            searchSheet = null;
         }
-        if (searchSheet.isAdded()) {
-            Log.d("DIALOG", "searchSheet show");
-            return;
-        }
+        searchSheet = new SearchSheetDialog();
         searchSheet.show(requireActivity().getSupportFragmentManager(), "searchSheet");
     }
 }

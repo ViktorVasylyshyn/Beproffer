@@ -99,7 +99,7 @@ public class AppBindingAdapter {
                     resId = R.drawable.ic_makeup;
                     break;
                 case Const.TAT:
-                    resId = R.drawable.ic_tattoo_piercing;
+                    resId = R.drawable.ic_tattoo;
                     break;
                 case Const.BAR:
                     resId = R.drawable.ic_barbershop;
@@ -166,9 +166,6 @@ public class AppBindingAdapter {
                 /*tattoo*/
                 case Const.TATTAT:
                     resId = R.string.tattoo_title_tattoo;
-                    break;
-                case Const.TATPIE:
-                    resId = R.string.tattoo_title_piercing;
                     break;
                 case Const.TATTEM:
                     resId = R.string.tattoo_title_temporary_tattoo;

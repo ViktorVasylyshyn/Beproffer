@@ -6,12 +6,9 @@ import android.databinding.ObservableBoolean;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
@@ -73,6 +70,6 @@ public class BaseFragment extends Fragment {
     public void cooldown(View view){
         view.setClickable(false);
         Handler handlerWordAnim = new Handler();
-        handlerWordAnim.postDelayed(() -> view.setClickable(true), Const.COOLDOWNDUR);
+        handlerWordAnim.postDelayed(() -> view.setClickable(true), Const.COOLDOWNDUR_LONG);
     }
 }

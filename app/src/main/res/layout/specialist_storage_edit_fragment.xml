@@ -130,12 +130,12 @@
                     tools:ignore="ContentDescription" />
 
                 <ImageView
-                    android:id="@+id/specialist_storage_edit_tattoo_piercing_icon"
+                    android:id="@+id/specialist_storage_edit_tattoo_icon"
                     android:layout_width="@dimen/icons_size_normal_height"
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:padding="@dimen/base_padding_small"
                     android:onClick="@{fragmentCallback::onTypeButtonClick}"
-                    android:src="@drawable/ic_tattoo_piercing"
+                    android:src="@drawable/ic_tattoo"
                     app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_barber_icon"
                     app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_haircut_icon"
                     tools:ignore="ContentDescription" />
@@ -147,7 +147,7 @@
                     android:padding="@dimen/base_padding_small"
                     android:onClick="@{fragmentCallback::onTypeButtonClick}"
                     android:src="@drawable/ic_fitness"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_tattoo_piercing_icon"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_tattoo_icon"
                     app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_haircut_icon"
                     tools:ignore="ContentDescription" />
 
@@ -343,7 +343,8 @@
             android:layout_marginEnd="@dimen/base_margin_medium"
             android:layout_marginBottom="@dimen/base_margin_small"
             android:background="@drawable/button_background_grey_stroke_rectangle"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_description">
 
             <LinearLayout
                 android:layout_width="match_parent"

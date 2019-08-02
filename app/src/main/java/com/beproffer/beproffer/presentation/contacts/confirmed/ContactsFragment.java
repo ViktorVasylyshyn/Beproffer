@@ -184,10 +184,10 @@ public class ContactsFragment extends BaseUserInfoFragment {
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.contact_request_menu_apply:
-                    handleContactRequest(true, item);
+                    handleContactRequest(item,true);
                     break;
                 case R.id.contact_request_menu_deny:
-                    handleContactRequest(false, item);
+                    handleContactRequest(item,true);
                     break;
             }
             return true;
@@ -195,7 +195,7 @@ public class ContactsFragment extends BaseUserInfoFragment {
         popupMenu.show();
     }
 
-    private void handleContactRequest(boolean confirm, ContactRequestItem handledItem) {
+    private void handleContactRequest(ContactRequestItem handledItem, boolean confirm) {
         mUserDataViewModel.handleIncomingContactRequest(handledItem, confirm);
     }
 }

@@ -39,6 +39,14 @@
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_signInFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/customerRegistrationFragment"
@@ -135,7 +143,7 @@
         app:launchSingleTop="true"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/signInFragment"
+        app:popUpTo="@+id/swipeImageFragment"
         app:popUpToInclusive="true" />
     <action
         android:id="@+id/action_global_signInFragment"
@@ -184,6 +192,6 @@
         app:launchSingleTop="true"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@+id/contactsFragment"
+        app:popUpTo="@+id/swipeImageFragment"
         app:popUpToInclusive="true" />
 </navigation>
