@@ -50,7 +50,7 @@ public class ProfileFragment extends BaseUserInfoFragment {
         mBinding.setFragmentCallback(mCallback);
         mBinding.setShowProgress(mShowProgress);
         if (getFirebaseUser() == null) {
-            ((MainActivity)requireActivity()).onBottomNavigationBarItemClicked(R.id.bnm_images_gallery, R.string.toast_error_has_occurred);
+            ((MainActivity) requireActivity()).onBottomNavigationBarItemClicked(R.id.bnm_images_gallery, R.string.toast_error_has_occurred);
         } else {
             initUserData();
         }
@@ -106,19 +106,29 @@ public class ProfileFragment extends BaseUserInfoFragment {
                     mBinding.profileBottomHint.setText(R.string.hint_specialist_add_more_images);
                 } else {
                     if (mCurrentUserInfo.getUserInfo() == null || mCurrentUserInfo.getUserInfo().isEmpty()) {
-                        Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_blinking_icon_anim);
-                        mBinding.profileEdit.startAnimation(animation);
-                        mBinding.profileBottomHint.setText(R.string.hint_any_add_more_personal_info);
+                        iconsBlinkingAnim();
+                    } else {
+                        joinUsHint();
                     }
                 }
             });
         } else {
             if (mCurrentUserInfo.getUserInfo() == null || mCurrentUserInfo.getUserInfo().isEmpty()) {
-                Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_blinking_icon_anim);
-                mBinding.profileEdit.startAnimation(animation);
-                mBinding.profileBottomHint.setText(R.string.hint_any_add_more_personal_info);
+                iconsBlinkingAnim();
+            } else {
+                joinUsHint();
             }
         }
+    }
+
+    private void joinUsHint() {
+        mBinding.profileBottomHint.setText(R.string.hint_join_us_on_social);
+    }
+
+    private void iconsBlinkingAnim() {
+        Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_blinking_icon_anim);
+        mBinding.profileEdit.startAnimation(animation);
+        mBinding.profileBottomHint.setText(R.string.hint_any_add_more_personal_info);
     }
 
     public void logOut() {

@@ -61,7 +61,6 @@ public class Const {
 
     public static final String TAT = "TAT"; /*menu_tattoo*/
     public static final String TATTAT = "TATTAT"; /*submenu_tattoo*/
-    public static final String TATPIE = "TATPIE"; /*submenu_piercing*/
     public static final String TATTEM = "TATTEM"; /*submenu_temporary_tattoo*/
 
     public static final String BAR = "BAR"; /*menu_beards*/
@@ -105,7 +104,8 @@ public class Const {
     public static final int ANIMDUR = 1000; /*анимация для карточки состоит из двух этапов вправо - назад,
      потом влево - назад. это задержка перед включением второй анимации*/
 
-    public static final int COOLDOWNDUR = 3000; /*заморозка повторного нажатия вью элементов после предыдущего.
+    public static final int COOLDOWNDUR_SHORT = 1500;
+    public static final int COOLDOWNDUR_LONG = 3000; /*заморозка повторного нажатия вью элементов после предыдущего.
     в основном применимо к вью элементам, которые не посылают запрос на сервер*/
 
     public static final int POPBACKSTACK_WAITING = 300; /*система не успевает сбросить параметр true при

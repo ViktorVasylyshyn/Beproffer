@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -81,13 +82,48 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/info_fragment_contact_us_email" />
 
+        <ImageView
+            android:id="@+id/info_fragment_telegram"
+            android:layout_width="@dimen/profile_image_half"
+            android:layout_height="@dimen/profile_image_half"
+            android:onClick="@{(view)->fragmentCallback.onTelegramClicked()}"
+            android:src="@drawable/ic_telegram"
+            app:layout_constraintBottom_toBottomOf="@+id/info_fragment_viber"
+            app:layout_constraintTop_toTopOf="@+id/info_fragment_viber"
+            app:layout_constraintEnd_toStartOf="@+id/info_fragment_viber"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/info_fragment_viber"
+            android:layout_width="@dimen/profile_image_three_quarters"
+            android:layout_height="@dimen/profile_image_three_quarters"
+            android:layout_margin="@dimen/base_margin_medium"
+            android:onClick="@{(view)->fragmentCallback.onViberClicked()}"
+            android:src="@drawable/ic_viber"
+            app:layout_constraintBottom_toTopOf="@+id/info_fragment_terms_of_use"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/info_fragment_facebook"
+            android:layout_width="@dimen/profile_image_half"
+            android:layout_height="@dimen/profile_image_half"
+            android:onClick="@{(view)->fragmentCallback.onFacebookClicked()}"
+            android:src="@drawable/ic_facebook"
+            app:layout_constraintBottom_toBottomOf="@+id/info_fragment_viber"
+            app:layout_constraintTop_toTopOf="@+id/info_fragment_viber"
+            app:layout_constraintStart_toEndOf="@+id/info_fragment_viber"
+            tools:ignore="ContentDescription" />
+
         <TextView
+            android:id="@+id/info_fragment_terms_of_use"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
             android:onClick="@{(view)->fragmentCallback.onUseTermsClick()}"
             android:text="@string/href_terms_of_service_title_1"
             android:textColor="@color/colorAccent"
-            android:layout_margin="@dimen/base_margin_small"
             android:textSize="@dimen/base_text_size_medium"
             app:layout_constraintBottom_toTopOf="@+id/info_fragment_privacy_policy"
             app:layout_constraintEnd_toEndOf="parent"

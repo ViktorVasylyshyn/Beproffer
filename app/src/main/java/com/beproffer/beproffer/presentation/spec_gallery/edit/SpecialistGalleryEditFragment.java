@@ -160,7 +160,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
             case R.id.specialist_storage_edit_barber_icon:
                 requiredMenuRes = R.menu.menu_barber_services;
                 break;
-            case R.id.specialist_storage_edit_tattoo_piercing_icon:
+            case R.id.specialist_storage_edit_tattoo_icon:
                 requiredMenuRes = R.menu.menu_tattoo_services;
                 break;
             case R.id.specialist_storage_edit_fitness_icon:
@@ -257,7 +257,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
                 targetView = mBinding.specialistStorageEditMakeupIcon;
                 break;
             case Const.TAT:
-                targetView = mBinding.specialistStorageEditTattooPiercingIcon;
+                targetView = mBinding.specialistStorageEditTattooIcon;
                 break;
             case Const.BAR:
                 targetView = mBinding.specialistStorageEditBarberIcon;
@@ -271,7 +271,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
         mBinding.specialistStorageEditHaircutIcon.setBackgroundResource(R.drawable.background_transparent);
         mBinding.specialistStorageEditNailsIcon.setBackgroundResource(R.drawable.background_transparent);
         mBinding.specialistStorageEditMakeupIcon.setBackgroundResource(R.drawable.background_transparent);
-        mBinding.specialistStorageEditTattooPiercingIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistStorageEditTattooIcon.setBackgroundResource(R.drawable.background_transparent);
         mBinding.specialistStorageEditBarberIcon.setBackgroundResource(R.drawable.background_transparent);
         mBinding.specialistStorageEditFitnessIcon.setBackgroundResource(R.drawable.background_transparent);
 

@@ -43,6 +43,9 @@ public class UserDataRepository {
     private String mCurrentUserId;
     private String mCurrentUserType;
 
+    private String mRequestsObtained = "user";
+    private String mContactsObtained = "user";
+
     private MutableLiveData<Boolean> mShowProgress = new MutableLiveData<>();
     private MutableLiveData<Boolean> mProcessing = new MutableLiveData<>();
     private MutableLiveData<Integer> mShowToast = new MutableLiveData<>();
@@ -327,12 +330,20 @@ public class UserDataRepository {
 
     public LiveData<Map<String, ContactItem>> getContacts() {
         mShowProgress.setValue(true);
-        if (mUserDataSnapShot.hasChild(Const.CONTACT) && mContactsMap.isEmpty()) {
+        /*проблема в том, что когда мэп пустеет(например в следствии удаления всех контактов), то эта
+        проверка опять срабатывает положительно. данные на сервере изменились, но мы, пока что не
+        делаем повторного запроса, потому что имеем общий слепок юзер даты. и если, юзер, не обновляя
+        данные из бд возвратится на активити контактов - то опять увидит у себя список тех контактов,
+        которыч по сути в бд уже нет, они остались только в неактуальном слепке юзер даты. Поэтому,
+        незная как пофиксить другим методом это говно - ввел переменную, которая будет триггером того,
+        прочитаны ли данные из актуального слепка.*/
+        if (mUserDataSnapShot.hasChild(Const.CONTACT) && mContactsMap.isEmpty() && !mContactsObtained.equals(mCurrentUserId)) {
             try {
                 for (DataSnapshot data : mUserDataSnapShot.child(Const.CONTACT).getChildren()) {
                     mContactsMap.put(data.getValue(ContactItem.class).getContactUid(), data.getValue(ContactItem.class));
                 }
                 mContactsMapLiveData.setValue(mContactsMap);
+                mContactsObtained = mCurrentUserId;
             } catch (NullPointerException e) {
                 feedBackToUi(false, R.string.toast_error_has_occurred, null, null);
             }
@@ -359,15 +370,26 @@ public class UserDataRepository {
 
     public LiveData<Map<String, ContactRequestItem>> getContactRequests() {
         mShowProgress.setValue(true);
-        if (mUserDataSnapShot.hasChild(Const.INREQUEST) && mContactRequestsMap.isEmpty()) {
+        /*проблема в том, что когда мэп пустеет(например в следствии обработки специалистом всех запросов,
+        что будет случатся намного чаще, чем в случае с удалением контактов), то эта
+        проверка опять срабатывает положительно. данные на сервере изменились, но мы, пока что не
+        делаем повторного запроса, потому что имеем общий слепок юзер даты. и если, юзер, не обновляя
+        данные из бд возвратится на активити контактов - то опять увидит у себя список тех контактов,
+        которые по сути в бд уже нет, они остались только в неактуальном слепке юзер даты. Поэтому,
+        незная как пофиксить другим методом это говно - ввел переменную, которая будет триггером того,
+        прочитаны ли данные из актуального слепка.*/
+        if (mUserDataSnapShot.hasChild(Const.INREQUEST) && mContactRequestsMap.isEmpty() && !mRequestsObtained.equals(mCurrentUserId)) {
             for (DataSnapshot data : mUserDataSnapShot.child(Const.INREQUEST).getChildren()) {
                 try {
-                    mContactRequestsMap.put(data.getValue(ContactRequestItem.class).getRequestUid(), data.getValue(ContactRequestItem.class));
+                    ContactRequestItem item = data.getValue(ContactRequestItem.class);
+                    mContactRequestsMap.put(item.getRequestUid(),item);
                 } catch (NullPointerException e) {
                     feedBackToUi(false, R.string.toast_error_has_occurred, null, null);
                 }
             }
             mContactRequestsMapLiveData.setValue(mContactRequestsMap);
+            mRequestsObtained = mCurrentUserId;
+
         }else {
             mContactRequestsMapLiveData.setValue(mContactRequestsMap);
         }
@@ -388,7 +410,9 @@ public class UserDataRepository {
                             currentUserInfo.getUserName(),
                             currentUserInfo.getUserPhone(),
                             currentUserInfo.getUserInfo(),
-                            currentUserInfo.getUserProfileImageUrl())).addOnSuccessListener(aVoid -> deleteIncomingContactRequestData(handledItem, true));
+                            currentUserInfo.getUserProfileImageUrl())).addOnSuccessListener(aVoid ->
+                    deleteIncomingContactRequestData(handledItem, true))
+                    .addOnFailureListener(e -> feedBackToUi(false, R.string.toast_error_has_occurred, null, null));
         } else {
             deleteIncomingContactRequestData(handledItem, false);
         }

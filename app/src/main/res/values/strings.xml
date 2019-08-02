@@ -29,7 +29,7 @@
     <string name="hint_edit_outfield">EDIT</string>
     <string name="hint_outfield_delete_profile">Enter your email and tap \"Delete\" if you want to delete your profile. It\'s impossible to restore the removed profile, but you can create the new one.</string>
     <string name="hint_outfield_clear_browsing_history">Tap \"Clear\" if you want to clear your browsing history and to see all available images again.</string>
-    <string name="hint_outfield_forgot_password">Forgot your password? Tap here to change it.</string>
+    <string name="hint_outfield_forgot_password">Forgot your password?</string>
     <string name="hint_outfield_change_password">To change the password, you have to enter your email to the input field and tap \"Reset\". We will send you an email for password changing.</string>
     <string name="hint_outfield_settings_reset_password">Tap \"Reset\" if you want to change your password. You will be signed out and redirected to the appropriate menu.</string>
     <string name="hint_outfield_agree_to">By signing up, you agree to Beproffer\'s</string>
@@ -46,6 +46,8 @@
     <string name="hint_specialist_add_more_images">Add more images to your gallery, to find more customers.</string>
     <string name="hint_outfield_confirm">confirm</string>
     <string name="hint_outfield_deny">deny</string>
+    <string name="hint_join_us_on_social">Join us on social. Share your impressions and wishes. Links to our socials are in \"info\" section.</string>
+
 
     <!--Refs-->
     <string name="href_terms_of_service_title_0">Terms of Use</string>
@@ -57,21 +59,26 @@
     <string name="href_privacy_policy">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0-%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8</string>
     <string name="href_official_site_title">Beproffer.com</string>
     <string name="href_official_site">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F</string>
+    <string name="href_telegram_chat_customers">https://t.me/beproffer_c</string>
+    <string name="href_telegram_chat_specialists">https://t.me/beproffer_s</string>
+    <string name="href_viber_chat_customers">https://invite.viber.com/?g2=AQATP13AdMH6M0oUzCUTcg75bBcL4qcWS72dKYPVLOL1fqTuHOB%2FXbsw%2BrHvZSLH</string>
+    <string name="href_viber_chat_specialists">https://invite.viber.com/?g2=AQAJVtpDxpdMMEoU3JqJjwNDXuNOM0GnZu%2FDu82uths%2FRhzGMfzEX7OChNW967CM</string>
 
 
     <!--Titles-->
     <string name="title_duration">DURATION</string>
-    <string name="title_confirmed_contacts">Contacts</string>
-    <string name="title_new_customers_title">Customers</string>
+    <string name="title_contacts_to_specialists">Specialists</string>
+    <string name="title_new_customers_title">Requests</string>
     <string name="title_sign_in">sign in</string>
     <string name="title_create_an_acc">or create new account</string>
     <string name="title_price">PRICE</string>
     <string name="title_customer_registration">NEW CUSTOMER</string>
     <string name="title_specialist_registration">NEW SPECIALIST</string>
-    <string name="title_send_contact_request">GET SPECIALISTS\' PHONE NUMBER</string>
+    <string name="title_send_contact_request">CONTACT THE SPECIALIST</string>
     <string name="title_request_already_sent">SENT</string>
     <string name="title_contact_already_available">YOU ALREADY HAVE THIS NUMBER </string>
     <string name="title_max_num_of_contacts">THE MAX NUM OF CONTACTS IS 10</string>
+    <string name="title_this_is_your_image">THIS IS YOUR IMAGE</string>
     <string name="title_specialist_type">SPECIALIST</string>
     <string name="title_customer_type">CUSTOMER</string>
     <string name="title_add_image">ADD</string>
@@ -121,7 +128,6 @@
     <string name="makeup_title_eyebrow_styling">Eyebrow Styling</string>
 
     <string name="tattoo_title_tattoo">Tattoo</string>
-    <string name="tattoo_title_piercing">Piercing</string>
     <string name="tattoo_title_temporary_tattoo">Temporary Tattoo</string>
 
     <string name="fitness_title_trainer">Personal Trainer</string>

@@ -13,14 +13,18 @@
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/base_margin_small"
+        android:layout_marginStart="@dimen/base_margin_extra_small"
+        android:layout_marginEnd="@dimen/base_margin_small"
+        android:layout_marginTop="@dimen/base_margin_small"
         android:background="@drawable/button_background_green_stroke_rectangle">
 
         <ImageView
             android:id="@+id/contact_item_image"
             android:layout_width="@dimen/profile_image_half"
             android:layout_height="@dimen/profile_image_half"
-            android:layout_margin="@dimen/base_margin_small"
+            android:layout_marginStart = "@dimen/base_margin_small"
+            android:layout_marginEnd = "@dimen/base_margin_small"
+            android:layout_marginTop = "@dimen/base_margin_extra_small"
             android:src="@{item.contactImageUrl}"
             app:layout_constraintBottom_toTopOf="@+id/contact_item_info"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +60,10 @@
             android:id="@+id/contact_item_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
+            android:layout_marginStart="@dimen/base_margin_small"
+            android:layout_marginEnd="@dimen/base_margin_small"
+            android:layout_marginTop="@dimen/base_margin_extra_small"
+            android:layout_marginBottom="@dimen/base_margin_extra_small"
             android:gravity="center"
             android:text="@{item.contactInfo}"
             android:textColor="@color/color_base_text_70per"
@@ -65,7 +72,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contact_item_phone" />
+            app:layout_constraintTop_toBottomOf="@+id/contact_item_image" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

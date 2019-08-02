@@ -93,14 +93,21 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
     }
 
     private void syncDataWithUi() {
+        if (mItem.getUid().equals(mCurrentUserInfo.getUserId())){
+            requestButtonIsInactive(R.string.title_this_is_your_image);
+            return;
+        }
+
         if (mOutgoingContactRequests != null && mOutgoingContactRequests.containsKey(mItem.getUid())) {
             requestButtonIsInactive(R.string.title_request_already_sent);
             return;
         }
+
         if (mContacts != null && mContacts.containsKey(mItem.getUid())) {
             requestButtonIsInactive(R.string.title_contact_already_available);
             return;
         }
+
         if (mContacts != null && mContacts.size() > Const.CONTACTS_NUM) {
             requestButtonIsInactive(R.string.title_max_num_of_contacts);
         }
@@ -122,9 +129,10 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
     }
 
     private void requestButtonIsInactive(int hintRes) {
-        mBinding.imageInfoDisplaySendContactRequestImage.setImageResource(R.drawable.ic_request_contact_inact);
-        mBinding.imageInfoDisplaySendContactRequestImage.setClickable(false);
-        mBinding.imageInfoDisplayContactTextView.setText(hintRes);
+        mBinding.imageInfoDisplaySendContactRequestButton.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
+        mBinding.imageInfoDisplaySendContactRequestButton.setText(getResources().getText(hintRes));
+        mBinding.imageInfoDisplaySendContactRequestButton.setTextColor(getResources().getColor(R.color.color_base_text_70per));
+        mBinding.imageInfoDisplaySendContactRequestButton.setClickable(false);
     }
 
     private void handleOnVoteClick() {

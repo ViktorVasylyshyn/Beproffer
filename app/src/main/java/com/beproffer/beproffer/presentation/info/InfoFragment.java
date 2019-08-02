@@ -13,8 +13,10 @@ import android.view.ViewGroup;
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.InfoFragmentLayoutBinding;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
+import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
+import com.beproffer.beproffer.util.Const;
 
-public class InfoFragment extends BaseFragment {
+public class InfoFragment extends BaseUserInfoFragment {
 
     private InfoFragmentLayoutBinding mBinding;
 
@@ -33,6 +35,31 @@ public class InfoFragment extends BaseFragment {
         public void onPrivacyClick() {
             openDoc(R.string.href_privacy_policy);
         }
+
+        @Override
+        public void onTelegramClicked() {
+            if(mCurrentUserInfo != null && mCurrentUserInfo.getUserType().equals(Const.SPEC)){
+                openDoc(R.string.href_telegram_chat_specialists);
+            }else {
+                openDoc(R.string.href_telegram_chat_customers);
+            }
+        }
+
+        @Override
+        public void onViberClicked() {
+            if(mCurrentUserInfo != null && mCurrentUserInfo.getUserType().equals(Const.SPEC)){
+                openDoc(R.string.href_viber_chat_specialists);
+            }else {
+                openDoc(R.string.href_viber_chat_customers);
+            }
+        }
+
+        @Override
+        public void onFacebookClicked() {
+            if(mCurrentUserInfo != null && mCurrentUserInfo.getUserType().equals(Const.SPEC)){
+                /*логика перехода в группу ФБ*/
+            }
+        }
     };
 
     @Override
@@ -47,6 +74,9 @@ public class InfoFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mBinding.setFragmentCallback(mCallback);
+        if(getFirebaseUser()!=null){
+            initUserData();
+        }
     }
 
     private void openDoc(int resId) {

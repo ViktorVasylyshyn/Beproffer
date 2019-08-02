@@ -7,4 +7,10 @@ public interface InfoFragmentCallback {
     void onUseTermsClick();
 
     void onPrivacyClick();
+
+    void onTelegramClicked();
+
+    void onViberClicked();
+
+    void onFacebookClicked();
 }

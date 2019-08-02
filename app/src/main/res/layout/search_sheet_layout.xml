@@ -93,12 +93,12 @@
                     tools:ignore="ContentDescription" />
 
                 <ImageView
-                    android:id="@+id/ssl_tattoo_piercing_icon"
+                    android:id="@+id/ssl_tattoo_icon"
                     android:layout_width="@dimen/icons_size_normal_width"
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:layout_margin="@dimen/base_margin_extra_small"
                     android:background="@drawable/button_background_grey_stroke_rectangle"
-                    android:src="@drawable/ic_tattoo_piercing"
+                    android:src="@drawable/ic_tattoo"
                     app:layout_constraintStart_toEndOf="@+id/ssl_makeup_icon"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription" />
@@ -110,7 +110,7 @@
                     android:layout_margin="@dimen/base_margin_extra_small"
                     android:background="@drawable/button_background_grey_stroke_rectangle"
                     android:src="@drawable/ic_barbershop"
-                    app:layout_constraintStart_toEndOf="@+id/ssl_tattoo_piercing_icon"
+                    app:layout_constraintStart_toEndOf="@+id/ssl_tattoo_icon"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription" />
 

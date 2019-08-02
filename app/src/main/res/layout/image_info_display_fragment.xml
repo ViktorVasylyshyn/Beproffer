@@ -145,7 +145,8 @@
                 android:src="@drawable/ic_money_sign"
                 app:layout_constraintBottom_toBottomOf="@+id/image_info_display_price"
                 app:layout_constraintEnd_toStartOf="@+id/image_info_display_price"
-                app:layout_constraintTop_toTopOf="@+id/image_info_display_price" />
+                app:layout_constraintTop_toTopOf="@+id/image_info_display_price"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -158,31 +159,21 @@
                 app:layout_constraintStart_toEndOf="@+id/image_info_display_price"
                 app:layout_constraintTop_toTopOf="@+id/image_info_display_price" />
 
-            <ImageView
-                android:id="@+id/image_info_display_send_contact_request_image"
-                android:layout_width="@dimen/icons_size_normal_width"
-                android:layout_height="@dimen/icons_size_normal_height"
-                android:layout_margin="@dimen/base_margin_small"
+            <Button
+                android:id="@+id/image_info_display_send_contact_request_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/base_margin_extra_small"
                 android:background="@drawable/button_background_green_stroke_rectangle"
                 android:onClick="@{(view)->fragmentCallback.onSendContactRequestClick()}"
-                android:padding="@dimen/base_padding_small"
-                android:src="@drawable/ic_request_contact"
+                android:padding="@dimen/base_margin_extra_small"
+                android:text="@string/title_send_contact_request"
+                android:textSize="@dimen/base_text_size_small"
+                android:textColor="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_info_display_price"
                 tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/image_info_display_contact_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/title_send_contact_request"
-                android:textColor="@color/color_base_text"
-                android:textSize="@dimen/base_text_size_small"
-                app:layout_constraintEnd_toEndOf="@+id/image_info_display_send_contact_request_image"
-                app:layout_constraintStart_toStartOf="@+id/image_info_display_send_contact_request_image"
-                app:layout_constraintTop_toBottomOf="@+id/image_info_display_send_contact_request_image" />
 
         </android.support.constraint.ConstraintLayout>
 

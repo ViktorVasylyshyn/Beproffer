@@ -20,13 +20,16 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="@dimen/base_padding_medium"
         tools:context=".presentation.contacts.confirmed.ContactsFragment">
 
         <LinearLayout
             android:id="@+id/contacts_bookmarks_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
+            android:layout_marginStart="@dimen/base_margin_small"
+            android:layout_marginEnd="@dimen/base_margin_small"
+            android:layout_marginTop="@dimen/base_margin_small"
             android:background="@drawable/button_background_grey_stroke_rectangle"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/base_padding_small"
                 android:maxLines="1"
-                android:text="@string/title_confirmed_contacts"
+                android:text="@string/title_contacts_to_specialists"
                 android:textSize="@dimen/base_text_size_big" />
 
             <TextView
@@ -58,8 +61,11 @@
             android:id="@+id/contacts_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
+            android:layout_marginStart="@dimen/base_margin_small"
+            android:layout_marginEnd="@dimen/base_margin_small"
+            android:layout_marginTop="@dimen/base_margin_small"
             android:scrollbars="vertical"
+            android:paddingBottom="@dimen/design_bottom_navigation_height"
             app:layout_constraintTop_toBottomOf="@+id/contacts_bookmarks_layout">
 
         </android.support.v7.widget.RecyclerView>
