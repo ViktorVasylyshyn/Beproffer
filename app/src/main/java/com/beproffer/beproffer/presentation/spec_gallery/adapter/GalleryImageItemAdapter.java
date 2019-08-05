@@ -49,7 +49,7 @@ public class GalleryImageItemAdapter extends RecyclerView.Adapter<GalleryImageIt
 
     static class GalleryImageItemViewHolder extends RecyclerView.ViewHolder {
 
-        private StorageImageItemBinding mBinding;
+        private final StorageImageItemBinding mBinding;
 
 
         GalleryImageItemViewHolder(StorageImageItemBinding binding) {

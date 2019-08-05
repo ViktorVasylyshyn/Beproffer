@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class DefineServiceType {
 
-    private Context context;
+    private final Context context;
 
     public DefineServiceType(Context context) {
         this.context = context;

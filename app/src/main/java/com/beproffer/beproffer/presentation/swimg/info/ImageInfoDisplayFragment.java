@@ -29,7 +29,7 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
     private Map<String, ContactItem> mContacts;
     private Map<String, Boolean> mOutgoingContactRequests;
 
-    private ImageInfoDisplayFragmentCallback mCallback = new ImageInfoDisplayFragmentCallback() {
+    private final ImageInfoDisplayFragmentCallback mCallback = new ImageInfoDisplayFragmentCallback() {
         @Override
         public void onSendContactRequestClick() {
             sendContactRequest();
@@ -93,7 +93,7 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
     }
 
     private void syncDataWithUi() {
-        if (mItem.getUid().equals(mCurrentUserInfo.getUserId())){
+        if (mItem.getUid().equals(mCurrentUserInfo.getUserId())) {
             requestButtonIsInactive(R.string.title_this_is_your_image);
             return;
         }
@@ -114,7 +114,7 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
 
     }
 
-    public void sendContactRequest() {
+    private void sendContactRequest() {
         if (getFirebaseUser() == null || mCurrentUserInfo == null) {
             showToast(R.string.toast_request_for_registered);
             return;
@@ -152,34 +152,43 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
         PopupMenu popupMenu = new PopupMenu(requireActivity(), mBinding.imageInfoDisplayVote);
         popupMenu.getMenuInflater().inflate(R.menu.menu_vote, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(menuItem -> {
-            if (menuItem.getItemId() == R.id.menu_prohibited_content) {
-                mProcessing.set(true);
-                showProgress(true);
-                FirebaseDatabase.getInstance().getReference()
-                        .child(Const.SERVICES)
-                        .child(Const.VOTES)
-                        .child(mCurrentUserInfo.getUserId())
-                        .setValue(mItem)
-                        .addOnSuccessListener(aVoid -> {
-                            mBinding.imageInfoDisplayVoteTopHint.setText(R.string.hint_any_prohibited_content);
-                            showProgress(false);
-                            mProcessing.set(false);
-                            mBinding.imageInfoDisplayVote.setImageResource(R.drawable.ic_vote_inactive);
-                            mBinding.imageInfoDisplayVote.setClickable(false);
-                        }).addOnFailureListener(e -> {
-                    showToast(R.string.toast_error_has_occurred);
-                    mBinding.imageInfoDisplayVoteTopHint.setText(e.getMessage());
-                    showProgress(false);
-                    mProcessing.set(false);
-                });
+            switch (menuItem.getItemId()) {
+                case R.id.menu_vote_prohibited_content:
+                    sendVote(Const.PROHCONT);
+                    break;
+                case R.id.menu_vote_wrong_section:
+                    sendVote(Const.WRONSECT);
+                    break;
             }
             return true;
         });
         popupMenu.show();
-
     }
 
-    public void performBackNavigation() {
+    private void sendVote(String section) {
+        mProcessing.set(true);
+        showProgress(true);
+        FirebaseDatabase.getInstance().getReference()
+                .child(Const.SERVICES)
+                .child(Const.VOTES)
+                .child(section)
+                .child(mCurrentUserInfo.getUserId())
+                .setValue(mItem)
+                .addOnSuccessListener(aVoid -> {
+                    mBinding.imageInfoDisplayVoteTopHint.setText(R.string.hint_any_prohibited_content);
+                    showProgress(false);
+                    mProcessing.set(false);
+                    mBinding.imageInfoDisplayVote.setImageResource(R.drawable.ic_vote_inactive);
+                    mBinding.imageInfoDisplayVote.setClickable(false);
+                }).addOnFailureListener(e -> {
+            showToast(R.string.toast_error_has_occurred);
+            mBinding.imageInfoDisplayVoteTopHint.setText(e.getMessage());
+            showProgress(false);
+            mProcessing.set(false);
+        });
+    }
+
+    private void performBackNavigation() {
         performNavigation(R.id.action_global_swipeImageFragment);
     }
 }

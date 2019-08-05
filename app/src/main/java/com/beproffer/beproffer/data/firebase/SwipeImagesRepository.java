@@ -7,7 +7,6 @@ import android.arch.lifecycle.Observer;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.browsing_history.BrowsingHistoryModel;
@@ -30,23 +29,23 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SwipeImagesRepository {
 
-    private Application mApplication;
+    private final Application mApplication;
 
     private FirebaseUser mUser;
 
     private BrowsingHistoryRepository mBrowsingHistoryRepository;
     private List<String> mActualBrowsingHistory;
 
-    private MutableLiveData<Boolean> mShowProgress = new MutableLiveData<>();
-    private MutableLiveData<Integer> mShowToast = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mPerformSearch = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mShowProgress = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mShowToast = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mPerformSearch = new MutableLiveData<>();
 
     private Map<String, String> mRequestParams;
 
     private DataSnapshot mActualDataSnapshot;
 
     private List<SwipeImageItem> mSwipeImageItemsList = new ArrayList<>();
-    private MutableLiveData<List<SwipeImageItem>> mSwipeImageItemsLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<SwipeImageItem>> mSwipeImageItemsLiveData = new MutableLiveData<>();
 
     private Observer mBrowsingHistoryObserver;
 
@@ -74,7 +73,6 @@ public class SwipeImagesRepository {
     /*пытаемся получить параметры для пользователя или гостя. согласно этим параметрам, будет сделан запрос в Firebase.*/
 
     private void obtainRequestParams(Application application) {
-        Log.d(Const.INFO, "obtainRequestParams");
         mShowProgress.setValue(true);
         mSwipeImageItemsList = new ArrayList<>();
         mSwipeImageItemsLiveData.setValue(mSwipeImageItemsList);
@@ -99,12 +97,11 @@ public class SwipeImagesRepository {
             return;
         }
         /*if search request params are not correct or equals null - we go to the search fragment to define params*/
-        if (!checkRequestParams()) {
+        if (checkRequestParams()) {
             feedBackToUi(false, R.string.toast_define_search_request, true);
             return;
         }
         if (mUser != null && mActualBrowsingHistory == null) {
-            Log.d(Const.INFO, "obtainRequestParams b hist");
             obtainBrowsingHistory();
             return;
         }
@@ -112,33 +109,26 @@ public class SwipeImagesRepository {
     }
 
     private void obtainBrowsingHistory() {
-        Log.d(Const.INFO, "obtainBrowsingHistory");
-
-        mBrowsingHistoryObserver = new Observer<List<String>>() {
-            @Override
-            public void onChanged(@Nullable List<String> browsingHistory) {
-                Log.d(Const.INFO, "Browsing History changed");
-                if (mActualBrowsingHistory == null) {
-                    mActualBrowsingHistory = browsingHistory;
-                    obtainImagesFromDb();
-                } else {
-                    mActualBrowsingHistory = browsingHistory;
-                    /*проверяем на то, пустой ли список. если да - то дальше фильтруем -
-                     * наполняем список новыми изображениями(ведь количество объектор в списке ограничено).
-                     * Так, чтобы со снимка фб в mSwipeImageItemsList не добавлялись объекты, которые там уже есть
-                     * здесь и нужна эта проверка. пыталя сделать проверку нв equals(в том числе и пере
-                     * определял equals & hashcode), непосредственно
-                     * перед помещением в список, но чето нихуя не получилось. так что, пока что так оставлю. */
-                    if (mSwipeImageItemsList.isEmpty()) {
-                        filterOutItemsForAdapter();
-                    }
+        mBrowsingHistoryObserver = (Observer<List<String>>) browsingHistory -> {
+            if (mActualBrowsingHistory == null) {
+                mActualBrowsingHistory = browsingHistory;
+                obtainImagesFromDb();
+            } else {
+                mActualBrowsingHistory = browsingHistory;
+                /*проверяем на то, пустой ли список. если да - то дальше фильтруем -
+                 * наполняем список новыми изображениями(ведь количество объектор в списке ограничено).
+                 * Так, чтобы со снимка фб в mSwipeImageItemsList не добавлялись объекты, которые там уже есть
+                 * здесь и нужна эта проверка. пыталя сделать проверку нв equals(в том числе и пере
+                 * определял equals & hashcode), непосредственно
+                 * перед помещением в список, но чето нихуя не получилось. так что, пока что так оставлю. */
+                if (mSwipeImageItemsList.isEmpty()) {
+                    filterOutItemsForAdapter();
                 }
             }
         };
 
         try {
             if (mBrowsingHistoryRepository != null && mBrowsingHistoryRepository.getTargetBrowsingHistory().hasObservers()) {
-                Log.d(Const.INFO, "obtainBrowsingHistory has observers");
                 mBrowsingHistoryRepository.getTargetBrowsingHistory().removeObserver(mBrowsingHistoryObserver);
                 mBrowsingHistoryRepository = null;
             }
@@ -164,13 +154,12 @@ public class SwipeImagesRepository {
     }
 
     private boolean checkRequestParams() {
-        return mRequestParams != null && !mRequestParams.containsValue(null) && mRequestParams.size() == Const.SEARCH_PARAMS_NUM;
+        return mRequestParams == null || mRequestParams.containsValue(null) || mRequestParams.size() != Const.SEARCH_PARAMS_NUM;
     }
 
-    public void obtainImagesFromDb() {
+    private void obtainImagesFromDb() {
         mShowProgress.setValue(true);
-        if (!checkRequestParams()) {
-            Log.d(Const.INFO, "!checkRequestParams()");
+        if (checkRequestParams()) {
             obtainRequestParams(mApplication);
             return;
         }
@@ -217,22 +206,18 @@ public class SwipeImagesRepository {
         mShowProgress.setValue(true);
         for (DataSnapshot userSnapshotItem : mActualDataSnapshot.getChildren()) {
             if (mSwipeImageItemsList.size() > Const.MAX_NUM_OF_IMAGES_IN_ADAPTER) {
-                Log.d(Const.INFO, "list size is  > MAX_NUM_OF_IMAGES_IN_ADAPTER = " + mSwipeImageItemsList.size());
                 mShowProgress.setValue(false);
                 return;
             }
             for (DataSnapshot serviceSnapshotItem : userSnapshotItem.getChildren()) {
                 if (mUser != null) {
-                    Log.d(Const.INFO, "filterOutItemsForAdapter children 1 ");
                     filterOutItemsForSignedUp(serviceSnapshotItem.getValue(SwipeImageItem.class));
                 } else {
-                    Log.d(Const.INFO, "filterOutItemsForAdapter children 2");
                     filterOutItemsForGuest(serviceSnapshotItem.getValue(SwipeImageItem.class));
                 }
             }
         }
         if (mSwipeImageItemsList.isEmpty()) {
-            Log.d(Const.INFO, "filterOutItemsForAdapter no_available_images");
             feedBackToUi(false, R.string.toast_no_available_images, true);
         }
         mShowProgress.setValue(false);
@@ -260,7 +245,6 @@ public class SwipeImagesRepository {
 
     private void addImageAdapterList(SwipeImageItem imageItem) {
         if (!mSwipeImageItemsList.contains(imageItem)) {
-            Log.d(Const.INFO, "addImageAdapterList item added");
             mSwipeImageItemsList.add(imageItem);
             mSwipeImageItemsLiveData.setValue(mSwipeImageItemsList);
         }
@@ -304,7 +288,6 @@ public class SwipeImagesRepository {
             mShowToast.setValue(toastResId);
         }
         if (performSearch != null) {
-            Log.d(Const.INFO, "feedBackToUi");
             mPerformSearch.setValue(performSearch);
         }
     }

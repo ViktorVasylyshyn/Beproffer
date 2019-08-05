@@ -37,7 +37,7 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
 
     private SwipeImagesViewModel mSwipeImagesViewModel;
 
-    private SwipeImageFragmentCallback mCallback = this::searchSheet;
+    private final SwipeImageFragmentCallback mCallback = this::searchSheet;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -208,6 +208,10 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
     }
 
     private void searchSheet() {
+        if(!checkInternetConnection()){
+            showToast(R.string.toast_no_internet_connection);
+            return;
+        }
         if (searchSheet != null){
             searchSheet.dismiss();
             searchSheet = null;

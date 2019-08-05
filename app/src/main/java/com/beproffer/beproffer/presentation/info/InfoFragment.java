@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.InfoFragmentLayoutBinding;
-import com.beproffer.beproffer.presentation.base.BaseFragment;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.util.Const;
 
@@ -20,7 +19,7 @@ public class InfoFragment extends BaseUserInfoFragment {
 
     private InfoFragmentLayoutBinding mBinding;
 
-    private InfoFragmentCallback mCallback = new InfoFragmentCallback() {
+    private final InfoFragmentCallback mCallback = new InfoFragmentCallback() {
         @Override
         public void onOfficialSiteClick() {
             openDoc(R.string.href_official_site);
@@ -56,8 +55,10 @@ public class InfoFragment extends BaseUserInfoFragment {
 
         @Override
         public void onFacebookClicked() {
+            /*вызов группы на девайсе не предлагает открыть группу через фейсбук приложение, а только
+            * через браузеры. почему так понять не могу. оставляю пока что так.*/
             if(mCurrentUserInfo != null && mCurrentUserInfo.getUserType().equals(Const.SPEC)){
-                /*логика перехода в группу ФБ*/
+                openDoc(R.string.href_facebook_page);
             }
         }
     };

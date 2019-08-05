@@ -8,7 +8,7 @@ import com.beproffer.beproffer.data.models.SwipeImageItem;
 
 public class ImageItemTransferViewModel extends ViewModel {
 
-    private MutableLiveData<SwipeImageItem> item = new MutableLiveData<>();
+    private final MutableLiveData<SwipeImageItem> item = new MutableLiveData<>();
 
     public void setImageItem(SwipeImageItem item){
         this.item.setValue(item);

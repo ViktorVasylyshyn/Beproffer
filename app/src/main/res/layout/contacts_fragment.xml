@@ -25,10 +25,10 @@
 
         <LinearLayout
             android:id="@+id/contacts_bookmarks_layout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/base_margin_small"
-            android:layout_marginEnd="@dimen/base_margin_small"
+            android:layout_marginStart="@dimen/base_margin_big"
+            android:layout_marginEnd="@dimen/base_margin_big"
             android:layout_marginTop="@dimen/base_margin_small"
             android:background="@drawable/button_background_grey_stroke_rectangle"
             android:orientation="horizontal"
@@ -38,18 +38,28 @@
 
             <TextView
                 android:id="@+id/contacts_contacts"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/base_padding_small"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:paddingTop="@dimen/base_padding_small"
+                android:paddingBottom="@dimen/base_padding_small"
+                android:paddingStart="@dimen/base_padding_medium"
+                android:paddingEnd="@dimen/base_padding_medium"
                 android:maxLines="1"
                 android:text="@string/title_contacts_to_specialists"
                 android:textSize="@dimen/base_text_size_big" />
 
             <TextView
                 android:id="@+id/contacts_contact_requests"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/base_padding_small"
+                android:layout_weight="1"
+                android:paddingTop="@dimen/base_padding_small"
+                android:gravity="center"
+                android:paddingBottom="@dimen/base_padding_small"
+                android:paddingStart="@dimen/base_padding_medium"
+                android:paddingEnd="@dimen/base_padding_medium"
                 android:maxLines="1"
                 android:visibility="gone"
                 android:text="@string/title_new_customers_title"

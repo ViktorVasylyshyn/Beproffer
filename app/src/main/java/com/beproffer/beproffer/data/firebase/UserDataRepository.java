@@ -34,9 +34,9 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class UserDataRepository {
 
-    private Application mApplication;
+    private final Application mApplication;
 
-    private DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference();
+    private final DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference();
 
     private DataSnapshot mUserDataSnapShot;
 
@@ -46,24 +46,24 @@ public class UserDataRepository {
     private String mRequestsObtained = "user";
     private String mContactsObtained = "user";
 
-    private MutableLiveData<Boolean> mShowProgress = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mProcessing = new MutableLiveData<>();
-    private MutableLiveData<Integer> mShowToast = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mHideKeyboard = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mPopBackStack = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mShowProgress = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mProcessing = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mShowToast = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mHideKeyboard = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mPopBackStack = new MutableLiveData<>();
 
-    private MutableLiveData<UserInfo> mUserInfoLiveData = new MutableLiveData<>();
+    private final MutableLiveData<UserInfo> mUserInfoLiveData = new MutableLiveData<>();
 
     private Map<String, SpecialistGalleryImageItem> mSpecialistGalleryImageItemsMap = new HashMap<>();
-    private MutableLiveData<Map<String, SpecialistGalleryImageItem>> mSpecialistGalleryImageItemsMapLiveData = new MutableLiveData<>();
-    private MutableLiveData<SpecialistGalleryImageItem> mEditableGalleryItemLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Map<String, SpecialistGalleryImageItem>> mSpecialistGalleryImageItemsMapLiveData = new MutableLiveData<>();
+    private final MutableLiveData<SpecialistGalleryImageItem> mEditableGalleryItemLiveData = new MutableLiveData<>();
 
     private Map<String, ContactItem> mContactsMap = new HashMap<>();
-    private MutableLiveData<Map<String, ContactItem>> mContactsMapLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Map<String, ContactItem>> mContactsMapLiveData = new MutableLiveData<>();
     private Map<String, ContactRequestItem> mContactRequestsMap = new HashMap<>();
-    private MutableLiveData<Map<String, ContactRequestItem>> mContactRequestsMapLiveData = new MutableLiveData<>();
-    private Map<String, Boolean> mOutgoingContactRequests = new HashMap<>();
-    private MutableLiveData<Map<String, Boolean>> mOutgoingContactRequestsLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Map<String, ContactRequestItem>> mContactRequestsMapLiveData = new MutableLiveData<>();
+    private final Map<String, Boolean> mOutgoingContactRequests = new HashMap<>();
+    private final MutableLiveData<Map<String, Boolean>> mOutgoingContactRequestsLiveData = new MutableLiveData<>();
 
     private static final DatabaseReference OBTAIN_USER_TYPE_VIA_FIREBASE_REF = FirebaseDatabase.getInstance().getReference()
             .child(Const.USERS)
@@ -74,7 +74,7 @@ public class UserDataRepository {
     }
 
     public LiveData<UserInfo> getUserInfoLiveData() {
-        if(mUserInfoLiveData.getValue() == null){
+        if (mUserInfoLiveData.getValue() == null) {
             mCurrentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             obtainUserType();
         }
@@ -214,15 +214,15 @@ public class UserDataRepository {
 
     public LiveData<Map<String, SpecialistGalleryImageItem>> getSpecialistGalleryImagesList() {
         /*до этого не дойдет, ведь этот медод может запуститься исключительно для специалистов, но мало ли...*/
-        if(!mCurrentUserType.equals(Const.SPEC)){
+        if (!mCurrentUserType.equals(Const.SPEC)) {
             mSpecialistGalleryImageItemsMapLiveData.setValue(mSpecialistGalleryImageItemsMap);
             return mSpecialistGalleryImageItemsMapLiveData;
         }
 
-        if (mUserDataSnapShot.hasChild(Const.IMAGES) && mUserDataSnapShot.child(Const.IMAGES).hasChildren()  && mSpecialistGalleryImageItemsMap.isEmpty()) {
+        if (mUserDataSnapShot.hasChild(Const.IMAGES) && mUserDataSnapShot.child(Const.IMAGES).hasChildren() && mSpecialistGalleryImageItemsMap.isEmpty()) {
             obtainSpecialistGalleryImagesData();
         }
-        if (!mUserDataSnapShot.hasChild(Const.IMAGES) || !mUserDataSnapShot.child(Const.IMAGES).hasChildren()){
+        if (!mUserDataSnapShot.hasChild(Const.IMAGES) || !mUserDataSnapShot.child(Const.IMAGES).hasChildren()) {
             mSpecialistGalleryImageItemsMapLiveData.setValue(mSpecialistGalleryImageItemsMap);
         }
         return mSpecialistGalleryImageItemsMapLiveData;
@@ -347,7 +347,7 @@ public class UserDataRepository {
             } catch (NullPointerException e) {
                 feedBackToUi(false, R.string.toast_error_has_occurred, null, null);
             }
-        }else {
+        } else {
             mContactsMapLiveData.setValue(mContactsMap);
         }
         mShowProgress.setValue(false);
@@ -382,7 +382,7 @@ public class UserDataRepository {
             for (DataSnapshot data : mUserDataSnapShot.child(Const.INREQUEST).getChildren()) {
                 try {
                     ContactRequestItem item = data.getValue(ContactRequestItem.class);
-                    mContactRequestsMap.put(item.getRequestUid(),item);
+                    mContactRequestsMap.put(item.getRequestUid(), item);
                 } catch (NullPointerException e) {
                     feedBackToUi(false, R.string.toast_error_has_occurred, null, null);
                 }
@@ -390,7 +390,7 @@ public class UserDataRepository {
             mContactRequestsMapLiveData.setValue(mContactRequestsMap);
             mRequestsObtained = mCurrentUserId;
 
-        }else {
+        } else {
             mContactRequestsMapLiveData.setValue(mContactRequestsMap);
         }
         mShowProgress.setValue(false);
@@ -411,14 +411,14 @@ public class UserDataRepository {
                             currentUserInfo.getUserPhone(),
                             currentUserInfo.getUserInfo(),
                             currentUserInfo.getUserProfileImageUrl())).addOnSuccessListener(aVoid ->
-                    deleteIncomingContactRequestData(handledItem, true))
+                    deleteIncomingContactRequestData(handledItem, R.string.toast_contact_confirmed))
                     .addOnFailureListener(e -> feedBackToUi(false, R.string.toast_error_has_occurred, null, null));
         } else {
-            deleteIncomingContactRequestData(handledItem, false);
+            deleteIncomingContactRequestData(handledItem, R.string.toast_contact_denied);
         }
     }
 
-    private void deleteIncomingContactRequestData(ContactRequestItem handledItem, boolean confirmed) {
+    private void deleteIncomingContactRequestData(ContactRequestItem handledItem, int toastRes) {
         mDatabaseRef.child(Const.USERS)
                 .child(Const.SPEC)
                 .child(mCurrentUserId)
@@ -426,12 +426,6 @@ public class UserDataRepository {
                 .child(handledItem.getRequestUid()).removeValue().addOnSuccessListener(aVoid -> {
                     mContactRequestsMap.remove(handledItem.getRequestUid());
                     mContactRequestsMapLiveData.setValue(mContactRequestsMap);
-                    int toastRes;
-                    if (confirmed) {
-                        toastRes = R.string.toast_contact_confirmed;
-                    } else {
-                        toastRes = R.string.toast_contact_denied;
-                    }
                     feedBackToUi(false, toastRes, null, null);
                 }
         );
@@ -481,7 +475,9 @@ public class UserDataRepository {
         return mShowProgress;
     }
 
-    public LiveData<Boolean> getProcessing(){return  mProcessing;}
+    public LiveData<Boolean> getProcessing() {
+        return mProcessing;
+    }
 
     public LiveData<Integer> getShowToast() {
         return mShowToast;

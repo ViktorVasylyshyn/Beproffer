@@ -19,36 +19,36 @@ import static com.beproffer.beproffer.util.NetworkUtil.hasInternetConnection;
 
 public class BaseFragment extends Fragment {
 
-    public final ObservableBoolean mShowProgress = new ObservableBoolean(false);
+    protected final ObservableBoolean mShowProgress = new ObservableBoolean(false);
 
-    public final ObservableBoolean mProcessing = new ObservableBoolean(false);
+    protected final ObservableBoolean mProcessing = new ObservableBoolean(false);
 
-    public boolean checkInternetConnection() {
+    protected boolean checkInternetConnection() {
         return hasInternetConnection(requireContext());
     }
 
     /*Показ тостов при запросе в UserDataRepository обрабатывается в репозитории а не снаружи в java файле автивити*/
-    public void showToast(int resId) {
+    protected void showToast(int resId) {
         Toast.makeText(this.requireContext(), resId, Toast.LENGTH_LONG).show();
     }
 
     /*Показ progress bar при запросе в UserDataRepository обрабатывается в репозитории а не снаружи в java файле автивити*/
-    public void showProgress(boolean show) {
+    protected void showProgress(boolean show) {
         mShowProgress.set(show);
     }
 
-    public void hideKeyboard(Activity activity) {
+    protected void hideKeyboard(Activity activity) {
         if (activity.getCurrentFocus() != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
         }
     }
 
-    public void popBackStack() {
+    void popBackStack() {
         ((MainActivity) requireActivity()).popBackStack();
     }
 
-    public void performNavigation(int destinationId) {
+    protected void performNavigation(int destinationId) {
         /*пока что на вход этому методу подается только айди пункта назначения. если вдруг в будущем
          * появится надобность на передачу аргументов - допишем второй параметр*/
         ((MainActivity) requireActivity()).performNavigation(destinationId, null);
@@ -58,16 +58,16 @@ public class BaseFragment extends Fragment {
      * того, что я чайник, в некоторых моментах получались конфузы, и я не знал, как их решить. поэтому
      * пока что делаю мануальную проверку юзера, без листенера. а когда будут над кодом работать люди,
      * которые в этом соображают лучше - сделают прослушивание через листенер, по человечески.*/
-    public FirebaseUser getFirebaseUser() {
+    protected FirebaseUser getFirebaseUser() {
         return FirebaseAuth.getInstance().getCurrentUser();
     }
 
     /*нужно, для контроля частых нажатий на кнопки*/
-    public void processing(boolean processing) {
+    protected void processing(boolean processing) {
         mProcessing.set(processing);
     }
 
-    public void cooldown(View view){
+    protected void cooldown(View view){
         view.setClickable(false);
         Handler handlerWordAnim = new Handler();
         handlerWordAnim.postDelayed(() -> view.setClickable(true), Const.COOLDOWNDUR_LONG);

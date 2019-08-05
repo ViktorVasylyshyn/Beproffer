@@ -49,7 +49,7 @@ public class ContactRequestItemAdapter extends RecyclerView.Adapter<ContactReque
 
     static class ContactRequestItemViewHolder extends RecyclerView.ViewHolder {
 
-        private ContactRequestItemBinding mBinding;
+        private final ContactRequestItemBinding mBinding;
 
         ContactRequestItemViewHolder(ContactRequestItemBinding binding) {
             super(binding.getRoot());

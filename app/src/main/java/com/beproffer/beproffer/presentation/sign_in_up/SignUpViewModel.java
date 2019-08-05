@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 public class SignUpViewModel extends AndroidViewModel {
-    private SignUpRepository mRepository;
+    private final SignUpRepository mRepository;
 
     public SignUpViewModel(@NonNull Application application) {
         super(application);

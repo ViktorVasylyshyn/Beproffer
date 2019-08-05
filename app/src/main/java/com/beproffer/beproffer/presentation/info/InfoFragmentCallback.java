@@ -1,5 +1,6 @@
 package com.beproffer.beproffer.presentation.info;
 
+/*must be public for binding*/
 public interface InfoFragmentCallback {
 
     void onOfficialSiteClick();

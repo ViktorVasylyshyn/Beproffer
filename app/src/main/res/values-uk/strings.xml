@@ -62,6 +62,7 @@
     <string name="href_telegram_chat_specialists">https://t.me/beproffer_s</string>
     <string name="href_viber_chat_customers">https://invite.viber.com/?g2=AQATP13AdMH6M0oUzCUTcg75bBcL4qcWS72dKYPVLOL1fqTuHOB%2FXbsw%2BrHvZSLH</string>
     <string name="href_viber_chat_specialists">https://invite.viber.com/?g2=AQAJVtpDxpdMMEoU3JqJjwNDXuNOM0GnZu%2FDu82uths%2FRhzGMfzEX7OChNW967CM</string>
+    <string name="href_facebook_page">fb://page/102981521053885</string>
 
     <!--Titles-->
     <string name="title_duration">ТРИВАЛІСТЬ</string>
@@ -90,16 +91,12 @@
     <string name="title_gender_female">ЖІН</string>
     <string name="title_gender_all_genders">ВСІ</string>
 
-    <string name="title_duration_30_min">30хв</string>
-    <string name="title_duration_45_min">45хв</string>
-    <string name="title_duration_60_min">60хв</string>
-    <string name="title_duration_90_min">90хв</string>
-    <string name="title_duration_120_min">120хв</string>
-
     <string name="title_search_fragment">ЯКИЙ СЕРВІС ВИ ШУКАЄТЕ?</string>
     <string name="title_specialist_storage_fragment">МОЇ ЗОБРАЖЕННЯ</string>
     <string name="title_search">Шукати</string>
     <string name="title_for">для</string>
+
+    <string name="title_try_again">Спробувати знову</string>
 
 
 
@@ -136,7 +133,8 @@
     <string name="confirmed_contact_menu_call">Задзвонити</string>
     <string name="confirmed_contact_menu_delete">Видалити</string>
 
-    <string name="vote_prohibited_content">Заборонений контент.</string>
+    <string name="menu_vote_prohibited_content">Заборонений контент</string>
+    <string name="menu_vote_wrong_section">Невідповідний розділ</string>
 
 
     <!--Image Upload Requirements-->
@@ -212,7 +210,7 @@
     <!--special hints-->
 
     <string name="hint_specialist_phone_1">Впевніться, що номер телефону правильний. Він буде показуватися потенційним клієнтам.</string>
-    <string name="hint_any_strong_password">Створіть надійний пароль, використовуючи літери, цифри та символи.</string>
+    <string name="hint_any_strong_password">Створіть надійний пароль, використовуючи літери латинського алфавіту та цифри.</string>
 
 
     <!--new-->

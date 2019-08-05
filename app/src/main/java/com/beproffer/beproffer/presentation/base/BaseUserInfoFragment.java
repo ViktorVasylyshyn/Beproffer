@@ -10,16 +10,16 @@ import com.beproffer.beproffer.util.Const;
 
 public class BaseUserInfoFragment extends BaseFragment {
 
-    public UserDataViewModel mUserDataViewModel;
+    protected UserDataViewModel mUserDataViewModel;
 
-    public UserInfo mCurrentUserInfo;
+    protected UserInfo mCurrentUserInfo;
 
     @Override
     public void onStart() {
         super.onStart();
     }
 
-    public void initUserData() {
+    protected void initUserData() {
         if (!checkInternetConnection()) {
             /*сделать здесь переход, на какой нить фрагмент*/
             showToast(R.string.toast_no_internet_connection);
@@ -67,7 +67,7 @@ public class BaseUserInfoFragment extends BaseFragment {
         obtainUserInfo();
     }
 
-    public void obtainUserInfo() {
+    private void obtainUserInfo() {
         mUserDataViewModel.getUserInfoLiveData().observe(getViewLifecycleOwner(), userInfo -> {
             if (userInfo != null) {
                 mCurrentUserInfo = userInfo;
@@ -76,7 +76,7 @@ public class BaseUserInfoFragment extends BaseFragment {
         });
     }
 
-    public void applyUserData() {
+    protected void applyUserData() {
         /*предполагается что во фрагментах наследниках, в этом методе будет размещаться логика, которая
         * должна начать совершаться, когда данные юзера получены*/
     }

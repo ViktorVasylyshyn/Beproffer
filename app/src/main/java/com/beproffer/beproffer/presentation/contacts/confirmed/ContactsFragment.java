@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class ContactsFragment extends BaseUserInfoFragment {
 
-    public final ObservableBoolean mShowNoContacts = new ObservableBoolean(false);
+    private final ObservableBoolean mShowNoContacts = new ObservableBoolean(false);
 
     private ContactsItemAdapter mContactsAdapter;
 
@@ -187,7 +187,7 @@ public class ContactsFragment extends BaseUserInfoFragment {
                     handleContactRequest(item,true);
                     break;
                 case R.id.contact_request_menu_deny:
-                    handleContactRequest(item,true);
+                    handleContactRequest(item,false);
                     break;
             }
             return true;

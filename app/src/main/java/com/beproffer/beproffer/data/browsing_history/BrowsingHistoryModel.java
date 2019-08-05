@@ -10,9 +10,9 @@ public class BrowsingHistoryModel {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private String url;
+    private final String url;
 
-    private String type;
+    private final String type;
 
     public BrowsingHistoryModel(String url, String type) {
         this.url = url;

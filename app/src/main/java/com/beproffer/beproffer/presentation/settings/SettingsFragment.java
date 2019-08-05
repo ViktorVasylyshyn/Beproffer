@@ -27,7 +27,7 @@ public class SettingsFragment extends BaseUserInfoFragment {
 
     private FirebaseAuth mAuth;
 
-    private SettingsFragmentCallback mCallback = new SettingsFragmentCallback() {
+    private final SettingsFragmentCallback mCallback = new SettingsFragmentCallback() {
         @Override
         public void clearBrowsingHistoryClick() {
             clearBrowsingHistory();

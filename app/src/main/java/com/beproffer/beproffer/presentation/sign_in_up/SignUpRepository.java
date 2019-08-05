@@ -16,19 +16,19 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class SignUpRepository {
+class SignUpRepository {
 
-    private Application mApplication;
+    private final Application mApplication;
 
-    private MutableLiveData<Integer> mToastRes = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mShowProgress = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mToastRes = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mShowProgress = new MutableLiveData<>();
     /*нужно для контроля частых нажатий на кнопки*/
-    private MutableLiveData<Boolean> mProcessing = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mPopBackStack = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mProcessing = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mPopBackStack = new MutableLiveData<>();
     /*устанавливает фокус на поле, которое требует изменения и выдает соответствующее сообщение рядом*/
-    private MutableLiveData<Integer> mErrorMessageId = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mErrorMessageId = new MutableLiveData<>();
 
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     public SignUpRepository(Application application) {
         mApplication = application;
@@ -80,7 +80,7 @@ public class SignUpRepository {
                 R.string.toast_error_user_data_saving_failure, null, null, false));
     }
 
-    public void saveUserDataToDatabase(UserInfo userInfo) {
+    private void saveUserDataToDatabase(UserInfo userInfo) {
         FirebaseDatabase.getInstance().getReference()
                 .child(Const.USERS)
                 .child(userInfo.getUserType())

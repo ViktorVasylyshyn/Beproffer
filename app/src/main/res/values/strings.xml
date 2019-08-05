@@ -46,8 +46,7 @@
     <string name="hint_specialist_add_more_images">Add more images to your gallery, to find more customers.</string>
     <string name="hint_outfield_confirm">confirm</string>
     <string name="hint_outfield_deny">deny</string>
-    <string name="hint_join_us_on_social">Join us on social. Share your impressions and wishes. Links to our socials are in \"info\" section.</string>
-
+    <string name="hint_join_us_on_social">Join us in social networks. Share your impressions and wishes. The links to our social networks are in the "info" section.</string>
 
     <!--Refs-->
     <string name="href_terms_of_service_title_0">Terms of Use</string>
@@ -63,6 +62,7 @@
     <string name="href_telegram_chat_specialists">https://t.me/beproffer_s</string>
     <string name="href_viber_chat_customers">https://invite.viber.com/?g2=AQATP13AdMH6M0oUzCUTcg75bBcL4qcWS72dKYPVLOL1fqTuHOB%2FXbsw%2BrHvZSLH</string>
     <string name="href_viber_chat_specialists">https://invite.viber.com/?g2=AQAJVtpDxpdMMEoU3JqJjwNDXuNOM0GnZu%2FDu82uths%2FRhzGMfzEX7OChNW967CM</string>
+    <string name="href_facebook_page">fb://page/102981521053885</string>
 
 
     <!--Titles-->
@@ -92,16 +92,11 @@
     <string name="title_gender_female">Female</string>
     <string name="title_gender_all_genders">Both</string>
 
-    <string name="title_duration_30_min">30min</string>
-    <string name="title_duration_45_min">45min</string>
-    <string name="title_duration_60_min">60min</string>
-    <string name="title_duration_90_min">90min</string>
-    <string name="title_duration_120_min">120min</string>
-
     <string name="title_search_fragment">WHAT ARE YOU LOOKING FOR?</string>
     <string name="title_specialist_storage_fragment">MY WORKS</string>
     <string name="title_search">Search</string>
     <string name="title_for">for</string>
+    <string name="title_try_again">Try again</string>
 
 
     <!--/*Start/SignIn/Registration/e.t.s.*/-->
@@ -137,7 +132,8 @@
     <string name="confirmed_contact_menu_call">call</string>
     <string name="confirmed_contact_menu_delete">delete</string>
 
-    <string name="vote_prohibited_content">Prohibited content.</string>
+    <string name="menu_vote_prohibited_content">Prohibited content</string>
+    <string name="menu_vote_wrong_section">Wrong section</string>
 
 
     <!--Image Upload Requirements-->
@@ -192,7 +188,7 @@
     <string name="toast_contact_denied">Contact denied.</string>
     <string name="toast_guest_mode">Guest mode.</string>
     <string name="toast_processing">Wait a second, please. Processing…</string>
-    <string name="toast_no_any_service_items">No publications for this request yet. Please, try again later.</string>
+    <string name="toast_no_any_service_items">There are no publications for this request yet. Please, try again later.</string>
 
 
     <string name="error_message_exception_sign_up_weak_password">Please, create more complicated password.</string>

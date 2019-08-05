@@ -122,7 +122,7 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
         popupMenu.show();
     }
 
-    public void handleGenderClick(View view) {
+    private void handleGenderClick(View view) {
         switch (view.getId()) {
             case R.id.ssl_male_text_view:
                 mGender = Const.MALE;
@@ -143,7 +143,7 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
         view.setBackground(getResources().getDrawable(R.drawable.button_background_green_stroke_rectangle));
     }
 
-    public void applySearchRequest() {
+    private void applySearchRequest() {
         if (mTypeMap != null && mGender != null) {
             if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                 SharedPreferences.Editor editor = requireActivity().getSharedPreferences(FirebaseAuth.getInstance().getCurrentUser().getUid(), MODE_PRIVATE).edit();

@@ -49,7 +49,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/specialist_storage_edit_aply_data"
+            android:id="@+id/specialist_storage_edit_apply_data"
             android:layout_width="@dimen/bnb_icon_size"
             android:layout_height="@dimen/bnb_icon_size"
             android:layout_margin="@dimen/base_margin_small"
@@ -243,7 +243,7 @@
 
         <LinearLayout
             android:id="@+id/specialist_gallery_edit_gender_scroll"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/specialist_edit_fragment_scroll_height"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
             android:background="@drawable/button_background_grey_stroke_rectangle"
@@ -257,11 +257,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{fragmentCallback::onGenderButtonClick}"
-                android:paddingStart="@dimen/base_padding_medium"
                 android:paddingTop="@dimen/base_padding_small"
-                android:paddingEnd="@dimen/base_padding_medium"
                 android:paddingBottom="@dimen/base_padding_small"
                 android:text="@string/title_gender_male"
+                android:gravity="center"
+                android:layout_weight="1"
                 android:textColor="@color/color_base_text"
                 android:textSize="@dimen/base_text_size_medium"
                 tools:ignore="ButtonStyle" />
@@ -271,11 +271,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{fragmentCallback::onGenderButtonClick}"
-                android:paddingStart="@dimen/base_padding_small"
                 android:paddingTop="@dimen/base_padding_small"
-                android:paddingEnd="@dimen/base_padding_small"
                 android:paddingBottom="@dimen/base_padding_small"
                 android:text="@string/title_gender_female"
+                android:gravity="center"
+                android:layout_weight="1"
                 android:textColor="@color/color_base_text"
                 android:textSize="@dimen/base_text_size_medium"
                 tools:ignore="ButtonStyle" />
@@ -285,11 +285,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{fragmentCallback::onGenderButtonClick}"
-                android:paddingStart="@dimen/base_padding_medium"
                 android:paddingTop="@dimen/base_padding_small"
-                android:paddingEnd="@dimen/base_padding_medium"
                 android:paddingBottom="@dimen/base_padding_small"
                 android:text="@string/title_gender_all_genders"
+                android:gravity="center"
+                android:layout_weight="1"
                 android:textColor="@color/color_base_text"
                 android:textSize="@dimen/base_text_size_medium"
                 tools:ignore="ButtonStyle" />
@@ -298,7 +298,7 @@
 
         <EditText
             android:id="@+id/specialist_storage_edit_price"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/specialist_edit_fragment_image_width"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_extra_small"
             android:gravity="center"

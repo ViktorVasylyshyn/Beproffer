@@ -27,7 +27,7 @@ public abstract class BrowsingHistoryDatabase extends RoomDatabase {
         return instance;
     }
 
-    private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback(){
+    private static final RoomDatabase.Callback roomCallback = new RoomDatabase.Callback(){
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             new PopulateDbAsyncTask(instance).execute();
@@ -36,7 +36,7 @@ public abstract class BrowsingHistoryDatabase extends RoomDatabase {
     };
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
-        private BrowsingHistoryDao browsingHistoryDao;
+        private final BrowsingHistoryDao browsingHistoryDao;
 
         private PopulateDbAsyncTask(BrowsingHistoryDatabase browsingHistoryDatabase){
             browsingHistoryDao = browsingHistoryDatabase.browsingHistoryDao();
