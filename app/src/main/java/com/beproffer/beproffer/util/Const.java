@@ -16,23 +16,15 @@ public class Const {
     public static final String INREQUEST = "inrequest";
     public static final String SERVICES = "services"; /*service image's data*/
 
-    public static final String PROFIMGURL = "profImageUrl"; /*urls of profile images */
     public static final String USERTYPE = "userType";
 
     public static final String GENDER = "gender";
     public static final String IMAGES = "images"; /*child with user images' urls*/
     public static final String VOTES = "votes"; /*directory for claims about prohibited content*/
 
-    /*list of observed urls*/
-    public static final String OBSERV = "observ";
-
-
     /*Firebase storage constants*/
     public static final String PROF = "prof"; /*profile*/
     public static final String SERV = "serv"; /*service*/
-
-    /*service image info*/
-    public static final String SERIMGURL = "url"; /*service image's url*/
 
     /*services database code*/
     public static final String SERVTYPE = "type"; /*service's type*/
@@ -85,12 +77,14 @@ public class Const {
 
 
     /*Log and system title*/
-    public static final String ERROR = "ERROR";
-    public static final String CUSTOMERS = "customers";/*эти две константы нужны для определения*/
-    public static final String CONTACTS = "contacts";/*..какая часть экрана контактов активна*/
     public static final String UNKNSTAT = "unknown state";
     public static final String UNKNOWN_USER_REQUEST = "unknownUserRequest";/*ключ для получения
     параметров запроса из SharedPref для не зарегистрированного пользователя*/
+
+    /*votes*/
+
+    public static final String PROHCONT = "prohcont";
+    public static final String WRONSECT = "wronsect";
 
     /*request code*/
     public static final int REQUEST_CODE_1 = 1;

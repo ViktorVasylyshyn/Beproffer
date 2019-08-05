@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class UserDataViewModel extends AndroidViewModel {
 
-    private UserDataRepository mRepository;
+    private final UserDataRepository mRepository;
 
     public UserDataViewModel(@NonNull Application application) {
         super(application);

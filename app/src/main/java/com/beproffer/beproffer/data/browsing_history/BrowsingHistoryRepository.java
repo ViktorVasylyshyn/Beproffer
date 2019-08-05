@@ -9,7 +9,7 @@ import com.beproffer.beproffer.util.Const;
 import java.util.List;
 
 public class BrowsingHistoryRepository {
-    private BrowsingHistoryDao browsingHistoryDao;
+    private final BrowsingHistoryDao browsingHistoryDao;
     private LiveData<List<String>> targetBrowsingHistory;
 
     public BrowsingHistoryRepository(Application application, String targetType){
@@ -50,7 +50,7 @@ public class BrowsingHistoryRepository {
     }
 
     private static class InsertBrowsingHistoryAsyncTask extends AsyncTask<BrowsingHistoryModel, Void, Void> {
-        private BrowsingHistoryDao browsingHistoryDao;
+        private final BrowsingHistoryDao browsingHistoryDao;
 
         private InsertBrowsingHistoryAsyncTask(BrowsingHistoryDao browsingHistoryDao){
             this.browsingHistoryDao = browsingHistoryDao;
@@ -64,7 +64,7 @@ public class BrowsingHistoryRepository {
     }
 
     private static class DeleteWholeBrowsingHistoryAsyncTask extends AsyncTask<Void, Void, Void>{
-        private BrowsingHistoryDao browsingHistoryDao;
+        private final BrowsingHistoryDao browsingHistoryDao;
 
         private DeleteWholeBrowsingHistoryAsyncTask(BrowsingHistoryDao browsingHistoryDao){
             this.browsingHistoryDao = browsingHistoryDao;

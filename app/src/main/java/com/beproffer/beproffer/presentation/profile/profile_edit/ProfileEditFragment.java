@@ -23,7 +23,7 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
 
     private Uri mResultUri;
 
-    private ProfileEditFragmentCallback mCallback = new ProfileEditFragmentCallback() {
+    private final ProfileEditFragmentCallback mCallback = new ProfileEditFragmentCallback() {
         @Override
         public void onSetProfileImageClick() {
             setProfileImage();
@@ -66,7 +66,7 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
         }
     }
 
-    public void checkUserData() {
+    private void checkUserData() {
         if (null == mResultUri && mCurrentUserInfo.getUserProfileImageUrl() == null) {
             showToast(R.string.toast_select_image);
             mBinding.editFragmentBottomHint.setText(R.string.hint_any_image_size);
@@ -111,7 +111,7 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
         mUserDataViewModel.updateUserInfo(mCurrentUserInfo, mResultUri);
     }
 
-    public void setProfileImage() {
+    private void setProfileImage() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, Const.REQUEST_CODE_1);

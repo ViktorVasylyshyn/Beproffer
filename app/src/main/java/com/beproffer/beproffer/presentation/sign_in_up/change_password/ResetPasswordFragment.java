@@ -18,9 +18,9 @@ public class ResetPasswordFragment extends BaseFragment {
 
     private ResetPasswordFragmentBinding mBinding;
 
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-    private ResetPasswordFragmentCallback mCallback = this::changePassword;
+    private final ResetPasswordFragmentCallback mCallback = this::changePassword;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -37,7 +37,7 @@ public class ResetPasswordFragment extends BaseFragment {
         mBinding.setFragmentCallback(mCallback);
     }
 
-    public void changePassword() {
+    private void changePassword() {
         if (mBinding.resetPasswordFragmentEmail.getText().toString().isEmpty()) {
             mBinding.resetPasswordFragmentEmail.setError(getResources().getText(R.string.error_message_enter_email));
             mBinding.resetPasswordFragmentEmail.requestFocus();

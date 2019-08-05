@@ -26,7 +26,7 @@ public class SpecialistSignUpFragment extends BaseFragment {
 
     private SignUpViewModel mSignUpViewModel;
 
-    private SpecialistSignUpFragmentCallback mCallback = new SpecialistSignUpFragmentCallback() {
+    private final SpecialistSignUpFragmentCallback mCallback = new SpecialistSignUpFragmentCallback() {
         @Override
         public void onSignUpClick() {
             checkDataAndSignUpNewUser();
@@ -65,7 +65,7 @@ public class SpecialistSignUpFragment extends BaseFragment {
         mBinding.specialistSignUpPrivacyPolicy.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    public void checkDataAndSignUpNewUser() {
+    private void checkDataAndSignUpNewUser() {
         if (!checkInternetConnection()) {
             showToast(R.string.toast_no_internet_connection);
             return;

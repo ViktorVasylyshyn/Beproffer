@@ -2,6 +2,7 @@ package com.beproffer.beproffer.presentation.spec_gallery.edit;
 
 import android.view.View;
 
+/*must be public for binding*/
 public interface SpecialistStorageEditFragmentCallback {
 
     void onTypeButtonClick(View view);

@@ -23,15 +23,15 @@ import java.util.Map;
 
 public class SpecialistGalleryFragment extends BaseUserInfoFragment {
 
-    private GalleryImageItemAdapter mImageAdapter = new GalleryImageItemAdapter();
+    private final GalleryImageItemAdapter mImageAdapter = new GalleryImageItemAdapter();
 
-    private ObservableBoolean mShowButton = new ObservableBoolean();
+    private final ObservableBoolean mShowButton = new ObservableBoolean();
 
     private List<SpecialistGalleryImageItem> mImageItemsList;
 
     private SpecialistStorageFragmentBinding mBinding;
 
-    private SpecialistGalleryFragmentCallback mCallback = this::addNewImage;
+    private final SpecialistGalleryFragmentCallback mCallback = this::addNewImage;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -80,7 +80,7 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
         imageRecyclerView.setAdapter(mImageAdapter);
     }
 
-    public void addNewImage() {
+    private void addNewImage() {
         if(mImageItemsList != null && mImageItemsList.size() >= 5){
             showToast(R.string.toast_would_you_like_to_donate);
             cooldown(mBinding.specialistStorageAddImageButton);

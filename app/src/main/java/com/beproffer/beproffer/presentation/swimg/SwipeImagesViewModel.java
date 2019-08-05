@@ -13,7 +13,7 @@ import java.util.List;
 
 public class SwipeImagesViewModel extends AndroidViewModel {
 
-    private SwipeImagesRepository mRepository;
+    private final SwipeImagesRepository mRepository;
 
     private LiveData<List<SwipeImageItem>> mSwipeImageItemsList;
 

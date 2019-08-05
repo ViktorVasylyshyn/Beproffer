@@ -64,6 +64,8 @@
             android:layout_marginEnd="@dimen/base_margin_small"
             android:layout_marginTop="@dimen/base_margin_extra_small"
             android:layout_marginBottom="@dimen/base_margin_extra_small"
+            android:paddingStart="@dimen/base_padding_medium"
+            android:paddingEnd="@dimen/base_padding_medium"
             android:gravity="center"
             android:text="@{item.contactInfo}"
             android:textColor="@color/color_base_text_70per"

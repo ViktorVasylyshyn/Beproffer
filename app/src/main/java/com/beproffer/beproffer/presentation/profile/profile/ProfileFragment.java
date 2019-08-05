@@ -23,7 +23,7 @@ public class ProfileFragment extends BaseUserInfoFragment {
 
     private ProfileFragmentBinding mBinding;
 
-    private ProfileFragmentCallback mCallback = new ProfileFragmentCallback() {
+    private final ProfileFragmentCallback mCallback = new ProfileFragmentCallback() {
 
         @Override
         public void onPerformNavigationClick(View view) {
@@ -72,7 +72,7 @@ public class ProfileFragment extends BaseUserInfoFragment {
         mBinding.profileStorage.setVisibility(View.VISIBLE);
     }
 
-    public void performNavigation(View view) {
+    private void performNavigation(View view) {
         int res = 0;
         switch (view.getId()) {
             case R.id.profile_storage:
@@ -131,7 +131,7 @@ public class ProfileFragment extends BaseUserInfoFragment {
         mBinding.profileBottomHint.setText(R.string.hint_any_add_more_personal_info);
     }
 
-    public void logOut() {
+    private void logOut() {
         mUserDataViewModel.resetUserData();
         FirebaseAuth.getInstance().signOut();
         ViewModelProviders.of(requireActivity()).get(SwipeImagesViewModel.class).refreshAdapter();

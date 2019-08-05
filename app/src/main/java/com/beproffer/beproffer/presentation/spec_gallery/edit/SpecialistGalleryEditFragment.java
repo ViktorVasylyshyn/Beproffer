@@ -34,7 +34,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
     private String mPrimordialItemSubtype;
     private Uri mResultUri;
 
-    private SpecialistStorageEditFragmentCallback mCallback = new SpecialistStorageEditFragmentCallback() {
+    private final SpecialistStorageEditFragmentCallback mCallback = new SpecialistStorageEditFragmentCallback() {
         @Override
         public void onTypeButtonClick(View view) {
             setServiceType(view);
@@ -145,7 +145,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
         saveNewImageData();
     }
 
-    public void setServiceType(View view) {
+    private void setServiceType(View view) {
         int requiredMenuRes;
         switch (view.getId()) {
             case R.id.specialist_storage_edit_haircut_icon:
@@ -195,7 +195,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
             mUserDataViewModel.deleteNotRelevantImageData(mUpdatedImageItem, mPrimordialItemType, mPrimordialItemSubtype);
     }
 
-    public void setServiceGender(View view) {
+    private void setServiceGender(View view) {
         String gender;
         switch (view.getId()) {
             case R.id.specialist_gallery_edit_gender_male:
@@ -215,7 +215,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
         setGenderLayoutFocus();
     }
 
-    public void setServiceDuration(View view) {
+    private void setServiceDuration(View view) {
         String duration;
         switch (view.getId()) {
             case R.id.specialist_storage_edit_duration_30_min_icon:
@@ -315,7 +315,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
 
 
 
-    public void setGenderLayoutFocus() {
+    private void setGenderLayoutFocus() {
         if (mUpdatedImageItem == null || mUpdatedImageItem.getGender() == null)
             return;
         TextView targetTextView;

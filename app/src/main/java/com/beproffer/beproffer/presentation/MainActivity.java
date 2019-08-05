@@ -6,20 +6,26 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
 import com.beproffer.beproffer.App;
 import com.beproffer.beproffer.R;
 import com.google.firebase.auth.FirebaseAuth;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+import static com.beproffer.beproffer.util.NetworkUtil.hasInternetConnection;
 
 public class MainActivity extends AppCompatActivity {
 
     private NavController mNavController;
     private BottomNavigationView bottomNavigationView;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
+        if (!hasInternetConnection(this)) {
+            Toast.makeText(this, R.string.toast_no_internet_connection, Toast.LENGTH_SHORT).show();
+            return false;
+        }
         switch (item.getItemId()) {
             case R.id.bnm_images_gallery:
                 performNavigation(R.id.action_global_swipeImageFragment, null);
@@ -44,7 +50,11 @@ public class MainActivity extends AppCompatActivity {
         return true;
     };
 
-    private BottomNavigationView.OnNavigationItemReselectedListener mOnNavigationItemReselectedListener = item -> {
+    private final BottomNavigationView.OnNavigationItemReselectedListener mOnNavigationItemReselectedListener = item -> {
+        if (!hasInternetConnection(this)) {
+            Toast.makeText(this, R.string.toast_no_internet_connection, Toast.LENGTH_SHORT).show();
+            return;
+        }
         switch (item.getItemId()) {
             case R.id.bnm_images_gallery:
                 break;
@@ -55,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
                     performNavigation(R.id.action_global_profileFragment, null);
                 } else {
                     performNavigation(R.id.action_global_signInFragment, null);
-                }                break;
+                }
+                break;
         }
     };
 
@@ -67,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         initBottomNavigationMenu();
         mNavController = Navigation.findNavController(this, R.id.navigation_fragment_container);
+
     }
 
     private void initBottomNavigationMenu() {
@@ -83,9 +95,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onBottomNavigationBarItemClicked(int menuItemId, @Nullable Integer toastRes){
+    public void onBottomNavigationBarItemClicked(int menuItemId, @Nullable Integer toastRes) {
         bottomNavigationView.setSelectedItemId(menuItemId);
-        if(toastRes != null){
+        if (toastRes != null) {
             Toast.makeText(this, toastRes, Toast.LENGTH_LONG).show();
         }
     }

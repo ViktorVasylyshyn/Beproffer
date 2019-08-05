@@ -26,7 +26,7 @@ public class CustomerSignUpFragment extends BaseFragment {
 
     private SignUpViewModel mSignUpViewModel;
 
-    private CustomerSignUpFragmentCallback mCallback = new CustomerSignUpFragmentCallback() {
+    private final CustomerSignUpFragmentCallback mCallback = new CustomerSignUpFragmentCallback() {
         @Override
         public void onSignUpClick() {
             checkDataAndSignUpNewUser();
@@ -65,7 +65,7 @@ public class CustomerSignUpFragment extends BaseFragment {
         mBinding.customerSignUpPrivacyPolicy.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    public void checkDataAndSignUpNewUser() {
+    private void checkDataAndSignUpNewUser() {
         if (!checkInternetConnection()) {
             showToast(R.string.toast_no_internet_connection);
             return;

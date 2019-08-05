@@ -24,7 +24,7 @@ public class SignInFragment extends BaseFragment {
 
     private SignInFragmentBinding mBinding;
 
-    private SingInFragmentCallback mCallback = new SingInFragmentCallback() {
+    private final SingInFragmentCallback mCallback = new SingInFragmentCallback() {
 
         @Override
         public void onSignInClick() {
@@ -48,7 +48,7 @@ public class SignInFragment extends BaseFragment {
 
         @Override
         public void onTermsClick() {
-            openDoc(R.string.href_privacy_policy);
+            openDoc(R.string.href_terms_of_service);
         }
 
         @Override
@@ -75,7 +75,7 @@ public class SignInFragment extends BaseFragment {
         }
     }
 
-    public void signIn() {
+    private void signIn() {
         if (mProcessing.get()) {
             showToast(R.string.toast_processing);
             return;

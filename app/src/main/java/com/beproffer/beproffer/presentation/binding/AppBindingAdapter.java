@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 
+/*may be public for binding*/
 public class AppBindingAdapter {
 
     private AppBindingAdapter() {
@@ -212,35 +213,6 @@ public class AppBindingAdapter {
             }
         }
         view.setImageResource(resId);
-    }
-
-    @BindingAdapter({"setDurationTitle"})
-    public static void showDurationTitle(TextView view, String type) {
-        int resId;
-        if (type == null) {
-            resId = R.string.title_duration;
-        } else {
-            switch (type) {
-                case Const.MIN30:
-                    resId = R.string.title_duration_30_min;
-                    break;
-                case Const.MIN45:
-                    resId = R.string.title_duration_45_min;
-                    break;
-                case Const.MIN60:
-                    resId = R.string.title_duration_60_min;
-                    break;
-                case Const.MIN90:
-                    resId = R.string.title_duration_90_min;
-                    break;
-                case Const.MIN120:
-                    resId = R.string.title_duration_120_min;
-                    break;
-                default:
-                    throw new IllegalArgumentException(Const.UNKNSTAT);
-            }
-        }
-        view.setText(resId);
     }
 
     @BindingAdapter({"showUserType"})
