@@ -149,6 +149,8 @@
             android:layout_marginStart="@dimen/base_margin_medium"
             android:layout_marginEnd="@dimen/base_margin_medium"
             android:layout_marginBottom="@dimen/profile_image_half"
+            android:paddingStart="@dimen/base_padding_small"
+            android:paddingEnd="@dimen/base_padding_small"
             android:gravity="center"
             android:text="@string/app_all_rights_reserved"
             android:textColor="@color/color_base_text"

@@ -60,10 +60,10 @@
             android:layout_marginEnd="@dimen/profile_image_quarter"
             android:background="@drawable/button_background_green_stroke_rectangle"
             android:padding="@dimen/base_padding_small"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/image_info_display_progress_bar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/image_info_display_vote_top_hint">
 
             <ImageView
                 android:id="@+id/image_info_display_type_image"
@@ -159,23 +159,42 @@
                 app:layout_constraintStart_toEndOf="@+id/image_info_display_price"
                 app:layout_constraintTop_toTopOf="@+id/image_info_display_price" />
 
-            <Button
-                android:id="@+id/image_info_display_send_contact_request_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/base_margin_extra_small"
-                android:background="@drawable/button_background_green_stroke_rectangle"
-                android:onClick="@{(view)->fragmentCallback.onSendContactRequestClick()}"
-                android:padding="@dimen/base_margin_extra_small"
-                android:text="@string/title_send_contact_request"
-                android:textSize="@dimen/base_text_size_small"
-                android:textColor="@color/colorPrimary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_info_display_price"
-                tools:ignore="ContentDescription" />
-
         </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/image_info_display_send_contact_request_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:background="@drawable/button_background_green_stroke_rectangle"
+            android:onClick="@{(view)->fragmentCallback.onSendContactRequestClick()}"
+            android:padding="@dimen/base_margin_medium"
+            android:text="@string/title_send_contact_request"
+            android:textSize="@dimen/base_text_size_medium"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_info_display_constraint_layout_internal"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/image_info_display_bottom_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_small"
+            android:layout_marginEnd="@dimen/base_margin_small"
+            android:gravity="center"
+            android:paddingStart="@dimen/base_padding_medium"
+            android:paddingEnd="@dimen/base_padding_medium"
+            android:layout_marginBottom="@dimen/base_margin_small"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_medium"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_info_display_send_contact_request_button"/>
 
         <ProgressBar
             android:id="@+id/image_info_display_progress_bar"

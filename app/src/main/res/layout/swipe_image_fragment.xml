@@ -10,7 +10,7 @@
             type="android.databinding.ObservableBoolean" />
 
         <variable
-            name="search"
+            name="callback"
             type="com.beproffer.beproffer.presentation.swimg.SwipeImageFragmentCallback" />
 
     </data>
@@ -40,7 +40,7 @@
             android:src="@drawable/ic_search_active"
             android:layout_marginEnd="@dimen/base_margin_medium"
             tools:ignore="ContentDescription"
-            android:onClick="@{(view) -> search.onSearchClick()}"/>
+            android:onClick="@{(view) -> callback.onSearchClick()}"/>
 
         <com.lorentzos.flingswipe.SwipeFlingAdapterView
             android:id="@+id/image_frame"
@@ -51,6 +51,36 @@
             android:layout_marginEnd="@dimen/base_margin_small"
             app:rotation_degrees="9"
             tools:context=".presentation.MainActivity" />
+
+        <ImageView
+            android:id="@+id/swipe_image_no_internet_connection_image"
+            android:layout_width="@dimen/profile_image_half"
+            android:layout_height="@dimen/profile_image_half"
+            android:src="@drawable/ic_no_internet_connection"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/image_frame"
+            app:layout_constraintBottom_toTopOf="@+id/swipe_image_retry_text_view"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/swipe_image_retry_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_small"
+            android:background="@drawable/button_background_green_stroke_rectangle"
+            android:padding="@dimen/base_margin_medium"
+            android:text="@string/title_try_again"
+            android:visibility="gone"
+            android:textSize="@dimen/base_text_size_big"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:onClick="@{(view) -> callback.onRetryClicked()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/swipe_image_progress_bar"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/swipe_image_like_image"

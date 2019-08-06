@@ -431,7 +431,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/base_margin_small"
                     android:onClick="@{(view) -> fragmentCallback.onTermsClick()}"
-                    android:text="@string/href_terms_of_service_title_0"
+                    android:text="@string/href_terms_of_service_title_2"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/base_text_size_medium"
                     app:layout_constraintEnd_toEndOf="parent"

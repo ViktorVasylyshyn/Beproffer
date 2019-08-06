@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,11 +34,23 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
 
     private List<SwipeImageItem> mImageItemsList;
 
-    private SearchSheetDialog searchSheet;
+    private SearchSheetDialog mSearchSheet;
 
     private SwipeImagesViewModel mSwipeImagesViewModel;
 
-    private final SwipeImageFragmentCallback mCallback = this::searchSheet;
+    private final SwipeImageFragmentCallback mCallback = new SwipeImageFragmentCallback() {
+        @Override
+        public void onSearchClick() {
+            searchSheet();
+        }
+
+        @Override
+        public void onRetryClicked() {
+            mBinding.swipeImageNoInternetConnectionImage.setVisibility(View.GONE);
+            mBinding.swipeImageRetryTextView.setVisibility(View.GONE);
+            startNewSession();
+        }
+    };
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -51,28 +64,32 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mBinding.setShowProgress(mShowProgress);
-        mBinding.setSearch(mCallback);
+        mBinding.setCallback(mCallback);
+        /*откровенно говоря, в этом активити наговнокожен лютый пиздец, как и во многих других...
+        ну а что делать, если я по другому не умею :(*/
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        startNewSession();
+    }
+
+    private void startNewSession() {
         if (!checkInternetConnection()) {
-            /*сделать здесь переход, на какой нить фрагмент*/
             showToast(R.string.toast_no_internet_connection);
+            mBinding.swipeImageRetryTextView.setVisibility(View.VISIBLE);
+            mBinding.swipeImageNoInternetConnectionImage.setVisibility(View.VISIBLE);
             return;
         }
 
-        if (getFirebaseUser() != null) {
-            if (mImageItemsList == null) {
-                initUserData();
-                return;
-            }
-        } else {
-            if (mImageItemsList == null) {
-                connectToRepository();
-                return;
-            }
+        if (getFirebaseUser() != null && mImageItemsList == null) {
+
+            initUserData();
+            return;
         }
-        if (!mImageItemsList.isEmpty()) {
-            initAdapter();
-        }
+        connectToRepository();
+        initAdapter();
     }
 
     @Override
@@ -82,7 +99,6 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
 
     private void connectToRepository() {
         if (!checkInternetConnection()) {
-            /*сделать здесь переход, на какой нить фрагмент*/
             showToast(R.string.toast_no_internet_connection);
             return;
         }
@@ -124,15 +140,10 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
     }
 
     private void initAdapter() {
+        mSwipeImageAdapter = null;
         mSwipeImageAdapter = new SwipeImageAdapter(requireActivity(), R.layout.swipe_image_item, mImageItemsList);
         SwipeFlingAdapterView flingImageContainer = mBinding.imageFrame;
         flingImageContainer.setAdapter(mSwipeImageAdapter);
-
-        /*подразумевается, что зарегистрированный юзер уже знает, что карточки можно свайпать в разные стороны
-         * и в дополнительных анимациях, как подсказках, не нуждается*/
-        if (getFirebaseUser() == null){
-            onCardHintAnimation(flingImageContainer);
-        }
 
         flingImageContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
@@ -187,20 +198,20 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
         }
     }
 
-    private void onCardHintAnimation(View view) {
-        try {
-            Toast.makeText(requireActivity(), R.string.toast_guest_mode, Toast.LENGTH_SHORT).show();
-            Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_card_animation_right);
-            view.startAnimation(animation);
-            Handler handlerWordAnim = new Handler();
-            handlerWordAnim.postDelayed(() -> {
-                Animation animation1 = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_card_animation_left);
-                view.startAnimation(animation1);
-            }, Const.ANIMDUR);
-        } catch (NullPointerException e) {
-            showToast(R.string.toast_error_has_occurred);
-        }
-    }
+//    private void onCardHintAnimation(View view) {
+//        try {
+//            Toast.makeText(requireActivity(), R.string.toast_guest_mode, Toast.LENGTH_SHORT).show();
+//            Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_card_animation_right);
+//            view.startAnimation(animation);
+//            Handler handlerWordAnim = new Handler();
+//            handlerWordAnim.postDelayed(() -> {
+//                Animation animation1 = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_card_animation_left);
+//                view.startAnimation(animation1);
+//            }, Const.ANIMDUR);
+//        } catch (NullPointerException e) {
+//            showToast(R.string.toast_error_has_occurred);
+//        }
+//    }
 
     private void displayImageInfo(Object dataObject) {
         ViewModelProviders.of(requireActivity()).get(ImageItemTransferViewModel.class).setImageItem((SwipeImageItem) dataObject);
@@ -208,15 +219,15 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
     }
 
     private void searchSheet() {
-        if(!checkInternetConnection()){
+        if (!checkInternetConnection()) {
             showToast(R.string.toast_no_internet_connection);
             return;
         }
-        if (searchSheet != null){
-            searchSheet.dismiss();
-            searchSheet = null;
+        if (mSearchSheet != null) {
+            mSearchSheet.dismiss();
+            mSearchSheet = null;
         }
-        searchSheet = new SearchSheetDialog();
-        searchSheet.show(requireActivity().getSupportFragmentManager(), "searchSheet");
+        mSearchSheet = new SearchSheetDialog();
+        mSearchSheet.show(requireActivity().getSupportFragmentManager(), "mSearchSheet");
     }
 }

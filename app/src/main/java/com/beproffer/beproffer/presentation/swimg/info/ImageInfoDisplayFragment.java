@@ -100,6 +100,7 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
 
         if (mOutgoingContactRequests != null && mOutgoingContactRequests.containsKey(mItem.getUid())) {
             requestButtonIsInactive(R.string.title_request_already_sent);
+            mBinding.imageInfoDisplayBottomHint.setText(R.string.hint_wait_for_confirmation);
             return;
         }
 

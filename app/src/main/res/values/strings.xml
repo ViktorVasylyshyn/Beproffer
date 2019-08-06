@@ -47,6 +47,7 @@
     <string name="hint_outfield_confirm">confirm</string>
     <string name="hint_outfield_deny">deny</string>
     <string name="hint_join_us_on_social">Join us in social networks. Share your impressions and wishes. The links to our social networks are in the "info" section.</string>
+    <string name="hint_wait_for_confirmation">Wait until the request is confirmed by the specialist. It\'ll appear in your contacts\' list.</string>
 
     <!--Refs-->
     <string name="href_terms_of_service_title_0">Terms of Use</string>

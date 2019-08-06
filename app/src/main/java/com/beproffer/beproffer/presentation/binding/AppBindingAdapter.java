@@ -21,7 +21,7 @@ public class AppBindingAdapter {
     public static void loadImage(ImageView view, String param) {
         Glide.with(view.getContext())
                 .load(param)
-                .apply(RequestOptions.circleCropTransform().placeholder(R.drawable.profile_image_place_holder))
+                .apply(RequestOptions.circleCropTransform().placeholder(R.drawable.profile_image_ph))
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(view);
     }
@@ -32,7 +32,7 @@ public class AppBindingAdapter {
         /*если картинка в списке будет плохо выгллядеть или не полностью показываться - помудровать с способами трансформации*/
         Glide.with(view.getContext())
                 .load(url)
-                .apply(RequestOptions.centerCropTransform().placeholder(R.drawable.service_image_rectangle_place_holder))
+                .apply(RequestOptions.centerCropTransform().placeholder(R.drawable.service_image_ph))
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(view);
     }

@@ -45,6 +45,8 @@
     <string name="hint_specialist_add_more_images">Добавьте больше изображений своих услуг, чтобы найти клиентов.</string>
     <string name="hint_outfield_confirm">принять</string>
     <string name="hint_outfield_deny">отклонить</string>
+    <string name="hint_wait_for_confirmation">Когда пециалист подтвердит запрос, его номер появится у Вас в контактах.</string>
+
 
 
     <string name="href_terms_of_service">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5-%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-beproffer</string>

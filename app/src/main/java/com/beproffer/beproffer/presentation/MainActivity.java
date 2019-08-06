@@ -33,10 +33,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.bnm_contacts:
                 if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                     performNavigation(R.id.action_global_contactsFragment, null);
+                    return true;
                 } else {
                     Toast.makeText(this, R.string.toast_request_for_registered, Toast.LENGTH_LONG).show();
+                    return false;
                 }
-                return true;
             case R.id.bnm_profile:
                 if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                     performNavigation(R.id.action_global_profileFragment, null);
