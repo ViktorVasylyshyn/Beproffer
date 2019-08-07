@@ -174,7 +174,7 @@
     <string name="toast_contact_deleted">Контакт удален.</string>
     <string name="toast_browsing_history_cleared">История просмотров очищена.</string>
     <string name="toast_request_sent">Запрос отправлен.</string>
-    <string name="toast_request_for_registered">Доступно только зарегистрированным пользователям.</string>
+    <string name="toast_available_for_registered">Доступно только зарегистрированным пользователям.</string>
     <string name="toast_no_available_images">Закончились доступные изображения. Измените критерии поиска или попробуйте позже.</string>
     <string name="toast_profile_deleted">Профайл удален.</string>
     <string name="toast_sign_up_email_verification">Проверьте свою электронную почту и подтвердите регистрацию.</string>

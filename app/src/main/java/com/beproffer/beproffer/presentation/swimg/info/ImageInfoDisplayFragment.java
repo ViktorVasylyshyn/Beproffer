@@ -37,7 +37,7 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
 
         @Override
         public void onPerformBackNavigationClick() {
-            performBackNavigation();
+            popBackStack();
         }
 
         @Override
@@ -101,6 +101,8 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
         if (mOutgoingContactRequests != null && mOutgoingContactRequests.containsKey(mItem.getUid())) {
             requestButtonIsInactive(R.string.title_request_already_sent);
             mBinding.imageInfoDisplayBottomHint.setText(R.string.hint_wait_for_confirmation);
+            mBinding.imageInfoDisplayBottomHint.setVisibility(View.VISIBLE);
+
             return;
         }
 
@@ -117,7 +119,7 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
 
     private void sendContactRequest() {
         if (getFirebaseUser() == null || mCurrentUserInfo == null) {
-            showToast(R.string.toast_request_for_registered);
+            showToast(R.string.toast_available_for_registered);
             return;
         }
 
@@ -130,7 +132,7 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
     }
 
     private void requestButtonIsInactive(int hintRes) {
-        mBinding.imageInfoDisplaySendContactRequestButton.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
+        mBinding.imageInfoDisplaySendContactRequestButton.setBackgroundResource(R.drawable.background_rectangle_grey_alpha_85_grey_stroke);
         mBinding.imageInfoDisplaySendContactRequestButton.setText(getResources().getText(hintRes));
         mBinding.imageInfoDisplaySendContactRequestButton.setTextColor(getResources().getColor(R.color.color_base_text_70per));
         mBinding.imageInfoDisplaySendContactRequestButton.setClickable(false);
@@ -138,7 +140,7 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
 
     private void handleOnVoteClick() {
         if (getFirebaseUser() == null || mCurrentUserInfo == null) {
-            showToast(R.string.toast_request_for_registered);
+            showToast(R.string.toast_available_for_registered);
             return;
         }
         if (!checkInternetConnection()) {
@@ -177,6 +179,7 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
                 .setValue(mItem)
                 .addOnSuccessListener(aVoid -> {
                     mBinding.imageInfoDisplayVoteTopHint.setText(R.string.hint_any_prohibited_content);
+                    mBinding.imageInfoDisplayVoteTopHint.setVisibility(View.VISIBLE);
                     showProgress(false);
                     mProcessing.set(false);
                     mBinding.imageInfoDisplayVote.setImageResource(R.drawable.ic_vote_inactive);
@@ -187,9 +190,5 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
             showProgress(false);
             mProcessing.set(false);
         });
-    }
-
-    private void performBackNavigation() {
-        performNavigation(R.id.action_global_swipeImageFragment);
     }
 }

@@ -4,6 +4,7 @@ package com.beproffer.beproffer.presentation.base;
 import android.app.Activity;
 import android.databinding.ObservableBoolean;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -44,14 +45,16 @@ public class BaseFragment extends Fragment {
         }
     }
 
-    void popBackStack() {
-        ((MainActivity) requireActivity()).popBackStack();
+    protected void popBackStack() {
+        (requireActivity()).onBackPressed();
     }
 
-    protected void performNavigation(int destinationId) {
-        /*пока что на вход этому методу подается только айди пункта назначения. если вдруг в будущем
-         * появится надобность на передачу аргументов - допишем второй параметр*/
-        ((MainActivity) requireActivity()).performNavigation(destinationId, null);
+    protected void changeFragment(Fragment fragment, boolean addToBackStack, boolean clearTask) {
+        ((MainActivity) requireActivity()).openFragment(fragment, addToBackStack, clearTask);
+    }
+
+    protected  void performOnBottomNavigationBarItemClick(int itemId, @Nullable Integer toastRes){
+        ((MainActivity)requireActivity()).onBottomNavigationBarItemClicked(itemId, toastRes);
     }
 
     /*существует специальный листенер, который слушает юзера. поначалу у меня так и было, но из-за

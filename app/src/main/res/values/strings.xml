@@ -177,7 +177,7 @@
     <string name="toast_sign_in_verify_email_first">Please, verify your email address.</string>
     <string name="toast_sign_up_email_verification">The profile was registered successfully. Please check your email for verification.</string>
     <string name="toast_request_sent">Contact request sent.</string>
-    <string name="toast_request_for_registered">The function is available only for registered users.</string>
+    <string name="toast_available_for_registered">The function is available only for registered users.</string>
     <string name="toast_reset_password_check_your_email">We sent you a message. Please check your inbox and complete the password changing.</string>
     <string name="toast_no_internet_connection">There is no internet connection. :( </string>
     <string name="toast_no_any_contacts">You have no contacts yet.</string>

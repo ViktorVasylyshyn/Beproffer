@@ -20,6 +20,9 @@
 
     <color name="colorIconGrey">#979E95</color>
 
+    <color name="image_info_fragment_grey_background_alpha_85">#D9FFFFFF</color>
+
+
     <color name="greyLightGradientStart">#66FFFFFF</color>
     <color name="greyLightGradientEnd">#B2FFFFFF</color>
 

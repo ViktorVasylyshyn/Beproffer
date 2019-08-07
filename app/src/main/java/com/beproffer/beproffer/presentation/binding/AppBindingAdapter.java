@@ -29,7 +29,6 @@ public class AppBindingAdapter {
     /*service image loading with rectangle crop*/
     @BindingAdapter("loadImageFromDb")
     public static void loadProfileImage(ImageView view, String url) {
-        /*если картинка в списке будет плохо выгллядеть или не полностью показываться - помудровать с способами трансформации*/
         Glide.with(view.getContext())
                 .load(url)
                 .apply(RequestOptions.centerCropTransform().placeholder(R.drawable.service_image_ph))

@@ -62,7 +62,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
 
         @Override
         public void denyChanges() {
-            ((MainActivity)requireActivity()).popBackStack();
+            popBackStack();
         }
 
         @Override

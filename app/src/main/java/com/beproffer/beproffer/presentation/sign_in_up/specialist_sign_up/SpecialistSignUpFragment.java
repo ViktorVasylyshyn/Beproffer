@@ -44,7 +44,7 @@ public class SpecialistSignUpFragment extends BaseFragment {
 
         @Override
         public void denySigningUp() {
-            ((MainActivity)requireActivity()).popBackStack();
+            popBackStack();
         }
     };
 
@@ -118,7 +118,7 @@ public class SpecialistSignUpFragment extends BaseFragment {
             if (performPopBackStack == null)
                 return;
             mSignUpViewModel.resetTriggers(null, true, null);
-            ((MainActivity) requireActivity()).popBackStack();
+            popBackStack();
         });
         mSignUpViewModel.getErrorMessageId().observe(getViewLifecycleOwner(), errorMessageId -> {
             if (errorMessageId == null)

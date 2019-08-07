@@ -1,24 +1,30 @@
 package com.beproffer.beproffer.presentation;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import com.beproffer.beproffer.App;
 import com.beproffer.beproffer.R;
+import com.beproffer.beproffer.presentation.contacts.confirmed.ContactsFragment;
+import com.beproffer.beproffer.presentation.profile.profile.ProfileFragment;
+import com.beproffer.beproffer.presentation.sign_in_up.sign_in.SignInFragment;
+import com.beproffer.beproffer.presentation.swimg.SwipeImageFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 import static com.beproffer.beproffer.util.NetworkUtil.hasInternetConnection;
 
 public class MainActivity extends AppCompatActivity {
 
-    private NavController mNavController;
     private BottomNavigationView bottomNavigationView;
+
+    private FragmentManager fragmentManager;
 
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -26,47 +32,41 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.toast_no_internet_connection, Toast.LENGTH_SHORT).show();
             return false;
         }
+        Fragment targetFragment = null;
+
         switch (item.getItemId()) {
             case R.id.bnm_images_gallery:
-                performNavigation(R.id.action_global_swipeImageFragment, null);
-                return true;
+                targetFragment = new SwipeImageFragment();
+                break;
             case R.id.bnm_contacts:
                 if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                    performNavigation(R.id.action_global_contactsFragment, null);
-                    return true;
+                    targetFragment = new ContactsFragment();
                 } else {
-                    Toast.makeText(this, R.string.toast_request_for_registered, Toast.LENGTH_LONG).show();
-                    return false;
+                    Toast.makeText(this, R.string.toast_available_for_registered, Toast.LENGTH_LONG).show();
+                return false;
                 }
+                break;
             case R.id.bnm_profile:
                 if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                    performNavigation(R.id.action_global_profileFragment, null);
+                    targetFragment = new ProfileFragment();
                 } else {
-                    performNavigation(R.id.action_global_signInFragment, null);
+                    targetFragment = new SignInFragment();
                 }
-                return true;
+                break;
             default:
                 break;
         }
+        openFragment(targetFragment, true, true);
         return true;
     };
 
     private final BottomNavigationView.OnNavigationItemReselectedListener mOnNavigationItemReselectedListener = item -> {
-        if (!hasInternetConnection(this)) {
-            Toast.makeText(this, R.string.toast_no_internet_connection, Toast.LENGTH_SHORT).show();
-            return;
-        }
         switch (item.getItemId()) {
             case R.id.bnm_images_gallery:
                 break;
             case R.id.bnm_contacts:
                 break;
             case R.id.bnm_profile:
-                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                    performNavigation(R.id.action_global_profileFragment, null);
-                } else {
-                    performNavigation(R.id.action_global_signInFragment, null);
-                }
                 break;
         }
     };
@@ -78,22 +78,31 @@ public class MainActivity extends AppCompatActivity {
         App.getComponent().injectMainActivity(this);
 
         initBottomNavigationMenu();
-        mNavController = Navigation.findNavController(this, R.id.navigation_fragment_container);
+        openFragment(new SwipeImageFragment(), true, false);
 
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Toast.makeText(this, R.string.toast_guest_mode, Toast.LENGTH_LONG).show();
+        }
     }
 
     private void initBottomNavigationMenu() {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         bottomNavigationView.setOnNavigationItemReselectedListener(mOnNavigationItemReselectedListener);
+
     }
 
-    public void performNavigation(int layoutId, @Nullable Bundle args) {
-        if (args != null) {
-            mNavController.navigate(layoutId, args);
-        } else {
-            mNavController.navigate(layoutId);
+    public void openFragment(@NonNull Fragment fragment, boolean addToBackStack, boolean clearBackStack) {
+        fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right);
+        if (addToBackStack) {
+            transaction.addToBackStack(fragment.getClass().getSimpleName());
         }
+        if (clearBackStack) {
+            fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+        transaction.add(R.id.fragment_container, fragment).commit();
     }
 
     public void onBottomNavigationBarItemClicked(int menuItemId, @Nullable Integer toastRes) {
@@ -103,8 +112,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void popBackStack() {
-        mNavController.popBackStack();
+    @Override
+    public void onBackPressed() {
+        fragmentManager.popBackStackImmediate();
+
+        if (fragmentManager.getBackStackEntryCount() == 0) {
+            super.onBackPressed();
+        }
     }
 
     @Override

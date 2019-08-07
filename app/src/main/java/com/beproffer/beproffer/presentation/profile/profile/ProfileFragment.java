@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,10 @@ import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.ProfileFragmentBinding;
 import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
+import com.beproffer.beproffer.presentation.info.InfoFragment;
+import com.beproffer.beproffer.presentation.profile.profile_edit.ProfileEditFragment;
+import com.beproffer.beproffer.presentation.settings.SettingsFragment;
+import com.beproffer.beproffer.presentation.spec_gallery.SpecialistGalleryFragment;
 import com.beproffer.beproffer.presentation.swimg.SwipeImagesViewModel;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
@@ -73,24 +78,25 @@ public class ProfileFragment extends BaseUserInfoFragment {
     }
 
     private void performNavigation(View view) {
-        int res = 0;
+        Fragment fragment;
         switch (view.getId()) {
             case R.id.profile_storage:
-                res = R.id.action_profileFragment_to_specialistStorageFragment;
+                fragment = new SpecialistGalleryFragment();
                 break;
             case R.id.profile_edit:
-                res = R.id.action_profileFragment_to_profileEditFragment;
+                fragment = new ProfileEditFragment();
                 break;
             case R.id.profile_settings:
-                res = R.id.action_profileFragment_to_settingsFragment;
+                fragment = new SettingsFragment();
                 break;
             case R.id.profile_info:
-                res = R.id.action_profileFragment_to_infoFragment;
+                fragment = new InfoFragment();
                 break;
             default:
                 showToast(R.string.toast_error_has_occurred);
+                return;
         }
-        performNavigation(res);
+        changeFragment(fragment, true, false);
     }
 
     private void hintsForUsers() {
@@ -135,6 +141,6 @@ public class ProfileFragment extends BaseUserInfoFragment {
         mUserDataViewModel.resetUserData();
         FirebaseAuth.getInstance().signOut();
         ViewModelProviders.of(requireActivity()).get(SwipeImagesViewModel.class).refreshAdapter();
-        performNavigation(R.id.action_global_swipeImageFragment);
+        performOnBottomNavigationBarItemClick(R.id.bnm_images_gallery, null);
     }
 }

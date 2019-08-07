@@ -3,25 +3,22 @@ package com.beproffer.beproffer.presentation.swimg;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.SwipeImageItem;
 import com.beproffer.beproffer.databinding.SwipeImageFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.swimg.adapter.SwipeImageAdapter;
+import com.beproffer.beproffer.presentation.swimg.info.ImageInfoDisplayFragment;
 import com.beproffer.beproffer.presentation.swimg.search_sheet.SearchSheetDialog;
-import com.beproffer.beproffer.util.Const;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.List;
@@ -215,7 +212,7 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
 
     private void displayImageInfo(Object dataObject) {
         ViewModelProviders.of(requireActivity()).get(ImageItemTransferViewModel.class).setImageItem((SwipeImageItem) dataObject);
-        performNavigation(R.id.action_swipeImageFragment_to_imageInfoDisplayFragment);
+        changeFragment(new ImageInfoDisplayFragment(), true, false);
     }
 
     private void searchSheet() {

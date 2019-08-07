@@ -41,14 +41,14 @@
 
 
     <!--list item image-->
-    <dimen name="list_item_image_width">120dp</dimen>
+    <dimen name="list_item_image_width">90dp</dimen>
     <dimen name="list_item_image_height">160dp</dimen>
     <dimen name="list_item_description_width">200dp</dimen>
 
 
     <!--specialists edit fragment image-->
-    <dimen name="specialist_edit_fragment_image_width">120dp</dimen>
-    <dimen name="specialist_edit_fragment_image_height">160dp</dimen>
+    <dimen name="specialist_edit_fragment_image_width">112dp</dimen>
+    <dimen name="specialist_edit_fragment_image_height">200dp</dimen>
     <dimen name="specialist_edit_fragment_scroll_height">160dp</dimen>
 
 

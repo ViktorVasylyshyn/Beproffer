@@ -16,6 +16,7 @@ import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
 import com.beproffer.beproffer.databinding.SpecialistStorageFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.spec_gallery.adapter.GalleryImageItemAdapter;
+import com.beproffer.beproffer.presentation.spec_gallery.edit.SpecialistGalleryEditFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
 
     @Override
     public void applyUserData() {
-        if(!checkInternetConnection()){
+        if (!checkInternetConnection()) {
             showToast(R.string.toast_no_internet_connection);
             return;
         }
@@ -81,22 +82,22 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
     }
 
     private void addNewImage() {
-        if(mImageItemsList != null && mImageItemsList.size() >= 5){
+        if (mImageItemsList != null && mImageItemsList.size() >= 5) {
             showToast(R.string.toast_would_you_like_to_donate);
             cooldown(mBinding.specialistStorageAddImageButton);
             return;
         }
         mUserDataViewModel.setEditableGalleryItem(new SpecialistGalleryImageItem(
-                        null,
-                        "image" + (mImageItemsList.size() + 1),
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null));
-        performNavigation(R.id.action_specialistStorageFragment_to_specialistStorageEditFragment);
+                null,
+                "image" + (mImageItemsList.size() + 1),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null));
+        changeFragment(new SpecialistGalleryEditFragment(), true, false);
     }
 
     private void setupList() {
@@ -105,7 +106,7 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
 
     private void setEditableGalleryItem(@Nullable View view, SpecialistGalleryImageItem editableItem) {
         mUserDataViewModel.setEditableGalleryItem(editableItem);
-        performNavigation(R.id.action_specialistStorageFragment_to_specialistStorageEditFragment);
+        changeFragment(new SpecialistGalleryEditFragment(), true, false);
     }
 }
 
