@@ -17,13 +17,11 @@
         app:menu="@menu/bottom_navigation_menu"
         android:background="@color/color_background_grey"/>
 
-    <fragment
-        android:id="@+id/navigation_fragment_container"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/bnb_icon_size"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/main_graph" />
+        android:paddingBottom="@dimen/base_padding_small"
+        android:layout_marginBottom="@dimen/bnb_icon_size" />
 
 </android.support.constraint.ConstraintLayout>

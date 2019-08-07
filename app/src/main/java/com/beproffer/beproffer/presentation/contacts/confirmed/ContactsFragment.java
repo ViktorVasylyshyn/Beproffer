@@ -55,8 +55,9 @@ public class ContactsFragment extends BaseUserInfoFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        /*хоть на этот фрагмент можно войти исключительно после проверки, но на всякий случай, поставлю еще одну*/
         if (getFirebaseUser() == null)
-            performNavigation(R.id.action_global_swipeImageFragment);
+            performOnBottomNavigationBarItemClick(R.id.bnm_images_gallery, R.string.toast_available_for_registered);
         mBinding.setShowProgress(mShowProgress);
         mBinding.setShowNoContacts(mShowNoContacts);
         mItemsRecyclerView = mBinding.contactsRecyclerView;
@@ -99,10 +100,8 @@ public class ContactsFragment extends BaseUserInfoFragment {
         mBinding.contactsContactRequests.setBackgroundResource(R.drawable.button_background_green_stroke_rectangle);
         mBinding.contactsContacts.setClickable(true);
         mBinding.contactsContactRequests.setClickable(false);
-        Log.d(Const.INFO, " obtainCustomersRequests 0");
         mUserDataViewModel.getIncomingContactRequests().observe(this, list -> {
             if (list != null) {
-                Log.d(Const.INFO, " obtainCustomersRequests 1");
                 initCustomersRequestsRecyclerView();
                 mCustomerRequestsList = new ArrayList<>();
                 for (Map.Entry<String, ContactRequestItem> entry : list.entrySet()) {

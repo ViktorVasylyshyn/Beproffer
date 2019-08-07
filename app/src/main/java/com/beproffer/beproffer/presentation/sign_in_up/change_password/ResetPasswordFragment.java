@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.ResetPasswordFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
+import com.beproffer.beproffer.presentation.sign_in_up.sign_in.SignInFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
@@ -49,7 +50,7 @@ public class ResetPasswordFragment extends BaseFragment {
             if (task.isSuccessful()) {
                 showToast(R.string.toast_reset_password_check_your_email);
                 showProgress(false);
-
+                changeFragment(new SignInFragment(), true, true);
             } else {
                 try {
                    throw task.getException();

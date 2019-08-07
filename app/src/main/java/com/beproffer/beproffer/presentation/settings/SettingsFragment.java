@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SettingsFragmentLayoutBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
+import com.beproffer.beproffer.presentation.sign_in_up.change_password.ResetPasswordFragment;
+import com.beproffer.beproffer.presentation.swimg.SwipeImageFragment;
 import com.beproffer.beproffer.presentation.swimg.SwipeImagesViewModel;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
@@ -115,7 +117,7 @@ public class SettingsFragment extends BaseUserInfoFragment {
                         .addOnSuccessListener(task -> currentUser.delete().addOnSuccessListener(deleted -> {
                             showProgress(false);
                             mUserDataViewModel.resetUserData();
-                            performNavigation(R.id.action_global_swipeImageFragment);
+                            performOnBottomNavigationBarItemClick(R.id.bnm_images_gallery, null);
                             showToast(R.string.toast_profile_deleted);
                         }).addOnFailureListener(e -> {
                             showProgress(false);
@@ -137,6 +139,6 @@ public class SettingsFragment extends BaseUserInfoFragment {
 
     private void resetPassword() {
         mAuth.signOut();
-        performNavigation(R.id.action_settingsFragment_to_resetPasswordFragment);
+        changeFragment(new ResetPasswordFragment(), true, true);
     }
 }

@@ -15,10 +15,13 @@ import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SignInFragmentBinding;
 import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
+import com.beproffer.beproffer.presentation.profile.profile.ProfileFragment;
+import com.beproffer.beproffer.presentation.sign_in_up.customer_sign_up.CustomerSignUpFragment;
 import com.beproffer.beproffer.presentation.swimg.SwipeImagesViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.database.core.persistence.TrackedQuery;
 
 public class SignInFragment extends BaseFragment {
 
@@ -33,17 +36,17 @@ public class SignInFragment extends BaseFragment {
 
         @Override
         public void onCustomerSignUpClick() {
-            performNavigation(R.id.action_signInFragment_to_customerRegistrationFragment);
+            changeFragment(new CustomerSignUpFragment(), true, false);
         }
 
         @Override
         public void onSpecialistSignUpClick() {
-            performNavigation(R.id.action_signInFragment_to_specialistRegistrationFragment);
+            changeFragment(new CustomerSignUpFragment(), true, false);
         }
 
         @Override
         public void onResetPasswordClick() {
-            performNavigation(R.id.action_signInFragment_to_resetPasswordFragment);
+            changeFragment(new CustomerSignUpFragment(), true, false);
         }
 
         @Override
@@ -71,7 +74,7 @@ public class SignInFragment extends BaseFragment {
         mBinding.setShowProgress(mShowProgress);
         mBinding.setFragmentCallback(mCallback);
         if (getFirebaseUser() != null) {
-            ((MainActivity) requireActivity()).popBackStack();
+            performOnBottomNavigationBarItemClick(R.id.bnm_images_gallery, null);
         }
     }
 
@@ -102,7 +105,7 @@ public class SignInFragment extends BaseFragment {
                     processing(false);
                     hideKeyboard(requireActivity());
                     if (auth.getCurrentUser().isEmailVerified()) {
-                        performNavigation(R.id.action_global_profileFragment);
+                        changeFragment(new ProfileFragment(), true, true);
                         ViewModelProviders.of(requireActivity()).get(SwipeImagesViewModel.class).refreshAdapter();
                     } else {
                         auth.signOut();

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <!--2.0-->
+
     <!--profile user image-->
     <dimen name="profile_image">256dp</dimen>
     <dimen name="profile_image_three_quarters">192dp</dimen>
@@ -39,14 +41,14 @@
 
 
     <!--list item image-->
-    <dimen name="list_item_image_width">192dp</dimen>
+    <dimen name="list_item_image_width">144dp</dimen>
     <dimen name="list_item_image_height">256dp</dimen>
     <dimen name="list_item_description_width">320dp</dimen>
 
 
     <!--specialists edit fragment image-->
-    <dimen name="specialist_edit_fragment_image_width">192dp</dimen>
-    <dimen name="specialist_edit_fragment_image_height">256dp</dimen>
+    <dimen name="specialist_edit_fragment_image_width">180dp</dimen>
+    <dimen name="specialist_edit_fragment_image_height">320dp</dimen>
     <dimen name="specialist_edit_fragment_scroll_height">256dp</dimen>
 
 

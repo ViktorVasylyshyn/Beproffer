@@ -36,7 +36,7 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
 
         @Override
         public void denyChanges() {
-            ((MainActivity)requireActivity()).popBackStack();
+            popBackStack();
         }
     };
 

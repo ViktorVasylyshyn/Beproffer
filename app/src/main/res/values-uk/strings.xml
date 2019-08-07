@@ -176,7 +176,7 @@
     <string name="toast_sign_up_email_verification">Перевірте свою електронну пошту і підтвердіть реєстрацію.</string>
     <string name="toast_sign_in_verify_email_first">Вам спочатку треба підтвердити адресу своєї електронної пошти.</string>
     <string name="toast_request_sent">Запит відправлено.</string>
-    <string name="toast_request_for_registered">Лише зареєстровані користувачі можуть відсилати запити.</string>
+    <string name="toast_available_for_registered">Лише зареєстровані користувачі можуть відсилати запити.</string>
     <string name="toast_no_available_images">Закінчилися зображення. Змініть критерії пошуку або спробуйте пізніше.</string>
     <string name="toast_profile_deleted">Профайл видалено.</string>
     <string name="toast_reset_password_check_your_email">Повідомлення було відправлено. Перевірте свою електронну пошту, для завершення зміни паролю.</string>

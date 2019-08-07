@@ -67,10 +67,6 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
         return mBinding.getRoot();
     }
 
-//    public interface SearchSheetListener {
-//        void apply();
-//    }
-
     private void defineServiceType(ImageView view) {
         int requiredMenuRes;
         switch (view.getId()) {
@@ -102,7 +98,7 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
             mTypeMap = new DefineServiceType(view.getContext()).setRequest(menuItem);
 
             if (mTypeMap == null || !mTypeMap.containsKey(Const.SERVTYPE) ||
-                    !mTypeMap.containsKey(Const.SERVSBTP)  || !mTypeMap.containsKey(Const.SERVTITL)) {
+                    !mTypeMap.containsKey(Const.SERVSBTP) || !mTypeMap.containsKey(Const.SERVTITL)) {
                 Toast.makeText(requireContext(), R.string.toast_error_has_occurred, Toast.LENGTH_SHORT).show();
             } else {
                 mBinding.sslTypeTitle.setText(mTypeMap.get(Const.SERVTITL));
@@ -167,16 +163,4 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
             Toast.makeText(requireContext(), R.string.toast_error_has_occurred, Toast.LENGTH_SHORT).show();
         }
     }
-
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//
-//        try {
-//            mListener = (SearchSheetListener) context;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(context.toString() + "must implement SearchSheetListener");
-//        }
-//    }
-
 }
