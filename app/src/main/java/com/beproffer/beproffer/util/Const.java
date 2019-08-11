@@ -95,8 +95,6 @@ public class Const {
 
 
     public static final int MAX_NUM_OF_IMAGES_IN_ADAPTER = 7; /*max num of image items in swipe card adapter*/
-    public static final int ANIMDUR = 1000; /*анимация для карточки состоит из двух этапов вправо - назад,
-     потом влево - назад. это задержка перед включением второй анимации*/
 
     public static final int COOLDOWNDUR_SHORT = 1500;
     public static final int COOLDOWNDUR_LONG = 3000; /*заморозка повторного нажатия вью элементов после предыдущего.
@@ -107,7 +105,6 @@ public class Const {
     хватает из репозитория значение true, а оно должно было быть false*/
 
     /*индексы иконок на панели навигации*/
-    public static final int CONTBNBINDEX = 1;
-    public static final int PROFBNBINDEX = 2;
+    public static final int CONTBNBINDEX = 1;/*contacts section(browsing image - 0, profile - 2)*/
 
 }

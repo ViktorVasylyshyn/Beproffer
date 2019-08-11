@@ -24,6 +24,9 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.List;
 
+import static com.beproffer.beproffer.util.OsVersionInfo.hasLollipop;
+
+
 public class BrowsingFragment extends BaseUserInfoFragment {
 
     private BrowsingFragmentBinding mBinding;
@@ -93,11 +96,12 @@ public class BrowsingFragment extends BaseUserInfoFragment {
     @Override
     public void applyUserData() {
 
-        if(mCurrentUserInfo.getUserType().equals(Const.SPEC)){
+        if (mCurrentUserInfo.getUserType().equals(Const.SPEC)) {
             mUserDataViewModel.getIncomingContactRequests().observe(this, list -> {
                 if (list != null) {
-                    if(!list.isEmpty()){
-                        setBadge(Const.CONTBNBINDEX);}
+                    if (!list.isEmpty()) {
+                        setBadge(Const.CONTBNBINDEX);
+                    }
                 }
             });
         }
@@ -148,7 +152,16 @@ public class BrowsingFragment extends BaseUserInfoFragment {
 
     private void initAdapter() {
         mBrowsingAdapter = null;
-        mBrowsingAdapter = new BrowsingAdapter(requireActivity(), R.layout.browsing_item, mImageItemsList);
+        int layoutId;
+        /*потому что  не смог я настроить нормально отображения картинок на ос меньше 21. чем больше
+        делаешь радиус углов тем больше изображение этим сдвигается вцентр, тоесть углы не
+        хотят обрезаться поетому на апи 19 будет без округления углов*/
+        if (hasLollipop()) {
+            layoutId = R.layout.browsing_item21h;
+        } else {
+            layoutId = R.layout.browsing_item19;
+        }
+        mBrowsingAdapter = new BrowsingAdapter(requireActivity(), layoutId, mImageItemsList);
         SwipeFlingAdapterView flingImageContainer = mBinding.browsingFragmentImageFrame;
         flingImageContainer.setAdapter(mBrowsingAdapter);
 

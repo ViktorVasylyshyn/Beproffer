@@ -106,10 +106,10 @@
             android:textSize="@dimen/base_text_size_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/sign_in_viewes_linear_layout"/>
+            app:layout_constraintBottom_toTopOf="@+id/sign_in_buttons_linear_layout"/>
 
         <LinearLayout
-            android:id="@+id/sign_in_viewes_linear_layout"
+            android:id="@+id/sign_in_buttons_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -177,7 +177,7 @@
             android:textSize="@dimen/base_text_size_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_in_viewes_linear_layout" />
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_buttons_linear_layout" />
 
         <TextView
             android:id="@+id/sign_in_privacy_policy"

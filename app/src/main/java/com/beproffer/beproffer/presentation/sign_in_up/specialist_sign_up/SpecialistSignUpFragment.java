@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SpecialistSignUpFragmentBinding;
-import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
 import com.beproffer.beproffer.presentation.sign_in_up.SignUpViewModel;
 import com.beproffer.beproffer.util.Const;

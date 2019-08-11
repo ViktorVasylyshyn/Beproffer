@@ -26,7 +26,6 @@
     <!--Bottom Navigation Bar-->
     <dimen name="design_bottom_navigation_height" tools:override="true">36dp</dimen>
     <dimen name="bnb_floating_button_bottom_margin">43dp</dimen> <!--may be similar as design_bottom_navigation_height or bigger-->
-    <dimen name="bnb_hints_margin">22dp</dimen>
     <dimen name="bnb_icon_size">29dp</dimen>
 
     <!--Icons-->
@@ -35,7 +34,7 @@
     <dimen name="icons_size_small_width">22dp</dimen>
     <dimen name="icons_size_small_height">22dp</dimen>
 
-    <!--Paddings-->
+    <!--Padding-->
     <dimen name="base_padding_medium">7dp</dimen>
     <dimen name="base_padding_small">3dp</dimen>
 
@@ -57,10 +56,6 @@
     <dimen name="radius_rectangle_background_extra_small">3dp</dimen>
 
 
-    <dimen name="base_stroke_big">3dp</dimen>
     <dimen name="base_stroke_medium">2dp</dimen>
-    <dimen name="base_stroke_small">1dp</dimen>
-
-    <dimen name="bsl_scroll_view_width">115dp</dimen>
 
 </resources>

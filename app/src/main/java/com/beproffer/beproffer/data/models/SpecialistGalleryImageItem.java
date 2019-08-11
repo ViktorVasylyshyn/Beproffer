@@ -18,7 +18,15 @@ public class SpecialistGalleryImageItem implements Parcelable {
 
     }
 
-    public SpecialistGalleryImageItem(String url, String key, String uid, String type, String subtype, String price, String duration, String description, String gender) {
+    public SpecialistGalleryImageItem(String url,
+                                      String key,
+                                      String uid,
+                                      String type,
+                                      String subtype,
+                                      String price,
+                                      String duration,
+                                      String description,
+                                      String gender) {
         this.url = url;
         this.key = key;
         this.uid = uid;
@@ -64,10 +72,6 @@ public class SpecialistGalleryImageItem implements Parcelable {
 
     public String getKey() {
         return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
     }
 
     public String getUid() {

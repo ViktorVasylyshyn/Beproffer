@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -184,10 +183,10 @@ public class ContactsFragment extends BaseUserInfoFragment {
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.contact_request_menu_apply:
-                    handleContactRequest(item,true);
+                    handleContactRequest(item, true);
                     break;
                 case R.id.contact_request_menu_deny:
-                    handleContactRequest(item,false);
+                    handleContactRequest(item, false);
                     break;
             }
             return true;

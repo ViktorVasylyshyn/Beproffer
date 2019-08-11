@@ -19,23 +19,13 @@
     <string name="hint_about_me_infield">про мене(до 100 символів)</string>
 
     <string name="hint_currency_outfield">грн</string>
-    <string name="hint_min_outfield">хв</string>
-    <string name="hint_hair_outfield">ВОЛОССЯ</string>
-    <string name="hint_nails_outfield">НІГТІ</string>
-    <string name="hint_makeup_outfield">МАКІЯЖ</string>
-    <string name="hint_fitness_outfield">ФІТНЕС</string>
-    <string name="hint_barber_outfield">БАРБЕР</string>
-    <string name="hint_tattoo_outfield">ТАТУ</string>
     <string name="hint_type_outfield">ВИД</string>
-    <string name="hint_edit_outfield">РЕД</string>
-    <string name="hint_gender_outfield">СТАТЬ</string>
     <string name="hint_outfield_clear_browsing_history">Натисніть \"Обнулити\" якщо хочете обнулити історію перегладів.</string>
     <string name="hint_outfield_delete_profile">Введіть свій email і настисніть \"Видалити\", для видалення цього профайлу з Beproffer. Видалений профайл не можна відновити, але можна буде створити новий.</string>
     <string name="hint_outfield_forgot_password">Забули свій пароль?</string>
     <string name="hint_outfield_change_password">Щоб змінити пароль, ведіть свій email в поле вводу і натисніть \"Змінити\". Ви отримаєте повідомлення для зміни паролю на цю адресу.</string>
     <string name="hint_outfield_settings_reset_password">Натисніть \"Скинути\" для зміни паролю(відбудеться вихід з профайлу в меню зміни паролю).</string>
     <string name="hint_outfield_agree_to">Реєструючись в додатку Beproffer Ви підтвержуєте, що ознайомилися і погоджуєтесь з його</string>
-    <string name="hint_outfield_not_sign_up_agree_to">Користуючись додатком Beproffer без реєстрації Ви підтвержуєте що ознайомилися і погоджуєтесь з нашими</string>
     <string name="hint_outfield_contact_us_title">Зв\'яжіться з нами, якщо маєте питання.</string>
     <string name="hint_outfield_contact_us_email">beproffer.llc@gmail.com</string>
     <string name="hint_outfield_use_correct_name_format">Використовуйте ваші ім\'я та прізвище, для кращого представлення вашого профайлу.</string>
@@ -67,12 +57,9 @@
     <string name="href_facebook_page">fb://page/102981521053885</string>
 
     <!--Titles-->
-    <string name="title_duration">ТРИВАЛІСТЬ</string>
     <string name="title_contacts_to_specialists">Спеціалісти</string>
     <string name="title_new_customers_title">Запити</string>
-    <string name="title_sign_in">ВХІД</string>
     <string name="title_create_an_acc">або створити новий аккаунт</string>
-    <string name="title_price">ЦІНА</string>
     <string name="title_customer_registration">НОВИЙ КЛІЄНТ</string>
     <string name="title_specialist_registration">НОВИЙ СПЕЦІАЛІСТ</string>
     <string name="title_send_contact_request">ЗВ\'ЯЗАТИСЯ ЗІ СПЕЦІАЛІСТОМ</string>
@@ -82,18 +69,15 @@
     <string name="title_this_is_your_image">ЦЕ ВАШЕ ЗОБРАЖЕННЯ</string>
     <string name="title_specialist_type">СПЕЦІАЛІСТ</string>
     <string name="title_customer_type">КЛІЄНТ</string>
-    <string name="title_add_image">ДОДАТИ</string>
     <string name="title_service_type">ВИД СЕРВІСУ</string>
     <string name="title_delete">Видалити</string>
     <string name="title_clear">Обнулити</string>
     <string name="title_reset_password">Скинути</string>
 
-    <string name="title_gender_unknown">СТАТЬ</string>
     <string name="title_gender_male">ЧОЛ</string>
     <string name="title_gender_female">ЖІН</string>
     <string name="title_gender_all_genders">ВСІ</string>
 
-    <string name="title_search_fragment">ЯКИЙ СЕРВІС ВИ ШУКАЄТЕ?</string>
     <string name="title_specialist_storage_fragment">МОЇ ЗОБРАЖЕННЯ</string>
     <string name="title_search">Шукати</string>
     <string name="title_for">для</string>
@@ -165,7 +149,6 @@
     <string name="toast_select_type">Будь ласка, зазначте вид послуги.</string>
     <string name="toast_enter_name">Будь ласка, введіть ім\'я.</string>
     <string name="toast_enter_phone">Будь ласка, введіть номер телефону.</string>
-    <string name="toast_determine_your_gender">Будь ласка зазначте свою стать.</string>
     <string name="toast_determine_gender">Будь ласка, зазначте стать для якої призначена послуга.</string>
     <string name="toast_select_duration">Будь ласка, зазначте тривалість сеансу.</string>
     <string name="toast_enter_price">Будь ласка, зазначте ціну сеансу.</string>
@@ -175,7 +158,6 @@
     <string name="toast_define_search_params">Будь ласка, зазначте всі параметри пошуку.</string>
 
     <string name="toast_error_has_occurred">Ой лишенько. Сталася помилка. Спробуйте ще раз.</string>
-    <string name="toast_error_image_dbkey">Помилка зі збереженням imageDbKey.</string>
     <string name="toast_error_search_request">Щось не так з параметрами пошуку. Спробуйте ще раз.</string>
     <string name="toast_error_login">Помилка входу. Перевірте привильність email та паролю.</string>
     <string name="toast_error_registration">Помилка реєстрації. Спробуйте знову.</string>
@@ -186,7 +168,6 @@
     <string name="toast_browsing_history_cleared">історію переглядів видалено.</string>
     <string name="toast_sign_up_email_verification">Перевірте свою електронну пошту і підтвердіть реєстрацію.</string>
     <string name="toast_sign_in_verify_email_first">Вам спочатку треба підтвердити адресу своєї електронної пошти.</string>
-    <string name="toast_request_sent">Запит відправлено.</string>
     <string name="toast_available_for_registered">Лише зареєстровані користувачі можуть відсилати запити.</string>
     <string name="toast_no_available_images">Закінчилися зображення. Змініть критерії пошуку або спробуйте пізніше.</string>
     <string name="toast_profile_deleted">Профайл видалено.</string>
@@ -215,7 +196,6 @@
     <string name="error_message_wrong_phone_number_format">Невірний формат номеру телефону.</string>
     <string name="error_message_wrong_name_format">Закоротке ім\'я.</string>
 
-    <string name="search">Пошук</string>
     <string name="kyiv">Київ, Україна.</string>
 
 

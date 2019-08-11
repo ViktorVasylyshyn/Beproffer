@@ -15,8 +15,8 @@ public class UserInfo {
     private String userProfileImageUrl;
     private String userInfo;
 
-    public UserInfo() {
-    }
+    /*constructor without params for Firebase*/
+    public UserInfo() {}
 
     public UserInfo(@NonNull String userId,
                     String userType,
@@ -41,16 +41,8 @@ public class UserInfo {
         return userId;
     }
 
-    public void setUserId(@NonNull String userId) {
-        this.userId = userId;
-    }
-
     public String getUserType() {
         return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
     }
 
     public String getUserSpecialistType() {
@@ -71,10 +63,6 @@ public class UserInfo {
 
     public String getUserEmail() {
         return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
     }
 
     public String getUserPhone() {

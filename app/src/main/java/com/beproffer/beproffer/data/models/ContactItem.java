@@ -10,7 +10,8 @@ public class ContactItem {
     private String contactInfo;
 
     /*constructor without parameters for Firebase*/
-    private ContactItem(){}
+    private ContactItem() {
+    }
 
     public ContactItem(String contactUid,
                        String contactName,
@@ -30,49 +31,25 @@ public class ContactItem {
         return contactUid;
     }
 
-    public void setContactUid(String contactUid) {
-        this.contactUid = contactUid;
-    }
-
     public String getContactName() {
         return contactName;
-    }
-
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
     }
 
     public String getContactPhone() {
         return contactPhone;
     }
 
-    public void setContactPhone(String contactPhone) {
-        this.contactPhone = contactPhone;
-    }
-
     public String getContactInfo() {
         return contactInfo;
     }
 
-    public void setContactSpecialistType(String contactSpecialistType){
-        this.contactSpecialistType = contactSpecialistType;
-    }
-
-    public String getContactSpecialistType(){
+    public String getContactSpecialistType() {
         return contactSpecialistType;
     }
-
-    public void setContactInfo(String contactInfo) {
-        this.contactInfo = contactInfo;
-    }
-
 
     public String getContactImageUrl() {
         return contactImageUrl;
     }
-
-    public void setContactImageUrl(String contactImageUrl) {
-        this.contactImageUrl = contactImageUrl;
-    }
-
 }
+
+

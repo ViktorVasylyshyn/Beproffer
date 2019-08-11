@@ -7,8 +7,8 @@ public class ContactRequestItem {
     private String requestName;
     private String requestImageUrl;
 
-    private ContactRequestItem(){
-
+    /*empty constructor for Firebase*/
+    private ContactRequestItem() {
     }
 
     public ContactRequestItem(String requestUid,
@@ -25,32 +25,16 @@ public class ContactRequestItem {
         return requestUid;
     }
 
-    public void setRequestUid(String requestUid) {
-        this.requestUid = requestUid;
-    }
-
     public String getRequestType() {
         return requestType;
-    }
-
-    public void setRequestType(String requestType) {
-        this.requestType = requestType;
     }
 
     public String getRequestName() {
         return requestName;
     }
 
-    public void setRequestName(String requestName) {
-        this.requestName = requestName;
-    }
-
     public String getRequestImageUrl() {
         return requestImageUrl;
     }
-
-    public void setRequestImageUrl(String requestImageUrl) {
-        this.requestImageUrl = requestImageUrl;
-    }
-
 }
+

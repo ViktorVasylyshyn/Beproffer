@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.toast_no_internet_connection, Toast.LENGTH_SHORT).show();
             return false;
         }
-        Fragment targetFragment = null;
+        Fragment targetFragment;
 
         switch (item.getItemId()) {
             case R.id.bnm_images_gallery:
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             default:
+                targetFragment = new BrowsingFragment();
                 break;
         }
         performNavigation(targetFragment, true, true, false);
@@ -102,8 +103,7 @@ public class MainActivity extends AppCompatActivity {
         View v = bottomNavigationMenuView.getChildAt(index);
         BottomNavigationItemView itemView = (BottomNavigationItemView) v;
         if (itemView.getChildCount() == 2) {
-            View badge = LayoutInflater.from(this)
-                    .inflate(R.layout.bnb_badge, itemView, true);
+            LayoutInflater.from(this).inflate(R.layout.bnb_badge, itemView, true);
         }
     }
 
@@ -128,8 +128,8 @@ public class MainActivity extends AppCompatActivity {
             fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
         /*addToCont - эта чепуха, пока что нужна только в одном случае, чтобы информация о изображении
-        * красиво появлялась на фоне самого изображения. пока что не кофликтует такой подход, но в
-        * будущем быть акккуратней с этим, а то мало ли*/
+         * красиво появлялась на фоне самого изображения. пока что не кофликтует такой подход, но в
+         * будущем быть акккуратней с этим, а то мало ли*/
         if (!addToCont) {
             transaction.replace(R.id.fragment_container, fragment).commit();
         } else {
@@ -152,10 +152,5 @@ public class MainActivity extends AppCompatActivity {
         if (fragmentManager.getBackStackEntryCount() == 0) {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
     }
 }

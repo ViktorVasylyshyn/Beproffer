@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:clipToPadding="false"
     android:outlineProvider="bounds">
-
+    <!--для разных операционных версий используются разные лейауты. незнаю хорошо это или плохо. пока рботает.-->
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,8 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:orientation="vertical"
-            android:background="@color/colorIconGrey">
+            android:background="@color/colorIconGrey"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/browsing_image"

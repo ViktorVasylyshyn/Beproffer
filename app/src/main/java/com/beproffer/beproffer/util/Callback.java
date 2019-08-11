@@ -9,7 +9,7 @@ import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
 public interface Callback {
 
     interface  OnImageClickListener {
-        void onImageClicked(View view, SpecialistGalleryImageItem image);
+        void onImageClicked(SpecialistGalleryImageItem image);
     }
 
     interface  OnContactClickListener {

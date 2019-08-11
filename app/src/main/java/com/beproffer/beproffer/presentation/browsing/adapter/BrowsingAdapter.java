@@ -13,6 +13,8 @@ import com.beproffer.beproffer.R;
 
 import java.util.List;
 
+import static com.beproffer.beproffer.util.OsVersionInfo.hasLollipop;
+
 public class BrowsingAdapter extends ArrayAdapter<BrowsingItem> {
 
     public BrowsingAdapter(Context context, int resourceId, List<BrowsingItem> items) {
@@ -22,8 +24,19 @@ public class BrowsingAdapter extends ArrayAdapter<BrowsingItem> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         BrowsingItem browsingItem = getItem(position);
+
+        int layoutId;
+        /*потому что  не смог я настроить нормально отображения картинок на ос меньше 21. чем больше
+        делаешь радиус углов тем больше изображение этим сдвигается вцентр, тоесть углы не
+        хотят обрезаться поетому на апи 19 будет без округления углов*/
+        if (hasLollipop()) {
+            layoutId = R.layout.browsing_item21h;
+        } else {
+            layoutId = R.layout.browsing_item19;
+        }
+
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.browsing_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(layoutId, parent, false);
         }
         ImageView browsingImage = convertView.findViewById(R.id.browsing_image);
 

@@ -2,11 +2,9 @@ package com.beproffer.beproffer.util;
 
 import android.os.Build;
 
-class OsVersionInfo {
+public class OsVersionInfo {
 
-    private OsVersionInfo() {
-
-    }
+    private OsVersionInfo() {}
 
     public static boolean hasLollipop() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;

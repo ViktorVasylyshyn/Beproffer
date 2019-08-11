@@ -62,7 +62,7 @@ public class GalleryImageItemAdapter extends RecyclerView.Adapter<GalleryImageIt
             mBinding.setImage(specialistGalleryImageItem);
             mBinding.getRoot().setOnClickListener(view -> {
                 if (null != callback)
-                    callback.onImageClicked(mBinding.storageImageItemImage, specialistGalleryImageItem);
+                    callback.onImageClicked( specialistGalleryImageItem);
             });
         }
     }

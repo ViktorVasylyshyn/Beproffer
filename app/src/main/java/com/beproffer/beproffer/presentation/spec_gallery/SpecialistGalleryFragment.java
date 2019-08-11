@@ -104,7 +104,7 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
         mImageAdapter.setOnItemClickListener(this::setEditableGalleryItem);
     }
 
-    private void setEditableGalleryItem(@Nullable View view, SpecialistGalleryImageItem editableItem) {
+    private void setEditableGalleryItem(SpecialistGalleryImageItem editableItem) {
         mUserDataViewModel.setEditableGalleryItem(editableItem);
         changeFragment(new SpecialistGalleryEditFragment(), true, false, false);
     }

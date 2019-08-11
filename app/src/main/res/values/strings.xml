@@ -17,23 +17,13 @@
     <string name="hint_about_me_infield">about me(100 characters max)</string>
 
     <string name="hint_currency_outfield">hrn</string>
-    <string name="hint_min_outfield">min</string>
-    <string name="hint_hair_outfield">HAIR</string>
-    <string name="hint_nails_outfield">NAILS</string>
-    <string name="hint_makeup_outfield">MAKEUP</string>
-    <string name="hint_fitness_outfield">FITNESS</string>
-    <string name="hint_barber_outfield">BARBER\'S</string>
-    <string name="hint_tattoo_outfield">TATTOO</string>
     <string name="hint_type_outfield">TYPE</string>
-    <string name="hint_gender_outfield">GENDER</string>
-    <string name="hint_edit_outfield">EDIT</string>
     <string name="hint_outfield_delete_profile">Enter your email and tap \"Delete\" if you want to delete your profile. It\'s impossible to restore the removed profile, but you can create the new one.</string>
     <string name="hint_outfield_clear_browsing_history">Tap \"Clear\" if you want to clear your browsing history and to see all available images again.</string>
     <string name="hint_outfield_forgot_password">Forgot your password?</string>
     <string name="hint_outfield_change_password">To change the password, you have to enter your email to the input field and tap \"Reset\". We will send you an email for password changing.</string>
     <string name="hint_outfield_settings_reset_password">Tap \"Reset\" if you want to change your password. You will be signed out and redirected to the appropriate menu.</string>
     <string name="hint_outfield_agree_to">By signing up, you agree to Beproffer\'s</string>
-    <string name="hint_outfield_not_sign_up_agree_to">By using Beproffer without signing up, you agree to our</string>
     <string name="hint_outfield_contact_us_title">Contact us if you have any questions.</string>
     <string name="hint_outfield_contact_us_email">beproffer.llc@gmail.com</string>
     <string name="hint_outfield_use_correct_name_format">Use your first and last name for better representation of your profile.</string>
@@ -69,12 +59,9 @@
 
 
     <!--Titles-->
-    <string name="title_duration">DURATION</string>
     <string name="title_contacts_to_specialists">Specialists</string>
     <string name="title_new_customers_title">Requests</string>
-    <string name="title_sign_in">sign in</string>
     <string name="title_create_an_acc">or create new account</string>
-    <string name="title_price">PRICE</string>
     <string name="title_customer_registration">NEW CUSTOMER</string>
     <string name="title_specialist_registration">NEW SPECIALIST</string>
     <string name="title_send_contact_request">CONTACT THE SPECIALIST</string>
@@ -84,18 +71,15 @@
     <string name="title_this_is_your_image">THIS IS YOUR IMAGE</string>
     <string name="title_specialist_type">SPECIALIST</string>
     <string name="title_customer_type">CUSTOMER</string>
-    <string name="title_add_image">ADD</string>
     <string name="title_service_type">TYPE</string>
     <string name="title_delete">Delete</string>
     <string name="title_clear">Clear</string>
     <string name="title_reset_password">Reset</string>
 
-    <string name="title_gender_unknown">GENDER</string>
     <string name="title_gender_male">Male</string>
     <string name="title_gender_female">Female</string>
     <string name="title_gender_all_genders">Both</string>
 
-    <string name="title_search_fragment">WHAT ARE YOU LOOKING FOR?</string>
     <string name="title_specialist_storage_fragment">MY WORKS</string>
     <string name="title_search">Search</string>
     <string name="title_for">for</string>
@@ -166,7 +150,6 @@
     <string name="toast_enter_name">Please enter your name.</string>
     <string name="toast_enter_phone">Please enter the phone number.</string>
     <string name="toast_select_duration">Please select the session duration.</string>
-    <string name="toast_determine_your_gender">Please select you gender.</string>
     <string name="toast_enter_price">Please enter the service price.</string>
     <string name="toast_enter_description">Please enter the service description.</string>
     <string name="toast_determine_gender">Please, determine the gender which the service is relevant for.</string>
@@ -175,7 +158,6 @@
     <string name="toast_define_search_params">All search params must be set.</string>
 
     <string name="toast_error_has_occurred">Oops. An error has occurred. Please, try again.</string>
-    <string name="toast_error_image_dbkey">There is an error with imageDbKey saving.</string>
     <string name="toast_error_search_request">Something wrong with search parameters. Try to define them once again.</string>
     <string name="toast_error_login">Sign in failed. Please, check your email and the password.</string>
     <string name="toast_error_registration">Registration failed. Please, try again.</string>
@@ -189,7 +171,6 @@
     <string name="toast_profile_deleted">Profile was deleted.</string>
     <string name="toast_sign_in_verify_email_first">Please, verify your email address.</string>
     <string name="toast_sign_up_email_verification">The profile was registered successfully. Please check your email for verification.</string>
-    <string name="toast_request_sent">Contact request sent.</string>
     <string name="toast_available_for_registered">The function is available only for registered users.</string>
     <string name="toast_reset_password_check_your_email">We sent you a message. Please check your inbox and complete the password changing.</string>
     <string name="toast_no_internet_connection">There is no internet connection. :( </string>
@@ -215,7 +196,6 @@
     <string name="error_message_wrong_phone_number_format">Incorrect format of phone number.</string>
     <string name="error_message_wrong_name_format">The name is too short.</string>
 
-    <string name="search">Search</string>
     <string name="kyiv">Kyiv, Ukraine.</string>
 
 </resources>

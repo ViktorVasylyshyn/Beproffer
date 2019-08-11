@@ -6,7 +6,6 @@
     <!--list items' colors-->
     <color name="color_base_text">#30312F</color>
     <color name="color_base_text_70per">#B230312F</color>
-    <color name="color_icons_bnb">#0c8922</color>
 
     <!--Backgrounds-->
     <color name="color_background_grey">#E6E6E6</color>

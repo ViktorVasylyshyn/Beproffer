@@ -105,9 +105,4 @@ public class UserDataViewModel extends AndroidViewModel {
     public void resetUserData() {
         mRepository.resetLocalUserData();
     }
-
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-    }
 }

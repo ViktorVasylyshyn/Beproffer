@@ -11,7 +11,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.ProfileEditFragmentBinding;
@@ -62,7 +61,7 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
         super.onActivityCreated(savedInstanceState);
         mBinding.setCallback(mCallback);
         mBinding.setShowProgress(mShowProgress);
-        mBinding.setIsUserSpecialis(mIsUserSpecialist);
+        mBinding.setIsUserSpecialist(mIsUserSpecialist);
 
         initUserData();
     }
@@ -70,7 +69,6 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
     @Override
     public void applyUserData() {
         mBinding.setUserInfo(mCurrentUserInfo);
-        /*если специалист - то добавить вью, которые касаются специалиста*/
         if (mCurrentUserInfo.getUserType().equals(Const.SPEC)) {
             mIsUserSpecialist.set(true);
             showSpecialistUserType(mCurrentUserInfo.getUserSpecialistType());
@@ -100,7 +98,6 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
     }
 
     private void saveUserData() {
-        /*ввести указание типа специалиста, и сделать проверку на указанность. равносильно как и отображение текущего типа специалиста*/
         if (!checkInternetConnection()) {
             showToast(R.string.toast_no_internet_connection);
             return;

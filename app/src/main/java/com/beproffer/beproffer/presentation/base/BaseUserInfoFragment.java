@@ -2,7 +2,6 @@ package com.beproffer.beproffer.presentation.base;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Handler;
-import android.util.Log;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.UserInfo;
@@ -16,11 +15,6 @@ public class BaseUserInfoFragment extends BaseFragment {
 
     protected UserInfo mCurrentUserInfo;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
     protected void initUserData() {
         if (!checkInternetConnection()) {
             /*сделать здесь переход, на какой нить фрагмент*/
@@ -28,11 +22,11 @@ public class BaseUserInfoFragment extends BaseFragment {
             return;
         }
 
-        if(getFirebaseUser()!=null)
+        if (getFirebaseUser() != null)
             initObservers();
     }
 
-    private void initObservers(){
+    private void initObservers() {
         mUserDataViewModel = ViewModelProviders.of(requireActivity()).get(UserDataViewModel.class);
         mUserDataViewModel.getShowProgress().observe(getViewLifecycleOwner(), progress -> {
             if (progress == null)
@@ -80,14 +74,14 @@ public class BaseUserInfoFragment extends BaseFragment {
 
     protected void applyUserData() {
         /*предполагается что во фрагментах наследниках, в этом методе будет размещаться логика, которая
-        * должна начать совершаться, когда данные юзера получены*/
+         * должна начать совершаться, когда данные юзера получены*/
     }
 
-    protected void setBadge(int index){
-        ((MainActivity)requireActivity()).setBadgeMain(index);
+    protected void setBadge(int index) {
+        ((MainActivity) requireActivity()).setBadgeMain(index);
     }
 
-    protected void removeBadge(int index){
-        ((MainActivity)requireActivity()).removeBadge(index);
+    protected void removeBadge(int index) {
+        ((MainActivity) requireActivity()).removeBadge(index);
     }
 }

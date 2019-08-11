@@ -59,8 +59,6 @@ public class SwipeImagesRepository {
     }
 
     public LiveData<List<BrowsingItem>> getSwipeImageItemsListLiveData() {
-//        if (mBrowsingItemsList != null && mBrowsingItemsList.size() == 0)
-//            obtainImagesFromDb();
         return mSwipeImageItemsLiveData;
     }
 
@@ -70,8 +68,8 @@ public class SwipeImagesRepository {
         mBrowsingItemsList.remove(0);
         mSwipeImageItemsLiveData.setValue(mBrowsingItemsList);
     }
-    /*пытаемся получить параметры для пользователя или гостя. согласно этим параметрам, будет сделан запрос в Firebase.*/
 
+    /*пытаемся получить параметры для пользователя или гостя. согласно этим параметрам, будет сделан запрос в Firebase.*/
     private void obtainRequestParams(Application application) {
         mShowProgress.setValue(true);
         mBrowsingItemsList = new ArrayList<>();
@@ -132,12 +130,13 @@ public class SwipeImagesRepository {
                 mBrowsingHistoryRepository.getTargetBrowsingHistory().removeObserver(mBrowsingHistoryObserver);
                 mBrowsingHistoryRepository = null;
             }
-            if(mBrowsingHistoryRepository == null){
-            mBrowsingHistoryRepository = new BrowsingHistoryRepository(mApplication, mRequestParams.get(Const.SERVTYPE));
-            /*я не уверен с этим обзервером. ситуация такова, что obtainImagesFromDb() должен запускатьсятогда,
-             * как у нас уже есть mActualBrowsingHistory, как это зарешать, так чтобы было правильно, я незнаю.
-             * на угад, сделал этот обзервер. но не уверен что правильно.*/
-            mBrowsingHistoryRepository.getTargetBrowsingHistory().observeForever(mBrowsingHistoryObserver);}
+            if (mBrowsingHistoryRepository == null) {
+                mBrowsingHistoryRepository = new BrowsingHistoryRepository(mApplication, mRequestParams.get(Const.SERVTYPE));
+                /*я не уверен с этим обзервером. ситуация такова, что obtainImagesFromDb() должен запускатьсятогда,
+                 * как у нас уже есть mActualBrowsingHistory, как это зарешать, так чтобы было правильно, я незнаю.
+                 * на угад, сделал этот обзервер. но не уверен что правильно.*/
+                mBrowsingHistoryRepository.getTargetBrowsingHistory().observeForever(mBrowsingHistoryObserver);
+            }
         } catch (NullPointerException e) {
             feedBackToUi(false, R.string.toast_error_has_occurred, null);
         }

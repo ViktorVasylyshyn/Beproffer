@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.CustomerSignUpFragmentBinding;
-import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
 import com.beproffer.beproffer.presentation.sign_in_up.SignUpViewModel;
 import com.beproffer.beproffer.util.Const;
@@ -70,7 +69,7 @@ public class CustomerSignUpFragment extends BaseFragment {
             showToast(R.string.toast_no_internet_connection);
             return;
         }
-        if(mProcessing.get()){
+        if (mProcessing.get()) {
             showToast(R.string.toast_processing);
             return;
         }
@@ -98,8 +97,8 @@ public class CustomerSignUpFragment extends BaseFragment {
                 showProgress(progress);
         });
         /*блокировать повторное нажатие на кнопку, если предыдущий запрос в процессе выполнения*/
-        mSignUpViewModel.getProcessing().observe(getViewLifecycleOwner(), processing ->{
-            if(processing != null)
+        mSignUpViewModel.getProcessing().observe(getViewLifecycleOwner(), processing -> {
+            if (processing != null)
                 processing(processing);
         });
         /*показ тостов*/

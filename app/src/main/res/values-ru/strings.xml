@@ -18,23 +18,13 @@
     <string name="hint_about_me_infield">про меня(до 100 символов)</string>
 
     <string name="hint_currency_outfield">грн</string>
-    <string name="hint_min_outfield">мин</string>
-    <string name="hint_hair_outfield">ВОЛОСЫ</string>
-    <string name="hint_nails_outfield">НОГТИ</string>
-    <string name="hint_makeup_outfield">МАКИЯЖ</string>
-    <string name="hint_fitness_outfield">ФИТНЕС</string>
-    <string name="hint_barber_outfield">БАРБЕР</string>
-    <string name="hint_tattoo_outfield">ТАТУ</string>
     <string name="hint_type_outfield">ВИД УСЛУГИ</string>
-    <string name="hint_gender_outfield">ПОЛ</string>
-    <string name="hint_edit_outfield">РЕД</string>
     <string name="hint_outfield_delete_profile">Введите свой email и нажмите \"Удалить\" для удаления текущего профайла в Beproffer. Удаленный профайл нельзя восстановить, но можно будет создать новый.</string>
     <string name="hint_outfield_clear_browsing_history">Нажмите \"Очистить\", чтобы очистить историю просмотров.</string>
     <string name="hint_outfield_forgot_password">Забыли пароль?</string>
     <string name="hint_outfield_change_password">Чтобы сменить пароль - введите свой email в поле ввода и нажмите \"Изменить\". Вам придет сообщение для смены пароля на этот email.</string>
     <string name="hint_outfield_settings_reset_password">Нажмите \"Сбросить\" для изменения пароля(произойдет выход из профайла в соответствующее меню).</string>
     <string name="hint_outfield_agree_to">Регистрируясь в приложении Beproffer Вы подтверждаете, что ознакомились и согласны с его</string>
-    <string name="hint_outfield_not_sign_up_agree_to">Используя приложение Beproffer без регистрации, Вы подтверждаете, что ознакомились и согласны с нашими</string>
     <string name="hint_outfield_contact_us_title">Свяжитесь с нами, если у вас есть вопросы.</string>
     <string name="hint_outfield_contact_us_email">beproffer.llc@gmail.com</string>
     <string name="hint_outfield_use_correct_name_format">Используйте ваши имя и фамилию, для лучшего представления вашего профайла.</string>
@@ -66,12 +56,9 @@
     <string name="href_facebook_page">fb://page/102981521053885</string>
 
     <!--Titles-->
-    <string name="title_duration">ДЛИТЕЛЬНОСТЬ</string>
     <string name="title_contacts_to_specialists">Специалисты</string>
     <string name="title_new_customers_title">Запросы</string>
-    <string name="title_sign_in">ЛОГИН</string>
     <string name="title_create_an_acc">или создать новый аккаунт</string>
-    <string name="title_price">ЦЕНА</string>
     <string name="title_customer_registration">НОВЫЙ КЛИЕНТ</string>
     <string name="title_specialist_registration">НОВЫЙ МАСТЕР</string>
     <string name="title_send_contact_request">СВЯЗАТЬСЯ СО СПЕЦИАЛИСТОМ</string>
@@ -82,18 +69,15 @@
 
     <string name="title_specialist_type">МАСТЕР</string>
     <string name="title_customer_type">КЛИЕНТ</string>
-    <string name="title_add_image">ДОБАВИТЬ</string>
     <string name="title_service_type">ВИД УСЛУГИ</string>
     <string name="title_delete">Удалить</string>
     <string name="title_clear">Очистить</string>
     <string name="title_reset_password">Сбросить</string>
 
-    <string name="title_gender_unknown">ПОЛ</string>
     <string name="title_gender_male">МУЖ</string>
     <string name="title_gender_female">ЖЕН</string>
     <string name="title_gender_all_genders">ВСЕ</string>
 
-    <string name="title_search_fragment">КАКИЕ УСЛУГИ ВЫ ИЩИТЕ?</string>
     <string name="title_specialist_storage_fragment">МОИ РАБОТЫ</string>
 
     <string name="title_search">Искать</string>
@@ -164,7 +148,6 @@
     <string name="toast_select_type">Пожалуйста, выберите вид услуги.</string>
     <string name="toast_enter_name">Пожалуйста, введите имя.</string>
     <string name="toast_enter_phone">Пожалуйста, введите номер телефона.</string>
-    <string name="toast_determine_your_gender">Укажите пожалуйста свой пол.</string>
     <string name="toast_select_duration">Пожалуйста, выберите длительность сеанса.</string>
     <string name="toast_enter_price">Пожалуйста, выберите цену услуги.</string>
     <string name="toast_enter_description">Пожалуйста, введите описание услуги.</string>
@@ -174,7 +157,6 @@
     <string name="toast_define_search_params">Все параметры должны быть заданы.</string>
 
     <string name="toast_error_has_occurred">Ой. кажется произошла ошибка. Попробуйте снова.</string>
-    <string name="toast_error_image_dbkey">Ошибка сохранения ключа изображения.</string>
     <string name="toast_error_search_request">Что-то не так с параметрами поиска. Задайте их еще раз.</string>
     <string name="toast_error_login">Ошибка входа. Проверте правильность логина и пароля.</string>
     <string name="toast_error_registration">Ошибка регистрации. Попробуйте снова.</string>
@@ -183,7 +165,6 @@
     <string name="toast_error_user_data_saving_failure">Данные пользователя не сохранились. Свяжитесь с поддержкой.</string>
     <string name="toast_contact_deleted">Контакт удален.</string>
     <string name="toast_browsing_history_cleared">История просмотров очищена.</string>
-    <string name="toast_request_sent">Запрос отправлен.</string>
     <string name="toast_available_for_registered">Доступно только зарегистрированным пользователям.</string>
     <string name="toast_no_available_images">Закончились доступные изображения. Измените критерии поиска или попробуйте позже.</string>
     <string name="toast_profile_deleted">Профайл удален.</string>
@@ -214,14 +195,10 @@
     <string name="error_message_wrong_phone_number_format">Неверный формат номера телефона.</string>
     <string name="error_message_wrong_name_format">слишком короткое имя.</string>
 
-    <string name="search">Поиск</string>
     <string name="kyiv">Киев, Украина.</string>
 
     <!--special hints-->
     <string name="hint_specialist_phone_1">Убедитесь, что номер телефона указан правильно. Он будет показываться потенциальным клиентам.</string>
     <string name="hint_any_strong_password">Создайте надежный пароль используя цыфры и буквы латинского алфавита.</string>
-
-
-    <!--new-->
 
 </resources>

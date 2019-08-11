@@ -34,7 +34,7 @@ public class ContactsItemAdapter extends RecyclerView.Adapter<ContactsItemAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ContactsItemViewHolder contactRequestItemViewHolder, int i) {
-        contactRequestItemViewHolder.bindData(mConfirmedContactsItemList.get(i), mOnContactClickListener, i);
+        contactRequestItemViewHolder.bindData(mConfirmedContactsItemList.get(i), mOnContactClickListener);
 
     }
 
@@ -56,7 +56,7 @@ public class ContactsItemAdapter extends RecyclerView.Adapter<ContactsItemAdapte
             this.mBinding = binding;
         }
 
-        void bindData(final ContactItem contactItem, Callback.OnContactClickListener callback, int position) {
+        void bindData(final ContactItem contactItem, Callback.OnContactClickListener callback) {
             mBinding.setItem(contactItem);
             mBinding.getRoot().setOnClickListener(view -> {
                 if (null != callback)

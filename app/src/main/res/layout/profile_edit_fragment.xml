@@ -13,7 +13,7 @@
             type="android.databinding.ObservableBoolean" />
 
         <variable
-            name="isUserSpecialis"
+            name="isUserSpecialist"
             type="android.databinding.ObservableBoolean" />
 
         <variable
@@ -114,7 +114,7 @@
             android:textColorHint="@color/color_base_text_70per"
             android:textSize="@dimen/base_text_size_big"
             android:textStyle="italic"
-            android:visibility="@{isUserSpecialis ? View.VISIBLE : View.GONE}"
+            android:visibility="@{isUserSpecialist ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_fragment_name"
@@ -128,7 +128,7 @@
             android:text="@string/title_main_specialization"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_medium"
-            android:visibility="@{isUserSpecialis ? View.VISIBLE : View.GONE}"
+            android:visibility="@{isUserSpecialist ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_fragment_about_me" />
@@ -143,7 +143,7 @@
             android:layout_marginBottom="@dimen/base_margin_small"
             android:paddingEnd="@dimen/base_padding_small"
             android:paddingBottom="@dimen/base_padding_small"
-            android:visibility="@{isUserSpecialis ? View.VISIBLE : View.GONE}"
+            android:visibility="@{isUserSpecialist ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_fragment_main_specialization_title">
@@ -235,7 +235,7 @@
             android:layout_marginTop="@dimen/base_margin_extra_small"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_medium"
-            android:visibility="@{isUserSpecialis ? View.VISIBLE : View.GONE}"
+            android:visibility="@{isUserSpecialist ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_fragment_scroll_service_view"
