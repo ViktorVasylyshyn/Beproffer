@@ -13,15 +13,13 @@ import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SignInFragmentBinding;
-import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
 import com.beproffer.beproffer.presentation.profile.profile.ProfileFragment;
 import com.beproffer.beproffer.presentation.sign_in_up.customer_sign_up.CustomerSignUpFragment;
-import com.beproffer.beproffer.presentation.swimg.SwipeImagesViewModel;
+import com.beproffer.beproffer.presentation.browsing.BrowsingViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
-import com.google.firebase.database.core.persistence.TrackedQuery;
 
 public class SignInFragment extends BaseFragment {
 
@@ -36,17 +34,17 @@ public class SignInFragment extends BaseFragment {
 
         @Override
         public void onCustomerSignUpClick() {
-            changeFragment(new CustomerSignUpFragment(), true, false);
+            changeFragment(new CustomerSignUpFragment(), true, false, false);
         }
 
         @Override
         public void onSpecialistSignUpClick() {
-            changeFragment(new CustomerSignUpFragment(), true, false);
+            changeFragment(new CustomerSignUpFragment(), true, false, false);
         }
 
         @Override
         public void onResetPasswordClick() {
-            changeFragment(new CustomerSignUpFragment(), true, false);
+            changeFragment(new CustomerSignUpFragment(), true, false, false);
         }
 
         @Override
@@ -105,8 +103,8 @@ public class SignInFragment extends BaseFragment {
                     processing(false);
                     hideKeyboard(requireActivity());
                     if (auth.getCurrentUser().isEmailVerified()) {
-                        changeFragment(new ProfileFragment(), true, true);
-                        ViewModelProviders.of(requireActivity()).get(SwipeImagesViewModel.class).refreshAdapter();
+                        changeFragment(new ProfileFragment(), true, true,false);
+                        ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class).refreshAdapter();
                     } else {
                         auth.signOut();
                         showToast(R.string.toast_sign_in_verify_email_first);

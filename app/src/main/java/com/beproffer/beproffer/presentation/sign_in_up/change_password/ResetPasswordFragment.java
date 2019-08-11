@@ -50,7 +50,7 @@ public class ResetPasswordFragment extends BaseFragment {
             if (task.isSuccessful()) {
                 showToast(R.string.toast_reset_password_check_your_email);
                 showProgress(false);
-                changeFragment(new SignInFragment(), true, true);
+                changeFragment(new SignInFragment(), true, true, false);
             } else {
                 try {
                    throw task.getException();

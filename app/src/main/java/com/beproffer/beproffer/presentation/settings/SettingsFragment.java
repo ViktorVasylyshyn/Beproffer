@@ -14,8 +14,7 @@ import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SettingsFragmentLayoutBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.sign_in_up.change_password.ResetPasswordFragment;
-import com.beproffer.beproffer.presentation.swimg.SwipeImageFragment;
-import com.beproffer.beproffer.presentation.swimg.SwipeImagesViewModel;
+import com.beproffer.beproffer.presentation.browsing.BrowsingViewModel;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,7 +24,7 @@ public class SettingsFragment extends BaseUserInfoFragment {
 
     private SettingsFragmentLayoutBinding mBinding;
 
-    private SwipeImagesViewModel mSwipeImagesViewModel;
+    private BrowsingViewModel mBrowsingViewModel;
 
     private FirebaseAuth mAuth;
 
@@ -71,23 +70,23 @@ public class SettingsFragment extends BaseUserInfoFragment {
                 mBinding.settingsClearBrowsingHistoryButton.setTextColor(getResources().getColor(R.color.color_base_text_70per));
                 mBinding.settingsClearBrowsingHistoryButton.setClickable(false);
 
-                if (mSwipeImagesViewModel == null) {
-                    mSwipeImagesViewModel = ViewModelProviders.of(requireActivity()).get(SwipeImagesViewModel.class);
+                if (mBrowsingViewModel == null) {
+                    mBrowsingViewModel = ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class);
                 }
                 /*актив\неактив прогресс бар*/
-                mSwipeImagesViewModel.getShowProgress().observe(getViewLifecycleOwner(), progress -> {
+                mBrowsingViewModel.getShowProgress().observe(getViewLifecycleOwner(), progress -> {
                     if (progress == null)
                         return;
                     showProgress(progress);
                 });
                 /*показ тостов*/
-                mSwipeImagesViewModel.getShowToast().observe(getViewLifecycleOwner(), resId -> {
+                mBrowsingViewModel.getShowToast().observe(getViewLifecycleOwner(), resId -> {
                     if (resId == null)
                         return;
                     showToast(resId);
-                    mSwipeImagesViewModel.resetTriggers(true, null);
+                    mBrowsingViewModel.resetTriggers(true, null);
                 });
-                mSwipeImagesViewModel.clearBrowsingHistory();
+                mBrowsingViewModel.clearBrowsingHistory();
             }
             return true;
         });
@@ -139,6 +138,6 @@ public class SettingsFragment extends BaseUserInfoFragment {
 
     private void resetPassword() {
         mAuth.signOut();
-        changeFragment(new ResetPasswordFragment(), true, true);
+        changeFragment(new ResetPasswordFragment(), true, true, false);
     }
 }

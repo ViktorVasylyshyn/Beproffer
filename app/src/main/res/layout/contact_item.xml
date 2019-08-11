@@ -44,6 +44,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@+id/contact_item_image"/>
 
+        <ImageView
+            android:layout_width="@dimen/icons_size_normal_width"
+            android:layout_height="@dimen/icons_size_normal_height"
+            android:layout_margin="@dimen/base_margin_small"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="ContentDescription"
+            app:setSpecialistTypeImage="@{item.contactSpecialistType}"/>
+
         <TextView
             android:id="@+id/contact_item_phone"
             android:layout_width="wrap_content"

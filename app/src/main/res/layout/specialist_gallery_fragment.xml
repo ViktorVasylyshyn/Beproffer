@@ -16,18 +16,17 @@
             type="android.databinding.ObservableBoolean" />
 
         <variable
-            name="fragmentCallback"
+            name="callback"
             type="com.beproffer.beproffer.presentation.spec_gallery.SpecialistGalleryFragmentCallback" />
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_background_grey"
         tools:context=".presentation.spec_gallery.SpecialistGalleryFragment">
 
         <TextView
-            android:id="@+id/specialist_storage_title"
+            android:id="@+id/specialist_gallery_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/title_specialist_storage_fragment"
@@ -41,23 +40,23 @@
             />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/specialist_storage_recycler_view"
+            android:id="@+id/specialist_gallery_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="vertical"
             android:layout_margin="@dimen/base_margin_small"
             android:paddingBottom="@dimen/bnb_floating_button_bottom_margin"
-            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_title"/>
+            app:layout_constraintTop_toBottomOf="@+id/specialist_gallery_title"/>
 
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/specialist_storage_add_image_button"
+            android:id="@+id/specialist_gallery_add_image_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fabCustomSize="@dimen/bnb_icon_size"
             android:layout_marginEnd="@dimen/base_margin_big"
             android:layout_marginBottom="@dimen/bnb_floating_button_bottom_margin"
-            android:onClick="@{(view)-> fragmentCallback.onAddNewImageClick()}"
+            android:onClick="@{(view)-> callback.onAddNewImageClick()}"
             android:src="@drawable/ic_add"
             android:visibility="@{showButton ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -65,7 +64,7 @@
 
 
         <ProgressBar
-            android:id="@+id/specialist_storage_progress_bar"
+            android:id="@+id/specialist_gallery_progress_bar"
             android:layout_width="@dimen/profile_image_half"
             android:layout_height="@dimen/profile_image_half"
             android:theme="@style/Widget.AppCompat.ProgressBar"

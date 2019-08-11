@@ -2,7 +2,7 @@ package com.beproffer.beproffer.data.models;
 
 import java.util.Objects;
 
-public class SwipeImageItem {
+public class BrowsingItem {
     private String uid;
     private String url;
     private String price;
@@ -12,18 +12,19 @@ public class SwipeImageItem {
     private String subtype;
     private String gender;
 
-    public SwipeImageItem(){
+    /*конструктор без параметров нужен для Firebase*/
+    public BrowsingItem(){
 
     }
 
-    public SwipeImageItem(String url,
-                          String uid,
-                          String price,
-                          String duration,
-                          String description,
-                          String type,
-                          String subtype,
-                          String gender) {
+    public BrowsingItem(String url,
+                        String uid,
+                        String price,
+                        String duration,
+                        String description,
+                        String type,
+                        String subtype,
+                        String gender) {
         this.uid = uid;
         this.url = url;
         this.price = price;
@@ -103,10 +104,10 @@ public class SwipeImageItem {
     public boolean equals(Object o) {
 
         if (o == this) return true;
-        if (!(o instanceof SwipeImageItem)) {
+        if (!(o instanceof BrowsingItem)) {
             return false;
         }
-        SwipeImageItem image = (SwipeImageItem) o;
+        BrowsingItem image = (BrowsingItem) o;
         return  Objects.equals(uid, image.uid) &&
                 Objects.equals(url, image.url);
     }

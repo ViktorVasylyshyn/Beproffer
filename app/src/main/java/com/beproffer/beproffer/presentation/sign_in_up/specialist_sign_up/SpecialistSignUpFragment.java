@@ -131,6 +131,7 @@ public class SpecialistSignUpFragment extends BaseFragment {
                 mBinding.specialistSignUpPass.getText().toString(),
                 mBinding.specialistSignUpName.getText().toString(),
                 Const.SPEC,
+                null,
                 mBinding.specialistSignUpPhone.getText().toString());
     }
 

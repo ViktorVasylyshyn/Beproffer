@@ -16,8 +16,7 @@ import android.widget.TextView;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
-import com.beproffer.beproffer.databinding.SpecialistStorageEditFragmentBinding;
-import com.beproffer.beproffer.presentation.MainActivity;
+import com.beproffer.beproffer.databinding.SpecialistEditGalleryItemFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.util.Const;
 import com.beproffer.beproffer.util.DefineServiceType;
@@ -28,13 +27,13 @@ import java.util.Map;
 public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
 
 
-    private SpecialistStorageEditFragmentBinding mBinding;
+    private SpecialistEditGalleryItemFragmentBinding mBinding;
     private SpecialistGalleryImageItem mUpdatedImageItem;
     private String mPrimordialItemType;
     private String mPrimordialItemSubtype;
     private Uri mResultUri;
 
-    private final SpecialistStorageEditFragmentCallback mCallback = new SpecialistStorageEditFragmentCallback() {
+    private final SpecialistEditGalleryItemFragmentCallback mCallback = new SpecialistEditGalleryItemFragmentCallback() {
         @Override
         public void onTypeButtonClick(View view) {
             setServiceType(view);
@@ -80,7 +79,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(
-                inflater, R.layout.specialist_storage_edit_fragment, container, false);
+                inflater, R.layout.specialist_edit_gallery_item_fragment, container, false);
         mBinding.setLifecycleOwner(this);
         return mBinding.getRoot();
     }
@@ -89,7 +88,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mBinding.setShowProgress(mShowProgress);
-        mBinding.setFragmentCallback(mCallback);
+        mBinding.setCallback(mCallback);
 
         initUserData();
 
@@ -134,11 +133,11 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
             showToast(R.string.toast_select_duration);
             return;
         }
-        if (mBinding.specialistStorageEditPrice.getText().toString().isEmpty() && mUpdatedImageItem.getPrice() == null) {
+        if (mBinding.specialistEditGalleryItemPrice.getText().toString().isEmpty() && mUpdatedImageItem.getPrice() == null) {
             showToast(R.string.toast_enter_price);
             return;
         }
-        if (mBinding.specialistStorageEditDescription.getText().toString().isEmpty() && mUpdatedImageItem.getDescription() == null) {
+        if (mBinding.specialistEditGalleryItemDescription.getText().toString().isEmpty() && mUpdatedImageItem.getDescription() == null) {
             showToast(R.string.toast_enter_description);
             return;
         }
@@ -148,22 +147,22 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
     private void setServiceType(View view) {
         int requiredMenuRes;
         switch (view.getId()) {
-            case R.id.specialist_storage_edit_haircut_icon:
+            case R.id.specialist_edit_gallery_item_haircut_icon:
                 requiredMenuRes = R.menu.menu_hair_services;
                 break;
-            case R.id.specialist_storage_edit_nails_icon:
+            case R.id.specialist_edit_gallery_item_nails_icon:
                 requiredMenuRes = R.menu.menu_nails_services;
                 break;
-            case R.id.specialist_storage_edit_makeup_icon:
+            case R.id.specialist_edit_gallery_item_makeup_icon:
                 requiredMenuRes = R.menu.menu_makeup_services;
                 break;
-            case R.id.specialist_storage_edit_barber_icon:
+            case R.id.specialist_edit_gallery_item_barber_icon:
                 requiredMenuRes = R.menu.menu_barber_services;
                 break;
-            case R.id.specialist_storage_edit_tattoo_icon:
+            case R.id.specialist_edit_gallery_item_tattoo_icon:
                 requiredMenuRes = R.menu.menu_tattoo_services;
                 break;
-            case R.id.specialist_storage_edit_fitness_icon:
+            case R.id.specialist_edit_gallery_item_fitness_icon:
                 requiredMenuRes = R.menu.menu_fitness_services;
                 break;
             default:
@@ -184,14 +183,14 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
     }
 
     private void saveNewImageData() {
-        if(mProcessing.get()){
+        if (mProcessing.get()) {
             showToast(R.string.toast_processing);
             return;
         }
         mUserDataViewModel.updateSpecialistGallery(mUpdatedImageItem, mResultUri);
         /*сравнением тип услуги начального обьекта и измененного.проверяем, изменился ли тип услуги.
          * если изменился - удаляем данные по старому адресу*/
-        if (mPrimordialItemSubtype!=null && !mPrimordialItemSubtype.equals(mUpdatedImageItem.getSubtype()))
+        if (mPrimordialItemSubtype != null && !mPrimordialItemSubtype.equals(mUpdatedImageItem.getSubtype()))
             mUserDataViewModel.deleteNotRelevantImageData(mUpdatedImageItem, mPrimordialItemType, mPrimordialItemSubtype);
     }
 
@@ -218,19 +217,19 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
     private void setServiceDuration(View view) {
         String duration;
         switch (view.getId()) {
-            case R.id.specialist_storage_edit_duration_30_min_icon:
+            case R.id.specialist_edit_gallery_item_duration_30_min_icon:
                 duration = Const.MIN30;
                 break;
-            case R.id.specialist_storage_edit_duration_45_min_icon:
+            case R.id.specialist_edit_gallery_item_duration_45_min_icon:
                 duration = Const.MIN45;
                 break;
-            case R.id.specialist_storage_edit_duration_60_min_icon:
+            case R.id.specialist_edit_gallery_item_duration_60_min_icon:
                 duration = Const.MIN60;
                 break;
-            case R.id.specialist_storage_edit_duration_90_min_icon:
+            case R.id.specialist_edit_gallery_item_duration_90_min_icon:
                 duration = Const.MIN90;
                 break;
-            case R.id.specialist_storage_edit_duration_120_min_icon:
+            case R.id.specialist_edit_gallery_item_duration_120_min_icon:
                 duration = Const.MIN120;
                 break;
             default:
@@ -248,32 +247,32 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
         ImageView targetView;
         switch (mUpdatedImageItem.getType()) {
             case Const.HAI:
-                targetView = mBinding.specialistStorageEditHaircutIcon;
+                targetView = mBinding.specialistEditGalleryItemHaircutIcon;
                 break;
             case Const.NAI:
-                targetView = mBinding.specialistStorageEditNailsIcon;
+                targetView = mBinding.specialistEditGalleryItemNailsIcon;
                 break;
             case Const.MAK:
-                targetView = mBinding.specialistStorageEditMakeupIcon;
+                targetView = mBinding.specialistEditGalleryItemMakeupIcon;
                 break;
             case Const.TAT:
-                targetView = mBinding.specialistStorageEditTattooIcon;
+                targetView = mBinding.specialistEditGalleryItemTattooIcon;
                 break;
             case Const.BAR:
-                targetView = mBinding.specialistStorageEditBarberIcon;
+                targetView = mBinding.specialistEditGalleryItemBarberIcon;
                 break;
             case Const.FIT:
-                targetView = mBinding.specialistStorageEditFitnessIcon;
+                targetView = mBinding.specialistEditGalleryItemFitnessIcon;
                 break;
             default:
                 throw new IllegalArgumentException(Const.UNKNSTAT);
         }
-        mBinding.specialistStorageEditHaircutIcon.setBackgroundResource(R.drawable.background_transparent);
-        mBinding.specialistStorageEditNailsIcon.setBackgroundResource(R.drawable.background_transparent);
-        mBinding.specialistStorageEditMakeupIcon.setBackgroundResource(R.drawable.background_transparent);
-        mBinding.specialistStorageEditTattooIcon.setBackgroundResource(R.drawable.background_transparent);
-        mBinding.specialistStorageEditBarberIcon.setBackgroundResource(R.drawable.background_transparent);
-        mBinding.specialistStorageEditFitnessIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistEditGalleryItemHaircutIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistEditGalleryItemNailsIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistEditGalleryItemMakeupIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistEditGalleryItemTattooIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistEditGalleryItemBarberIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistEditGalleryItemFitnessIcon.setBackgroundResource(R.drawable.background_transparent);
 
         targetView.getParent().requestChildFocus(targetView, targetView);
         targetView.setBackgroundResource(R.drawable.button_background_green_stroke_rectangle);
@@ -285,34 +284,33 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
         ImageView targetView;
         switch (mUpdatedImageItem.getDuration()) {
             case Const.MIN30:
-                targetView = mBinding.specialistStorageEditDuration30MinIcon;
+                targetView = mBinding.specialistEditGalleryItemDuration30MinIcon;
                 break;
             case Const.MIN45:
-                targetView = mBinding.specialistStorageEditDuration45MinIcon;
+                targetView = mBinding.specialistEditGalleryItemDuration45MinIcon;
                 break;
             case Const.MIN60:
-                targetView = mBinding.specialistStorageEditDuration60MinIcon;
+                targetView = mBinding.specialistEditGalleryItemDuration60MinIcon;
                 break;
             case Const.MIN90:
-                targetView = mBinding.specialistStorageEditDuration90MinIcon;
+                targetView = mBinding.specialistEditGalleryItemDuration90MinIcon;
                 break;
             case Const.MIN120:
-                targetView = mBinding.specialistStorageEditDuration120MinIcon;
+                targetView = mBinding.specialistEditGalleryItemDuration120MinIcon;
                 break;
             default:
                 throw new IllegalArgumentException(Const.UNKNSTAT);
         }
 
-        mBinding.specialistStorageEditDuration30MinIcon.setBackgroundResource(R.drawable.background_transparent);
-        mBinding.specialistStorageEditDuration45MinIcon.setBackgroundResource(R.drawable.background_transparent);
-        mBinding.specialistStorageEditDuration60MinIcon.setBackgroundResource(R.drawable.background_transparent);
-        mBinding.specialistStorageEditDuration90MinIcon.setBackgroundResource(R.drawable.background_transparent);
-        mBinding.specialistStorageEditDuration120MinIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistEditGalleryItemDuration30MinIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistEditGalleryItemDuration45MinIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistEditGalleryItemDuration60MinIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistEditGalleryItemDuration90MinIcon.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.specialistEditGalleryItemDuration120MinIcon.setBackgroundResource(R.drawable.background_transparent);
 
         targetView.getParent().requestChildFocus(targetView, targetView);
         targetView.setBackgroundResource(R.drawable.button_background_green_stroke_rectangle);
     }
-
 
 
     private void setGenderLayoutFocus() {

@@ -20,7 +20,7 @@ import com.beproffer.beproffer.presentation.info.InfoFragment;
 import com.beproffer.beproffer.presentation.profile.profile_edit.ProfileEditFragment;
 import com.beproffer.beproffer.presentation.settings.SettingsFragment;
 import com.beproffer.beproffer.presentation.spec_gallery.SpecialistGalleryFragment;
-import com.beproffer.beproffer.presentation.swimg.SwipeImagesViewModel;
+import com.beproffer.beproffer.presentation.browsing.BrowsingViewModel;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -96,7 +96,7 @@ public class ProfileFragment extends BaseUserInfoFragment {
                 showToast(R.string.toast_error_has_occurred);
                 return;
         }
-        changeFragment(fragment, true, false);
+        changeFragment(fragment, true, false, false);
     }
 
     private void hintsForUsers() {
@@ -140,7 +140,7 @@ public class ProfileFragment extends BaseUserInfoFragment {
     private void logOut() {
         mUserDataViewModel.resetUserData();
         FirebaseAuth.getInstance().signOut();
-        ViewModelProviders.of(requireActivity()).get(SwipeImagesViewModel.class).refreshAdapter();
+        ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class).refreshAdapter();
         performOnBottomNavigationBarItemClick(R.id.bnm_images_gallery, null);
     }
 }

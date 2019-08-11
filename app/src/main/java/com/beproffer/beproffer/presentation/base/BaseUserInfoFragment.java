@@ -2,9 +2,11 @@ package com.beproffer.beproffer.presentation.base;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Handler;
+import android.util.Log;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.UserInfo;
+import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.presentation.UserDataViewModel;
 import com.beproffer.beproffer.util.Const;
 
@@ -79,5 +81,13 @@ public class BaseUserInfoFragment extends BaseFragment {
     protected void applyUserData() {
         /*предполагается что во фрагментах наследниках, в этом методе будет размещаться логика, которая
         * должна начать совершаться, когда данные юзера получены*/
+    }
+
+    protected void setBadge(int index){
+        ((MainActivity)requireActivity()).setBadgeMain(index);
+    }
+
+    protected void removeBadge(int index){
+        ((MainActivity)requireActivity()).removeBadge(index);
     }
 }

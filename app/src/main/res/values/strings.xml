@@ -48,6 +48,8 @@
     <string name="hint_outfield_deny">deny</string>
     <string name="hint_join_us_on_social">Join us in social networks. Share your impressions and wishes. The links to our social networks are in the "info" section.</string>
     <string name="hint_wait_for_confirmation">Wait until the request is confirmed by the specialist. It\'ll appear in your contacts\' list.</string>
+    <string name="hint_choose_main_specialization">Please, choose your main specialization.</string>
+
 
     <!--Refs-->
     <string name="href_terms_of_service_title_0">Terms of Use</string>
@@ -98,6 +100,17 @@
     <string name="title_search">Search</string>
     <string name="title_for">for</string>
     <string name="title_try_again">Try again</string>
+    <string name="title_badge_text">!</string>
+    <string name="title_wants_to_contact">Wants to contact you.</string>
+    <string name="title_main_specialization">Your main specialization.</string>
+
+    <!--main specialists' specialization-->
+    <string name="title_specialization_hai">Hair Services</string>
+    <string name="title_specialization_nai">Nails Services</string>
+    <string name="title_specialization_mak">Makeup Services</string>
+    <string name="title_specialization_tat">Tattoo Services</string>
+    <string name="title_specialization_bar">Barbershop Services</string>
+    <string name="title_specialization_fit">Fitness Services</string>
 
 
     <!--/*Start/SignIn/Registration/e.t.s.*/-->

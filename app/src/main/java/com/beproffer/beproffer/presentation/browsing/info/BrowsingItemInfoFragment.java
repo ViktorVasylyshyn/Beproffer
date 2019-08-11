@@ -1,4 +1,4 @@
-package com.beproffer.beproffer.presentation.swimg.info;
+package com.beproffer.beproffer.presentation.browsing.info;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
@@ -11,25 +11,25 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
+import com.beproffer.beproffer.data.models.BrowsingItem;
 import com.beproffer.beproffer.data.models.ContactItem;
 import com.beproffer.beproffer.data.models.ContactRequestItem;
-import com.beproffer.beproffer.data.models.SwipeImageItem;
-import com.beproffer.beproffer.databinding.ImageInfoDisplayFragmentBinding;
+import com.beproffer.beproffer.databinding.BrowsingImageInfoFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
-import com.beproffer.beproffer.presentation.swimg.ImageItemTransferViewModel;
+import com.beproffer.beproffer.presentation.browsing.BrowsingItemTransferViewModel;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Map;
 
-public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
+public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
 
-    private ImageInfoDisplayFragmentBinding mBinding;
-    private SwipeImageItem mItem;
+    private BrowsingImageInfoFragmentBinding mBinding;
+    private BrowsingItem mItem;
     private Map<String, ContactItem> mContacts;
     private Map<String, Boolean> mOutgoingContactRequests;
 
-    private final ImageInfoDisplayFragmentCallback mCallback = new ImageInfoDisplayFragmentCallback() {
+    private final BrowsingItemInfoFragmentCallback mCallback = new BrowsingItemInfoFragmentCallback() {
         @Override
         public void onSendContactRequestClick() {
             sendContactRequest();
@@ -50,7 +50,7 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater,
-                R.layout.image_info_display_fragment, container, false);
+                R.layout.browsing_image_info_fragment, container, false);
         mBinding.setLifecycleOwner(this);
         return mBinding.getRoot();
     }
@@ -84,7 +84,7 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
     }
 
     private void obtainImageItem() {
-        ViewModelProviders.of(requireActivity()).get(ImageItemTransferViewModel.class).getImageItem().observe(this, item -> {
+        ViewModelProviders.of(requireActivity()).get(BrowsingItemTransferViewModel.class).getBrowsingItem().observe(this, item -> {
             if (item != null) {
                 mItem = item;
                 mBinding.setImageItem(mItem);
@@ -100,8 +100,8 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
 
         if (mOutgoingContactRequests != null && mOutgoingContactRequests.containsKey(mItem.getUid())) {
             requestButtonIsInactive(R.string.title_request_already_sent);
-            mBinding.imageInfoDisplayBottomHint.setText(R.string.hint_wait_for_confirmation);
-            mBinding.imageInfoDisplayBottomHint.setVisibility(View.VISIBLE);
+            mBinding.browsingImageInfoBottomHint.setText(R.string.hint_wait_for_confirmation);
+            mBinding.browsingImageInfoBottomHint.setVisibility(View.VISIBLE);
 
             return;
         }
@@ -132,10 +132,10 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
     }
 
     private void requestButtonIsInactive(int hintRes) {
-        mBinding.imageInfoDisplaySendContactRequestButton.setBackgroundResource(R.drawable.background_rectangle_grey_alpha_85_grey_stroke);
-        mBinding.imageInfoDisplaySendContactRequestButton.setText(getResources().getText(hintRes));
-        mBinding.imageInfoDisplaySendContactRequestButton.setTextColor(getResources().getColor(R.color.color_base_text_70per));
-        mBinding.imageInfoDisplaySendContactRequestButton.setClickable(false);
+        mBinding.browsingImageInfoSendContactRequestButton.setBackgroundResource(R.drawable.background_rectangle_grey_alpha_85_grey_stroke);
+        mBinding.browsingImageInfoSendContactRequestButton.setText(getResources().getText(hintRes));
+        mBinding.browsingImageInfoSendContactRequestButton.setTextColor(getResources().getColor(R.color.color_base_text_70per));
+        mBinding.browsingImageInfoSendContactRequestButton.setClickable(false);
     }
 
     private void handleOnVoteClick() {
@@ -152,7 +152,7 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
             return;
         }
 
-        PopupMenu popupMenu = new PopupMenu(requireActivity(), mBinding.imageInfoDisplayVote);
+        PopupMenu popupMenu = new PopupMenu(requireActivity(), mBinding.browsingImageInfoVote);
         popupMenu.getMenuInflater().inflate(R.menu.menu_vote, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             switch (menuItem.getItemId()) {
@@ -178,15 +178,15 @@ public class ImageInfoDisplayFragment extends BaseUserInfoFragment {
                 .child(mCurrentUserInfo.getUserId())
                 .setValue(mItem)
                 .addOnSuccessListener(aVoid -> {
-                    mBinding.imageInfoDisplayVoteTopHint.setText(R.string.hint_any_prohibited_content);
-                    mBinding.imageInfoDisplayVoteTopHint.setVisibility(View.VISIBLE);
+                    mBinding.browsingImageInfoVoteTopHint.setText(R.string.hint_any_prohibited_content);
+                    mBinding.browsingImageInfoVoteTopHint.setVisibility(View.VISIBLE);
                     showProgress(false);
                     mProcessing.set(false);
-                    mBinding.imageInfoDisplayVote.setImageResource(R.drawable.ic_vote_inactive);
-                    mBinding.imageInfoDisplayVote.setClickable(false);
+                    mBinding.browsingImageInfoVote.setImageResource(R.drawable.ic_vote_inactive);
+                    mBinding.browsingImageInfoVote.setClickable(false);
                 }).addOnFailureListener(e -> {
             showToast(R.string.toast_error_has_occurred);
-            mBinding.imageInfoDisplayVoteTopHint.setText(e.getMessage());
+            mBinding.browsingImageInfoVoteTopHint.setText(e.getMessage());
             showProgress(false);
             mProcessing.set(false);
         });

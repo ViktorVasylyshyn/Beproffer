@@ -13,11 +13,15 @@
             type="android.databinding.ObservableBoolean" />
 
         <variable
+            name="isUserSpecialis"
+            type="android.databinding.ObservableBoolean" />
+
+        <variable
             name="userInfo"
             type="com.beproffer.beproffer.data.models.UserInfo" />
 
         <variable
-            name="fragmentCallback"
+            name="callback"
             type="com.beproffer.beproffer.presentation.profile.profile_edit.ProfileEditFragmentCallback" />
 
     </data>
@@ -33,7 +37,7 @@
             android:layout_width="@dimen/bnb_icon_size"
             android:layout_height="@dimen/bnb_icon_size"
             android:layout_margin="@dimen/base_margin_small"
-            android:onClick="@{(view) -> fragmentCallback.denyChanges()}"
+            android:onClick="@{(view) -> callback.denyChanges()}"
             android:src="@drawable/ic_exit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -55,7 +59,7 @@
             android:layout_width="@dimen/bnb_icon_size"
             android:layout_height="@dimen/bnb_icon_size"
             android:layout_margin="@dimen/base_margin_small"
-            android:onClick="@{(view) -> fragmentCallback.onCheckUserDataClick()}"
+            android:onClick="@{(view) -> callback.onCheckUserDataClick()}"
             android:src="@drawable/ic_check_mark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -66,9 +70,9 @@
             android:layout_width="@dimen/profile_image"
             android:layout_height="@dimen/profile_image"
             android:layout_margin="@dimen/base_margin_medium"
-            android:padding="@dimen/base_padding_small"
             android:background="@drawable/button_background_grey_stroke_oval"
-            android:onClick="@{(view) -> fragmentCallback.onSetProfileImageClick()}"
+            android:onClick="@{(view) -> callback.onSetProfileImageClick()}"
+            android:padding="@dimen/base_padding_small"
             android:src="@{userInfo.userProfileImageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -110,10 +114,132 @@
             android:textColorHint="@color/color_base_text_70per"
             android:textSize="@dimen/base_text_size_big"
             android:textStyle="italic"
+            android:visibility="@{isUserSpecialis ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_fragment_name"
             tools:ignore="Autofill" />
+
+        <TextView
+            android:id="@+id/edit_fragment_main_specialization_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_margin_extra_small"
+            android:text="@string/title_main_specialization"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_medium"
+            android:visibility="@{isUserSpecialis ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_fragment_about_me" />
+
+        <HorizontalScrollView
+            android:id="@+id/edit_fragment_scroll_service_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_big"
+            android:layout_marginTop="@dimen/base_margin_extra_small"
+            android:layout_marginEnd="@dimen/base_margin_big"
+            android:layout_marginBottom="@dimen/base_margin_small"
+            android:paddingEnd="@dimen/base_padding_small"
+            android:paddingBottom="@dimen/base_padding_small"
+            android:visibility="@{isUserSpecialis ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_fragment_main_specialization_title">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/edit_fragment_haircut_icon"
+                    android:layout_width="@dimen/icons_size_normal_width"
+                    android:layout_height="@dimen/icons_size_normal_height"
+                    android:layout_margin="@dimen/base_margin_extra_small"
+                    android:background="@drawable/button_background_grey_stroke_rectangle"
+                    android:onClick="@{callback::onSpecialistTypeIconClick}"
+                    android:src="@drawable/ic_haircut"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/edit_fragment_nails_icon"
+                    android:layout_width="@dimen/icons_size_normal_width"
+                    android:layout_height="@dimen/icons_size_normal_height"
+                    android:layout_margin="@dimen/base_margin_extra_small"
+                    android:background="@drawable/button_background_grey_stroke_rectangle"
+                    android:onClick="@{callback::onSpecialistTypeIconClick}"
+                    android:src="@drawable/ic_nails"
+                    app:layout_constraintStart_toEndOf="@+id/edit_fragment_haircut_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/edit_fragment_makeup_icon"
+                    android:layout_width="@dimen/icons_size_normal_width"
+                    android:layout_height="@dimen/icons_size_normal_height"
+                    android:layout_margin="@dimen/base_margin_extra_small"
+                    android:background="@drawable/button_background_grey_stroke_rectangle"
+                    android:onClick="@{callback::onSpecialistTypeIconClick}"
+                    android:src="@drawable/ic_makeup"
+                    app:layout_constraintStart_toEndOf="@+id/edit_fragment_nails_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/edit_fragment_tattoo_icon"
+                    android:layout_width="@dimen/icons_size_normal_width"
+                    android:layout_height="@dimen/icons_size_normal_height"
+                    android:layout_margin="@dimen/base_margin_extra_small"
+                    android:background="@drawable/button_background_grey_stroke_rectangle"
+                    android:onClick="@{callback::onSpecialistTypeIconClick}"
+                    android:src="@drawable/ic_tattoo"
+                    app:layout_constraintStart_toEndOf="@+id/edit_fragment_makeup_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/edit_fragment_barber_icon"
+                    android:layout_width="@dimen/icons_size_normal_width"
+                    android:layout_height="@dimen/icons_size_normal_height"
+                    android:layout_margin="@dimen/base_margin_extra_small"
+                    android:background="@drawable/button_background_grey_stroke_rectangle"
+                    android:onClick="@{callback::onSpecialistTypeIconClick}"
+                    android:src="@drawable/ic_barbershop"
+                    app:layout_constraintStart_toEndOf="@+id/edit_fragment_tattoo_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/edit_fragment_fitness_icon"
+                    android:layout_width="@dimen/icons_size_normal_width"
+                    android:layout_height="@dimen/icons_size_normal_height"
+                    android:layout_margin="@dimen/base_margin_extra_small"
+                    android:background="@drawable/button_background_grey_stroke_rectangle"
+                    android:onClick="@{callback::onSpecialistTypeIconClick}"
+                    android:src="@drawable/ic_fitness"
+                    app:layout_constraintStart_toEndOf="@+id/edit_fragment_barber_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/edit_fragment_main_specialization"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_margin_extra_small"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_medium"
+            android:visibility="@{isUserSpecialis ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_fragment_scroll_service_view"
+            app:setSpecialistTypeTitle="@{userInfo.userSpecialistType}" />
 
         <EditText
             android:id="@+id/edit_fragment_about_me"
@@ -154,7 +280,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base_margin_small"
             android:layout_marginEnd="@dimen/base_margin_small"
-            android:layout_marginBottom="@dimen/bnb_floating_button_bottom_margin"
+            android:layout_marginBottom="@dimen/base_margin_medium"
             android:background="@drawable/rectangle_grey_background"
             android:gravity="center"
             android:textColor="@color/color_base_text"

@@ -1,4 +1,4 @@
-package com.beproffer.beproffer.presentation.swimg.search_sheet;
+package com.beproffer.beproffer.presentation.browsing.search_sheet;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.SharedPreferences;
@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SearchSheetLayoutBinding;
-import com.beproffer.beproffer.presentation.swimg.SwipeImagesViewModel;
+import com.beproffer.beproffer.presentation.browsing.BrowsingViewModel;
 import com.beproffer.beproffer.util.Const;
 import com.beproffer.beproffer.util.DefineServiceType;
 import com.google.firebase.auth.FirebaseAuth;
@@ -155,7 +155,7 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
                 editor.apply();
             }
 
-            ViewModelProviders.of(requireActivity()).get(SwipeImagesViewModel.class).refreshAdapter();
+            ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class).refreshAdapter();
 
 
             dismiss();

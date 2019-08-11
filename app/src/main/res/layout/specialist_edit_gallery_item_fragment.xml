@@ -16,29 +16,28 @@
             type="com.beproffer.beproffer.data.models.SpecialistGalleryImageItem" />
 
         <variable
-            name="fragmentCallback"
-            type="com.beproffer.beproffer.presentation.spec_gallery.edit.SpecialistStorageEditFragmentCallback" />
+            name="callback"
+            type="com.beproffer.beproffer.presentation.spec_gallery.edit.SpecialistEditGalleryItemFragmentCallback" />
 
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_background_grey"
         tools:context=".presentation.spec_gallery.edit.SpecialistGalleryEditFragment">
 
         <ImageView
             android:layout_width="@dimen/bnb_icon_size"
             android:layout_height="@dimen/bnb_icon_size"
             android:layout_margin="@dimen/base_margin_small"
-            android:onClick="@{(view) -> fragmentCallback.denyChanges()}"
+            android:onClick="@{(view) -> callback.denyChanges()}"
             android:src="@drawable/ic_exit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/specialist_storage_edit_logo"
+            android:id="@+id/specialist_edit_gallery_item_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name_low_case"
@@ -50,47 +49,47 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/specialist_storage_edit_apply_data"
+            android:id="@+id/specialist_edit_gallery_item_apply_data"
             android:layout_width="@dimen/bnb_icon_size"
             android:layout_height="@dimen/bnb_icon_size"
             android:layout_margin="@dimen/base_margin_small"
-            android:onClick="@{(view) -> fragmentCallback.confirmImageData()}"
+            android:onClick="@{(view) -> callback.confirmImageData()}"
             android:src="@drawable/ic_check_mark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <ImageView
-            android:id="@+id/specialist_storage_edit_image"
+            android:id="@+id/specialist_edit_gallery_item_image"
             android:layout_width="@dimen/specialist_edit_fragment_image_width"
             android:layout_height="@dimen/specialist_edit_fragment_image_height"
             android:layout_margin="@dimen/base_margin_small"
-            android:onClick="@{(view) -> fragmentCallback.setImage()}"
-            app:layout_constraintEnd_toStartOf="@+id/specialist_storage_edit_type_scroll"
+            android:onClick="@{(view) -> callback.setImage()}"
+            app:layout_constraintEnd_toStartOf="@+id/specialist_edit_gallery_item_type_scroll"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_logo"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_edit_gallery_item_logo"
             app:loadImageFromDb="@{item.url}"
             tools:ignore="ContentDescription" />
 
         <HorizontalScrollView
-            android:id="@+id/specialist_storage_edit_type_scroll"
+            android:id="@+id/specialist_edit_gallery_item_type_scroll"
             android:layout_width="@dimen/specialist_edit_fragment_scroll_height"
             android:layout_height="wrap_content"
             android:background="@drawable/button_background_grey_stroke_rectangle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_image"
-            app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_image">
+            app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_image"
+            app:layout_constraintTop_toTopOf="@+id/specialist_edit_gallery_item_image">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/specialist_storage_edit_haircut_icon"
+                    android:id="@+id/specialist_edit_gallery_item_haircut_icon"
                     android:layout_width="@dimen/icons_size_normal_height"
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:padding="@dimen/base_padding_small"
-                    android:onClick="@{fragmentCallback::onTypeButtonClick}"
+                    android:onClick="@{callback::onTypeButtonClick}"
                     android:src="@drawable/ic_haircut"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -98,58 +97,58 @@
                     tools:ignore="ContentDescription" />
 
                 <ImageView
-                    android:id="@+id/specialist_storage_edit_nails_icon"
+                    android:id="@+id/specialist_edit_gallery_item_nails_icon"
                     android:layout_width="@dimen/icons_size_normal_height"
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:padding="@dimen/base_padding_small"
-                    android:onClick="@{fragmentCallback::onTypeButtonClick}"
+                    android:onClick="@{callback::onTypeButtonClick}"
                     android:src="@drawable/ic_nails"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_haircut_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_haircut_icon"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_haircut_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_edit_gallery_item_haircut_icon"
                     tools:ignore="ContentDescription" />
 
                 <ImageView
-                    android:id="@+id/specialist_storage_edit_makeup_icon"
+                    android:id="@+id/specialist_edit_gallery_item_makeup_icon"
                     android:layout_width="@dimen/icons_size_normal_height"
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:padding="@dimen/base_padding_small"
-                    android:onClick="@{fragmentCallback::onTypeButtonClick}"
+                    android:onClick="@{callback::onTypeButtonClick}"
                     android:src="@drawable/ic_makeup"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_nails_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_haircut_icon"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_nails_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_edit_gallery_item_haircut_icon"
                     tools:ignore="ContentDescription" />
 
                 <ImageView
-                    android:id="@+id/specialist_storage_edit_barber_icon"
+                    android:id="@+id/specialist_edit_gallery_item_barber_icon"
                     android:layout_width="@dimen/icons_size_normal_height"
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:padding="@dimen/base_padding_small"
-                    android:onClick="@{fragmentCallback::onTypeButtonClick}"
+                    android:onClick="@{callback::onTypeButtonClick}"
                     android:src="@drawable/ic_barbershop"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_makeup_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_haircut_icon"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_makeup_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_edit_gallery_item_haircut_icon"
                     tools:ignore="ContentDescription" />
 
                 <ImageView
-                    android:id="@+id/specialist_storage_edit_tattoo_icon"
+                    android:id="@+id/specialist_edit_gallery_item_tattoo_icon"
                     android:layout_width="@dimen/icons_size_normal_height"
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:padding="@dimen/base_padding_small"
-                    android:onClick="@{fragmentCallback::onTypeButtonClick}"
+                    android:onClick="@{callback::onTypeButtonClick}"
                     android:src="@drawable/ic_tattoo"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_barber_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_haircut_icon"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_barber_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_edit_gallery_item_haircut_icon"
                     tools:ignore="ContentDescription" />
 
                 <ImageView
-                    android:id="@+id/specialist_storage_edit_fitness_icon"
+                    android:id="@+id/specialist_edit_gallery_item_fitness_icon"
                     android:layout_width="@dimen/icons_size_normal_height"
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:padding="@dimen/base_padding_small"
-                    android:onClick="@{fragmentCallback::onTypeButtonClick}"
+                    android:onClick="@{callback::onTypeButtonClick}"
                     android:src="@drawable/ic_fitness"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_tattoo_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_haircut_icon"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_tattoo_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_edit_gallery_item_haircut_icon"
                     tools:ignore="ContentDescription" />
 
             </android.support.constraint.ConstraintLayout>
@@ -157,37 +156,37 @@
         </HorizontalScrollView>
 
         <TextView
-            android:id="@+id/specialist_storage_edit_type_title"
+            android:id="@+id/specialist_edit_gallery_item_type_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/base_margin_extra_small"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_medium"
-            app:layout_constraintEnd_toEndOf="@id/specialist_storage_edit_type_scroll"
-            app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_type_scroll"
-            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_type_scroll"
+            app:layout_constraintEnd_toEndOf="@id/specialist_edit_gallery_item_type_scroll"
+            app:layout_constraintStart_toStartOf="@+id/specialist_edit_gallery_item_type_scroll"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_edit_gallery_item_type_scroll"
             app:setTypeTitle="@{item.subtype}" />
 
         <HorizontalScrollView
-            android:id="@+id/specialist_storage_edit_duration_scroll"
+            android:id="@+id/specialist_edit_gallery_item_duration_scroll"
             android:layout_width="@dimen/specialist_edit_fragment_scroll_height"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/base_margin_extra_small"
             android:background="@drawable/button_background_grey_stroke_rectangle"
-            app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_type_scroll"
-            app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_type_scroll"
-            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_type_title">
+            app:layout_constraintEnd_toEndOf="@+id/specialist_edit_gallery_item_type_scroll"
+            app:layout_constraintStart_toStartOf="@+id/specialist_edit_gallery_item_type_scroll"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_edit_gallery_item_type_title">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/specialist_storage_edit_duration_30_min_icon"
+                    android:id="@+id/specialist_edit_gallery_item_duration_30_min_icon"
                     android:layout_width="@dimen/icons_size_normal_height"
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:padding="@dimen/base_padding_small"
-                    android:onClick="@{fragmentCallback::onDurationButtonClick}"
+                    android:onClick="@{callback::onDurationButtonClick}"
                     android:src="@drawable/ic_duration_30_min"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -195,47 +194,47 @@
                     tools:ignore="ContentDescription" />
 
                 <ImageView
-                    android:id="@+id/specialist_storage_edit_duration_45_min_icon"
+                    android:id="@+id/specialist_edit_gallery_item_duration_45_min_icon"
                     android:layout_width="@dimen/icons_size_normal_height"
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:padding="@dimen/base_padding_small"
-                    android:onClick="@{fragmentCallback::onDurationButtonClick}"
+                    android:onClick="@{callback::onDurationButtonClick}"
                     android:src="@drawable/ic_duration_45_min"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_duration_30_min_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_duration_30_min_icon"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_duration_30_min_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_edit_gallery_item_duration_30_min_icon"
                     tools:ignore="ContentDescription" />
 
                 <ImageView
-                    android:id="@+id/specialist_storage_edit_duration_60_min_icon"
+                    android:id="@+id/specialist_edit_gallery_item_duration_60_min_icon"
                     android:layout_width="@dimen/icons_size_normal_height"
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:padding="@dimen/base_padding_small"
-                    android:onClick="@{fragmentCallback::onDurationButtonClick}"
+                    android:onClick="@{callback::onDurationButtonClick}"
                     android:src="@drawable/ic_duration_60_min"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_duration_45_min_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_duration_30_min_icon"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_duration_45_min_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_edit_gallery_item_duration_30_min_icon"
                     tools:ignore="ContentDescription" />
 
                 <ImageView
-                    android:id="@+id/specialist_storage_edit_duration_90_min_icon"
+                    android:id="@+id/specialist_edit_gallery_item_duration_90_min_icon"
                     android:layout_width="@dimen/icons_size_normal_height"
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:padding="@dimen/base_padding_small"
-                    android:onClick="@{fragmentCallback::onDurationButtonClick}"
+                    android:onClick="@{callback::onDurationButtonClick}"
                     android:src="@drawable/ic_duration_90_min"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_duration_60_min_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_duration_30_min_icon"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_duration_60_min_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_edit_gallery_item_duration_30_min_icon"
                     tools:ignore="ContentDescription" />
 
                 <ImageView
-                    android:id="@+id/specialist_storage_edit_duration_120_min_icon"
+                    android:id="@+id/specialist_edit_gallery_item_duration_120_min_icon"
                     android:layout_width="@dimen/icons_size_normal_height"
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:padding="@dimen/base_padding_small"
-                    android:onClick="@{fragmentCallback::onDurationButtonClick}"
+                    android:onClick="@{callback::onDurationButtonClick}"
                     android:src="@drawable/ic_duration_120_min"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_storage_edit_duration_90_min_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_storage_edit_duration_30_min_icon"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_duration_90_min_icon"
+                    app:layout_constraintTop_toTopOf="@+id/specialist_edit_gallery_item_duration_30_min_icon"
                     tools:ignore="ContentDescription" />
 
             </android.support.constraint.ConstraintLayout>
@@ -249,15 +248,15 @@
             android:layout_margin="@dimen/base_margin_small"
             android:background="@drawable/button_background_grey_stroke_rectangle"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_type_scroll"
-            app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_type_scroll"
-            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_duration_scroll">
+            app:layout_constraintEnd_toEndOf="@+id/specialist_edit_gallery_item_type_scroll"
+            app:layout_constraintStart_toStartOf="@+id/specialist_edit_gallery_item_type_scroll"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_edit_gallery_item_duration_scroll">
 
             <TextView
                 android:id="@+id/specialist_gallery_edit_gender_male"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{fragmentCallback::onGenderButtonClick}"
+                android:onClick="@{callback::onGenderButtonClick}"
                 android:paddingTop="@dimen/base_padding_small"
                 android:paddingBottom="@dimen/base_padding_small"
                 android:text="@string/title_gender_male"
@@ -271,7 +270,7 @@
                 android:id="@+id/specialist_gallery_edit_gender_female"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{fragmentCallback::onGenderButtonClick}"
+                android:onClick="@{callback::onGenderButtonClick}"
                 android:paddingTop="@dimen/base_padding_small"
                 android:paddingBottom="@dimen/base_padding_small"
                 android:text="@string/title_gender_female"
@@ -285,7 +284,7 @@
                 android:id="@+id/specialist_gallery_edit_gender_both"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{fragmentCallback::onGenderButtonClick}"
+                android:onClick="@{callback::onGenderButtonClick}"
                 android:paddingTop="@dimen/base_padding_small"
                 android:paddingBottom="@dimen/base_padding_small"
                 android:text="@string/title_gender_all_genders"
@@ -298,7 +297,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/specialist_storage_edit_price"
+            android:id="@+id/specialist_edit_gallery_item_price"
             android:layout_width="@dimen/specialist_edit_fragment_scroll_height"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
@@ -312,13 +311,13 @@
             android:text="@={item.price}"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_big"
-            app:layout_constraintEnd_toEndOf="@+id/specialist_storage_edit_type_scroll"
-            app:layout_constraintStart_toStartOf="@+id/specialist_storage_edit_type_scroll"
+            app:layout_constraintEnd_toEndOf="@+id/specialist_edit_gallery_item_type_scroll"
+            app:layout_constraintStart_toStartOf="@+id/specialist_edit_gallery_item_type_scroll"
             app:layout_constraintTop_toBottomOf="@+id/specialist_gallery_edit_gender_scroll"
             tools:ignore="Autofill" />
 
         <EditText
-            android:id="@+id/specialist_storage_edit_description"
+            android:id="@+id/specialist_edit_gallery_item_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base_margin_big"
@@ -333,11 +332,11 @@
             android:textColor="@color/color_base_text"
             android:textStyle="italic"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_price"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_edit_gallery_item_price"
             tools:ignore="Autofill" />
 
         <ScrollView
-            android:id="@+id/specialist_storage_edit_scroll"
+            android:id="@+id/specialist_edit_gallery_item_scroll"
             android:layout_width="match_parent"
             android:layout_height="@dimen/specialist_edit_fragment_image_height"
             android:layout_marginStart="@dimen/base_margin_medium"
@@ -345,7 +344,7 @@
             android:layout_marginBottom="@dimen/base_margin_small"
             android:background="@drawable/button_background_grey_stroke_rectangle"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/specialist_storage_edit_description">
+            app:layout_constraintTop_toBottomOf="@+id/specialist_edit_gallery_item_description">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -431,7 +430,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/base_margin_small"
-                    android:onClick="@{(view) -> fragmentCallback.onTermsClick()}"
+                    android:onClick="@{(view) -> callback.onTermsClick()}"
                     android:text="@string/href_terms_of_service_title_2"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/base_text_size_medium"
@@ -443,7 +442,7 @@
         </ScrollView>
 
         <ProgressBar
-            android:id="@+id/specialist_storage_edit_progress_bar"
+            android:id="@+id/specialist_edit_gallery_item_progress_bar"
             android:layout_width="@dimen/profile_image_half"
             android:layout_height="@dimen/profile_image_half"
             android:layout_gravity="center"

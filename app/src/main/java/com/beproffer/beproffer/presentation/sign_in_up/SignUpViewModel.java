@@ -38,8 +38,9 @@ public class SignUpViewModel extends AndroidViewModel {
                               String userPassword,
                               String userName,
                               String userType,
+                              @Nullable String userSpecialistType,
                               @Nullable String userPhone) {
-        mRepository.signUpNewUser(userEmail, userPassword, userName, userType, userPhone);
+        mRepository.signUpNewUser(userEmail, userPassword, userName, userType, userSpecialistType, userPhone);
     }
 
     public void resetTriggers(@Nullable Boolean resetToastIdValue,
