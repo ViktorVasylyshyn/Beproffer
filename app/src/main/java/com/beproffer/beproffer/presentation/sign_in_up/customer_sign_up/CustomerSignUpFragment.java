@@ -127,6 +127,7 @@ public class CustomerSignUpFragment extends BaseFragment {
                 mBinding.customerSignUpPass.getText().toString(),
                 mBinding.customerSignUpName.getText().toString(),
                 Const.CUST,
+                null,
                 null);
     }
 

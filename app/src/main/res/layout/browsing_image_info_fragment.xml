@@ -14,23 +14,23 @@
 
         <variable
             name="fragmentCallback"
-            type="com.beproffer.beproffer.presentation.swimg.info.ImageInfoDisplayFragmentCallback" />
+            type="com.beproffer.beproffer.presentation.browsing.info.BrowsingItemInfoFragmentCallback" />
 
         <variable
             name="imageItem"
-            type="com.beproffer.beproffer.data.models.SwipeImageItem" />
+            type="com.beproffer.beproffer.data.models.BrowsingItem" />
 
     </data>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/image_info_display_constraint_layout"
+        android:id="@+id/browsing_image_info_constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:onClick="@{(view)->fragmentCallback.onPerformBackNavigationClick()}"
-        tools:context=".presentation.swimg.info.ImageInfoDisplayFragment">
+        tools:context=".presentation.browsing.info.BrowsingItemInfoFragment">
 
         <ImageView
-            android:id="@+id/image_info_display_vote"
+            android:id="@+id/browsing_image_info_vote"
             android:layout_width="@dimen/icons_size_normal_width"
             android:layout_height="@dimen/icons_size_normal_height"
             android:layout_marginEnd="@dimen/profile_image_quarter"
@@ -38,12 +38,12 @@
             android:background="@drawable/circle_gradient_grey_background_alpha_85"
             android:onClick="@{(view)->fragmentCallback.onVoteClick()}"
             android:src="@drawable/ic_vote"
-            app:layout_constraintBottom_toTopOf="@+id/image_info_display_vote_top_hint"
+            app:layout_constraintBottom_toTopOf="@+id/browsing_image_info_vote_top_hint"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/image_info_display_vote_top_hint"
+            android:id="@+id/browsing_image_info_vote_top_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/profile_image_quarter"
@@ -57,10 +57,10 @@
             android:textSize="@dimen/base_text_size_medium"
             android:textStyle="italic"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/image_info_display_constraint_layout_internal" />
+            app:layout_constraintBottom_toTopOf="@+id/browsing_image_info_constraint_layout_internal" />
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/image_info_display_constraint_layout_internal"
+            android:id="@+id/browsing_image_info_constraint_layout_internal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/profile_image_quarter"
@@ -73,51 +73,51 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/image_info_display_type_image"
+                android:id="@+id/browsing_image_info_type_image"
                 android:layout_width="@dimen/icons_size_normal_width"
                 android:layout_height="@dimen/icons_size_normal_height"
                 android:layout_margin="@dimen/base_margin_small"
-                app:layout_constraintEnd_toStartOf="@+id/image_info_display_duration_image"
-                app:layout_constraintStart_toEndOf="@+id/image_info_display_gender_image"
+                app:layout_constraintEnd_toStartOf="@+id/browsing_image_info_duration_image"
+                app:layout_constraintStart_toEndOf="@+id/browsing_image_info_gender_image"
                 app:layout_constraintTop_toTopOf="parent"
                 app:setTypeImage="@{imageItem.type}"
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:id="@+id/image_info_display_type_title"
+                android:id="@+id/browsing_image_info_type_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_base_text"
                 android:textSize="@dimen/base_text_size_medium"
-                app:layout_constraintEnd_toEndOf="@+id/image_info_display_type_image"
-                app:layout_constraintStart_toStartOf="@+id/image_info_display_type_image"
-                app:layout_constraintTop_toBottomOf="@+id/image_info_display_type_image"
+                app:layout_constraintEnd_toEndOf="@+id/browsing_image_info_type_image"
+                app:layout_constraintStart_toStartOf="@+id/browsing_image_info_type_image"
+                app:layout_constraintTop_toBottomOf="@+id/browsing_image_info_type_image"
                 app:setTypeTitle="@{imageItem.subtype}" />
 
             <ImageView
-                android:id="@+id/image_info_display_gender_image"
+                android:id="@+id/browsing_image_info_gender_image"
                 android:layout_width="@dimen/icons_size_normal_width"
                 android:layout_height="@dimen/icons_size_normal_height"
                 android:layout_margin="@dimen/base_margin_small"
-                app:layout_constraintEnd_toStartOf="@+id/image_info_display_type_image"
+                app:layout_constraintEnd_toStartOf="@+id/browsing_image_info_type_image"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:setGenderImage="@{imageItem.gender}"
                 tools:ignore="ContentDescription" />
 
             <ImageView
-                android:id="@+id/image_info_display_duration_image"
+                android:id="@+id/browsing_image_info_duration_image"
                 android:layout_width="@dimen/icons_size_normal_width"
                 android:layout_height="@dimen/icons_size_normal_height"
                 android:layout_margin="@dimen/base_margin_small"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/image_info_display_type_image"
+                app:layout_constraintStart_toEndOf="@+id/browsing_image_info_type_image"
                 app:layout_constraintTop_toTopOf="parent"
                 app:setDurationImage="@{imageItem.duration}"
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:id="@+id/image_info_display_description"
+                android:id="@+id/browsing_image_info_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/base_margin_small"
@@ -128,10 +128,10 @@
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_info_display_type_title" />
+                app:layout_constraintTop_toBottomOf="@+id/browsing_image_info_type_title" />
 
             <TextView
-                android:id="@+id/image_info_display_price"
+                android:id="@+id/browsing_image_info_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/base_margin_small"
@@ -143,16 +143,16 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_info_display_description" />
+                app:layout_constraintTop_toBottomOf="@+id/browsing_image_info_description" />
 
             <ImageView
                 android:layout_width="@dimen/icons_size_small_width"
                 android:layout_height="@dimen/icons_size_small_height"
                 android:layout_margin="@dimen/base_margin_small"
                 android:src="@drawable/ic_money_sign"
-                app:layout_constraintBottom_toBottomOf="@+id/image_info_display_price"
-                app:layout_constraintEnd_toStartOf="@+id/image_info_display_price"
-                app:layout_constraintTop_toTopOf="@+id/image_info_display_price"
+                app:layout_constraintBottom_toBottomOf="@+id/browsing_image_info_price"
+                app:layout_constraintEnd_toStartOf="@+id/browsing_image_info_price"
+                app:layout_constraintTop_toTopOf="@+id/browsing_image_info_price"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -162,14 +162,14 @@
                 android:text="@string/hint_currency_outfield"
                 android:textColor="@color/color_base_text"
                 android:textSize="@dimen/base_text_size_medium"
-                app:layout_constraintBottom_toBottomOf="@+id/image_info_display_price"
-                app:layout_constraintStart_toEndOf="@+id/image_info_display_price"
-                app:layout_constraintTop_toTopOf="@+id/image_info_display_price" />
+                app:layout_constraintBottom_toBottomOf="@+id/browsing_image_info_price"
+                app:layout_constraintStart_toEndOf="@+id/browsing_image_info_price"
+                app:layout_constraintTop_toTopOf="@+id/browsing_image_info_price" />
 
         </android.support.constraint.ConstraintLayout>
 
         <TextView
-            android:id="@+id/image_info_display_send_contact_request_button"
+            android:id="@+id/browsing_image_info_send_contact_request_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/profile_image_quarter"
@@ -185,11 +185,11 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_info_display_constraint_layout_internal"
+            app:layout_constraintTop_toBottomOf="@+id/browsing_image_info_constraint_layout_internal"
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/image_info_display_bottom_hint"
+            android:id="@+id/browsing_image_info_bottom_hint"
             android:layout_width="match_parent"
             android:background="@drawable/background_rectangle_grey_alpha_85_grey_stroke"
             android:layout_height="wrap_content"
@@ -205,10 +205,10 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_info_display_send_contact_request_button" />
+            app:layout_constraintTop_toBottomOf="@+id/browsing_image_info_send_contact_request_button" />
 
         <ProgressBar
-            android:id="@+id/image_info_display_progress_bar"
+            android:id="@+id/browsing_image_info_progress_bar"
             android:layout_width="@dimen/profile_image_half"
             android:layout_height="@dimen/profile_image_half"
             android:theme="@style/Widget.AppCompat.ProgressBar"

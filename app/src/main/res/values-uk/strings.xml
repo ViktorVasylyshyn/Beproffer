@@ -47,6 +47,7 @@
     <string name="hint_outfield_confirm">прийняти</string>
     <string name="hint_outfield_deny">відхилити</string>
     <string name="hint_wait_for_confirmation">Коли спеціаліст підтвердить запит, його номер телефону з\'явиться у Вас в контактах.</string>
+    <string name="hint_choose_main_specialization">Будь ласка, вкажіть свою головну спеціалізацію.</string>
 
 
     <string name="href_terms_of_service">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5-%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-beproffer</string>
@@ -98,7 +99,16 @@
     <string name="title_for">для</string>
 
     <string name="title_try_again">Спробувати знову</string>
+    <string name="title_badge_text">!</string>
+    <string name="title_wants_to_contact">Хоче з Вами зв\'язатися.</string>
 
+    <!--main specialists' specialization-->
+    <string name="title_specialization_hai">Перукарська справа</string>
+    <string name="title_specialization_nai">Нігтьовий сервіс</string>
+    <string name="title_specialization_mak">Макіяж і візаж</string>
+    <string name="title_specialization_tat">Майстер татуажу</string>
+    <string name="title_specialization_bar">Барбершоп сервіс</string>
+    <string name="title_specialization_fit">Фітнес сервіс</string>
 
 
     <!--/*Start/SignIn/Registration/e.t.s.*/-->
@@ -130,6 +140,7 @@
     <string name="fitness_title_trainer">Персональний Тренер</string>
 
     <string name="barber_title_barber">Барбершоп</string>
+    <string name="title_main_specialization">Ваша головна спеціалізація.</string>
 
     <string name="confirmed_contact_menu_call">Задзвонити</string>
     <string name="confirmed_contact_menu_delete">Видалити</string>

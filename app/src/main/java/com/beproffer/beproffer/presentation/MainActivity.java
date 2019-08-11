@@ -3,19 +3,23 @@ package com.beproffer.beproffer.presentation;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Toast;
 
 import com.beproffer.beproffer.App;
 import com.beproffer.beproffer.R;
+import com.beproffer.beproffer.presentation.browsing.BrowsingFragment;
 import com.beproffer.beproffer.presentation.contacts.confirmed.ContactsFragment;
 import com.beproffer.beproffer.presentation.profile.profile.ProfileFragment;
 import com.beproffer.beproffer.presentation.sign_in_up.sign_in.SignInFragment;
-import com.beproffer.beproffer.presentation.swimg.SwipeImageFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 import static com.beproffer.beproffer.util.NetworkUtil.hasInternetConnection;
@@ -36,14 +40,14 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.bnm_images_gallery:
-                targetFragment = new SwipeImageFragment();
+                targetFragment = new BrowsingFragment();
                 break;
             case R.id.bnm_contacts:
                 if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                     targetFragment = new ContactsFragment();
                 } else {
                     Toast.makeText(this, R.string.toast_available_for_registered, Toast.LENGTH_LONG).show();
-                return false;
+                    return false;
                 }
                 break;
             case R.id.bnm_profile:
@@ -56,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
-        openFragment(targetFragment, true, true);
+        performNavigation(targetFragment, true, true, false);
         return true;
     };
 
@@ -78,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         App.getComponent().injectMainActivity(this);
 
         initBottomNavigationMenu();
-        openFragment(new SwipeImageFragment(), true, false);
+        performNavigation(new BrowsingFragment(), true, false, false);
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             Toast.makeText(this, R.string.toast_guest_mode, Toast.LENGTH_LONG).show();
@@ -89,10 +93,31 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         bottomNavigationView.setOnNavigationItemReselectedListener(mOnNavigationItemReselectedListener);
-
     }
 
-    public void openFragment(@NonNull Fragment fragment, boolean addToBackStack, boolean clearBackStack) {
+    public void setBadgeMain(int index) {
+        /*создание красной точки, как подсказка, что в этом разделе, что то нужно сделать или доделать*/
+        BottomNavigationMenuView bottomNavigationMenuView =
+                (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
+        View v = bottomNavigationMenuView.getChildAt(index);
+        BottomNavigationItemView itemView = (BottomNavigationItemView) v;
+        if (itemView.getChildCount() == 2) {
+            View badge = LayoutInflater.from(this)
+                    .inflate(R.layout.bnb_badge, itemView, true);
+        }
+    }
+
+    public void removeBadge(int index) {
+        BottomNavigationMenuView bottomNavigationMenuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
+        View v = bottomNavigationMenuView.getChildAt(index);
+        BottomNavigationItemView itemView = (BottomNavigationItemView) v;
+        if (itemView.getChildCount() > 2) {
+            itemView.removeViewAt(itemView.getChildCount() - 1);
+        }
+    }
+
+
+    public void performNavigation(@NonNull Fragment fragment, boolean addToBackStack, boolean clearBackStack, boolean addToCont) {
         fragmentManager = getSupportFragmentManager();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right);
@@ -102,7 +127,15 @@ public class MainActivity extends AppCompatActivity {
         if (clearBackStack) {
             fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
-        transaction.add(R.id.fragment_container, fragment).commit();
+        /*addToCont - эта чепуха, пока что нужна только в одном случае, чтобы информация о изображении
+        * красиво появлялась на фоне самого изображения. пока что не кофликтует такой подход, но в
+        * будущем быть акккуратней с этим, а то мало ли*/
+        if (!addToCont) {
+            transaction.replace(R.id.fragment_container, fragment).commit();
+        } else {
+            transaction.add(R.id.fragment_container, fragment).commit();
+        }
+
     }
 
     public void onBottomNavigationBarItemClicked(int menuItemId, @Nullable Integer toastRes) {

@@ -1,4 +1,4 @@
-package com.beproffer.beproffer.presentation.swimg;
+package com.beproffer.beproffer.presentation.browsing;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -7,17 +7,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.beproffer.beproffer.data.firebase.SwipeImagesRepository;
-import com.beproffer.beproffer.data.models.SwipeImageItem;
+import com.beproffer.beproffer.data.models.BrowsingItem;
 
 import java.util.List;
 
-public class SwipeImagesViewModel extends AndroidViewModel {
+public class BrowsingViewModel extends AndroidViewModel {
 
     private final SwipeImagesRepository mRepository;
 
-    private LiveData<List<SwipeImageItem>> mSwipeImageItemsList;
+    private LiveData<List<BrowsingItem>> mSwipeImageItemsList;
 
-    public SwipeImagesViewModel(@NonNull Application application) {
+    public BrowsingViewModel(@NonNull Application application) {
         super(application);
         mRepository = new SwipeImagesRepository(application);
         if(mSwipeImageItemsList == null)
@@ -25,7 +25,7 @@ public class SwipeImagesViewModel extends AndroidViewModel {
 
     }
 
-    public LiveData<List<SwipeImageItem>> getSwipeImageItemsList() {
+    public LiveData<List<BrowsingItem>> getSwipeImageItemsList() {
         return mSwipeImageItemsList;
     }
 
@@ -41,7 +41,7 @@ public class SwipeImagesViewModel extends AndroidViewModel {
         return mRepository.getPerformSearch();
     }
 
-    public void deleteObservedImageItem(SwipeImageItem item) {
+    public void deleteObservedImageItem(BrowsingItem item) {
         mRepository.deleteObservedImageItem(item);
     }
 

@@ -5,17 +5,23 @@ public class ContactItem {
     private String contactUid;
     private String contactName;
     private String contactPhone;
+    private String contactSpecialistType;
     private String contactImageUrl;
     private String contactInfo;
 
-    private ContactItem(){
+    /*constructor without parameters for Firebase*/
+    private ContactItem(){}
 
-    }
-
-    public ContactItem(String contactUid, String contactName, String contactPhone, String contactInfo, String contactImageUrl) {
+    public ContactItem(String contactUid,
+                       String contactName,
+                       String contactPhone,
+                       String contactSpecialistType,
+                       String contactInfo,
+                       String contactImageUrl) {
         this.contactUid = contactUid;
         this.contactName = contactName;
         this.contactPhone = contactPhone;
+        this.contactSpecialistType = contactSpecialistType;
         this.contactInfo = contactInfo;
         this.contactImageUrl = contactImageUrl;
     }
@@ -46,6 +52,14 @@ public class ContactItem {
 
     public String getContactInfo() {
         return contactInfo;
+    }
+
+    public void setContactSpecialistType(String contactSpecialistType){
+        this.contactSpecialistType = contactSpecialistType;
+    }
+
+    public String getContactSpecialistType(){
+        return contactSpecialistType;
     }
 
     public void setContactInfo(String contactInfo) {

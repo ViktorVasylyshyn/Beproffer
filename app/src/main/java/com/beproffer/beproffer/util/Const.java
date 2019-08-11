@@ -106,4 +106,8 @@ public class Const {
     переходе назад, и иногда происходят перескоки сразу на два шага назад. так как предыдущий фрагмент
     хватает из репозитория значение true, а оно должно было быть false*/
 
+    /*индексы иконок на панели навигации*/
+    public static final int CONTBNBINDEX = 1;
+    public static final int PROFBNBINDEX = 2;
+
 }

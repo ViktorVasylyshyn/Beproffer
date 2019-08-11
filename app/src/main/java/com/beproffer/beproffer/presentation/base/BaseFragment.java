@@ -49,8 +49,8 @@ public class BaseFragment extends Fragment {
         (requireActivity()).onBackPressed();
     }
 
-    protected void changeFragment(Fragment fragment, boolean addToBackStack, boolean clearTask) {
-        ((MainActivity) requireActivity()).openFragment(fragment, addToBackStack, clearTask);
+    protected void changeFragment(Fragment fragment, boolean addToBackStack, boolean clearTask, boolean addToCont) {
+        ((MainActivity) requireActivity()).performNavigation(fragment, addToBackStack, clearTask, addToCont);
     }
 
     protected  void performOnBottomNavigationBarItemClick(int itemId, @Nullable Integer toastRes){

@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
-import com.beproffer.beproffer.databinding.SpecialistStorageFragmentBinding;
+import com.beproffer.beproffer.databinding.SpecialistGalleryFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.spec_gallery.adapter.GalleryImageItemAdapter;
 import com.beproffer.beproffer.presentation.spec_gallery.edit.SpecialistGalleryEditFragment;
@@ -30,14 +30,14 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
 
     private List<SpecialistGalleryImageItem> mImageItemsList;
 
-    private SpecialistStorageFragmentBinding mBinding;
+    private SpecialistGalleryFragmentBinding mBinding;
 
     private final SpecialistGalleryFragmentCallback mCallback = this::addNewImage;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.specialist_storage_fragment, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.specialist_gallery_fragment, container, false);
         mBinding.setLifecycleOwner(this);
         initRecyclerView();
         return mBinding.getRoot();
@@ -46,7 +46,7 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mBinding.setFragmentCallback(mCallback);
+        mBinding.setCallback(mCallback);
         mBinding.setShowProgress(mShowProgress);
         mBinding.setShowButton(mShowButton);
 
@@ -76,7 +76,7 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
 
     private void initRecyclerView() {
         setupList();
-        RecyclerView imageRecyclerView = mBinding.specialistStorageRecyclerView;
+        RecyclerView imageRecyclerView = mBinding.specialistGalleryRecyclerView;
         imageRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         imageRecyclerView.setAdapter(mImageAdapter);
     }
@@ -84,7 +84,7 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
     private void addNewImage() {
         if (mImageItemsList != null && mImageItemsList.size() >= 5) {
             showToast(R.string.toast_would_you_like_to_donate);
-            cooldown(mBinding.specialistStorageAddImageButton);
+            cooldown(mBinding.specialistGalleryAddImageButton);
             return;
         }
         mUserDataViewModel.setEditableGalleryItem(new SpecialistGalleryImageItem(
@@ -97,7 +97,7 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
                 null,
                 null,
                 null));
-        changeFragment(new SpecialistGalleryEditFragment(), true, false);
+        changeFragment(new SpecialistGalleryEditFragment(), true, false, false);
     }
 
     private void setupList() {
@@ -106,7 +106,7 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
 
     private void setEditableGalleryItem(@Nullable View view, SpecialistGalleryImageItem editableItem) {
         mUserDataViewModel.setEditableGalleryItem(editableItem);
-        changeFragment(new SpecialistGalleryEditFragment(), true, false);
+        changeFragment(new SpecialistGalleryEditFragment(), true, false, false);
     }
 }
 

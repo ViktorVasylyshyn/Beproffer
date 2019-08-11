@@ -59,27 +59,64 @@ public class AppBindingAdapter {
         view.setImageResource(resId);
     }
 
-    @BindingAdapter({"setGenderTitle"})
-    public static void showGenderTitle(TextView view, String gender) {
-        int resId;
-        if (gender == null) {
-            resId = R.string.title_gender_unknown;
-        } else {
-            switch (gender) {
-                case Const.MALE:
-                    resId = R.string.title_gender_male;
+    @BindingAdapter({"setSpecialistTypeTitle"})
+    public static void showSpecialistTypeTitle(TextView view, String specialistType) {
+        int textResId;
+        if (specialistType != null) {
+            switch (specialistType) {
+                case Const.HAI:
+                    textResId = R.string.title_specialization_hai;
                     break;
-                case Const.FEMALE:
-                    resId = R.string.title_gender_female;
+                case Const.NAI:
+                    textResId = R.string.title_specialization_nai;
                     break;
-                case Const.BOTHGEND:
-                    resId = R.string.title_gender_all_genders;
+                case Const.MAK:
+                    textResId = R.string.title_specialization_mak;
+                    break;
+                case Const.TAT:
+                    textResId = R.string.title_specialization_tat;
+                    break;
+                case Const.BAR:
+                    textResId = R.string.title_specialization_bar;
+                    break;
+                case Const.FIT:
+                    textResId = R.string.title_specialization_fit;
                     break;
                 default:
                     throw new IllegalArgumentException(Const.UNKNSTAT);
             }
+            view.setText(textResId);
         }
-        view.setText(resId);
+    }
+
+    @BindingAdapter({"setSpecialistTypeImage"})
+    public static void showSpecialistTypeImage(ImageView view, String specialistType){
+        int imageResId;
+        if (specialistType!= null){
+            switch (specialistType) {
+                case Const.HAI:
+                    imageResId = R.drawable.ic_haircut;
+                    break;
+                case Const.NAI:
+                    imageResId = R.drawable.ic_nails;
+                    break;
+                case Const.MAK:
+                    imageResId = R.drawable.ic_makeup;
+                    break;
+                case Const.TAT:
+                    imageResId = R.drawable.ic_tattoo;
+                    break;
+                case Const.BAR:
+                    imageResId = R.drawable.ic_barbershop;
+                    break;
+                case Const.FIT:
+                    imageResId = R.drawable.ic_fitness;
+                    break;
+                default:
+                    throw new IllegalArgumentException(Const.UNKNSTAT);
+            }
+            view.setImageResource(imageResId);
+        }
     }
 
     @BindingAdapter({"setTypeImage"})

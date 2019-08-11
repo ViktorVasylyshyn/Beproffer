@@ -1,4 +1,4 @@
-package com.beproffer.beproffer.presentation.swimg;
+package com.beproffer.beproffer.presentation.browsing;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
@@ -13,29 +13,30 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.data.models.SwipeImageItem;
-import com.beproffer.beproffer.databinding.SwipeImageFragmentBinding;
+import com.beproffer.beproffer.data.models.BrowsingItem;
+import com.beproffer.beproffer.databinding.BrowsingFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
-import com.beproffer.beproffer.presentation.swimg.adapter.SwipeImageAdapter;
-import com.beproffer.beproffer.presentation.swimg.info.ImageInfoDisplayFragment;
-import com.beproffer.beproffer.presentation.swimg.search_sheet.SearchSheetDialog;
+import com.beproffer.beproffer.presentation.browsing.adapter.BrowsingAdapter;
+import com.beproffer.beproffer.presentation.browsing.info.BrowsingItemInfoFragment;
+import com.beproffer.beproffer.presentation.browsing.search_sheet.SearchSheetDialog;
+import com.beproffer.beproffer.util.Const;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.List;
 
-public class SwipeImageFragment extends BaseUserInfoFragment {
+public class BrowsingFragment extends BaseUserInfoFragment {
 
-    private SwipeImageFragmentBinding mBinding;
+    private BrowsingFragmentBinding mBinding;
 
-    private SwipeImageAdapter mSwipeImageAdapter;
+    private BrowsingAdapter mBrowsingAdapter;
 
-    private List<SwipeImageItem> mImageItemsList;
+    private List<BrowsingItem> mImageItemsList;
 
     private SearchSheetDialog mSearchSheet;
 
-    private SwipeImagesViewModel mSwipeImagesViewModel;
+    private BrowsingViewModel mBrowsingViewModel;
 
-    private final SwipeImageFragmentCallback mCallback = new SwipeImageFragmentCallback() {
+    private final BrowsingFragmentCallback mCallback = new BrowsingFragmentCallback() {
         @Override
         public void onSearchClick() {
             searchSheet();
@@ -43,8 +44,8 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
 
         @Override
         public void onRetryClicked() {
-            mBinding.swipeImageNoInternetConnectionImage.setVisibility(View.GONE);
-            mBinding.swipeImageRetryTextView.setVisibility(View.GONE);
+            mBinding.browsingFragmentNoInternetConnectionImage.setVisibility(View.GONE);
+            mBinding.browsingFragmentRetryTextView.setVisibility(View.GONE);
             startNewSession();
         }
     };
@@ -52,7 +53,7 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.swipe_image_fragment, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.browsing_fragment, container, false);
         mBinding.setLifecycleOwner(this);
         return mBinding.getRoot();
     }
@@ -75,8 +76,8 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
     private void startNewSession() {
         if (!checkInternetConnection()) {
             showToast(R.string.toast_no_internet_connection);
-            mBinding.swipeImageRetryTextView.setVisibility(View.VISIBLE);
-            mBinding.swipeImageNoInternetConnectionImage.setVisibility(View.VISIBLE);
+            mBinding.browsingFragmentRetryTextView.setVisibility(View.VISIBLE);
+            mBinding.browsingFragmentNoInternetConnectionImage.setVisibility(View.VISIBLE);
             return;
         }
 
@@ -91,6 +92,15 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
 
     @Override
     public void applyUserData() {
+
+        if(mCurrentUserInfo.getUserType().equals(Const.SPEC)){
+            mUserDataViewModel.getIncomingContactRequests().observe(this, list -> {
+                if (list != null) {
+                    if(!list.isEmpty()){
+                        setBadge(Const.CONTBNBINDEX);}
+                }
+            });
+        }
         connectToRepository();
     }
 
@@ -100,47 +110,47 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
             return;
         }
 
-        if (mSwipeImagesViewModel == null) {
-            mSwipeImagesViewModel = ViewModelProviders.of(requireActivity()).get(SwipeImagesViewModel.class);
+        if (mBrowsingViewModel == null) {
+            mBrowsingViewModel = ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class);
         }
         /*получения списка объектов для отображения*/
-        mSwipeImagesViewModel.getSwipeImageItemsList().observe(getViewLifecycleOwner(), list -> {
+        mBrowsingViewModel.getSwipeImageItemsList().observe(getViewLifecycleOwner(), list -> {
             if (list == null)
                 return;
             mImageItemsList = list;
-            if (mSwipeImageAdapter == null || mImageItemsList.isEmpty()) {
+            if (mBrowsingAdapter == null || mImageItemsList.isEmpty()) {
                 initAdapter();
             } else {
-                mSwipeImageAdapter.notifyDataSetChanged();
+                mBrowsingAdapter.notifyDataSetChanged();
             }
         });
         /*актив\неактив прогресс бар*/
-        mSwipeImagesViewModel.getShowProgress().observe(getViewLifecycleOwner(), progress -> {
+        mBrowsingViewModel.getShowProgress().observe(getViewLifecycleOwner(), progress -> {
             if (progress != null)
                 showProgress(progress);
         });
         /*показ тостов*/
-        mSwipeImagesViewModel.getShowToast().observe(getViewLifecycleOwner(), resId -> {
+        mBrowsingViewModel.getShowToast().observe(getViewLifecycleOwner(), resId -> {
             if (resId == null)
                 return;
             showToast(resId);
-            mSwipeImagesViewModel.resetTriggers(true, null);
+            mBrowsingViewModel.resetTriggers(true, null);
         });
         /*получение команд и айди для совершения перехода*/
-        mSwipeImagesViewModel.getPerformSearch().observe(getViewLifecycleOwner(), performSearch -> {
+        mBrowsingViewModel.getPerformSearch().observe(getViewLifecycleOwner(), performSearch -> {
             if (performSearch == null)
                 return;
-            mSwipeImagesViewModel.resetTriggers(null, true);
+            mBrowsingViewModel.resetTriggers(null, true);
             searchSheet();
         });
 
     }
 
     private void initAdapter() {
-        mSwipeImageAdapter = null;
-        mSwipeImageAdapter = new SwipeImageAdapter(requireActivity(), R.layout.swipe_image_item, mImageItemsList);
-        SwipeFlingAdapterView flingImageContainer = mBinding.imageFrame;
-        flingImageContainer.setAdapter(mSwipeImageAdapter);
+        mBrowsingAdapter = null;
+        mBrowsingAdapter = new BrowsingAdapter(requireActivity(), R.layout.browsing_item, mImageItemsList);
+        SwipeFlingAdapterView flingImageContainer = mBinding.browsingFragmentImageFrame;
+        flingImageContainer.setAdapter(mBrowsingAdapter);
 
         flingImageContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
@@ -169,11 +179,11 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
             }
 
         });
-        flingImageContainer.setOnItemClickListener((itemPosition, dataObject) -> displayImageInfo(dataObject));
+        flingImageContainer.setOnItemClickListener((itemPosition, dataObject) -> showBrowsingItemInfo(dataObject));
     }
 
     private void onCardExit(Object imageItem) {
-        mSwipeImagesViewModel.deleteObservedImageItem((SwipeImageItem) imageItem);
+        mBrowsingViewModel.deleteObservedImageItem((BrowsingItem) imageItem);
     }
 
     private void onCardExitAnim(boolean isRightExit) {
@@ -181,9 +191,9 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
         ImageView image;
         if (isRightExit) {
             animId = R.anim.swipe_out_right;
-            image = mBinding.swipeImageLikeImage;
+            image = mBinding.browsingFragmentLikeImage;
         } else {
-            image = mBinding.swipeImageDislikeImage;
+            image = mBinding.browsingFragmentDislikeImage;
             animId = R.anim.swipe_out_left;
         }
         try {
@@ -195,24 +205,9 @@ public class SwipeImageFragment extends BaseUserInfoFragment {
         }
     }
 
-//    private void onCardHintAnimation(View view) {
-//        try {
-//            Toast.makeText(requireActivity(), R.string.toast_guest_mode, Toast.LENGTH_SHORT).show();
-//            Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_card_animation_right);
-//            view.startAnimation(animation);
-//            Handler handlerWordAnim = new Handler();
-//            handlerWordAnim.postDelayed(() -> {
-//                Animation animation1 = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_card_animation_left);
-//                view.startAnimation(animation1);
-//            }, Const.ANIMDUR);
-//        } catch (NullPointerException e) {
-//            showToast(R.string.toast_error_has_occurred);
-//        }
-//    }
-
-    private void displayImageInfo(Object dataObject) {
-        ViewModelProviders.of(requireActivity()).get(ImageItemTransferViewModel.class).setImageItem((SwipeImageItem) dataObject);
-        changeFragment(new ImageInfoDisplayFragment(), true, false);
+    private void showBrowsingItemInfo(Object dataObject) {
+        ViewModelProviders.of(requireActivity()).get(BrowsingItemTransferViewModel.class).setBrowsingItem((BrowsingItem) dataObject);
+        changeFragment(new BrowsingItemInfoFragment(), true, false, true);
     }
 
     private void searchSheet() {

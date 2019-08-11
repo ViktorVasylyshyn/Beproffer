@@ -1,7 +1,8 @@
-package com.beproffer.beproffer.presentation.swimg.info;
+package com.beproffer.beproffer.presentation.browsing.info;
 
 /*must be public for binding*/
-public interface ImageInfoDisplayFragmentCallback {
+public interface BrowsingItemInfoFragmentCallback {
+
     void onSendContactRequestClick();
 
     void onPerformBackNavigationClick();

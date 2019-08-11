@@ -11,7 +11,7 @@
 
         <variable
             name="callback"
-            type="com.beproffer.beproffer.presentation.swimg.SwipeImageFragmentCallback" />
+            type="com.beproffer.beproffer.presentation.browsing.BrowsingFragmentCallback" />
 
     </data>
 
@@ -19,76 +19,77 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.swimg.SwipeImageFragment">
+        tools:context=".presentation.browsing.BrowsingFragment">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name_low_case"
             android:textColor="@color/colorPrimary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:textSize="@dimen/base_text_size_huge"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:layout_width="@dimen/bnb_icon_size"
             android:layout_height="@dimen/bnb_icon_size"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_search_active"
             android:layout_marginEnd="@dimen/base_margin_medium"
-            tools:ignore="ContentDescription"
-            android:onClick="@{(view) -> callback.onSearchClick()}"/>
+            android:onClick="@{(view) -> callback.onSearchClick()}"
+            android:src="@drawable/ic_search_active"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <com.lorentzos.flingswipe.SwipeFlingAdapterView
-            android:id="@+id/image_frame"
+            android:id="@+id/browsing_fragment_image_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/bnb_icon_size"
             android:layout_marginStart="@dimen/base_margin_small"
+            android:layout_marginTop="@dimen/bnb_icon_size"
             android:layout_marginEnd="@dimen/base_margin_small"
+            android:layout_marginBottom="@dimen/base_margin_extra_small"
             app:rotation_degrees="9"
             tools:context=".presentation.MainActivity" />
 
         <ImageView
-            android:id="@+id/swipe_image_no_internet_connection_image"
+            android:id="@+id/browsing_fragment_no_internet_connection_image"
             android:layout_width="@dimen/profile_image_half"
             android:layout_height="@dimen/profile_image_half"
             android:src="@drawable/ic_no_internet_connection"
-            app:layout_constraintEnd_toEndOf="parent"
             android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/browsing_fragment_retry_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/image_frame"
-            app:layout_constraintBottom_toTopOf="@+id/swipe_image_retry_text_view"
+            app:layout_constraintTop_toTopOf="@+id/browsing_fragment_image_frame"
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/swipe_image_retry_text_view"
+            android:id="@+id/browsing_fragment_retry_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
             android:background="@drawable/button_background_green_stroke_rectangle"
+            android:onClick="@{(view) -> callback.onRetryClicked()}"
             android:padding="@dimen/base_margin_medium"
             android:text="@string/title_try_again"
-            android:visibility="gone"
-            android:textSize="@dimen/base_text_size_big"
             android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/base_text_size_big"
             android:textStyle="bold"
-            android:onClick="@{(view) -> callback.onRetryClicked()}"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/browsing_fragment_progress_bar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/swipe_image_progress_bar"
             tools:ignore="ContentDescription" />
 
         <ImageView
-            android:id="@+id/swipe_image_like_image"
+            android:id="@+id/browsing_fragment_like_image"
             android:layout_width="@dimen/profile_image_quarter"
             android:layout_height="@dimen/profile_image_quarter"
             android:layout_marginBottom="@dimen/profile_image_half"
-            android:padding="@dimen/base_padding_medium"
             android:background="@drawable/circle_gradient_grey_background_alpha_40"
+            android:padding="@dimen/base_padding_medium"
             android:src="@drawable/ic_heart_70"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="parent"
@@ -96,12 +97,12 @@
             tools:ignore="ContentDescription" />
 
         <ImageView
-            android:id="@+id/swipe_image_dislike_image"
+            android:id="@+id/browsing_fragment_dislike_image"
             android:layout_width="@dimen/profile_image_quarter"
             android:layout_height="@dimen/profile_image_quarter"
             android:layout_marginBottom="@dimen/profile_image_half"
-            android:padding="@dimen/base_padding_small"
             android:background="@drawable/circle_gradient_grey_background_alpha_40"
+            android:padding="@dimen/base_padding_small"
             android:src="@drawable/ic_exit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="parent"
@@ -109,7 +110,7 @@
             tools:ignore="ContentDescription" />
 
         <ProgressBar
-            android:id="@+id/swipe_image_progress_bar"
+            android:id="@+id/browsing_fragment_progress_bar"
             android:layout_width="@dimen/profile_image_half"
             android:layout_height="@dimen/profile_image_half"
             android:theme="@style/Widget.AppCompat.ProgressBar"

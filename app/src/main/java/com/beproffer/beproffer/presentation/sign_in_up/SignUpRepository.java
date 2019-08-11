@@ -34,8 +34,12 @@ class SignUpRepository {
         mApplication = application;
     }
 
-    public void signUpNewUser(String userEmail, String userPassword,
-                              String userName, String userType, String userPhone) {
+    public void signUpNewUser(String userEmail,
+                              String userPassword,
+                              String userName,
+                              String userType,
+                              @Nullable String userSpecialistType,
+                              @Nullable String userPhone) {
         feedBackToUi(true, null, null, null, true);
         mAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(signUpTask -> {
             if (signUpTask.isSuccessful()) {
@@ -48,6 +52,7 @@ class SignUpRepository {
                                     .putString(Const.USERTYPE, userType).apply();
                             saveUserDataToDatabase(new UserInfo(mAuth.getCurrentUser().getUid(),
                                     userType,
+                                    userSpecialistType,
                                     userName,
                                     userEmail,
                                     userPhone,
