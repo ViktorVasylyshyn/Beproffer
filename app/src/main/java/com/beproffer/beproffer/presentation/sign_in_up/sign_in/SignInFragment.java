@@ -14,9 +14,10 @@ import android.view.ViewGroup;
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SignInFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
+import com.beproffer.beproffer.presentation.browsing.BrowsingViewModel;
 import com.beproffer.beproffer.presentation.profile.profile.ProfileFragment;
 import com.beproffer.beproffer.presentation.sign_in_up.customer_sign_up.CustomerSignUpFragment;
-import com.beproffer.beproffer.presentation.browsing.BrowsingViewModel;
+import com.beproffer.beproffer.presentation.sign_in_up.specialist_sign_up.SpecialistSignUpFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
@@ -39,7 +40,7 @@ public class SignInFragment extends BaseFragment {
 
         @Override
         public void onSpecialistSignUpClick() {
-            changeFragment(new CustomerSignUpFragment(), true, false, false);
+            changeFragment(new SpecialistSignUpFragment(), true, false, false);
         }
 
         @Override
@@ -103,7 +104,7 @@ public class SignInFragment extends BaseFragment {
                     processing(false);
                     hideKeyboard(requireActivity());
                     if (auth.getCurrentUser().isEmailVerified()) {
-                        changeFragment(new ProfileFragment(), true, true,false);
+                        changeFragment(new ProfileFragment(), true, true, false);
                         ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class).refreshAdapter();
                     } else {
                         auth.signOut();

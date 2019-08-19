@@ -48,7 +48,8 @@
             android:layout_width="@dimen/icons_size_normal_width"
             android:layout_height="@dimen/icons_size_normal_height"
             android:layout_margin="@dimen/base_margin_small"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/contact_item_phone"
+            app:layout_constraintBottom_toBottomOf="@+id/contact_item_phone"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="ContentDescription"
             app:setSpecialistTypeImage="@{item.contactSpecialistType}"/>

@@ -235,4 +235,6 @@ public class BrowsingFragment extends BaseUserInfoFragment {
         mSearchSheet = new SearchSheetDialog();
         mSearchSheet.show(requireActivity().getSupportFragmentManager(), "mSearchSheet");
     }
+
+
 }

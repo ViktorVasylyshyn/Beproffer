@@ -195,6 +195,10 @@ public class ContactsFragment extends BaseUserInfoFragment {
     }
 
     private void handleContactRequest(ContactRequestItem handledItem, boolean confirm) {
+        if(mCurrentUserInfo.getUserSpecialistType() == null || mCurrentUserInfo.getUserInfo() == null){
+            showToast(R.string.toast_add_personal_info_first);
+            return;
+        }
         mUserDataViewModel.handleIncomingContactRequest(handledItem, confirm);
     }
 }

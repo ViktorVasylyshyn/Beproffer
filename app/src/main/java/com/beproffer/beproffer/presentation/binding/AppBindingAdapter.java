@@ -113,7 +113,7 @@ public class AppBindingAdapter {
                     imageResId = R.drawable.ic_fitness;
                     break;
                 default:
-                    throw new IllegalArgumentException(Const.UNKNSTAT);
+                    return;
             }
             view.setImageResource(imageResId);
         }

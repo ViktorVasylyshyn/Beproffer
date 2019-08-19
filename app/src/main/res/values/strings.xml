@@ -3,7 +3,7 @@
     <!--App's name-->
     <string name="app_name">Beproffer</string>
     <string name="app_name_low_case">beproffer</string>
-    <string name="app_version">v 0.9.0</string>
+    <string name="app_version">v 0.9.2</string>
     <string name="app_all_rights_reserved">Copyright 2019 "Beproffer" LLC. All rights reserved.</string>
 
 
@@ -184,6 +184,7 @@
     <string name="toast_guest_mode">Guest mode.</string>
     <string name="toast_processing">Wait a second, please. Processing…</string>
     <string name="toast_no_any_service_items">There are no publications for this request yet. Please, try again later.</string>
+    <string name="toast_add_personal_info_first">Please, add information about you to "edit profile" section first.</string>
 
 
     <string name="error_message_exception_sign_up_weak_password">Please, create more complicated password.</string>
