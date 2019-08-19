@@ -12,7 +12,6 @@ import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.beproffer.beproffer.R;
@@ -30,6 +29,35 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
 
     private SearchSheetLayoutBinding mBinding;
 
+    private SearchSheetCallback mCallback = new SearchSheetCallback() {
+        @Override
+        public void onServiceTypeIconClicked(View view) {
+            defineServiceType(view);
+        }
+
+        @Override
+        public void onGenderClicked(View view) {
+            handleGenderClick(view);
+        }
+
+        @Override
+        public void onApplyClicked() {
+            if (mGender == null || mTypeMap == null) {
+                mBinding.sslApply.setClickable(false);
+                Toast.makeText(requireContext(), R.string.toast_define_search_params, Toast.LENGTH_SHORT).show();
+                Handler handler = new Handler();
+                handler.postDelayed(() -> mBinding.sslApply.setClickable(true), Const.COOLDOWNDUR_SHORT);
+                return;
+            }
+            applySearchRequest();
+        }
+
+        @Override
+        public void onDenyClicked() {
+            dismiss();
+        }
+    };
+
     private Map<String, String> mTypeMap;
 
     private String mGender;
@@ -39,35 +67,12 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle saveInstantState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.search_sheet_layout, container, false);
         mBinding.setLifecycleOwner(this);
-        /*пока что так, потому что хуй его знает, как его по другому сделать :(*/
-        mBinding.sslHaircutIcon.setOnClickListener(v -> defineServiceType(mBinding.sslHaircutIcon));
-        mBinding.sslNailsIcon.setOnClickListener(v -> defineServiceType(mBinding.sslNailsIcon));
-        mBinding.sslMakeupIcon.setOnClickListener(v -> defineServiceType(mBinding.sslMakeupIcon));
-        mBinding.sslTattooIcon.setOnClickListener(v -> defineServiceType(mBinding.sslTattooIcon));
-        mBinding.sslBarberIcon.setOnClickListener(v -> defineServiceType(mBinding.sslBarberIcon));
-        mBinding.sslFitnessIcon.setOnClickListener(v -> defineServiceType(mBinding.sslFitnessIcon));
-
-        mBinding.sslMaleTextView.setOnClickListener(v -> handleGenderClick(mBinding.sslMaleTextView));
-        mBinding.sslFemaleTextView.setOnClickListener(v -> handleGenderClick(mBinding.sslFemaleTextView));
-        mBinding.sslBothTextView.setOnClickListener(v -> handleGenderClick(mBinding.sslBothTextView));
-
-        mBinding.sslApply.setOnClickListener(v -> {
-            if (mGender == null || mTypeMap == null) {
-                mBinding.sslApply.setClickable(false);
-                Toast.makeText(requireContext(), R.string.toast_define_search_params, Toast.LENGTH_SHORT).show();
-                Handler handler = new Handler();
-                handler.postDelayed(() -> mBinding.sslApply.setClickable(true), Const.COOLDOWNDUR_SHORT);
-                return;
-            }
-            applySearchRequest();
-        });
-
-        mBinding.sslDeny.setOnClickListener(v -> dismiss());
+        mBinding.setCallback(mCallback);
 
         return mBinding.getRoot();
     }
 
-    private void defineServiceType(ImageView view) {
+    private void defineServiceType(View view) {
         int requiredMenuRes;
         switch (view.getId()) {
             case R.id.ssl_haircut_icon:

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="callback"
+            type="com.beproffer.beproffer.presentation.browsing.search_sheet.SearchSheetCallback" />
+
+    </data>
+
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -13,6 +21,7 @@
             android:layout_width="@dimen/bnb_icon_size"
             android:layout_height="@dimen/bnb_icon_size"
             android:layout_margin="@dimen/base_margin_small"
+            android:onClick="@{(view) -> callback.onDenyClicked()}"
             android:src="@drawable/ic_exit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,6 +44,7 @@
             android:layout_width="@dimen/bnb_icon_size"
             android:layout_height="@dimen/bnb_icon_size"
             android:layout_margin="@dimen/base_margin_small"
+            android:onClick="@{(view)-> callback.onApplyClicked()}"
             android:src="@drawable/ic_check_mark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -65,6 +75,7 @@
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:layout_margin="@dimen/base_margin_extra_small"
                     android:background="@drawable/button_background_grey_stroke_rectangle"
+                    android:onClick="@{callback::onServiceTypeIconClicked}"
                     android:src="@drawable/ic_haircut"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -76,6 +87,7 @@
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:layout_margin="@dimen/base_margin_extra_small"
                     android:background="@drawable/button_background_grey_stroke_rectangle"
+                    android:onClick="@{callback::onServiceTypeIconClicked}"
                     android:src="@drawable/ic_nails"
                     app:layout_constraintStart_toEndOf="@+id/ssl_haircut_icon"
                     app:layout_constraintTop_toTopOf="parent"
@@ -87,6 +99,7 @@
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:layout_margin="@dimen/base_margin_extra_small"
                     android:background="@drawable/button_background_grey_stroke_rectangle"
+                    android:onClick="@{callback::onServiceTypeIconClicked}"
                     android:src="@drawable/ic_makeup"
                     app:layout_constraintStart_toEndOf="@+id/ssl_nails_icon"
                     app:layout_constraintTop_toTopOf="parent"
@@ -98,6 +111,7 @@
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:layout_margin="@dimen/base_margin_extra_small"
                     android:background="@drawable/button_background_grey_stroke_rectangle"
+                    android:onClick="@{callback::onServiceTypeIconClicked}"
                     android:src="@drawable/ic_tattoo"
                     app:layout_constraintStart_toEndOf="@+id/ssl_makeup_icon"
                     app:layout_constraintTop_toTopOf="parent"
@@ -109,6 +123,7 @@
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:layout_margin="@dimen/base_margin_extra_small"
                     android:background="@drawable/button_background_grey_stroke_rectangle"
+                    android:onClick="@{callback::onServiceTypeIconClicked}"
                     android:src="@drawable/ic_barbershop"
                     app:layout_constraintStart_toEndOf="@+id/ssl_tattoo_icon"
                     app:layout_constraintTop_toTopOf="parent"
@@ -120,6 +135,7 @@
                     android:layout_height="@dimen/icons_size_normal_height"
                     android:layout_margin="@dimen/base_margin_extra_small"
                     android:background="@drawable/button_background_grey_stroke_rectangle"
+                    android:onClick="@{callback::onServiceTypeIconClicked}"
                     android:src="@drawable/ic_fitness"
                     app:layout_constraintStart_toEndOf="@+id/ssl_barber_icon"
                     app:layout_constraintTop_toTopOf="parent"
@@ -146,8 +162,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
-            android:text="@string/title_for"
             android:padding="@dimen/base_padding_small"
+            android:text="@string/title_for"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_medium"
             android:textStyle="italic"
@@ -170,6 +186,7 @@
                 android:id="@+id/ssl_male_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="@{callback::onGenderClicked}"
                 android:paddingStart="@dimen/base_margin_big"
                 android:paddingTop="@dimen/base_padding_small"
                 android:paddingEnd="@dimen/base_margin_big"
@@ -183,6 +200,7 @@
                 android:id="@+id/ssl_female_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="@{callback::onGenderClicked}"
                 android:paddingStart="@dimen/base_margin_big"
                 android:paddingTop="@dimen/base_padding_small"
                 android:paddingEnd="@dimen/base_margin_big"
@@ -196,6 +214,7 @@
                 android:id="@+id/ssl_both_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="@{callback::onGenderClicked}"
                 android:paddingStart="@dimen/base_margin_big"
                 android:paddingTop="@dimen/base_padding_small"
                 android:paddingEnd="@dimen/base_margin_big"

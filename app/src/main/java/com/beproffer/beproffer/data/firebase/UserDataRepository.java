@@ -408,8 +408,8 @@ public class UserDataRepository {
                     child(currentUserInfo.getUserId()).
                     setValue(new ContactItem(currentUserInfo.getUserId(),
                             currentUserInfo.getUserName(),
-                            currentUserInfo.getUserSpecialistType(),
                             currentUserInfo.getUserPhone(),
+                            currentUserInfo.getUserSpecialistType(),
                             currentUserInfo.getUserInfo(),
                             currentUserInfo.getUserProfileImageUrl())).addOnSuccessListener(aVoid ->
                     deleteIncomingContactRequestData(handledItem, R.string.toast_contact_confirmed))

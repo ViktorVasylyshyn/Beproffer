@@ -120,6 +120,7 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
         }
 
         if (mCurrentUserInfo.getUserType().equals(Const.SPEC) && mCurrentUserInfo.getUserSpecialistType() == null) {
+            showToast(R.string.hint_choose_main_specialization);
             mBinding.editFragmentBottomHint.setText(R.string.hint_choose_main_specialization);
             return;
         }
