@@ -6,86 +6,88 @@ import android.support.annotation.Nullable;
 
 public class UserInfo {
 
-    private String userId;
-    private String userType;
-    private String userSpecialistType;
-    private String userName;
-    private String userEmail;
-    private String userPhone;
-    private String userProfileImageUrl;
-    private String userInfo;
+    private String id;
+    private String type;
+    private String specialization; /*relevant for specialists' only*/
+    private String name;
+    private String email;
+    private String phone;
+    private String profileImageUrl;
+    private String description;
+    /*TODO в будущем добавить локализацию юзера, которую от сам, мануально будет задавать*/
 
-    /*constructor without params for Firebase*/
-    public UserInfo() {}
+    public UserInfo() {
+        /*public no-arg constructor needed for for Firebase*/
+    }
 
-    public UserInfo(@NonNull String userId,
-                    String userType,
-                    @Nullable String userSpecialistType,
-                    String userName,
-                    String userEmail,
-                    @Nullable String userPhone,
-                    @Nullable String userProfileImageUrl,
-                    @Nullable String userInfo) {
-        this.userId = userId;
-        this.userType = userType;
-        this.userSpecialistType = userSpecialistType;
-        this.userName = userName;
-        this.userEmail = userEmail;
-        this.userPhone = userPhone;
-        this.userProfileImageUrl = userProfileImageUrl;
-        this.userInfo = userInfo;
+    public UserInfo(@NonNull String id,
+                    String type,
+                    @Nullable String specialization,
+                    String name,
+                    String email,
+                    @Nullable String phone,
+                    @Nullable String profileImageUrl,
+                    @Nullable String description) {
+        this.id = id;
+        this.type = type;
+        this.specialization = specialization;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.profileImageUrl = profileImageUrl;
+        this.description = description;
     }
 
     @NonNull
-    public String getUserId() {
-        return userId;
+    public String getId() {
+        return id;
     }
 
-    public String getUserType() {
-        return userType;
+    public String getType() {
+        return type;
     }
 
-    public String getUserSpecialistType() {
-        return userSpecialistType;
+    public String getSpecialization() {
+        return specialization;
     }
 
-    public void setUserSpecialistType(String userSpecialistType) {
-        this.userSpecialistType = userSpecialistType;
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public String getUserPhone() {
-        return userPhone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getUserProfileImageUrl() {
-        return userProfileImageUrl;
+    public String getProfileImageUrl() {
+        return profileImageUrl;
     }
 
-    public void setUserProfileImageUrl(String userProfileImageUrl) {
-        this.userProfileImageUrl = userProfileImageUrl;
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 
-    public String getUserInfo() {
-        return userInfo;
+    public String getDescription() {
+        return description;
     }
 
-    public void setUserInfo(String userInfo) {
-        this.userInfo = userInfo;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -6,27 +6,32 @@ import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.beproffer.beproffer.data.firebase.SwipeImagesRepository;
-import com.beproffer.beproffer.data.models.BrowsingItem;
+import com.beproffer.beproffer.data.firebase.BrowsingItemsRepository;
+import com.beproffer.beproffer.data.models.BrowsingItemRef;
+import com.beproffer.beproffer.data.models.BrowsingImageItem;
 
 import java.util.List;
 
 public class BrowsingViewModel extends AndroidViewModel {
 
-    private final SwipeImagesRepository mRepository;
+    private final BrowsingItemsRepository mRepository;
 
-    private LiveData<List<BrowsingItem>> mSwipeImageItemsList;
+    private LiveData<List<BrowsingItemRef>> mBrowsingItemRefsList;
 
     public BrowsingViewModel(@NonNull Application application) {
         super(application);
-        mRepository = new SwipeImagesRepository(application);
-        if(mSwipeImageItemsList == null)
-            mSwipeImageItemsList = mRepository.getSwipeImageItemsListLiveData();
+        mRepository = new BrowsingItemsRepository(application);
+        if (mBrowsingItemRefsList == null)
+            mBrowsingItemRefsList = mRepository.getBrowsingItemRefListLiveData();
 
     }
 
-    public LiveData<List<BrowsingItem>> getSwipeImageItemsList() {
-        return mSwipeImageItemsList;
+    public LiveData<List<BrowsingItemRef>> getBrowsingItemRefsList() {
+        return mBrowsingItemRefsList;
+    }
+
+    public LiveData<BrowsingImageItem> getBrowsingItemInfo() {
+        return mRepository.getTargetBrowsingItemLiveData();
     }
 
     public LiveData<Boolean> getShowProgress() {
@@ -41,15 +46,19 @@ public class BrowsingViewModel extends AndroidViewModel {
         return mRepository.getPerformSearch();
     }
 
-    public void deleteObservedImageItem(BrowsingItem item) {
-        mRepository.deleteObservedImageItem(item);
+    public void deleteObservedItem(BrowsingItemRef item) {
+        mRepository.deleteObservedItem(item);
     }
 
-    public void refreshAdapter(){
+    public void obtainBrowsingItemDetailInfo(BrowsingItemRef itemRef) {
+        mRepository.obtainBrowsingItemDetailInfo(itemRef);
+    }
+
+    public void refreshAdapter() {
         mRepository.refreshAdapter();
     }
 
-    public void clearBrowsingHistory(){
+    public void clearBrowsingHistory() {
         mRepository.clearBrowsingHistory();
     }
 

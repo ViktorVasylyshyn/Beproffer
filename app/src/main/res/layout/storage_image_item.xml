@@ -7,7 +7,7 @@
 
         <variable
             name="image"
-            type="com.beproffer.beproffer.data.models.SpecialistGalleryImageItem" />
+            type="com.beproffer.beproffer.data.models.BrowsingImageItem" />
 
     </data>
 

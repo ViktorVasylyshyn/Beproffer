@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
+import com.beproffer.beproffer.data.models.BrowsingImageItem;
 import com.beproffer.beproffer.databinding.SpecialistEditGalleryItemFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.util.Const;
@@ -28,7 +28,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
 
 
     private SpecialistEditGalleryItemFragmentBinding mBinding;
-    private SpecialistGalleryImageItem mUpdatedImageItem;
+    private BrowsingImageItem mUpdatedImageItem;
     private String mPrimordialItemType;
     private String mPrimordialItemSubtype;
     private Uri mResultUri;
@@ -203,9 +203,6 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
             case R.id.specialist_gallery_edit_gender_female:
                 gender = Const.FEMALE;
                 break;
-            case R.id.specialist_gallery_edit_gender_both:
-                gender = Const.BOTHGEND;
-                break;
             default:
                 throw new IllegalArgumentException(Const.UNKNSTAT);
         }
@@ -324,16 +321,12 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
             case Const.FEMALE:
                 targetTextView = mBinding.specialistGalleryEditGenderFemale;
                 break;
-            case Const.BOTHGEND:
-                targetTextView = mBinding.specialistGalleryEditGenderBoth;
-                break;
             default:
                 throw new IllegalArgumentException(Const.UNKNSTAT);
         }
 
         mBinding.specialistGalleryEditGenderMale.setBackgroundResource(R.drawable.background_transparent);
         mBinding.specialistGalleryEditGenderFemale.setBackgroundResource(R.drawable.background_transparent);
-        mBinding.specialistGalleryEditGenderBoth.setBackgroundResource(R.drawable.background_transparent);
 
         targetTextView.setBackgroundResource(R.drawable.button_background_green_stroke_rectangle);
     }

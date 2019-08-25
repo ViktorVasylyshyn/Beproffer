@@ -11,12 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.data.models.BrowsingItem;
+import com.beproffer.beproffer.data.models.BrowsingImageItem;
 import com.beproffer.beproffer.data.models.ContactItem;
-import com.beproffer.beproffer.data.models.ContactRequestItem;
 import com.beproffer.beproffer.databinding.BrowsingImageInfoFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
-import com.beproffer.beproffer.presentation.browsing.BrowsingItemTransferViewModel;
+import com.beproffer.beproffer.presentation.browsing.BrowsingViewModel;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -25,7 +24,7 @@ import java.util.Map;
 public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
 
     private BrowsingImageInfoFragmentBinding mBinding;
-    private BrowsingItem mItem;
+    private BrowsingImageItem mItem;
     private Map<String, ContactItem> mContacts;
     private Map<String, Boolean> mOutgoingContactRequests;
 
@@ -75,58 +74,59 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
             }
         });
         mUserDataViewModel.getOutgoingContactRequests().observe(this, contactRequests -> {
-            if (contactRequests != null)
+            if (contactRequests != null) {
                 mOutgoingContactRequests = contactRequests;
-            syncDataWithUi();
+                syncDataWithUi();
+            }
         });
 
         showProgress(false);
     }
 
     private void obtainImageItem() {
-        ViewModelProviders.of(requireActivity()).get(BrowsingItemTransferViewModel.class).getBrowsingItem().observe(this, item -> {
+        ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class).getBrowsingItemInfo().observe(getViewLifecycleOwner(), item -> {
             if (item != null) {
                 mItem = item;
                 mBinding.setImageItem(mItem);
+                syncDataWithUi();
             }
         });
     }
 
     private void syncDataWithUi() {
-        if (mItem.getUid().equals(mCurrentUserInfo.getUserId())) {
-            requestButtonIsInactive(R.string.title_this_is_your_image);
-            return;
+        if (mItem != null && mContacts != null && mOutgoingContactRequests != null) {
+            if (mItem.getId().equals(mCurrentUserInfo.getId())) {
+                requestButtonIsInactive(R.string.title_this_is_your_image);
+                return;
+            }
+
+            if (mOutgoingContactRequests != null && mOutgoingContactRequests.containsKey(mItem.getId())) {
+                requestButtonIsInactive(R.string.title_request_already_sent);
+                mBinding.browsingImageInfoBottomHint.setText(R.string.hint_wait_for_confirmation);
+                mBinding.browsingImageInfoBottomHint.setVisibility(View.VISIBLE);
+
+                return;
+            }
+
+            if (mContacts != null && mContacts.containsKey(mItem.getId())) {
+                requestButtonIsInactive(R.string.title_contact_already_available);
+                return;
+            }
+
+            if (mContacts != null && mContacts.size() > Const.CONTACTS_NUM) {
+                requestButtonIsInactive(R.string.title_max_num_of_contacts);
+            }
         }
-
-        if (mOutgoingContactRequests != null && mOutgoingContactRequests.containsKey(mItem.getUid())) {
-            requestButtonIsInactive(R.string.title_request_already_sent);
-            mBinding.browsingImageInfoBottomHint.setText(R.string.hint_wait_for_confirmation);
-            mBinding.browsingImageInfoBottomHint.setVisibility(View.VISIBLE);
-
-            return;
-        }
-
-        if (mContacts != null && mContacts.containsKey(mItem.getUid())) {
-            requestButtonIsInactive(R.string.title_contact_already_available);
-            return;
-        }
-
-        if (mContacts != null && mContacts.size() > Const.CONTACTS_NUM) {
-            requestButtonIsInactive(R.string.title_max_num_of_contacts);
-        }
-
     }
 
     private void sendContactRequest() {
         if (getFirebaseUser() == null || mCurrentUserInfo == null) {
+            /*TODO make message via view not via toast*/
             showToast(R.string.toast_available_for_registered);
             return;
         }
 
-        mUserDataViewModel.sendContactRequest(new ContactRequestItem(mCurrentUserInfo.getUserId()
-                , mCurrentUserInfo.getUserType()
-                , mCurrentUserInfo.getUserName()
-                , mCurrentUserInfo.getUserProfileImageUrl()), mItem.getUid());
+        mUserDataViewModel.sendContactRequest(mItem.getId());
 
         requestButtonIsInactive(R.string.title_request_already_sent);
     }
@@ -140,14 +140,17 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
 
     private void handleOnVoteClick() {
         if (getFirebaseUser() == null || mCurrentUserInfo == null) {
+            /*TODO make message via view not via toast*/
             showToast(R.string.toast_available_for_registered);
             return;
         }
         if (!checkInternetConnection()) {
+            /*TODO make message via view not via toast*/
             showToast(R.string.toast_no_internet_connection);
             return;
         }
         if (mProcessing.get()) {
+            /*TODO make message via view not via toast*/
             showToast(R.string.toast_processing);
             return;
         }
@@ -175,7 +178,7 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
                 .child(Const.SERVICES)
                 .child(Const.VOTES)
                 .child(section)
-                .child(mCurrentUserInfo.getUserId())
+                .child(mCurrentUserInfo.getId())
                 .setValue(mItem)
                 .addOnSuccessListener(aVoid -> {
                     mBinding.browsingImageInfoVoteTopHint.setText(R.string.hint_any_prohibited_content);

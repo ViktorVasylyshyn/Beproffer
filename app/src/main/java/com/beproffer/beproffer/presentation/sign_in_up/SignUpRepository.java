@@ -88,8 +88,8 @@ class SignUpRepository {
     private void saveUserDataToDatabase(UserInfo userInfo) {
         FirebaseDatabase.getInstance().getReference()
                 .child(Const.USERS)
-                .child(userInfo.getUserType())
-                .child(userInfo.getUserId())
+                .child(userInfo.getType())
+                .child(userInfo.getId())
                 .child(Const.INFO)
                 .setValue(userInfo).addOnSuccessListener(aVoid -> {
             FirebaseAuth.getInstance().signOut();

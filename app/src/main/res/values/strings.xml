@@ -36,7 +36,7 @@
     <string name="hint_specialist_add_more_images">Add more images to your gallery, to find more customers.</string>
     <string name="hint_outfield_confirm">confirm</string>
     <string name="hint_outfield_deny">deny</string>
-    <string name="hint_join_us_on_social">Join us in social networks. Share your impressions and wishes. The links to our social networks are in the "info" section.</string>
+    <string name="hint_join_us_on_social">Join us in social networks. Share your impressions and wishes. The links to our social networks are in the "description" section.</string>
     <string name="hint_wait_for_confirmation">Wait until the request is confirmed by the specialist. It\'ll appear in your contacts\' list.</string>
     <string name="hint_choose_main_specialization">Please, choose your main specialization.</string>
 
@@ -191,7 +191,7 @@
     <string name="error_message_exception_sign_up_invalid_credentials">Invalid credentials.</string>
     <string name="error_message_exception_sign_up_collision">Profile with such email already exists.</string>
     <string name="error_message_exception_sign_in_invalid_user">Profile with such email does\'t exist.</string>
-    <string name="error_message_exception_sign_in_invalid_credentials">Incorrect password or email address.</string>
+    <string name="error_message_exception_sign_in_invalid_credentials">Incorrect password.</string>
     <string name="error_message_enter_email">Enter your email first.</string>
     <string name="error_message_delete_profile_wrong_email">Incorrect email.</string>
     <string name="error_message_wrong_phone_number_format">Incorrect format of phone number.</string>

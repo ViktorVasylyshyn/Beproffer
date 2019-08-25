@@ -13,7 +13,7 @@
 
         <variable
             name="item"
-            type="com.beproffer.beproffer.data.models.SpecialistGalleryImageItem" />
+            type="com.beproffer.beproffer.data.models.BrowsingImageItem" />
 
         <variable
             name="callback"
@@ -274,20 +274,6 @@
                 android:paddingTop="@dimen/base_padding_small"
                 android:paddingBottom="@dimen/base_padding_small"
                 android:text="@string/title_gender_female"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:textColor="@color/color_base_text"
-                android:textSize="@dimen/base_text_size_medium"
-                tools:ignore="ButtonStyle" />
-
-            <TextView
-                android:id="@+id/specialist_gallery_edit_gender_both"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="@{callback::onGenderButtonClick}"
-                android:paddingTop="@dimen/base_padding_small"
-                android:paddingBottom="@dimen/base_padding_small"
-                android:text="@string/title_gender_all_genders"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:textColor="@color/color_base_text"

@@ -1,54 +1,55 @@
 package com.beproffer.beproffer.data.models;
 
 public class ContactItem {
+    /*it always contains only specialists' data*/
 
-    private String contactUid;
-    private String contactName;
-    private String contactPhone;
-    private String contactSpecialistType;
-    private String contactImageUrl;
-    private String contactInfo;
+    private String id;
+    private String name;
+    private String phone;
+    private String specialization;
+    private String profileImageUrl;
+    private String description;
 
-    /*constructor without parameters for Firebase*/
-    private ContactItem() {
+    public ContactItem() {
+        /*private no-arg constructor for Firebase*/
     }
 
-    public ContactItem(String contactUid,
-                       String contactName,
-                       String contactPhone,
-                       String contactSpecialistType,
-                       String contactInfo,
-                       String contactImageUrl) {
-        this.contactUid = contactUid;
-        this.contactName = contactName;
-        this.contactPhone = contactPhone;
-        this.contactSpecialistType = contactSpecialistType;
-        this.contactInfo = contactInfo;
-        this.contactImageUrl = contactImageUrl;
+    public ContactItem(String id,
+                       String name,
+                       String phone,
+                       String specialization,
+                       String description,
+                       String profileImageUrl) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.specialization = specialization;
+        this.description = description;
+        this.profileImageUrl = profileImageUrl;
     }
 
-    public String getContactUid() {
-        return contactUid;
+    public String getId() {
+        return id;
     }
 
-    public String getContactName() {
-        return contactName;
+    public String getName() {
+        return name;
     }
 
-    public String getContactPhone() {
-        return contactPhone;
+    public String getPhone() {
+        return phone;
     }
 
-    public String getContactInfo() {
-        return contactInfo;
+    public String getDescription() {
+        return description;
     }
 
-    public String getContactSpecialistType() {
-        return contactSpecialistType;
+    public String getSpecialization() {
+        return specialization;
     }
 
-    public String getContactImageUrl() {
-        return contactImageUrl;
+    public String getProfileImageUrl() {
+        return profileImageUrl;
     }
 }
 

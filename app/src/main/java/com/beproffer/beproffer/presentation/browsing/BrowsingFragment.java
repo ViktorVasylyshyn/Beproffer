@@ -13,13 +13,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.data.models.BrowsingItem;
+import com.beproffer.beproffer.data.models.BrowsingItemRef;
 import com.beproffer.beproffer.databinding.BrowsingFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.browsing.adapter.BrowsingAdapter;
 import com.beproffer.beproffer.presentation.browsing.info.BrowsingItemInfoFragment;
 import com.beproffer.beproffer.presentation.browsing.search_sheet.SearchSheetDialog;
-import com.beproffer.beproffer.util.Const;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.List;
@@ -33,7 +32,7 @@ public class BrowsingFragment extends BaseUserInfoFragment {
 
     private BrowsingAdapter mBrowsingAdapter;
 
-    private List<BrowsingItem> mImageItemsList;
+    private List<BrowsingItemRef> mImageItemsList;
 
     private SearchSheetDialog mSearchSheet;
 
@@ -66,8 +65,6 @@ public class BrowsingFragment extends BaseUserInfoFragment {
         super.onActivityCreated(savedInstanceState);
         mBinding.setShowProgress(mShowProgress);
         mBinding.setCallback(mCallback);
-        /*откровенно говоря, в этом активити наговнокожен лютый пиздец, как и во многих других...
-        ну а что делать, если я по другому не умею :(*/
     }
 
     @Override
@@ -95,16 +92,7 @@ public class BrowsingFragment extends BaseUserInfoFragment {
 
     @Override
     public void applyUserData() {
-
-        if (mCurrentUserInfo.getUserType().equals(Const.SPEC)) {
-            mUserDataViewModel.getIncomingContactRequests().observe(this, list -> {
-                if (list != null) {
-                    if (!list.isEmpty()) {
-                        setBadge(Const.CONTBNBINDEX);
-                    }
-                }
-            });
-        }
+        setBadgeIfNeed();
         connectToRepository();
     }
 
@@ -118,7 +106,7 @@ public class BrowsingFragment extends BaseUserInfoFragment {
             mBrowsingViewModel = ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class);
         }
         /*получения списка объектов для отображения*/
-        mBrowsingViewModel.getSwipeImageItemsList().observe(getViewLifecycleOwner(), list -> {
+        mBrowsingViewModel.getBrowsingItemRefsList().observe(getViewLifecycleOwner(), list -> {
             if (list == null)
                 return;
             mImageItemsList = list;
@@ -153,7 +141,7 @@ public class BrowsingFragment extends BaseUserInfoFragment {
     private void initAdapter() {
         mBrowsingAdapter = null;
         int layoutId;
-        /*потому что  не смог я настроить нормально отображения картинок на ос меньше 21. чем больше
+        /*на ос меньше api 21 не работают некоторые особенности разметки лейаута. чем больше
         делаешь радиус углов тем больше изображение этим сдвигается вцентр, тоесть углы не
         хотят обрезаться поетому на апи 19 будет без округления углов*/
         if (hasLollipop()) {
@@ -196,7 +184,7 @@ public class BrowsingFragment extends BaseUserInfoFragment {
     }
 
     private void onCardExit(Object imageItem) {
-        mBrowsingViewModel.deleteObservedImageItem((BrowsingItem) imageItem);
+        mBrowsingViewModel.deleteObservedItem((BrowsingItemRef) imageItem);
     }
 
     private void onCardExitAnim(boolean isRightExit) {
@@ -219,7 +207,7 @@ public class BrowsingFragment extends BaseUserInfoFragment {
     }
 
     private void showBrowsingItemInfo(Object dataObject) {
-        ViewModelProviders.of(requireActivity()).get(BrowsingItemTransferViewModel.class).setBrowsingItem((BrowsingItem) dataObject);
+        ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class).obtainBrowsingItemDetailInfo((BrowsingItemRef) dataObject);
         changeFragment(new BrowsingItemInfoFragment(), true, false, true);
     }
 

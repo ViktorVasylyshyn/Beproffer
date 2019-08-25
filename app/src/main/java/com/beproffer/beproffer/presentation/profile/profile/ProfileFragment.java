@@ -63,13 +63,13 @@ public class ProfileFragment extends BaseUserInfoFragment {
 
     @Override
     public void applyUserData() {
-        if (mCurrentUserInfo.getUserType().equals(Const.SPEC)) {
+        if (mCurrentUserInfo.getType().equals(Const.SPEC)) {
             adaptProfileForSpecialist();
         }
         mBinding.setUserInfo(mCurrentUserInfo);
 
         hintsForUsers();
-
+        setBadgeIfNeed();
         showProgress(false);
     }
 
@@ -104,14 +104,14 @@ public class ProfileFragment extends BaseUserInfoFragment {
          * него требуютсяю в случае специалиста - подмигивание значка галлереи. если там все нормально -
          * проверяем есть ли описание профиля. предположим, что если описания нет, то профиль заполнен
          * не до концаю для кастомера же проверяем только описание*/
-        if (mCurrentUserInfo.getUserType().equals(Const.SPEC)) {
+        if (mCurrentUserInfo.getType().equals(Const.SPEC)) {
             mUserDataViewModel.getSpecialistGalleryData().observe(this, data -> {
                 if (data != null && data.size() < Const.IMAGES_BASE_SET_COUNT) {
                     Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_blinking_icon_anim);
                     mBinding.profileStorage.startAnimation(animation);
                     mBinding.profileBottomHint.setText(R.string.hint_specialist_add_more_images);
                 } else {
-                    if (mCurrentUserInfo.getUserInfo() == null || mCurrentUserInfo.getUserInfo().isEmpty()) {
+                    if (mCurrentUserInfo.getDescription() == null || mCurrentUserInfo.getDescription().isEmpty()) {
                         iconsBlinkingAnim();
                     } else {
                         joinUsHint();
@@ -119,7 +119,7 @@ public class ProfileFragment extends BaseUserInfoFragment {
                 }
             });
         } else {
-            if (mCurrentUserInfo.getUserInfo() == null || mCurrentUserInfo.getUserInfo().isEmpty()) {
+            if (mCurrentUserInfo.getDescription() == null || mCurrentUserInfo.getDescription().isEmpty()) {
                 iconsBlinkingAnim();
             } else {
                 joinUsHint();

@@ -12,26 +12,19 @@ public class BrowsingHistoryModel {
 
     private final String url;
 
-    private final String type;
-
-    public BrowsingHistoryModel(String url, String type) {
+    public BrowsingHistoryModel(String url) {
         this.url = url;
-        this.type = type;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public String getType() {
-        return type;
-    }
-
     public int getId() {
         return id;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }

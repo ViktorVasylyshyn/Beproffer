@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
+import com.beproffer.beproffer.data.models.BrowsingImageItem;
 import com.beproffer.beproffer.databinding.StorageImageItemBinding;
 import com.beproffer.beproffer.util.Callback;
 
@@ -18,10 +18,10 @@ public class GalleryImageItemAdapter extends RecyclerView.Adapter<GalleryImageIt
     @Nullable
     private Callback.OnImageClickListener mOnImageClickListener;
 
-    private List<SpecialistGalleryImageItem> mSpecialistGalleryImageItemList = Collections.emptyList();
+    private List<BrowsingImageItem> mBrowsingImageItemList = Collections.emptyList();
 
-    public void setData(List<SpecialistGalleryImageItem> mSpecialistGalleryImageItemList) {
-        this.mSpecialistGalleryImageItemList = mSpecialistGalleryImageItemList;
+    public void setData(List<BrowsingImageItem> mBrowsingImageItemList) {
+        this.mBrowsingImageItemList = mBrowsingImageItemList;
         notifyDataSetChanged();
     }
 
@@ -34,13 +34,13 @@ public class GalleryImageItemAdapter extends RecyclerView.Adapter<GalleryImageIt
 
     @Override
     public void onBindViewHolder(@NonNull GalleryImageItemViewHolder galleryImageItemViewHolder, int i) {
-        galleryImageItemViewHolder.bindData(mSpecialistGalleryImageItemList.get(i), mOnImageClickListener);
+        galleryImageItemViewHolder.bindData(mBrowsingImageItemList.get(i), mOnImageClickListener);
 
     }
 
     @Override
     public int getItemCount() {
-        return mSpecialistGalleryImageItemList.size();
+        return mBrowsingImageItemList.size();
     }
 
     public void setOnItemClickListener(@NonNull Callback.OnImageClickListener callback) {
@@ -58,11 +58,11 @@ public class GalleryImageItemAdapter extends RecyclerView.Adapter<GalleryImageIt
         }
 
 
-        void bindData(final SpecialistGalleryImageItem specialistGalleryImageItem, Callback.OnImageClickListener callback) {
-            mBinding.setImage(specialistGalleryImageItem);
+        void bindData(final BrowsingImageItem browsingImageItem, Callback.OnImageClickListener callback) {
+            mBinding.setImage(browsingImageItem);
             mBinding.getRoot().setOnClickListener(view -> {
                 if (null != callback)
-                    callback.onImageClicked( specialistGalleryImageItem);
+                    callback.onImageClicked(browsingImageItem);
             });
         }
     }

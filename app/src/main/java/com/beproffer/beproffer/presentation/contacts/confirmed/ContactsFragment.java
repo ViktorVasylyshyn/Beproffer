@@ -71,7 +71,7 @@ public class ContactsFragment extends BaseUserInfoFragment {
          * циалльных клиентов, поэтому есть смысл открывать им этот фрагмент, именно на вкладке запросов.
          * а клиентам, и вовсе, доступна только вкладка контактов. так что со старта проверяем тип узера,
          * и настраиваем интерфейс согласно нему.*/
-        switch (mCurrentUserInfo.getUserType()) {
+        switch (mCurrentUserInfo.getType()) {
             case Const.SPEC:
                 adaptUiForSpecialist();
                 obtainCustomersRequests();
@@ -115,7 +115,7 @@ public class ContactsFragment extends BaseUserInfoFragment {
     }
 
     private void obtainContacts() {
-        if (mCurrentUserInfo.getUserType().equals(Const.SPEC)) {
+        if (mCurrentUserInfo.getType().equals(Const.SPEC)) {
             mBinding.contactsContacts.setBackgroundResource(R.drawable.button_background_green_stroke_rectangle);
             mBinding.contactsContactRequests.setBackgroundResource(R.drawable.background_transparent);
             mBinding.contactsContacts.setClickable(false);
@@ -166,7 +166,7 @@ public class ContactsFragment extends BaseUserInfoFragment {
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.confirmed_contact_menu_call:
-                    startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + item.getContactPhone())));
+                    startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + item.getPhone())));
                     break;
                 case R.id.confirmed_contact_menu_delete:
                     mUserDataViewModel.deleteContact(item);
@@ -195,7 +195,7 @@ public class ContactsFragment extends BaseUserInfoFragment {
     }
 
     private void handleContactRequest(ContactRequestItem handledItem, boolean confirm) {
-        if(mCurrentUserInfo.getUserSpecialistType() == null || mCurrentUserInfo.getUserInfo() == null){
+        if(mCurrentUserInfo.getSpecialization() == null || mCurrentUserInfo.getDescription() == null){
             showToast(R.string.toast_add_personal_info_first);
             return;
         }
