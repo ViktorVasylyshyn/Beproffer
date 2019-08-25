@@ -2,39 +2,44 @@ package com.beproffer.beproffer.data.models;
 
 public class ContactRequestItem {
 
-    private String requestUid;
-    private String requestType;
-    private String requestName;
-    private String requestImageUrl;
+    private String id;
+    private String type;
+    private String name;
+    private String profileImageUrl;
 
-    /*empty constructor for Firebase*/
-    private ContactRequestItem() {
+    public ContactRequestItem() {
+        //public no-arg constructor for firabase
     }
 
-    public ContactRequestItem(String requestUid,
-                              String requestType,
-                              String requestName,
-                              String requestImageUrl) {
-        this.requestUid = requestUid;
-        this.requestType = requestType;
-        this.requestName = requestName;
-        this.requestImageUrl = requestImageUrl;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getRequestUid() {
-        return requestUid;
+    public String getId() {
+        return id;
     }
 
-    public String getRequestType() {
-        return requestType;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getRequestName() {
-        return requestName;
+    public String getType() {
+        return type;
     }
 
-    public String getRequestImageUrl() {
-        return requestImageUrl;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
     }
 }
-

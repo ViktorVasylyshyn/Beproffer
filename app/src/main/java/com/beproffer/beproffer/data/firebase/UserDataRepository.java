@@ -8,13 +8,16 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.beproffer.beproffer.R;
+import com.beproffer.beproffer.data.models.BrowsingImageItem;
+import com.beproffer.beproffer.data.models.BrowsingItemRef;
 import com.beproffer.beproffer.data.models.ContactItem;
 import com.beproffer.beproffer.data.models.ContactRequestItem;
-import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
 import com.beproffer.beproffer.data.models.UserInfo;
 import com.beproffer.beproffer.util.Const;
+import com.beproffer.beproffer.util.LocalizationConstants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -54,9 +57,9 @@ public class UserDataRepository {
 
     private final MutableLiveData<UserInfo> mUserInfoLiveData = new MutableLiveData<>();
 
-    private Map<String, SpecialistGalleryImageItem> mSpecialistGalleryImageItemsMap = new HashMap<>();
-    private final MutableLiveData<Map<String, SpecialistGalleryImageItem>> mSpecialistGalleryImageItemsMapLiveData = new MutableLiveData<>();
-    private final MutableLiveData<SpecialistGalleryImageItem> mEditableGalleryItemLiveData = new MutableLiveData<>();
+    private Map<String, BrowsingImageItem> mLocalImageItemsMap = new HashMap<>();
+    private final MutableLiveData<Map<String, BrowsingImageItem>> mSpecialistGalleryImageItemsMapLiveData = new MutableLiveData<>();
+    private final MutableLiveData<BrowsingImageItem> mEditableGalleryItemLiveData = new MutableLiveData<>();
 
     private Map<String, ContactItem> mContactsMap = new HashMap<>();
     private final MutableLiveData<Map<String, ContactItem>> mContactsMapLiveData = new MutableLiveData<>();
@@ -65,15 +68,12 @@ public class UserDataRepository {
     private final Map<String, Boolean> mOutgoingContactRequests = new HashMap<>();
     private final MutableLiveData<Map<String, Boolean>> mOutgoingContactRequestsLiveData = new MutableLiveData<>();
 
-    private static final DatabaseReference OBTAIN_USER_TYPE_VIA_FIREBASE_REF = FirebaseDatabase.getInstance().getReference()
-            .child(Const.USERS)
-            .child(Const.SPEC);
-
     public UserDataRepository(Application application) {
         mApplication = application;
     }
 
     public LiveData<UserInfo> getUserInfoLiveData() {
+
         if (mUserInfoLiveData.getValue() == null) {
             mCurrentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             obtainUserType();
@@ -81,16 +81,18 @@ public class UserDataRepository {
         return mUserInfoLiveData;
     }
 
+    /*Данные о специалистах и клиентая находятся в разных ветках Realtime Database. тип юзера нужен
+     для правильного построения пути к его данным. Если по каким то причинам типа нет в SharedPref
+    * то нужно его определить по базе данных.*/
     private void obtainUserType() {
         mShowProgress.setValue(true);
-        // получать тип юзера приходится для того, чтобы правильно построить путь в базу данных к ветке с данными юзера.
         mCurrentUserType = mApplication.getApplicationContext().getSharedPreferences(mCurrentUserId, MODE_PRIVATE)
                 .getString(Const.USERTYPE, null);
 
         if (mCurrentUserType != null) {
             loadUserDataSnapShot();
         } else {
-            OBTAIN_USER_TYPE_VIA_FIREBASE_REF.addListenerForSingleValueEvent(new ValueEventListener() {
+            mDatabaseRef.child(Const.USERS).child(Const.SPEC).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
@@ -108,7 +110,8 @@ public class UserDataRepository {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    mShowProgress.setValue(false);
+                    feedBackToUi(false, R.string.toast_error_has_occurred,
+                            null, null, false);
                 }
             });
         }
@@ -129,14 +132,14 @@ public class UserDataRepository {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                mShowProgress.setValue(false);
+                feedBackToUi(false, R.string.toast_error_has_occurred,
+                        null, null, false);
             }
         });
     }
 
     private void saveUserType(String currentUserType) {
-        /*тип юзера сохраняется, чтобы при повторном входе не приходилось его определять через бд,
-         а можно было взять из SharedPref.*/
+        /* чтобы постоянно не искать по базе после первого поиска - сохраняем в SharedPref, чтобы значение было локально*/
         mApplication.getApplicationContext().getApplicationContext()
                 .getSharedPreferences(mCurrentUserId, MODE_PRIVATE).edit()
                 .putString(Const.USERTYPE, currentUserType).apply();
@@ -146,59 +149,64 @@ public class UserDataRepository {
         mShowProgress.setValue(true);
         mProcessing.setValue(true);
         if (updatedImageUri != null) {
-            saveProfileImageToStorage(updatedUserInfo, updatedImageUri);
+            saveImageToStorage(FirebaseStorage.getInstance().getReference()
+                            .child(Const.PROF)
+                            .child(updatedUserInfo.getType())
+                            .child(updatedUserInfo.getId())
+                            .child(updatedUserInfo.getId()),
+                    updatedUserInfo,
+                    null,
+                    updatedImageUri,
+                    Const.PROFILE_IMAGE_BITMAP_QUALITY);
         } else {
-            saveUserInfoToDb(updatedUserInfo);
+            saveUserInfoToRealTimeDb(updatedUserInfo);
         }
     }
 
-    public LiveData<SpecialistGalleryImageItem> getEditableGalleryItem() {
-        return mEditableGalleryItemLiveData;
-    }
-
-    public void setEditableGalleryItem(SpecialistGalleryImageItem editableItem) {
-        mEditableGalleryItemLiveData.setValue(editableItem);
-    }
-
-    private void saveProfileImageToStorage(UserInfo updatedUserInfo, Uri updatesImageUri) {
-        /*в сохранении изображения сервиса для специалиста и изображения профайла присутствует много
-         * одинакового кода. пока что я незнаю как решить этот вопрос, так как в илучае успешного сохранения
-         * изображения дальше должен исполнятся разный код а на вход должны подаваться разные объекты*/
-        StorageReference filepath = FirebaseStorage.getInstance().getReference()
-                .child(Const.PROF)
-                .child(updatedUserInfo.getUserType())
-                .child(updatedUserInfo.getUserId())
-                .child(updatedUserInfo.getUserId());
+    /*метод обрабатывает сохранение как изображений профайла, так и изображений сервисов, зависит от поданных параметров*/
+    /*только один объект может одновременно подаваться как аргумент - или UserInfo или BrowsingImageItem*/
+    private void saveImageToStorage(StorageReference filepath,
+                                    @Nullable UserInfo updatedUserInfo,
+                                    @Nullable BrowsingImageItem updatedServiceItem,
+                                    Uri updatesImageUri,
+                                    int bitmapQuality) {
         Bitmap bitmap = null;
         try {
             bitmap = MediaStore.Images.Media.getBitmap(mApplication.getContentResolver(), updatesImageUri);
         } catch (IOException e) {
-            mProcessing.setValue(false);
-            feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
+            /*TODO make message via view not via toast*/
+            feedBackToUi(false, R.string.toast_error_has_occurred, true, null, false);
         }
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, bitmapQuality, baos);
         } catch (NullPointerException e) {
-            mProcessing.setValue(false);
-            feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
+            /*TODO make message via view not via toast*/
+            feedBackToUi(false, R.string.toast_error_has_occurred, true, null, false);
         }
         byte[] data = baos.toByteArray();
         UploadTask uploadTask = filepath.putBytes(data);
         uploadTask.addOnFailureListener(e -> {
-            mProcessing.setValue(false);
-            feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
+            /*TODO make message via view not via toast*/
+            feedBackToUi(false, R.string.toast_error_has_occurred, true, null, false);
         });
         uploadTask.addOnSuccessListener(taskSnapshot -> filepath.getDownloadUrl()
                 .addOnSuccessListener(url -> {
-                    updatedUserInfo.setUserProfileImageUrl(url.toString());
-                    saveUserInfoToDb(updatedUserInfo);
-                }));
+                    if (updatedUserInfo != null) {
+                        updatedUserInfo.setProfileImageUrl(url.toString());
+                        saveUserInfoToRealTimeDb(updatedUserInfo);
+                    } else if (updatedServiceItem != null) {
+                        saveImageDataToRealtimeDb(updatedServiceItem, url.toString());
+                    }
+                }).addOnFailureListener(e -> {
+                    /*TODO make message via view not via toast*/
+                    feedBackToUi(false, R.string.toast_error_has_occurred,
+                            null, null, false);
+                })
+        );
     }
 
-    private void saveUserInfoToDb(UserInfo updatedUserInfo) {
-        /*изменяем инфо юзера в базе данных. если из базы приходит ответ об удачной замене, то меняем
-         инфо юзера локально, чтобы не делать повторный запрос в базу за обновленными данными*/
+    private void saveUserInfoToRealTimeDb(UserInfo updatedUserInfo) {
         if (mCurrentUserId != null && mCurrentUserType != null)
             mDatabaseRef.child(Const.USERS)
                     .child(mCurrentUserType)
@@ -208,145 +216,176 @@ public class UserDataRepository {
                     .addOnSuccessListener(aVoid -> {
                         mUserInfoLiveData.setValue(updatedUserInfo);
                         mProcessing.setValue(false);
-                        feedBackToUi(false, R.string.toast_user_data_updated, true, true);
+                        feedBackToUi(false, R.string.toast_user_data_updated, true, true, false);
                     });
     }
 
-    public LiveData<Map<String, SpecialistGalleryImageItem>> getSpecialistGalleryImagesList() {
+    public LiveData<Map<String, BrowsingImageItem>> getSpecialistGalleryImagesList() {
         /*до этого не дойдет, ведь этот медод может запуститься исключительно для специалистов, но мало ли...*/
         if (!mCurrentUserType.equals(Const.SPEC)) {
-            mSpecialistGalleryImageItemsMapLiveData.setValue(mSpecialistGalleryImageItemsMap);
+            mSpecialistGalleryImageItemsMapLiveData.setValue(mLocalImageItemsMap);
             return mSpecialistGalleryImageItemsMapLiveData;
         }
 
-        if (mUserDataSnapShot.hasChild(Const.IMAGES) && mUserDataSnapShot.child(Const.IMAGES).hasChildren() && mSpecialistGalleryImageItemsMap.isEmpty()) {
+        if (mUserDataSnapShot.hasChild(Const.SERVICES) && mUserDataSnapShot.child(Const.SERVICES).hasChildren() && mLocalImageItemsMap.isEmpty()) {
             obtainSpecialistGalleryImagesData();
         }
-        if (!mUserDataSnapShot.hasChild(Const.IMAGES) || !mUserDataSnapShot.child(Const.IMAGES).hasChildren()) {
-            mSpecialistGalleryImageItemsMapLiveData.setValue(mSpecialistGalleryImageItemsMap);
+        if (!mUserDataSnapShot.hasChild(Const.SERVICES) || !mUserDataSnapShot.child(Const.SERVICES).hasChildren()) {
+            mSpecialistGalleryImageItemsMapLiveData.setValue(mLocalImageItemsMap);
         }
         return mSpecialistGalleryImageItemsMapLiveData;
     }
 
     private void obtainSpecialistGalleryImagesData() {
         mShowProgress.setValue(true);
-        for (DataSnapshot data : mUserDataSnapShot.child(Const.IMAGES).getChildren()) {
+        for (DataSnapshot data : mUserDataSnapShot.child(Const.SERVICES).getChildren()) {
             try {
-                mSpecialistGalleryImageItemsMap.put(data.getKey(), data.getValue(SpecialistGalleryImageItem.class));
+                mLocalImageItemsMap.put(data.getKey(), data.getValue(BrowsingImageItem.class));
             } catch (NullPointerException e) {
-                feedBackToUi(false, R.string.toast_error_has_occurred, null, null);
+                feedBackToUi(false, R.string.toast_error_has_occurred,
+                        null, null, false);
             }
         }
-        mSpecialistGalleryImageItemsMapLiveData.setValue(mSpecialistGalleryImageItemsMap);
+        mSpecialistGalleryImageItemsMapLiveData.setValue(mLocalImageItemsMap);
         mShowProgress.setValue(false);
     }
 
     /*сохранение измененного или добавленного изображения проходит в несколько шагов*/
-    public void updateSpecialistGallery(SpecialistGalleryImageItem updatedItem, @Nullable Uri resultUri) {
+    public void updateSpecialistGallery(BrowsingImageItem updatedServiceItem, @Nullable Uri resultUri) {
         mShowProgress.setValue(true);
         mProcessing.setValue(true);
         /*1. Если изображение изменялось и Uri != null,то сначала сохраняем новое изображение в Storage*/
         if (resultUri != null) {
-            saveServiceImageToStorage(updatedItem, resultUri);
+            saveImageToStorage(FirebaseStorage.getInstance().getReference()
+                            .child(Const.SERV)
+                            .child(mCurrentUserId)
+                            .child(updatedServiceItem.getKey()),
+                    null,
+                    updatedServiceItem,
+                    resultUri,
+                    Const.SERVICE_IMAGE_BITMAP_QUALITY);
         } else {
-            saveImageDataToRealtimeDb(updatedItem, null);
+            saveImageDataToRealtimeDb(updatedServiceItem, null);
         }
     }
 
-    private void saveServiceImageToStorage(SpecialistGalleryImageItem updatedItem, Uri resultUri) {
-        /*в сохранении изображения сервиса для специалиста и изображения профайла присутствует много
-         * одинакового кода. пока что я незнаю как решить этот вопрос, так как в илучае успешного сохранения
-         * изображения дальше должен исполнятся разный код а на вход должны подаваться разные объекты*/
-        StorageReference filepath = FirebaseStorage.getInstance().getReference()
-                .child(Const.SERV)
-                .child(mCurrentUserId)
-                .child(updatedItem.getKey());
-        Bitmap bitmap = null;
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(mApplication.getContentResolver(), resultUri);
-        } catch (IOException e) {
-            mProcessing.setValue(false);
-            feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
-        }
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
-        } catch (NullPointerException e) {
-            mProcessing.setValue(false);
-            feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
-        }
-        byte[] data = baos.toByteArray();
-        UploadTask uploadTask = filepath.putBytes(data);
-        uploadTask.addOnFailureListener(e -> {
-            mProcessing.setValue(false);
-            feedBackToUi(false, R.string.toast_error_has_occurred, true, null);
-        });
-        uploadTask.addOnSuccessListener(taskSnapshot -> filepath.getDownloadUrl()
-                .addOnSuccessListener(url -> saveImageDataToRealtimeDb(updatedItem, url.toString())));
-    }
-
-    private void saveImageDataToRealtimeDb(SpecialistGalleryImageItem updatedItem, @Nullable String url) {
-        /*выключени прогресс бара. по сути - запроса отправляется 2, но выключение крутилки подвязано
-         только под завершение одного из них */
+    private void saveImageDataToRealtimeDb(BrowsingImageItem updatedItem, @Nullable String url) {
         if (url != null) {
             updatedItem.setUrl(url);
         }
-        if (updatedItem.getUid() == null) {
-            updatedItem.setUid(mCurrentUserId);
+        if (updatedItem.getId() == null) {
+            updatedItem.setId(mCurrentUserId);
         }
-        /*2. Сохраняем данные в раздел "services"*/
-        mDatabaseRef.child(Const.SERVICES)
-                .child(updatedItem.getType())
-                .child(updatedItem.getSubtype())
-                .child(mCurrentUserId)
-                .child(updatedItem.getKey())
-                .setValue(updatedItem).addOnSuccessListener(aVoid -> {
-        });
-        /*3. Сохраняем данные в раздел юзера "images" */
+        /*2. Сохраняем данные в ветку юзера "images" */
         mDatabaseRef.child(Const.USERS)
                 .child(Const.SPEC)
                 .child(mCurrentUserId)
-                .child(Const.IMAGES)
+                .child(Const.SERVICES)
                 .child(updatedItem.getKey())
-                .setValue(updatedItem).addOnSuccessListener(aVoid -> updateSpecialistGalleryImagesData(updatedItem));
+                .setValue(updatedItem).addOnCompleteListener(imgTask -> {
+            if (imgTask.isSuccessful()) {
+                /*3. Сохраняем ссылку на данные в раздел "services".*/
+                /*TODO после введения локализации - формировать этот запрос с учетом локации пользователя.*/
+                mDatabaseRef.child(Const.SERVICES)
+                        .child(LocalizationConstants.UKRAINE)
+                        .child(LocalizationConstants.KYIV_REGION)
+                        .child(LocalizationConstants.KYIV)
+                        .child(updatedItem.getType())
+                        .child(updatedItem.getSubtype())
+                        .child(updatedItem.getKey())
+                        .setValue(new BrowsingItemRef(mCurrentUserId
+                                , updatedItem.getKey()
+                                , updatedItem.getGender()
+                                , updatedItem.getUrl()
+                        )).addOnSuccessListener(aVoid -> updateLocalImageItemsMap(updatedItem))
+                        .addOnFailureListener(e -> {
+                            Log.d(Const.INFO, e.getMessage());
+                            /*TODO make message via view not via toast*/
+                            feedBackToUi(false, R.string.toast_error_has_occurred,
+                                    null, null, false);
+                        });
+            }
+        });
     }
 
-    public void deleteNotRelevantImageData(SpecialistGalleryImageItem updatedItem, String primordialItemType, String primordialItemSubtype) {
-        mDatabaseRef.child(Const.SERVICES)
-                .child(primordialItemType)
-                .child(primordialItemSubtype)
-                .child(mCurrentUserId)
-                .child(mSpecialistGalleryImageItemsMap.get(updatedItem.getKey()).getKey())
-                .removeValue().addOnCompleteListener(task -> updateSpecialistGalleryImagesData(updatedItem));
+    /*На случай, если специалист изменял тип услуги. тогда ссылка на услугу в ветке "services, будет
+    перезаписана в новую ветку, а старую нужно удалить."*/
+    public void deleteNotRelevantImageData(BrowsingImageItem updatedItem, String primordialItemType, String primordialItemSubtype) {
+        try {
+            /*TODO после введения локализации - формировать этот запрос с учетом локации пользователя.*/
+            mDatabaseRef.child(Const.SERVICES)
+                    .child(LocalizationConstants.UKRAINE)
+                    .child(LocalizationConstants.KYIV_REGION)
+                    .child(LocalizationConstants.KYIV)
+                    .child(primordialItemType)
+                    .child(primordialItemSubtype)
+                    .child(updatedItem.getKey())
+                    .removeValue().addOnCompleteListener(task -> updateLocalImageItemsMap(updatedItem));
+        } catch (NullPointerException e) {
+            Log.d(Const.INFO, e.getMessage());
+        }
     }
 
-    private void updateSpecialistGalleryImagesData(SpecialistGalleryImageItem updatedItem) {
-        /*4. Добавляем или заменяем данные в списке, который подается локально на RecyclerView*/
-        mSpecialistGalleryImageItemsMap.put(updatedItem.getKey(), updatedItem);
-        mSpecialistGalleryImageItemsMapLiveData.setValue(mSpecialistGalleryImageItemsMap);
-        mProcessing.setValue(false);
-        feedBackToUi(false, R.string.toast_image_data_updated, true, true);
+    private void updateLocalImageItemsMap(BrowsingImageItem updatedItem) {
+        /*4. Добавляем или заменяем данные в списке, который подается локально на RecyclerView,
+        потому что нет отслеживания в реальном времени. объекты сервисов специалиста находятся в
+        snapshot которые взялся разово. соответственно - заменили в базе - нужно заменить и локально.
+        в будущем - переделать.*/
+        mLocalImageItemsMap.put(updatedItem.getKey(), updatedItem);
+        mSpecialistGalleryImageItemsMapLiveData.setValue(mLocalImageItemsMap);
+        feedBackToUi(false, R.string.toast_image_data_updated, true, true, false);
     }
 
     public LiveData<Map<String, ContactItem>> getContacts() {
         mShowProgress.setValue(true);
-        /*проблема в том, что когда мэп пустеет(например в следствии удаления всех контактов), то эта
-        проверка опять срабатывает положительно. данные на сервере изменились, но мы, пока что не
-        делаем повторного запроса, потому что имеем общий слепок юзер даты. и если, юзер, не обновляя
-        данные из бд возвратится на активити контактов - то опять увидит у себя список тех контактов,
-        которыч по сути в бд уже нет, они остались только в неактуальном слепке юзер даты. Поэтому,
-        незная как пофиксить другим методом это говно - ввел переменную, которая будет триггером того,
-        прочитаны ли данные из актуального слепка.*/
+        /*Весь слепок информации данного пользователя находится в mUserDataSnapShot. В том числе и
+         контакты. Мы, на даном этапе не вешаем слушатель на данные пользователя, а подгружаем их единым
+         слепком при входе в систему. Если пользователь решит удалять контакты - то в базе данных
+         они удалятся, но в слепке останутя. Чтобы нижестоящее условие не срабоатывало, при
+          повторном входе на фрагмент контактов и не показывались контакты
+         которых нет в бд, но еще есть в слепке - введена переменная mContactsObtained.*/
         if (mUserDataSnapShot.hasChild(Const.CONTACT) && mContactsMap.isEmpty() && !mContactsObtained.equals(mCurrentUserId)) {
-            try {
-                for (DataSnapshot data : mUserDataSnapShot.child(Const.CONTACT).getChildren()) {
-                    mContactsMap.put(data.getValue(ContactItem.class).getContactUid(), data.getValue(ContactItem.class));
+            for (DataSnapshot data : mUserDataSnapShot.child(Const.CONTACT).getChildren()) {
+                Log.d(Const.INFO, "contacts count is " + mUserDataSnapShot.child(Const.CONTACT).getChildrenCount());
+                try {
+                    Log.d(Const.INFO, "try obtain contact request ");
+
+                    mDatabaseRef.child(Const.USERS).child(Const.SPEC).child(data.getKey()).child(Const.INFO)
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    Log.d(Const.INFO, "onDataChange " + dataSnapshot.getValue(ContactItem.class).getId());
+                            /*Если при создании объекта ContactItem тех специалистов, которые не добавили
+                             изображение, и у них в описании нет profileImageUrl ключа - то обязать их
+                             загружать изображение профайла, перед тем как разрешать подтверждать запросы*/
+                                    if (dataSnapshot.exists()) {
+                                        try {
+                                            mContactsMap.put(dataSnapshot.getValue(ContactItem.class).getId()
+                                                    , dataSnapshot.getValue(ContactItem.class));
+                                        } catch (NullPointerException e) {
+                                            Log.d(Const.INFO, e.getMessage());
+                                        }
+                                        mContactsMapLiveData.setValue(mContactsMap);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    /*TODO подавать в mContactsMap объект ContactItem только с полем id и отображать.
+                                     * в recycler view этот объект, так, ка будто его нет - что то типа:
+                                     * ("не можем получить данные специалиста. возможно они удалены или непрвильны")
+                                     * это должно подталкивать юзера к удалению этого не валидного id*/
+
+                                    feedBackToUi(false, R.string.toast_error_has_occurred,
+                                            null, null, false);
+                                }
+                            });
+                } catch (NullPointerException e) {
+                    feedBackToUi(false, R.string.toast_error_has_occurred,
+                            null, null, false);
                 }
-                mContactsMapLiveData.setValue(mContactsMap);
-                mContactsObtained = mCurrentUserId;
-            } catch (NullPointerException e) {
-                feedBackToUi(false, R.string.toast_error_has_occurred, null, null);
             }
+            mContactsObtained = mCurrentUserId;
         } else {
             mContactsMapLiveData.setValue(mContactsMap);
         }
@@ -360,36 +399,51 @@ public class UserDataRepository {
                 .child(mCurrentUserType)
                 .child(mCurrentUserId)
                 .child(Const.CONTACT)
-                .child(deletedContact.getContactUid()).removeValue().addOnSuccessListener(aVoid -> {
-            mContactsMap.remove(deletedContact.getContactUid());
+                .child(deletedContact.getId()).removeValue().addOnSuccessListener(aVoid -> {
+            mContactsMap.remove(deletedContact.getId());
             mContactsMapLiveData.setValue(mContactsMap);
             mShowProgress.setValue(false);
-            feedBackToUi(false, R.string.toast_contact_deleted, null, null);
+            feedBackToUi(false, R.string.toast_contact_deleted, null, null, false);
         });
     }
 
     public LiveData<Map<String, ContactRequestItem>> getContactRequests() {
         mShowProgress.setValue(true);
-        /*проблема в том, что когда мэп пустеет(например в следствии обработки специалистом всех запросов,
-        что будет случатся намного чаще, чем в случае с удалением контактов), то эта
-        проверка опять срабатывает положительно. данные на сервере изменились, но мы, пока что не
-        делаем повторного запроса, потому что имеем общий слепок юзер даты. и если, юзер, не обновляя
-        данные из бд возвратится на активити контактов - то опять увидит у себя список тех контактов,
-        которые по сути в бд уже нет, они остались только в неактуальном слепке юзер даты. Поэтому,
-        незная как пофиксить другим методом это говно - ввел переменную, которая будет триггером того,
-        прочитаны ли данные из актуального слепка.*/
+        /*Весь слепок информации данного пользователя находится в mUserDataSnapShot. В том числе и запросы
+         контактов(если текущий пользователь - специалст). Мы, на даном этапе не вешаем слушатель на данные
+         пользователя, а подгружаем их единым слепком при входе в систему. Когда все запросы обработаны - то в базе данных
+         их нет, но в слепке они остались. Чтобы нижестоящее условие не срабоатывало при повторном
+         входе в раздел запросов и не показывались запросы
+         которых нет в бд, но еще есть в слепке - введена переменная mRequestsObtained.*/
         if (mUserDataSnapShot.hasChild(Const.INREQUEST) && mContactRequestsMap.isEmpty() && !mRequestsObtained.equals(mCurrentUserId)) {
             for (DataSnapshot data : mUserDataSnapShot.child(Const.INREQUEST).getChildren()) {
                 try {
-                    ContactRequestItem item = data.getValue(ContactRequestItem.class);
-                    mContactRequestsMap.put(item.getRequestUid(), item);
+                    mDatabaseRef.child(Const.USERS).child(data.getValue().toString()).child(data.getKey()).child(Const.INFO)
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.exists()) {
+                                /*TODO обратить внимание, будет ли крашится, если в инфо
+                                   запрашиваемого пользователя нет ключа с url изображения*/
+                                        mContactRequestsMap.put(dataSnapshot.getValue(ContactRequestItem.class).getId()
+                                                , dataSnapshot.getValue(ContactRequestItem.class));
+                                        mContactRequestsMapLiveData.setValue(mContactRequestsMap);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
                 } catch (NullPointerException e) {
-                    feedBackToUi(false, R.string.toast_error_has_occurred, null, null);
+                    /*TODO make message via view not via toast*/
+                    feedBackToUi(false, R.string.toast_error_has_occurred,
+                            null, null, false);
                 }
             }
             mContactRequestsMapLiveData.setValue(mContactRequestsMap);
             mRequestsObtained = mCurrentUserId;
-
         } else {
             mContactRequestsMapLiveData.setValue(mContactRequestsMap);
         }
@@ -402,18 +456,14 @@ public class UserDataRepository {
         mShowProgress.setValue(true);
         if (confirm) {
             mDatabaseRef.child(Const.USERS).
-                    child(handledItem.getRequestType()).
-                    child(handledItem.getRequestUid()).
+                    child(handledItem.getType()).
+                    child(handledItem.getId()).
                     child(Const.CONTACT).
-                    child(currentUserInfo.getUserId()).
-                    setValue(new ContactItem(currentUserInfo.getUserId(),
-                            currentUserInfo.getUserName(),
-                            currentUserInfo.getUserPhone(),
-                            currentUserInfo.getUserSpecialistType(),
-                            currentUserInfo.getUserInfo(),
-                            currentUserInfo.getUserProfileImageUrl())).addOnSuccessListener(aVoid ->
+                    child(currentUserInfo.getId()).
+                    setValue(true).addOnSuccessListener(aVoid ->
                     deleteIncomingContactRequestData(handledItem, R.string.toast_contact_confirmed))
-                    .addOnFailureListener(e -> feedBackToUi(false, R.string.toast_error_has_occurred, null, null));
+                    .addOnFailureListener(e -> feedBackToUi(false, R.string.toast_error_has_occurred,
+                            null, null, false));
         } else {
             deleteIncomingContactRequestData(handledItem, R.string.toast_contact_denied);
         }
@@ -424,15 +474,15 @@ public class UserDataRepository {
                 .child(Const.SPEC)
                 .child(mCurrentUserId)
                 .child(Const.INREQUEST)
-                .child(handledItem.getRequestUid()).removeValue().addOnSuccessListener(aVoid -> {
-                    mContactRequestsMap.remove(handledItem.getRequestUid());
+                .child(handledItem.getId()).removeValue().addOnSuccessListener(aVoid -> {
+                    mContactRequestsMap.remove(handledItem.getId());
                     mContactRequestsMapLiveData.setValue(mContactRequestsMap);
-                    feedBackToUi(false, toastRes, null, null);
+                    feedBackToUi(false, toastRes, null, null, false);
                 }
         );
     }
 
-    public void sendContactRequest(ContactRequestItem contactRequestItem, String specialistId) {
+    public void sendContactRequest(String specialistId) {
         mShowProgress.setValue(true);
         try {
             mDatabaseRef.child(Const.USERS)
@@ -440,17 +490,25 @@ public class UserDataRepository {
                     .child(specialistId)
                     .child(Const.INREQUEST)
                     .child(mCurrentUserId)
-                    .setValue(contactRequestItem).addOnSuccessListener(aVoid -> {
+                    .setValue(mCurrentUserType).addOnSuccessListener(aVoid -> {
                 mOutgoingContactRequests.put(specialistId, true);
-                /*исходящие запросы сохраняются только в течении текущего сеанса. стоит только
-                 * пользователю перезайти в приложение, и история обновляется. возможно это мы
-                 * как то доработаем или измения, но это со временем*/
+                /* TODO истори исходящих запросов сохраняется только в течении текущего сеанса.
+                 * После перезахода в приложение она сбрасывается. Сделать историю  отправленых запросов
+                 * не зависящей от перезаходы в приложение*/
                 mOutgoingContactRequestsLiveData.setValue(mOutgoingContactRequests);
                 mShowProgress.setValue(false);
             });
         } catch (NullPointerException e) {
             mShowProgress.setValue(false);
         }
+    }
+
+    public LiveData<BrowsingImageItem> getEditableGalleryItem() {
+        return mEditableGalleryItemLiveData;
+    }
+
+    public void setEditableGalleryItem(BrowsingImageItem editableItem) {
+        mEditableGalleryItemLiveData.setValue(editableItem);
     }
 
     public LiveData<Map<String, Boolean>> getOutgoingContactRequests() {
@@ -467,8 +525,8 @@ public class UserDataRepository {
         mContactRequestsMapLiveData.setValue(mContactRequestsMap);
         mContactsMap = new HashMap<>();
         mContactsMapLiveData.setValue(mContactsMap);
-        mSpecialistGalleryImageItemsMap = new HashMap<>();
-        mSpecialistGalleryImageItemsMapLiveData.setValue(mSpecialistGalleryImageItemsMap);
+        mLocalImageItemsMap = new HashMap<>();
+        mSpecialistGalleryImageItemsMapLiveData.setValue(mLocalImageItemsMap);
         mShowProgress.setValue(false);
     }
 
@@ -507,7 +565,8 @@ public class UserDataRepository {
     private void feedBackToUi(@Nullable Boolean showProgress,
                               @Nullable Integer toastResId,
                               @Nullable Boolean hideKeyboard,
-                              @Nullable Boolean popBackStack) {
+                              @Nullable Boolean popBackStack,
+                              @Nullable Boolean processing) {
 
         if (showProgress != null) {
             mShowProgress.setValue(showProgress);
@@ -515,12 +574,16 @@ public class UserDataRepository {
         if (toastResId != null) {
             mShowToast.setValue(toastResId);
         }
+        /*TODO создать пннотации, которые будут запрещать подчу "false" с этим параметром*/
         /*null - не трогать, true - скрыть*/
         if (hideKeyboard != null && hideKeyboard) {
             mHideKeyboard.setValue(true);
         }
         if (popBackStack != null && popBackStack) {
             mPopBackStack.setValue(true);
+        }
+        if (processing != null) {
+            mProcessing.setValue(false);
         }
     }
 }

@@ -112,7 +112,7 @@ public class SettingsFragment extends BaseUserInfoFragment {
                         child(Const.USERS).
                         child(Const.DELETED).
                         child(currentUser.getUid()).
-                        setValue(mCurrentUserInfo.getUserType())
+                        setValue(mCurrentUserInfo.getType())
                         .addOnSuccessListener(task -> currentUser.delete().addOnSuccessListener(deleted -> {
                             showProgress(false);
                             mUserDataViewModel.resetUserData();

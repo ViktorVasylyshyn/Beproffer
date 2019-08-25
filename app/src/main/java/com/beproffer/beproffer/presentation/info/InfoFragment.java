@@ -37,7 +37,7 @@ public class InfoFragment extends BaseUserInfoFragment {
 
         @Override
         public void onTelegramClicked() {
-            if(mCurrentUserInfo != null && mCurrentUserInfo.getUserType().equals(Const.SPEC)){
+            if(mCurrentUserInfo != null && mCurrentUserInfo.getType().equals(Const.SPEC)){
                 openDoc(R.string.href_telegram_chat_specialists);
             }else {
                 openDoc(R.string.href_telegram_chat_customers);
@@ -46,7 +46,7 @@ public class InfoFragment extends BaseUserInfoFragment {
 
         @Override
         public void onViberClicked() {
-            if(mCurrentUserInfo != null && mCurrentUserInfo.getUserType().equals(Const.SPEC)){
+            if(mCurrentUserInfo != null && mCurrentUserInfo.getType().equals(Const.SPEC)){
                 openDoc(R.string.href_viber_chat_specialists);
             }else {
                 openDoc(R.string.href_viber_chat_customers);
@@ -57,7 +57,7 @@ public class InfoFragment extends BaseUserInfoFragment {
         public void onFacebookClicked() {
             /*вызов группы на девайсе не предлагает открыть группу через фейсбук приложение, а только
             * через браузеры. почему так понять не могу. оставляю пока что так.*/
-            if(mCurrentUserInfo != null && mCurrentUserInfo.getUserType().equals(Const.SPEC)){
+            if(mCurrentUserInfo != null && mCurrentUserInfo.getType().equals(Const.SPEC)){
                 openDoc(R.string.href_facebook_page);
             }
         }

@@ -12,29 +12,11 @@ public class BrowsingHistoryRepository {
     private final BrowsingHistoryDao browsingHistoryDao;
     private LiveData<List<String>> targetBrowsingHistory;
 
-    public BrowsingHistoryRepository(Application application, String targetType){
+    public BrowsingHistoryRepository(Application application){
         BrowsingHistoryDatabase database = BrowsingHistoryDatabase.getInstance(application);
         browsingHistoryDao = database.browsingHistoryDao();
-        switch (targetType){
-            case Const.HAI:
-                targetBrowsingHistory = browsingHistoryDao.getBrowsingHistoryHair();
-                break;
-            case Const.NAI:
-                targetBrowsingHistory = browsingHistoryDao.getBrowsingHistoryNails();
-                break;
-            case Const.MAK:
-                targetBrowsingHistory = browsingHistoryDao.getBrowsingHistoryMakeup();
-                break;
-            case Const.TAT:
-                targetBrowsingHistory = browsingHistoryDao.getBrowsingHistoryTattoo();
-                break;
-            case Const.BAR:
-                targetBrowsingHistory = browsingHistoryDao.getBrowsingHistoryBarber();
-                break;
-            case Const.FIT:
-                targetBrowsingHistory = browsingHistoryDao.getBrowsingHistoryFitness();
-                break;
-        }
+                targetBrowsingHistory = browsingHistoryDao.getBrowsingHistory();
+
     }
 
     public void insert(BrowsingHistoryModel browsingHistoryModel){

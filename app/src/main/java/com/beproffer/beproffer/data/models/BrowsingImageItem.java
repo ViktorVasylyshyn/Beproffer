@@ -3,10 +3,10 @@ package com.beproffer.beproffer.data.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class SpecialistGalleryImageItem implements Parcelable {
+public class BrowsingImageItem implements Parcelable {
     private String key;
     private String url;
-    private String uid;
+    private String id;
     private String type;
     private String subtype;
     private String price;
@@ -14,22 +14,22 @@ public class SpecialistGalleryImageItem implements Parcelable {
     private String description;
     private String gender;
 
-    public SpecialistGalleryImageItem(){
+    public BrowsingImageItem(){
 
     }
 
-    public SpecialistGalleryImageItem(String url,
-                                      String key,
-                                      String uid,
-                                      String type,
-                                      String subtype,
-                                      String price,
-                                      String duration,
-                                      String description,
-                                      String gender) {
+    public BrowsingImageItem(String url,
+                             String key,
+                             String id,
+                             String type,
+                             String subtype,
+                             String price,
+                             String duration,
+                             String description,
+                             String gender) {
         this.url = url;
         this.key = key;
-        this.uid = uid;
+        this.id = id;
         this.type = type;
         this.subtype = subtype;
         this.price = price;
@@ -38,10 +38,10 @@ public class SpecialistGalleryImageItem implements Parcelable {
         this.gender = gender;
     }
 
-    protected SpecialistGalleryImageItem(Parcel in) {
+    protected BrowsingImageItem(Parcel in) {
         key = in.readString();
         url = in.readString();
-        uid = in.readString();
+        id = in.readString();
         type = in.readString();
         subtype = in.readString();
         price = in.readString();
@@ -50,15 +50,15 @@ public class SpecialistGalleryImageItem implements Parcelable {
         gender = in.readString();
     }
 
-    public static final Creator<SpecialistGalleryImageItem> CREATOR = new Creator<SpecialistGalleryImageItem>() {
+    public static final Creator<BrowsingImageItem> CREATOR = new Creator<BrowsingImageItem>() {
         @Override
-        public SpecialistGalleryImageItem createFromParcel(Parcel in) {
-            return new SpecialistGalleryImageItem(in);
+        public BrowsingImageItem createFromParcel(Parcel in) {
+            return new BrowsingImageItem(in);
         }
 
         @Override
-        public SpecialistGalleryImageItem[] newArray(int size) {
-            return new SpecialistGalleryImageItem[size];
+        public BrowsingImageItem[] newArray(int size) {
+            return new BrowsingImageItem[size];
         }
     };
 
@@ -74,12 +74,12 @@ public class SpecialistGalleryImageItem implements Parcelable {
         return key;
     }
 
-    public String getUid() {
-        return uid;
+    public String getId() {
+        return id;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getType() {
@@ -139,7 +139,7 @@ public class SpecialistGalleryImageItem implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(key);
         parcel.writeString(url);
-        parcel.writeString(uid);
+        parcel.writeString(id);
         parcel.writeString(type);
         parcel.writeString(subtype);
         parcel.writeString(price);

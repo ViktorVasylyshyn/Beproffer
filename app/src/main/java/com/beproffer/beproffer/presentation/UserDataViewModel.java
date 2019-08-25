@@ -8,9 +8,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.beproffer.beproffer.data.firebase.UserDataRepository;
+import com.beproffer.beproffer.data.models.BrowsingImageItem;
 import com.beproffer.beproffer.data.models.ContactItem;
 import com.beproffer.beproffer.data.models.ContactRequestItem;
-import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
 import com.beproffer.beproffer.data.models.UserInfo;
 
 import java.util.Map;
@@ -32,23 +32,23 @@ public class UserDataViewModel extends AndroidViewModel {
         mRepository.updateUserInfo(updatedUserInfo, updatedImageUri);
     }
 
-    public LiveData<Map<String, SpecialistGalleryImageItem>> getSpecialistGalleryData() {
+    public LiveData<Map<String, BrowsingImageItem>> getSpecialistGalleryData() {
         return mRepository.getSpecialistGalleryImagesList();
     }
 
-    public void updateSpecialistGallery(SpecialistGalleryImageItem newItem, @Nullable Uri resultUri) {
+    public void updateSpecialistGallery(BrowsingImageItem newItem, @Nullable Uri resultUri) {
         mRepository.updateSpecialistGallery(newItem, resultUri);
     }
 
-    public LiveData<SpecialistGalleryImageItem> getEditableGalleryItem() {
+    public LiveData<BrowsingImageItem> getEditableGalleryItem() {
         return mRepository.getEditableGalleryItem();
     }
 
-    public void setEditableGalleryItem(SpecialistGalleryImageItem editableItem) {
+    public void setEditableGalleryItem(BrowsingImageItem editableItem) {
         mRepository.setEditableGalleryItem(editableItem);
     }
 
-    public void deleteNotRelevantImageData(SpecialistGalleryImageItem updatedItem, String primordialItemType, String primordialItemSubtype) {
+    public void deleteNotRelevantImageData(BrowsingImageItem updatedItem, String primordialItemType, String primordialItemSubtype) {
         mRepository.deleteNotRelevantImageData(updatedItem, primordialItemType, primordialItemSubtype);
     }
 
@@ -93,8 +93,8 @@ public class UserDataViewModel extends AndroidViewModel {
         mRepository.resetTrigger(resetToastValue, resetHideKeyboardValue, resetBackStackValue);
     }
 
-    public void sendContactRequest(ContactRequestItem contactRequestItem, String specialistId) {
-        mRepository.sendContactRequest(contactRequestItem, specialistId);
+    public void sendContactRequest(String specialistId) {
+        mRepository.sendContactRequest(specialistId);
     }
 
     public LiveData<Map<String, Boolean>> getOutgoingContactRequests() {

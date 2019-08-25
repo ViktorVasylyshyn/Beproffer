@@ -12,11 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.data.models.SpecialistGalleryImageItem;
+import com.beproffer.beproffer.data.models.BrowsingImageItem;
 import com.beproffer.beproffer.databinding.SpecialistGalleryFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.spec_gallery.adapter.GalleryImageItemAdapter;
 import com.beproffer.beproffer.presentation.spec_gallery.edit.SpecialistGalleryEditFragment;
+import com.beproffer.beproffer.util.Const;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,7 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
 
     private final ObservableBoolean mShowButton = new ObservableBoolean();
 
-    private List<SpecialistGalleryImageItem> mImageItemsList;
+    private List<BrowsingImageItem> mImageItemsList;
 
     private SpecialistGalleryFragmentBinding mBinding;
 
@@ -65,7 +67,7 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
                 mShowButton.set(true);
                 if (data != null) {
                     mImageItemsList = new ArrayList<>();
-                    for (Map.Entry<String, SpecialistGalleryImageItem> entry : data.entrySet()) {
+                    for (Map.Entry<String, BrowsingImageItem> entry : data.entrySet()) {
                         mImageItemsList.add(entry.getValue());
                     }
                     mImageAdapter.setData(mImageItemsList);
@@ -87,9 +89,11 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
             cooldown(mBinding.specialistGalleryAddImageButton);
             return;
         }
-        mUserDataViewModel.setEditableGalleryItem(new SpecialistGalleryImageItem(
+
+        mUserDataViewModel.setEditableGalleryItem(new BrowsingImageItem(
                 null,
-                "image" + (mImageItemsList.size() + 1),
+                FirebaseDatabase.getInstance().getReference().child(Const.USERS).child(Const.SPEC)
+                        .child(mCurrentUserInfo.getId()).child(Const.SERVICES).push().getKey(),
                 null,
                 null,
                 null,
@@ -104,7 +108,7 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
         mImageAdapter.setOnItemClickListener(this::setEditableGalleryItem);
     }
 
-    private void setEditableGalleryItem(SpecialistGalleryImageItem editableItem) {
+    private void setEditableGalleryItem(BrowsingImageItem editableItem) {
         mUserDataViewModel.setEditableGalleryItem(editableItem);
         changeFragment(new SpecialistGalleryEditFragment(), true, false, false);
     }

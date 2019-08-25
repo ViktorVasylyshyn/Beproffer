@@ -69,25 +69,25 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
     @Override
     public void applyUserData() {
         mBinding.setUserInfo(mCurrentUserInfo);
-        if (mCurrentUserInfo.getUserType().equals(Const.SPEC)) {
+        if (mCurrentUserInfo.getType().equals(Const.SPEC)) {
             mIsUserSpecialist.set(true);
-            showSpecialistUserType(mCurrentUserInfo.getUserSpecialistType());
+            showSpecialistUserType(mCurrentUserInfo.getSpecialization());
             mBinding.editFragmentBottomHint.setText(R.string.hint_specialist_phone_1);
         }
     }
 
     private void checkUserData() {
-        if (null == mResultUri && mCurrentUserInfo.getUserProfileImageUrl() == null) {
+        if (null == mResultUri && mCurrentUserInfo.getProfileImageUrl() == null) {
             showToast(R.string.toast_select_image);
             mBinding.editFragmentBottomHint.setText(R.string.hint_any_image_size);
             return;
         }
-        if (mBinding.editFragmentName.getText().toString().isEmpty() && mCurrentUserInfo.getUserName() == null) {
+        if (mBinding.editFragmentName.getText().toString().isEmpty() && mCurrentUserInfo.getName() == null) {
             showToast(R.string.toast_enter_name);
             return;
         }
-        if (mCurrentUserInfo.getUserType().equals(Const.SPEC)) {
-            if (mCurrentUserInfo.getUserPhone() != null || !mBinding.editFragmentPhone.getText().toString().isEmpty()) {
+        if (mCurrentUserInfo.getType().equals(Const.SPEC)) {
+            if (mCurrentUserInfo.getPhone() != null || !mBinding.editFragmentPhone.getText().toString().isEmpty()) {
                 saveUserData();
             } else {
                 showToast(R.string.toast_enter_phone);
@@ -106,20 +106,20 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
             showToast(R.string.toast_processing);
             return;
         }
-        if (mCurrentUserInfo.getUserPhone() != null && (mCurrentUserInfo.getUserPhone().length() < 5 || mCurrentUserInfo.getUserPhone().length() > 13)) {
+        if (mCurrentUserInfo.getPhone() != null && (mCurrentUserInfo.getPhone().length() < 5 || mCurrentUserInfo.getPhone().length() > 13)) {
             mBinding.editFragmentPhone.requestFocus();
             mBinding.editFragmentPhone.setError(getResources().getText(R.string.error_message_wrong_phone_number_format));
             mBinding.editFragmentBottomHint.setText(R.string.hint_specialist_phone_1);
             return;
         }
-        if (mCurrentUserInfo.getUserName().length() < 4) {
+        if (mCurrentUserInfo.getName().length() < 4) {
             mBinding.editFragmentName.requestFocus();
             mBinding.editFragmentName.setError(getResources().getText(R.string.error_message_wrong_name_format));
             mBinding.editFragmentBottomHint.setText(R.string.hint_outfield_use_correct_name_format);
             return;
         }
 
-        if (mCurrentUserInfo.getUserType().equals(Const.SPEC) && mCurrentUserInfo.getUserSpecialistType() == null) {
+        if (mCurrentUserInfo.getType().equals(Const.SPEC) && mCurrentUserInfo.getSpecialization() == null) {
             showToast(R.string.hint_choose_main_specialization);
             mBinding.editFragmentBottomHint.setText(R.string.hint_choose_main_specialization);
             return;
@@ -185,7 +185,7 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
             default:
                 throw new IllegalArgumentException(Const.UNKNSTAT);
         }
-        mCurrentUserInfo.setUserSpecialistType(mainSpecialization);
+        mCurrentUserInfo.setSpecialization(mainSpecialization);
         markActualSpecialistType(view);
     }
 
@@ -215,7 +215,7 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
                     return;
                 }
                 mResultUri = data.getData();
-                mCurrentUserInfo.setUserProfileImageUrl(mResultUri.toString());
+                mCurrentUserInfo.setProfileImageUrl(mResultUri.toString());
                 mBinding.setUserInfo(mCurrentUserInfo);
             } catch (NullPointerException e) {
                 showToast(R.string.toast_error_has_occurred);

@@ -72,6 +72,18 @@ public class BaseUserInfoFragment extends BaseFragment {
         });
     }
 
+    public void setBadgeIfNeed(){
+        if (mCurrentUserInfo.getType().equals(Const.SPEC)) {
+            mUserDataViewModel.getIncomingContactRequests().observe(getViewLifecycleOwner(), list -> {
+                if (list != null) {
+                    if (!list.isEmpty()) {
+                        setBadge(Const.CONTBNBINDEX);
+                    }
+                }
+            });
+        }
+    }
+
     protected void applyUserData() {
         /*предполагается что во фрагментах наследниках, в этом методе будет размещаться логика, которая
          * должна начать совершаться, когда данные юзера получены*/

@@ -73,7 +73,7 @@
             android:background="@drawable/button_background_grey_stroke_oval"
             android:onClick="@{(view) -> callback.onSetProfileImageClick()}"
             android:padding="@dimen/base_padding_small"
-            android:src="@{userInfo.userProfileImageUrl}"
+            android:src="@{userInfo.profileImageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_fragment_logo"
@@ -89,7 +89,7 @@
             android:inputType="text"
             android:maxLength="50"
             android:maxLines="1"
-            android:text="@={userInfo.userName}"
+            android:text="@={userInfo.name}"
             android:textColor="@color/color_base_text"
             android:textColorHint="@color/color_base_text_70per"
             android:textSize="@dimen/base_text_size_big"
@@ -109,7 +109,7 @@
             android:inputType="phone"
             android:maxLength="20"
             android:maxLines="1"
-            android:text="@={userInfo.userPhone}"
+            android:text="@={userInfo.phone}"
             android:textColor="@color/color_base_text"
             android:textColorHint="@color/color_base_text_70per"
             android:textSize="@dimen/base_text_size_big"
@@ -239,7 +239,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_fragment_scroll_service_view"
-            app:setSpecialistTypeTitle="@{userInfo.userSpecialistType}" />
+            app:setSpecialistTypeTitle="@{userInfo.specialization}" />
 
         <EditText
             android:id="@+id/edit_fragment_about_me"
@@ -252,7 +252,7 @@
             android:inputType="textMultiLine"
             android:maxLength="100"
             android:maxLines="3"
-            android:text="@={userInfo.userInfo}"
+            android:text="@={userInfo.description}"
             android:textColor="@color/color_base_text"
             android:textColorHint="@color/color_base_text_70per"
             android:textSize="@dimen/base_text_size_big"

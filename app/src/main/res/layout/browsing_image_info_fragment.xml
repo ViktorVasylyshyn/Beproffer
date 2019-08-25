@@ -18,7 +18,7 @@
 
         <variable
             name="imageItem"
-            type="com.beproffer.beproffer.data.models.BrowsingItem" />
+            type="com.beproffer.beproffer.data.models.BrowsingImageItem" />
 
     </data>
 
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:onClick="@{(view)->fragmentCallback.onPerformBackNavigationClick()}"
-        tools:context=".presentation.browsing.info.BrowsingItemInfoFragment">
+        tools:context=".presentation.browsing.description.BrowsingItemInfoFragment">
 
         <ImageView
             android:id="@+id/browsing_image_info_vote"
