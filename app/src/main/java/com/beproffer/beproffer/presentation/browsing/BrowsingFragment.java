@@ -126,14 +126,18 @@ public class BrowsingFragment extends BaseUserInfoFragment {
             if (resId == null)
                 return;
             showToast(resId);
-            mBrowsingViewModel.resetTriggers(true, null);
         });
         /*получение команд и айди для совершения перехода*/
-        mBrowsingViewModel.getPerformSearch().observe(getViewLifecycleOwner(), performSearch -> {
+        mBrowsingViewModel.getShowSearchPanel().observe(getViewLifecycleOwner(), performSearch -> {
             if (performSearch == null)
                 return;
-            mBrowsingViewModel.resetTriggers(null, true);
             searchSheet();
+        });
+        /*получение команд и айди для совершения перехода*/
+        mBrowsingViewModel.getShowViewMessage().observe(getViewLifecycleOwner(), textResId -> {
+            if (textResId == null)
+                return;
+            showMessage(textResId);
         });
 
     }
@@ -224,5 +228,8 @@ public class BrowsingFragment extends BaseUserInfoFragment {
         mSearchSheet.show(requireActivity().getSupportFragmentManager(), "mSearchSheet");
     }
 
+    private void showMessage(int textResId) {
+            mBinding.browsingFragmentTextMessage.setText(getResources().getText(textResId));
+    }
 
 }

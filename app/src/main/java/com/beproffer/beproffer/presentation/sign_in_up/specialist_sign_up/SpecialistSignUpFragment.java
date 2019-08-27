@@ -11,7 +11,6 @@ import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SpecialistSignUpFragmentBinding;
@@ -73,22 +72,25 @@ public class SpecialistSignUpFragment extends BaseFragment {
             showToast(R.string.toast_processing);
             return;
         }
-        if (mBinding.specialistSignUpEmail.getText().toString().isEmpty()
-                || mBinding.specialistSignUpPass.getText().toString().isEmpty()) {
-            showErrorMessage(R.string.toast_error_check_fields_data);
+        if (mBinding.specialistSignUpName.getText().toString().isEmpty()
+                || mBinding.specialistSignUpName.getText().toString().length() < 4) {
+            showErrorMessage(R.string.error_message_name_is_too_short);
             return;
         }
-        if (mBinding.specialistSignUpName.getText().toString().length() < 4) {
-            showErrorMessage(R.string.error_message_wrong_name_format);
+        if (mBinding.specialistSignUpEmail.getText().toString().isEmpty()) {
+            showErrorMessage(R.string.error_message_enter_email);
             return;
         }
-
+        if (mBinding.specialistSignUpPass.getText().toString().isEmpty()) {
+            showErrorMessage(R.string.error_message_exception_sign_up_weak_password);
+            return;
+        }
         if (6 > mBinding.specialistSignUpPhone.length() && mBinding.specialistSignUpPhone.length() > 13) {
             showErrorMessage(R.string.error_message_wrong_phone_number_format);
             return;
         }
         if (!mBinding.specialistSignUpPass.getText().toString().equals(mBinding.specialistSignUpPassConfirm.getText().toString())) {
-            showErrorMessage(R.string.toast_error_check_password);
+            showErrorMessage(R.string.toast_error_password_confirm_failure);
             return;
         }
 
@@ -110,20 +112,17 @@ public class SpecialistSignUpFragment extends BaseFragment {
             if (toastId == null)
                 return;
             showToast(toastId);
-            mSignUpViewModel.resetTriggers(true, null, null);
         });
         /*получение команд и айди для совершения перехода*/
         mSignUpViewModel.getPopBackStack().observe(getViewLifecycleOwner(), performPopBackStack -> {
             if (performPopBackStack == null)
                 return;
-            mSignUpViewModel.resetTriggers(null, true, null);
             popBackStack();
         });
         mSignUpViewModel.getErrorMessageId().observe(getViewLifecycleOwner(), errorMessageId -> {
             if (errorMessageId == null)
                 return;
             showErrorMessage(errorMessageId);
-            mSignUpViewModel.resetTriggers(null, null, true);
         });
 
         mSignUpViewModel.signUpNewUser(mBinding.specialistSignUpEmail.getText().toString(),
@@ -135,43 +134,8 @@ public class SpecialistSignUpFragment extends BaseFragment {
     }
 
     private void showErrorMessage(int errorMessageId) {
-        TextView targetTextView;
-        int bottomHintIdRes = 0;
-        switch (errorMessageId) {
-            case R.string.error_message_exception_sign_up_weak_password:
-                targetTextView = mBinding.specialistSignUpPass;
-                break;
-            case R.string.error_message_exception_sign_up_invalid_credentials:
-                targetTextView = mBinding.specialistSignUpEmail;
-                break;
-            case R.string.error_message_exception_sign_up_collision:
-                targetTextView = mBinding.specialistSignUpEmail;
-                break;
-            case R.string.error_message_wrong_phone_number_format:
-                targetTextView = mBinding.specialistSignUpPhone;
-                bottomHintIdRes = R.string.hint_specialist_phone_1;
-                break;
-            case R.string.error_message_wrong_name_format:
-                targetTextView = mBinding.specialistSignUpName;
-                bottomHintIdRes = R.string.hint_outfield_use_correct_name_format;
-                break;
-            case R.string.toast_error_check_fields_data:
-                targetTextView = mBinding.specialistSignUpEmail;
-                break;
-            case R.string.toast_error_check_password:
-                targetTextView = mBinding.specialistSignUpPassConfirm;
-                break;
-            default:
-                targetTextView = mBinding.specialistSignUpName;
-                bottomHintIdRes = R.string.toast_error_has_occurred;
-        }
-        if (targetTextView != null) {
-            targetTextView.setError(getResources().getText(errorMessageId));
-            targetTextView.requestFocus();
-        }
-        if (bottomHintIdRes != 0) {
-            mBinding.specialistSignUpBottomHint.setText(bottomHintIdRes);
-        }
+        mBinding.specialistSignUpBottomHint.setText(errorMessageId);
+        mBinding.specialistSignUpBottomHint.setTextColor(getResources().getColor(R.color.color_red_alpha_85));
     }
 
     private void openDoc(int resId) {

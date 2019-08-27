@@ -3,6 +3,7 @@ package com.beproffer.beproffer.presentation.sign_in_up;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.beproffer.beproffer.R;
@@ -40,7 +41,7 @@ class SignUpRepository {
                               String userType,
                               @Nullable String userSpecialistType,
                               @Nullable String userPhone) {
-        feedBackToUi(true, null, null, null, true);
+        feedBackToUi(true, null, false, null, true);
         mAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(signUpTask -> {
             if (signUpTask.isSuccessful()) {
                 try {
@@ -62,27 +63,26 @@ class SignUpRepository {
                     });
                 } catch (NullPointerException e) {
                     feedBackToUi(false, R.string.toast_error_has_occurred,
-                            null, null, false);
+                            false, null, false);
                 }
             } else {
                 try {
                     throw signUpTask.getException();
                 } catch (FirebaseAuthWeakPasswordException weakPassword) {
-                    feedBackToUi(false, null, null,
+                    feedBackToUi(false, null, false,
                             R.string.error_message_exception_sign_up_weak_password, false);
                 } catch (FirebaseAuthInvalidCredentialsException invalidCredential) {
-                    feedBackToUi(false, null, null,
+                    feedBackToUi(false, null, false,
                             R.string.error_message_exception_sign_up_invalid_credentials, false);
                 } catch (FirebaseAuthUserCollisionException userCollision) {
-                    feedBackToUi(false, null, null,
+                    feedBackToUi(false, null, false,
                             R.string.error_message_exception_sign_up_collision, false);
                 } catch (Exception e) {
                     feedBackToUi(false, R.string.toast_error_registration,
-                            null, null, false);
+                            false, null, false);
                 }
             }
-        }).addOnFailureListener(e -> feedBackToUi(false,
-                R.string.toast_error_user_data_saving_failure, null, null, false));
+        });
     }
 
     private void saveUserDataToDatabase(UserInfo userInfo) {
@@ -96,7 +96,7 @@ class SignUpRepository {
             feedBackToUi(false, R.string.toast_sign_up_email_verification, true, null, false);
         })
                 .addOnFailureListener(e -> feedBackToUi(false,
-                        R.string.toast_error_user_data_saving_failure, null, null, false));
+                        R.string.toast_error_user_data_saving_failure, false, null, false));
     }
 
     public LiveData<Integer> getToastRes() {
@@ -121,34 +121,26 @@ class SignUpRepository {
 
     private void feedBackToUi(@Nullable Boolean showProgress,
                               @Nullable Integer toastId,
-                              @Nullable Boolean popBackStack,
+                              @NonNull Boolean popBackStack,
                               @Nullable Integer errorMessageId,
                               @Nullable Boolean processing) {
         if (showProgress != null)
             mShowProgress.setValue(showProgress);
-        if (toastId != null)
+        if (toastId != null) {
             mToastRes.setValue(toastId);
-        if (popBackStack != null)
-            mPopBackStack.setValue(popBackStack);
-        if (errorMessageId != null)
+            mToastRes.setValue(null);
+        }
+        if (popBackStack) {
+            mPopBackStack.setValue(true);
+            mPopBackStack.setValue(null);
+        }
+        if (errorMessageId != null) {
             mErrorMessageId.setValue(errorMessageId);
-        /*юлокирование повторных запросов если предыдущий идентичный в процессе выполнения*/
+            mErrorMessageId.setValue(null);
+        }
+        /*блокирование повторных запросов если предыдущий идентичный в процессе выполнения*/
         if (processing != null) {
             mProcessing.setValue(processing);
         }
-    }
-
-    public void resetTriggers(@Nullable Boolean resetToastIdValue,
-                              @Nullable Boolean resetPopBackStackValue,
-                              @Nullable Boolean resetErrorMessageIdValue) {
-        /*true = reset parameter, null = ignore parameter*/
-        if (resetToastIdValue != null && resetToastIdValue) {
-            mToastRes.setValue(null);
-        }
-        if (resetPopBackStackValue != null && resetPopBackStackValue) {
-            mPopBackStack.setValue(null);
-        }
-        if (resetErrorMessageIdValue != null)
-            mErrorMessageId.setValue(null);
     }
 }

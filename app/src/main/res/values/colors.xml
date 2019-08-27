@@ -28,4 +28,6 @@
     <color name="colorTextDarkGrey">#30312F</color>
     <color name="colorTextLightGrey">#80525552</color>
 
+    <color name="color_red_alpha_85">#C43326</color>
+
 </resources>

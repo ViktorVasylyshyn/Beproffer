@@ -12,8 +12,8 @@ import android.util.Log;
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.browsing_history.BrowsingHistoryModel;
 import com.beproffer.beproffer.data.browsing_history.BrowsingHistoryRepository;
-import com.beproffer.beproffer.data.models.BrowsingItemRef;
 import com.beproffer.beproffer.data.models.BrowsingImageItem;
+import com.beproffer.beproffer.data.models.BrowsingItemRef;
 import com.beproffer.beproffer.util.Const;
 import com.beproffer.beproffer.util.LocalizationConstants;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,7 +50,8 @@ public class BrowsingItemsRepository {
 
     private final MutableLiveData<Boolean> mShowProgress = new MutableLiveData<>();
     private final MutableLiveData<Integer> mShowToast = new MutableLiveData<>();
-    private final MutableLiveData<Boolean> mPerformSearch = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mShowSearchPanel = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mShowMessage = new MutableLiveData<>();
 
     private Map<String, String> mRequestParams;
 
@@ -58,8 +59,6 @@ public class BrowsingItemsRepository {
 
     private List<BrowsingItemRef> mBrowsingItemsRefsList = new ArrayList<>();
     private final MutableLiveData<List<BrowsingItemRef>> mBrowsingItemsRefsLiveData = new MutableLiveData<>();
-
-    private Observer mBrowsingHistoryObserver;
 
     public BrowsingItemsRepository(Application application) {
         mApplication = application;
@@ -91,8 +90,7 @@ public class BrowsingItemsRepository {
             searchRequestData = application.getSharedPreferences(Const.UNKNOWN_USER_REQUEST, MODE_PRIVATE);
         }
         if (searchRequestData == null) {
-            /*TODO make message via view not via toast*/
-            feedBackToUi(false, R.string.toast_define_search_request, true);
+            feedBackToUi(false, null, true, R.string.toast_define_search_request);
             return;
         }
         try {
@@ -101,14 +99,12 @@ public class BrowsingItemsRepository {
             mRequestParams.put(Const.SERVTYPE, searchRequestData.getString(Const.SERVTYPE, null));
             mRequestParams.put(Const.GENDER, searchRequestData.getString(Const.GENDER, null));
         } catch (NullPointerException e) {
-            /*TODO make message via view not via toast*/
-            feedBackToUi(false, R.string.toast_error_search_request, true);
+            feedBackToUi(false, null, true, R.string.toast_error_search_request);
             return;
         }
         /*if search request params are not correct or equals null - we go to the search fragment to define params*/
         if (checkRequestParams()) {
-            /*TODO make message with view not with toast*/
-            feedBackToUi(false, R.string.toast_define_search_request, true);
+            feedBackToUi(false, null, true, R.string.toast_define_search_request);
             return;
         }
         if (mUser != null && mActualBrowsingHistory == null) {
@@ -119,13 +115,14 @@ public class BrowsingItemsRepository {
     }
 
     private void obtainBrowsingHistory() {
-        mBrowsingHistoryObserver = (Observer<List<String>>) browsingHistory -> {
+        Observer mBrowsingHistoryObserver = (Observer<List<String>>) browsingHistory -> {
             if (mActualBrowsingHistory == null) {
                 mActualBrowsingHistory = browsingHistory;
                 obtainImageRefsFromDb();
             } else {
                 mActualBrowsingHistory = browsingHistory;
-                /*Последний просмотр должен учпевать обновить историю прежде чем начинать новую фильтрацию*/
+                /*Находится здесь, потому что последний просмотр должен успевать обновить
+                 историю прежде чем начинать новую фильтрацию*/
                 if (mBrowsingItemsRefsList.isEmpty()) {
                     filterBrowsingItemRefs();
                 }
@@ -145,7 +142,7 @@ public class BrowsingItemsRepository {
                 mBrowsingHistoryRepository.getTargetBrowsingHistory().observeForever(mBrowsingHistoryObserver);
             }
         } catch (NullPointerException e) {
-            feedBackToUi(false, R.string.toast_error_has_occurred, null);
+            feedBackToUi(false, null, false, R.string.toast_error_has_occurred);
         }
     }
 
@@ -155,7 +152,7 @@ public class BrowsingItemsRepository {
         mBrowsingHistoryRepository.deleteWholeBrowsingHistory();
         mActualBrowsingHistory.clear();
         filterBrowsingItemRefs();
-        feedBackToUi(false, R.string.toast_browsing_history_cleared, null);
+        feedBackToUi(false, R.string.toast_browsing_history_cleared, false, null);
     }
 
     private boolean checkRequestParams() {
@@ -163,7 +160,8 @@ public class BrowsingItemsRepository {
     }
 
     private void obtainImageRefsFromDb() {
-
+        /*выполнение этого метода должно убирать с фрагмента текст об отсутсвии результатов поиска*/
+        feedBackToUi(true, null, false, R.string.string_res_without_text);
         mShowProgress.setValue(true);
         if (checkRequestParams()) {
             obtainRequestParams(mApplication);
@@ -185,7 +183,7 @@ public class BrowsingItemsRepository {
                         .addListenerForSingleValueEvent(mValueEventListener);
             }
         } catch (NullPointerException exception) {
-            feedBackToUi(false, R.string.toast_error_has_occurred, null);
+            feedBackToUi(false, null, false, R.string.toast_error_has_occurred);
         }
     }
 
@@ -194,16 +192,12 @@ public class BrowsingItemsRepository {
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
             if (!dataSnapshot.exists()) {
-                /*TODO make message via view not via toast*/
-
-                feedBackToUi(false, R.string.toast_no_any_service_items, true);
+                feedBackToUi(false, null, true, R.string.toast_no_any_service_items);
                 return;
             }
 
             if (dataSnapshot.getChildrenCount() < 1) {
-                /*TODO make message via view not via toast*/
-
-                feedBackToUi(false, R.string.toast_no_available_images, true);
+                feedBackToUi(false, null, true, R.string.toast_no_available_images);
                 return;
             }
 
@@ -214,7 +208,7 @@ public class BrowsingItemsRepository {
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            feedBackToUi(false, R.string.toast_error_has_occurred, null);
+            feedBackToUi(false, null, false, R.string.toast_error_has_occurred);
         }
     };
 
@@ -249,7 +243,7 @@ public class BrowsingItemsRepository {
             handledBrowsingImageRefsNum++;
             if (handledBrowsingImageRefsNum == totalBrowsingImageRefsNum) {
                 if (mBrowsingItemsRefsList.isEmpty()) {
-                    feedBackToUi(false, R.string.toast_no_available_images, true);
+                    feedBackToUi(false, null, true, R.string.toast_no_available_images);
                 } else {
                     mShowProgress.setValue(false);
                 }
@@ -289,11 +283,9 @@ public class BrowsingItemsRepository {
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         mShowProgress.setValue(false);
-                        Log.d(Const.INFO, " onCancelled" + databaseError.getMessage());
-                        /*TODO make message via view not via toast*/
-                        feedBackToUi(false, R.string.toast_error_has_occurred, null);
+                        Log.d(Const.INFO, "obtainBrowsingItemDetailInfo onCancelled with db error: " + databaseError.getMessage());
                         /* TODO возможно отслеживать и фиксить случаи при которых, не вышло
-                         * получить объект, который по факту должен был быть.*/
+                            получить объект, который по факту должен был быть.*/
                     }
                 });
     }
@@ -308,7 +300,6 @@ public class BrowsingItemsRepository {
     public void refreshAdapter() {
         mActualBrowsingHistory = null;
         obtainRequestParams(mApplication);
-
     }
 
     public LiveData<Boolean> getShowProgress() {
@@ -319,31 +310,33 @@ public class BrowsingItemsRepository {
         return mShowToast;
     }
 
-    public LiveData<Boolean> getPerformSearch() {
-        return mPerformSearch;
+    public LiveData<Boolean> getShowSearchPanel() {
+        return mShowSearchPanel;
     }
 
-    public void resetTriggers(@Nullable Boolean resetToastValue, @Nullable Boolean resetPerformSearch) {
-        if (resetToastValue != null && resetToastValue) {
-            mShowToast.setValue(null);
-        }
-        if (resetPerformSearch != null && resetPerformSearch) {
-            mPerformSearch.setValue(null);
-        }
+    public LiveData<Integer> getShowMessage() {
+        return mShowMessage;
     }
 
     private void feedBackToUi(@Nullable Boolean showProgress,
                               @Nullable Integer toastResId,
-                              @Nullable Boolean performSearch) {
+                              @NonNull Boolean showSearchPanel,
+                              @Nullable Integer showViewMessage) {
 
         if (showProgress != null) {
             mShowProgress.setValue(showProgress);
         }
         if (toastResId != null) {
             mShowToast.setValue(toastResId);
+            mShowToast.setValue(null);
         }
-        if (performSearch != null) {
-            mPerformSearch.setValue(performSearch);
+        if (showSearchPanel) {
+            mShowSearchPanel.setValue(true);
+            mShowSearchPanel.setValue(null);
+        }
+        if (showViewMessage != null) {
+            mShowMessage.setValue(showViewMessage);
+            mShowMessage.setValue(null);
         }
     }
 }

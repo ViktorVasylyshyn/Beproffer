@@ -42,10 +42,4 @@ public class SignUpViewModel extends AndroidViewModel {
                               @Nullable String userPhone) {
         mRepository.signUpNewUser(userEmail, userPassword, userName, userType, userSpecialistType, userPhone);
     }
-
-    public void resetTriggers(@Nullable Boolean resetToastIdValue,
-                              @Nullable Boolean resetPopBackStackValue,
-                              @Nullable Boolean resetErrorMessageIdValue) {
-        mRepository.resetTriggers(resetToastIdValue, resetPopBackStackValue, resetErrorMessageIdValue);
-    }
 }

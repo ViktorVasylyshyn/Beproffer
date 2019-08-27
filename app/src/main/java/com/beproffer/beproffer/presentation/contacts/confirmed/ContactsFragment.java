@@ -100,6 +100,7 @@ public class ContactsFragment extends BaseUserInfoFragment {
         mBinding.contactsContactRequests.setBackgroundResource(R.drawable.button_background_green_stroke_rectangle);
         mBinding.contactsContacts.setClickable(true);
         mBinding.contactsContactRequests.setClickable(false);
+        hideErrorMessageView();
         mUserDataViewModel.getIncomingContactRequests().observe(this, list -> {
             if (list != null) {
                 initCustomersRequestsRecyclerView();
@@ -121,6 +122,7 @@ public class ContactsFragment extends BaseUserInfoFragment {
             mBinding.contactsContacts.setClickable(false);
             mBinding.contactsContactRequests.setClickable(true);
         }
+        hideErrorMessageView();
         mUserDataViewModel.getContacts().observe(this, contacts -> {
             if (contacts != null) {
                 initContactsRecyclerView();
@@ -200,5 +202,15 @@ public class ContactsFragment extends BaseUserInfoFragment {
             return;
         }
         mUserDataViewModel.handleIncomingContactRequest(handledItem, confirm);
+    }
+
+    @Override
+    protected void showErrorMessage(int messageResId) {
+        mBinding.contactsTextMessage.setVisibility(View.VISIBLE);
+        mBinding.contactsTextMessage.setText(messageResId);
+    }
+
+    private void hideErrorMessageView(){
+        mBinding.contactsTextMessage.setVisibility(View.GONE);
     }
 }

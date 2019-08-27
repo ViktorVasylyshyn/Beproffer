@@ -427,6 +427,26 @@
             </LinearLayout>
         </ScrollView>
 
+        <TextView
+            android:id="@+id/specialist_edit_gallery_item_text_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_small"
+            android:layout_marginEnd="@dimen/base_margin_small"
+            android:gravity="center"
+            android:paddingStart="@dimen/base_padding_medium"
+            android:paddingEnd="@dimen/base_padding_medium"
+            android:layout_marginBottom="@dimen/base_margin_small"
+            android:text="@string/string_res_without_text"
+            android:textColor="@color/color_red_alpha_85"
+            android:textSize="@dimen/base_text_size_medium"
+            android:textStyle="italic"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_edit_gallery_item_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
         <ProgressBar
             android:id="@+id/specialist_edit_gallery_item_progress_bar"
             android:layout_width="@dimen/profile_image_half"

@@ -187,6 +187,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
             showToast(R.string.toast_processing);
             return;
         }
+        hideErrorMessage();
         mUserDataViewModel.updateSpecialistGallery(mUpdatedImageItem, mResultUri);
         /*сравнением тип услуги начального обьекта и измененного.проверяем, изменился ли тип услуги.
          * если изменился - удаляем данные по старому адресу*/
@@ -352,5 +353,17 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
             }
             mBinding.setItem(mUpdatedImageItem);
         }
+    }
+
+    @Override
+    protected void showErrorMessage(int messageResId) {
+        mBinding.specialistEditGalleryItemScroll.setVisibility(View.GONE);
+        mBinding.specialistEditGalleryItemTextMessage.setVisibility(View.VISIBLE);
+        mBinding.specialistEditGalleryItemTextMessage.setText(messageResId);
+    }
+
+    private void hideErrorMessage(){
+        mBinding.specialistEditGalleryItemTextMessage.setVisibility(View.GONE);
+        mBinding.specialistEditGalleryItemScroll.setVisibility(View.VISIBLE);
     }
 }

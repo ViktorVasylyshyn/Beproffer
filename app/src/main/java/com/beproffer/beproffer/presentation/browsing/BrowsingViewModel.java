@@ -4,11 +4,10 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.beproffer.beproffer.data.firebase.BrowsingItemsRepository;
-import com.beproffer.beproffer.data.models.BrowsingItemRef;
 import com.beproffer.beproffer.data.models.BrowsingImageItem;
+import com.beproffer.beproffer.data.models.BrowsingItemRef;
 
 import java.util.List;
 
@@ -23,7 +22,6 @@ public class BrowsingViewModel extends AndroidViewModel {
         mRepository = new BrowsingItemsRepository(application);
         if (mBrowsingItemRefsList == null)
             mBrowsingItemRefsList = mRepository.getBrowsingItemRefListLiveData();
-
     }
 
     public LiveData<List<BrowsingItemRef>> getBrowsingItemRefsList() {
@@ -42,8 +40,12 @@ public class BrowsingViewModel extends AndroidViewModel {
         return mRepository.getShowToast();
     }
 
-    public LiveData<Boolean> getPerformSearch() {
-        return mRepository.getPerformSearch();
+    public LiveData<Boolean> getShowSearchPanel() {
+        return mRepository.getShowSearchPanel();
+    }
+
+    public LiveData<Integer> getShowViewMessage() {
+        return mRepository.getShowMessage();
     }
 
     public void deleteObservedItem(BrowsingItemRef item) {
@@ -60,10 +62,5 @@ public class BrowsingViewModel extends AndroidViewModel {
 
     public void clearBrowsingHistory() {
         mRepository.clearBrowsingHistory();
-    }
-
-    public void resetTriggers(@Nullable Boolean resetToastValue, @Nullable Boolean resetPerformSearch) {
-        /*параметр может быть или null(не трогать) или true(обнулить значение)*/
-        mRepository.resetTriggers(resetToastValue, resetPerformSearch);
     }
 }

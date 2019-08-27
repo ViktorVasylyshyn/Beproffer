@@ -11,6 +11,7 @@
     <string name="name_infield">name</string>
     <string name="email_infield">email</string>
     <string name="password_infield">password</string>
+    <string name="password_repeat_infield">repeat password</string>
     <string name="phone_infield">phone number</string>
     <string name="hint_price_infield">price(hrn)</string>
     <string name="hint_description_infield">description(100 characters max)</string>
@@ -64,8 +65,8 @@
     <string name="title_create_an_acc">or create new account</string>
     <string name="title_customer_registration">NEW CUSTOMER</string>
     <string name="title_specialist_registration">NEW SPECIALIST</string>
-    <string name="title_send_contact_request">CONTACT THE SPECIALIST</string>
-    <string name="title_request_already_sent">SENT</string>
+    <string name="title_send_contact_request">ADD SPECIALIST TO CONTACTS</string>
+    <string name="title_request_already_sent">REQUEST SENT</string>
     <string name="title_contact_already_available">YOU ALREADY HAVE THIS NUMBER </string>
     <string name="title_max_num_of_contacts">THE MAX NUM OF CONTACTS IS 10</string>
     <string name="title_this_is_your_image">THIS IS YOUR IMAGE</string>
@@ -161,7 +162,7 @@
     <string name="toast_error_search_request">Something wrong with search parameters. Try to define them once again.</string>
     <string name="toast_error_login">Sign in failed. Please, check your email and the password.</string>
     <string name="toast_error_registration">Registration failed. Please, try again.</string>
-    <string name="toast_error_check_password">Please, check the password.</string>
+    <string name="toast_error_password_confirm_failure">Passwords are not similar.</string>
     <string name="toast_error_check_fields_data">Please, check the data accuracy.</string>
     <string name="toast_error_user_data_saving_failure">User data saving failed. Please, contact to support.</string>
     <string name="toast_contact_deleted">Contact deleted.</string>
@@ -192,11 +193,14 @@
     <string name="error_message_exception_sign_up_collision">Profile with such email already exists.</string>
     <string name="error_message_exception_sign_in_invalid_user">Profile with such email does\'t exist.</string>
     <string name="error_message_exception_sign_in_invalid_credentials">Incorrect password.</string>
-    <string name="error_message_enter_email">Enter your email first.</string>
+    <string name="error_message_enter_email">Enter your email.</string>
     <string name="error_message_delete_profile_wrong_email">Incorrect email.</string>
     <string name="error_message_wrong_phone_number_format">Incorrect format of phone number.</string>
-    <string name="error_message_wrong_name_format">The name is too short.</string>
+    <string name="error_message_name_is_too_short">The name is too short.</string>
+    <string name="message_error_has_occured">Oops, an error has occurred. Please restart the app, and try again. Please contact Beproffers\' support, if the error appears again.</string>
 
     <string name="kyiv">Kyiv, Ukraine.</string>
+
+    <string name="string_res_without_text"> </string>
 
 </resources>

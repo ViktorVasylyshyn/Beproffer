@@ -67,6 +67,26 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/contacts_text_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_small"
+            android:layout_marginEnd="@dimen/base_margin_small"
+            android:gravity="center"
+            android:paddingStart="@dimen/base_padding_medium"
+            android:paddingEnd="@dimen/base_padding_medium"
+            android:layout_marginBottom="@dimen/base_margin_small"
+            android:text="@string/string_res_without_text"
+            android:textColor="@color/color_red_alpha_85"
+            android:textSize="@dimen/base_text_size_medium"
+            android:textStyle="italic"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/contacts_bookmarks_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/contacts_recycler_view"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/contacts_recycler_view"
             android:layout_width="match_parent"
@@ -76,7 +96,7 @@
             android:layout_marginTop="@dimen/base_margin_small"
             android:scrollbars="vertical"
             android:paddingBottom="@dimen/design_bottom_navigation_height"
-            app:layout_constraintTop_toBottomOf="@+id/contacts_bookmarks_layout">
+            app:layout_constraintTop_toBottomOf="@+id/contacts_text_message">
 
         </android.support.v7.widget.RecyclerView>
 
