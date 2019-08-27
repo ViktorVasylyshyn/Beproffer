@@ -35,6 +35,14 @@ import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 
+/**
+ * Репозиторий, отвечающий за подгрузку снимка данных пользователя. На данный момент нет слушателя и
+ * данные подгружаются один раз, при старте сеанса. Содержит персональную информацию, ссылки на
+ * подтвержденные контакты + если пользователь специалист - ссылки на запросы контактов и объекты сервисов.
+ * Содержит методы позволяющие редактировать данные пользователя и данные сервисов(если специалист),
+ * отсылать и подтверждать запросы о контактах.
+ */
+
 public class UserDataRepository {
 
     private final Application mApplication;
@@ -54,6 +62,7 @@ public class UserDataRepository {
     private final MutableLiveData<Integer> mShowToast = new MutableLiveData<>();
     private final MutableLiveData<Boolean> mHideKeyboard = new MutableLiveData<>();
     private final MutableLiveData<Boolean> mPopBackStack = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mMessageResId = new MutableLiveData<>();
 
     private final MutableLiveData<UserInfo> mUserInfoLiveData = new MutableLiveData<>();
 
@@ -111,7 +120,7 @@ public class UserDataRepository {
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     feedBackToUi(false, R.string.toast_error_has_occurred,
-                            null, null, false);
+                            false, false, false, R.string.message_error_has_occured);
                 }
             });
         }
@@ -133,7 +142,7 @@ public class UserDataRepository {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 feedBackToUi(false, R.string.toast_error_has_occurred,
-                        null, null, false);
+                        false, false, false, R.string.message_error_has_occured);
             }
         });
     }
@@ -174,22 +183,20 @@ public class UserDataRepository {
         try {
             bitmap = MediaStore.Images.Media.getBitmap(mApplication.getContentResolver(), updatesImageUri);
         } catch (IOException e) {
-            /*TODO make message via view not via toast*/
-            feedBackToUi(false, R.string.toast_error_has_occurred, true, null, false);
+            feedBackToUi(false, R.string.toast_error_has_occurred, true,
+                    false, false, R.string.message_error_has_occured);
         }
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
             bitmap.compress(Bitmap.CompressFormat.JPEG, bitmapQuality, baos);
         } catch (NullPointerException e) {
-            /*TODO make message via view not via toast*/
-            feedBackToUi(false, R.string.toast_error_has_occurred, true, null, false);
+            feedBackToUi(false, R.string.toast_error_has_occurred, true,
+                    false, false, R.string.message_error_has_occured);
         }
         byte[] data = baos.toByteArray();
         UploadTask uploadTask = filepath.putBytes(data);
-        uploadTask.addOnFailureListener(e -> {
-            /*TODO make message via view not via toast*/
-            feedBackToUi(false, R.string.toast_error_has_occurred, true, null, false);
-        });
+        uploadTask.addOnFailureListener(e -> feedBackToUi(false, R.string.toast_error_has_occurred, true,
+                false, false, R.string.message_error_has_occured));
         uploadTask.addOnSuccessListener(taskSnapshot -> filepath.getDownloadUrl()
                 .addOnSuccessListener(url -> {
                     if (updatedUserInfo != null) {
@@ -198,11 +205,8 @@ public class UserDataRepository {
                     } else if (updatedServiceItem != null) {
                         saveImageDataToRealtimeDb(updatedServiceItem, url.toString());
                     }
-                }).addOnFailureListener(e -> {
-                    /*TODO make message via view not via toast*/
-                    feedBackToUi(false, R.string.toast_error_has_occurred,
-                            null, null, false);
-                })
+                }).addOnFailureListener(e -> feedBackToUi(false, R.string.toast_error_has_occurred,
+                        false, false, false, R.string.message_error_has_occured))
         );
     }
 
@@ -213,10 +217,15 @@ public class UserDataRepository {
                     .child(mCurrentUserId)
                     .child(Const.INFO)
                     .setValue(updatedUserInfo)
-                    .addOnSuccessListener(aVoid -> {
-                        mUserInfoLiveData.setValue(updatedUserInfo);
-                        mProcessing.setValue(false);
-                        feedBackToUi(false, R.string.toast_user_data_updated, true, true, false);
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            mUserInfoLiveData.setValue(updatedUserInfo);
+                            feedBackToUi(false, R.string.toast_user_data_updated, true,
+                                    true, false, null);
+                        } else {
+                            feedBackToUi(false, R.string.toast_error_has_occurred, true,
+                                    false, false, R.string.message_error_has_occured);
+                        }
                     });
     }
 
@@ -242,8 +251,10 @@ public class UserDataRepository {
             try {
                 mLocalImageItemsMap.put(data.getKey(), data.getValue(BrowsingImageItem.class));
             } catch (NullPointerException e) {
+                /*TODO такого, правда еще не случалось, но если вдруг то - отображать объект как
+                    испорченый, чтобы пользователь его перезаписал. или может вообще его удалять*/
                 feedBackToUi(false, R.string.toast_error_has_occurred,
-                        null, null, false);
+                        false, false, false, null);
             }
         }
         mSpecialistGalleryImageItemsMapLiveData.setValue(mLocalImageItemsMap);
@@ -300,10 +311,12 @@ public class UserDataRepository {
                         )).addOnSuccessListener(aVoid -> updateLocalImageItemsMap(updatedItem))
                         .addOnFailureListener(e -> {
                             Log.d(Const.INFO, e.getMessage());
-                            /*TODO make message via view not via toast*/
                             feedBackToUi(false, R.string.toast_error_has_occurred,
-                                    null, null, false);
+                                    false, false, false, R.string.message_error_has_occured);
                         });
+            } else {
+                feedBackToUi(false, R.string.toast_error_has_occurred,
+                        false, false, false, R.string.message_error_has_occured);
             }
         });
     }
@@ -333,7 +346,8 @@ public class UserDataRepository {
         в будущем - переделать.*/
         mLocalImageItemsMap.put(updatedItem.getKey(), updatedItem);
         mSpecialistGalleryImageItemsMapLiveData.setValue(mLocalImageItemsMap);
-        feedBackToUi(false, R.string.toast_image_data_updated, true, true, false);
+        feedBackToUi(false, R.string.toast_image_data_updated, true,
+                true, false, null);
     }
 
     public LiveData<Map<String, ContactItem>> getContacts() {
@@ -346,16 +360,13 @@ public class UserDataRepository {
          которых нет в бд, но еще есть в слепке - введена переменная mContactsObtained.*/
         if (mUserDataSnapShot.hasChild(Const.CONTACT) && mContactsMap.isEmpty() && !mContactsObtained.equals(mCurrentUserId)) {
             for (DataSnapshot data : mUserDataSnapShot.child(Const.CONTACT).getChildren()) {
-                Log.d(Const.INFO, "contacts count is " + mUserDataSnapShot.child(Const.CONTACT).getChildrenCount());
                 try {
-                    Log.d(Const.INFO, "try obtain contact request ");
 
                     mDatabaseRef.child(Const.USERS).child(Const.SPEC).child(data.getKey()).child(Const.INFO)
                             .addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    Log.d(Const.INFO, "onDataChange " + dataSnapshot.getValue(ContactItem.class).getId());
-                            /*Если при создании объекта ContactItem тех специалистов, которые не добавили
+                            /*Если при создании объекта ContactItem будет краш у тех специалистов, которые не добавили
                              изображение, и у них в описании нет profileImageUrl ключа - то обязать их
                              загружать изображение профайла, перед тем как разрешать подтверждать запросы*/
                                     if (dataSnapshot.exists()) {
@@ -372,17 +383,17 @@ public class UserDataRepository {
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
                                     /*TODO подавать в mContactsMap объект ContactItem только с полем id и отображать.
-                                     * в recycler view этот объект, так, ка будто его нет - что то типа:
+                                     * в recycler view этот объект, так, как будто его нет - что то типа:
                                      * ("не можем получить данные специалиста. возможно они удалены или непрвильны")
                                      * это должно подталкивать юзера к удалению этого не валидного id*/
 
                                     feedBackToUi(false, R.string.toast_error_has_occurred,
-                                            null, null, false);
+                                            false, false, false, null);
                                 }
                             });
                 } catch (NullPointerException e) {
                     feedBackToUi(false, R.string.toast_error_has_occurred,
-                            null, null, false);
+                            false, false, false, R.string.message_error_has_occured);
                 }
             }
             mContactsObtained = mCurrentUserId;
@@ -403,7 +414,7 @@ public class UserDataRepository {
             mContactsMap.remove(deletedContact.getId());
             mContactsMapLiveData.setValue(mContactsMap);
             mShowProgress.setValue(false);
-            feedBackToUi(false, R.string.toast_contact_deleted, null, null, false);
+            feedBackToUi(false, R.string.toast_contact_deleted, false, false, false, null);
         });
     }
 
@@ -437,9 +448,8 @@ public class UserDataRepository {
                                 }
                             });
                 } catch (NullPointerException e) {
-                    /*TODO make message via view not via toast*/
                     feedBackToUi(false, R.string.toast_error_has_occurred,
-                            null, null, false);
+                            false, false, false, R.string.message_error_has_occured);
                 }
             }
             mContactRequestsMapLiveData.setValue(mContactRequestsMap);
@@ -463,7 +473,7 @@ public class UserDataRepository {
                     setValue(true).addOnSuccessListener(aVoid ->
                     deleteIncomingContactRequestData(handledItem, R.string.toast_contact_confirmed))
                     .addOnFailureListener(e -> feedBackToUi(false, R.string.toast_error_has_occurred,
-                            null, null, false));
+                            false, false, false, null));
         } else {
             deleteIncomingContactRequestData(handledItem, R.string.toast_contact_denied);
         }
@@ -477,7 +487,7 @@ public class UserDataRepository {
                 .child(handledItem.getId()).removeValue().addOnSuccessListener(aVoid -> {
                     mContactRequestsMap.remove(handledItem.getId());
                     mContactRequestsMapLiveData.setValue(mContactRequestsMap);
-                    feedBackToUi(false, toastRes, null, null, false);
+                    feedBackToUi(false, toastRes, false, false, false, null);
                 }
         );
     }
@@ -492,9 +502,9 @@ public class UserDataRepository {
                     .child(mCurrentUserId)
                     .setValue(mCurrentUserType).addOnSuccessListener(aVoid -> {
                 mOutgoingContactRequests.put(specialistId, true);
-                /* TODO истори исходящих запросов сохраняется только в течении текущего сеанса.
-                 * После перезахода в приложение она сбрасывается. Сделать историю  отправленых запросов
-                 * не зависящей от перезаходы в приложение*/
+                /* TODO история исходящих запросов сохраняется только в течении текущего сеанса.
+                    После перезахода в приложение она сбрасывается. Сделать историю отправленых запросов
+                    не зависящей от перезаходы в приложение*/
                 mOutgoingContactRequestsLiveData.setValue(mOutgoingContactRequests);
                 mShowProgress.setValue(false);
             });
@@ -550,40 +560,39 @@ public class UserDataRepository {
         return mPopBackStack;
     }
 
-    public void resetTrigger(@Nullable Boolean resetToastValue, @Nullable Boolean resetHideKeyboardValue, @Nullable Boolean resetBackStackValue) {
-        if (resetToastValue != null && resetToastValue) {
-            mShowToast.setValue(null);
-        }
-        if (resetHideKeyboardValue != null && resetHideKeyboardValue) {
-            mHideKeyboard.setValue(null);
-        }
-        if (resetBackStackValue != null && resetBackStackValue) {
-            mPopBackStack.setValue(null);
-        }
+    public LiveData<Integer> getMessageResId() {
+        return mMessageResId;
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void feedBackToUi(@Nullable Boolean showProgress,
                               @Nullable Integer toastResId,
-                              @Nullable Boolean hideKeyboard,
-                              @Nullable Boolean popBackStack,
-                              @Nullable Boolean processing) {
+                              @NonNull Boolean hideKeyboard,
+                              @NonNull Boolean popBackStack,
+                              @Nullable Boolean processing,
+                              @Nullable Integer messageResId) {
 
         if (showProgress != null) {
             mShowProgress.setValue(showProgress);
         }
         if (toastResId != null) {
             mShowToast.setValue(toastResId);
+            mShowToast.setValue(null);
         }
-        /*TODO создать пннотации, которые будут запрещать подчу "false" с этим параметром*/
-        /*null - не трогать, true - скрыть*/
-        if (hideKeyboard != null && hideKeyboard) {
+        if (hideKeyboard) {
             mHideKeyboard.setValue(true);
+            mHideKeyboard.setValue(null);
         }
-        if (popBackStack != null && popBackStack) {
+        if (popBackStack) {
             mPopBackStack.setValue(true);
+            mPopBackStack.setValue(null);
         }
         if (processing != null) {
             mProcessing.setValue(false);
+        }
+        if (messageResId != null) {
+            mMessageResId.setValue(messageResId);
+            mMessageResId.setValue(null);
         }
     }
 }

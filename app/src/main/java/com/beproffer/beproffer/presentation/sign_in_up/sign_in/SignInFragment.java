@@ -78,6 +78,7 @@ public class SignInFragment extends BaseFragment {
     }
 
     private void signIn() {
+        hideErrorMessage();// на случай, если высвечивалось сообщение об ошибке
         if (mProcessing.get()) {
             showToast(R.string.toast_processing);
             return;
@@ -87,9 +88,11 @@ public class SignInFragment extends BaseFragment {
             return;
         }
 
-        if (mBinding.signInFragmentEmail.getText().toString().isEmpty() ||
-                mBinding.signInFragmentPassword.getText().toString().isEmpty()) {
-            showToast(R.string.toast_error_login);
+        if (mBinding.signInFragmentEmail.getText().toString().isEmpty()) {
+            showErrorMessage(R.string.error_message_enter_email);
+        }
+        if (mBinding.signInFragmentPassword.getText().toString().isEmpty()) {
+            showToast(R.string.error_message_exception_sign_in_invalid_credentials);
             return;
         }
         showProgress(true);
@@ -108,7 +111,7 @@ public class SignInFragment extends BaseFragment {
                         ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class).refreshAdapter();
                     } else {
                         auth.signOut();
-                        showToast(R.string.toast_sign_in_verify_email_first);
+                        showErrorMessage(R.string.toast_sign_in_verify_email_first);
                     }
                 }
             } else {
@@ -129,6 +132,20 @@ public class SignInFragment extends BaseFragment {
         });
     }
 
+    /*TODO после успешной регистрации нового пользователя делается возврат с фрагмента регистрации(в
+       котором приходит сообщение о том, что нужно почту подтвердить), на фрагмент аутентификации(на
+        котором, по факту, после удачного регистрирования, сообщение о подтверждении пароля нужно
+         отобразить). как это сделать без кучи кода?*/
+    private void showErrorMessage(int textResId) {
+        mBinding.signInBottomHint1.setText(textResId);
+        mBinding.signInBottomHint1.setTextColor(getResources().getColor(R.color.color_red_alpha_85));
+    }
+
+    private void hideErrorMessage() {
+        mBinding.signInBottomHint1.setText(getResources().getText(R.string.string_res_without_text));
+        mBinding.signInBottomHint1.setTextColor(getResources().getColor(R.color.color_base_text));
+    }
+
     private void openDoc(int resId) {
         if (!checkInternetConnection()) {
             showToast(R.string.toast_no_internet_connection);
@@ -136,7 +153,6 @@ public class SignInFragment extends BaseFragment {
         }
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(resId)));
         startActivity(browserIntent);
-
     }
 
     @Override

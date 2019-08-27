@@ -12,6 +12,7 @@
     <string name="name_infield">имя</string>
     <string name="email_infield">email</string>
     <string name="password_infield">пароль</string>
+    <string name="password_repeat_infield">повторите пароль</string>
     <string name="phone_infield">тел.</string>
     <string name="hint_price_infield">цена(грн)</string>
     <string name="hint_description_infield">описание(до 100 символов)</string>
@@ -61,8 +62,8 @@
     <string name="title_create_an_acc">или создать новый аккаунт</string>
     <string name="title_customer_registration">НОВЫЙ КЛИЕНТ</string>
     <string name="title_specialist_registration">НОВЫЙ МАСТЕР</string>
-    <string name="title_send_contact_request">СВЯЗАТЬСЯ СО СПЕЦИАЛИСТОМ</string>
-    <string name="title_request_already_sent">ОТПРАВЛЕНО</string>
+    <string name="title_send_contact_request">ДОБАВИТЬ СПЕЦИАЛИСТА В КОНТАКТЫ</string>
+    <string name="title_request_already_sent">ЗАПРОС ОТПРАВЛЕНО</string>
     <string name="title_contact_already_available">УЖЕ ЕСТЬ В КОНТАКТАХ</string>
     <string name="title_max_num_of_contacts">МАКСИМУМ</string>
     <string name="title_this_is_your_image">ЭТО ВАШЕ ИЗОБРАЖЕНИЕ</string>
@@ -160,7 +161,7 @@
     <string name="toast_error_search_request">Что-то не так с параметрами поиска. Задайте их еще раз.</string>
     <string name="toast_error_login">Ошибка входа. Проверте правильность логина и пароля.</string>
     <string name="toast_error_registration">Ошибка регистрации. Попробуйте снова.</string>
-    <string name="toast_error_check_password">Проверте правильность пароля.</string>
+    <string name="toast_error_password_confirm_failure">Пароль и его подтверждение не совпадают.</string>
     <string name="toast_error_check_fields_data">Проверьте правильность введенных данных.</string>
     <string name="toast_error_user_data_saving_failure">Данные пользователя не сохранились. Свяжитесь с поддержкой.</string>
     <string name="toast_contact_deleted">Контакт удален.</string>
@@ -192,12 +193,17 @@
     <string name="error_message_exception_sign_up_collision">Профайл с таким электронным адресом уже существует.</string>
     <string name="error_message_exception_sign_in_invalid_user">Профайла с такой электронной почтой не существует.</string>
     <string name="error_message_exception_sign_in_invalid_credentials">Введен неверный пароль.</string>
-    <string name="error_message_enter_email">Сначала введите email.</string>
+    <string name="error_message_enter_email">Введите свой email.</string>
     <string name="error_message_delete_profile_wrong_email">Неправильный email.</string>
     <string name="error_message_wrong_phone_number_format">Неверный формат номера телефона.</string>
-    <string name="error_message_wrong_name_format">слишком короткое имя.</string>
+    <string name="error_message_name_is_too_short">слишком короткое имя.</string>
+
+    <string name="message_error_has_occured">Ой, произошла ошибка. Попробуйте перезапустить приложение. Если ошибка повторится, свяжитесь пожалуйста с тех поддержкой.</string>
+
 
     <string name="kyiv">Киев, Украина.</string>
+
+    <string name="string_res_without_text"> </string>
 
     <!--special hints-->
     <string name="hint_specialist_phone_1">Убедитесь, что номер телефона указан правильно. Он будет показываться потенциальным клиентам.</string>

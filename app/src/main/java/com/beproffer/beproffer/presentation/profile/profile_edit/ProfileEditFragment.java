@@ -98,6 +98,10 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
     }
 
     private void saveUserData() {
+        /*ресет textview на случай, если внем отобрабается\лась подсказка о ошибке*/
+        mBinding.editFragmentBottomHint.setText(R.string.string_res_without_text);
+        mBinding.editFragmentBottomHint.setTextColor(getResources().getColor(R.color.color_base_text));
+
         if (!checkInternetConnection()) {
             showToast(R.string.toast_no_internet_connection);
             return;
@@ -114,7 +118,7 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
         }
         if (mCurrentUserInfo.getName().length() < 4) {
             mBinding.editFragmentName.requestFocus();
-            mBinding.editFragmentName.setError(getResources().getText(R.string.error_message_wrong_name_format));
+            mBinding.editFragmentName.setError(getResources().getText(R.string.error_message_name_is_too_short));
             mBinding.editFragmentBottomHint.setText(R.string.hint_outfield_use_correct_name_format);
             return;
         }
@@ -221,5 +225,11 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
                 showToast(R.string.toast_error_has_occurred);
             }
         }
+    }
+
+    @Override
+    protected void showErrorMessage(int messageResId) {
+        mBinding.editFragmentBottomHint.setText(messageResId);
+        mBinding.editFragmentBottomHint.setTextColor(getResources().getColor(R.color.color_red_alpha_85));
     }
 }

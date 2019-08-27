@@ -11,7 +11,6 @@ import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.CustomerSignUpFragmentBinding;
@@ -66,28 +65,31 @@ public class CustomerSignUpFragment extends BaseFragment {
 
     private void checkDataAndSignUpNewUser() {
         if (!checkInternetConnection()) {
-            showToast(R.string.toast_no_internet_connection);
+            showErrorMessage(R.string.toast_no_internet_connection);
             return;
         }
         if (mProcessing.get()) {
             showToast(R.string.toast_processing);
             return;
         }
-        if (mBinding.customerSignUpEmail.getText().toString().isEmpty()
-                || mBinding.customerSignUpPass.getText().toString().isEmpty()) {
-            showErrorMessage(R.string.toast_error_check_fields_data);
+        if (mBinding.customerSignUpName.getText().toString().isEmpty()
+                || mBinding.customerSignUpName.getText().toString().length() < 4) {
+            showErrorMessage(R.string.error_message_name_is_too_short);
             return;
         }
-        if (mBinding.customerSignUpName.getText().toString().length() < 4) {
-            showErrorMessage(R.string.error_message_wrong_name_format);
+        if (mBinding.customerSignUpEmail.getText().toString().isEmpty()) {
+            showErrorMessage(R.string.error_message_enter_email);
             return;
         }
-
-        if (!mBinding.customerSignUpPass.getText().toString().equals(mBinding.customerSignUpPassConfirm.getText().toString())) {
-            showErrorMessage(R.string.toast_error_check_password);
+        if (mBinding.customerSignUpPass.getText().toString().isEmpty()) {
+            showErrorMessage(R.string.error_message_exception_sign_up_weak_password);
             return;
         }
-
+        if (!mBinding.customerSignUpPass.getText().toString()
+                .equals(mBinding.customerSignUpPassConfirm.getText().toString())) {
+            showErrorMessage(R.string.toast_error_password_confirm_failure);
+            return;
+        }
         if (mSignUpViewModel == null)
             mSignUpViewModel = ViewModelProviders.of(requireActivity()).get(SignUpViewModel.class);
 
@@ -106,20 +108,17 @@ public class CustomerSignUpFragment extends BaseFragment {
             if (toastId == null)
                 return;
             showToast(toastId);
-            mSignUpViewModel.resetTriggers(true, null, null);
         });
         /*получение команд и айди для совершения перехода*/
         mSignUpViewModel.getPopBackStack().observe(getViewLifecycleOwner(), performPopBackStack -> {
             if (performPopBackStack == null)
                 return;
-            mSignUpViewModel.resetTriggers(null, true, null);
             popBackStack();
         });
         mSignUpViewModel.getErrorMessageId().observe(getViewLifecycleOwner(), errorMessageId -> {
             if (errorMessageId == null)
                 return;
             showErrorMessage(errorMessageId);
-            mSignUpViewModel.resetTriggers(null, null, true);
         });
 
         mSignUpViewModel.signUpNewUser(mBinding.customerSignUpEmail.getText().toString(),
@@ -131,39 +130,8 @@ public class CustomerSignUpFragment extends BaseFragment {
     }
 
     private void showErrorMessage(int errorMessageId) {
-        TextView targetTextView;
-        int bottomHintIdRes = 0;
-        switch (errorMessageId) {
-            case R.string.error_message_exception_sign_up_weak_password:
-                targetTextView = mBinding.customerSignUpPass;
-                break;
-            case R.string.error_message_exception_sign_up_invalid_credentials:
-                targetTextView = mBinding.customerSignUpEmail;
-                break;
-            case R.string.error_message_exception_sign_up_collision:
-                targetTextView = mBinding.customerSignUpEmail;
-                break;
-            case R.string.error_message_wrong_name_format:
-                targetTextView = mBinding.customerSignUpName;
-                bottomHintIdRes = R.string.hint_outfield_use_correct_name_format;
-                break;
-            case R.string.toast_error_check_fields_data:
-                targetTextView = mBinding.customerSignUpEmail;
-                break;
-            case R.string.toast_error_check_password:
-                targetTextView = mBinding.customerSignUpPassConfirm;
-                break;
-            default:
-                targetTextView = mBinding.customerSignUpName;
-                bottomHintIdRes = R.string.toast_error_has_occurred;
-        }
-        if (targetTextView != null) {
-            targetTextView.setError(getResources().getText(errorMessageId));
-            targetTextView.requestFocus();
-        }
-        if (bottomHintIdRes != 0) {
-            mBinding.customerSignUpBottomHint.setText(bottomHintIdRes);
-        }
+        mBinding.customerSignUpBottomHint.setText(errorMessageId);
+        mBinding.customerSignUpBottomHint.setTextColor(getResources().getColor(R.color.color_red_alpha_85));
     }
 
     private void openDoc(int resId) {

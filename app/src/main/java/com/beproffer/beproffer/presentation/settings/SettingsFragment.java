@@ -84,7 +84,6 @@ public class SettingsFragment extends BaseUserInfoFragment {
                     if (resId == null)
                         return;
                     showToast(resId);
-                    mBrowsingViewModel.resetTriggers(true, null);
                 });
                 mBrowsingViewModel.clearBrowsingHistory();
             }

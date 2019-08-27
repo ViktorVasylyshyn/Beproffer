@@ -13,6 +13,7 @@
     <string name="name_infield">ім\'я</string>
     <string name="email_infield">email</string>
     <string name="password_infield">пароль</string>
+    <string name="password_repeat_infield">повторіть пароль</string>
     <string name="phone_infield">тел</string>
     <string name="hint_price_infield">ціна(грн)</string>
     <string name="hint_description_infield">опис(до 100 символів)</string>
@@ -62,8 +63,8 @@
     <string name="title_create_an_acc">або створити новий аккаунт</string>
     <string name="title_customer_registration">НОВИЙ КЛІЄНТ</string>
     <string name="title_specialist_registration">НОВИЙ СПЕЦІАЛІСТ</string>
-    <string name="title_send_contact_request">ЗВ\'ЯЗАТИСЯ ЗІ СПЕЦІАЛІСТОМ</string>
-    <string name="title_request_already_sent">ВІДПРАВЛЕНО</string>
+    <string name="title_send_contact_request">ДОДАТИ СПЕЦІАЛІСТА ДО КОНТАКТІВ</string>
+    <string name="title_request_already_sent">ЗАПИТ ВІДПРАВЛЕНО</string>
     <string name="title_contact_already_available">ВЖЕ Є В КОНТАКТАХ</string>
     <string name="title_max_num_of_contacts">МАКСИМУМ</string>
     <string name="title_this_is_your_image">ЦЕ ВАШЕ ЗОБРАЖЕННЯ</string>
@@ -161,7 +162,7 @@
     <string name="toast_error_search_request">Щось не так з параметрами пошуку. Спробуйте ще раз.</string>
     <string name="toast_error_login">Помилка входу. Перевірте привильність email та паролю.</string>
     <string name="toast_error_registration">Помилка реєстрації. Спробуйте знову.</string>
-    <string name="toast_error_check_password">Перевірте пароль.</string>
+    <string name="toast_error_password_confirm_failure">Пароль і його підтверження не співпвдають.</string>
     <string name="toast_error_check_fields_data">Будь ласка перевірте правильність введених даних.</string>
     <string name="toast_error_user_data_saving_failure">Дані користувача не збереглися. зв\'яжіться з підтримкою.</string>
     <string name="toast_contact_deleted">Контакт видалено.</string>
@@ -186,20 +187,21 @@
     <string name="toast_add_personal_info_first">Будь ласка, додайте інформацію про себе в розділі "редагувати профіль", спочатку.</string>
 
 
-
-
     <string name="error_message_exception_sign_up_weak_password">Захистіть свій профайл більш надійним паролем.</string>
     <string name="error_message_exception_sign_up_invalid_credentials">Адреса єлектронної пошти має невірний формат.</string>
     <string name="error_message_exception_sign_up_collision">Профайл с такою адресою вже існує.</string>
     <string name="error_message_exception_sign_in_invalid_user">Профайлу з такою адресою не існує.</string>
     <string name="error_message_exception_sign_in_invalid_credentials">Невірний пароль.</string>
-    <string name="error_message_enter_email">Спочатку введіть email.</string>
+    <string name="error_message_enter_email">Введіть свой email.</string>
     <string name="error_message_delete_profile_wrong_email">Неправильний email.</string>
     <string name="error_message_wrong_phone_number_format">Невірний формат номеру телефону.</string>
-    <string name="error_message_wrong_name_format">Закоротке ім\'я.</string>
+    <string name="error_message_name_is_too_short">Закоротке ім\'я.</string>
+
+    <string name="message_error_has_occured">Сталася помилка. Спробуйте перезапустити додаток. Якщо помилка станеться знову - зв\'яжіться, будь ласка, з підтримкою Beproffer.</string>
 
     <string name="kyiv">Київ, Україна.</string>
 
+    <string name="string_res_without_text"> </string>
 
     <!--special hints-->
 

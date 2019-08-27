@@ -281,7 +281,6 @@
             android:layout_marginStart="@dimen/base_margin_small"
             android:layout_marginEnd="@dimen/base_margin_small"
             android:layout_marginBottom="@dimen/base_margin_medium"
-            android:background="@drawable/rectangle_grey_background"
             android:gravity="center"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_medium"

@@ -88,9 +88,8 @@ public class UserDataViewModel extends AndroidViewModel {
         return mRepository.getPopBackStack();
     }
 
-    public void resetTrigger(@Nullable Boolean resetToastValue, @Nullable Boolean resetHideKeyboardValue, @Nullable Boolean resetBackStackValue) {
-        /*параметр может быть или null(не трогать) или true(обнулить значение)*/
-        mRepository.resetTrigger(resetToastValue, resetHideKeyboardValue, resetBackStackValue);
+    public LiveData<Integer> getMessageResId() {
+        return mRepository.getMessageResId();
     }
 
     public void sendContactRequest(String specialistId) {
@@ -100,7 +99,6 @@ public class UserDataViewModel extends AndroidViewModel {
     public LiveData<Map<String, Boolean>> getOutgoingContactRequests() {
         return mRepository.getOutgoingContactRequests();
     }
-
 
     public void resetUserData() {
         mRepository.resetLocalUserData();

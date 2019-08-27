@@ -42,24 +42,28 @@ public class BaseUserInfoFragment extends BaseFragment {
             if (resId == null)
                 return;
             showToast(resId);
-            mUserDataViewModel.resetTrigger(true, null, null);
         });
 
         mUserDataViewModel.getHideKeyboard().observe(getViewLifecycleOwner(), hide -> {
             if (hide == null)
                 return;
-            mUserDataViewModel.resetTrigger(null, true, null);
             hideKeyboard(requireActivity());
         });
 
         mUserDataViewModel.getPopBackStack().observe(getViewLifecycleOwner(), back -> {
             if (back == null)
                 return;
-            mUserDataViewModel.resetTrigger(null, null, true);
             Handler handlerWordAnim = new Handler();
             handlerWordAnim.postDelayed(this::popBackStack, Const.POPBACKSTACK_WAITING);
-
         });
+
+        mUserDataViewModel.getMessageResId().observe(getViewLifecycleOwner(), messageResId -> {
+            if (messageResId == null)
+                return;
+            showErrorMessage(messageResId);
+        });
+
+
         obtainUserInfo();
     }
 
@@ -87,6 +91,10 @@ public class BaseUserInfoFragment extends BaseFragment {
     protected void applyUserData() {
         /*предполагается что во фрагментах наследниках, в этом методе будет размещаться логика, которая
          * должна начать совершаться, когда данные юзера получены*/
+    }
+
+    protected void showErrorMessage(int messageResId){
+        /*разная реализация, для разных фрагментов*/
     }
 
     protected void setBadge(int index) {
