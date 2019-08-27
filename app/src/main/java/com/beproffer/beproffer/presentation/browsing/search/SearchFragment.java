@@ -1,4 +1,4 @@
-package com.beproffer.beproffer.presentation.browsing.search_sheet;
+package com.beproffer.beproffer.presentation.browsing.search;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.SharedPreferences;
@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.databinding.SearchSheetLayoutBinding;
+import com.beproffer.beproffer.databinding.SearchFragmentLayoutBinding;
+import com.beproffer.beproffer.presentation.base.BaseFragment;
 import com.beproffer.beproffer.presentation.browsing.BrowsingViewModel;
 import com.beproffer.beproffer.util.Const;
 import com.beproffer.beproffer.util.DefineServiceType;
@@ -25,11 +25,11 @@ import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class SearchSheetDialog extends BottomSheetDialogFragment {
+public class SearchFragment extends BaseFragment {
 
-    private SearchSheetLayoutBinding mBinding;
+    private SearchFragmentLayoutBinding mBinding;
 
-    private SearchSheetCallback mCallback = new SearchSheetCallback() {
+    private SearchFragmentCallback mCallback = new SearchFragmentCallback() {
         @Override
         public void onServiceTypeIconClicked(View view) {
             defineServiceType(view);
@@ -43,10 +43,10 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
         @Override
         public void onApplyClicked() {
             if (mGender == null || mTypeMap == null) {
-                mBinding.sslApply.setClickable(false);
+                mBinding.searchFragmentApply.setClickable(false);
                 Toast.makeText(requireContext(), R.string.toast_define_search_params, Toast.LENGTH_SHORT).show();
                 Handler handler = new Handler();
-                handler.postDelayed(() -> mBinding.sslApply.setClickable(true), Const.COOLDOWNDUR_SHORT);
+                handler.postDelayed(() -> mBinding.searchFragmentApply.setClickable(true), Const.COOLDOWNDUR_SHORT);
                 return;
             }
             applySearchRequest();
@@ -54,7 +54,13 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
 
         @Override
         public void onDenyClicked() {
-            dismiss();
+            popBackStack();
+        }
+
+        @Override
+        public void onFreeAreaClicked() {
+            /*должен быть пустой, чтобы не кликало на BrowsingFragment, так как эти фрагменты
+            * одновременно добавлены в контейнер*/
         }
     };
 
@@ -62,12 +68,11 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
 
     private String mGender;
 
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle saveInstantState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.search_sheet_layout, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.search_fragment_layout, container, false);
         mBinding.setLifecycleOwner(this);
-        mBinding.setCallback(mCallback);
+        mBinding.setFragmentCallback(mCallback);
 
         return mBinding.getRoot();
     }
@@ -75,22 +80,22 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
     private void defineServiceType(View view) {
         int requiredMenuRes;
         switch (view.getId()) {
-            case R.id.ssl_haircut_icon:
+            case R.id.search_fragment_haircut_icon:
                 requiredMenuRes = R.menu.menu_hair_services;
                 break;
-            case R.id.ssl_nails_icon:
+            case R.id.search_fragment_nails_icon:
                 requiredMenuRes = R.menu.menu_nails_services;
                 break;
-            case R.id.ssl_makeup_icon:
+            case R.id.search_fragment_makeup_icon:
                 requiredMenuRes = R.menu.menu_makeup_services;
                 break;
-            case R.id.ssl_tattoo_icon:
+            case R.id.search_fragment_tattoo_icon:
                 requiredMenuRes = R.menu.menu_tattoo_services;
                 break;
-            case R.id.ssl_barber_icon:
+            case R.id.search_fragment_barber_icon:
                 requiredMenuRes = R.menu.menu_barber_services;
                 break;
-            case R.id.ssl_fitness_icon:
+            case R.id.search_fragment_fitness_icon:
                 requiredMenuRes = R.menu.menu_fitness_services;
                 break;
             default:
@@ -106,14 +111,14 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
                     !mTypeMap.containsKey(Const.SERVSBTP) || !mTypeMap.containsKey(Const.SERVTITL)) {
                 Toast.makeText(requireContext(), R.string.toast_error_has_occurred, Toast.LENGTH_SHORT).show();
             } else {
-                mBinding.sslTypeTitle.setText(mTypeMap.get(Const.SERVTITL));
+                mBinding.searchFragmentTypeTitle.setText(mTypeMap.get(Const.SERVTITL));
 
-                mBinding.sslHaircutIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
-                mBinding.sslNailsIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
-                mBinding.sslMakeupIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
-                mBinding.sslTattooIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
-                mBinding.sslBarberIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
-                mBinding.sslFitnessIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
+                mBinding.searchFragmentHaircutIcon.setBackgroundResource(R.drawable.button_grey_stroke_rectangle);
+                mBinding.searchFragmentNailsIcon.setBackgroundResource(R.drawable.button_grey_stroke_rectangle);
+                mBinding.searchFragmentMakeupIcon.setBackgroundResource(R.drawable.button_grey_stroke_rectangle);
+                mBinding.searchFragmentTattooIcon.setBackgroundResource(R.drawable.button_grey_stroke_rectangle);
+                mBinding.searchFragmentBarberIcon.setBackgroundResource(R.drawable.button_grey_stroke_rectangle);
+                mBinding.searchFragmentFitnessIcon.setBackgroundResource(R.drawable.button_grey_stroke_rectangle);
 
                 view.setBackground(getResources().getDrawable(R.drawable.button_background_green_stroke_rectangle));
                 /*this map have service's type, subtype and title*/
@@ -125,21 +130,21 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
 
     private void handleGenderClick(View view) {
         switch (view.getId()) {
-            case R.id.ssl_male_text_view:
+            case R.id.search_fragment_male_text_view:
                 mGender = Const.MALE;
                 break;
-            case R.id.ssl_female_text_view:
+            case R.id.search_fragment_female_text_view:
                 mGender = Const.FEMALE;
                 break;
-            case R.id.ssl_both_text_view:
+            case R.id.search_fragment_both_text_view:
                 mGender = Const.BOTHGEND;
                 break;
             default:
                 throw new IllegalArgumentException(Const.UNKNSTAT);
         }
-        mBinding.sslMaleTextView.setBackgroundResource(R.drawable.background_transparent);
-        mBinding.sslFemaleTextView.setBackgroundResource(R.drawable.background_transparent);
-        mBinding.sslBothTextView.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.searchFragmentMaleTextView.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.searchFragmentFemaleTextView.setBackgroundResource(R.drawable.background_transparent);
+        mBinding.searchFragmentBothTextView.setBackgroundResource(R.drawable.background_transparent);
 
         view.setBackground(getResources().getDrawable(R.drawable.button_background_green_stroke_rectangle));
     }
@@ -159,11 +164,8 @@ public class SearchSheetDialog extends BottomSheetDialogFragment {
                 editor.putString(Const.SERVSBTP, mTypeMap.get(Const.SERVSBTP));
                 editor.apply();
             }
-
             ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class).refreshAdapter();
-
-
-            dismiss();
+            popBackStack();
         } else {
             Toast.makeText(requireContext(), R.string.toast_error_has_occurred, Toast.LENGTH_SHORT).show();
         }
