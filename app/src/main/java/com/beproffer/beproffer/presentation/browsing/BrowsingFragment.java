@@ -18,7 +18,7 @@ import com.beproffer.beproffer.databinding.BrowsingFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.browsing.adapter.BrowsingAdapter;
 import com.beproffer.beproffer.presentation.browsing.info.BrowsingItemInfoFragment;
-import com.beproffer.beproffer.presentation.browsing.search_sheet.SearchSheetDialog;
+import com.beproffer.beproffer.presentation.browsing.search.SearchFragment;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.List;
@@ -34,14 +34,12 @@ public class BrowsingFragment extends BaseUserInfoFragment {
 
     private List<BrowsingItemRef> mImageItemsList;
 
-    private SearchSheetDialog mSearchSheet;
-
     private BrowsingViewModel mBrowsingViewModel;
 
     private final BrowsingFragmentCallback mCallback = new BrowsingFragmentCallback() {
         @Override
         public void onSearchClick() {
-            searchSheet();
+            performSearch();
         }
 
         @Override
@@ -131,7 +129,7 @@ public class BrowsingFragment extends BaseUserInfoFragment {
         mBrowsingViewModel.getShowSearchPanel().observe(getViewLifecycleOwner(), performSearch -> {
             if (performSearch == null)
                 return;
-            searchSheet();
+            performSearch();
         });
         /*получение команд и айди для совершения перехода*/
         mBrowsingViewModel.getShowViewMessage().observe(getViewLifecycleOwner(), textResId -> {
@@ -139,7 +137,6 @@ public class BrowsingFragment extends BaseUserInfoFragment {
                 return;
             showMessage(textResId);
         });
-
     }
 
     private void initAdapter() {
@@ -182,7 +179,6 @@ public class BrowsingFragment extends BaseUserInfoFragment {
             @Override
             public void onScroll(float scrollProgressPercent) {
             }
-
         });
         flingImageContainer.setOnItemClickListener((itemPosition, dataObject) -> showBrowsingItemInfo(dataObject));
     }
@@ -215,21 +211,15 @@ public class BrowsingFragment extends BaseUserInfoFragment {
         changeFragment(new BrowsingItemInfoFragment(), true, false, true);
     }
 
-    private void searchSheet() {
+    private void performSearch() {
         if (!checkInternetConnection()) {
             showToast(R.string.toast_no_internet_connection);
             return;
         }
-        if (mSearchSheet != null) {
-            mSearchSheet.dismiss();
-            mSearchSheet = null;
-        }
-        mSearchSheet = new SearchSheetDialog();
-        mSearchSheet.show(requireActivity().getSupportFragmentManager(), "mSearchSheet");
+        changeFragment(new SearchFragment(), true, false, true);
     }
 
     private void showMessage(int textResId) {
-            mBinding.browsingFragmentTextMessage.setText(getResources().getText(textResId));
+        mBinding.browsingFragmentTextMessage.setText(getResources().getText(textResId));
     }
-
 }

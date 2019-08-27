@@ -1,8 +1,8 @@
-package com.beproffer.beproffer.presentation.browsing.search_sheet;
+package com.beproffer.beproffer.presentation.browsing.search;
 
 import android.view.View;
 
-public interface SearchSheetCallback {
+public interface SearchFragmentCallback {
 
     void onServiceTypeIconClicked(View view);
 
@@ -11,4 +11,6 @@ public interface SearchSheetCallback {
     void onApplyClicked();
 
     void onDenyClicked();
+
+    void onFreeAreaClicked();
 }
