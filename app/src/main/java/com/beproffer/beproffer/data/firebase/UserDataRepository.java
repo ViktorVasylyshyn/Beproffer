@@ -120,7 +120,7 @@ public class UserDataRepository {
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     feedBackToUi(false, R.string.toast_error_has_occurred,
-                            false, false, false, R.string.message_error_has_occured);
+                            false, false, false, R.string.message_error_has_occurred);
                 }
             });
         }
@@ -142,7 +142,7 @@ public class UserDataRepository {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 feedBackToUi(false, R.string.toast_error_has_occurred,
-                        false, false, false, R.string.message_error_has_occured);
+                        false, false, false, R.string.message_error_has_occurred);
             }
         });
     }
@@ -184,19 +184,19 @@ public class UserDataRepository {
             bitmap = MediaStore.Images.Media.getBitmap(mApplication.getContentResolver(), updatesImageUri);
         } catch (IOException e) {
             feedBackToUi(false, R.string.toast_error_has_occurred, true,
-                    false, false, R.string.message_error_has_occured);
+                    false, false, R.string.message_error_has_occurred);
         }
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
             bitmap.compress(Bitmap.CompressFormat.JPEG, bitmapQuality, baos);
         } catch (NullPointerException e) {
             feedBackToUi(false, R.string.toast_error_has_occurred, true,
-                    false, false, R.string.message_error_has_occured);
+                    false, false, R.string.message_error_has_occurred);
         }
         byte[] data = baos.toByteArray();
         UploadTask uploadTask = filepath.putBytes(data);
         uploadTask.addOnFailureListener(e -> feedBackToUi(false, R.string.toast_error_has_occurred, true,
-                false, false, R.string.message_error_has_occured));
+                false, false, R.string.message_error_has_occurred));
         uploadTask.addOnSuccessListener(taskSnapshot -> filepath.getDownloadUrl()
                 .addOnSuccessListener(url -> {
                     if (updatedUserInfo != null) {
@@ -206,7 +206,7 @@ public class UserDataRepository {
                         saveImageDataToRealtimeDb(updatedServiceItem, url.toString());
                     }
                 }).addOnFailureListener(e -> feedBackToUi(false, R.string.toast_error_has_occurred,
-                        false, false, false, R.string.message_error_has_occured))
+                        false, false, false, R.string.message_error_has_occurred))
         );
     }
 
@@ -224,7 +224,7 @@ public class UserDataRepository {
                                     true, false, null);
                         } else {
                             feedBackToUi(false, R.string.toast_error_has_occurred, true,
-                                    false, false, R.string.message_error_has_occured);
+                                    false, false, R.string.message_error_has_occurred);
                         }
                     });
     }
@@ -312,11 +312,11 @@ public class UserDataRepository {
                         .addOnFailureListener(e -> {
                             Log.d(Const.INFO, e.getMessage());
                             feedBackToUi(false, R.string.toast_error_has_occurred,
-                                    false, false, false, R.string.message_error_has_occured);
+                                    false, false, false, R.string.message_error_has_occurred);
                         });
             } else {
                 feedBackToUi(false, R.string.toast_error_has_occurred,
-                        false, false, false, R.string.message_error_has_occured);
+                        false, false, false, R.string.message_error_has_occurred);
             }
         });
     }
@@ -393,7 +393,7 @@ public class UserDataRepository {
                             });
                 } catch (NullPointerException e) {
                     feedBackToUi(false, R.string.toast_error_has_occurred,
-                            false, false, false, R.string.message_error_has_occured);
+                            false, false, false, R.string.message_error_has_occurred);
                 }
             }
             mContactsObtained = mCurrentUserId;
@@ -449,7 +449,7 @@ public class UserDataRepository {
                             });
                 } catch (NullPointerException e) {
                     feedBackToUi(false, R.string.toast_error_has_occurred,
-                            false, false, false, R.string.message_error_has_occured);
+                            false, false, false, R.string.message_error_has_occurred);
                 }
             }
             mContactRequestsMapLiveData.setValue(mContactRequestsMap);

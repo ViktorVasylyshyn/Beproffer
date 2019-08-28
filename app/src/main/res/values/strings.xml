@@ -186,7 +186,7 @@
     <string name="toast_processing">Wait a second, please. Processing…</string>
     <string name="toast_no_any_service_items">There are no publications for this request yet. Please, try again later.</string>
     <string name="toast_add_personal_info_first">Please, add information about you to "edit profile" section first.</string>
-
+    <string name="toast_images_for_guest_mode">The images in \'guest\' mode can be repeated. Please, sign up to have a possibility to use browsing history.</string>
 
     <string name="error_message_exception_sign_up_weak_password">Please, create more complicated password.</string>
     <string name="error_message_exception_sign_up_invalid_credentials">Invalid credentials.</string>
@@ -197,7 +197,7 @@
     <string name="error_message_delete_profile_wrong_email">Incorrect email.</string>
     <string name="error_message_wrong_phone_number_format">Incorrect format of phone number.</string>
     <string name="error_message_name_is_too_short">The name is too short.</string>
-    <string name="message_error_has_occured">Oops, an error has occurred. Please restart the app, and try again. Please contact Beproffers\' support, if the error appears again.</string>
+    <string name="message_error_has_occurred">Oops, an error has occurred. Please restart the app, and try again. Please contact Beproffers\' support, if the error appears again.</string>
 
     <string name="kyiv">Kyiv, Ukraine.</string>
 

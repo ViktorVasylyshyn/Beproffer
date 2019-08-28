@@ -89,10 +89,12 @@ public class BrowsingItemsRepository {
         } else {
             searchRequestData = application.getSharedPreferences(Const.UNKNOWN_USER_REQUEST, MODE_PRIVATE);
         }
-        if (searchRequestData == null) {
-            feedBackToUi(false, null, true, R.string.toast_define_search_request);
-            return;
-        }
+        /*TODO до конца не понятно почему, в свое время здесь была оставлена эта проверка. Проследить некоторое
+         *  время, будут ли краши из-за ее остуствия. Если нет - убрать окончательно. Если */
+//        if (searchRequestData == null) {
+//            feedBackToUi(false, null, true, R.string.toast_define_search_request);
+//            return;
+//        }
         try {
             mRequestParams = new HashMap<>();
             mRequestParams.put(Const.SERVSBTP, searchRequestData.getString(Const.SERVSBTP, null));
@@ -121,8 +123,10 @@ public class BrowsingItemsRepository {
                 obtainImageRefsFromDb();
             } else {
                 mActualBrowsingHistory = browsingHistory;
-                /*Находится здесь, потому что последний просмотр должен успевать обновить
-                 историю прежде чем начинать новую фильтрацию*/
+                /*Эта проверка и начало новой фильтрации валидны только для авторизированных пользователей,
+                 когда история просмотров фиксируется. Фильтрация начинается после ответа, о том, что url последнего
+                 просмотренного изображения записано в историю просмотров. Стьарт новой фильтрации для режима гостя,
+                 когда история просмотров не фиксируется, находится в deleteObservedItem()*/
                 if (mBrowsingItemsRefsList.isEmpty()) {
                     filterBrowsingItemRefs();
                 }
@@ -295,6 +299,14 @@ public class BrowsingItemsRepository {
             mBrowsingHistoryRepository.insert(new BrowsingHistoryModel(item.getUrl()));
         mBrowsingItemsRefsList.remove(0);
         mBrowsingItemsRefsLiveData.setValue(mBrowsingItemsRefsList);
+
+        /*Эта проверка и начало новой фильтрации валидны только для пользователей в режиме гостя,
+        когда история просмотров не фиксируется. Старт новой фильтрации для авторизированных пользователей,
+         которые имеют историю просмотров находится в obtainBrowsingHistory()*/
+        if (mBrowsingItemsRefsList.isEmpty() && mUser == null) {
+            filterBrowsingItemRefs();
+            feedBackToUi(false, R.string.toast_images_for_guest_mode, false, null);
+        }
     }
 
     public void refreshAdapter() {
@@ -318,6 +330,14 @@ public class BrowsingItemsRepository {
         return mShowMessage;
     }
 
+    public void resetValues(@NonNull Boolean resetShowSearchPanelValue,
+                            @NonNull Boolean resetViewMessageValue) {
+        if (resetShowSearchPanelValue)
+            mShowSearchPanel.setValue(false);
+        if (resetViewMessageValue)
+            mShowMessage.setValue(null);
+    }
+
     private void feedBackToUi(@Nullable Boolean showProgress,
                               @Nullable Integer toastResId,
                               @NonNull Boolean showSearchPanel,
@@ -332,11 +352,9 @@ public class BrowsingItemsRepository {
         }
         if (showSearchPanel) {
             mShowSearchPanel.setValue(true);
-            mShowSearchPanel.setValue(null);
         }
         if (showViewMessage != null) {
             mShowMessage.setValue(showViewMessage);
-            mShowMessage.setValue(null);
         }
     }
 }

@@ -48,6 +48,10 @@ public class BrowsingViewModel extends AndroidViewModel {
         return mRepository.getShowMessage();
     }
 
+    public void resetValues(@NonNull Boolean resetShowSearchPanelValue, @NonNull Boolean resetViewMessageValue){
+        mRepository.resetValues(resetShowSearchPanelValue, resetViewMessageValue);
+    }
+
     public void deleteObservedItem(BrowsingItemRef item) {
         mRepository.deleteObservedItem(item);
     }
