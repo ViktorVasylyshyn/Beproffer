@@ -184,8 +184,7 @@
     <string name="toast_processing">Подождите пожалуйста. Обработка данных…</string>
     <string name="toast_no_any_service_items">Извините, но, пока что по этому запросу, публикаций нет.</string>
     <string name="toast_add_personal_info_first">Пожалуйста, добавьте информацию о себе в разделе "редактировать профайл", сначала.</string>
-
-
+    <string name="toast_images_for_guest_mode">Для гостей, изображения могут повторяться. Пожалуйста, зарегистрируйтесь, чтобы иметь возможность использовать историю просмотров.</string>
 
 
     <string name="error_message_exception_sign_up_weak_password">Придумайте более надежный пароль.</string>
@@ -198,7 +197,7 @@
     <string name="error_message_wrong_phone_number_format">Неверный формат номера телефона.</string>
     <string name="error_message_name_is_too_short">слишком короткое имя.</string>
 
-    <string name="message_error_has_occured">Ой, произошла ошибка. Попробуйте перезапустить приложение. Если ошибка повторится, свяжитесь пожалуйста с тех поддержкой.</string>
+    <string name="message_error_has_occurred">Ой, произошла ошибка. Попробуйте перезапустить приложение. Если ошибка повторится, свяжитесь пожалуйста с тех поддержкой.</string>
 
 
     <string name="kyiv">Киев, Украина.</string>

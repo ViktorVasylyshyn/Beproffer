@@ -125,17 +125,19 @@ public class BrowsingFragment extends BaseUserInfoFragment {
                 return;
             showToast(resId);
         });
-        /*получение команд и айди для совершения перехода*/
+        /*получение команд и айди для показа панели поиска*/
         mBrowsingViewModel.getShowSearchPanel().observe(getViewLifecycleOwner(), performSearch -> {
-            if (performSearch == null)
-                return;
-            performSearch();
+            if (performSearch != null && performSearch){
+                performSearch();
+                mBrowsingViewModel.resetValues(true,false);
+            }
         });
-        /*получение команд и айди для совершения перехода*/
+        /*получение команд и айди для показа сообщения*/
         mBrowsingViewModel.getShowViewMessage().observe(getViewLifecycleOwner(), textResId -> {
             if (textResId == null)
                 return;
             showMessage(textResId);
+            mBrowsingViewModel.resetValues(false,true);
         });
     }
 
