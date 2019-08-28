@@ -1,6 +1,6 @@
 package com.beproffer.beproffer.presentation.base;
 
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.os.Handler;
 
 import com.beproffer.beproffer.R;

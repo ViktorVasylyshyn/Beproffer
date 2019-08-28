@@ -2,10 +2,10 @@ package com.beproffer.beproffer.presentation.base;
 
 
 import android.app.Activity;
-import android.databinding.ObservableBoolean;
+import androidx.databinding.ObservableBoolean;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;

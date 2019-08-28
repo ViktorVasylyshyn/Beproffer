@@ -1,10 +1,8 @@
 package com.beproffer.beproffer.data.browsing_history;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.LiveData;
 import android.os.AsyncTask;
-
-import com.beproffer.beproffer.util.Const;
 
 import java.util.List;
 
