@@ -6,10 +6,15 @@ import android.databinding.ObservableBoolean;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.presentation.MainActivity;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
@@ -53,8 +58,8 @@ public class BaseFragment extends Fragment {
         ((MainActivity) requireActivity()).performNavigation(fragment, addToBackStack, clearTask, addToCont);
     }
 
-    protected  void performOnBottomNavigationBarItemClick(int itemId, @Nullable Integer toastRes){
-        ((MainActivity)requireActivity()).onBottomNavigationBarItemClicked(itemId, toastRes);
+    protected void performOnBottomNavigationBarItemClick(int itemId, @Nullable Integer toastRes) {
+        ((MainActivity) requireActivity()).onBottomNavigationBarItemClicked(itemId, toastRes);
     }
 
     /*существует специальный листенер, который слушает юзера. поначалу у меня так и было, но из-за
@@ -70,9 +75,27 @@ public class BaseFragment extends Fragment {
         mProcessing.set(processing);
     }
 
-    protected void cooldown(View view){
+    protected void cooldown(View view) {
         view.setClickable(false);
         Handler handlerWordAnim = new Handler();
         handlerWordAnim.postDelayed(() -> view.setClickable(true), Const.COOLDOWNDUR_LONG);
+    }
+
+    /*TODO метод валиден только для фрагментов регистрации и авторизациию. Создать базовый фрагмент,
+       для фрагментов авторизации и регистрации.*/
+    private ImageView mImageView;
+
+    protected void passwordVisibility(EditText editText, ImageView imageView) {
+        /*в случае, если раскроются сразу два поля(на фрагментах регистрации), то первое поле отреагирует
+         только после двух кликов. баг мелкий, так что, пускай пока живет.*/
+        if (mImageView != null && mImageView.getId() == imageView.getId()) {
+            editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            imageView.setImageResource(R.drawable.ic_pass_hide);
+            mImageView = null;
+        } else {
+            editText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            imageView.setImageResource(R.drawable.ic_pass_show);
+            mImageView = imageView;
+        }
     }
 }

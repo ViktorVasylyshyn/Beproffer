@@ -15,8 +15,7 @@
             type="com.beproffer.beproffer.presentation.sign_in_up.sign_in.SingInFragmentCallback" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.sign_in_up.sign_in.SignInFragment">
@@ -65,6 +64,17 @@
             app:layout_constraintTop_toBottomOf="@+id/sign_in_fragment_email"
             tools:ignore="Autofill" />
 
+        <ImageView
+            android:id="@+id/sign_in_fragment_show_password"
+            android:layout_width="@dimen/bnb_icon_size"
+            android:layout_height="@dimen/bnb_icon_size"
+            android:onClick="@{fragmentCallback::onShowPasswordClicked}"
+            android:src="@drawable/ic_pass_hide"
+            app:layout_constraintBottom_toBottomOf="@+id/sign_in_fragment_password"
+            app:layout_constraintEnd_toEndOf="@id/sign_in_fragment_password"
+            app:layout_constraintTop_toTopOf="@+id/sign_in_fragment_password"
+            tools:ignore="ContentDescription" />
+
         <TextView
             android:id="@+id/sign_in_fragment_change_password"
             android:layout_width="wrap_content"
@@ -86,15 +96,15 @@
             android:layout_margin="@dimen/base_margin_medium"
             android:background="@drawable/button_background_green_stroke_rectangle"
             android:onClick="@{(view) -> fragmentCallback.onSignInClick()}"
-            android:text="@string/common_signin_button_text"
             android:paddingStart="@dimen/base_padding_small"
             android:paddingEnd="@dimen/base_padding_small"
+            android:text="@string/common_signin_button_text"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/base_text_size_medium"
+            app:layout_constraintBottom_toTopOf="@+id/sign_in_create_account_hint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_in_fragment_change_password"
-            app:layout_constraintBottom_toTopOf="@+id/sign_in_create_account_hint"/>
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_fragment_change_password" />
 
         <TextView
             android:id="@+id/sign_in_create_account_hint"
@@ -104,54 +114,53 @@
             android:text="@string/title_create_an_acc"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_medium"
+            app:layout_constraintBottom_toTopOf="@+id/sign_in_buttons_linear_layout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/sign_in_buttons_linear_layout"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
             android:id="@+id/sign_in_buttons_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginStart="@dimen/base_margin_small"
             android:layout_marginEnd="@dimen/base_margin_small"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_in_fragment_change_password"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/sign_in_bottom_hint_1"
-            >
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_fragment_change_password">
 
             <TextView
                 android:id="@+id/sign_in_fragment_customer_sign_up"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1"
                 android:layout_marginStart="@dimen/base_margin_small"
                 android:layout_marginEnd="@dimen/base_margin_small"
+                android:layout_weight="1"
+                android:background="@drawable/button_background_green_stroke_rectangle"
+                android:gravity="center"
+                android:onClick="@{(view) -> fragmentCallback.onCustomerSignUpClick()}"
                 android:paddingTop="@dimen/base_padding_medium"
                 android:paddingBottom="@dimen/base_padding_medium"
-                android:background="@drawable/button_background_green_stroke_rectangle"
-                android:onClick="@{(view) -> fragmentCallback.onCustomerSignUpClick()}"
                 android:text="@string/title_customer_registration"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/base_text_size_medium"/>
+                android:textSize="@dimen/base_text_size_medium" />
 
             <TextView
                 android:id="@+id/sign_in_fragment_specialist_sign_up"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1"
                 android:layout_marginStart="@dimen/base_margin_small"
                 android:layout_marginEnd="@dimen/base_margin_small"
+                android:layout_weight="1"
+                android:background="@drawable/button_background_green_stroke_rectangle"
+                android:gravity="center"
+                android:onClick="@{(view) -> fragmentCallback.onSpecialistSignUpClick()}"
                 android:paddingTop="@dimen/base_padding_medium"
                 android:paddingBottom="@dimen/base_padding_medium"
-                android:background="@drawable/button_background_green_stroke_rectangle"
-                android:onClick="@{(view) -> fragmentCallback.onSpecialistSignUpClick()}"
                 android:text="@string/title_specialist_registration"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/base_text_size_medium"/>
+                android:textSize="@dimen/base_text_size_medium" />
 
         </LinearLayout>
 
@@ -190,7 +199,7 @@
             android:textSize="@dimen/base_text_size_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_in_terms"/>
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_terms" />
 
         <TextView
             android:id="@+id/sign_in_bottom_hint_1"
@@ -210,9 +219,9 @@
             android:id="@+id/sign_in_bottom_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/base_margin_small"
             android:layout_marginStart="@dimen/base_margin_small"
             android:layout_marginEnd="@dimen/base_margin_small"
+            android:layout_marginBottom="@dimen/base_margin_small"
             android:gravity="center"
             android:padding="@dimen/base_padding_small"
             android:text="@string/app_availability"

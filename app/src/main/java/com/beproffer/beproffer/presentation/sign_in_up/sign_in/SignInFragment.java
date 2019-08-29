@@ -10,6 +10,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SignInFragmentBinding;
@@ -56,6 +58,11 @@ public class SignInFragment extends BaseFragment {
         @Override
         public void onPrivacyPolicyClick() {
             openDoc(R.string.href_privacy_policy);
+        }
+
+        @Override
+        public void onShowPasswordClicked(View view) {
+            passwordVisibility(mBinding.signInFragmentPassword, (ImageView) view);
         }
     };
 
