@@ -70,7 +70,7 @@ public class BaseFragment extends Fragment {
         mProcessing.set(processing);
     }
 
-    protected void cooldown(View view){
+    protected void cooldown(View view) {
         view.setClickable(false);
         Handler handlerWordAnim = new Handler();
         handlerWordAnim.postDelayed(() -> view.setClickable(true), Const.COOLDOWNDUR_LONG);

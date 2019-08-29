@@ -121,10 +121,12 @@ public class UserDataRepository {
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     feedBackToUi(false, R.string.toast_error_has_occurred,
                             false, false, false, R.string.message_error_has_occurred);
+                    Log.d(Const.ERROR, "obtainUserType: " + databaseError.getMessage());
                 }
             });
         }
     }
+
 
     private void loadUserDataSnapShot() {
         mDatabaseRef.child(Const.USERS)
@@ -143,6 +145,7 @@ public class UserDataRepository {
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 feedBackToUi(false, R.string.toast_error_has_occurred,
                         false, false, false, R.string.message_error_has_occurred);
+                Log.d(Const.ERROR, "loadUserDataSnapShot: " + databaseError.getMessage());
             }
         });
     }
@@ -185,6 +188,7 @@ public class UserDataRepository {
         } catch (IOException e) {
             feedBackToUi(false, R.string.toast_error_has_occurred, true,
                     false, false, R.string.message_error_has_occurred);
+            Log.d(Const.ERROR, "saveImageToStorage: " + e.getMessage());
         }
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
@@ -192,11 +196,15 @@ public class UserDataRepository {
         } catch (NullPointerException e) {
             feedBackToUi(false, R.string.toast_error_has_occurred, true,
                     false, false, R.string.message_error_has_occurred);
+            Log.d(Const.ERROR, "saveImageToStorage: " + e.getMessage());
         }
         byte[] data = baos.toByteArray();
         UploadTask uploadTask = filepath.putBytes(data);
-        uploadTask.addOnFailureListener(e -> feedBackToUi(false, R.string.toast_error_has_occurred, true,
-                false, false, R.string.message_error_has_occurred));
+        uploadTask.addOnFailureListener(e -> {
+            feedBackToUi(false, R.string.toast_error_has_occurred, true,
+                    false, false, R.string.message_error_has_occurred);
+            Log.d(Const.ERROR, "saveImageToStorage: " + e.getMessage());
+        });
         uploadTask.addOnSuccessListener(taskSnapshot -> filepath.getDownloadUrl()
                 .addOnSuccessListener(url -> {
                     if (updatedUserInfo != null) {
@@ -205,8 +213,11 @@ public class UserDataRepository {
                     } else if (updatedServiceItem != null) {
                         saveImageDataToRealtimeDb(updatedServiceItem, url.toString());
                     }
-                }).addOnFailureListener(e -> feedBackToUi(false, R.string.toast_error_has_occurred,
-                        false, false, false, R.string.message_error_has_occurred))
+                }).addOnFailureListener(e -> {
+                    feedBackToUi(false, R.string.toast_error_has_occurred,
+                            false, false, false, R.string.message_error_has_occurred);
+                    Log.d(Const.ERROR, "saveImageToStorage: " + e.getMessage());
+                })
         );
     }
 
@@ -225,6 +236,7 @@ public class UserDataRepository {
                         } else {
                             feedBackToUi(false, R.string.toast_error_has_occurred, true,
                                     false, false, R.string.message_error_has_occurred);
+                            Log.d(Const.ERROR, "saveUserInfoToRealTimeDb: " + task.getException().getMessage());
                         }
                     });
     }
@@ -255,6 +267,7 @@ public class UserDataRepository {
                     испорченый, чтобы пользователь его перезаписал. или может вообще его удалять*/
                 feedBackToUi(false, R.string.toast_error_has_occurred,
                         false, false, false, null);
+                Log.d(Const.ERROR, "obtainSpecialistGalleryImagesData: " + e.getMessage());
             }
         }
         mSpecialistGalleryImageItemsMapLiveData.setValue(mLocalImageItemsMap);
@@ -310,13 +323,14 @@ public class UserDataRepository {
                                 , updatedItem.getUrl()
                         )).addOnSuccessListener(aVoid -> updateLocalImageItemsMap(updatedItem))
                         .addOnFailureListener(e -> {
-                            Log.d(Const.INFO, e.getMessage());
+                            Log.d(Const.ERROR, "saveImageDataToRealtimeDb: " + e.getMessage());
                             feedBackToUi(false, R.string.toast_error_has_occurred,
                                     false, false, false, R.string.message_error_has_occurred);
                         });
             } else {
                 feedBackToUi(false, R.string.toast_error_has_occurred,
                         false, false, false, R.string.message_error_has_occurred);
+                Log.d(Const.ERROR, "saveImageDataToRealtimeDb: " + imgTask.getException().getMessage());
             }
         });
     }
@@ -335,7 +349,7 @@ public class UserDataRepository {
                     .child(updatedItem.getKey())
                     .removeValue().addOnCompleteListener(task -> updateLocalImageItemsMap(updatedItem));
         } catch (NullPointerException e) {
-            Log.d(Const.INFO, e.getMessage());
+            Log.d(Const.ERROR, "deleteNotRelevantImageData: " + e.getMessage());
         }
     }
 
@@ -374,7 +388,7 @@ public class UserDataRepository {
                                             mContactsMap.put(dataSnapshot.getValue(ContactItem.class).getId()
                                                     , dataSnapshot.getValue(ContactItem.class));
                                         } catch (NullPointerException e) {
-                                            Log.d(Const.INFO, e.getMessage());
+                                            Log.d(Const.ERROR, "getContacts.onDataChange: " + e.getMessage());
                                         }
                                         mContactsMapLiveData.setValue(mContactsMap);
                                     }
@@ -389,11 +403,13 @@ public class UserDataRepository {
 
                                     feedBackToUi(false, R.string.toast_error_has_occurred,
                                             false, false, false, null);
+                                    Log.d(Const.ERROR, "getContacts.onCancelled: " + databaseError.getMessage());
                                 }
                             });
                 } catch (NullPointerException e) {
                     feedBackToUi(false, R.string.toast_error_has_occurred,
                             false, false, false, R.string.message_error_has_occurred);
+                    Log.d(Const.ERROR, "getContacts: " + e.getMessage());
                 }
             }
             mContactsObtained = mCurrentUserId;
@@ -444,10 +460,11 @@ public class UserDataRepository {
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                                    Log.d(Const.ERROR, "getContactRequests.onCancelled: " + databaseError.getMessage());
                                 }
                             });
                 } catch (NullPointerException e) {
+                    Log.d(Const.ERROR, "getContactRequests: " + e.getMessage());
                     feedBackToUi(false, R.string.toast_error_has_occurred,
                             false, false, false, R.string.message_error_has_occurred);
                 }
@@ -472,8 +489,11 @@ public class UserDataRepository {
                     child(currentUserInfo.getId()).
                     setValue(true).addOnSuccessListener(aVoid ->
                     deleteIncomingContactRequestData(handledItem, R.string.toast_contact_confirmed))
-                    .addOnFailureListener(e -> feedBackToUi(false, R.string.toast_error_has_occurred,
-                            false, false, false, null));
+                    .addOnFailureListener(e -> {
+                        feedBackToUi(false, R.string.toast_error_has_occurred,
+                                false, false, false, null);
+                        Log.d(Const.ERROR, "handleIncomingContactRequest: " + e.getMessage());
+                    });
         } else {
             deleteIncomingContactRequestData(handledItem, R.string.toast_contact_denied);
         }
@@ -509,6 +529,7 @@ public class UserDataRepository {
                 mShowProgress.setValue(false);
             });
         } catch (NullPointerException e) {
+            Log.d(Const.ERROR, "sendContactRequest: " + e.getMessage());
             mShowProgress.setValue(false);
         }
     }

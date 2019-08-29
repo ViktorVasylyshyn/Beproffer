@@ -197,6 +197,7 @@
     <string name="error_message_delete_profile_wrong_email">Incorrect email.</string>
     <string name="error_message_wrong_phone_number_format">Incorrect format of phone number.</string>
     <string name="error_message_name_is_too_short">The name is too short.</string>
+
     <string name="message_error_has_occurred">Oops, an error has occurred. Please restart the app, and try again. Please contact Beproffers\' support, if the error appears again.</string>
 
     <string name="kyiv">Kyiv, Ukraine.</string>

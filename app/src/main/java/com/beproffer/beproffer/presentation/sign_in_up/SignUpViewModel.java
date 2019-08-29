@@ -18,7 +18,7 @@ public class SignUpViewModel extends AndroidViewModel {
         return mRepository.getShowProgress();
     }
 
-    public LiveData<Boolean> getProcessing(){
+    public LiveData<Boolean> getProcessing() {
         return mRepository.getProcessing();
     }
 
@@ -32,6 +32,10 @@ public class SignUpViewModel extends AndroidViewModel {
 
     public LiveData<Boolean> getPopBackStack() {
         return mRepository.getPopBackStack();
+    }
+
+    public LiveData<Boolean> getHideKeyboard() {
+        return mRepository.getHideKeyboard();
     }
 
     public void signUpNewUser(String userEmail,
