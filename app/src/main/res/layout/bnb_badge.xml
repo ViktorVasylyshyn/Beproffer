@@ -6,7 +6,6 @@
         android:layout_height="@dimen/base_margin_medium"
         android:layout_gravity="top|center_horizontal"
         android:layout_marginTop="@dimen/base_margin_extra_small"
-        android:layout_marginLeft="@dimen/base_margin_small"
         android:layout_marginStart="@dimen/base_margin_small"
         android:background="@drawable/bnb_badge_background"
         android:gravity="center"

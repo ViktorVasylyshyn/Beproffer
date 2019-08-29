@@ -96,7 +96,8 @@
             android:layout_marginTop="@dimen/base_margin_small"
             android:scrollbars="vertical"
             android:paddingBottom="@dimen/design_bottom_navigation_height"
-            app:layout_constraintTop_toBottomOf="@+id/contacts_text_message">
+            app:layout_constraintTop_toBottomOf="@+id/contacts_text_message"
+            tools:ignore="PrivateResource">
 
         </androidx.recyclerview.widget.RecyclerView>
 

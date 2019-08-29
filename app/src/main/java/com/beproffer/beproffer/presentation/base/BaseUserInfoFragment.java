@@ -76,7 +76,7 @@ public class BaseUserInfoFragment extends BaseFragment {
         });
     }
 
-    public void setBadgeIfNeed(){
+    protected void setBadgeIfNeed(){
         if (mCurrentUserInfo.getType().equals(Const.SPEC)) {
             mUserDataViewModel.getIncomingContactRequests().observe(getViewLifecycleOwner(), list -> {
                 if (list != null) {
@@ -97,7 +97,7 @@ public class BaseUserInfoFragment extends BaseFragment {
         /*разная реализация, для разных фрагментов*/
     }
 
-    protected void setBadge(int index) {
+    private void setBadge(int index) {
         ((MainActivity) requireActivity()).setBadgeMain(index);
     }
 

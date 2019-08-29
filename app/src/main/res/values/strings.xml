@@ -163,7 +163,6 @@
     <string name="toast_error_login">Sign in failed. Please, check your email and the password.</string>
     <string name="toast_error_registration">Registration failed. Please, try again.</string>
     <string name="toast_error_password_confirm_failure">Passwords are not similar.</string>
-    <string name="toast_error_check_fields_data">Please, check the data accuracy.</string>
     <string name="toast_error_user_data_saving_failure">User data saving failed. Please, contact to support.</string>
     <string name="toast_contact_deleted">Contact deleted.</string>
     <string name="toast_browsing_history_cleared">Browsing history was cleared.</string>

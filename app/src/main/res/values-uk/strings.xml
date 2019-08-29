@@ -8,7 +8,6 @@
     <string name="app_all_rights_reserved">Copyright 2019 "Beproffer" LLC. Всі права захищені.</string>
 
 
-
     <!--Hints-->
     <string name="name_infield">ім\'я</string>
     <string name="email_infield">email</string>
@@ -26,7 +25,7 @@
     <string name="hint_outfield_forgot_password">Забули свій пароль?</string>
     <string name="hint_outfield_change_password">Щоб змінити пароль, ведіть свій email в поле вводу і натисніть \"Змінити\". Ви отримаєте повідомлення для зміни паролю на цю адресу.</string>
     <string name="hint_outfield_settings_reset_password">Натисніть \"Скинути\" для зміни паролю(відбудеться вихід з профайлу в меню зміни паролю).</string>
-    <string name="hint_outfield_agree_to">Реєструючись в додатку Beproffer Ви підтвержуєте, що ознайомилися і погоджуєтесь з його</string>
+    <string name="hint_outfield_agree_to">Реєструючись в додатку Beproffer Ви підтвержуєте, що погоджуєтесь з його</string>
     <string name="hint_outfield_contact_us_title">Зв\'яжіться з нами, якщо маєте питання.</string>
     <string name="hint_outfield_contact_us_email">beproffer.llc@gmail.com</string>
     <string name="hint_outfield_use_correct_name_format">Використовуйте ваші ім\'я та прізвище, для кращого представлення вашого профайлу.</string>
@@ -138,7 +137,7 @@
     <string name="iur_requirements">Зверніть увагу</string>
     <string name="iur_requirements_1">1. Для кращого відображення слід вікористовувати зображення роозміром до 500 кб і пропоціями 16:9 або 18:9. Велике, непропрорційне зображення може бути обтяте чи погано відображене.</string>
     <string name="iur_requirements_2">2. Зображення повинно відображати послугу, відповідно розділу, в якому знаходиться.</string>
-    <string name="iur_requirements_3">3. Зображення повинно відображати результат особисто вашої роботи. Забороняються додаткові редагування зображення(крім обтиняння), і розміщення на ньому номерів телефону, надписів, логотипів, облич людей, дітей, особистих даних тощо.</string>
+    <string name="iur_requirements_3">3. Зображення повинно відображати результат особисто вашої роботи. Забороняються додаткові редагування зображення(крім обтинання), і розміщення на ньому номерів телефону, надписів, логотипів, облич людей, дітей, особистих даних тощо.</string>
     <string name="iur_requirements_4">4. Інформація про послугу повинна бути правдива, зрозуміла, однозначна.</string>
     <string name="iur_requirements_5">5. Люди, зображені на фотографіях, повинні дати свою згоду, на їх публікацію в Beproffer.</string>
 
@@ -163,7 +162,6 @@
     <string name="toast_error_login">Помилка входу. Перевірте привильність email та паролю.</string>
     <string name="toast_error_registration">Помилка реєстрації. Спробуйте знову.</string>
     <string name="toast_error_password_confirm_failure">Пароль і його підтверження не співпвдають.</string>
-    <string name="toast_error_check_fields_data">Будь ласка перевірте правильність введених даних.</string>
     <string name="toast_error_user_data_saving_failure">Дані користувача не збереглися. зв\'яжіться з підтримкою.</string>
     <string name="toast_contact_deleted">Контакт видалено.</string>
     <string name="toast_browsing_history_cleared">історію переглядів видалено.</string>

@@ -55,10 +55,12 @@ public class BaseFragment extends Fragment {
         (requireActivity()).onBackPressed();
     }
 
+    @SuppressWarnings("SameParameterValue")
     protected void changeFragment(Fragment fragment, boolean addToBackStack, boolean clearTask, boolean addToCont) {
         ((MainActivity) requireActivity()).performNavigation(fragment, addToBackStack, clearTask, addToCont);
     }
 
+    @SuppressWarnings("SameParameterValue")
     protected void performOnBottomNavigationBarItemClick(int itemId, @Nullable Integer toastRes) {
         ((MainActivity) requireActivity()).onBottomNavigationBarItemClicked(itemId, toastRes);
     }
