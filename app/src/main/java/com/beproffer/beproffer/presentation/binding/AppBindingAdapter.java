@@ -1,6 +1,6 @@
 package com.beproffer.beproffer.presentation.binding;
 
-import android.databinding.BindingAdapter;
+import androidx.databinding.BindingAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 

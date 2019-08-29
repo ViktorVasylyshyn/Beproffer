@@ -8,14 +8,14 @@
     android:clipToPadding="false"
     android:outlineProvider="bounds">
     <!--для разных операционных версий используются разные лейауты. незнаю хорошо это или плохо. пока рботает.-->
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:elevation="@dimen/base_margin_small"
         app:cardCornerRadius="@dimen/base_margin_medium">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -29,6 +29,6 @@
                 android:scaleType="centerCrop"
                 tools:ignore="ContentDescription" />
 
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

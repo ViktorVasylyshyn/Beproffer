@@ -9,15 +9,15 @@
 
         <variable
             name="showProgress"
-            type="android.databinding.ObservableBoolean" />
+            type="androidx.databinding.ObservableBoolean" />
 
         <variable
             name="showNoContacts"
-            type="android.databinding.ObservableBoolean"/>
+            type="androidx.databinding.ObservableBoolean"/>
 
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/base_padding_medium"
@@ -87,7 +87,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/contacts_recycler_view"/>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/contacts_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
             android:paddingBottom="@dimen/design_bottom_navigation_height"
             app:layout_constraintTop_toBottomOf="@+id/contacts_text_message">
 
-        </android.support.v7.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
 
         <ProgressBar
             android:id="@+id/contacts_progress_bar"
@@ -123,5 +123,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -9,18 +9,18 @@
 
         <variable
             name="showProgress"
-            type="android.databinding.ObservableBoolean"/>
+            type="androidx.databinding.ObservableBoolean"/>
 
         <variable
             name="showButton"
-            type="android.databinding.ObservableBoolean" />
+            type="androidx.databinding.ObservableBoolean" />
 
         <variable
             name="callback"
             type="com.beproffer.beproffer.presentation.spec_gallery.SpecialistGalleryFragmentCallback" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.spec_gallery.SpecialistGalleryFragment">
@@ -39,7 +39,7 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/specialist_gallery_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
             app:layout_constraintTop_toBottomOf="@+id/specialist_gallery_title"/>
 
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/specialist_gallery_add_image_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,5 +74,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
