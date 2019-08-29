@@ -1,17 +1,19 @@
 package com.beproffer.beproffer.presentation.sign_in_up.specialist_sign_up;
 
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SpecialistSignUpFragmentBinding;
@@ -44,6 +46,22 @@ public class SpecialistSignUpFragment extends BaseFragment {
         @Override
         public void denySigningUp() {
             popBackStack();
+        }
+
+        @Override
+        public void onShowPasswordClicked(View view) {
+            EditText editText = null;
+            switch (view.getId()) {
+                case R.id.specialist_sign_up_fragment_show_password:
+                    editText = mBinding.specialistSignUpPass;
+                    break;
+                case R.id.specialist_sign_up_fragment_show_password_confirm:
+                    editText = mBinding.specialistSignUpPassConfirm;
+                    break;
+                default:
+            }
+            if (editText != null)
+                passwordVisibility(editText, (ImageView) view);
         }
     };
 

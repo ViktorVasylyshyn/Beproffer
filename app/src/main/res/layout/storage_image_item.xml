@@ -11,7 +11,7 @@
 
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/base_margin_extra_small"
@@ -122,5 +122,5 @@
             android:textStyle="italic"
             app:layout_constraintStart_toEndOf="@+id/storage_image_item_image"
             app:layout_constraintTop_toBottomOf="@+id/storage_image_item_price_icon" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

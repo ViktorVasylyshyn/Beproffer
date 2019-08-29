@@ -1,11 +1,11 @@
 package com.beproffer.beproffer.presentation;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.beproffer.beproffer.data.firebase.UserDataRepository;
 import com.beproffer.beproffer.data.models.BrowsingImageItem;

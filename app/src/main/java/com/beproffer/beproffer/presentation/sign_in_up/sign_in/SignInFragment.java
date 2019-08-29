@@ -1,15 +1,17 @@
 package com.beproffer.beproffer.presentation.sign_in_up.sign_in;
 
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SignInFragmentBinding;
@@ -56,6 +58,11 @@ public class SignInFragment extends BaseFragment {
         @Override
         public void onPrivacyPolicyClick() {
             openDoc(R.string.href_privacy_policy);
+        }
+
+        @Override
+        public void onShowPasswordClicked(View view) {
+            passwordVisibility(mBinding.signInFragmentPassword, (ImageView) view);
         }
     };
 

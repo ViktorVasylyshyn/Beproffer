@@ -1,5 +1,7 @@
 package com.beproffer.beproffer.presentation.sign_in_up.customer_sign_up;
 
+import android.view.View;
+
 /*must be public for binding*/
 public interface CustomerSignUpFragmentCallback {
 
@@ -10,4 +12,6 @@ public interface CustomerSignUpFragmentCallback {
     void onTermsClick();
 
     void denySigningUp();
+
+    void onShowPasswordClicked(View view);
 }

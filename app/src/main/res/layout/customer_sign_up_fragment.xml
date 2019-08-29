@@ -8,14 +8,14 @@
 
         <variable
             name="showProgress"
-            type="android.databinding.ObservableBoolean"/>
+            type="androidx.databinding.ObservableBoolean"/>
 
         <variable
             name="fragmentCallback"
             type="com.beproffer.beproffer.presentation.sign_in_up.customer_sign_up.CustomerSignUpFragmentCallback" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -111,6 +111,17 @@
             app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_email"
             tools:ignore="Autofill,TextFields" />
 
+        <ImageView
+            android:id="@+id/customer_sign_up_fragment_show_password"
+            android:layout_width="@dimen/bnb_icon_size"
+            android:layout_height="@dimen/bnb_icon_size"
+            android:onClick="@{fragmentCallback::onShowPasswordClicked}"
+            android:src="@drawable/ic_pass_hide"
+            app:layout_constraintBottom_toBottomOf="@+id/customer_sign_up_pass"
+            app:layout_constraintEnd_toEndOf="@id/customer_sign_up_pass"
+            app:layout_constraintTop_toTopOf="@+id/customer_sign_up_pass"
+            tools:ignore="ContentDescription" />
+
         <EditText
             android:id="@+id/customer_sign_up_pass_confirm"
             android:layout_width="match_parent"
@@ -125,6 +136,17 @@
             android:textSize="@dimen/base_text_size_big"
             app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_pass"
             tools:ignore="Autofill,TextFields" />
+
+        <ImageView
+            android:id="@+id/customer_sign_up_fragment_show_password_confirm"
+            android:layout_width="@dimen/bnb_icon_size"
+            android:layout_height="@dimen/bnb_icon_size"
+            android:onClick="@{fragmentCallback::onShowPasswordClicked}"
+            android:src="@drawable/ic_pass_hide"
+            app:layout_constraintBottom_toBottomOf="@+id/customer_sign_up_pass_confirm"
+            app:layout_constraintEnd_toEndOf="@id/customer_sign_up_pass_confirm"
+            app:layout_constraintTop_toTopOf="@+id/customer_sign_up_pass_confirm"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/customer_sign_up_agree_to"
@@ -206,5 +228,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
