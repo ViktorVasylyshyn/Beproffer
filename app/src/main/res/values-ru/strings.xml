@@ -25,7 +25,7 @@
     <string name="hint_outfield_forgot_password">Забыли пароль?</string>
     <string name="hint_outfield_change_password">Чтобы сменить пароль - введите свой email в поле ввода и нажмите \"Изменить\". Вам придет сообщение для смены пароля на этот email.</string>
     <string name="hint_outfield_settings_reset_password">Нажмите \"Сбросить\" для изменения пароля(произойдет выход из профайла в соответствующее меню).</string>
-    <string name="hint_outfield_agree_to">Регистрируясь в приложении Beproffer Вы подтверждаете, что ознакомились и согласны с его</string>
+    <string name="hint_outfield_agree_to">Регистрируясь в приложении Beproffer Вы подтверждаете, согласны с его</string>
     <string name="hint_outfield_contact_us_title">Свяжитесь с нами, если у вас есть вопросы.</string>
     <string name="hint_outfield_contact_us_email">beproffer.llc@gmail.com</string>
     <string name="hint_outfield_use_correct_name_format">Используйте ваши имя и фамилию, для лучшего представления вашего профайла.</string>
@@ -162,7 +162,6 @@
     <string name="toast_error_login">Ошибка входа. Проверте правильность логина и пароля.</string>
     <string name="toast_error_registration">Ошибка регистрации. Попробуйте снова.</string>
     <string name="toast_error_password_confirm_failure">Пароль и его подтверждение не совпадают.</string>
-    <string name="toast_error_check_fields_data">Проверьте правильность введенных данных.</string>
     <string name="toast_error_user_data_saving_failure">Данные пользователя не сохранились. Свяжитесь с поддержкой.</string>
     <string name="toast_contact_deleted">Контакт удален.</string>
     <string name="toast_browsing_history_cleared">История просмотров очищена.</string>

@@ -1,13 +1,14 @@
 package com.beproffer.beproffer.data.firebase;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import android.content.SharedPreferences;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import android.util.Log;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.browsing_history.BrowsingHistoryModel;
@@ -42,7 +43,7 @@ public class BrowsingItemsRepository {
     private final Application mApplication;
 
     private FirebaseUser mUser;
-
+    @SuppressWarnings("FieldCanBeLocal")
     private DatabaseReference mSearchRef;
 
     private BrowsingHistoryRepository mBrowsingHistoryRepository;

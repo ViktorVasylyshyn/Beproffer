@@ -146,7 +146,8 @@
             android:visibility="@{isUserSpecialist ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_fragment_main_specialization_title">
+            app:layout_constraintTop_toBottomOf="@+id/edit_fragment_main_specialization_title"
+            tools:ignore="RtlSymmetry">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"

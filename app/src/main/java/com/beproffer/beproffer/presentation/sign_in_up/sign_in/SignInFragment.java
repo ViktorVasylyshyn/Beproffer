@@ -1,17 +1,17 @@
 package com.beproffer.beproffer.presentation.sign_in_up.sign_in;
 
-import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import androidx.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SignInFragmentBinding;
@@ -97,6 +97,7 @@ public class SignInFragment extends BaseFragment {
 
         if (mBinding.signInFragmentEmail.getText().toString().isEmpty()) {
             showErrorMessage(R.string.error_message_enter_email);
+            return;
         }
         if (mBinding.signInFragmentPassword.getText().toString().isEmpty()) {
             showToast(R.string.error_message_exception_sign_in_invalid_credentials);
