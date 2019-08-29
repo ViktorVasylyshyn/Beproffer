@@ -5,6 +5,7 @@ import android.content.Intent;
 import androidx.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.text.method.LinkMovementMethod;
@@ -135,12 +136,20 @@ public class SpecialistSignUpFragment extends BaseFragment {
         mSignUpViewModel.getPopBackStack().observe(getViewLifecycleOwner(), performPopBackStack -> {
             if (performPopBackStack == null)
                 return;
-            popBackStack();
+            Handler handler = new Handler();
+            handler.postDelayed(this::popBackStack, Const.POPBACKSTACK_WAITING);
         });
+        /*показ сообщений об ощибках*/
         mSignUpViewModel.getErrorMessageId().observe(getViewLifecycleOwner(), errorMessageId -> {
             if (errorMessageId == null)
                 return;
             showErrorMessage(errorMessageId);
+        });
+        /*скрытие клавиатуры*/
+        mSignUpViewModel.getHideKeyboard().observe(getViewLifecycleOwner(), hideKeyboard -> {
+            if (hideKeyboard == null)
+                return;
+            hideKeyboard(requireActivity());
         });
 
         mSignUpViewModel.signUpNewUser(mBinding.specialistSignUpEmail.getText().toString(),

@@ -133,10 +133,17 @@ public class CustomerSignUpFragment extends BaseFragment {
                 return;
             popBackStack();
         });
+        /*получение сообщений об ошибках*/
         mSignUpViewModel.getErrorMessageId().observe(getViewLifecycleOwner(), errorMessageId -> {
             if (errorMessageId == null)
                 return;
             showErrorMessage(errorMessageId);
+        });
+        /*скрытие клавиатуры*/
+        mSignUpViewModel.getHideKeyboard().observe(getViewLifecycleOwner(), hideKeyboard -> {
+            if (hideKeyboard == null)
+                return;
+            hideKeyboard(requireActivity());
         });
 
         mSignUpViewModel.signUpNewUser(mBinding.customerSignUpEmail.getText().toString(),

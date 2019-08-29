@@ -26,6 +26,7 @@ class SignUpRepository {
     /*нужно для контроля частых нажатий на кнопки*/
     private final MutableLiveData<Boolean> mProcessing = new MutableLiveData<>();
     private final MutableLiveData<Boolean> mPopBackStack = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mHideKeyboard = new MutableLiveData<>();
     /*устанавливает фокус на поле, которое требует изменения и выдает соответствующее сообщение рядом*/
     private final MutableLiveData<Integer> mErrorMessageId = new MutableLiveData<>();
 
@@ -41,7 +42,7 @@ class SignUpRepository {
                               String userType,
                               @Nullable String userSpecialistType,
                               @Nullable String userPhone) {
-        feedBackToUi(true, null, false, null, true);
+        feedBackToUi(true, null, false, null, true, false);
         mAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(signUpTask -> {
             if (signUpTask.isSuccessful()) {
                 try {
@@ -63,23 +64,23 @@ class SignUpRepository {
                     });
                 } catch (NullPointerException e) {
                     feedBackToUi(false, R.string.toast_error_has_occurred,
-                            false, null, false);
+                            false, R.string.message_error_has_occurred, false, true);
                 }
             } else {
                 try {
                     throw signUpTask.getException();
                 } catch (FirebaseAuthWeakPasswordException weakPassword) {
                     feedBackToUi(false, null, false,
-                            R.string.error_message_exception_sign_up_weak_password, false);
+                            R.string.error_message_exception_sign_up_weak_password, false, true);
                 } catch (FirebaseAuthInvalidCredentialsException invalidCredential) {
                     feedBackToUi(false, null, false,
-                            R.string.error_message_exception_sign_up_invalid_credentials, false);
+                            R.string.error_message_exception_sign_up_invalid_credentials, false, true);
                 } catch (FirebaseAuthUserCollisionException userCollision) {
                     feedBackToUi(false, null, false,
-                            R.string.error_message_exception_sign_up_collision, false);
+                            R.string.error_message_exception_sign_up_collision, false, true);
                 } catch (Exception e) {
                     feedBackToUi(false, R.string.toast_error_registration,
-                            false, null, false);
+                            false, R.string.message_error_has_occurred, false, true);
                 }
             }
         });
@@ -93,10 +94,10 @@ class SignUpRepository {
                 .child(Const.INFO)
                 .setValue(userInfo).addOnSuccessListener(aVoid -> {
             FirebaseAuth.getInstance().signOut();
-            feedBackToUi(false, R.string.toast_sign_up_email_verification, true, null, false);
+            feedBackToUi(false, R.string.toast_sign_up_email_verification, true, null, false, true);
         })
                 .addOnFailureListener(e -> feedBackToUi(false,
-                        R.string.toast_error_user_data_saving_failure, false, null, false));
+                        R.string.toast_error_user_data_saving_failure, false, R.string.message_error_has_occurred, false, true));
     }
 
     public LiveData<Integer> getToastRes() {
@@ -119,11 +120,16 @@ class SignUpRepository {
         return mErrorMessageId;
     }
 
+    public LiveData<Boolean> getHideKeyboard() {
+        return mHideKeyboard;
+    }
+
     private void feedBackToUi(@Nullable Boolean showProgress,
                               @Nullable Integer toastId,
                               @NonNull Boolean popBackStack,
                               @Nullable Integer errorMessageId,
-                              @Nullable Boolean processing) {
+                              @Nullable Boolean processing,
+                              @NonNull Boolean hideKeyboard) {
         if (showProgress != null)
             mShowProgress.setValue(showProgress);
         if (toastId != null) {
@@ -141,6 +147,10 @@ class SignUpRepository {
         /*блокирование повторных запросов если предыдущий идентичный в процессе выполнения*/
         if (processing != null) {
             mProcessing.setValue(processing);
+        }
+        if (hideKeyboard) {
+            mHideKeyboard.setValue(true);
+            mHideKeyboard.setValue(null);
         }
     }
 }

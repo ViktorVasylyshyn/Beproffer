@@ -123,4 +123,6 @@ public class Const {
      * сотни объектов BrowsingImageSearchRef*/
     public static final int BROWSING_REFS_LIST_MAX_SIZE = 50;
 
+    public static final String ERROR = "ERROR"; /*the constant for the logcat filter*/
+
 }

@@ -53,8 +53,8 @@ public class BaseUserInfoFragment extends BaseFragment {
         mUserDataViewModel.getPopBackStack().observe(getViewLifecycleOwner(), back -> {
             if (back == null)
                 return;
-            Handler handlerWordAnim = new Handler();
-            handlerWordAnim.postDelayed(this::popBackStack, Const.POPBACKSTACK_WAITING);
+            Handler handler = new Handler();
+            handler.postDelayed(this::popBackStack, Const.POPBACKSTACK_WAITING);
         });
 
         mUserDataViewModel.getMessageResId().observe(getViewLifecycleOwner(), messageResId -> {
