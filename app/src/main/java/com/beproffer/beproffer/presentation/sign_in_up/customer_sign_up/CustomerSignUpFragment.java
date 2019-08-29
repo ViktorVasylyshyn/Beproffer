@@ -11,6 +11,8 @@ import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.CustomerSignUpFragmentBinding;
@@ -43,6 +45,22 @@ public class CustomerSignUpFragment extends BaseFragment {
         @Override
         public void denySigningUp() {
             popBackStack();
+        }
+
+        @Override
+        public void onShowPasswordClicked(View view) {
+            EditText editText = null;
+            switch (view.getId()) {
+                case R.id.customer_sign_up_fragment_show_password:
+                    editText = mBinding.customerSignUpPass;
+                    break;
+                case R.id.customer_sign_up_fragment_show_password_confirm:
+                    editText = mBinding.customerSignUpPassConfirm;
+                    break;
+                default:
+            }
+            if (editText != null)
+                passwordVisibility(editText, (ImageView) view);
         }
     };
 

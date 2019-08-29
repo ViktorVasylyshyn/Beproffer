@@ -128,6 +128,17 @@
             app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_phone"
             tools:ignore="Autofill,TextFields" />
 
+        <ImageView
+            android:id="@+id/specialist_sign_up_fragment_show_password"
+            android:layout_width="@dimen/bnb_icon_size"
+            android:layout_height="@dimen/bnb_icon_size"
+            android:onClick="@{fragmentCallback::onShowPasswordClicked}"
+            android:src="@drawable/ic_pass_hide"
+            app:layout_constraintBottom_toBottomOf="@+id/specialist_sign_up_pass"
+            app:layout_constraintEnd_toEndOf="@id/specialist_sign_up_pass"
+            app:layout_constraintTop_toTopOf="@+id/specialist_sign_up_pass"
+            tools:ignore="ContentDescription" />
+
         <EditText
             android:id="@+id/specialist_sign_up_pass_confirm"
             android:layout_width="match_parent"
@@ -142,6 +153,17 @@
             android:textSize="@dimen/base_text_size_big"
             app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_pass"
             tools:ignore="Autofill,TextFields" />
+
+        <ImageView
+            android:id="@+id/specialist_sign_up_fragment_show_password_confirm"
+            android:layout_width="@dimen/bnb_icon_size"
+            android:layout_height="@dimen/bnb_icon_size"
+            android:onClick="@{fragmentCallback::onShowPasswordClicked}"
+            android:src="@drawable/ic_pass_hide"
+            app:layout_constraintBottom_toBottomOf="@+id/specialist_sign_up_pass_confirm"
+            app:layout_constraintEnd_toEndOf="@id/specialist_sign_up_pass_confirm"
+            app:layout_constraintTop_toTopOf="@+id/specialist_sign_up_pass_confirm"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/specialist_sign_up_agree_to"
