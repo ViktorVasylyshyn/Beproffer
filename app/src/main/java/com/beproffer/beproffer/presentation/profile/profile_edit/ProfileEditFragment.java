@@ -2,20 +2,23 @@ package com.beproffer.beproffer.presentation.profile.profile_edit;
 
 import android.app.Activity;
 import android.content.Intent;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ObservableBoolean;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ObservableBoolean;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.ProfileEditFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.util.Const;
+import com.beproffer.beproffer.util.ImageUtil;
 
 public class ProfileEditFragment extends BaseUserInfoFragment {
 
@@ -219,8 +222,16 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
                     return;
                 }
                 mResultUri = data.getData();
-                mCurrentUserInfo.setProfileImageUrl(mResultUri.toString());
-                mBinding.setUserInfo(mCurrentUserInfo);
+
+                // максимальный размер изображения 1000000 = 1 mb
+                if (ImageUtil.isImageSizeCorrect(getContext(), mResultUri, 1000000)) {
+                    mCurrentUserInfo.setProfileImageUrl(mResultUri.toString());
+                    mBinding.setUserInfo(mCurrentUserInfo);
+                } else {
+                    String toastMessage = getResources().getString(R.string.toast_image_size_error, 1);
+                    Toast.makeText(getContext(), toastMessage, Toast.LENGTH_SHORT).show();
+                }
+
             } catch (NullPointerException e) {
                 showToast(R.string.toast_error_has_occurred);
             }

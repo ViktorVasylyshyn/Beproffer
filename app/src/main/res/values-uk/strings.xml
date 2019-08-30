@@ -185,6 +185,8 @@
     <string name="toast_add_personal_info_first">Будь ласка, додайте інформацію про себе в розділі "редагувати профіль", спочатку.</string>
     <string name="toast_images_for_guest_mode">Для гостей зображення можуть повторюватися. Будь ласка, зареєструйтеся щоб мати можливість фіксувати історію переглядів.</string>
 
+    <string name="toast_image_size_error">Зображення має бути менше %1$d МБ.</string>
+
 
     <string name="error_message_exception_sign_up_weak_password">Захистіть свій профайл більш надійним паролем.</string>
     <string name="error_message_exception_sign_up_invalid_credentials">Адреса єлектронної пошти має невірний формат.</string>

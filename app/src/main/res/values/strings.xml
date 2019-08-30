@@ -187,6 +187,8 @@
     <string name="toast_add_personal_info_first">Please, add information about you to "edit profile" section first.</string>
     <string name="toast_images_for_guest_mode">The images in \'guest\' mode can be repeated. Please, sign up to have a possibility to use browsing history.</string>
 
+    <string name="toast_image_size_error">Image size must be less than %1$d MB.</string>
+
     <string name="error_message_exception_sign_up_weak_password">Please, create more complicated password.</string>
     <string name="error_message_exception_sign_up_invalid_credentials">Invalid credentials.</string>
     <string name="error_message_exception_sign_up_collision">Profile with such email already exists.</string>

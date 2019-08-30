@@ -185,6 +185,8 @@
     <string name="toast_add_personal_info_first">Пожалуйста, добавьте информацию о себе в разделе "редактировать профайл", сначала.</string>
     <string name="toast_images_for_guest_mode">Для гостей, изображения могут повторяться. Пожалуйста, зарегистрируйтесь, чтобы иметь возможность использовать историю просмотров.</string>
 
+    <string name="toast_image_size_error">Изображение должно быть меньше %1$d МБ.</string>
+
 
     <string name="error_message_exception_sign_up_weak_password">Придумайте более надежный пароль.</string>
     <string name="error_message_exception_sign_up_invalid_credentials">Неправильный формат адреса электронной почты.</string>
