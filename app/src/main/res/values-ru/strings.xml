@@ -79,7 +79,7 @@
     <string name="title_gender_female">ЖЕН</string>
     <string name="title_gender_all_genders">ВСЕ</string>
 
-    <string name="title_specialist_storage_fragment">МОИ РАБОТЫ</string>
+    <string name="title_gallery_services">УСЛУГИ</string>
 
     <string name="title_search">Искать</string>
     <string name="title_try_again">Попробовать снова</string>
@@ -130,8 +130,9 @@
 
     <string name="barber_title_barber">Барбершоп</string>
 
-    <string name="confirmed_contact_menu_call">Позвонить</string>
-    <string name="confirmed_contact_menu_delete">Удалить</string>
+    <string name="confirmed_contact_menu_call">позвонить</string>
+    <string name="confirmed_contact_menu_delete">удалить</string>
+    <string name="confirmed_contact_menu_gallery">галерея</string>
 
 
     <!--Image Upload Requirements-->
@@ -184,6 +185,8 @@
     <string name="toast_no_any_service_items">Извините, но, пока что по этому запросу, публикаций нет.</string>
     <string name="toast_add_personal_info_first">Пожалуйста, добавьте информацию о себе в разделе "редактировать профайл", сначала.</string>
     <string name="toast_images_for_guest_mode">Для гостей, изображения могут повторяться. Пожалуйста, зарегистрируйтесь, чтобы иметь возможность использовать историю просмотров.</string>
+    <string name="toast_not_available_yet">Пока не доступно.</string>
+
 
 
     <string name="error_message_exception_sign_up_weak_password">Придумайте более надежный пароль.</string>

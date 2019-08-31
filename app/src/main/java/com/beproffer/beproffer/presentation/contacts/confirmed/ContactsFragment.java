@@ -1,18 +1,19 @@
 package com.beproffer.beproffer.presentation.contacts.confirmed;
 
 import android.content.Intent;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ObservableBoolean;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.appcompat.widget.PopupMenu;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ObservableBoolean;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.ContactItem;
@@ -21,6 +22,7 @@ import com.beproffer.beproffer.databinding.ContactsFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.contacts.adapter.ContactRequestItemAdapter;
 import com.beproffer.beproffer.presentation.contacts.adapter.ContactsItemAdapter;
+import com.beproffer.beproffer.presentation.spec_gallery.CustomerGalleryFragment;
 import com.beproffer.beproffer.util.Const;
 
 import java.util.ArrayList;
@@ -170,6 +172,15 @@ public class ContactsFragment extends BaseUserInfoFragment {
                 case R.id.confirmed_contact_menu_call:
                     startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + item.getPhone())));
                     break;
+                case R.id.confirmed_contact_menu_gallery:
+                    Bundle specialistId = new Bundle();
+                    specialistId.putString(Const.SPEC, item.getId());
+                    changeFragment(new CustomerGalleryFragment(),
+                            true,
+                            false,
+                            false,
+                            specialistId);
+                    break;
                 case R.id.confirmed_contact_menu_delete:
                     mUserDataViewModel.deleteContact(item);
                     break;
@@ -197,7 +208,7 @@ public class ContactsFragment extends BaseUserInfoFragment {
     }
 
     private void handleContactRequest(ContactRequestItem handledItem, boolean confirm) {
-        if(mCurrentUserInfo.getSpecialization() == null || mCurrentUserInfo.getDescription() == null){
+        if (mCurrentUserInfo.getSpecialization() == null || mCurrentUserInfo.getDescription() == null) {
             showToast(R.string.toast_add_personal_info_first);
             return;
         }
@@ -210,7 +221,7 @@ public class ContactsFragment extends BaseUserInfoFragment {
         mBinding.contactsTextMessage.setText(messageResId);
     }
 
-    private void hideErrorMessageView(){
+    private void hideErrorMessageView() {
         mBinding.contactsTextMessage.setVisibility(View.GONE);
     }
 }

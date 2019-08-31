@@ -81,7 +81,7 @@
     <string name="title_gender_female">Female</string>
     <string name="title_gender_all_genders">Both</string>
 
-    <string name="title_specialist_storage_fragment">MY WORKS</string>
+    <string name="title_gallery_services">SERVICES</string>
     <string name="title_search">Search</string>
     <string name="title_for">for</string>
     <string name="title_try_again">Try again</string>
@@ -130,6 +130,8 @@
 
     <string name="confirmed_contact_menu_call">call</string>
     <string name="confirmed_contact_menu_delete">delete</string>
+    <string name="confirmed_contact_menu_gallery">gallery</string>
+
 
     <string name="menu_vote_prohibited_content">Prohibited content</string>
     <string name="menu_vote_wrong_section">Wrong section</string>
@@ -186,6 +188,7 @@
     <string name="toast_no_any_service_items">There are no publications for this request yet. Please, try again later.</string>
     <string name="toast_add_personal_info_first">Please, add information about you to "edit profile" section first.</string>
     <string name="toast_images_for_guest_mode">The images in \'guest\' mode can be repeated. Please, sign up to have a possibility to use browsing history.</string>
+    <string name="toast_not_available_yet">Function not available yet.</string>
 
     <string name="error_message_exception_sign_up_weak_password">Please, create more complicated password.</string>
     <string name="error_message_exception_sign_up_invalid_credentials">Invalid credentials.</string>

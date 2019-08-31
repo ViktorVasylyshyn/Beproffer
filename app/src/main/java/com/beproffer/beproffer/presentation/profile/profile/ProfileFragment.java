@@ -96,7 +96,7 @@ public class ProfileFragment extends BaseUserInfoFragment {
                 showToast(R.string.toast_error_has_occurred);
                 return;
         }
-        changeFragment(fragment, true, false, false);
+        changeFragment(fragment, true, false, false, null);
     }
 
     private void hintsForUsers() {
@@ -105,7 +105,7 @@ public class ProfileFragment extends BaseUserInfoFragment {
          * проверяем есть ли описание профиля. предположим, что если описания нет, то профиль заполнен
          * не до концаю для кастомера же проверяем только описание*/
         if (mCurrentUserInfo.getType().equals(Const.SPEC)) {
-            mUserDataViewModel.getSpecialistGalleryData().observe(this, data -> {
+            mUserDataViewModel.getServiceItemsList().observe(this, data -> {
                 if (data != null && data.size() < Const.IMAGES_BASE_SET_COUNT) {
                     Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_blinking_icon_anim);
                     mBinding.profileStorage.startAnimation(animation);

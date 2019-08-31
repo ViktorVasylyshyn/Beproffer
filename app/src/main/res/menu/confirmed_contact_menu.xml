@@ -5,6 +5,9 @@
         android:id="@+id/confirmed_contact_menu_call"
         android:title="@string/confirmed_contact_menu_call" />
     <item
+        android:id="@+id/confirmed_contact_menu_gallery"
+        android:title="@string/confirmed_contact_menu_gallery" />
+    <item
         android:id="@+id/confirmed_contact_menu_delete"
         android:title="@string/confirmed_contact_menu_delete" />
 

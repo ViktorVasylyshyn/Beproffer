@@ -1,18 +1,16 @@
 package com.beproffer.beproffer.presentation;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.beproffer.beproffer.App;
 import com.beproffer.beproffer.R;
@@ -20,6 +18,9 @@ import com.beproffer.beproffer.presentation.browsing.BrowsingFragment;
 import com.beproffer.beproffer.presentation.contacts.confirmed.ContactsFragment;
 import com.beproffer.beproffer.presentation.profile.profile.ProfileFragment;
 import com.beproffer.beproffer.presentation.sign_in_up.sign_in.SignInFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import static com.beproffer.beproffer.util.NetworkUtil.hasInternetConnection;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 targetFragment = new BrowsingFragment();/* в том числе, если поступило R.id.bnm_images_gallery*/
                 break;
         }
-        performNavigation(targetFragment, true, true, false);
+        performNavigation(targetFragment, true, true, false, null);
         return true;
     };
 
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         App.getComponent().injectMainActivity(this);
 
         initBottomNavigationMenu();
-        performNavigation(new BrowsingFragment(), true, false, false);
+        performNavigation(new BrowsingFragment(), true, false, false, null);
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             Toast.makeText(this, R.string.toast_guest_mode, Toast.LENGTH_LONG).show();
@@ -106,11 +107,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    public void performNavigation(@NonNull Fragment fragment, boolean addToBackStack, boolean clearBackStack, boolean addToCont) {
+    public void performNavigation(@NonNull Fragment fragment, boolean addToBackStack,
+                                  boolean clearBackStack, boolean addToCont, @Nullable Bundle arg) {
         fragmentManager = getSupportFragmentManager();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right);
+        transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
+                R.anim.slide_in_left, R.anim.slide_out_right);
+        if (arg != null) {
+            fragment.setArguments(arg);
+        }
         if (addToBackStack) {
             transaction.addToBackStack(fragment.getClass().getSimpleName());
         }

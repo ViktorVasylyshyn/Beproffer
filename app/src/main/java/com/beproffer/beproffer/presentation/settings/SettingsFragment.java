@@ -137,6 +137,6 @@ public class SettingsFragment extends BaseUserInfoFragment {
 
     private void resetPassword() {
         mAuth.signOut();
-        changeFragment(new ResetPasswordFragment(), true, true, false);
+        changeFragment(new ResetPasswordFragment(), true, true, false, null);
     }
 }

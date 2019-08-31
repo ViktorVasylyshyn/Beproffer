@@ -37,17 +37,17 @@ public class SignInFragment extends BaseFragment {
 
         @Override
         public void onCustomerSignUpClick() {
-            changeFragment(new CustomerSignUpFragment(), true, false, false);
+            changeFragment(new CustomerSignUpFragment(), true, false, false, null);
         }
 
         @Override
         public void onSpecialistSignUpClick() {
-            changeFragment(new SpecialistSignUpFragment(), true, false, false);
+            changeFragment(new SpecialistSignUpFragment(), true, false, false, null);
         }
 
         @Override
         public void onResetPasswordClick() {
-            changeFragment(new CustomerSignUpFragment(), true, false, false);
+            changeFragment(new CustomerSignUpFragment(), true, false, false, null);
         }
 
         @Override
@@ -115,7 +115,7 @@ public class SignInFragment extends BaseFragment {
                     processing(false);
                     hideKeyboard(requireActivity());
                     if (auth.getCurrentUser().isEmailVerified()) {
-                        changeFragment(new ProfileFragment(), true, true, false);
+                        changeFragment(new ProfileFragment(), true, true, false, null);
                         ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class).refreshAdapter();
                     } else {
                         auth.signOut();
