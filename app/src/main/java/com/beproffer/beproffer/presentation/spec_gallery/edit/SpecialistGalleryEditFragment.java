@@ -2,17 +2,19 @@ package com.beproffer.beproffer.presentation.spec_gallery.edit;
 
 import android.app.Activity;
 import android.content.Intent;
-import androidx.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.databinding.DataBindingUtil;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.BrowsingImageItem;
@@ -20,6 +22,7 @@ import com.beproffer.beproffer.databinding.SpecialistEditGalleryItemFragmentBind
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.util.Const;
 import com.beproffer.beproffer.util.DefineServiceType;
+import com.beproffer.beproffer.util.ImageUtil;
 import com.crashlytics.android.Crashlytics;
 
 import java.util.Map;
@@ -344,9 +347,14 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
         if (resultCode == Activity.RESULT_OK && requestCode == Const.REQUEST_CODE_1) {
             try {
                 mResultUri = data.getData();
-                if (mResultUri != null) {
+
+                if (ImageUtil.isImageSizeCorrect(getContext(), mResultUri, Const.ONE_AND_HALF_MB)) {
                     mUpdatedImageItem.setUrl(mResultUri.toString());
+                } else {
+                    String toastMessage = getResources().getString(R.string.toast_image_size_error, 1.5);
+                    showToast(toastMessage);
                 }
+
             } catch (NullPointerException e) {
                 Crashlytics.getInstance().crash();
                 showToast(R.string.toast_error_has_occurred);
@@ -362,7 +370,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
         mBinding.specialistEditGalleryItemTextMessage.setText(messageResId);
     }
 
-    private void hideErrorMessage(){
+    private void hideErrorMessage() {
         mBinding.specialistEditGalleryItemTextMessage.setVisibility(View.GONE);
         mBinding.specialistEditGalleryItemScroll.setVisibility(View.VISIBLE);
     }

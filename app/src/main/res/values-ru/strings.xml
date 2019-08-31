@@ -188,6 +188,8 @@
     <string name="toast_not_available_yet">Пока не доступно.</string>
 
 
+    <string name="toast_image_size_error">Изображение должно быть меньше %1$d МБ.</string>
+
 
     <string name="error_message_exception_sign_up_weak_password">Придумайте более надежный пароль.</string>
     <string name="error_message_exception_sign_up_invalid_credentials">Неправильный формат адреса электронной почты.</string>
