@@ -348,12 +348,11 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
             try {
                 mResultUri = data.getData();
 
-                // максимальный размер изображения 1500000 = 1.5 mb
-                if (ImageUtil.isImageSizeCorrect(getContext(), mResultUri, 1500000)) {
+                if (ImageUtil.isImageSizeCorrect(getContext(), mResultUri, Const.ONE_AND_HALF_MB)) {
                     mUpdatedImageItem.setUrl(mResultUri.toString());
                 } else {
                     String toastMessage = getResources().getString(R.string.toast_image_size_error, 1.5);
-                    Toast.makeText(getContext(), toastMessage, Toast.LENGTH_SHORT).show();
+                    showToast(toastMessage);
                 }
 
             } catch (NullPointerException e) {
