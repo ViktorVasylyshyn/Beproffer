@@ -1,10 +1,11 @@
 package com.beproffer.beproffer.presentation.sign_in_up;
 
 import android.app.Application;
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 public class SignUpViewModel extends AndroidViewModel {
     private final SignUpRepository mRepository;
@@ -36,6 +37,16 @@ public class SignUpViewModel extends AndroidViewModel {
 
     public LiveData<Boolean> getHideKeyboard() {
         return mRepository.getHideKeyboard();
+    }
+
+    public void resetValues(@NonNull Boolean resetToast,
+                            @NonNull Boolean resetPopBackStack,
+                            @NonNull Boolean resetErrorMessage,
+                            @NonNull Boolean resetHideKeyboard) {
+        mRepository.resetValues(resetToast,
+                resetPopBackStack,
+                resetErrorMessage,
+                resetHideKeyboard);
     }
 
     public void signUpNewUser(String userEmail,

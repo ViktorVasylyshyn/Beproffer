@@ -96,11 +96,11 @@ public class SignInFragment extends BaseFragment {
         }
 
         if (mBinding.signInFragmentEmail.getText().toString().isEmpty()) {
-            showErrorMessage(R.string.error_message_enter_email);
+            requestErrorFocus(mBinding.signInFragmentEmail, R.string.error_message_enter_email);
             return;
         }
         if (mBinding.signInFragmentPassword.getText().toString().isEmpty()) {
-            showToast(R.string.error_message_exception_sign_in_invalid_credentials);
+            requestErrorFocus(mBinding.signInFragmentPassword, R.string.error_message_exception_sign_in_invalid_credentials);
             return;
         }
         showProgress(true);

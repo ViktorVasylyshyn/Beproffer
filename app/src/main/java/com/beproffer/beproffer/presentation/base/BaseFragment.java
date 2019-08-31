@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beproffer.beproffer.R;
@@ -100,5 +101,10 @@ public class BaseFragment extends Fragment {
             imageView.setImageResource(R.drawable.ic_pass_show);
             mImageView = imageView;
         }
+    }
+
+    protected void requestErrorFocus(TextView  textView, int messageId){
+        textView.requestFocus();
+        textView.setError(getResources().getText(messageId));
     }
 }

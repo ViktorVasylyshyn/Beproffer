@@ -39,9 +39,6 @@ public class MainActivity extends AppCompatActivity {
         Fragment targetFragment;
 
         switch (item.getItemId()) {
-            case R.id.bnm_images_gallery:
-                targetFragment = new BrowsingFragment();
-                break;
             case R.id.bnm_contacts:
                 if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                     targetFragment = new ContactsFragment();
@@ -58,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             default:
-                targetFragment = new BrowsingFragment();
+                targetFragment = new BrowsingFragment();/* в том числе, если поступило R.id.bnm_images_gallery*/
                 break;
         }
         performNavigation(targetFragment, true, true, false);
@@ -66,14 +63,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private final BottomNavigationView.OnNavigationItemReselectedListener mOnNavigationItemReselectedListener = item -> {
-        switch (item.getItemId()) {
-            case R.id.bnm_images_gallery:
-                break;
-            case R.id.bnm_contacts:
-                break;
-            case R.id.bnm_profile:
-                break;
-        }
+                /*Повторные нажатия не должны ничего делать*/
     };
 
     @Override
@@ -127,15 +117,14 @@ public class MainActivity extends AppCompatActivity {
         if (clearBackStack) {
             fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
-        /*addToCont - эта чепуха, пока что нужна только в одном случае, чтобы информация о изображении
-         * красиво появлялась на фоне самого изображения. пока что не кофликтует такой подход, но в
-         * будущем быть акккуратней с этим, а то мало ли*/
+        /*addToCont - используется добавлении в контейнер двух фрагментов: BrowsingItemInfoFragment
+        * & SearchFragment. Сделано для эфекта появления этих фрагментов на фоне BrowsingFragment. Как бы поверх
+        * свайп изображений. Конфликтов пока не замечено.*/
         if (!addToCont) {
             transaction.replace(R.id.fragment_container, fragment).commit();
         } else {
             transaction.add(R.id.fragment_container, fragment).commit();
         }
-
     }
 
     public void onBottomNavigationBarItemClicked(int menuItemId, @Nullable Integer toastRes) {

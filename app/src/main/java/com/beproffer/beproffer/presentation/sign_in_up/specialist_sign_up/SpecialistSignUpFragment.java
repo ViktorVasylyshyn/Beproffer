@@ -1,19 +1,20 @@
 package com.beproffer.beproffer.presentation.sign_in_up.specialist_sign_up;
 
-import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import androidx.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SpecialistSignUpFragmentBinding;
@@ -93,30 +94,30 @@ public class SpecialistSignUpFragment extends BaseFragment {
         }
         if (mBinding.specialistSignUpName.getText().toString().isEmpty()
                 || mBinding.specialistSignUpName.getText().toString().length() < 4) {
-            showErrorMessage(R.string.error_message_name_is_too_short);
+            requestErrorFocus(mBinding.specialistSignUpName, R.string.error_message_name_is_too_short);
             return;
         }
         if (mBinding.specialistSignUpEmail.getText().toString().isEmpty()) {
-            showErrorMessage(R.string.error_message_enter_email);
+            requestErrorFocus(mBinding.specialistSignUpEmail, R.string.error_message_enter_email);
             return;
         }
         if (mBinding.specialistSignUpPass.getText().toString().isEmpty()) {
-            showErrorMessage(R.string.error_message_exception_sign_up_weak_password);
+            requestErrorFocus(mBinding.specialistSignUpPass, R.string.error_message_exception_sign_up_weak_password);
             return;
         }
         if (6 > mBinding.specialistSignUpPhone.length() && mBinding.specialistSignUpPhone.length() > 13) {
-            showErrorMessage(R.string.error_message_wrong_phone_number_format);
+            requestErrorFocus(mBinding.specialistSignUpPhone, R.string.error_message_wrong_phone_number_format);
             return;
         }
         if (!mBinding.specialistSignUpPass.getText().toString().equals(mBinding.specialistSignUpPassConfirm.getText().toString())) {
-            showErrorMessage(R.string.toast_error_password_confirm_failure);
+            requestErrorFocus(mBinding.specialistSignUpPass, R.string.toast_error_password_confirm_failure);
             return;
         }
 
         if (mSignUpViewModel == null)
             mSignUpViewModel = ViewModelProviders.of(requireActivity()).get(SignUpViewModel.class);
 
-        /*актив\неактив прогресс бар*/
+        /*progressBar*/
         mSignUpViewModel.getShowProgress().observe(getViewLifecycleOwner(), progress -> {
             if (progress != null)
                 showProgress(progress);
@@ -126,29 +127,33 @@ public class SpecialistSignUpFragment extends BaseFragment {
             if (processing != null)
                 processing(processing);
         });
-        /*показ тостов*/
+        /*Toast*/
         mSignUpViewModel.getToastId().observe(getViewLifecycleOwner(), toastId -> {
             if (toastId == null)
                 return;
+            mSignUpViewModel.resetValues(true, false, false, false);
             showToast(toastId);
         });
-        /*получение команд и айди для совершения перехода*/
+        /*popBackStack*/
         mSignUpViewModel.getPopBackStack().observe(getViewLifecycleOwner(), performPopBackStack -> {
             if (performPopBackStack == null)
                 return;
+            mSignUpViewModel.resetValues(false, true, false, false);
             Handler handler = new Handler();
             handler.postDelayed(this::popBackStack, Const.POPBACKSTACK_WAITING);
         });
-        /*показ сообщений об ощибках*/
+        /*bottom TextView*/
         mSignUpViewModel.getErrorMessageId().observe(getViewLifecycleOwner(), errorMessageId -> {
             if (errorMessageId == null)
                 return;
+            mSignUpViewModel.resetValues(false, false, true, false);
             showErrorMessage(errorMessageId);
         });
-        /*скрытие клавиатуры*/
+        /*keyboard*/
         mSignUpViewModel.getHideKeyboard().observe(getViewLifecycleOwner(), hideKeyboard -> {
             if (hideKeyboard == null)
                 return;
+            mSignUpViewModel.resetValues(false, false, false, true);
             hideKeyboard(requireActivity());
         });
 

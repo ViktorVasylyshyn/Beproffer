@@ -1,10 +1,12 @@
 package com.beproffer.beproffer.presentation.sign_in_up;
 
 import android.app.Application;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.UserInfo;
@@ -63,24 +65,31 @@ class SignUpRepository {
                         }
                     });
                 } catch (NullPointerException e) {
+                    Log.d(Const.ERROR, "signUpNewUser" + e.getMessage());
                     feedBackToUi(false, R.string.toast_error_has_occurred,
-                            false, R.string.message_error_has_occurred, false, true);
+                            false, R.string.message_error_has_occurred,
+                            false, true);
                 }
             } else {
                 try {
                     throw signUpTask.getException();
                 } catch (FirebaseAuthWeakPasswordException weakPassword) {
+                    Log.d(Const.ERROR, "signUpNewUser" + weakPassword.getMessage());
                     feedBackToUi(false, null, false,
                             R.string.error_message_exception_sign_up_weak_password, false, true);
                 } catch (FirebaseAuthInvalidCredentialsException invalidCredential) {
+                    Log.d(Const.ERROR, "signUpNewUser" + invalidCredential.getMessage());
                     feedBackToUi(false, null, false,
                             R.string.error_message_exception_sign_up_invalid_credentials, false, true);
                 } catch (FirebaseAuthUserCollisionException userCollision) {
+                    Log.d(Const.ERROR, "signUpNewUser" + userCollision.getMessage());
                     feedBackToUi(false, null, false,
                             R.string.error_message_exception_sign_up_collision, false, true);
                 } catch (Exception e) {
+                    Log.d(Const.ERROR, "signUpNewUser" + e.getMessage());
                     feedBackToUi(false, R.string.toast_error_registration,
-                            false, R.string.message_error_has_occurred, false, true);
+                            false, R.string.message_error_has_occurred,
+                            false, true);
                 }
             }
         });
@@ -94,10 +103,14 @@ class SignUpRepository {
                 .child(Const.INFO)
                 .setValue(userInfo).addOnSuccessListener(aVoid -> {
             FirebaseAuth.getInstance().signOut();
-            feedBackToUi(false, R.string.toast_sign_up_email_verification, true, null, false, true);
+            feedBackToUi(false, R.string.toast_sign_up_email_verification,
+                    true, null, false, true);
         })
-                .addOnFailureListener(e -> feedBackToUi(false,
-                        R.string.toast_error_user_data_saving_failure, false, R.string.message_error_has_occurred, false, true));
+                .addOnFailureListener(e -> {
+                    Log.d(Const.ERROR, "saveUserDataToDatabase: " + e.getMessage());
+                    feedBackToUi(false, R.string.toast_error_user_data_saving_failure, false,
+                            R.string.message_error_has_occurred, false, true);
+                });
     }
 
     public LiveData<Integer> getToastRes() {
@@ -124,6 +137,24 @@ class SignUpRepository {
         return mHideKeyboard;
     }
 
+    public void resetValues(@NonNull Boolean resetToast,
+                            @NonNull Boolean resetPopBackStack,
+                            @NonNull Boolean resetErrorMessage,
+                            @NonNull Boolean resetHideKeyboard) {
+        if (resetToast) {
+            mToastRes.setValue(null);
+        }
+        if (resetPopBackStack) {
+            mPopBackStack.setValue(null);
+        }
+        if (resetErrorMessage) {
+            mErrorMessageId.setValue(null);
+        }
+        if (resetHideKeyboard) {
+            mHideKeyboard.setValue(null);
+        }
+    }
+
     private void feedBackToUi(@Nullable Boolean showProgress,
                               @Nullable Integer toastId,
                               @NonNull Boolean popBackStack,
@@ -134,15 +165,12 @@ class SignUpRepository {
             mShowProgress.setValue(showProgress);
         if (toastId != null) {
             mToastRes.setValue(toastId);
-            mToastRes.setValue(null);
         }
         if (popBackStack) {
             mPopBackStack.setValue(true);
-            mPopBackStack.setValue(null);
         }
         if (errorMessageId != null) {
             mErrorMessageId.setValue(errorMessageId);
-            mErrorMessageId.setValue(null);
         }
         /*блокирование повторных запросов если предыдущий идентичный в процессе выполнения*/
         if (processing != null) {
@@ -150,7 +178,6 @@ class SignUpRepository {
         }
         if (hideKeyboard) {
             mHideKeyboard.setValue(true);
-            mHideKeyboard.setValue(null);
         }
     }
 }
