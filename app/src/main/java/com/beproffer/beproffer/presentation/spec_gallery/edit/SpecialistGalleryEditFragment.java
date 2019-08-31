@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -348,13 +347,11 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
             try {
                 mResultUri = data.getData();
 
-                if (ImageUtil.isImageSizeCorrect(getContext(), mResultUri, Const.ONE_AND_HALF_MB)) {
+                if (ImageUtil.isImageSizeCorrect(getContext(), mResultUri, Const.SERVICE_IMAGE_MAX_SIZE)) {
                     mUpdatedImageItem.setUrl(mResultUri.toString());
                 } else {
-                    String toastMessage = getResources().getString(R.string.toast_image_size_error, 1.5);
-                    showToast(toastMessage);
+                    showToast(R.string.toast_image_size_error_2);
                 }
-
             } catch (NullPointerException e) {
                 Crashlytics.getInstance().crash();
                 showToast(R.string.toast_error_has_occurred);

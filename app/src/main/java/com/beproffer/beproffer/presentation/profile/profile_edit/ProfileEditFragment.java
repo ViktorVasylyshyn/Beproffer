@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -223,14 +222,12 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
                 }
                 mResultUri = data.getData();
 
-                if (ImageUtil.isImageSizeCorrect(getContext(), mResultUri, Const.ONE_MB)) {
+                if (ImageUtil.isImageSizeCorrect(getContext(), mResultUri, Const.PROFILE_IMAGE_MAX_SIZE)) {
                     mCurrentUserInfo.setProfileImageUrl(mResultUri.toString());
                     mBinding.setUserInfo(mCurrentUserInfo);
                 } else {
-                    String toastMessage = getResources().getString(R.string.toast_image_size_error, 1);
-                    showToast(toastMessage);
+                    showToast(R.string.toast_image_size_error_1_5);
                 }
-
             } catch (NullPointerException e) {
                 showToast(R.string.toast_error_has_occurred);
             }

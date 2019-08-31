@@ -190,7 +190,8 @@
     <string name="toast_images_for_guest_mode">The images in \'guest\' mode can be repeated. Please, sign up to have a possibility to use browsing history.</string>
     <string name="toast_not_available_yet">Function not available yet.</string>
 
-    <string name="toast_image_size_error">Image size must be less than %1$d MB.</string>
+    <string name="toast_image_size_error_1_5">Please, use image up to 1.5 MB.</string>
+    <string name="toast_image_size_error_2">Please, use image up to 2 MB.</string>
 
     <string name="error_message_exception_sign_up_weak_password">Please, create more complicated password.</string>
     <string name="error_message_exception_sign_up_invalid_credentials">Invalid credentials.</string>

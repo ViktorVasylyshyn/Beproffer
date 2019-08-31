@@ -3,6 +3,7 @@ package com.beproffer.beproffer.util;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 
 import java.io.File;
 import java.io.InputStream;
@@ -24,7 +25,7 @@ public class ImageUtil {
                     InputStream fileInputStream = context.getContentResolver().openInputStream(uri);
                     dataSize = fileInputStream.available();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.d(Const.ERROR, "isImageSizeCorrect" + e.getMessage());
                 }
 
                 isSizeCorrect = dataSize <= maxImageSize;
@@ -35,7 +36,7 @@ public class ImageUtil {
                 try {
                     file = new File(path);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.d(Const.ERROR, "isImageSizeCorrect" + e.getMessage());
                 }
 
                 isSizeCorrect = file.length() <= maxImageSize;
