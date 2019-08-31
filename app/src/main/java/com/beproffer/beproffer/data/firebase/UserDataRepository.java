@@ -1,14 +1,15 @@
 package com.beproffer.beproffer.data.firebase;
 
 import android.app.Application;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.util.Log;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.BrowsingImageItem;
@@ -30,7 +31,9 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -66,9 +69,15 @@ public class UserDataRepository {
 
     private final MutableLiveData<UserInfo> mUserInfoLiveData = new MutableLiveData<>();
 
-    private Map<String, BrowsingImageItem> mLocalImageItemsMap = new HashMap<>();
-    private final MutableLiveData<Map<String, BrowsingImageItem>> mSpecialistGalleryImageItemsMapLiveData = new MutableLiveData<>();
+    /*список личных сервисов специалиста*/
+    private Map<String, BrowsingImageItem> mServiceItemsMap = new HashMap<>();
+    private final MutableLiveData<Map<String, BrowsingImageItem>> mServiceItemsMapLiveData = new MutableLiveData<>();
+
     private final MutableLiveData<BrowsingImageItem> mEditableGalleryItemLiveData = new MutableLiveData<>();
+
+    /*список сервисов специалиста который находится в конактах пользователя*/
+    private List<BrowsingImageItem> mServiceItemsList = new ArrayList<>();
+    private final MutableLiveData<List<BrowsingImageItem>> mServiceItemsListLiveData = new MutableLiveData<>();
 
     private Map<String, ContactItem> mContactsMap = new HashMap<>();
     private final MutableLiveData<Map<String, ContactItem>> mContactsMapLiveData = new MutableLiveData<>();
@@ -241,36 +250,72 @@ public class UserDataRepository {
                     });
     }
 
-    public LiveData<Map<String, BrowsingImageItem>> getSpecialistGalleryImagesList() {
-        /*до этого не дойдет, ведь этот медод может запуститься исключительно для специалистов, но мало ли...*/
+    /*специалист получает данные о своих сервисах*/
+    public LiveData<Map<String, BrowsingImageItem>> getServiceItemsList() {
         if (!mCurrentUserType.equals(Const.SPEC)) {
-            mSpecialistGalleryImageItemsMapLiveData.setValue(mLocalImageItemsMap);
-            return mSpecialistGalleryImageItemsMapLiveData;
+            mServiceItemsMapLiveData.setValue(mServiceItemsMap);
+            return mServiceItemsMapLiveData;
         }
 
-        if (mUserDataSnapShot.hasChild(Const.SERVICES) && mUserDataSnapShot.child(Const.SERVICES).hasChildren() && mLocalImageItemsMap.isEmpty()) {
-            obtainSpecialistGalleryImagesData();
+        if (mUserDataSnapShot.hasChild(Const.SERVICES) && mUserDataSnapShot.child(Const.SERVICES).hasChildren() && mServiceItemsMap.isEmpty()) {
+            obtainServiceItems();
         }
         if (!mUserDataSnapShot.hasChild(Const.SERVICES) || !mUserDataSnapShot.child(Const.SERVICES).hasChildren()) {
-            mSpecialistGalleryImageItemsMapLiveData.setValue(mLocalImageItemsMap);
+            mServiceItemsMapLiveData.setValue(mServiceItemsMap);
         }
-        return mSpecialistGalleryImageItemsMapLiveData;
+        return mServiceItemsMapLiveData;
     }
 
-    private void obtainSpecialistGalleryImagesData() {
+    /*пользователь получает данные о сервисах специалиста, которые находится в его контактах*/
+    public LiveData<List<BrowsingImageItem>> getServiceItemsList(String specialistId) {
+        /*если пользователь хочет, повторно, посмотреть данные специалиста, которые хранятся в mServiceItemsList*/
+        if (!mServiceItemsList.isEmpty() && mServiceItemsList.get(0).getId().equals(specialistId))
+            return mServiceItemsListLiveData;
+        /*пользователь хочет просмотреть данные, которые он еще не видел*/
+        mShowProgress.setValue(true);
+        mDatabaseRef.child(Const.USERS)
+                .child(Const.SPEC)
+                .child(specialistId)
+                .child(Const.SERVICES)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (!dataSnapshot.exists()) {
+                            return;
+                        }
+                        mShowProgress.postValue(false);
+                        for (DataSnapshot itemSnapshot : dataSnapshot.getChildren()) {
+                            try {
+                                mServiceItemsList.add(itemSnapshot.getValue(BrowsingImageItem.class));
+                                mServiceItemsListLiveData.postValue(mServiceItemsList);
+                            } catch (NullPointerException e) {
+                                Log.d(Const.ERROR, "getServiceItemsList: " + e.getMessage());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.d(Const.ERROR, "getServiceItemsList.onCancelled: " + databaseError.getMessage());
+                    }
+                });
+        return mServiceItemsListLiveData;
+    }
+
+    private void obtainServiceItems() {
         mShowProgress.setValue(true);
         for (DataSnapshot data : mUserDataSnapShot.child(Const.SERVICES).getChildren()) {
             try {
-                mLocalImageItemsMap.put(data.getKey(), data.getValue(BrowsingImageItem.class));
+                mServiceItemsMap.put(data.getKey(), data.getValue(BrowsingImageItem.class));
             } catch (NullPointerException e) {
                 /*TODO такого, правда еще не случалось, но если вдруг то - отображать объект как
                     испорченый, чтобы пользователь его перезаписал. или может вообще его удалять*/
                 feedBackToUi(false, R.string.toast_error_has_occurred,
                         false, false, false, null);
-                Log.d(Const.ERROR, "obtainSpecialistGalleryImagesData: " + e.getMessage());
+                Log.d(Const.ERROR, "obtainServiceItems: " + e.getMessage());
             }
         }
-        mSpecialistGalleryImageItemsMapLiveData.setValue(mLocalImageItemsMap);
+        mServiceItemsMapLiveData.setValue(mServiceItemsMap);
         mShowProgress.setValue(false);
     }
 
@@ -358,8 +403,8 @@ public class UserDataRepository {
         потому что нет отслеживания в реальном времени. объекты сервисов специалиста находятся в
         snapshot которые взялся разово. соответственно - заменили в базе - нужно заменить и локально.
         в будущем - переделать.*/
-        mLocalImageItemsMap.put(updatedItem.getKey(), updatedItem);
-        mSpecialistGalleryImageItemsMapLiveData.setValue(mLocalImageItemsMap);
+        mServiceItemsMap.put(updatedItem.getKey(), updatedItem);
+        mServiceItemsMapLiveData.setValue(mServiceItemsMap);
         feedBackToUi(false, R.string.toast_image_data_updated, true,
                 true, false, null);
     }
@@ -556,8 +601,8 @@ public class UserDataRepository {
         mContactRequestsMapLiveData.setValue(mContactRequestsMap);
         mContactsMap = new HashMap<>();
         mContactsMapLiveData.setValue(mContactsMap);
-        mLocalImageItemsMap = new HashMap<>();
-        mSpecialistGalleryImageItemsMapLiveData.setValue(mLocalImageItemsMap);
+        mServiceItemsMap = new HashMap<>();
+        mServiceItemsMapLiveData.setValue(mServiceItemsMap);
         mShowProgress.setValue(false);
     }
 

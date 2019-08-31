@@ -1,11 +1,12 @@
 package com.beproffer.beproffer.presentation;
 
 import android.app.Application;
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 import android.net.Uri;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 import com.beproffer.beproffer.data.firebase.UserDataRepository;
 import com.beproffer.beproffer.data.models.BrowsingImageItem;
@@ -13,6 +14,7 @@ import com.beproffer.beproffer.data.models.ContactItem;
 import com.beproffer.beproffer.data.models.ContactRequestItem;
 import com.beproffer.beproffer.data.models.UserInfo;
 
+import java.util.List;
 import java.util.Map;
 
 public class UserDataViewModel extends AndroidViewModel {
@@ -32,8 +34,12 @@ public class UserDataViewModel extends AndroidViewModel {
         mRepository.updateUserInfo(updatedUserInfo, updatedImageUri);
     }
 
-    public LiveData<Map<String, BrowsingImageItem>> getSpecialistGalleryData() {
-        return mRepository.getSpecialistGalleryImagesList();
+    public LiveData<Map<String, BrowsingImageItem>> getServiceItemsList() {
+        return mRepository.getServiceItemsList();
+    }
+
+    public LiveData<List<BrowsingImageItem>> getServiceItemsList(String specialistId) {
+        return mRepository.getServiceItemsList(specialistId);
     }
 
     public void updateSpecialistGallery(BrowsingImageItem newItem, @Nullable Uri resultUri) {

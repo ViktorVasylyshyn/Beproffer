@@ -3,6 +3,8 @@ package com.beproffer.beproffer.presentation.base;
 
 import android.app.Activity;
 import androidx.databinding.ObservableBoolean;
+
+import android.os.Bundle;
 import android.os.Handler;
 
 import android.text.method.HideReturnsTransformationMethod;
@@ -56,8 +58,8 @@ public class BaseFragment extends Fragment {
     }
 
     @SuppressWarnings("SameParameterValue")
-    protected void changeFragment(Fragment fragment, boolean addToBackStack, boolean clearTask, boolean addToCont) {
-        ((MainActivity) requireActivity()).performNavigation(fragment, addToBackStack, clearTask, addToCont);
+    protected void changeFragment(Fragment fragment, boolean addToBackStack, boolean clearTask, boolean addToCont, Bundle arg) {
+        ((MainActivity) requireActivity()).performNavigation(fragment, addToBackStack, clearTask, addToCont, arg);
     }
 
     @SuppressWarnings("SameParameterValue")

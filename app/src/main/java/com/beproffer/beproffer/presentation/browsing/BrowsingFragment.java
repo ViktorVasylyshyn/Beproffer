@@ -210,7 +210,7 @@ public class BrowsingFragment extends BaseUserInfoFragment {
 
     private void showBrowsingItemInfo(Object dataObject) {
         ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class).obtainBrowsingItemDetailInfo((BrowsingItemRef) dataObject);
-        changeFragment(new BrowsingItemInfoFragment(), true, false, true);
+        changeFragment(new BrowsingItemInfoFragment(), true, false, true, null);
     }
 
     private void performSearch() {
@@ -218,7 +218,7 @@ public class BrowsingFragment extends BaseUserInfoFragment {
             showToast(R.string.toast_no_internet_connection);
             return;
         }
-        changeFragment(new SearchFragment(), true, false, true);
+        changeFragment(new SearchFragment(), true, false, true, null);
     }
 
     private void showMessage(int textResId) {

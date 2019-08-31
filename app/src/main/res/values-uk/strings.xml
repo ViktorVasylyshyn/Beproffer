@@ -78,7 +78,7 @@
     <string name="title_gender_female">ЖІН</string>
     <string name="title_gender_all_genders">ВСІ</string>
 
-    <string name="title_specialist_storage_fragment">МОЇ ЗОБРАЖЕННЯ</string>
+    <string name="title_gallery_services">ПОСЛУГИ</string>
     <string name="title_search">Шукати</string>
     <string name="title_for">для</string>
 
@@ -126,8 +126,9 @@
     <string name="barber_title_barber">Барбершоп</string>
     <string name="title_main_specialization">Ваша головна спеціалізація.</string>
 
-    <string name="confirmed_contact_menu_call">Задзвонити</string>
-    <string name="confirmed_contact_menu_delete">Видалити</string>
+    <string name="confirmed_contact_menu_call">дзвінок</string>
+    <string name="confirmed_contact_menu_delete">видалити</string>
+    <string name="confirmed_contact_menu_gallery">галерея</string>
 
     <string name="menu_vote_prohibited_content">Заборонений контент</string>
     <string name="menu_vote_wrong_section">Невідповідний розділ</string>
@@ -184,6 +185,7 @@
     <string name="toast_no_any_service_items">Перепрошуемо, але, поки що, нема публікацій цього напрямку.</string>
     <string name="toast_add_personal_info_first">Будь ласка, додайте інформацію про себе в розділі "редагувати профіль", спочатку.</string>
     <string name="toast_images_for_guest_mode">Для гостей зображення можуть повторюватися. Будь ласка, зареєструйтеся щоб мати можливість фіксувати історію переглядів.</string>
+    <string name="toast_not_available_yet">Наразі не доступно.</string>
 
 
     <string name="error_message_exception_sign_up_weak_password">Захистіть свій профайл більш надійним паролем.</string>

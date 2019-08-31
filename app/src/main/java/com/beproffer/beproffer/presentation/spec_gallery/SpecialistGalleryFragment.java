@@ -1,49 +1,23 @@
 package com.beproffer.beproffer.presentation.spec_gallery;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ObservableBoolean;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.BrowsingImageItem;
-import com.beproffer.beproffer.databinding.SpecialistGalleryFragmentBinding;
-import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
-import com.beproffer.beproffer.presentation.spec_gallery.adapter.GalleryImageItemAdapter;
 import com.beproffer.beproffer.presentation.spec_gallery.edit.SpecialistGalleryEditFragment;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
-public class SpecialistGalleryFragment extends BaseUserInfoFragment {
+/**Показ специалисту его галереи с изображениями сервисов.*/
 
-    private final GalleryImageItemAdapter mImageAdapter = new GalleryImageItemAdapter();
-
-    private final ObservableBoolean mShowButton = new ObservableBoolean();
-
-    private List<BrowsingImageItem> mImageItemsList;
-
-    private SpecialistGalleryFragmentBinding mBinding;
+public class SpecialistGalleryFragment extends BaseGalleryFragment {
 
     private final SpecialistGalleryFragmentCallback mCallback = this::addNewImage;
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.specialist_gallery_fragment, container, false);
-        mBinding.setLifecycleOwner(this);
-        initRecyclerView();
-        return mBinding.getRoot();
-    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -51,7 +25,6 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
         mBinding.setCallback(mCallback);
         mBinding.setShowProgress(mShowProgress);
         mBinding.setShowButton(mShowButton);
-
         initUserData();
     }
 
@@ -62,8 +35,8 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
             return;
         }
         if (mImageItemsList == null) {
-            mUserDataViewModel.getSpecialistGalleryData().observe(this, data -> {
-                mImageItemsList = new ArrayList<>();
+            mUserDataViewModel.getServiceItemsList().observe(this, data -> {
+                mImageItemsList = new ArrayList<>(); //TODO попробовать убрать
                 mShowButton.set(true);
                 if (data != null) {
                     mImageItemsList = new ArrayList<>();
@@ -74,13 +47,6 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
                 }
             });
         }
-    }
-
-    private void initRecyclerView() {
-        setupList();
-        RecyclerView imageRecyclerView = mBinding.specialistGalleryRecyclerView;
-        imageRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        imageRecyclerView.setAdapter(mImageAdapter);
     }
 
     private void addNewImage() {
@@ -101,16 +67,13 @@ public class SpecialistGalleryFragment extends BaseUserInfoFragment {
                 null,
                 null,
                 null));
-        changeFragment(new SpecialistGalleryEditFragment(), true, false, false);
+        changeFragment(new SpecialistGalleryEditFragment(), true, false, false, null);
     }
 
-    private void setupList() {
-        mImageAdapter.setOnItemClickListener(this::setEditableGalleryItem);
-    }
-
-    private void setEditableGalleryItem(BrowsingImageItem editableItem) {
+    @Override
+    void showServiceInfo(BrowsingImageItem editableItem) {
         mUserDataViewModel.setEditableGalleryItem(editableItem);
-        changeFragment(new SpecialistGalleryEditFragment(), true, false, false);
+        changeFragment(new SpecialistGalleryEditFragment(), true, false, false, null);
     }
 }
 
