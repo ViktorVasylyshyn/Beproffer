@@ -126,7 +126,7 @@ public class Const {
     public static final String ERROR = "ERROR"; /*the constant for the logcat filter*/
 
     /* макс размеры изображений */
-    public static final int ONE_MB = 1000000;
-    public static final int ONE_AND_HALF_MB = 1500000;
+    public static final int PROFILE_IMAGE_MAX_SIZE = 1500000;
+    public static final int SERVICE_IMAGE_MAX_SIZE = 2000000;
 
 }

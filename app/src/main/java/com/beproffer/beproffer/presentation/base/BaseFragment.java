@@ -42,10 +42,6 @@ public class BaseFragment extends Fragment {
         Toast.makeText(this.requireContext(), resId, Toast.LENGTH_LONG).show();
     }
 
-    protected void showToast(String message) {
-        Toast.makeText(this.requireContext(), message, Toast.LENGTH_LONG).show();
-    }
-
     /*Показ progress bar при запросе в UserDataRepository обрабатывается в репозитории а не снаружи в java файле автивити*/
     protected void showProgress(boolean show) {
         mShowProgress.set(show);
