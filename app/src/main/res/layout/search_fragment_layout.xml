@@ -3,6 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="showProgress"
+            type="androidx.databinding.ObservableBoolean" />
+
+        <variable
+            name="fragmentCallback"
+            type="com.beproffer.beproffer.presentation.browsing.search.SearchFragmentCallback" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -43,10 +57,7 @@
 
                     <ImageView
                         android:id="@+id/search_fragment_haircut_icon"
-                        android:layout_width="@dimen/icons_size_normal_width"
-                        android:layout_height="@dimen/icons_size_normal_height"
-                        android:layout_margin="@dimen/base_margin_extra_small"
-                        android:background="@drawable/button_grey_stroke_rectangle"
+                        style="@style/ScrollIcons.Margin"
                         android:onClick="@{fragmentCallback::onServiceTypeIconClicked}"
                         android:src="@drawable/ic_haircut"
                         app:layout_constraintStart_toStartOf="parent"
@@ -55,10 +66,7 @@
 
                     <ImageView
                         android:id="@+id/search_fragment_nails_icon"
-                        android:layout_width="@dimen/icons_size_normal_width"
-                        android:layout_height="@dimen/icons_size_normal_height"
-                        android:layout_margin="@dimen/base_margin_extra_small"
-                        android:background="@drawable/button_grey_stroke_rectangle"
+                        style="@style/ScrollIcons.Margin"
                         android:onClick="@{fragmentCallback::onServiceTypeIconClicked}"
                         android:src="@drawable/ic_nails"
                         app:layout_constraintStart_toEndOf="@+id/search_fragment_haircut_icon"
@@ -67,10 +75,7 @@
 
                     <ImageView
                         android:id="@+id/search_fragment_makeup_icon"
-                        android:layout_width="@dimen/icons_size_normal_width"
-                        android:layout_height="@dimen/icons_size_normal_height"
-                        android:layout_margin="@dimen/base_margin_extra_small"
-                        android:background="@drawable/button_grey_stroke_rectangle"
+                        style="@style/ScrollIcons.Margin"
                         android:onClick="@{fragmentCallback::onServiceTypeIconClicked}"
                         android:src="@drawable/ic_makeup"
                         app:layout_constraintStart_toEndOf="@+id/search_fragment_nails_icon"
@@ -79,10 +84,7 @@
 
                     <ImageView
                         android:id="@+id/search_fragment_tattoo_icon"
-                        android:layout_width="@dimen/icons_size_normal_width"
-                        android:layout_height="@dimen/icons_size_normal_height"
-                        android:layout_margin="@dimen/base_margin_extra_small"
-                        android:background="@drawable/button_grey_stroke_rectangle"
+                        style="@style/ScrollIcons.Margin"
                         android:onClick="@{fragmentCallback::onServiceTypeIconClicked}"
                         android:src="@drawable/ic_tattoo"
                         app:layout_constraintStart_toEndOf="@+id/search_fragment_makeup_icon"
@@ -91,10 +93,7 @@
 
                     <ImageView
                         android:id="@+id/search_fragment_barber_icon"
-                        android:layout_width="@dimen/icons_size_normal_width"
-                        android:layout_height="@dimen/icons_size_normal_height"
-                        android:layout_margin="@dimen/base_margin_extra_small"
-                        android:background="@drawable/button_grey_stroke_rectangle"
+                        style="@style/ScrollIcons.Margin"
                         android:onClick="@{fragmentCallback::onServiceTypeIconClicked}"
                         android:src="@drawable/ic_barbershop"
                         app:layout_constraintStart_toEndOf="@+id/search_fragment_tattoo_icon"
@@ -103,10 +102,7 @@
 
                     <ImageView
                         android:id="@+id/search_fragment_fitness_icon"
-                        android:layout_width="@dimen/icons_size_normal_width"
-                        android:layout_height="@dimen/icons_size_normal_height"
-                        android:layout_margin="@dimen/base_margin_extra_small"
-                        android:background="@drawable/button_grey_stroke_rectangle"
+                        style="@style/ScrollIcons.Margin"
                         android:onClick="@{fragmentCallback::onServiceTypeIconClicked}"
                         android:src="@drawable/ic_fitness"
                         app:layout_constraintStart_toEndOf="@+id/search_fragment_barber_icon"
@@ -204,14 +200,12 @@
 
             <TextView
                 android:id="@+id/search_fragment_for"
+                style="@style/BottomHints"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/base_margin_small"
                 android:padding="@dimen/base_padding_small"
                 android:text="@string/title_for"
-                android:textColor="@color/color_base_text"
-                android:textSize="@dimen/base_text_size_medium"
-                android:textStyle="italic"
                 app:layout_constraintBottom_toTopOf="@+id/search_fragment_genders_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -230,34 +224,17 @@
 
             <TextView
                 android:id="@+id/search_fragment_bottom_hint"
+                style="@style/BottomHints"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/base_margin_medium"
                 android:layout_marginTop="@dimen/base_margin_medium"
                 android:layout_marginEnd="@dimen/base_margin_medium"
                 android:layout_marginBottom="@dimen/base_margin_big"
-                android:gravity="center"
                 android:text="@string/app_availability"
-                android:textColor="@color/color_base_text"
-                android:textSize="@dimen/base_text_size_medium"
-                android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="showProgress"
-            type="androidx.databinding.ObservableBoolean" />
-
-        <variable
-            name="fragmentCallback"
-            type="com.beproffer.beproffer.presentation.browsing.search.SearchFragmentCallback" />
-
-    </data>
 </layout>

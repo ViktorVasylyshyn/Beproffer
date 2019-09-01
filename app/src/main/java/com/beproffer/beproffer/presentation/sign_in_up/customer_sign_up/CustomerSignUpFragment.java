@@ -1,7 +1,10 @@
-package com.beproffer.beproffer.presentation.sign_in_up.sign_up;
+package com.beproffer.beproffer.presentation.sign_in_up.customer_sign_up;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,20 +17,18 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.databinding.FragmentSignUpBinding;
+import com.beproffer.beproffer.databinding.CustomerSignUpFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
 import com.beproffer.beproffer.presentation.sign_in_up.SignUpViewModel;
 import com.beproffer.beproffer.util.Const;
 
-public class SignUpFragment extends BaseFragment {
+public class CustomerSignUpFragment extends BaseFragment {
 
-    private FragmentSignUpBinding mBinding;
+    private CustomerSignUpFragmentBinding mBinding;
 
     private SignUpViewModel mSignUpViewModel;
 
-    private String mUserType;
-
-    private final SignUpFragmentCallback mCallback = new SignUpFragmentCallback() {
+    private final CustomerSignUpFragmentCallback mCallback = new CustomerSignUpFragmentCallback() {
         @Override
         public void onSignUpClick() {
             checkDataAndSignUpNewUser();
@@ -46,17 +47,18 @@ public class SignUpFragment extends BaseFragment {
         @Override
         public void denySigningUp() {
             popBackStack();
+            hideKeyboard(requireActivity());
         }
 
         @Override
         public void onShowPasswordClicked(View view) {
             EditText editText = null;
             switch (view.getId()) {
-                case R.id.sign_up_fragment_show_password:
-                    editText = mBinding.signUpPass;
+                case R.id.customer_sign_up_fragment_show_password:
+                    editText = mBinding.customerSignUpPass;
                     break;
-                case R.id.sign_up_fragment_show_password_confirm:
-                    editText = mBinding.signUpPassConfirm;
+                case R.id.customer_sign_up_fragment_show_password_confirm:
+                    editText = mBinding.customerSignUpPassConfirm;
                     break;
                 default:
             }
@@ -68,7 +70,7 @@ public class SignUpFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.customer_sign_up_fragment, container, false);
         mBinding.setLifecycleOwner(this);
         return mBinding.getRoot();
     }
@@ -78,58 +80,37 @@ public class SignUpFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         mBinding.setFragmentCallback(mCallback);
         mBinding.setShowProgress(mShowProgress);
-
-        if (this.getArguments() != null) {
-            mUserType = this.getArguments().getString(Const.USERS, null);
-        } else {
-            showToast(R.string.toast_error_has_occurred);
-            popBackStack();
-        }
-        if (mUserType.equals(Const.CUST) || mUserType.equals(Const.SPEC)) {
-            /*никаих иных значений на фрагмент регистрации, в качестве типа пользователя, поступить не должно*/
-        } else {
-            showToast(R.string.toast_error_has_occurred);
-            popBackStack();
-        }
-        if (mUserType.equals(Const.SPEC)) {
-            mBinding.signUpPhone.setVisibility(View.VISIBLE);
-            mBinding.signUpBottomHint.setText(R.string.hint_specialist_phone_1);
-        }
+        mBinding.customerSignUpTerms.setMovementMethod(LinkMovementMethod.getInstance());
+        mBinding.customerSignUpPrivacyPolicy.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     private void checkDataAndSignUpNewUser() {
         if (!checkInternetConnection()) {
-            showToast(R.string.toast_no_internet_connection);
+            showErrorMessage(R.string.toast_no_internet_connection);
             return;
         }
         if (mProcessing.get()) {
             showToast(R.string.toast_processing);
             return;
         }
-        if (mBinding.signUpName.getText().toString().isEmpty()
-                || mBinding.signUpName.getText().toString().length() < 4) {
-            requestErrorFocus(mBinding.signUpName, R.string.error_message_name_is_too_short);
+        if (mBinding.customerSignUpName.getText().toString().isEmpty()
+                || mBinding.customerSignUpName.getText().toString().length() < 4) {
+            requestErrorFocus(mBinding.customerSignUpName, R.string.error_message_name_is_too_short);
             return;
         }
-        if (mBinding.signUpEmail.getText().toString().isEmpty()) {
-            requestErrorFocus(mBinding.signUpEmail, R.string.error_message_enter_email);
+        if (mBinding.customerSignUpEmail.getText().toString().isEmpty()) {
+            requestErrorFocus(mBinding.customerSignUpEmail, R.string.error_message_enter_email);
             return;
         }
-        if (mBinding.signUpPass.getText().toString().isEmpty()) {
-            requestErrorFocus(mBinding.signUpPass, R.string.error_message_exception_sign_up_weak_password);
+        if (mBinding.customerSignUpPass.getText().toString().isEmpty()) {
+            requestErrorFocus(mBinding.customerSignUpPass, R.string.error_message_exception_sign_up_weak_password);
             return;
         }
-        if (mUserType.equals(Const.SPEC)) {
-            if (checkPhoneDataAccuracy()) {
-                requestErrorFocus(mBinding.signUpPhone, R.string.error_message_wrong_phone_number_format);
-                return;
-            }
-        }
-        if (!mBinding.signUpPass.getText().toString().equals(mBinding.signUpPassConfirm.getText().toString())) {
-            requestErrorFocus(mBinding.signUpPass, R.string.toast_error_password_confirm_failure);
+        if (!mBinding.customerSignUpPass.getText().toString()
+                .equals(mBinding.customerSignUpPassConfirm.getText().toString())) {
+            requestErrorFocus(mBinding.customerSignUpPass, R.string.toast_error_password_confirm_failure);
             return;
         }
-
         if (mSignUpViewModel == null)
             mSignUpViewModel = ViewModelProviders.of(requireActivity()).get(SignUpViewModel.class);
 
@@ -173,31 +154,31 @@ public class SignUpFragment extends BaseFragment {
             hideKeyboard(requireActivity());
         });
 
-        switch (mUserType) {
-            case Const.CUST:
-                mSignUpViewModel.signUpNewUser(mBinding.signUpEmail.getText().toString(),
-                        mBinding.signUpPass.getText().toString(),
-                        mBinding.signUpName.getText().toString(),
-                        mUserType,
-                        null,
-                        null);
-                break;
-            case Const.SPEC:
-                mSignUpViewModel.signUpNewUser(mBinding.signUpEmail.getText().toString(),
-                        mBinding.signUpPass.getText().toString(),
-                        mBinding.signUpName.getText().toString(),
-                        mUserType,
-                        null,
-                        mBinding.signUpPhone.getText().toString());
-        }
+        mSignUpViewModel.signUpNewUser(mBinding.customerSignUpEmail.getText().toString(),
+                mBinding.customerSignUpPass.getText().toString(),
+                mBinding.customerSignUpName.getText().toString(),
+                Const.CUST,
+                null,
+                null);
     }
 
     private void showErrorMessage(int errorMessageId) {
-        mBinding.signUpBottomHint.setText(errorMessageId);
-        mBinding.signUpBottomHint.setTextColor(getResources().getColor(R.color.color_red_alpha_85));
+        mBinding.customerSignUpBottomHint.setText(errorMessageId);
+        mBinding.customerSignUpBottomHint.setTextColor(getResources().getColor(R.color.color_red_alpha_85));
     }
 
-    private boolean checkPhoneDataAccuracy() {
-        return 6 > mBinding.signUpPhone.length() || mBinding.signUpPhone.length() > 13;
+    private void openDoc(int resId) {
+        if (checkInternetConnection()) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(resId)));
+            startActivity(browserIntent);
+        } else {
+            showToast(R.string.toast_no_internet_connection);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        hideKeyboard(requireActivity());
     }
 }

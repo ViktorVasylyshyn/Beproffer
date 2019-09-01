@@ -44,6 +44,7 @@
 
         <TextView
             android:id="@+id/browsing_image_info_vote_top_hint"
+            style="@style/BottomHints"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/profile_image_quarter"
@@ -51,11 +52,7 @@
             android:layout_marginEnd="@dimen/profile_image_quarter"
             android:layout_marginBottom="@dimen/base_margin_small"
             android:background="@drawable/background_rectangle_grey_alpha_85_grey_stroke"
-            android:gravity="center"
             android:padding="@dimen/base_padding_small"
-            android:textColor="@color/color_base_text"
-            android:textSize="@dimen/base_text_size_medium"
-            android:textStyle="italic"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/browsing_image_info_constraint_layout_internal" />
 

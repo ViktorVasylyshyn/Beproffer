@@ -46,6 +46,7 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
         @Override
         public void denyChanges() {
             popBackStack();
+            hideKeyboard(requireActivity());
         }
     };
 
@@ -128,6 +129,7 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
         if (mCurrentUserInfo.getType().equals(Const.SPEC) && mCurrentUserInfo.getSpecialization() == null) {
             showToast(R.string.hint_choose_main_specialization);
             mBinding.editFragmentBottomHint.setText(R.string.hint_choose_main_specialization);
+            hideKeyboard(requireActivity());
             return;
         }
 

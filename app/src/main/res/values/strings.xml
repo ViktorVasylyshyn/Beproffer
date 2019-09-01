@@ -188,7 +188,7 @@
     <string name="toast_no_any_service_items">There are no publications for this request yet. Please, try again later.</string>
     <string name="toast_add_personal_info_first">Please, add information about you to "edit profile" section first.</string>
     <string name="toast_images_for_guest_mode">The images in \'guest\' mode can be repeated. Please, sign up to have a possibility to use browsing history.</string>
-    <string name="toast_not_available_yet">Function not available yet.</string>
+    <string name="toast_not_available_yet">The function is not available at the moment.</string>
 
     <string name="toast_image_size_error_1_5">Please, use image up to 1.5 MB.</string>
     <string name="toast_image_size_error_2">Please, use image up to 2 MB.</string>

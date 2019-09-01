@@ -13,4 +13,47 @@
         <item name="android:popupBackground">@drawable/rectangle_pop_up_menu_background</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
+
+    <style name="BaseEditText">
+        <item name="android:background">@drawable/rectangle_white_background</item>
+        <item name="android:layout_margin">@dimen/base_margin_small</item>
+        <item name="android:padding">@dimen/base_padding_small</item>
+        <item name="android:textSize">@dimen/base_text_size_big</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="BottomHints">
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">@dimen/base_text_size_medium</item>
+        <item name="android:textColor">@color/color_base_text</item>
+    </style>
+
+    <style name="TextButton">
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/button_background_green_stroke_rectangle</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/base_text_size_medium</item>
+    </style>
+
+    <style name="BeprofferTitle">
+        <item name="android:text">@string/app_name_low_case</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/base_text_size_huge</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ScrollIcons">
+        <item name="android:layout_width">@dimen/icons_size_normal_height</item>
+        <item name="android:layout_height">@dimen/icons_size_normal_height</item>
+    </style>
+
+    <style name="ScrollIcons.Padding">
+        <item name="android:padding">@dimen/base_padding_small</item>
+    </style>
+
+    <style name="ScrollIcons.Margin">
+        <item name="android:background">@drawable/button_grey_stroke_rectangle</item>
+        <item name="android:layout_margin">@dimen/base_margin_extra_small</item>
+    </style>
 </resources>

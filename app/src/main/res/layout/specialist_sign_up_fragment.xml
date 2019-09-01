@@ -13,7 +13,7 @@
 
         <variable
             name="fragmentCallback"
-            type="com.beproffer.beproffer.presentation.sign_in_up.sign_up.SignUpFragmentCallback" />
+            type="com.beproffer.beproffer.presentation.sign_in_up.specialist_sign_up.SpecialistSignUpFragmentCallback" />
 
     </data>
 
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_background_grey"
-        tools:context=".presentation.sign_in_up.sign_up.SignUpFragment">
+        tools:context=".presentation.sign_in_up.specialist_sign_up.SpecialistSignUpFragment">
 
         <ImageView
             android:layout_width="@dimen/bnb_icon_size"
@@ -34,7 +34,7 @@
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/sign_up_logo"
+            android:id="@+id/specialist_sign_up_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name_low_case"
@@ -55,105 +55,97 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
-        <EditText
-            android:id="@+id/sign_up_name"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/specialist_sign_up_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_small"
-            android:background="@drawable/rectangle_white_background"
+            android:text="@string/register_as_specialist"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_big"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_logo" />
+
+        <EditText
+            android:id="@+id/specialist_sign_up_name"
+            style="@style/BaseEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:hint="@string/name_infield"
             android:maxLength="30"
-            android:maxLines="1"
-            android:padding="@dimen/base_padding_small"
-            android:textSize="@dimen/base_text_size_big"
-            app:layout_constraintTop_toBottomOf="@+id/sign_up_logo"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_title"
             tools:ignore="Autofill,TextFields" />
 
         <EditText
-            android:id="@+id/sign_up_email"
+            android:id="@+id/specialist_sign_up_email"
+            style="@style/BaseEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
-            android:background="@drawable/rectangle_white_background"
             android:hint="@string/email_infield"
             android:inputType="textEmailAddress"
             android:maxLength="35"
-            android:maxLines="1"
-            android:padding="@dimen/base_padding_small"
-            android:textSize="@dimen/base_text_size_big"
-            app:layout_constraintTop_toBottomOf="@+id/sign_up_name"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_name"
             tools:ignore="Autofill,TextFields" />
 
         <EditText
-            android:id="@+id/sign_up_phone"
+            android:id="@+id/specialist_sign_up_phone"
+            style="@style/BaseEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
-            android:background="@drawable/rectangle_white_background"
             android:hint="@string/phone_infield"
             android:inputType="phone"
             android:maxLength="15"
-            android:maxLines="1"
-            android:padding="@dimen/base_padding_small"
-            android:textSize="@dimen/base_text_size_big"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@+id/sign_up_email"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_email"
             tools:ignore="Autofill" />
 
         <EditText
-            android:id="@+id/sign_up_pass"
+            android:id="@+id/specialist_sign_up_pass"
+            style="@style/BaseEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
-            android:background="@drawable/rectangle_white_background"
             android:hint="@string/password_infield"
             android:inputType="textPassword"
             android:maxLength="15"
-            android:maxLines="1"
-            android:padding="@dimen/base_padding_small"
-            android:textSize="@dimen/base_text_size_big"
-            app:layout_constraintTop_toBottomOf="@+id/sign_up_phone"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_phone"
             tools:ignore="Autofill,TextFields" />
 
         <ImageView
-            android:id="@+id/sign_up_fragment_show_password"
+            android:id="@+id/specialist_sign_up_fragment_show_password"
             android:layout_width="@dimen/bnb_icon_size"
             android:layout_height="@dimen/bnb_icon_size"
             android:onClick="@{fragmentCallback::onShowPasswordClicked}"
             android:src="@drawable/ic_pass_hide"
-            app:layout_constraintBottom_toBottomOf="@+id/sign_up_pass"
-            app:layout_constraintEnd_toEndOf="@id/sign_up_pass"
-            app:layout_constraintTop_toTopOf="@+id/sign_up_pass"
+            app:layout_constraintBottom_toBottomOf="@+id/specialist_sign_up_pass"
+            app:layout_constraintEnd_toEndOf="@id/specialist_sign_up_pass"
+            app:layout_constraintTop_toTopOf="@+id/specialist_sign_up_pass"
             tools:ignore="ContentDescription" />
 
         <EditText
-            android:id="@+id/sign_up_pass_confirm"
+            android:id="@+id/specialist_sign_up_pass_confirm"
+            style="@style/BaseEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
-            android:background="@drawable/rectangle_white_background"
             android:hint="@string/password_repeat_infield"
             android:inputType="textPassword"
             android:maxLength="15"
-            android:maxLines="1"
-            android:padding="@dimen/base_padding_small"
-            android:textSize="@dimen/base_text_size_big"
-            app:layout_constraintTop_toBottomOf="@+id/sign_up_pass"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_pass"
             tools:ignore="Autofill,TextFields" />
 
         <ImageView
-            android:id="@+id/sign_up_fragment_show_password_confirm"
+            android:id="@+id/specialist_sign_up_fragment_show_password_confirm"
             android:layout_width="@dimen/bnb_icon_size"
             android:layout_height="@dimen/bnb_icon_size"
             android:onClick="@{fragmentCallback::onShowPasswordClicked}"
             android:src="@drawable/ic_pass_hide"
-            app:layout_constraintBottom_toBottomOf="@+id/sign_up_pass_confirm"
-            app:layout_constraintEnd_toEndOf="@id/sign_up_pass_confirm"
-            app:layout_constraintTop_toTopOf="@+id/sign_up_pass_confirm"
+            app:layout_constraintBottom_toBottomOf="@+id/specialist_sign_up_pass_confirm"
+            app:layout_constraintEnd_toEndOf="@id/specialist_sign_up_pass_confirm"
+            app:layout_constraintTop_toTopOf="@+id/specialist_sign_up_pass_confirm"
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/sign_up_agree_to"
+            android:id="@+id/specialist_sign_up_agree_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_extra_small"
@@ -162,10 +154,10 @@
             android:textSize="@dimen/base_text_size_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_up_pass_confirm" />
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_pass_confirm" />
 
         <TextView
-            android:id="@+id/sign_up_terms"
+            android:id="@+id/specialist_sign_up_terms"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_extra_small"
@@ -175,10 +167,10 @@
             android:textSize="@dimen/base_text_size_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_up_agree_to" />
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_agree_to" />
 
         <TextView
-            android:id="@+id/sign_up_privacy_policy"
+            android:id="@+id/specialist_sign_up_privacy_policy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_extra_small"
@@ -188,10 +180,10 @@
             android:textSize="@dimen/base_text_size_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_up_terms" />
+            app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_terms" />
 
         <ProgressBar
-            android:id="@+id/sign_up_progress_bar"
+            android:id="@+id/specialist_sign_up_progress_bar"
             android:layout_width="@dimen/profile_image_half"
             android:layout_height="@dimen/profile_image_half"
             android:layout_gravity="center"
@@ -203,7 +195,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/sign_up_hint_availability"
+            android:id="@+id/specialist_sign_up_hint_availability"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base_margin_small"
@@ -219,19 +211,18 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/sign_up_bottom_hint"
+            android:id="@+id/specialist_sign_up_bottom_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/base_margin_medium"
             android:gravity="center"
-            android:text="@string/hint_any_strong_password"
+            android:text="@string/hint_specialist_phone_1"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_medium"
             android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@+id/sign_up_hint_availability"
+            app:layout_constraintBottom_toTopOf="@+id/specialist_sign_up_hint_availability"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

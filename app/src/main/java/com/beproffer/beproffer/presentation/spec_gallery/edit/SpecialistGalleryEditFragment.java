@@ -64,11 +64,17 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
         @Override
         public void denyChanges() {
             popBackStack();
+            hideKeyboard(requireActivity());
         }
 
         @Override
         public void onTermsClick() {
-            openDoc(R.string.href_terms_of_service);
+            if (checkInternetConnection()) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.href_terms_of_service)));
+                startActivity(browserIntent);
+            } else {
+                showToast(R.string.toast_no_internet_connection);
+            }
         }
     };
 

@@ -273,11 +273,6 @@ public class UserDataRepository {
             return mServiceItemsListLiveData;
         /*пользователь хочет просмотреть данные, которые он еще не видел*/
         mShowProgress.setValue(true);
-        /*очистить список, если раньше просматривались данные другого специалиста*/
-        if (!mServiceItemsList.isEmpty()) {
-            mServiceItemsList.clear();
-            mServiceItemsListLiveData.setValue(mServiceItemsList);
-        }
         mDatabaseRef.child(Const.USERS)
                 .child(Const.SPEC)
                 .child(specialistId)
