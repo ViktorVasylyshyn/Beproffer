@@ -1,6 +1,7 @@
 package com.beproffer.beproffer.presentation.contacts.confirmed;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -170,7 +171,13 @@ public class ContactsFragment extends BaseUserInfoFragment {
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.confirmed_contact_menu_call:
-                    startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + item.getPhone())));
+                    /*на случай, если приложение установлено на устройство, с которого нельзя позвонить*/
+                    PackageManager pm = requireActivity().getPackageManager();
+                    if (pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
+                        startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + item.getPhone())));
+                    } else {
+                        showToast(R.string.toast_telephony_not_available);
+                    }
                     break;
                 case R.id.confirmed_contact_menu_gallery:
                     Bundle specialistId = new Bundle();
