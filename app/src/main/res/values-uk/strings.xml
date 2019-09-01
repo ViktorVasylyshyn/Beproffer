@@ -190,6 +190,8 @@
     <string name="toast_image_size_error_1_5">Будь ласка, оберіть зображення менше ніж 1.5 МБ.</string>
     <string name="toast_image_size_error_2">Будь ласка, оберіть зображення менше ніж 2 МБ.</string>
 
+    <string name="toast_telephony_not_available">Здійснення дзвінків є неможливим для даного пристрою.</string>
+
 
     <string name="error_message_exception_sign_up_weak_password">Захистіть свій профайл більш надійним паролем.</string>
     <string name="error_message_exception_sign_up_invalid_credentials">Адреса єлектронної пошти має невірний формат.</string>
