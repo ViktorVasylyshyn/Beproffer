@@ -346,7 +346,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
                 if (ImageUtil.isImageSizeCorrect(getContext(), mResultUri, Const.SERVICE_IMAGE_MAX_SIZE)) {
                     mUpdatedImageItem.setUrl(mResultUri.toString());
                 } else {
-                    showToast(R.string.toast_image_size_error_2);
+                    showToast(R.string.toast_image_size_error_6);
                 }
             } catch (NullPointerException e) {
                 Crashlytics.getInstance().crash();

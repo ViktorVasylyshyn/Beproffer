@@ -194,9 +194,9 @@
     <string name="toast_not_available_yet">The function is not available at the moment.</string>
     <string name="toast_telephony_not_available">Telephony isn\'t available for current device.</string>
     <string name="toast_app_not_found_on_device">Target app not found on device.</string>
-
-    <string name="toast_image_size_error_1_5">Please, use image up to 1.5 MB.</string>
-    <string name="toast_image_size_error_2">Please, use image up to 2 MB.</string>
+    <string name="toast_close_the_app">Please, tap \'Back\' onсe more, to close the app.</string>
+    <string name="toast_image_size_error_4">Please, use image up to 4 MB.</string>
+    <string name="toast_image_size_error_6">Please, use image up to 6 MB.</string>
 
     <string name="error_message_exception_sign_up_weak_password">Please, create more complicated password.</string>
     <string name="error_message_exception_sign_up_invalid_credentials">Invalid credentials.</string>

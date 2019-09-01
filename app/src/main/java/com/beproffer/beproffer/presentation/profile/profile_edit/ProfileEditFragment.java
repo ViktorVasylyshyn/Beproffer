@@ -228,7 +228,7 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
                     mCurrentUserInfo.setProfileImageUrl(mResultUri.toString());
                     mBinding.setUserInfo(mCurrentUserInfo);
                 } else {
-                    showToast(R.string.toast_image_size_error_1_5);
+                    showToast(R.string.toast_image_size_error_4);
                 }
             } catch (NullPointerException e) {
                 showToast(R.string.toast_error_has_occurred);
