@@ -47,6 +47,7 @@ public class SpecialistSignUpFragment extends BaseFragment {
         @Override
         public void denySigningUp() {
             popBackStack();
+            hideKeyboard(requireActivity());
         }
 
         @Override

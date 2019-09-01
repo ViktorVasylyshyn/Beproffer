@@ -40,10 +40,7 @@
             android:id="@+id/specialist_edit_gallery_item_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name_low_case"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/base_text_size_huge"
-            android:textStyle="bold"
+            style="@style/BeprofferTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -86,9 +83,7 @@
 
                 <ImageView
                     android:id="@+id/specialist_edit_gallery_item_haircut_icon"
-                    android:layout_width="@dimen/icons_size_normal_height"
-                    android:layout_height="@dimen/icons_size_normal_height"
-                    android:padding="@dimen/base_padding_small"
+                    style="@style/ScrollIcons.Padding"
                     android:onClick="@{callback::onTypeButtonClick}"
                     android:src="@drawable/ic_haircut"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -98,9 +93,7 @@
 
                 <ImageView
                     android:id="@+id/specialist_edit_gallery_item_nails_icon"
-                    android:layout_width="@dimen/icons_size_normal_height"
-                    android:layout_height="@dimen/icons_size_normal_height"
-                    android:padding="@dimen/base_padding_small"
+                    style="@style/ScrollIcons.Padding"
                     android:onClick="@{callback::onTypeButtonClick}"
                     android:src="@drawable/ic_nails"
                     app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_haircut_icon"
@@ -109,9 +102,7 @@
 
                 <ImageView
                     android:id="@+id/specialist_edit_gallery_item_makeup_icon"
-                    android:layout_width="@dimen/icons_size_normal_height"
-                    android:layout_height="@dimen/icons_size_normal_height"
-                    android:padding="@dimen/base_padding_small"
+                    style="@style/ScrollIcons.Padding"
                     android:onClick="@{callback::onTypeButtonClick}"
                     android:src="@drawable/ic_makeup"
                     app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_nails_icon"
@@ -120,9 +111,7 @@
 
                 <ImageView
                     android:id="@+id/specialist_edit_gallery_item_barber_icon"
-                    android:layout_width="@dimen/icons_size_normal_height"
-                    android:layout_height="@dimen/icons_size_normal_height"
-                    android:padding="@dimen/base_padding_small"
+                    style="@style/ScrollIcons.Padding"
                     android:onClick="@{callback::onTypeButtonClick}"
                     android:src="@drawable/ic_barbershop"
                     app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_makeup_icon"
@@ -131,9 +120,7 @@
 
                 <ImageView
                     android:id="@+id/specialist_edit_gallery_item_tattoo_icon"
-                    android:layout_width="@dimen/icons_size_normal_height"
-                    android:layout_height="@dimen/icons_size_normal_height"
-                    android:padding="@dimen/base_padding_small"
+                    style="@style/ScrollIcons.Padding"
                     android:onClick="@{callback::onTypeButtonClick}"
                     android:src="@drawable/ic_tattoo"
                     app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_barber_icon"
@@ -142,9 +129,7 @@
 
                 <ImageView
                     android:id="@+id/specialist_edit_gallery_item_fitness_icon"
-                    android:layout_width="@dimen/icons_size_normal_height"
-                    android:layout_height="@dimen/icons_size_normal_height"
-                    android:padding="@dimen/base_padding_small"
+                    style="@style/ScrollIcons.Padding"
                     android:onClick="@{callback::onTypeButtonClick}"
                     android:src="@drawable/ic_fitness"
                     app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_tattoo_icon"
@@ -183,9 +168,7 @@
 
                 <ImageView
                     android:id="@+id/specialist_edit_gallery_item_duration_30_min_icon"
-                    android:layout_width="@dimen/icons_size_normal_height"
-                    android:layout_height="@dimen/icons_size_normal_height"
-                    android:padding="@dimen/base_padding_small"
+                    style="@style/ScrollIcons.Padding"
                     android:onClick="@{callback::onDurationButtonClick}"
                     android:src="@drawable/ic_duration_30_min"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -195,9 +178,7 @@
 
                 <ImageView
                     android:id="@+id/specialist_edit_gallery_item_duration_45_min_icon"
-                    android:layout_width="@dimen/icons_size_normal_height"
-                    android:layout_height="@dimen/icons_size_normal_height"
-                    android:padding="@dimen/base_padding_small"
+                    style="@style/ScrollIcons.Padding"
                     android:onClick="@{callback::onDurationButtonClick}"
                     android:src="@drawable/ic_duration_45_min"
                     app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_duration_30_min_icon"
@@ -206,9 +187,7 @@
 
                 <ImageView
                     android:id="@+id/specialist_edit_gallery_item_duration_60_min_icon"
-                    android:layout_width="@dimen/icons_size_normal_height"
-                    android:layout_height="@dimen/icons_size_normal_height"
-                    android:padding="@dimen/base_padding_small"
+                    style="@style/ScrollIcons.Padding"
                     android:onClick="@{callback::onDurationButtonClick}"
                     android:src="@drawable/ic_duration_60_min"
                     app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_duration_45_min_icon"
@@ -217,9 +196,7 @@
 
                 <ImageView
                     android:id="@+id/specialist_edit_gallery_item_duration_90_min_icon"
-                    android:layout_width="@dimen/icons_size_normal_height"
-                    android:layout_height="@dimen/icons_size_normal_height"
-                    android:padding="@dimen/base_padding_small"
+                    style="@style/ScrollIcons.Padding"
                     android:onClick="@{callback::onDurationButtonClick}"
                     android:src="@drawable/ic_duration_90_min"
                     app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_duration_60_min_icon"
@@ -228,9 +205,7 @@
 
                 <ImageView
                     android:id="@+id/specialist_edit_gallery_item_duration_120_min_icon"
-                    android:layout_width="@dimen/icons_size_normal_height"
-                    android:layout_height="@dimen/icons_size_normal_height"
-                    android:padding="@dimen/base_padding_small"
+                    style="@style/ScrollIcons.Padding"
                     android:onClick="@{callback::onDurationButtonClick}"
                     android:src="@drawable/ic_duration_120_min"
                     app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_duration_90_min_icon"
@@ -324,7 +299,7 @@
         <ScrollView
             android:id="@+id/specialist_edit_gallery_item_scroll"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/specialist_edit_fragment_image_height"
+            android:layout_height="@dimen/list_item_image_height"
             android:layout_marginStart="@dimen/base_margin_medium"
             android:layout_marginEnd="@dimen/base_margin_medium"
             android:layout_marginBottom="@dimen/base_margin_small"
@@ -458,7 +433,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

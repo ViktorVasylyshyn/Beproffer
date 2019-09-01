@@ -64,6 +64,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
         @Override
         public void denyChanges() {
             popBackStack();
+            hideKeyboard(requireActivity());
         }
 
         @Override

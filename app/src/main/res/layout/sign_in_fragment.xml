@@ -14,54 +14,40 @@
             name="fragmentCallback"
             type="com.beproffer.beproffer.presentation.sign_in_up.sign_in.SingInFragmentCallback" />
     </data>
-  
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.sign_in_up.sign_in.SignInFragment">
 
         <TextView
             android:id="@+id/sign_in_fragment_sign_up_logo"
+            style="@style/BeprofferTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name_low_case"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/base_text_size_huge"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/sign_in_fragment_email"
+            style="@style/BaseEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/base_margin_small"
-            android:layout_marginTop="@dimen/base_margin_small"
-            android:layout_marginEnd="@dimen/base_margin_small"
-            android:background="@drawable/rectangle_white_background"
             android:hint="@string/email_infield"
             android:inputType="textEmailAddress"
             android:maxLength="35"
-            android:maxLines="1"
-            android:padding="@dimen/base_padding_small"
-            android:textSize="@dimen/base_text_size_big"
             app:layout_constraintTop_toBottomOf="@id/sign_in_fragment_sign_up_logo"
             tools:ignore="Autofill" />
 
         <EditText
             android:id="@+id/sign_in_fragment_password"
+            style="@style/BaseEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
-            android:background="@drawable/rectangle_white_background"
             android:hint="@string/password_infield"
             android:inputType="textPassword"
             android:maxLength="15"
-            android:maxLines="1"
-            android:padding="@dimen/base_padding_small"
-            android:textSize="@dimen/base_text_size_big"
             app:layout_constraintTop_toBottomOf="@+id/sign_in_fragment_email"
             tools:ignore="Autofill" />
 
@@ -90,18 +76,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sign_in_fragment_password" />
 
-        <Button
+        <TextView
+            style="@style/TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="@dimen/base_margin_medium"
-            android:background="@drawable/button_background_green_stroke_rectangle"
             android:onClick="@{(view) -> fragmentCallback.onSignInClick()}"
-            android:paddingStart="@dimen/base_padding_small"
-            android:paddingEnd="@dimen/base_padding_small"
+            android:paddingStart="@dimen/base_padding_medium"
+            android:paddingTop="@dimen/base_padding_medium"
+            android:paddingEnd="@dimen/base_padding_medium"
+            android:paddingBottom="@dimen/base_padding_medium"
             android:text="@string/common_signin_button_text"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/base_text_size_medium"
+            android:textAllCaps="true"
             app:layout_constraintBottom_toTopOf="@+id/sign_in_create_account_hint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -133,35 +120,29 @@
 
             <TextView
                 android:id="@+id/sign_in_fragment_customer_sign_up"
+                style="@style/TextButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/base_margin_small"
                 android:layout_marginEnd="@dimen/base_margin_small"
                 android:layout_weight="1"
-                android:background="@drawable/button_background_green_stroke_rectangle"
-                android:gravity="center"
                 android:onClick="@{(view) -> fragmentCallback.onCustomerSignUpClick()}"
                 android:paddingTop="@dimen/base_padding_medium"
                 android:paddingBottom="@dimen/base_padding_medium"
-                android:text="@string/title_customer_registration"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/base_text_size_medium" />
+                android:text="@string/title_customer_registration" />
 
             <TextView
                 android:id="@+id/sign_in_fragment_specialist_sign_up"
+                style="@style/TextButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/base_margin_small"
                 android:layout_marginEnd="@dimen/base_margin_small"
                 android:layout_weight="1"
-                android:background="@drawable/button_background_green_stroke_rectangle"
-                android:gravity="center"
                 android:onClick="@{(view) -> fragmentCallback.onSpecialistSignUpClick()}"
                 android:paddingTop="@dimen/base_padding_medium"
                 android:paddingBottom="@dimen/base_padding_medium"
-                android:text="@string/title_specialist_registration"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/base_text_size_medium" />
+                android:text="@string/title_specialist_registration" />
 
         </LinearLayout>
 
@@ -204,31 +185,25 @@
 
         <TextView
             android:id="@+id/sign_in_bottom_hint_1"
+            style="@style/BottomHints"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base_margin_small"
             android:layout_marginEnd="@dimen/base_margin_small"
-            android:gravity="center"
             android:padding="@dimen/base_padding_small"
             android:text="@string/hint_any_browsing_history"
-            android:textColor="@color/color_base_text"
-            android:textSize="@dimen/base_text_size_medium"
-            android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@+id/sign_in_bottom_hint" />
 
         <TextView
             android:id="@+id/sign_in_bottom_hint"
+            style="@style/BottomHints"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base_margin_small"
             android:layout_marginEnd="@dimen/base_margin_small"
             android:layout_marginBottom="@dimen/base_margin_small"
-            android:gravity="center"
             android:padding="@dimen/base_padding_small"
             android:text="@string/app_availability"
-            android:textColor="@color/color_base_text"
-            android:textSize="@dimen/base_text_size_medium"
-            android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

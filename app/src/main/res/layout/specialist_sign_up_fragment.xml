@@ -17,8 +17,7 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_background_grey"
@@ -71,60 +70,44 @@
 
         <EditText
             android:id="@+id/specialist_sign_up_name"
+            style="@style/BaseEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
-            android:background="@drawable/rectangle_white_background"
             android:hint="@string/name_infield"
             android:maxLength="30"
-            android:maxLines="1"
-            android:padding="@dimen/base_padding_small"
-            android:textSize="@dimen/base_text_size_big"
             app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_title"
             tools:ignore="Autofill,TextFields" />
 
         <EditText
             android:id="@+id/specialist_sign_up_email"
+            style="@style/BaseEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
-            android:background="@drawable/rectangle_white_background"
             android:hint="@string/email_infield"
             android:inputType="textEmailAddress"
             android:maxLength="35"
-            android:maxLines="1"
-            android:padding="@dimen/base_padding_small"
-            android:textSize="@dimen/base_text_size_big"
             app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_name"
             tools:ignore="Autofill,TextFields" />
 
         <EditText
             android:id="@+id/specialist_sign_up_phone"
+            style="@style/BaseEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
-            android:background="@drawable/rectangle_white_background"
             android:hint="@string/phone_infield"
             android:inputType="phone"
             android:maxLength="15"
-            android:maxLines="1"
-            android:padding="@dimen/base_padding_small"
-            android:textSize="@dimen/base_text_size_big"
             app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_email"
             tools:ignore="Autofill" />
 
         <EditText
             android:id="@+id/specialist_sign_up_pass"
+            style="@style/BaseEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
-            android:background="@drawable/rectangle_white_background"
             android:hint="@string/password_infield"
             android:inputType="textPassword"
             android:maxLength="15"
-            android:maxLines="1"
-            android:padding="@dimen/base_padding_small"
-            android:textSize="@dimen/base_text_size_big"
             app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_phone"
             tools:ignore="Autofill,TextFields" />
 
@@ -141,16 +124,12 @@
 
         <EditText
             android:id="@+id/specialist_sign_up_pass_confirm"
+            style="@style/BaseEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
-            android:background="@drawable/rectangle_white_background"
             android:hint="@string/password_repeat_infield"
             android:inputType="textPassword"
             android:maxLength="15"
-            android:maxLines="1"
-            android:padding="@dimen/base_padding_small"
-            android:textSize="@dimen/base_text_size_big"
             app:layout_constraintTop_toBottomOf="@+id/specialist_sign_up_pass"
             tools:ignore="Autofill,TextFields" />
 
@@ -246,5 +225,4 @@
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-  
 </layout>

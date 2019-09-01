@@ -47,10 +47,7 @@
             android:id="@+id/edit_fragment_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name_low_case"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/base_text_size_huge"
-            android:textStyle="bold"
+            style="@style/BeprofferTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -155,9 +152,7 @@
 
                 <ImageView
                     android:id="@+id/edit_fragment_haircut_icon"
-                    android:layout_width="@dimen/icons_size_normal_width"
-                    android:layout_height="@dimen/icons_size_normal_height"
-                    android:layout_margin="@dimen/base_margin_extra_small"
+                    style="@style/ScrollIcons.Margin"
                     android:background="@drawable/button_background_grey_stroke_rectangle"
                     android:onClick="@{callback::onSpecialistTypeIconClick}"
                     android:src="@drawable/ic_haircut"
@@ -167,9 +162,7 @@
 
                 <ImageView
                     android:id="@+id/edit_fragment_nails_icon"
-                    android:layout_width="@dimen/icons_size_normal_width"
-                    android:layout_height="@dimen/icons_size_normal_height"
-                    android:layout_margin="@dimen/base_margin_extra_small"
+                    style="@style/ScrollIcons.Margin"
                     android:background="@drawable/button_background_grey_stroke_rectangle"
                     android:onClick="@{callback::onSpecialistTypeIconClick}"
                     android:src="@drawable/ic_nails"
@@ -179,9 +172,7 @@
 
                 <ImageView
                     android:id="@+id/edit_fragment_makeup_icon"
-                    android:layout_width="@dimen/icons_size_normal_width"
-                    android:layout_height="@dimen/icons_size_normal_height"
-                    android:layout_margin="@dimen/base_margin_extra_small"
+                    style="@style/ScrollIcons.Margin"
                     android:background="@drawable/button_background_grey_stroke_rectangle"
                     android:onClick="@{callback::onSpecialistTypeIconClick}"
                     android:src="@drawable/ic_makeup"
@@ -191,9 +182,7 @@
 
                 <ImageView
                     android:id="@+id/edit_fragment_tattoo_icon"
-                    android:layout_width="@dimen/icons_size_normal_width"
-                    android:layout_height="@dimen/icons_size_normal_height"
-                    android:layout_margin="@dimen/base_margin_extra_small"
+                    style="@style/ScrollIcons.Margin"
                     android:background="@drawable/button_background_grey_stroke_rectangle"
                     android:onClick="@{callback::onSpecialistTypeIconClick}"
                     android:src="@drawable/ic_tattoo"
@@ -203,9 +192,7 @@
 
                 <ImageView
                     android:id="@+id/edit_fragment_barber_icon"
-                    android:layout_width="@dimen/icons_size_normal_width"
-                    android:layout_height="@dimen/icons_size_normal_height"
-                    android:layout_margin="@dimen/base_margin_extra_small"
+                    style="@style/ScrollIcons.Margin"
                     android:background="@drawable/button_background_grey_stroke_rectangle"
                     android:onClick="@{callback::onSpecialistTypeIconClick}"
                     android:src="@drawable/ic_barbershop"
@@ -215,9 +202,7 @@
 
                 <ImageView
                     android:id="@+id/edit_fragment_fitness_icon"
-                    android:layout_width="@dimen/icons_size_normal_width"
-                    android:layout_height="@dimen/icons_size_normal_height"
-                    android:layout_margin="@dimen/base_margin_extra_small"
+                    style="@style/ScrollIcons.Margin"
                     android:background="@drawable/button_background_grey_stroke_rectangle"
                     android:onClick="@{callback::onSpecialistTypeIconClick}"
                     android:src="@drawable/ic_fitness"
@@ -274,21 +259,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <TextView
             android:id="@+id/edit_fragment_bottom_hint"
+            style="@style/BottomHints"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base_margin_small"
             android:layout_marginEnd="@dimen/base_margin_small"
-            android:layout_marginBottom="@dimen/base_margin_medium"
-            android:gravity="center"
-            android:textColor="@color/color_base_text"
-            android:textSize="@dimen/base_text_size_medium"
-            android:textStyle="italic"
+            android:layout_marginBottom="@dimen/base_margin_small"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </layout>
