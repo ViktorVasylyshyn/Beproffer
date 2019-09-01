@@ -1,5 +1,6 @@
 package com.beproffer.beproffer.presentation.info;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,10 @@ public class InfoFragment extends BaseUserInfoFragment {
 
         @Override
         public void onTelegramClicked() {
+            if (!isAppInstalled(R.string.package_id_telegram)) {
+                showToast(R.string.toast_app_not_found_on_device);
+                return;
+            }
             if (mCurrentUserInfo != null && mCurrentUserInfo.getType().equals(Const.SPEC)) {
                 openDoc(R.string.href_telegram_chat_specialists);
             } else {
@@ -45,6 +50,10 @@ public class InfoFragment extends BaseUserInfoFragment {
 
         @Override
         public void onViberClicked() {
+            if (!isAppInstalled(R.string.package_id_viber)) {
+                showToast(R.string.toast_app_not_found_on_device);
+                return;
+            }
             if (mCurrentUserInfo != null && mCurrentUserInfo.getType().equals(Const.SPEC)) {
                 openDoc(R.string.href_viber_chat_specialists);
             } else {
@@ -61,6 +70,17 @@ public class InfoFragment extends BaseUserInfoFragment {
             }
         }
     };
+
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    private boolean isAppInstalled(int uriId) {
+        PackageManager pm = requireActivity().getPackageManager();
+        try {
+            pm.getPackageInfo(getResources().getString(uriId), PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

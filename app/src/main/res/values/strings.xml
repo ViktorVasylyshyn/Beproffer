@@ -37,7 +37,7 @@
     <string name="hint_specialist_add_more_images">Add more images to your gallery, to find more customers.</string>
     <string name="hint_outfield_confirm">confirm</string>
     <string name="hint_outfield_deny">deny</string>
-    <string name="hint_join_us_on_social">Join us in social networks. Share your impressions and wishes. The links to our social networks are in the "description" section.</string>
+    <string name="hint_join_us_on_social">Join us in social networks. Share your impressions and wishes. The links to our social networks are in the "info(i)" section.</string>
     <string name="hint_wait_for_confirmation">Wait until the request is confirmed by the specialist. It\'ll appear in your contacts\' list.</string>
     <string name="hint_choose_main_specialization">Please, choose your main specialization.</string>
 
@@ -57,6 +57,9 @@
     <string name="href_viber_chat_customers">https://invite.viber.com/?g2=AQATP13AdMH6M0oUzCUTcg75bBcL4qcWS72dKYPVLOL1fqTuHOB%2FXbsw%2BrHvZSLH</string>
     <string name="href_viber_chat_specialists">https://invite.viber.com/?g2=AQAJVtpDxpdMMEoU3JqJjwNDXuNOM0GnZu%2FDu82uths%2FRhzGMfzEX7OChNW967CM</string>
     <string name="href_facebook_page">fb://page/102981521053885</string>
+
+    <string name="package_id_telegram">org.telegram.messenger</string>
+    <string name="package_id_viber">com.viber.voip</string>
 
 
     <!--Titles-->
@@ -190,6 +193,7 @@
     <string name="toast_images_for_guest_mode">The images in \'guest\' mode can be repeated. Please, sign up to have a possibility to use browsing history.</string>
     <string name="toast_not_available_yet">The function is not available at the moment.</string>
     <string name="toast_telephony_not_available">Telephony isn\'t available for current device.</string>
+    <string name="toast_app_not_found_on_device">Target app not found on device.</string>
 
     <string name="toast_image_size_error_1_5">Please, use image up to 1.5 MB.</string>
     <string name="toast_image_size_error_2">Please, use image up to 2 MB.</string>
