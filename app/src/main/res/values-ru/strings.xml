@@ -189,12 +189,11 @@
     <string name="toast_add_personal_info_first">Пожалуйста, добавьте информацию о себе в разделе "редактировать профайл", сначала.</string>
     <string name="toast_images_for_guest_mode">Для гостей, изображения могут повторяться. Пожалуйста, зарегистрируйтесь, чтобы иметь возможность использовать историю просмотров.</string>
     <string name="toast_not_available_yet">Пока не доступно.</string>
-
     <string name="toast_telephony_not_available">Совершение звонков недуступно для данного устройства.</string>
     <string name="toast_app_not_found_on_device">Целевое приложение на устройстве не обнаружено.</string>
-
-    <string name="toast_image_size_error_1_5">Пожалуйста, используйте изображение меньше чем 2 МБ.</string>
-    <string name="toast_image_size_error_2">Пожалуйста, используйте изображение меньше чем 2 МБ.</string>
+    <string name="toast_close_the_app">Нажмите \'Назад\' еще раз, чтобы закрыть приложение.</string>
+    <string name="toast_image_size_error_4">Пожалуйста, используйте изображение меньше чем 4 МБ.</string>
+    <string name="toast_image_size_error_6">Пожалуйста, используйте изображение меньше чем 6 МБ.</string>
 
 
     <string name="error_message_exception_sign_up_weak_password">Придумайте более надежный пароль.</string>

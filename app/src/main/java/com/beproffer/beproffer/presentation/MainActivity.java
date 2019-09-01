@@ -1,6 +1,7 @@
 package com.beproffer.beproffer.presentation;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import com.beproffer.beproffer.presentation.browsing.BrowsingFragment;
 import com.beproffer.beproffer.presentation.contacts.confirmed.ContactsFragment;
 import com.beproffer.beproffer.presentation.profile.profile.ProfileFragment;
 import com.beproffer.beproffer.presentation.sign_in_up.sign_in.SignInFragment;
+import com.beproffer.beproffer.util.Const;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
         if (!hasInternetConnection(this)) {
-            Toast.makeText(this, R.string.toast_no_internet_connection, Toast.LENGTH_SHORT).show();
+            showToast(R.string.toast_no_internet_connection);
             return false;
         }
         Fragment targetFragment;
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                     targetFragment = new ContactsFragment();
                 } else {
-                    Toast.makeText(this, R.string.toast_available_for_registered, Toast.LENGTH_LONG).show();
+                    showToast(R.string.toast_available_for_registered);
                     return false;
                 }
                 break;
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private final BottomNavigationView.OnNavigationItemReselectedListener mOnNavigationItemReselectedListener = item -> {
-                /*Повторные нажатия не должны ничего делать*/
+        /*Повторные нажатия не должны ничего делать*/
     };
 
     @Override
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         performNavigation(new BrowsingFragment(), true, false, false, null);
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            Toast.makeText(this, R.string.toast_guest_mode, Toast.LENGTH_LONG).show();
+            showToast(R.string.toast_guest_mode);
         }
     }
 
@@ -123,8 +125,8 @@ public class MainActivity extends AppCompatActivity {
             fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
         /*addToCont - используется добавлении в контейнер двух фрагментов: BrowsingItemInfoFragment
-        * & SearchFragment. Сделано для эфекта появления этих фрагментов на фоне BrowsingFragment. Как бы поверх
-        * свайп изображений. Конфликтов пока не замечено.*/
+         * & SearchFragment. Сделано для эфекта появления этих фрагментов на фоне BrowsingFragment. Как бы поверх
+         * свайп изображений. Конфликтов пока не замечено.*/
         if (!addToCont) {
             transaction.replace(R.id.fragment_container, fragment).commit();
         } else {
@@ -135,16 +137,32 @@ public class MainActivity extends AppCompatActivity {
     public void onBottomNavigationBarItemClicked(int menuItemId, @Nullable Integer toastRes) {
         bottomNavigationView.setSelectedItemId(menuItemId);
         if (toastRes != null) {
-            Toast.makeText(this, toastRes, Toast.LENGTH_LONG).show();
+            showToast(toastRes);
         }
     }
 
+    boolean mCloseAppPermit;
+
     @Override
     public void onBackPressed() {
-        fragmentManager.popBackStackImmediate();
-
-        if (fragmentManager.getBackStackEntryCount() == 0) {
-            super.onBackPressed();
+        if (fragmentManager.getBackStackEntryCount() == 1) {
+            if (!mCloseAppPermit) {
+                showToast(R.string.toast_close_the_app);
+                mCloseAppPermit = true;
+                Handler handler = new Handler();
+                handler.postDelayed(() -> mCloseAppPermit = false, Const.COOLDOWNDUR_LONG);
+                return;
+            }
+            fragmentManager.popBackStackImmediate();
+            if (fragmentManager.getBackStackEntryCount() == 0) {
+                super.onBackPressed();
+            }
+            return;
         }
+        fragmentManager.popBackStackImmediate();
+    }
+
+    private void showToast(int resId) {
+        Toast.makeText(this, resId, Toast.LENGTH_LONG).show();
     }
 }
