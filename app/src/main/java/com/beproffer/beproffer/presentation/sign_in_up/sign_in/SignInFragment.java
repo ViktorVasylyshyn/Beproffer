@@ -1,7 +1,5 @@
 package com.beproffer.beproffer.presentation.sign_in_up.sign_in;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +16,9 @@ import com.beproffer.beproffer.databinding.SignInFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
 import com.beproffer.beproffer.presentation.browsing.BrowsingViewModel;
 import com.beproffer.beproffer.presentation.profile.profile.ProfileFragment;
-import com.beproffer.beproffer.presentation.sign_in_up.customer_sign_up.CustomerSignUpFragment;
-import com.beproffer.beproffer.presentation.sign_in_up.specialist_sign_up.SpecialistSignUpFragment;
+import com.beproffer.beproffer.presentation.sign_in_up.change_password.ResetPasswordFragment;
+import com.beproffer.beproffer.presentation.sign_in_up.sign_up.SignUpFragment;
+import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
@@ -37,17 +36,21 @@ public class SignInFragment extends BaseFragment {
 
         @Override
         public void onCustomerSignUpClick() {
-            changeFragment(new CustomerSignUpFragment(), true, false, false, null);
+            Bundle userType = new Bundle();
+            userType.putString(Const.USERS, Const.CUST);
+            changeFragment(new SignUpFragment(), true, false, false, userType);
         }
 
         @Override
         public void onSpecialistSignUpClick() {
-            changeFragment(new SpecialistSignUpFragment(), true, false, false, null);
+            Bundle userType = new Bundle();
+            userType.putString(Const.USERS, Const.SPEC);
+            changeFragment(new SignUpFragment(), true, false, false, userType);
         }
 
         @Override
         public void onResetPasswordClick() {
-            changeFragment(new CustomerSignUpFragment(), true, false, false, null);
+            changeFragment(new ResetPasswordFragment(), true, false, false, null);
         }
 
         @Override
@@ -152,15 +155,6 @@ public class SignInFragment extends BaseFragment {
     private void hideErrorMessage() {
         mBinding.signInBottomHint1.setText(getResources().getText(R.string.string_res_without_text));
         mBinding.signInBottomHint1.setTextColor(getResources().getColor(R.color.color_base_text));
-    }
-
-    private void openDoc(int resId) {
-        if (!checkInternetConnection()) {
-            showToast(R.string.toast_no_internet_connection);
-            return;
-        }
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(resId)));
-        startActivity(browserIntent);
     }
 
     @Override

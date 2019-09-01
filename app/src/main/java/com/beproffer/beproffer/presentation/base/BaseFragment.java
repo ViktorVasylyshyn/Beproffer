@@ -2,21 +2,22 @@ package com.beproffer.beproffer.presentation.base;
 
 
 import android.app.Activity;
-import androidx.databinding.ObservableBoolean;
-
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.databinding.ObservableBoolean;
+import androidx.fragment.app.Fragment;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.presentation.MainActivity;
@@ -105,7 +106,16 @@ public class BaseFragment extends Fragment {
         }
     }
 
-    protected void requestErrorFocus(TextView  textView, int messageId){
+    protected void openDoc(int resId) {
+        if (checkInternetConnection()) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(resId)));
+            startActivity(browserIntent);
+        } else {
+            showToast(R.string.toast_no_internet_connection);
+        }
+    }
+
+    protected void requestErrorFocus(TextView textView, int messageId) {
         textView.requestFocus();
         textView.setError(getResources().getText(messageId));
     }
