@@ -20,7 +20,7 @@ import androidx.databinding.ObservableBoolean;
 import androidx.fragment.app.Fragment;
 
 import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.presentation.MainActivity;
+import com.beproffer.beproffer.presentation.activities.MainActivity;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

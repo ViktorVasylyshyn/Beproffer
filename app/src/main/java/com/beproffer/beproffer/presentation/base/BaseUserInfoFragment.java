@@ -5,7 +5,7 @@ import android.os.Handler;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.UserInfo;
-import com.beproffer.beproffer.presentation.MainActivity;
+import com.beproffer.beproffer.presentation.activities.MainActivity;
 import com.beproffer.beproffer.presentation.UserDataViewModel;
 import com.beproffer.beproffer.util.Const;
 

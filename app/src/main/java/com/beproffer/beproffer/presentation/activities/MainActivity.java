@@ -1,4 +1,4 @@
-package com.beproffer.beproffer.presentation;
+package com.beproffer.beproffer.presentation.activities;
 
 import android.os.Bundle;
 import android.os.Handler;

@@ -14,7 +14,7 @@ import android.view.animation.AnimationUtils;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.ProfileFragmentBinding;
-import com.beproffer.beproffer.presentation.MainActivity;
+import com.beproffer.beproffer.presentation.activities.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
 import com.beproffer.beproffer.presentation.info.InfoFragment;
 import com.beproffer.beproffer.presentation.profile.profile_edit.ProfileEditFragment;
