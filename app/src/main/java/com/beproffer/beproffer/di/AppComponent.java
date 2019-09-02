@@ -1,6 +1,6 @@
 package com.beproffer.beproffer.di;
 
-import com.beproffer.beproffer.presentation.MainActivity;
+import com.beproffer.beproffer.presentation.activities.MainActivity;
 
 import javax.inject.Singleton;
 

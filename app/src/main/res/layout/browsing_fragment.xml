@@ -98,7 +98,7 @@
             android:layout_marginEnd="@dimen/base_margin_small"
             android:layout_marginBottom="@dimen/base_margin_extra_small"
             app:rotation_degrees="9"
-            tools:context=".presentation.MainActivity" />
+            tools:context=".presentation.activities.MainActivity" />
 
         <ImageView
             android:id="@+id/browsing_fragment_like_image"

@@ -9,6 +9,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
+
     <style name="PopupMenu" parent="Theme.AppCompat">
         <item name="android:popupBackground">@drawable/rectangle_pop_up_menu_background</item>
         <item name="android:textColor">@android:color/white</item>

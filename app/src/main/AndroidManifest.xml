@@ -5,14 +5,13 @@
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!--Чтобы Google Play расценивал приложение, как доступное для планшетов-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- Чтобы Google Play расценивал приложение, как доступное для планшетов -->
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
 
     <application
-        android:name="com.beproffer.beproffer.App"
+        android:name=".App"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,17 +19,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
         <activity
-            android:name=".presentation.MainActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan">
+            android:name=".presentation.activities.SplashActivity"
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".presentation.activities.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>
