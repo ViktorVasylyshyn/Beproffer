@@ -1,14 +1,14 @@
 package com.beproffer.beproffer.presentation.binding;
 
-import androidx.databinding.BindingAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.databinding.BindingAdapter;
+
 import com.beproffer.beproffer.R;
+import com.beproffer.beproffer.util.CircleTransform;
 import com.beproffer.beproffer.util.Const;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestOptions;
+import com.squareup.picasso.Picasso;
 
 /*may be public for binding*/
 public class AppBindingAdapter {
@@ -19,21 +19,13 @@ public class AppBindingAdapter {
     /*user profile image loading with circle crop */
     @BindingAdapter("android:src")
     public static void loadImage(ImageView view, String param) {
-        Glide.with(view.getContext())
-                .load(param)
-                .apply(RequestOptions.circleCropTransform().placeholder(R.drawable.profile_image_ph))
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(view);
+        Picasso.get().load(param).placeholder(R.drawable.profile_image_ph).transform(new CircleTransform()).into(view);
     }
 
     /*service image loading with rectangle crop*/
     @BindingAdapter("loadImageFromDb")
     public static void loadProfileImage(ImageView view, String url) {
-        Glide.with(view.getContext())
-                .load(url)
-                .apply(RequestOptions.centerCropTransform().placeholder(R.drawable.service_image_ph))
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(view);
+        Picasso.get().load(url).placeholder(R.drawable.service_image_ph).fit().centerCrop().into(view);
     }
 
     @BindingAdapter({"setGenderImage"})
@@ -90,9 +82,9 @@ public class AppBindingAdapter {
     }
 
     @BindingAdapter({"setSpecialistTypeImage"})
-    public static void showSpecialistTypeImage(ImageView view, String specialistType){
+    public static void showSpecialistTypeImage(ImageView view, String specialistType) {
         int imageResId;
-        if (specialistType!= null){
+        if (specialistType != null) {
             switch (specialistType) {
                 case Const.HAI:
                     imageResId = R.drawable.ic_haircut;
