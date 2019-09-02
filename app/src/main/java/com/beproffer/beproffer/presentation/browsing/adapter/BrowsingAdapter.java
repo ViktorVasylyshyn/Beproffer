@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.BrowsingItemRef;
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class BrowsingAdapter extends ArrayAdapter<BrowsingItemRef> {
         BrowsingItemRef browsingItem = getItem(position);
 
         int layoutId;
-        /*потому что  не смог я настроить нормально отображения картинок на ос меньше 21. чем больше
+        /*не смог настроить нормальное отображения картинок на ос меньше 21. чем больше
         делаешь радиус углов тем больше изображение этим сдвигается вцентр, тоесть углы не
         хотят обрезаться поетому на апи 19 будет без округления углов*/
         if (hasLollipop()) {
@@ -39,8 +39,7 @@ public class BrowsingAdapter extends ArrayAdapter<BrowsingItemRef> {
             convertView = LayoutInflater.from(getContext()).inflate(layoutId, parent, false);
         }
         ImageView browsingImage = convertView.findViewById(R.id.browsing_image);
-
-        Glide.with(getContext()).load(browsingItem.getUrl()).into(browsingImage);
+        Picasso.get().load(browsingItem.getUrl()).placeholder(R.drawable.service_image_ph).fit().centerCrop().into(browsingImage);
 
         return convertView;
     }

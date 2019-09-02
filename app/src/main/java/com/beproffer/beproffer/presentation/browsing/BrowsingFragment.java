@@ -1,16 +1,17 @@
 package com.beproffer.beproffer.presentation.browsing;
 
-import androidx.lifecycle.ViewModelProviders;
-import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.BrowsingItemRef;
@@ -127,9 +128,9 @@ public class BrowsingFragment extends BaseUserInfoFragment {
         });
         /*получение команд и айди для показа панели поиска*/
         mBrowsingViewModel.getShowSearchPanel().observe(getViewLifecycleOwner(), performSearch -> {
-            if (performSearch != null && performSearch){
+            if (performSearch != null && performSearch) {
                 performSearch();
-                mBrowsingViewModel.resetValues(true,false);
+                mBrowsingViewModel.resetValues(true, false);
             }
         });
         /*получение команд и айди для показа сообщения*/
@@ -137,7 +138,7 @@ public class BrowsingFragment extends BaseUserInfoFragment {
             if (textResId == null)
                 return;
             showMessage(textResId);
-            mBrowsingViewModel.resetValues(false,true);
+            mBrowsingViewModel.resetValues(false, true);
         });
     }
 
