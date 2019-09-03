@@ -192,8 +192,8 @@
     <string name="toast_add_personal_info_first">Please, add information about you to "edit profile" section first.</string>
     <string name="toast_images_for_guest_mode">The images in \'guest\' mode can be repeated. Please, sign up to have a possibility to use browsing history.</string>
     <string name="toast_not_available_yet">The function is not available at the moment.</string>
-    <string name="toast_telephony_not_available">Telephony isn\'t available for current device.</string>
-    <string name="toast_app_not_found_on_device">Target app not found on device.</string>
+    <string name="toast_telephony_not_available">The calls aren\'t available on current device.</string>
+    <string name="toast_app_not_found_on_device">The target app wasn\'t found on your device.</string>
     <string name="toast_close_the_app">Please, tap \'Back\' onсe more, to close the app.</string>
     <string name="toast_image_size_error_4">Please, use image up to 4 MB.</string>
     <string name="toast_image_size_error_6">Please, use image up to 6 MB.</string>
@@ -207,6 +207,7 @@
     <string name="error_message_delete_profile_wrong_email">Incorrect email.</string>
     <string name="error_message_wrong_phone_number_format">Incorrect format of phone number.</string>
     <string name="error_message_name_is_too_short">The name is too short.</string>
+    <string name="error_message_password_allowable_symbols">Please, use the latin alphabet, numbers and the allowable symbols(! @ # $), without white spaces for password.</string>
 
     <string name="message_error_has_occurred">Oops, an error has occurred. Please restart the app, and try again. Please contact Beproffers\' support, if the error appears again.</string>
 

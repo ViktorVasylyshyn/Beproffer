@@ -186,6 +186,7 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
             return;
         }
         hideErrorMessage();
+        mUpdatedImageItem.setDescription(editInputText(mUpdatedImageItem.getDescription()));
         mUserDataViewModel.updateSpecialistGallery(mUpdatedImageItem, mResultUri);
         /*сравнением тип услуги начального обьекта и измененного.проверяем, изменился ли тип услуги.
          * если изменился - удаляем данные по старому адресу*/

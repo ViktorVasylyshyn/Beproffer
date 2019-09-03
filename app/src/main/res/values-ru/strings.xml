@@ -204,7 +204,8 @@
     <string name="error_message_enter_email">Введите свой email.</string>
     <string name="error_message_delete_profile_wrong_email">Неправильный email.</string>
     <string name="error_message_wrong_phone_number_format">Неверный формат номера телефона.</string>
-    <string name="error_message_name_is_too_short">слишком короткое имя.</string>
+    <string name="error_message_name_is_too_short">Сслишком короткое имя.</string>
+    <string name="error_message_password_allowable_symbols">Используйте буквы латинского алфавита, цифры и разрешенные символы(! @ # $), без пробелов, для пароля пароль.</string>
 
     <string name="message_error_has_occurred">Ой, произошла ошибка. Попробуйте перезапустить приложение. Если ошибка повторится, свяжитесь пожалуйста с тех поддержкой.</string>
 

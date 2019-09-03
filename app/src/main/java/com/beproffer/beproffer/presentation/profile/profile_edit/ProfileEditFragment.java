@@ -133,6 +133,9 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
             return;
         }
 
+        mCurrentUserInfo.setDescription(editInputText(mCurrentUserInfo.getDescription()));
+        mCurrentUserInfo.setName(editInputText(mCurrentUserInfo.getName()));
+
         mUserDataViewModel.updateUserInfo(mCurrentUserInfo, mResultUri);
     }
 

@@ -99,6 +99,7 @@ public class SignUpFragment extends BaseFragment {
     }
 
     private void checkDataAndSignUpNewUser() {
+        hideKeyboard(requireActivity());
         if (!checkInternetConnection()) {
             showToast(R.string.toast_no_internet_connection);
             return;
@@ -125,6 +126,13 @@ public class SignUpFragment extends BaseFragment {
                 requestErrorFocus(mBinding.signUpPhone, R.string.error_message_wrong_phone_number_format);
                 return;
             }
+        }
+        /*иметь ввиду, что Firebase разрешает использовать намного больше символьв. В тех редких случаях,
+         когда пользователь будет менять пароль через отсылку на его email письма - в его пароле могут
+          содержаться не толлько разрешенные этой проверкой символы, но и другие*/
+        if (!mBinding.signUpPass.getText().toString().matches("[a-zA-Z0-9!@#$]+")) {
+            showErrorMessage(R.string.error_message_password_allowable_symbols);
+            return;
         }
         if (!mBinding.signUpPass.getText().toString().equals(mBinding.signUpPassConfirm.getText().toString())) {
             requestErrorFocus(mBinding.signUpPass, R.string.toast_error_password_confirm_failure);
@@ -178,7 +186,7 @@ public class SignUpFragment extends BaseFragment {
             case Const.CUST:
                 mSignUpViewModel.signUpNewUser(mBinding.signUpEmail.getText().toString(),
                         mBinding.signUpPass.getText().toString(),
-                        mBinding.signUpName.getText().toString(),
+                        editInputText(mBinding.signUpName.getText().toString()),
                         mUserType,
                         null,
                         null);

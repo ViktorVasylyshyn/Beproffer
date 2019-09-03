@@ -207,6 +207,7 @@
     <string name="error_message_delete_profile_wrong_email">Неправильний email.</string>
     <string name="error_message_wrong_phone_number_format">Невірний формат номеру телефону.</string>
     <string name="error_message_name_is_too_short">Закоротке ім\'я.</string>
+    <string name="error_message_password_allowable_symbols">Використовуйте, латинські літери, цифри та дозволені знаки(! @ # $), без відступів, для створення пороля.</string>
 
     <string name="message_error_has_occurred">Сталася помилка. Спробуйте перезапустити додаток. Якщо помилка станеться знову - зв\'яжіться, будь ласка, з підтримкою Beproffer.</string>
 
