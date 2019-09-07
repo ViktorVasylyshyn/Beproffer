@@ -35,7 +35,7 @@
             android:layout_height="@dimen/icons_size_normal_height"
             android:layout_marginEnd="@dimen/profile_image_quarter"
             android:layout_marginBottom="@dimen/base_margin_small"
-            android:background="@drawable/circle_gradient_grey_background_alpha_85"
+            android:background="@drawable/oval_grey_alpha_85"
             android:onClick="@{(view)->fragmentCallback.onVoteClick()}"
             android:src="@drawable/ic_vote"
             app:layout_constraintBottom_toTopOf="@+id/browsing_image_info_vote_top_hint"

@@ -177,7 +177,7 @@
             android:layout_marginTop="@dimen/icons_size_normal_height"
             android:background="@drawable/button_background_grey_stroke_oval"
             android:padding="@dimen/base_padding_small"
-            android:src="@{userInfo.profileImageUrl}"
+            app:loadProfileImageFromDb="@{userInfo.profileImageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

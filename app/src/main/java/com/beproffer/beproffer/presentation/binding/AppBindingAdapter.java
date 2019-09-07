@@ -6,9 +6,10 @@ import android.widget.TextView;
 import androidx.databinding.BindingAdapter;
 
 import com.beproffer.beproffer.R;
-import com.beproffer.beproffer.util.CircleTransform;
 import com.beproffer.beproffer.util.Const;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 /*may be public for binding*/
 public class AppBindingAdapter {
@@ -17,15 +18,31 @@ public class AppBindingAdapter {
     }
 
     /*user profile image loading with circle crop */
-    @BindingAdapter("android:src")
-    public static void loadImage(ImageView view, String param) {
-        Picasso.get().load(param).placeholder(R.drawable.profile_image_ph).transform(new CircleTransform()).into(view);
+    @BindingAdapter("loadProfileImageFromDb")
+    public static void loadProfileImage(ImageView imageView, String url) {
+        final RequestOptions options = new RequestOptions()
+                .placeholder(R.drawable.profile_image_ph)
+                .apply(RequestOptions.circleCropTransform())
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
+
+        Glide.with(imageView.getContext())
+                .load(url)
+                .apply(options)
+                .into(imageView);
     }
 
     /*service image loading with rectangle crop*/
-    @BindingAdapter("loadImageFromDb")
-    public static void loadProfileImage(ImageView view, String url) {
-        Picasso.get().load(url).placeholder(R.drawable.service_image_ph).fit().centerCrop().into(view);
+    @BindingAdapter("loadServiceImageFromDb")
+    public static void loadServiceImage(ImageView imageView, String url) {
+        final RequestOptions options = new RequestOptions()
+                .placeholder(R.drawable.service_image_ph)
+                .apply(RequestOptions.centerCropTransform())
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
+
+        Glide.with(imageView.getContext())
+                .load(url)
+                .apply(options)
+                .into(imageView);
     }
 
     @BindingAdapter({"setGenderImage"})

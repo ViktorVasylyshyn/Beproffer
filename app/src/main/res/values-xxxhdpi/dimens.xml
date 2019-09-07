@@ -58,4 +58,33 @@
 
     <dimen name="base_stroke_medium">3dp</dimen>
 
+
+
+    <!--motion scene dimens-->
+    <!--motion scene часто встречаются элементы с шириной 0dp. используется не только в размерах motion scene
+    но и в некоторых других местах.-->
+    <dimen name="motion_scene_width_zero">0dp</dimen>
+
+    <dimen name="motion_scene_like_position_margin_start">375dp</dimen>
+    <dimen name="motion_scene_like_position_margin_end">75dp</dimen>
+
+    <dimen name="motion_scene_dislike_position_margin_start">75dp</dimen>
+    <dimen name="motion_scene_dislike_position_margin_end">375dp</dimen>
+
+    <dimen name="motion_scene_like_dislike_position_margin_top">45dp</dimen>
+    <dimen name="motion_scene_like_dislike_position_margin_bottom">0dp</dimen>
+
+
+    <dimen name="motion_scene_like_off_screen_position_margin_end">75dp</dimen>
+
+    <dimen name="motion_scene_dislike_off_screen_position_margin_end">600dp</dimen>
+
+    <dimen name="motion_scene_like_dislike_off_screen_position_margin_top">75dp</dimen>
+
+
+    <dimen name="motion_scene_reaction_icons_size">192dp</dimen>
+
+
+    <dimen name="card_corner_radius">24dp</dimen>
+
 </resources>

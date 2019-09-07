@@ -6,4 +6,6 @@ public interface BrowsingFragmentCallback {
     void onSearchClick();
 
     void onRetryClicked();
+
+    void onShowServiceInfoClick();
 }

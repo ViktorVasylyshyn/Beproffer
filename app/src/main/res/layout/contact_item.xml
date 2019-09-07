@@ -25,7 +25,7 @@
             android:layout_marginStart="@dimen/base_margin_small"
             android:layout_marginTop="@dimen/base_margin_extra_small"
             android:layout_marginEnd="@dimen/base_margin_small"
-            android:src="@{item.profileImageUrl}"
+            app:loadProfileImageFromDb="@{item.profileImageUrl}"
             app:layout_constraintBottom_toTopOf="@+id/contact_item_info"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

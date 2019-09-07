@@ -122,7 +122,6 @@ public class Const {
      * запросо в базу данных, и не так будет нагружать систуму, но при этом и не держать в list
      * сотни объектов BrowsingImageSearchRef*/
     public static final int BROWSING_REFS_LIST_MAX_SIZE = 50;
-
     public static final String ERROR = "ERROR"; /*the constant for the logcat filter*/
 
     /* макс размеры изображений */
