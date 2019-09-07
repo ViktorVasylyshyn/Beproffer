@@ -25,7 +25,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +48,8 @@ public class BrowsingItemsRepository {
     private BrowsingHistoryRepository mBrowsingHistoryRepository;
     private List<String> mActualBrowsingHistory;
 
+    private final MutableLiveData<Boolean> mClearRefs = new MutableLiveData<>();
+
     private final MutableLiveData<Boolean> mShowProgress = new MutableLiveData<>();
     private final MutableLiveData<Integer> mShowToast = new MutableLiveData<>();
     private final MutableLiveData<Boolean> mShowSearchPanel = new MutableLiveData<>();
@@ -58,8 +59,9 @@ public class BrowsingItemsRepository {
 
     private MutableLiveData<BrowsingImageItem> mTargetBrowsingItemLiveData = new MutableLiveData<>();
 
-    private List<BrowsingItemRef> mBrowsingItemsRefsList = new ArrayList<>();
-    private final MutableLiveData<List<BrowsingItemRef>> mBrowsingItemsRefsLiveData = new MutableLiveData<>();
+    private final MutableLiveData<BrowsingItemRef> mBrowsingItemRefLiveData = new MutableLiveData<>();
+
+    private int mRefsCountInList = 0;
 
     public BrowsingItemsRepository(Application application) {
         mApplication = application;
@@ -70,8 +72,8 @@ public class BrowsingItemsRepository {
         }
     }
 
-    public LiveData<List<BrowsingItemRef>> getBrowsingItemRefListLiveData() {
-        return mBrowsingItemsRefsLiveData;
+    public LiveData<BrowsingItemRef> getBrowsingItemRefs() {
+        return mBrowsingItemRefLiveData;
     }
 
     public LiveData<BrowsingImageItem> getTargetBrowsingItemLiveData() {
@@ -81,8 +83,6 @@ public class BrowsingItemsRepository {
     /*пытаемся получить параметры поика для пользователя, чтобы сделать запрос в Realtime Database.*/
     private void obtainRequestParams(Application application) {
         mShowProgress.setValue(true);
-        mBrowsingItemsRefsList = new ArrayList<>();
-        mBrowsingItemsRefsLiveData.setValue(mBrowsingItemsRefsList);
         SharedPreferences searchRequestData;
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         if (mUser != null) {
@@ -91,7 +91,7 @@ public class BrowsingItemsRepository {
             searchRequestData = application.getSharedPreferences(Const.UNKNOWN_USER_REQUEST, MODE_PRIVATE);
         }
         /*TODO до конца не понятно почему, в свое время здесь была оставлена эта проверка. Проследить некоторое
-         *  время, будут ли краши из-за ее остуствия. Если нет - убрать окончательно. Если */
+         *  время, будут ли краши из-за ее остуствия. Если нет - убрать окончательно.*/
 //        if (searchRequestData == null) {
 //            feedBackToUi(false, null, true, R.string.toast_define_search_request);
 //            return;
@@ -107,6 +107,7 @@ public class BrowsingItemsRepository {
         }
         /*if search request params are not correct or equals null - we go to the search fragment to define params*/
         if (checkRequestParams()) {
+//            mClearRefs.setValue(true);
             feedBackToUi(false, null, true, R.string.toast_define_search_request);
             return;
         }
@@ -128,7 +129,7 @@ public class BrowsingItemsRepository {
                  когда история просмотров фиксируется. Фильтрация начинается после ответа, о том, что url последнего
                  просмотренного изображения записано в историю просмотров. Стьарт новой фильтрации для режима гостя,
                  когда история просмотров не фиксируется, находится в deleteObservedItem()*/
-                if (mBrowsingItemsRefsList.isEmpty()) {
+                if (mRefsCountInList < 1) {
                     filterBrowsingItemRefs();
                 }
             }
@@ -197,11 +198,13 @@ public class BrowsingItemsRepository {
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
             if (!dataSnapshot.exists()) {
+                mClearRefs.postValue(true);
                 feedBackToUi(false, null, true, R.string.toast_no_any_service_items);
                 return;
             }
 
             if (dataSnapshot.getChildrenCount() < 1) {
+                mClearRefs.postValue(true);
                 feedBackToUi(false, null, true, R.string.toast_no_available_images);
                 return;
             }
@@ -213,6 +216,7 @@ public class BrowsingItemsRepository {
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
+            mClearRefs.postValue(true);
             feedBackToUi(false, null, false, R.string.toast_error_has_occurred);
         }
     };
@@ -239,7 +243,7 @@ public class BrowsingItemsRepository {
                 handleBrowsingItemRef(itemRef);
             }
             /*список mBrowsingItemRefsStorageList уже достаточно наполнен, но mCurrentDataSnapshot проитерован не полностью*/
-            if (mBrowsingItemsRefsList.size() > Const.BROWSING_REFS_LIST_MAX_SIZE) {
+            if (mRefsCountInList > Const.BROWSING_REFS_LIST_MAX_SIZE) {
                 mShowProgress.setValue(false);
                 return;
             }
@@ -247,7 +251,7 @@ public class BrowsingItemsRepository {
             /*весь mCurrentDataSnapshot проитерован, показать юзеру нечего - по этому запросу*/
             handledBrowsingImageRefsNum++;
             if (handledBrowsingImageRefsNum == totalBrowsingImageRefsNum) {
-                if (mBrowsingItemsRefsList.isEmpty()) {
+                if (mRefsCountInList < 1) {
                     feedBackToUi(false, null, true, R.string.toast_no_available_images);
                 } else {
                     mShowProgress.setValue(false);
@@ -258,8 +262,8 @@ public class BrowsingItemsRepository {
 
     private void handleBrowsingItemRef(BrowsingItemRef itemRef) {
         if (itemRef != null) {
-            mBrowsingItemsRefsList.add(itemRef);
-            mBrowsingItemsRefsLiveData.setValue(mBrowsingItemsRefsList);
+            mBrowsingItemRefLiveData.setValue(itemRef);
+            mRefsCountInList++;
         }
     }
 
@@ -298,13 +302,11 @@ public class BrowsingItemsRepository {
     public void deleteObservedItem(BrowsingItemRef item) {
         if (mUser != null)
             mBrowsingHistoryRepository.insert(new BrowsingHistoryModel(item.getUrl()));
-        mBrowsingItemsRefsList.remove(0);
-        mBrowsingItemsRefsLiveData.setValue(mBrowsingItemsRefsList);
-
+        mRefsCountInList--;
         /*Эта проверка и начало новой фильтрации валидны только для пользователей в режиме гостя,
         когда история просмотров не фиксируется. Старт новой фильтрации для авторизированных пользователей,
          которые имеют историю просмотров находится в obtainBrowsingHistory()*/
-        if (mBrowsingItemsRefsList.isEmpty() && mUser == null) {
+        if (mRefsCountInList < 1 && mUser == null) {
             filterBrowsingItemRefs();
             feedBackToUi(false, R.string.toast_images_for_guest_mode, false, null);
         }
@@ -312,7 +314,13 @@ public class BrowsingItemsRepository {
 
     public void refreshAdapter() {
         mActualBrowsingHistory = null;
+        mClearRefs.setValue(true);
+        mRefsCountInList = 0;
         obtainRequestParams(mApplication);
+    }
+
+    public LiveData<Boolean> getClearRefs() {
+        return mClearRefs;
     }
 
     public LiveData<Boolean> getShowProgress() {
@@ -332,11 +340,15 @@ public class BrowsingItemsRepository {
     }
 
     public void resetValues(@NonNull Boolean resetShowSearchPanelValue,
-                            @NonNull Boolean resetViewMessageValue) {
+                            @NonNull Boolean resetViewMessageValue,
+                            @NonNull Boolean resetClearRefsValue) {
         if (resetShowSearchPanelValue)
             mShowSearchPanel.setValue(false);
         if (resetViewMessageValue)
             mShowMessage.setValue(null);
+        if (resetClearRefsValue) {
+            mClearRefs.setValue(null);
+        }
     }
 
     private void feedBackToUi(@Nullable Boolean showProgress,

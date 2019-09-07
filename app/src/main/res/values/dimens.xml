@@ -25,7 +25,8 @@
 
     <!--Bottom Navigation Bar-->
     <dimen name="design_bottom_navigation_height" tools:override="true">40dp</dimen>
-    <dimen name="bnb_floating_button_bottom_margin">48dp</dimen> <!--may be similar as design_bottom_navigation_height or bigger-->
+    <dimen name="bnb_floating_button_bottom_margin">48dp
+    </dimen> <!--may be similar as design_bottom_navigation_height or bigger-->
     <dimen name="bnb_icon_size">32dp</dimen>
 
     <!--Icons-->
@@ -57,5 +58,32 @@
 
 
     <dimen name="base_stroke_medium">2dp</dimen>
+
+    <!--motion scene dimens-->
+    <!--motion scene часто встречаются элементы с шириной 0dp. используется не только в размерах motion scene
+    но и в некоторых других местах.-->
+    <dimen name="motion_scene_width_zero">0dp</dimen>
+
+    <dimen name="motion_scene_like_position_margin_start">250dp</dimen>
+    <dimen name="motion_scene_like_position_margin_end">50dp</dimen>
+
+    <dimen name="motion_scene_dislike_position_margin_start">50dp</dimen>
+    <dimen name="motion_scene_dislike_position_margin_end">250dp</dimen>
+
+    <dimen name="motion_scene_like_dislike_position_margin_top">30dp</dimen>
+    <dimen name="motion_scene_like_dislike_position_margin_bottom">0dp</dimen>
+
+
+    <dimen name="motion_scene_like_off_screen_position_margin_end">50dp</dimen>
+
+    <dimen name="motion_scene_dislike_off_screen_position_margin_end">400dp</dimen>
+
+    <dimen name="motion_scene_like_dislike_off_screen_position_margin_top">50dp</dimen>
+
+
+    <dimen name="motion_scene_reaction_icons_size">128dp</dimen>
+
+
+    <dimen name="card_corner_radius">16dp</dimen>
 
 </resources>

@@ -15,17 +15,17 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.browsing.BrowsingFragment">
 
         <TextView
+            android:id="@+id/browsing_fragment_logo"
+            style="@style/BeprofferTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/BeprofferTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,18 +46,18 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base_margin_small"
             android:layout_marginEnd="@dimen/base_margin_small"
+            android:layout_marginBottom="@dimen/base_margin_small"
             android:gravity="center"
             android:paddingStart="@dimen/base_padding_medium"
             android:paddingEnd="@dimen/base_padding_medium"
-            android:layout_marginBottom="@dimen/base_margin_small"
             android:text="@string/string_res_without_text"
             android:textColor="@color/color_red_alpha_85"
             android:textSize="@dimen/base_text_size_medium"
             android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/browsing_fragment_progress_bar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/browsing_fragment_image_frame"
-            app:layout_constraintBottom_toBottomOf="@+id/browsing_fragment_progress_bar"/>
+            app:layout_constraintTop_toTopOf="@+id/browsing_fragment_motion_layout" />
 
         <ImageView
             android:id="@+id/browsing_fragment_no_internet_connection_image"
@@ -68,7 +68,7 @@
             app:layout_constraintBottom_toTopOf="@+id/browsing_fragment_retry_text_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/browsing_fragment_image_frame"
+            app:layout_constraintTop_toTopOf="@+id/browsing_fragment_motion_layout"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -89,40 +89,101 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="ContentDescription" />
 
-        <com.lorentzos.flingswipe.SwipeFlingAdapterView
-            android:id="@+id/browsing_fragment_image_frame"
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/browsing_fragment_motion_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/base_margin_small"
-            android:layout_marginTop="@dimen/bnb_icon_size"
-            android:layout_marginEnd="@dimen/base_margin_small"
-            android:layout_marginBottom="@dimen/base_margin_extra_small"
-            app:rotation_degrees="9"
-            tools:context=".presentation.activities.MainActivity" />
+            android:layout_marginTop="@dimen/icons_size_normal_height"
+            android:clipChildren="false"
+            android:visibility="gone"
+            app:layoutDescription="@xml/motion_scene_swipe"
+            app:layout_constraintTop_toBottomOf="@+id/browsing_fragment_logo">
 
-        <ImageView
-            android:id="@+id/browsing_fragment_like_image"
-            android:layout_width="@dimen/profile_image_quarter"
-            android:layout_height="@dimen/profile_image_quarter"
-            android:layout_marginBottom="@dimen/profile_image_half"
-            android:background="@drawable/circle_gradient_grey_background_alpha_40"
-            android:src="@drawable/ic_like_85"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/browsing_fragment_third_card"
+                android:layout_width="@dimen/motion_scene_width_zero"
+                android:layout_height="@dimen/motion_scene_width_zero"
+                android:elevation="1dp"
+                app:cardCornerRadius="@dimen/card_corner_radius">
 
-        <ImageView
-            android:id="@+id/browsing_fragment_dislike_image"
-            android:layout_width="@dimen/profile_image_quarter"
-            android:layout_height="@dimen/profile_image_quarter"
-            android:layout_marginBottom="@dimen/profile_image_half"
-            android:background="@drawable/circle_gradient_grey_background_alpha_40"
-            android:src="@drawable/ic_dislike_85"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+                <ImageView
+                    android:id="@+id/browsing_fragment_third_card_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    tools:ignore="ContentDescription" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/browsing_fragment_second_card"
+                android:layout_width="@dimen/motion_scene_width_zero"
+                android:layout_height="@dimen/motion_scene_width_zero"
+                android:elevation="1dp"
+                app:cardCornerRadius="@dimen/card_corner_radius">
+
+                <ImageView
+                    android:id="@+id/browsing_fragment_second_card_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    tools:ignore="ContentDescription" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/browsing_fragment_first_card"
+                android:layout_width="@dimen/motion_scene_width_zero"
+                android:layout_height="@dimen/motion_scene_width_zero"
+                android:elevation="1dp"
+                app:cardCornerRadius="@dimen/card_corner_radius">
+
+                <ImageView
+                    android:id="@+id/browsing_fragment_first_card_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    tools:ignore="ContentDescription" />
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/browsing_fragment_like_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/oval_grey_alpha_85"
+                android:src="@drawable/ic_like_85"
+                tools:ignore="ContentDescription"
+                android:elevation="2dp"/>
+
+            <ImageView
+                android:id="@+id/browsing_fragment_dislike_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/oval_grey_alpha_85"
+                android:src="@drawable/ic_dislike_85"
+                tools:ignore="ContentDescription"
+                android:elevation="2dp"/>
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+        <FrameLayout
+            android:id="@+id/browsing_fragment_image_description_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_margin_big"
+            android:padding="@dimen/base_padding_medium"
+            android:background="@drawable/oval_grey_alpha_85"
+            android:onClick="@{(view) -> callback.onShowServiceInfoClick()}"
+            app:layout_constraintBottom_toBottomOf="@+id/browsing_fragment_motion_layout"
+            app:layout_constraintEnd_toEndOf="@+id/browsing_fragment_motion_layout">
+
+            <ImageView
+                android:layout_width="@dimen/icons_size_normal_width"
+                android:layout_height="@dimen/icons_size_normal_height"
+                android:src="@drawable/ic_image_description"
+                tools:ignore="ContentDescription" />
+        </FrameLayout>
 
         <ProgressBar
             android:id="@+id/browsing_fragment_progress_bar"

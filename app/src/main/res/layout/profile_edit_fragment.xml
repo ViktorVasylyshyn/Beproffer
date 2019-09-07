@@ -70,7 +70,7 @@
             android:background="@drawable/button_background_grey_stroke_oval"
             android:onClick="@{(view) -> callback.onSetProfileImageClick()}"
             android:padding="@dimen/base_padding_small"
-            android:src="@{userInfo.profileImageUrl}"
+            app:loadProfileImageFromDb="@{userInfo.profileImageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_fragment_logo"

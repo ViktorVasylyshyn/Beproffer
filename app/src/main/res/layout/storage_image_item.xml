@@ -24,7 +24,7 @@
             android:layout_height="@dimen/list_item_image_height"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:loadImageFromDb="@{image.url}"
+            app:loadServiceImageFromDb="@{image.url}"
             tools:ignore="ContentDescription" />
 
         <ImageView

@@ -65,7 +65,7 @@
             app:layout_constraintEnd_toStartOf="@+id/specialist_edit_gallery_item_type_scroll"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/specialist_edit_gallery_item_logo"
-            app:loadImageFromDb="@{item.url}"
+            app:loadServiceImageFromDb="@{item.url}"
             tools:ignore="ContentDescription" />
 
         <HorizontalScrollView

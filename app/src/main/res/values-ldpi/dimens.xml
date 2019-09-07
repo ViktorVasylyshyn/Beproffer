@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!--1.0-->
+    <!--x1.0-->
 
     <!--profile user image-->
     <dimen name="profile_image">128dp</dimen>
@@ -58,5 +58,33 @@
 
 
     <dimen name="base_stroke_medium">2dp</dimen>
+
+
+    <!--motion scene dimens-->
+    <!--motion scene часто встречаются элементы с шириной 0dp. используется не только в размерах motion scene
+    но и в некоторых других местах.-->
+    <dimen name="motion_scene_width_zero">0dp</dimen>
+
+    <dimen name="motion_scene_like_position_margin_start">250dp</dimen>
+    <dimen name="motion_scene_like_position_margin_end">50dp</dimen>
+
+    <dimen name="motion_scene_dislike_position_margin_start">50dp</dimen>
+    <dimen name="motion_scene_dislike_position_margin_end">250dp</dimen>
+
+    <dimen name="motion_scene_like_dislike_position_margin_top">30dp</dimen>
+    <dimen name="motion_scene_like_dislike_position_margin_bottom">0dp</dimen>
+
+
+    <dimen name="motion_scene_like_off_screen_position_margin_end">50dp</dimen>
+
+    <dimen name="motion_scene_dislike_off_screen_position_margin_end">400dp</dimen>
+
+    <dimen name="motion_scene_like_dislike_off_screen_position_margin_top">50dp</dimen>
+
+
+    <dimen name="motion_scene_reaction_icons_size">128dp</dimen>
+
+
+    <dimen name="card_corner_radius">16dp</dimen>
 
 </resources>

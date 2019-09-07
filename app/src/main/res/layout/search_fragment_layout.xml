@@ -232,6 +232,8 @@
                 android:layout_marginEnd="@dimen/base_margin_medium"
                 android:layout_marginBottom="@dimen/base_margin_big"
                 android:text="@string/app_availability"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
