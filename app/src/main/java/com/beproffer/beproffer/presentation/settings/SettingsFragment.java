@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SettingsFragmentLayoutBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
+import com.beproffer.beproffer.presentation.browsing.BrowsingFragment;
 import com.beproffer.beproffer.presentation.sign_in_up.change_password.ResetPasswordFragment;
 import com.beproffer.beproffer.presentation.browsing.BrowsingViewModel;
 import com.beproffer.beproffer.util.Const;
@@ -81,8 +82,9 @@ public class SettingsFragment extends BaseUserInfoFragment {
                 });
                 /*показ тостов*/
                 mBrowsingViewModel.getShowToast().observe(getViewLifecycleOwner(), resId -> {
-                    if (resId == null)
+                    if (resId == null) {
                         return;
+                    }
                     showToast(resId);
                 });
                 mBrowsingViewModel.clearBrowsingHistory();

@@ -152,7 +152,7 @@
 
         <Constraint
             android:id="@id/browsing_fragment_first_card"
-            android:layout_width="@dimen/motion_scene_width_zero"
+            android:layout_width="@dimen/motion_scene_size_zero"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/motion_scene_dislike_position_margin_start"
             android:layout_marginTop="@dimen/motion_scene_like_dislike_position_margin_top"
@@ -204,7 +204,7 @@
 
         <Constraint
             android:id="@id/browsing_fragment_first_card"
-            android:layout_width="@dimen/motion_scene_width_zero"
+            android:layout_width="@dimen/motion_scene_size_zero"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/motion_scene_like_dislike_off_screen_position_margin_top"
             android:layout_marginEnd="@dimen/motion_scene_dislike_off_screen_position_margin_end"
@@ -254,7 +254,7 @@
 
         <Constraint
             android:id="@id/browsing_fragment_first_card"
-            android:layout_width="@dimen/motion_scene_width_zero"
+            android:layout_width="@dimen/motion_scene_size_zero"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/motion_scene_like_position_margin_start"
             android:layout_marginTop="@dimen/motion_scene_like_dislike_position_margin_top"
@@ -304,7 +304,7 @@
 
         <Constraint
             android:id="@id/browsing_fragment_first_card"
-            android:layout_width="@dimen/motion_scene_width_zero"
+            android:layout_width="@dimen/motion_scene_size_zero"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/motion_scene_like_dislike_off_screen_position_margin_top"
             android:layout_marginEnd="@dimen/motion_scene_like_off_screen_position_margin_end"

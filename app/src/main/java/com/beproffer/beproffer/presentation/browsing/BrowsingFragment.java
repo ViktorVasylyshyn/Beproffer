@@ -21,7 +21,6 @@ import com.beproffer.beproffer.presentation.browsing.info.BrowsingItemInfoFragme
 import com.beproffer.beproffer.presentation.browsing.search.SearchFragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,18 +61,16 @@ public class BrowsingFragment extends BaseUserInfoFragment {
                     mMotionLayout.setTransition(R.id.motion_scene_start_position, R.id.motion_scene_dislike_position);
                     if (!mBrowsingItemRefsList.isEmpty()) {
                         mBrowsingViewModel.deleteObservedItem(mBrowsingItemRefsList.get(0));
-                        mBrowsingItemRefsList.remove(0);
                     }
-                    motionLayoutUpdate();
+                    updateCardsSwipe();
                     break;
                 case R.id.motion_scene_off_screen_like_position:
                     mMotionLayout.setProgress(0f);
                     mMotionLayout.setTransition(R.id.motion_scene_start_position, R.id.motion_scene_like_position);
                     if (!mBrowsingItemRefsList.isEmpty()) {
                         mBrowsingViewModel.deleteObservedItem(mBrowsingItemRefsList.get(0));
-                        mBrowsingItemRefsList.remove(0);
                     }
-                    motionLayoutUpdate();
+                    updateCardsSwipe();
             }
         }
     };
@@ -94,7 +91,11 @@ public class BrowsingFragment extends BaseUserInfoFragment {
 
         mMotionLayout = mBinding.browsingFragmentMotionLayout;
         mMotionLayout.setTransitionListener(mTransitionAdapter);
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
         startNewSession();
     }
 
@@ -129,16 +130,16 @@ public class BrowsingFragment extends BaseUserInfoFragment {
             mBrowsingViewModel = ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class);
         }
         /*получения списка объектов для отображения*/
-        mBrowsingViewModel.getBrowsingItemRefs().observe(getViewLifecycleOwner(), browsingItemRef -> {
-            if (browsingItemRef == null)
+        mBrowsingViewModel.getBrowsingItemRefs().observe(getViewLifecycleOwner(), browsingItemsList -> {
+            if (browsingItemsList == null)
                 return;
-            handleBrowsingItemRef(browsingItemRef);
-        });
-        mBrowsingViewModel.getClearRefs().observe(getViewLifecycleOwner(), clear -> {
-            if (clear != null && clear) {
-                mBrowsingItemRefsList.clear();
-                handleBrowsingItemRef(null);
-                mBrowsingViewModel.resetValues(false, false, true);
+            mBrowsingItemRefsList = browsingItemsList;
+            if(mBrowsingItemRefsList.isEmpty())
+                resetSession();
+            if (mBinding.browsingFragmentFirstCardImage.getDrawable() == null ||
+                    mBinding.browsingFragmentSecondCardImage.getDrawable() == null ||
+                    mBinding.browsingFragmentThirdCardImage.getDrawable() == null) {
+                updateCardsRepo();
             }
         });
         /*актив\неактив прогресс бар*/
@@ -156,7 +157,7 @@ public class BrowsingFragment extends BaseUserInfoFragment {
         mBrowsingViewModel.getShowSearchPanel().observe(getViewLifecycleOwner(), performSearch -> {
             if (performSearch != null && performSearch) {
                 performSearch();
-                mBrowsingViewModel.resetValues(true, false, false);
+                mBrowsingViewModel.resetValues(true, false);
             }
         });
         /*получение команд и айди для показа сообщения*/
@@ -164,38 +165,39 @@ public class BrowsingFragment extends BaseUserInfoFragment {
             if (textResId == null)
                 return;
             mBinding.browsingFragmentTextMessage.setText(getResources().getText(textResId));
-            mBrowsingViewModel.resetValues(false, true, false);
+            mBrowsingViewModel.resetValues(false, true);
         });
     }
 
-    private void handleBrowsingItemRef(@Nullable BrowsingItemRef itemRef) {
-        if (itemRef == null) {
-            mBinding.browsingFragmentFirstCardImage.setImageDrawable(null);
-            mBinding.browsingFragmentSecondCardImage.setImageDrawable(null);
-            mBinding.browsingFragmentThirdCardImage.setImageDrawable(null);
-            mMotionLayout.setVisibility(View.GONE);
+    private void updateCardsRepo() {
+        if (mBrowsingItemRefsList.isEmpty()) {
+            resetSession();
             return;
         }
-        mBrowsingItemRefsList.add(itemRef);
-        switch (mBrowsingItemRefsList.size()) {
-            case 0:
-                mMotionLayout.setVisibility(View.GONE);
-                break;
-            case 1:
-                mMotionLayout.setVisibility(View.VISIBLE);
-                loadImage(mBrowsingItemRefsList.get(0).getUrl(), mBinding.browsingFragmentFirstCardImage);
-                break;
-            case 2:
-                loadImage(mBrowsingItemRefsList.get(1).getUrl(), mBinding.browsingFragmentSecondCardImage);
-                break;
-            case 3:
-                loadImage(mBrowsingItemRefsList.get(2).getUrl(), mBinding.browsingFragmentThirdCardImage);
-                break;
-            default:
+        if (mBinding.browsingFragmentFirstCardImage.getDrawable() == null) {
+            mMotionLayout.setVisibility(View.VISIBLE);
+            mBinding.browsingFragmentImageDetailInfo.setVisibility(View.VISIBLE);
+            loadImage(mBrowsingItemRefsList.get(0).getUrl(), mBinding.browsingFragmentFirstCardImage);
+        }
+        if (mBinding.browsingFragmentSecondCardImage.getDrawable() == null
+                && mBrowsingItemRefsList.size() > 1) {
+            loadImage(mBrowsingItemRefsList.get(1).getUrl(), mBinding.browsingFragmentSecondCardImage);
+        }
+        if (mBinding.browsingFragmentThirdCardImage.getDrawable() == null
+                && mBrowsingItemRefsList.size() > 2) {
+            loadImage(mBrowsingItemRefsList.get(2).getUrl(), mBinding.browsingFragmentThirdCardImage);
         }
     }
 
-    private void motionLayoutUpdate() {
+    private void resetSession() {
+        mBinding.browsingFragmentFirstCardImage.setImageDrawable(null);
+        mBinding.browsingFragmentSecondCardImage.setImageDrawable(null);
+        mBinding.browsingFragmentThirdCardImage.setImageDrawable(null);
+        mMotionLayout.setVisibility(View.GONE);
+        mBinding.browsingFragmentImageDetailInfo.setVisibility(View.GONE);
+    }
+
+    private void updateCardsSwipe() {
         /*TODO исследовать, насколько критично может быть, если свайп первой карты осуществился до
          *  получения изображений из базы*/
         if (mBinding.browsingFragmentSecondCardImage.getDrawable() != null) {
@@ -204,10 +206,6 @@ public class BrowsingFragment extends BaseUserInfoFragment {
         } else {
             if (mBrowsingItemRefsList.size() > 0) {
                 loadImage(mBrowsingItemRefsList.get(0).getUrl(), mBinding.browsingFragmentFirstCardImage);
-            } else {
-                mBinding.browsingFragmentFirstCardImage.setImageDrawable(null);
-                mMotionLayout.setVisibility(View.GONE);
-                return;
             }
         }
         if (mBinding.browsingFragmentThirdCardImage.getDrawable() != null) {
@@ -233,11 +231,14 @@ public class BrowsingFragment extends BaseUserInfoFragment {
             повторного в него возврата, так же и плейсхолдер. будет ли считаться, что это дровабл?*/
         Glide.with(requireContext())
                 .load(url)
+                .placeholder(R.drawable.service_image_ph)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(view);
     }
+
     private void showBrowsingItemInfo() {
-        ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class).obtainBrowsingItemDetailInfo(mBrowsingItemRefsList.get(0));
+        if (!mBrowsingItemRefsList.isEmpty())
+            ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class).obtainBrowsingItemDetailInfo(mBrowsingItemRefsList.get(0));
         changeFragment(new BrowsingItemInfoFragment(), true, false, true, null);
     }
 

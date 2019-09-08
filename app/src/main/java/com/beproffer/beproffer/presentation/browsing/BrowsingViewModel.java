@@ -9,6 +9,8 @@ import com.beproffer.beproffer.data.firebase.BrowsingItemsRepository;
 import com.beproffer.beproffer.data.models.BrowsingImageItem;
 import com.beproffer.beproffer.data.models.BrowsingItemRef;
 
+import java.util.List;
+
 public class BrowsingViewModel extends AndroidViewModel {
 
     private final BrowsingItemsRepository mRepository;
@@ -18,16 +20,12 @@ public class BrowsingViewModel extends AndroidViewModel {
         mRepository = new BrowsingItemsRepository(application);
     }
 
-    public LiveData<BrowsingItemRef> getBrowsingItemRefs() {
+    public LiveData<List<BrowsingItemRef>> getBrowsingItemRefs() {
         return mRepository.getBrowsingItemRefs();
     }
 
     public LiveData<BrowsingImageItem> getBrowsingItemInfo() {
         return mRepository.getTargetBrowsingItemLiveData();
-    }
-
-    public LiveData<Boolean> getClearRefs(){
-        return mRepository.getClearRefs();
     }
 
     public LiveData<Boolean> getShowProgress() {
@@ -47,9 +45,8 @@ public class BrowsingViewModel extends AndroidViewModel {
     }
 
     public void resetValues(@NonNull Boolean resetShowSearchPanelValue,
-                            @NonNull Boolean resetViewMessageValue,
-                            @NonNull Boolean resetClearRefs){
-        mRepository.resetValues(resetShowSearchPanelValue, resetViewMessageValue, resetClearRefs);
+                            @NonNull Boolean resetViewMessageValue){
+        mRepository.resetValues(resetShowSearchPanelValue, resetViewMessageValue);
     }
 
     public void deleteObservedItem(BrowsingItemRef item) {

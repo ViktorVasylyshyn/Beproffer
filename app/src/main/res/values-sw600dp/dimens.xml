@@ -62,7 +62,7 @@
     <!--motion scene dimens-->
     <!--motion scene часто встречаются элементы с шириной 0dp. используется не только в размерах motion scene
     но и в некоторых других местах.-->
-    <dimen name="motion_scene_width_zero">0dp</dimen>
+    <dimen name="motion_scene_size_zero">0dp</dimen>
 
     <dimen name="motion_scene_like_position_margin_start">375dp</dimen>
     <dimen name="motion_scene_like_position_margin_end">75dp</dimen>
