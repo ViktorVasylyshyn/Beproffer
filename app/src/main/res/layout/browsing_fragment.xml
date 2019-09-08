@@ -101,8 +101,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/browsing_fragment_third_card"
-                android:layout_width="@dimen/motion_scene_width_zero"
-                android:layout_height="@dimen/motion_scene_width_zero"
+                android:layout_width="@dimen/motion_scene_size_zero"
+                android:layout_height="@dimen/motion_scene_size_zero"
                 android:elevation="1dp"
                 app:cardCornerRadius="@dimen/card_corner_radius">
 
@@ -117,8 +117,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/browsing_fragment_second_card"
-                android:layout_width="@dimen/motion_scene_width_zero"
-                android:layout_height="@dimen/motion_scene_width_zero"
+                android:layout_width="@dimen/motion_scene_size_zero"
+                android:layout_height="@dimen/motion_scene_size_zero"
                 android:elevation="1dp"
                 app:cardCornerRadius="@dimen/card_corner_radius">
 
@@ -133,8 +133,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/browsing_fragment_first_card"
-                android:layout_width="@dimen/motion_scene_width_zero"
-                android:layout_height="@dimen/motion_scene_width_zero"
+                android:layout_width="@dimen/motion_scene_size_zero"
+                android:layout_height="@dimen/motion_scene_size_zero"
                 android:elevation="1dp"
                 app:cardCornerRadius="@dimen/card_corner_radius">
 
@@ -167,23 +167,18 @@
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
-        <FrameLayout
-            android:id="@+id/browsing_fragment_image_description_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_big"
-            android:padding="@dimen/base_padding_medium"
-            android:background="@drawable/oval_grey_alpha_85"
-            android:onClick="@{(view) -> callback.onShowServiceInfoClick()}"
-            app:layout_constraintBottom_toBottomOf="@+id/browsing_fragment_motion_layout"
-            app:layout_constraintEnd_toEndOf="@+id/browsing_fragment_motion_layout">
-
             <ImageView
+                android:id="@+id/browsing_fragment_image_detail_info"
                 android:layout_width="@dimen/icons_size_normal_width"
                 android:layout_height="@dimen/icons_size_normal_height"
+                android:layout_margin="@dimen/base_margin_big"
+                android:padding="@dimen/base_padding_medium"
+                android:background="@drawable/oval_grey_alpha_85"
+                android:onClick="@{(view) -> callback.onShowServiceInfoClick()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:src="@drawable/ic_image_description"
                 tools:ignore="ContentDescription" />
-        </FrameLayout>
 
         <ProgressBar
             android:id="@+id/browsing_fragment_progress_bar"

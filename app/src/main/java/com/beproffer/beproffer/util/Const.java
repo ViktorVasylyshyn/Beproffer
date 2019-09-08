@@ -100,7 +100,6 @@ public class Const {
 
     /*TODO пока что, максимальное количество взято из головы. со временем определить
      * оптимальные цифры для константы*/
-    public static final int MAX_NUM_OF_IMAGES_IN_ADAPTER = 13;
 
     public static final int COOLDOWNDUR_SHORT = 1500;
     public static final int COOLDOWNDUR_LONG = 3000; /*заморозка повторного нажатия вью элементов после предыдущего.
@@ -119,9 +118,12 @@ public class Const {
     /*TODO со временем определить, сколько изображений, после входа в приложение, просматривает
      * среднестатистический пользователь. Сделать константу BROWSING_REFS_LIST_MAX_SIZE на 10-20% больше,
      * чем количество просмотров за один старт приложения. Предполагается, что это ограничит количество
-     * запросо в базу данных, и не так будет нагружать систуму, но при этом и не держать в list
+     * запросо в базу данных, и не так будет нагружать систему, но при этом и не держать в list
      * сотни объектов BrowsingImageSearchRef*/
     public static final int BROWSING_REFS_LIST_MAX_SIZE = 50;
+    /*TODO список подающийся непосредственно в BrowsingFragment сделать 10-15шт*/
+    public static final int BROWSING_REFS_LIST_SIZE = 5;
+
     public static final String ERROR = "ERROR"; /*the constant for the logcat filter*/
 
     /* макс размеры изображений */
