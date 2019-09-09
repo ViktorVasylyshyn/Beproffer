@@ -21,7 +21,7 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/base_padding_medium"
+        android:paddingBottom="@dimen/base_margin_medium"
         android:layout_marginBottom="@dimen/bnb_icon_size" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

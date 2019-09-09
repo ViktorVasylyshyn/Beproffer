@@ -134,13 +134,7 @@ public class BrowsingFragment extends BaseUserInfoFragment {
             if (browsingItemsList == null)
                 return;
             mBrowsingItemRefsList = browsingItemsList;
-            if(mBrowsingItemRefsList.isEmpty())
-                resetSession();
-            if (mBinding.browsingFragmentFirstCardImage.getDrawable() == null ||
-                    mBinding.browsingFragmentSecondCardImage.getDrawable() == null ||
-                    mBinding.browsingFragmentThirdCardImage.getDrawable() == null) {
                 updateCardsRepo();
-            }
         });
         /*актив\неактив прогресс бар*/
         mBrowsingViewModel.getShowProgress().observe(getViewLifecycleOwner(), progress -> {

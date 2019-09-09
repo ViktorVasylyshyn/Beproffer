@@ -120,9 +120,9 @@ public class Const {
      * чем количество просмотров за один старт приложения. Предполагается, что это ограничит количество
      * запросо в базу данных, и не так будет нагружать систему, но при этом и не держать в list
      * сотни объектов BrowsingImageSearchRef*/
-    public static final int BROWSING_REFS_LIST_MAX_SIZE = 50;
+    public static final int BROWSING_REFS_LIST_MAX_SIZE = 64;
     /*TODO список подающийся непосредственно в BrowsingFragment сделать 10-15шт*/
-    public static final int BROWSING_REFS_LIST_SIZE = 5;
+    public static final int BROWSING_REFS_LIST_SIZE = 16;
 
     public static final String ERROR = "ERROR"; /*the constant for the logcat filter*/
 

@@ -159,7 +159,8 @@ public class BrowsingItemsRepository {
         if (mBrowsingHistoryRepository == null)
             mBrowsingHistoryRepository = new BrowsingHistoryRepository(mApplication);
         mBrowsingHistoryRepository.deleteWholeBrowsingHistory();
-        mActualBrowsingHistory.clear();
+        if (mActualBrowsingHistory != null)
+            mActualBrowsingHistory.clear();
         syncLiveData(null, CLEAR_ALL);
         feedBackToUi(false, R.string.toast_browsing_history_cleared, false, null);
     }
@@ -225,17 +226,22 @@ public class BrowsingItemsRepository {
     };
 
     private void filterBrowsingItemRefs() {
+        Log.d(Const.ERROR, "filterBrowsingItemRefs");
         if (mCurrentDataSnapshot == null) {
+            Log.d(Const.ERROR, "filterBrowsingItemRefs mCurrentDataSnapshot == null");
             obtainImageRefsFromDb();
             return;
         }
 
         if (!mBrowsingItemRefStorageList.isEmpty()) {
+            Log.d(Const.ERROR, "filterBrowsingItemRefs !mBrowsingItemRefStorageList.isEmpty()");
             for (int i = 0; i < Const.BROWSING_REFS_LIST_SIZE; i++) {
                 if (!mBrowsingItemRefStorageList.isEmpty()) {
-                    syncLiveData(mBrowsingItemRefStorageList.get(0),ADD_NEW);
+                    syncLiveData(mBrowsingItemRefStorageList.get(0), ADD_NEW);
                     mBrowsingItemRefStorageList.remove(0);
+                    Log.d(Const.ERROR, "filterBrowsingItemRefs mBrowsingItemRefStorageList.size is: " + mBrowsingItemRefStorageList.size());
                 } else {
+                    Log.d(Const.ERROR, "filterBrowsingItemRefs mBrowsingItemRefStorageList.isEmpty()");
                     return;
                 }
             }
@@ -248,6 +254,7 @@ public class BrowsingItemsRepository {
 
         for (DataSnapshot snapshot : mCurrentDataSnapshot.getChildren()) {
             BrowsingItemRef itemRef = snapshot.getValue(BrowsingItemRef.class);
+            Log.d(Const.ERROR, "filterBrowsingItemRefs DataSnapshot filtration");
 
             if (mUser != null && !mActualBrowsingHistory.contains(itemRef.getUrl())) {
                 handleBrowsingItemRef(itemRef);
@@ -255,7 +262,7 @@ public class BrowsingItemsRepository {
                 handleBrowsingItemRef(itemRef);
             }
             /*список mBrowsingItemRefsStorageList уже достаточно наполнен, но mCurrentDataSnapshot проитерован не полностью*/
-            if (mBrowsingItemRefList.size() > Const.BROWSING_REFS_LIST_SIZE) {
+            if (mBrowsingItemRefStorageList.size() > Const.BROWSING_REFS_LIST_MAX_SIZE) {
                 mShowProgress.setValue(false);
                 return;
             }
@@ -274,6 +281,7 @@ public class BrowsingItemsRepository {
     private void handleBrowsingItemRef(@NonNull BrowsingItemRef itemRef) {
         if (mBrowsingItemRefList.size() > Const.BROWSING_REFS_LIST_SIZE) {
             mBrowsingItemRefStorageList.add(itemRef);
+            Log.d(Const.ERROR, "mBrowsingItemRefStorageList size is: " + mBrowsingItemRefStorageList.size());
             return;
         }
         syncLiveData(itemRef, ADD_NEW);
@@ -337,8 +345,17 @@ public class BrowsingItemsRepository {
         когда история просмотров не фиксируется. Старт новой фильтрации для авторизированных пользователей,
          которые имеют историю просмотров находится в obtainBrowsingHistory()*/
         if (mBrowsingItemRefList.isEmpty() && mUser == null) {
-            filterBrowsingItemRefs();
-            feedBackToUi(false, R.string.toast_images_for_guest_mode, false, null);
+            /*Если показ изображений пошел повторно, то пользователю должно показаться сообщение, о
+            том, что изображения могут повторяться, если же, mBrowsingItemRefStorageList еще содержит
+             не показанные гостю - то сообщение не должно показаться*/
+            if (mBrowsingItemRefStorageList.isEmpty()) {
+                feedBackToUi(false, R.string.toast_images_for_guest_mode, false, null);
+                refreshAdapter();
+            } else {
+                feedBackToUi(false, null, false, null);
+                filterBrowsingItemRefs();
+
+            }
         }
     }
 

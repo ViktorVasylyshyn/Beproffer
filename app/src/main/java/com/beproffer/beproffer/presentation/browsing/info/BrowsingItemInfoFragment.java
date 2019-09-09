@@ -179,6 +179,7 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
                 .child(Const.VOTES)
                 .child(section)
                 .child(mCurrentUserInfo.getId())
+                .child(mItem.getKey())
                 .setValue(mItem)
                 .addOnSuccessListener(aVoid -> {
                     mBinding.browsingImageInfoVoteTopHint.setText(R.string.hint_any_prohibited_content);

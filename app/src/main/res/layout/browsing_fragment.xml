@@ -169,8 +169,8 @@
 
             <ImageView
                 android:id="@+id/browsing_fragment_image_detail_info"
-                android:layout_width="@dimen/icons_size_normal_width"
-                android:layout_height="@dimen/icons_size_normal_height"
+                android:layout_width="@dimen/profile_image_half"
+                android:layout_height="@dimen/profile_image_half"
                 android:layout_margin="@dimen/base_margin_big"
                 android:padding="@dimen/base_padding_medium"
                 android:background="@drawable/oval_grey_alpha_85"
