@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="fragmentCallback"
             type="com.beproffer.beproffer.presentation.info.InfoFragmentCallback" />
@@ -81,37 +82,57 @@
             app:layout_constraintTop_toBottomOf="@id/info_fragment_contact_us_email" />
 
         <ImageView
-            android:id="@+id/info_fragment_telegram"
-            android:layout_width="@dimen/profile_image_half"
-            android:layout_height="@dimen/profile_image_half"
-            android:onClick="@{(view)->fragmentCallback.onTelegramClicked()}"
-            android:src="@drawable/ic_telegram"
-            app:layout_constraintBottom_toBottomOf="@+id/info_fragment_viber"
-            app:layout_constraintTop_toTopOf="@+id/info_fragment_viber"
-            app:layout_constraintEnd_toStartOf="@+id/info_fragment_viber"
-            tools:ignore="ContentDescription" />
-
-        <ImageView
             android:id="@+id/info_fragment_viber"
-            android:layout_width="@dimen/profile_image_three_quarters"
-            android:layout_height="@dimen/profile_image_three_quarters"
-            android:layout_margin="@dimen/base_margin_medium"
+            android:layout_width="@dimen/icons_size_normal_width"
+            android:layout_height="@dimen/icons_size_normal_height"
+            android:layout_marginStart="@dimen/base_margin_big"
+            android:layout_marginTop="@dimen/base_margin_medium"
+            android:layout_marginBottom="@dimen/base_margin_medium"
+            android:layout_marginEnd="@dimen/base_margin_medium"
             android:onClick="@{(view)->fragmentCallback.onViberClicked()}"
             android:src="@drawable/ic_viber"
             app:layout_constraintBottom_toTopOf="@+id/info_fragment_terms_of_use"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/info_fragment_telegram"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="ContentDescription" />
 
         <ImageView
+            android:id="@+id/info_fragment_telegram"
+            android:layout_width="@dimen/icons_size_normal_width"
+            android:layout_height="@dimen/icons_size_normal_height"
+            android:layout_margin="@dimen/base_margin_medium"
+            android:onClick="@{(view)->fragmentCallback.onTelegramClicked()}"
+            android:src="@drawable/ic_telegram"
+            app:layout_constraintBottom_toTopOf="@+id/info_fragment_terms_of_use"
+            app:layout_constraintEnd_toStartOf="@+id/info_fragment_facebook"
+            app:layout_constraintStart_toEndOf="@+id/info_fragment_viber"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
             android:id="@+id/info_fragment_facebook"
-            android:layout_width="@dimen/profile_image_half"
-            android:layout_height="@dimen/profile_image_half"
+            android:layout_width="@dimen/icons_size_normal_width"
+            android:layout_height="@dimen/icons_size_normal_height"
+            android:layout_margin="@dimen/base_margin_medium"
             android:onClick="@{(view)->fragmentCallback.onFacebookClicked()}"
             android:src="@drawable/ic_facebook"
-            app:layout_constraintBottom_toBottomOf="@+id/info_fragment_viber"
-            app:layout_constraintTop_toTopOf="@+id/info_fragment_viber"
-            app:layout_constraintStart_toEndOf="@+id/info_fragment_viber"
+            app:layout_constraintBottom_toTopOf="@+id/info_fragment_terms_of_use"
+            app:layout_constraintEnd_toEndOf="@+id/info_fragment_instagram"
+            app:layout_constraintStart_toEndOf="@+id/info_fragment_telegram"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/info_fragment_instagram"
+            android:layout_width="@dimen/icons_size_normal_width"
+            android:layout_height="@dimen/icons_size_normal_height"
+            android:onClick="@{(view)->fragmentCallback.onInstagramClicked()}"
+            android:layout_marginStart="@dimen/base_margin_medium"
+            android:layout_marginTop="@dimen/base_margin_medium"
+            android:layout_marginBottom="@dimen/base_margin_medium"
+            android:layout_marginEnd="@dimen/base_margin_big"
+            android:src="@drawable/ic_instagram"
+            app:layout_constraintBottom_toTopOf="@+id/info_fragment_terms_of_use"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/info_fragment_facebook"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -146,10 +167,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base_margin_medium"
             android:layout_marginEnd="@dimen/base_margin_medium"
-            android:layout_marginBottom="@dimen/profile_image_half"
+            android:layout_marginBottom="@dimen/base_margin_medium"
+            android:gravity="center"
             android:paddingStart="@dimen/base_padding_small"
             android:paddingEnd="@dimen/base_padding_small"
-            android:gravity="center"
             android:text="@string/app_all_rights_reserved"
             android:textColor="@color/color_base_text"
             android:textSize="@dimen/base_text_size_medium"

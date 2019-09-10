@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.constraintlayout.motion.widget.TransitionAdapter;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.beproffer.beproffer.R;
@@ -26,6 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BrowsingFragment extends BaseUserInfoFragment {
+
+    protected final ObservableBoolean mShowSearchSign = new ObservableBoolean(false);
+
 
     private BrowsingFragmentBinding mBinding;
     private BrowsingViewModel mBrowsingViewModel;
@@ -88,6 +92,7 @@ public class BrowsingFragment extends BaseUserInfoFragment {
         super.onActivityCreated(savedInstanceState);
         mBinding.setShowProgress(mShowProgress);
         mBinding.setCallback(mCallback);
+        mBinding.setShowSearchSign(mShowSearchSign);
 
         mMotionLayout = mBinding.browsingFragmentMotionLayout;
         mMotionLayout.setTransitionListener(mTransitionAdapter);
@@ -134,12 +139,15 @@ public class BrowsingFragment extends BaseUserInfoFragment {
             if (browsingItemsList == null)
                 return;
             mBrowsingItemRefsList = browsingItemsList;
-                updateCardsRepo();
+            updateCardsRepo();
         });
         /*актив\неактив прогресс бар*/
         mBrowsingViewModel.getShowProgress().observe(getViewLifecycleOwner(), progress -> {
-            if (progress != null)
-                showProgress(progress);
+            if (progress == null)
+                return;
+            showProgress(progress);
+            if (progress)
+                mShowSearchSign.set(false);
         });
         /*показ тостов*/
         mBrowsingViewModel.getShowToast().observe(getViewLifecycleOwner(), resId -> {
@@ -165,6 +173,7 @@ public class BrowsingFragment extends BaseUserInfoFragment {
 
     private void updateCardsRepo() {
         if (mBrowsingItemRefsList.isEmpty()) {
+            mShowSearchSign.set(true);
             resetSession();
             return;
         }
@@ -241,6 +250,7 @@ public class BrowsingFragment extends BaseUserInfoFragment {
             showToast(R.string.toast_no_internet_connection);
             return;
         }
+        mShowSearchSign.set(false);
         changeFragment(new SearchFragment(), true, false, true, null);
     }
 }

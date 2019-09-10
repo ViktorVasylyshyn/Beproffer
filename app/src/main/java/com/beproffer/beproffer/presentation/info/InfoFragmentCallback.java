@@ -14,4 +14,6 @@ public interface InfoFragmentCallback {
     void onViberClicked();
 
     void onFacebookClicked();
+
+    void onInstagramClicked();
 }

@@ -118,7 +118,7 @@
             tools:ignore="Autofill" />
 
         <TextView
-            android:id="@+id/edit_fragment_main_specialization_title"
+            android:id="@+id/edit_fragment_main_specialization"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/base_margin_extra_small"
@@ -128,7 +128,8 @@
             android:visibility="@{isUserSpecialist ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_fragment_about_me" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_fragment_about_me"
+            app:setSpecialistTypeTitle="@{userInfo.specialization}"/>
 
         <HorizontalScrollView
             android:id="@+id/edit_fragment_scroll_service_view"
@@ -143,7 +144,7 @@
             android:visibility="@{isUserSpecialist ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_fragment_main_specialization_title"
+            app:layout_constraintTop_toBottomOf="@+id/edit_fragment_main_specialization"
             tools:ignore="RtlSymmetry">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -213,19 +214,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </HorizontalScrollView>
-
-        <TextView
-            android:id="@+id/edit_fragment_main_specialization"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/base_margin_extra_small"
-            android:textColor="@color/color_base_text"
-            android:textSize="@dimen/base_text_size_medium"
-            android:visibility="@{isUserSpecialist ? View.VISIBLE : View.GONE}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_fragment_scroll_service_view"
-            app:setSpecialistTypeTitle="@{userInfo.specialization}" />
 
         <EditText
             android:id="@+id/edit_fragment_about_me"

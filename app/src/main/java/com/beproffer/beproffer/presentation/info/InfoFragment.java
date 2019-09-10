@@ -65,8 +65,15 @@ public class InfoFragment extends BaseUserInfoFragment {
         public void onFacebookClicked() {
             /*вызов группы на девайсе не предлагает открыть группу через фейсбук приложение, а только
              * через браузеры. почему так понять не могу. оставляю пока что так.*/
-            if (mCurrentUserInfo != null && mCurrentUserInfo.getType().equals(Const.SPEC)) {
+            if (mCurrentUserInfo != null) {
                 openDoc(R.string.href_facebook_page);
+            }
+        }
+
+        @Override
+        public void onInstagramClicked() {
+            if (mCurrentUserInfo != null) {
+                openDoc(R.string.href_instagram_page);
             }
         }
     };

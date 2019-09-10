@@ -44,6 +44,7 @@ public class ResetPasswordFragment extends BaseFragment {
             mBinding.resetPasswordFragmentEmail.requestFocus();
             return;
         }
+        hideKeyboard(requireActivity());
         showProgress(true);
         mAuth.sendPasswordResetEmail(mBinding.resetPasswordFragmentEmail.getText().toString()).
                 addOnCompleteListener(task -> {

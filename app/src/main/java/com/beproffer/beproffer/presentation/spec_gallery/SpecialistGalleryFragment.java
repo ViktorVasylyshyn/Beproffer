@@ -75,5 +75,11 @@ public class SpecialistGalleryFragment extends BaseGalleryFragment {
         mUserDataViewModel.setEditableGalleryItem(editableItem);
         changeFragment(new SpecialistGalleryEditFragment(), true, false, false, null);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        hideKeyboard(requireActivity());
+    }
 }
 

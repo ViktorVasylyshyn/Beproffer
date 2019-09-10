@@ -57,6 +57,7 @@
     <string name="href_viber_chat_customers">https://invite.viber.com/?g2=AQATP13AdMH6M0oUzCUTcg75bBcL4qcWS72dKYPVLOL1fqTuHOB%2FXbsw%2BrHvZSLH</string>
     <string name="href_viber_chat_specialists">https://invite.viber.com/?g2=AQAJVtpDxpdMMEoU3JqJjwNDXuNOM0GnZu%2FDu82uths%2FRhzGMfzEX7OChNW967CM</string>
     <string name="href_facebook_page">fb://page/102981521053885</string>
+    <string name="href_instagram_page">https://www.instagram.com/beproffer/</string>
 
     <string name="package_id_telegram">org.telegram.messenger</string>
     <string name="package_id_viber">com.viber.voip</string>

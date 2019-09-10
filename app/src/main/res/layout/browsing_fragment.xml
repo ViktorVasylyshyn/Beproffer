@@ -10,6 +10,10 @@
             type="androidx.databinding.ObservableBoolean" />
 
         <variable
+            name="showSearchSign"
+            type="androidx.databinding.ObservableBoolean" />
+
+        <variable
             name="callback"
             type="com.beproffer.beproffer.presentation.browsing.BrowsingFragmentCallback" />
 
@@ -39,6 +43,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="@dimen/profile_image"
+            android:layout_height="@dimen/profile_image"
+            android:src="@drawable/ic_search_active"
+            android:visibility="@{showSearchSign ? View.VISIBLE : View.GONE}"
+            android:onClick="@{(view) -> callback.onSearchClick()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
+            />
 
         <TextView
             android:id="@+id/browsing_fragment_text_message"
@@ -152,33 +169,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/oval_grey_alpha_85"
+                android:elevation="2dp"
                 android:src="@drawable/ic_like_85"
-                tools:ignore="ContentDescription"
-                android:elevation="2dp"/>
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/browsing_fragment_dislike_icon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/oval_grey_alpha_85"
+                android:elevation="2dp"
                 android:src="@drawable/ic_dislike_85"
-                tools:ignore="ContentDescription"
-                android:elevation="2dp"/>
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
-            <ImageView
-                android:id="@+id/browsing_fragment_image_detail_info"
-                android:layout_width="@dimen/profile_image_half"
-                android:layout_height="@dimen/profile_image_half"
-                android:layout_margin="@dimen/base_margin_big"
-                android:padding="@dimen/base_padding_medium"
-                android:background="@drawable/oval_grey_alpha_85"
-                android:onClick="@{(view) -> callback.onShowServiceInfoClick()}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/ic_image_description"
-                tools:ignore="ContentDescription" />
+        <ImageView
+            android:id="@+id/browsing_fragment_image_detail_info"
+            android:layout_width="@dimen/profile_image_half"
+            android:layout_height="@dimen/profile_image_half"
+            android:layout_margin="@dimen/base_margin_big"
+            android:background="@drawable/oval_grey_alpha_85"
+            android:onClick="@{(view) -> callback.onShowServiceInfoClick()}"
+            android:padding="@dimen/base_padding_medium"
+            android:src="@drawable/ic_image_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="ContentDescription" />
 
         <ProgressBar
             android:id="@+id/browsing_fragment_progress_bar"

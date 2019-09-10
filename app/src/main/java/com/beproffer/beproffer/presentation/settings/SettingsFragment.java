@@ -1,21 +1,21 @@
 package com.beproffer.beproffer.presentation.settings;
 
-import androidx.lifecycle.ViewModelProviders;
-import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.SettingsFragmentLayoutBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
-import com.beproffer.beproffer.presentation.browsing.BrowsingFragment;
-import com.beproffer.beproffer.presentation.sign_in_up.change_password.ResetPasswordFragment;
 import com.beproffer.beproffer.presentation.browsing.BrowsingViewModel;
+import com.beproffer.beproffer.presentation.sign_in_up.change_password.ResetPasswordFragment;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -100,7 +100,7 @@ public class SettingsFragment extends BaseUserInfoFragment {
             mBinding.settingsDeleteAccountEmail.requestFocus();
             return;
         }
-
+        hideKeyboard(requireActivity());
         try {
             /*согласно этому удалению - юзер удаляется из аутентификации, в дерево users\deleted
              помещается соответствующая запись с его айди и типом юзера. но при этом, его данные остаются в

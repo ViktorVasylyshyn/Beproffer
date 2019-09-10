@@ -53,8 +53,9 @@
 
         <ImageView
             android:id="@+id/sign_in_fragment_show_password"
-            android:layout_width="@dimen/bnb_icon_size"
-            android:layout_height="@dimen/bnb_icon_size"
+            android:layout_width="@dimen/icons_size_small_width"
+            android:layout_height="@dimen/icons_size_small_width"
+            android:layout_marginEnd="@dimen/base_margin_big"
             android:onClick="@{fragmentCallback::onShowPasswordClicked}"
             android:src="@drawable/ic_pass_hide"
             app:layout_constraintBottom_toBottomOf="@+id/sign_in_fragment_password"
