@@ -66,8 +66,8 @@
     <string name="title_create_an_acc">или создать новый аккаунт</string>
     <string name="title_customer_registration">НОВЫЙ КЛИЕНТ</string>
     <string name="title_specialist_registration">НОВЫЙ МАСТЕР</string>
-    <string name="title_send_contact_request">ДОБАВИТЬ СПЕЦИАЛИСТА В КОНТАКТЫ</string>
-    <string name="title_request_already_sent">ЗАПРОС ОТПРАВЛЕНО</string>
+    <string name="title_send_contact_request">добавить специалиста в контакты</string>
+    <string name="title_request_already_sent">запрос отправлен</string>
     <string name="title_contact_already_available">УЖЕ ЕСТЬ В КОНТАКТАХ</string>
     <string name="title_max_num_of_contacts">МАКСИМУМ</string>
     <string name="title_this_is_your_image">ЭТО ВАШЕ ИЗОБРАЖЕНИЕ</string>

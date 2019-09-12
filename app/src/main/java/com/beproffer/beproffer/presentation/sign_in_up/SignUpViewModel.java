@@ -39,14 +39,20 @@ public class SignUpViewModel extends AndroidViewModel {
         return mRepository.getHideKeyboard();
     }
 
+    public LiveData<Boolean> getVerifyEmail(){
+        return mRepository.getVerifyEmail();
+    }
+
     public void resetValues(@NonNull Boolean resetToast,
                             @NonNull Boolean resetPopBackStack,
                             @NonNull Boolean resetErrorMessage,
-                            @NonNull Boolean resetHideKeyboard) {
+                            @NonNull Boolean resetHideKeyboard,
+                            @NonNull Boolean resetVerifyEmail) {
         mRepository.resetValues(resetToast,
                 resetPopBackStack,
                 resetErrorMessage,
-                resetHideKeyboard);
+                resetHideKeyboard,
+                resetVerifyEmail);
     }
 
     public void signUpNewUser(String userEmail,

@@ -69,8 +69,8 @@
     <string name="title_create_an_acc">or create new account</string>
     <string name="title_customer_registration">NEW CUSTOMER</string>
     <string name="title_specialist_registration">NEW SPECIALIST</string>
-    <string name="title_send_contact_request">ADD SPECIALIST TO CONTACTS</string>
-    <string name="title_request_already_sent">REQUEST SENT</string>
+    <string name="title_send_contact_request">add specialist to contacts</string>
+    <string name="title_request_already_sent">request sent</string>
     <string name="title_contact_already_available">YOU ALREADY HAVE THIS NUMBER </string>
     <string name="title_max_num_of_contacts">THE MAX NUM OF CONTACTS IS 10</string>
     <string name="title_this_is_your_image">THIS IS YOUR IMAGE</string>

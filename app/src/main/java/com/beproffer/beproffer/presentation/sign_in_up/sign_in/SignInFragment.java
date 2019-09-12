@@ -16,6 +16,7 @@ import com.beproffer.beproffer.databinding.SignInFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseFragment;
 import com.beproffer.beproffer.presentation.browsing.BrowsingViewModel;
 import com.beproffer.beproffer.presentation.profile.profile.ProfileFragment;
+import com.beproffer.beproffer.presentation.sign_in_up.SignUpViewModel;
 import com.beproffer.beproffer.presentation.sign_in_up.change_password.ResetPasswordFragment;
 import com.beproffer.beproffer.presentation.sign_in_up.sign_up.SignUpFragment;
 import com.beproffer.beproffer.util.Const;
@@ -26,6 +27,8 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 public class SignInFragment extends BaseFragment {
 
     private SignInFragmentBinding mBinding;
+
+    private SignUpViewModel mSignUpViewModel;
 
     private final SingInFragmentCallback mCallback = new SingInFragmentCallback() {
 
@@ -85,6 +88,7 @@ public class SignInFragment extends BaseFragment {
         if (getFirebaseUser() != null) {
             performOnBottomNavigationBarItemClick(R.id.bnm_images_gallery, null);
         }
+        signUpRepoSync();
     }
 
     private void signIn() {
@@ -108,6 +112,8 @@ public class SignInFragment extends BaseFragment {
         }
         showProgress(true);
         processing(true);
+        mSignUpViewModel.resetValues(false, false,false,
+                false, true);
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
         auth.signInWithEmailAndPassword(mBinding.signInFragmentEmail.getText().toString(), mBinding.signInFragmentPassword.getText()
@@ -155,6 +161,19 @@ public class SignInFragment extends BaseFragment {
     private void hideErrorMessage() {
         mBinding.signInBottomHint1.setText(getResources().getText(R.string.string_res_without_text));
         mBinding.signInBottomHint1.setTextColor(getResources().getColor(R.color.color_base_text));
+    }
+
+    private void signUpRepoSync() {
+        mSignUpViewModel = ViewModelProviders.of(requireActivity()).get((SignUpViewModel.class));
+        mSignUpViewModel.getVerifyEmail().observe(getViewLifecycleOwner(), verify -> {
+            if (verify == null)
+                return;
+            if (verify) {
+                showErrorMessage(R.string.toast_sign_up_email_verification);
+            } else {
+                hideErrorMessage();
+            }
+        });
     }
 
     @Override

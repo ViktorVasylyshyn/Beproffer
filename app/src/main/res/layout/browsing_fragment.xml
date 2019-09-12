@@ -192,6 +192,7 @@
             android:background="@drawable/oval_grey_alpha_85"
             android:onClick="@{(view) -> callback.onShowServiceInfoClick()}"
             android:padding="@dimen/base_padding_medium"
+            android:visibility="gone"
             android:src="@drawable/ic_image_description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
