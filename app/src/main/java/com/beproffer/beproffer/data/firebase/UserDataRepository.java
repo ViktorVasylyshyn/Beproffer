@@ -425,7 +425,6 @@ public class UserDataRepository {
         if (mUserDataSnapShot.hasChild(Const.CONTACT) && mContactsMap.isEmpty() && !mContactsObtained.equals(mCurrentUserId)) {
             for (DataSnapshot data : mUserDataSnapShot.child(Const.CONTACT).getChildren()) {
                 try {
-
                     mDatabaseRef.child(Const.USERS).child(Const.SPEC).child(data.getKey()).child(Const.INFO)
                             .addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
@@ -434,6 +433,7 @@ public class UserDataRepository {
                              изображение, и у них в описании нет profileImageUrl ключа - то обязать их
                              загружать изображение профайла, перед тем как разрешать подтверждать запросы*/
                                     if (dataSnapshot.exists()) {
+                                        mShowProgress.setValue(false);
                                         try {
                                             mContactsMap.put(dataSnapshot.getValue(ContactItem.class).getId()
                                                     , dataSnapshot.getValue(ContactItem.class));
@@ -464,9 +464,9 @@ public class UserDataRepository {
             }
             mContactsObtained = mCurrentUserId;
         } else {
+            mShowProgress.setValue(false);
             mContactsMapLiveData.setValue(mContactsMap);
         }
-        mShowProgress.setValue(false);
         return mContactsMapLiveData;
     }
 
@@ -500,6 +500,7 @@ public class UserDataRepository {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.exists()) {
+                                        mShowProgress.setValue(false);
                                 /*TODO обратить внимание, будет ли крашится, если в инфо
                                    запрашиваемого пользователя нет ключа с url изображения*/
                                         mContactRequestsMap.put(dataSnapshot.getValue(ContactRequestItem.class).getId()
@@ -507,7 +508,6 @@ public class UserDataRepository {
                                         mContactRequestsMapLiveData.setValue(mContactRequestsMap);
                                     }
                                 }
-
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
                                     Log.d(Const.ERROR, "getContactRequests.onCancelled: " + databaseError.getMessage());
@@ -522,6 +522,7 @@ public class UserDataRepository {
             mContactRequestsMapLiveData.setValue(mContactRequestsMap);
             mRequestsObtained = mCurrentUserId;
         } else {
+            mShowProgress.setValue(false);
             mContactRequestsMapLiveData.setValue(mContactRequestsMap);
         }
         mShowProgress.setValue(false);

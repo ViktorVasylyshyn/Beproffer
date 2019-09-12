@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import static android.content.Context.MODE_PRIVATE;
 
-class SignUpRepository {
+public class SignUpRepository {
 
     private final Application mApplication;
 
@@ -31,6 +31,8 @@ class SignUpRepository {
     private final MutableLiveData<Boolean> mHideKeyboard = new MutableLiveData<>();
     /*устанавливает фокус на поле, которое требует изменения и выдает соответствующее сообщение рядом*/
     private final MutableLiveData<Integer> mErrorMessageId = new MutableLiveData<>();
+
+    private final MutableLiveData<Boolean> mVerifyEmail = new MutableLiveData<>();
 
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
@@ -103,6 +105,7 @@ class SignUpRepository {
                 .child(Const.INFO)
                 .setValue(userInfo).addOnSuccessListener(aVoid -> {
             FirebaseAuth.getInstance().signOut();
+            mVerifyEmail.postValue(true);
             feedBackToUi(false, R.string.toast_sign_up_email_verification,
                     true, null, false, true);
         })
@@ -137,10 +140,15 @@ class SignUpRepository {
         return mHideKeyboard;
     }
 
+    public LiveData<Boolean> getVerifyEmail(){
+        return mVerifyEmail;
+    }
+
     public void resetValues(@NonNull Boolean resetToast,
                             @NonNull Boolean resetPopBackStack,
                             @NonNull Boolean resetErrorMessage,
-                            @NonNull Boolean resetHideKeyboard) {
+                            @NonNull Boolean resetHideKeyboard,
+                            @NonNull Boolean resetVerifyEmail) {
         if (resetToast) {
             mToastRes.setValue(null);
         }
@@ -152,6 +160,9 @@ class SignUpRepository {
         }
         if (resetHideKeyboard) {
             mHideKeyboard.setValue(null);
+        }
+        if (resetVerifyEmail){
+            mVerifyEmail.setValue(false);
         }
     }
 

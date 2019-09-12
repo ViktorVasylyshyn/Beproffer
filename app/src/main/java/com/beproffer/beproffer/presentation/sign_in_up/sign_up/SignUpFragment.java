@@ -156,14 +156,16 @@ public class SignUpFragment extends BaseFragment {
         mSignUpViewModel.getToastId().observe(getViewLifecycleOwner(), toastId -> {
             if (toastId == null)
                 return;
-            mSignUpViewModel.resetValues(true, false, false, false);
+            mSignUpViewModel.resetValues(true, false, false,
+                    false, false);
             showToast(toastId);
         });
         /*popBackStack*/
         mSignUpViewModel.getPopBackStack().observe(getViewLifecycleOwner(), performPopBackStack -> {
             if (performPopBackStack == null)
                 return;
-            mSignUpViewModel.resetValues(false, true, false, false);
+            mSignUpViewModel.resetValues(false, true, false,
+                    false, false);
             Handler handler = new Handler();
             handler.postDelayed(this::popBackStack, Const.POPBACKSTACK_WAITING);
         });
@@ -171,14 +173,16 @@ public class SignUpFragment extends BaseFragment {
         mSignUpViewModel.getErrorMessageId().observe(getViewLifecycleOwner(), errorMessageId -> {
             if (errorMessageId == null)
                 return;
-            mSignUpViewModel.resetValues(false, false, true, false);
+            mSignUpViewModel.resetValues(false, false, true,
+                    false, false);
             showErrorMessage(errorMessageId);
         });
         /*keyboard*/
         mSignUpViewModel.getHideKeyboard().observe(getViewLifecycleOwner(), hideKeyboard -> {
             if (hideKeyboard == null)
                 return;
-            mSignUpViewModel.resetValues(false, false, false, true);
+            mSignUpViewModel.resetValues(false, false, false,
+                    true, false);
             hideKeyboard(requireActivity());
         });
 

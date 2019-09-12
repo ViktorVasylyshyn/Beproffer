@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -121,7 +120,7 @@ public class BaseFragment extends Fragment {
         textView.setError(getResources().getText(messageId));
     }
 
-    protected String editInputText(String inputRes){
+    protected String editInputText(String inputRes) {
         /*заменяем повторяющиеся отступы в средине на один отступ + обрезаем отступы вначале и конце*/
         String editedRes = inputRes.replaceAll("\\s+", " ");
         return editedRes.trim();
