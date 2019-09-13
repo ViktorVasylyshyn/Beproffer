@@ -230,12 +230,9 @@ public class BrowsingFragment extends BaseUserInfoFragment {
     }
 
     private void loadImage(String url, ImageView view) {
-        /*TODO добавить кэш, если он не добавится по умолчанию. нужен на случай закрытия фрагмента и
-            повторного в него возврата, так же и плейсхолдер. будет ли считаться, что это дровабл?*/
         Glide.with(requireContext())
                 .load(url)
-                .placeholder(R.drawable.service_image_ph)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .into(view);
     }
 

@@ -109,4 +109,12 @@ public class UserDataViewModel extends AndroidViewModel {
     public void resetUserData() {
         mRepository.resetLocalUserData();
     }
+
+    public void resetValues(@NonNull Boolean resetToastResId,
+                            @NonNull Boolean resetHideKeyboard,
+                            @NonNull Boolean resetPopBackStack,
+                            @NonNull Boolean resetMessageResId){
+        mRepository.resetValues(resetToastResId, resetHideKeyboard, resetPopBackStack, resetMessageResId);
+
+    }
 }
