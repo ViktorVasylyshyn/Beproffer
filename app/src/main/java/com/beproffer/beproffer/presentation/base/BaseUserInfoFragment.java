@@ -1,12 +1,13 @@
 package com.beproffer.beproffer.presentation.base;
 
-import androidx.lifecycle.ViewModelProviders;
 import android.os.Handler;
+
+import androidx.lifecycle.ViewModelProviders;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.UserInfo;
-import com.beproffer.beproffer.presentation.activities.MainActivity;
 import com.beproffer.beproffer.presentation.UserDataViewModel;
+import com.beproffer.beproffer.presentation.activities.MainActivity;
 import com.beproffer.beproffer.util.Const;
 
 public class BaseUserInfoFragment extends BaseFragment {
@@ -33,36 +34,41 @@ public class BaseUserInfoFragment extends BaseFragment {
                 return;
             showProgress(progress);
         });
+
         mUserDataViewModel.getProcessing().observe(getViewLifecycleOwner(), processing -> {
             if (processing == null)
                 return;
             processing(processing);
         });
+
         mUserDataViewModel.getShowToast().observe(getViewLifecycleOwner(), resId -> {
             if (resId == null)
                 return;
+            mUserDataViewModel.resetValues(true, false, false, false);
             showToast(resId);
         });
 
         mUserDataViewModel.getHideKeyboard().observe(getViewLifecycleOwner(), hide -> {
-            if (hide == null)
-                return;
-            hideKeyboard(requireActivity());
+            if (hide != null && hide) {
+                mUserDataViewModel.resetValues(false, true, false, false);
+                hideKeyboard(requireActivity());
+            }
         });
 
         mUserDataViewModel.getPopBackStack().observe(getViewLifecycleOwner(), back -> {
-            if (back == null)
-                return;
-            Handler handler = new Handler();
-            handler.postDelayed(this::popBackStack, Const.POPBACKSTACK_WAITING);
+            if (back != null && back) {
+                mUserDataViewModel.resetValues(false, false, true, false);
+                Handler handler = new Handler();
+                handler.postDelayed(this::popBackStack, Const.POPBACKSTACK_WAITING);
+            }
         });
 
         mUserDataViewModel.getMessageResId().observe(getViewLifecycleOwner(), messageResId -> {
             if (messageResId == null)
                 return;
+            mUserDataViewModel.resetValues(false, false, false, true);
             showErrorMessage(messageResId);
         });
-
 
         obtainUserInfo();
     }
@@ -76,7 +82,7 @@ public class BaseUserInfoFragment extends BaseFragment {
         });
     }
 
-    protected void setBadgeIfNeed(){
+    protected void setBadgeIfNeed() {
         if (mCurrentUserInfo.getType().equals(Const.SPEC)) {
             mUserDataViewModel.getIncomingContactRequests().observe(getViewLifecycleOwner(), list -> {
                 if (list != null) {
@@ -93,7 +99,7 @@ public class BaseUserInfoFragment extends BaseFragment {
          * должна начать совершаться, когда данные юзера получены*/
     }
 
-    protected void showErrorMessage(int messageResId){
+    protected void showErrorMessage(int messageResId) {
         /*разная реализация, для разных фрагментов*/
     }
 

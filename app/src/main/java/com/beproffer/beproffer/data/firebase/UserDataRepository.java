@@ -636,6 +636,20 @@ public class UserDataRepository {
         return mMessageResId;
     }
 
+    public void resetValues(@NonNull Boolean resetToastResId,
+                            @NonNull Boolean resetHideKeyboard,
+                            @NonNull Boolean resetPopBackStack,
+                            @NonNull Boolean resetMessageResId) {
+        if (resetToastResId)
+            mShowToast.setValue(null);
+        if (resetHideKeyboard)
+            mHideKeyboard.setValue(false);
+        if (resetPopBackStack)
+            mPopBackStack.setValue(false);
+        if (resetMessageResId)
+            mMessageResId.setValue(null);
+    }
+
     @SuppressWarnings("SameParameterValue")
     private void feedBackToUi(@Nullable Boolean showProgress,
                               @Nullable Integer toastResId,
@@ -649,22 +663,18 @@ public class UserDataRepository {
         }
         if (toastResId != null) {
             mShowToast.setValue(toastResId);
-            mShowToast.setValue(null);
         }
         if (hideKeyboard) {
             mHideKeyboard.setValue(true);
-            mHideKeyboard.setValue(null);
         }
         if (popBackStack) {
             mPopBackStack.setValue(true);
-            mPopBackStack.setValue(null);
         }
         if (processing != null) {
             mProcessing.setValue(false);
         }
         if (messageResId != null) {
             mMessageResId.setValue(messageResId);
-            mMessageResId.setValue(null);
         }
     }
 }

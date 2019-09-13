@@ -2,6 +2,7 @@ package com.beproffer.beproffer.data.firebase;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,10 @@ import com.beproffer.beproffer.data.models.BrowsingImageItem;
 import com.beproffer.beproffer.data.models.BrowsingItemRef;
 import com.beproffer.beproffer.util.Const;
 import com.beproffer.beproffer.util.LocalizationConstants;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -225,6 +230,9 @@ public class BrowsingItemsRepository {
         }
     };
 
+    /*разница между отправленными и принятыми запросами в storage для загрузки изображений*/
+    private int mLoadings = 0;
+
     private void filterBrowsingItemRefs() {
         Log.d(Const.ERROR, "filterBrowsingItemRefs");
         if (mCurrentDataSnapshot == null) {
@@ -269,7 +277,7 @@ public class BrowsingItemsRepository {
             /*весь mCurrentDataSnapshot проитерован, показать юзеру нечего - по этому запросу*/
             handledBrowsingImageRefsNum++;
             if (handledBrowsingImageRefsNum == totalBrowsingImageRefsNum) {
-                if (mBrowsingItemRefList.isEmpty()) {
+                if (mBrowsingItemRefList.isEmpty() && mLoadings == 0) {
                     feedBackToUi(false, null, true, R.string.toast_no_available_images);
                 } else {
                     mShowProgress.setValue(false);
@@ -291,18 +299,42 @@ public class BrowsingItemsRepository {
         switch (action) {
             case REMOVE_FIRST:
                 mBrowsingItemRefList.remove(0);
+                mBrowsingItemRefListLiveData.setValue(mBrowsingItemRefList);
                 break;
             case ADD_NEW:
-                if (browsingItemRef != null) {
-                    mBrowsingItemRefList.add(browsingItemRef);
-                }
-                Log.d(Const.ERROR, "mBrowsingItemRefList size is: " + mBrowsingItemRefList.size());
+                if (browsingItemRef != null)
+                    preloadImageFromDb(browsingItemRef);
                 break;
             case CLEAR_ALL:
                 mBrowsingItemRefList.clear();
                 mBrowsingItemRefStorageList.clear();
+                Glide.get(mApplication.getApplicationContext()).clearMemory();
+                mBrowsingItemRefListLiveData.setValue(mBrowsingItemRefList);
         }
-        mBrowsingItemRefListLiveData.setValue(mBrowsingItemRefList);
+    }
+
+    private void preloadImageFromDb(BrowsingItemRef browsingItemRef) {
+        /*добавляем в mBrowsingItemRefList объекты browsingItemRef только в том случае, если произошел
+         * preload изображения в кеш. при загрузке сразу в imageView часто изображение не успевает
+         * загрузиться а пользователь уже свайпает. это дает сбои.*/
+        mLoadings++;
+        Glide.with(mApplication.getApplicationContext())
+                .load(browsingItemRef.getUrl())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(new CustomTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        mBrowsingItemRefList.add(browsingItemRef);
+                        mBrowsingItemRefListLiveData.setValue(mBrowsingItemRefList);
+                        Log.d(Const.ERROR, "mBrowsingItemRefList size is: " + mBrowsingItemRefList.size());
+                        mLoadings--;
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                        mLoadings--;
+                    }
+                });
     }
 
     public void obtainBrowsingItemDetailInfo(BrowsingItemRef itemRef) {
