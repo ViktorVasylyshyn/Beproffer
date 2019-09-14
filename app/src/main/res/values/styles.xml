@@ -58,6 +58,9 @@
 
     <style name="ScrollIcons.Margin">
         <item name="android:background">@drawable/button_grey_stroke_rectangle</item>
-        <item name="android:layout_margin">@dimen/base_margin_extra_small</item>
+        <item name="android:layout_marginStart">@dimen/base_margin_extra_small</item>
+        <item name="android:layout_marginTop">@dimen/base_margin_extra_small</item>
+        <item name="android:layout_marginBottom">@dimen/base_margin_extra_small</item>
+        <item name="android:layout_marginEnd">@dimen/base_margin_small</item>
     </style>
 </resources>

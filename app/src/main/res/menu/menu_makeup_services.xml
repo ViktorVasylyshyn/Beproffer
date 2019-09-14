@@ -6,14 +6,18 @@
         android:title="@string/makeup_title_makeup" />
 
     <item
-        android:id="@+id/menu_makeup_permanent"
-        android:title="@string/makeup_title_permanent_makeup" />
-
-    <item
         android:id="@+id/menu_makeup_eyelash_extension"
         android:title="@string/makeup_title_eyelash_extension" />
 
     <item
         android:id="@+id/menu_makeup_eyebrow_styling"
         android:title="@string/makeup_title_eyebrow_styling" />
+
+    <item
+        android:id="@+id/menu_makeup_permanent"
+        android:title="@string/makeup_title_permanent_makeup" />
+
+    <item
+        android:id="@+id/menu_makeup_other"
+        android:title="@string/makeup_title_other" />
 </menu>

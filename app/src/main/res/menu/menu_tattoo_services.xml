@@ -6,6 +6,6 @@
         android:title="@string/tattoo_title_tattoo" />
 
     <item
-        android:id="@+id/menu_tattoo_temporary_tattoo"
-        android:title="@string/tattoo_title_temporary_tattoo" />
+        android:id="@+id/menu_tattoo_other"
+        android:title="@string/tattoo_title_other" />
 </menu>

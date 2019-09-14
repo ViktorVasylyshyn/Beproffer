@@ -32,7 +32,7 @@
     <string name="hint_any_strong_password">Make sure your password is strong.</string>
     <string name="hint_any_browsing_history">Browsing history filter id available only for signed up users.</string>
     <string name="hint_any_prohibited_content">Thank you for your help. Qualitative content of Beproffer is one of our main goals.</string>
-    <string name="hint_any_image_size">Please use images up to 1 MB to display correctly.</string>
+    <string name="hint_any_image_size">Please use images up to 2 MB to display correctly.</string>
     <string name="hint_any_add_more_personal_info">Add information about you, to make your profile more attractive.</string>
     <string name="hint_specialist_add_more_images">Add more images to your gallery, to find more customers.</string>
     <string name="hint_outfield_confirm">confirm</string>
@@ -98,8 +98,6 @@
     <string name="title_specialization_nai">Nails Services</string>
     <string name="title_specialization_mak">Makeup Services</string>
     <string name="title_specialization_tat">Tattoo Services</string>
-    <string name="title_specialization_bar">Barbershop Services</string>
-    <string name="title_specialization_fit">Fitness Services</string>
 
 
     <!--/*Start/SignIn/Registration/e.t.s.*/-->
@@ -110,27 +108,25 @@
 
     <!--Menu Titles-->
     <string name="hair_title_haircut">Haircut</string>
-    <string name="hair_title_extension">Hair Extension</string>
     <string name="hair_title_styling">Styling</string>
-    <string name="hair_title_straightening">Straightening</string>
     <string name="hair_title_dyeing">Dyeing</string>
+    <string name="hair_title_extension">Extension</string>
     <string name="hair_title_braids">Braids, Dreadlocks</string>
+    <string name="hair_title_other">Other(hair)</string>
 
     <string name="nails_title_manicure">Manicure</string>
     <string name="nails_title_pedicure">Pedicure</string>
     <string name="nails_title_extension">Nails Extension</string>
+    <string name="nails_title_other">Other(nails)</string>
 
     <string name="makeup_title_makeup">Makeup</string>
-    <string name="makeup_title_permanent_makeup">Permanent Makeup</string>
     <string name="makeup_title_eyelash_extension">Eyelash Extension</string>
     <string name="makeup_title_eyebrow_styling">Eyebrow Styling</string>
+    <string name="makeup_title_permanent_makeup">Permanent Makeup</string>
+    <string name="makeup_title_other">Other(makeup)</string>
 
     <string name="tattoo_title_tattoo">Tattoo</string>
-    <string name="tattoo_title_temporary_tattoo">Temporary Tattoo</string>
-
-    <string name="fitness_title_trainer">Personal Trainer</string>
-
-    <string name="barber_title_barber">Barbershop</string>
+    <string name="tattoo_title_other">Other(tattoo)</string>
 
     <string name="confirmed_contact_menu_call">call</string>
     <string name="confirmed_contact_menu_delete">delete</string>
@@ -143,7 +139,7 @@
 
     <!--Image Upload Requirements-->
     <string name="iur_requirements">Notice that</string>
-    <string name="iur_requirements_1">1. For better performance it\'s better to use images up to 500 KB and 16:9 or 18:9 proportions. Huge or disproportionate images will be cropped or distorted.</string>
+    <string name="iur_requirements_1">1. For better performance it\'s better to use images up to 2 MB and 16:9 or 18:9 proportions. Huge or disproportionate images will be cropped or distorted.</string>
     <string name="iur_requirements_2">2. The image must show the service which section it posted in.</string>
     <string name="iur_requirements_3">3. The result of your personal work should be shown on the image. Image should\'t contain any editing, color changing, names, logos, personal information etc.</string>
     <string name="iur_requirements_4">4. Service information should be true and understandable.</string>

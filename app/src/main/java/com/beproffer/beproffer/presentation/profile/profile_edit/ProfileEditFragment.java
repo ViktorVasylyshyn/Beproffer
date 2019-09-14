@@ -154,12 +154,6 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
                 case Const.TAT:
                     markActualSpecialistType(mBinding.editFragmentTattooIcon);
                     break;
-                case Const.BAR:
-                    markActualSpecialistType(mBinding.editFragmentBarberIcon);
-                    break;
-                case Const.FIT:
-                    markActualSpecialistType(mBinding.editFragmentFitnessIcon);
-                    break;
                 default:
                     throw new IllegalArgumentException(Const.UNKNSTAT);
             }
@@ -185,14 +179,6 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
                 mainSpecialization = Const.TAT;
                 mBinding.editFragmentMainSpecialization.setText(getResources().getText(R.string.title_specialization_tat));
                 break;
-            case R.id.edit_fragment_barber_icon:
-                mainSpecialization = Const.BAR;
-                mBinding.editFragmentMainSpecialization.setText(getResources().getText(R.string.title_specialization_bar));
-                break;
-            case R.id.edit_fragment_fitness_icon:
-                mainSpecialization = Const.FIT;
-                mBinding.editFragmentMainSpecialization.setText(getResources().getText(R.string.title_specialization_fit));
-                break;
             default:
                 throw new IllegalArgumentException(Const.UNKNSTAT);
         }
@@ -205,8 +191,6 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
         mBinding.editFragmentNailsIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
         mBinding.editFragmentMakeupIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
         mBinding.editFragmentTattooIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
-        mBinding.editFragmentBarberIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
-        mBinding.editFragmentFitnessIcon.setBackgroundResource(R.drawable.button_background_grey_stroke_rectangle);
 
         targetView.setBackground(getResources().getDrawable(R.drawable.button_background_green_stroke_rectangle));
     }
