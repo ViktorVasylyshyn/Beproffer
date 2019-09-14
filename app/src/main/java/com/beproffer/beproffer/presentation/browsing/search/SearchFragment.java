@@ -92,12 +92,6 @@ public class SearchFragment extends BaseFragment {
             case R.id.search_fragment_tattoo_icon:
                 requiredMenuRes = R.menu.menu_tattoo_services;
                 break;
-            case R.id.search_fragment_barber_icon:
-                requiredMenuRes = R.menu.menu_barber_services;
-                break;
-            case R.id.search_fragment_fitness_icon:
-                requiredMenuRes = R.menu.menu_fitness_services;
-                break;
             default:
                 throw new IllegalArgumentException(Const.UNKNSTAT);
         }
@@ -117,8 +111,6 @@ public class SearchFragment extends BaseFragment {
                 mBinding.searchFragmentNailsIcon.setBackgroundResource(R.drawable.button_grey_stroke_rectangle);
                 mBinding.searchFragmentMakeupIcon.setBackgroundResource(R.drawable.button_grey_stroke_rectangle);
                 mBinding.searchFragmentTattooIcon.setBackgroundResource(R.drawable.button_grey_stroke_rectangle);
-                mBinding.searchFragmentBarberIcon.setBackgroundResource(R.drawable.button_grey_stroke_rectangle);
-                mBinding.searchFragmentFitnessIcon.setBackgroundResource(R.drawable.button_grey_stroke_rectangle);
 
                 view.setBackground(getResources().getDrawable(R.drawable.button_background_green_stroke_rectangle));
                 /*this map have service's type, subtype and title*/

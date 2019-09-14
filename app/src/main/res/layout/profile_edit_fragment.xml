@@ -191,26 +191,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription" />
 
-                <ImageView
-                    android:id="@+id/edit_fragment_barber_icon"
-                    style="@style/ScrollIcons.Margin"
-                    android:background="@drawable/button_background_grey_stroke_rectangle"
-                    android:onClick="@{callback::onSpecialistTypeIconClick}"
-                    android:src="@drawable/ic_barbershop"
-                    app:layout_constraintStart_toEndOf="@+id/edit_fragment_tattoo_icon"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="ContentDescription" />
-
-                <ImageView
-                    android:id="@+id/edit_fragment_fitness_icon"
-                    style="@style/ScrollIcons.Margin"
-                    android:background="@drawable/button_background_grey_stroke_rectangle"
-                    android:onClick="@{callback::onSpecialistTypeIconClick}"
-                    android:src="@drawable/ic_fitness"
-                    app:layout_constraintStart_toEndOf="@+id/edit_fragment_barber_icon"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="ContentDescription" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </HorizontalScrollView>

@@ -154,14 +154,8 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
             case R.id.specialist_edit_gallery_item_makeup_icon:
                 requiredMenuRes = R.menu.menu_makeup_services;
                 break;
-            case R.id.specialist_edit_gallery_item_barber_icon:
-                requiredMenuRes = R.menu.menu_barber_services;
-                break;
             case R.id.specialist_edit_gallery_item_tattoo_icon:
                 requiredMenuRes = R.menu.menu_tattoo_services;
-                break;
-            case R.id.specialist_edit_gallery_item_fitness_icon:
-                requiredMenuRes = R.menu.menu_fitness_services;
                 break;
             default:
                 throw new IllegalArgumentException(Const.UNKNSTAT);
@@ -255,12 +249,6 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
             case Const.TAT:
                 targetView = mBinding.specialistEditGalleryItemTattooIcon;
                 break;
-            case Const.BAR:
-                targetView = mBinding.specialistEditGalleryItemBarberIcon;
-                break;
-            case Const.FIT:
-                targetView = mBinding.specialistEditGalleryItemFitnessIcon;
-                break;
             default:
                 throw new IllegalArgumentException(Const.UNKNSTAT);
         }
@@ -268,8 +256,6 @@ public class SpecialistGalleryEditFragment extends BaseUserInfoFragment {
         mBinding.specialistEditGalleryItemNailsIcon.setBackgroundResource(R.drawable.background_transparent);
         mBinding.specialistEditGalleryItemMakeupIcon.setBackgroundResource(R.drawable.background_transparent);
         mBinding.specialistEditGalleryItemTattooIcon.setBackgroundResource(R.drawable.background_transparent);
-        mBinding.specialistEditGalleryItemBarberIcon.setBackgroundResource(R.drawable.background_transparent);
-        mBinding.specialistEditGalleryItemFitnessIcon.setBackgroundResource(R.drawable.background_transparent);
 
         targetView.getParent().requestChildFocus(targetView, targetView);
         targetView.setBackgroundResource(R.drawable.button_background_green_stroke_rectangle);

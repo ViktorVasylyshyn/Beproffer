@@ -85,12 +85,6 @@ public class AppBindingAdapter {
                 case Const.TAT:
                     textResId = R.string.title_specialization_tat;
                     break;
-                case Const.BAR:
-                    textResId = R.string.title_specialization_bar;
-                    break;
-                case Const.FIT:
-                    textResId = R.string.title_specialization_fit;
-                    break;
                 default:
                     throw new IllegalArgumentException(Const.UNKNSTAT);
             }
@@ -114,12 +108,6 @@ public class AppBindingAdapter {
                     break;
                 case Const.TAT:
                     imageResId = R.drawable.ic_tattoo;
-                    break;
-                case Const.BAR:
-                    imageResId = R.drawable.ic_barbershop;
-                    break;
-                case Const.FIT:
-                    imageResId = R.drawable.ic_fitness;
                     break;
                 default:
                     return;
@@ -147,12 +135,6 @@ public class AppBindingAdapter {
                 case Const.TAT:
                     resId = R.drawable.ic_tattoo;
                     break;
-                case Const.BAR:
-                    resId = R.drawable.ic_barbershop;
-                    break;
-                case Const.FIT:
-                    resId = R.drawable.ic_fitness;
-                    break;
                 default:
                     throw new IllegalArgumentException(Const.UNKNSTAT);
             }
@@ -177,14 +159,14 @@ public class AppBindingAdapter {
                 case Const.HAISTY:
                     resId = R.string.hair_title_styling;
                     break;
-                case Const.HAISTR:
-                    resId = R.string.hair_title_straightening;
-                    break;
                 case Const.HAIDYE:
                     resId = R.string.hair_title_dyeing;
                     break;
                 case Const.HAIBRA:
                     resId = R.string.hair_title_braids;
+                    break;
+                case Const.HAIOTH:
+                    resId = R.string.hair_title_other;
                     break;
                 /*nails*/
                 case Const.NAIMAN:
@@ -195,6 +177,9 @@ public class AppBindingAdapter {
                     break;
                 case Const.NAIEXT:
                     resId = R.string.nails_title_extension;
+                    break;
+                case Const.NAIOTH:
+                    resId = R.string.nails_title_other;
                     break;
                 /*makeup*/
                 case Const.MAKMAK:
@@ -209,20 +194,15 @@ public class AppBindingAdapter {
                 case Const.MAKEST:
                     resId = R.string.makeup_title_eyebrow_styling;
                     break;
+                case Const.MAKOTH:
+                    resId = R.string.makeup_title_other;
+                    break;
                 /*tattoo*/
                 case Const.TATTAT:
                     resId = R.string.tattoo_title_tattoo;
                     break;
-                case Const.TATTEM:
-                    resId = R.string.tattoo_title_temporary_tattoo;
-                    break;
-                /*barber*/
-                case Const.BARSTY:
-                    resId = R.string.barber_title_barber;
-                    break;
-                /*fitness*/
-                case Const.FITTRA:
-                    resId = R.string.fitness_title_trainer;
+                case Const.TATOTH:
+                    resId = R.string.tattoo_title_other;
                     break;
                 default:
                     throw new IllegalArgumentException(Const.UNKNSTAT);

@@ -32,33 +32,28 @@ public class Const {
 
     public static final String HAI = "HAI"; /*menu_hair*/
     public static final String HAICUT = "HAICUT"; /*submenu_haircut*/
-    public static final String HAIEXT = "HAIEXT"; /*submenu_hair_extension*/
     public static final String HAISTY = "HAISTY"; /*submenu_styling*/
-    public static final String HAISTR = "HAISTR"; /*submenu_straightening*/
     public static final String HAIDYE = "HAIDYE"; /*submenu_dyeing*/
+    public static final String HAIEXT = "HAIEXT"; /*submenu_extension*/
     public static final String HAIBRA = "HAIBRA"; /*submenu_braids*/
+    public static final String HAIOTH = "HAIOTH"; /*submenu_other*/
 
     public static final String NAI = "NAI"; /*menu_nails*/
     public static final String NAIMAN = "NAIMAN"; /*submenu_manicure*/
     public static final String NAIPED = "NAIPED"; /*submenu_pedicure*/
     public static final String NAIEXT = "NAIEXT"; /*submenu_nails_extension*/
+    public static final String NAIOTH = "NAIOTH"; /*submenu_other*/
 
     public static final String MAK = "MAK"; /*menu_makeup*/
     public static final String MAKMAK = "MAKMAK"; /*submenu_makeup*/
     public static final String MAKPER = "MAKPER"; /*permanent makeup*/
     public static final String MAKEEX = "MAKEEX"; /*submenu_eyelash_extensions*/
     public static final String MAKEST = "MAKEST"; /*submenu_eyebrow_styling*/
-
+    public static final String MAKOTH = "MAKOTH"; /*submenu_other*/
 
     public static final String TAT = "TAT"; /*menu_tattoo*/
     public static final String TATTAT = "TATTAT"; /*submenu_tattoo*/
-    public static final String TATTEM = "TATTEM"; /*submenu_temporary_tattoo*/
-
-    public static final String BAR = "BAR"; /*menu_beards*/
-    public static final String BARSTY = "BARSTY"; /*submenu_beards_styling*/
-
-    public static final String FIT = "FIT"; /*menu_fitness*/
-    public static final String FITTRA = "FITTRA"; /*submenu_personal_trainer*/
+    public static final String TATOTH = "TATOTH"; /*submenu_other*/
 
 
     /*genders*/

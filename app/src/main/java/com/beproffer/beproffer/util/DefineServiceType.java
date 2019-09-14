@@ -26,31 +26,32 @@ public class DefineServiceType {
                 serviceSubtype = Const.HAICUT;
                 serviceTitle = context.getResources().getString(R.string.hair_title_haircut);
                 break;
-            case R.id.menu_hair_extension:
-                serviceType = Const.HAI;
-                serviceSubtype = Const.HAIEXT;
-                serviceTitle = context.getResources().getString(R.string.hair_title_extension);
-                break;
             case R.id.menu_hair_styling:
                 serviceType = Const.HAI;
                 serviceSubtype = Const.HAISTY;
                 serviceTitle = context.getResources().getString(R.string.hair_title_styling);
-                break;
-            case R.id.menu_hair_straightening:
-                serviceType = Const.HAI;
-                serviceSubtype = Const.HAISTR;
-                serviceTitle = context.getResources().getString(R.string.hair_title_straightening);
                 break;
             case R.id.menu_hair_dyeing:
                 serviceType = Const.HAI;
                 serviceSubtype = Const.HAIDYE;
                 serviceTitle = context.getResources().getString(R.string.hair_title_dyeing);
                 break;
+            case R.id.menu_hair_extension:
+                serviceType = Const.HAI;
+                serviceSubtype = Const.HAIEXT;
+                serviceTitle = context.getResources().getString(R.string.hair_title_extension);
+                break;
             case R.id.menu_hair_braids:
                 serviceType = Const.HAI;
                 serviceSubtype = Const.HAIBRA;
                 serviceTitle = context.getResources().getString(R.string.hair_title_braids);
                 break;
+            case R.id.menu_hair_other:
+                serviceType = Const.HAI;
+                serviceSubtype = Const.HAIOTH;
+                serviceTitle = context.getResources().getString(R.string.hair_title_other);
+                break;
+
             case R.id.menu_nails_manicure:
                 serviceType = Const.NAI;
                 serviceSubtype = Const.NAIMAN;
@@ -66,15 +67,16 @@ public class DefineServiceType {
                 serviceSubtype = Const.NAIEXT;
                 serviceTitle = context.getResources().getString(R.string.nails_title_extension);
                 break;
+            case R.id.menu_nails_other:
+                serviceType = Const.NAI;
+                serviceSubtype = Const.NAIOTH;
+                serviceTitle = context.getResources().getString(R.string.nails_title_other);
+                break;
+
             case R.id.menu_makeup:
                 serviceType = Const.MAK;
                 serviceSubtype = Const.MAKMAK;
                 serviceTitle = context.getResources().getString(R.string.makeup_title_makeup);
-                break;
-            case R.id.menu_makeup_permanent:
-                serviceType = Const.MAK;
-                serviceSubtype = Const.MAKPER;
-                serviceTitle = context.getResources().getString(R.string.makeup_title_permanent_makeup);
                 break;
             case R.id.menu_makeup_eyelash_extension:
                 serviceType = Const.MAK;
@@ -86,25 +88,26 @@ public class DefineServiceType {
                 serviceSubtype = Const.MAKEST;
                 serviceTitle = context.getResources().getString(R.string.makeup_title_eyebrow_styling);
                 break;
+            case R.id.menu_makeup_permanent:
+                serviceType = Const.MAK;
+                serviceSubtype = Const.MAKPER;
+                serviceTitle = context.getResources().getString(R.string.makeup_title_permanent_makeup);
+                break;
+            case R.id.menu_makeup_other:
+                serviceType = Const.MAK;
+                serviceSubtype = Const.MAKOTH;
+                serviceTitle = context.getResources().getString(R.string.makeup_title_other);
+                break;
+
             case R.id.menu_tattoo_tattoo:
                 serviceType = Const.TAT;
                 serviceSubtype = Const.TATTAT;
                 serviceTitle = context.getResources().getString(R.string.tattoo_title_tattoo);
                 break;
-            case R.id.menu_tattoo_temporary_tattoo:
+            case R.id.menu_tattoo_other:
                 serviceType = Const.TAT;
-                serviceSubtype = Const.TATTEM;
-                serviceTitle = context.getResources().getString(R.string.tattoo_title_temporary_tattoo);
-                break;
-            case R.id.menu_barber:
-                serviceType = Const.BAR;
-                serviceSubtype = Const.BARSTY;
-                serviceTitle = context.getResources().getString(R.string.barber_title_barber);
-                break;
-            case R.id.menu_fitness:
-                serviceType = Const.FIT;
-                serviceSubtype = Const.FITTRA;
-                serviceTitle = context.getResources().getString(R.string.fitness_title_trainer);
+                serviceSubtype = Const.TATOTH;
+                serviceTitle = context.getResources().getString(R.string.tattoo_title_other);
                 break;
             default:
                 throw new IllegalArgumentException("unknown menu item id");

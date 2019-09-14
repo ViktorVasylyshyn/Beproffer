@@ -110,29 +110,11 @@
                     tools:ignore="ContentDescription" />
 
                 <ImageView
-                    android:id="@+id/specialist_edit_gallery_item_barber_icon"
-                    style="@style/ScrollIcons.Padding"
-                    android:onClick="@{callback::onTypeButtonClick}"
-                    android:src="@drawable/ic_barbershop"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_makeup_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_edit_gallery_item_haircut_icon"
-                    tools:ignore="ContentDescription" />
-
-                <ImageView
                     android:id="@+id/specialist_edit_gallery_item_tattoo_icon"
                     style="@style/ScrollIcons.Padding"
                     android:onClick="@{callback::onTypeButtonClick}"
                     android:src="@drawable/ic_tattoo"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_barber_icon"
-                    app:layout_constraintTop_toTopOf="@+id/specialist_edit_gallery_item_haircut_icon"
-                    tools:ignore="ContentDescription" />
-
-                <ImageView
-                    android:id="@+id/specialist_edit_gallery_item_fitness_icon"
-                    style="@style/ScrollIcons.Padding"
-                    android:onClick="@{callback::onTypeButtonClick}"
-                    android:src="@drawable/ic_fitness"
-                    app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_tattoo_icon"
+                    app:layout_constraintStart_toEndOf="@+id/specialist_edit_gallery_item_makeup_icon"
                     app:layout_constraintTop_toTopOf="@+id/specialist_edit_gallery_item_haircut_icon"
                     tools:ignore="ContentDescription" />
 
@@ -396,8 +378,7 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/base_text_size_medium"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/customer_sign_up_agree_to" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </LinearLayout>
         </ScrollView>

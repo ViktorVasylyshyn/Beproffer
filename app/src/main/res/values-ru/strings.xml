@@ -31,7 +31,7 @@
     <string name="hint_outfield_use_correct_name_format">Используйте ваши имя и фамилию, для лучшего представления вашего профайла.</string>
     <string name="hint_any_browsing_history">Фильтрация просмотренных изображений доступна для зарегистрированных пользователей.</string>
     <string name="hint_any_prohibited_content">Спасибо за вашу помощь. Качественный контент в Beproffer одна из основных наших целей.</string>
-    <string name="hint_any_image_size">Для лучшего отображения используйте изображения до 1 мб.</string>
+    <string name="hint_any_image_size">Для лучшего отображения используйте изображения до 2 мб.</string>
     <string name="hint_any_add_more_personal_info">Добавьте больше информации о себе, чтобы ваш профиль выглядел привлекательно.</string>
     <string name="hint_specialist_add_more_images">Добавьте больше изображений своих услуг, чтобы найти клиентов.</string>
     <string name="hint_outfield_confirm">принять</string>
@@ -100,8 +100,6 @@
     <string name="title_specialization_nai">Ногтевой сервис</string>
     <string name="title_specialization_mak">Макияж и визаж</string>
     <string name="title_specialization_tat">Мастер татуажа</string>
-    <string name="title_specialization_bar">Барбершоп сервис</string>
-    <string name="title_specialization_fit">Фитнес сервис</string>
 
 
     <!--/*Start/SignIn/Registration/e.t.s.*/-->
@@ -112,27 +110,25 @@
 
     <!--Menu Titles-->
     <string name="hair_title_haircut">Стрижки</string>
-    <string name="hair_title_extension">Наращивание Волос</string>
     <string name="hair_title_styling">Прически, Укладки</string>
-    <string name="hair_title_straightening">Выпрямление</string>
     <string name="hair_title_dyeing">Окрашивание</string>
+    <string name="hair_title_extension">Наращивание Волос</string>
     <string name="hair_title_braids">Косички, Дреды</string>
+    <string name="hair_title_other">Другое(волосы)</string>
 
     <string name="nails_title_manicure">Маникюр</string>
     <string name="nails_title_pedicure">Педикюр</string>
     <string name="nails_title_extension">Наращивание Ногтей</string>
+    <string name="nails_title_other">Другое(ногти)</string>
 
     <string name="makeup_title_makeup">Макияж</string>
-    <string name="makeup_title_permanent_makeup">Перманентный Макияж</string>
     <string name="makeup_title_eyelash_extension">Наращивание Ресниц</string>
     <string name="makeup_title_eyebrow_styling">Коррекция Бровей</string>
+    <string name="makeup_title_permanent_makeup">Перманентный Макияж</string>
+    <string name="makeup_title_other">Другое(маияж)</string>
 
     <string name="tattoo_title_tattoo">Татуировки</string>
-    <string name="tattoo_title_temporary_tattoo">Временные Татуировки</string>
-
-    <string name="fitness_title_trainer">Персональный Тренер</string>
-
-    <string name="barber_title_barber">Барбершоп</string>
+    <string name="tattoo_title_other">Другое(татуировки)</string>
 
     <string name="confirmed_contact_menu_call">позвонить</string>
     <string name="confirmed_contact_menu_delete">удалить</string>
@@ -141,7 +137,7 @@
 
     <!--Image Upload Requirements-->
     <string name="iur_requirements">Обратите внимание что</string>
-    <string name="iur_requirements_1">1. Для лучшего отображения, следует использовать изображения размером до 500 кб и пропорциями 16:9 или 18:9. Большие или непропорциональные изображения могут быть обрезаны и искажены.</string>
+    <string name="iur_requirements_1">1. Для лучшего отображения, следует использовать изображения размером до 2 мб и пропорциями 16:9 или 18:9. Большие или непропорциональные изображения могут быть обрезаны и искажены.</string>
     <string name="iur_requirements_2">2. Изображение должно отображать услугу согласно разделу, в котором оно находится.</string>
     <string name="iur_requirements_3">3. На изображении должен быть изображен результат лично вашей работы. Запрещается, дополнительное редактирование изображения(кроме обрезки), и размещение на нем номеров телефонов, надписей, логотипов, лиц людей, детей, персональный даных и т.д.</string>
     <string name="iur_requirements_4">4. Информация о услуге должна быть правдивой, понятной, однозначной.</string>
