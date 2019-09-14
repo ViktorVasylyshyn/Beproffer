@@ -19,6 +19,7 @@ import com.beproffer.beproffer.data.models.ContactRequestItem;
 import com.beproffer.beproffer.data.models.UserInfo;
 import com.beproffer.beproffer.util.Const;
 import com.beproffer.beproffer.util.LocalizationConstants;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -390,6 +391,8 @@ public class UserDataRepository {
     public void deleteNotRelevantImageData(BrowsingImageItem updatedItem, String primordialItemType, String primordialItemSubtype) {
         try {
             /*TODO после введения локализации - формировать этот запрос с учетом локации пользователя.*/
+            /*если удаление неактуального объекта сервиса, по каким то причинам не удается - сохраняем
+            * в раздел notdeleted этот объект, чтобы удалить мануально*/
             mDatabaseRef.child(Const.SERVICES)
                     .child(LocalizationConstants.UKRAINE)
                     .child(LocalizationConstants.KYIV_REGION)
@@ -397,7 +400,13 @@ public class UserDataRepository {
                     .child(primordialItemType)
                     .child(primordialItemSubtype)
                     .child(updatedItem.getKey())
-                    .removeValue().addOnCompleteListener(task -> updateLocalImageItemsMap(updatedItem));
+                    .removeValue().addOnFailureListener(e -> mDatabaseRef.child(Const.SERVICES)
+                            .child(LocalizationConstants.UKRAINE)
+                            .child(LocalizationConstants.KYIV_REGION)
+                            .child(LocalizationConstants.KYIV)
+                            .child("notdeleted")/*однажды сделать константой*/
+                            .child(updatedItem.getKey())
+                            .setValue(updatedItem));
         } catch (NullPointerException e) {
             Log.d(Const.ERROR, "deleteNotRelevantImageData: " + e.getMessage());
         }
@@ -412,6 +421,7 @@ public class UserDataRepository {
         mServiceItemsMapLiveData.setValue(mServiceItemsMap);
         feedBackToUi(false, R.string.toast_image_data_updated, true,
                 true, false, null);
+
     }
 
     public LiveData<Map<String, ContactItem>> getContacts() {
@@ -508,6 +518,7 @@ public class UserDataRepository {
                                         mContactRequestsMapLiveData.setValue(mContactRequestsMap);
                                     }
                                 }
+
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
                                     Log.d(Const.ERROR, "getContactRequests.onCancelled: " + databaseError.getMessage());
