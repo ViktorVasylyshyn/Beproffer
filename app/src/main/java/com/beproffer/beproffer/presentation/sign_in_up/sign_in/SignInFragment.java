@@ -122,6 +122,7 @@ public class SignInFragment extends BaseFragment {
                 if (auth.getCurrentUser() != null) {
                     showProgress(false);
                     processing(false);
+                    mSignUpViewModel.setSignUpEmailLiveData(null);
                     hideKeyboard(requireActivity());
                     if (auth.getCurrentUser().isEmailVerified()) {
                         changeFragment(new ProfileFragment(), true, true, false, null);
@@ -172,6 +173,11 @@ public class SignInFragment extends BaseFragment {
                 showErrorMessage(R.string.toast_sign_up_email_verification);
             } else {
                 hideErrorMessage();
+            }
+        });
+        mSignUpViewModel.getSignUpEmail().observe(getViewLifecycleOwner(), email ->{
+            if(email != null){
+                mBinding.signInFragmentEmail.setText(email);
             }
         });
     }

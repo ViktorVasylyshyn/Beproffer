@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.beproffer.beproffer.R;
@@ -203,6 +205,7 @@ public class SignUpFragment extends BaseFragment {
                         null,
                         mBinding.signUpPhone.getText().toString());
         }
+        mSignUpViewModel.setSignUpEmailLiveData(mBinding.signUpEmail.getText().toString());
     }
 
     private void showErrorMessage(int errorMessageId) {
