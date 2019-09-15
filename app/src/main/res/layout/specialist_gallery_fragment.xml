@@ -47,19 +47,25 @@
             android:scrollbars="vertical"
             app:layout_constraintTop_toBottomOf="@+id/specialist_gallery_title" />
 
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <TextView
             android:id="@+id/specialist_gallery_add_image_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/base_margin_big"
             android:layout_marginBottom="@dimen/bnb_floating_button_bottom_margin"
+            android:background="@drawable/background_rectangle_grey_alpha_85_green_stroke"
+            android:gravity="center"
             android:onClick="@{(view)-> callback.onAddNewImageClick()}"
-            android:src="@drawable/ic_add"
             android:visibility="@{showButton ? View.VISIBLE : View.GONE}"
-            app:fabCustomSize="@dimen/bnb_icon_size"
+            android:padding="@dimen/base_margin_small"
+            android:text="@string/hint_add"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/base_text_size_medium"
+            android:textStyle="bold"
+            android:textAllCaps="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="ContentDescription" />
 
         <ProgressBar
             android:id="@+id/specialist_gallery_progress_bar"

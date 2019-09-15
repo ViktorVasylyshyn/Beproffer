@@ -36,10 +36,9 @@ public class SpecialistGalleryFragment extends BaseGalleryFragment {
         }
         if (mImageItemsList == null) {
             mUserDataViewModel.getServiceItemsList().observe(this, data -> {
-                mImageItemsList = new ArrayList<>(); //TODO попробовать убрать
+                mImageItemsList = new ArrayList<>();
                 mShowButton.set(true);
                 if (data != null) {
-                    mImageItemsList = new ArrayList<>();
                     for (Map.Entry<String, BrowsingImageItem> entry : data.entrySet()) {
                         mImageItemsList.add(entry.getValue());
                     }

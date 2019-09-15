@@ -16,6 +16,7 @@
     <string name="hint_price_infield">price(hrn)</string>
     <string name="hint_description_infield">description(100 characters max)</string>
     <string name="hint_about_me_infield">about me(100 characters max)</string>
+    <string name="hint_add">add</string>
 
     <string name="hint_currency_outfield">hrn</string>
     <string name="hint_type_outfield">TYPE</string>
@@ -40,6 +41,7 @@
     <string name="hint_join_us_on_social">Join us in social networks. Share your impressions and wishes. The links to our social networks are in the "info(i)" section.</string>
     <string name="hint_wait_for_confirmation">Wait until the request is confirmed by the specialist. It\'ll appear in your contacts\' list.</string>
     <string name="hint_choose_main_specialization">Please, choose your main specialization.</string>
+    <string name="hint_specialist_no_services">You have no services yet. Please tap \"Add\" to publish new one.</string>
 
 
     <!--Refs-->

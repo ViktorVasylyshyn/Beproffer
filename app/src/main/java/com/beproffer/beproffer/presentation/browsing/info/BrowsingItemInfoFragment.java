@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,14 +69,19 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
 
     @Override
     public void applyUserData() {
+        Log.d(Const.ERROR, "applyUserData");
         mUserDataViewModel.getContacts().observe(this, contactItems -> {
+            Log.d(Const.ERROR, "applyUserData contactItems");
             if (contactItems != null) {
+                Log.d(Const.ERROR, "applyUserData contactItems != null");
                 mContacts = contactItems;
                 syncDataWithUi();
             }
         });
         mUserDataViewModel.getOutgoingContactRequests().observe(this, contactRequests -> {
+            Log.d(Const.ERROR, "applyUserData contactRequests");
             if (contactRequests != null) {
+                Log.d(Const.ERROR, "applyUserData contactRequests != null");
                 mOutgoingContactRequests = contactRequests;
                 syncDataWithUi();
             }
@@ -84,8 +91,11 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
     }
 
     private void obtainImageItem() {
+        Log.d(Const.ERROR, "obtainImageItem");
         ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class).getBrowsingItemInfo().observe(getViewLifecycleOwner(), item -> {
+            Log.d(Const.ERROR, "obtainImageItem item");
             if (item != null) {
+                Log.d(Const.ERROR, "obtainImageItem item != null");
                 mItem = item;
                 mBinding.setImageItem(mItem);
                 syncDataWithUi();
@@ -94,8 +104,11 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
     }
 
     private void syncDataWithUi() {
-        if (mItem != null && mContacts != null && mOutgoingContactRequests != null) {
+        Log.d(Const.ERROR, "syncDataWithUi");
+        if (mItem != null && mContacts != null) {
+            Log.d(Const.ERROR, "syncDataWithUi all != null");
             if (mItem.getId().equals(mCurrentUserInfo.getId())) {
+                Log.d(Const.ERROR, "syncDataWithUi same password");
                 requestButtonIsInactive(R.string.title_this_is_your_image);
                 return;
             }
@@ -104,7 +117,6 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
                 requestButtonIsInactive(R.string.title_request_already_sent);
                 mBinding.browsingImageInfoBottomHint.setText(R.string.hint_wait_for_confirmation);
                 mBinding.browsingImageInfoBottomHint.setVisibility(View.VISIBLE);
-
                 return;
             }
 
@@ -140,17 +152,14 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
 
     private void handleOnVoteClick() {
         if (getFirebaseUser() == null || mCurrentUserInfo == null) {
-            /*TODO make message via view not via toast*/
             showToast(R.string.toast_available_for_registered);
             return;
         }
         if (!checkInternetConnection()) {
-            /*TODO make message via view not via toast*/
             showToast(R.string.toast_no_internet_connection);
             return;
         }
         if (mProcessing.get()) {
-            /*TODO make message via view not via toast*/
             showToast(R.string.toast_processing);
             return;
         }
@@ -186,8 +195,7 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
                     mBinding.browsingImageInfoVoteTopHint.setVisibility(View.VISIBLE);
                     showProgress(false);
                     mProcessing.set(false);
-                    mBinding.browsingImageInfoVote.setImageResource(R.drawable.ic_vote_inactive);
-                    mBinding.browsingImageInfoVote.setClickable(false);
+                    mBinding.browsingImageInfoVote.setVisibility(View.GONE);
                 }).addOnFailureListener(e -> {
             showToast(R.string.toast_error_has_occurred);
             mBinding.browsingImageInfoVoteTopHint.setText(e.getMessage());
