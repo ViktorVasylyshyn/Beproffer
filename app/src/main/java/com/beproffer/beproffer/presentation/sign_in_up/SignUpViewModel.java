@@ -6,9 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 public class SignUpViewModel extends AndroidViewModel {
+
     private final SignUpRepository mRepository;
+
+    /*автозаполнение поля email SignInFragment, после регистрации на SignUpFragment и popBackStack*/
+    private MutableLiveData<String> mSignUpEmailLiveData = new MutableLiveData<>();
 
     public SignUpViewModel(@NonNull Application application) {
         super(application);
@@ -41,6 +46,14 @@ public class SignUpViewModel extends AndroidViewModel {
 
     public LiveData<Boolean> getVerifyEmail(){
         return mRepository.getVerifyEmail();
+    }
+
+    public void setSignUpEmailLiveData(String signUpEmail){
+        mSignUpEmailLiveData.postValue(signUpEmail);
+    }
+
+    public LiveData<String> getSignUpEmail(){
+        return mSignUpEmailLiveData;
     }
 
     public void resetValues(@NonNull Boolean resetToast,
