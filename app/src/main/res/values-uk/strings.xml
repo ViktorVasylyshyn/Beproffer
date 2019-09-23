@@ -179,6 +179,7 @@
     <string name="toast_telephony_not_available">Здійснення дзвінків є неможливим для даного пристрою.</string>
     <string name="toast_app_not_found_on_device">Потрібний додаток, на пристрої, не знайдено.</string>
     <string name="toast_close_the_app">Натисніть \'Назад\' ще раз, щоб вийти з додатку.</string>
+    <string name="toast_popularity">Кількість користувачів, що додали Вас до своїх контактів.</string>
 
     <string name="toast_image_size_error_4">Будь ласка, оберіть зображення менше ніж 4 МБ.</string>
     <string name="toast_image_size_error_6">Будь ласка, оберіть зображення менше ніж 6 МБ.</string>

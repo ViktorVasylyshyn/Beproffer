@@ -12,6 +12,10 @@
             type="androidx.databinding.ObservableBoolean" />
 
         <variable
+            name="userSpecialist"
+            type="androidx.databinding.ObservableBoolean" />
+
+        <variable
             name="userInfo"
             type="com.beproffer.beproffer.data.models.UserInfo" />
 
@@ -138,7 +142,7 @@
                 android:layout_margin="@dimen/base_margin_small"
                 android:onClick="@{fragmentCallback::onPerformNavigationClick}"
                 android:src="@drawable/ic_my_gallery"
-                android:visibility="gone"
+                android:visibility="@{userSpecialist ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toStartOf="@+id/profile_settings"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profile_stroke"
@@ -182,6 +186,36 @@
             app:layout_constraintTop_toTopOf="parent"
             app:loadProfileImageFromDb="@{userInfo.profileImageUrl}"
             tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/profile_popularity_icon"
+            android:layout_width="@dimen/base_margin_big"
+            android:layout_height="@dimen/base_margin_big"
+            android:src="@drawable/ic_star"
+            android:visibility="@{userSpecialist ? View.VISIBLE : View.GONE}"
+            android:onClick="@{(view)->fragmentCallback.onPopularityClick()}"
+            app:layout_constraintStart_toEndOf="@+id/profile_image"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+            app:layout_constraintTop_toTopOf="@+id/constraint_layout"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/profile_popularity_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_padding_small"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:visibility="@{userSpecialist ? View.VISIBLE : View.GONE}"
+            android:onClick="@{(view)->fragmentCallback.onPopularityClick()}"
+            android:text="@string/title_zero"
+            android:textColor="@color/color_base_text_70per"
+            android:textSize="@dimen/base_text_size_medium"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintStart_toEndOf="@+id/profile_popularity_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_popularity_icon"
+            app:layout_constraintTop_toTopOf="@+id/profile_popularity_icon"/>
+
 
         <ImageView
             android:id="@+id/profile_info"

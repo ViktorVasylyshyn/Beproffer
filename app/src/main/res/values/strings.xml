@@ -94,6 +94,7 @@
     <string name="title_try_again">Try again</string>
     <string name="title_wants_to_contact">Wants to contact you.</string>
     <string name="title_main_specialization">Your main specialization.</string>
+    <string name="title_zero" translatable="false">0</string>
 
     <!--main specialists' specialization-->
     <string name="title_specialization_hai">Hair Services</string>
@@ -194,6 +195,8 @@
     <string name="toast_telephony_not_available">The calls aren\'t available on current device.</string>
     <string name="toast_app_not_found_on_device">The target app wasn\'t found on your device.</string>
     <string name="toast_close_the_app">Please, tap \'Back\' onсe more, to close the app.</string>
+    <string name="toast_popularity">The count of users which added you to the contact list.</string>
+
     <string name="toast_image_size_error_4">Please, use image up to 4 MB.</string>
     <string name="toast_image_size_error_6">Please, use image up to 6 MB.</string>
 

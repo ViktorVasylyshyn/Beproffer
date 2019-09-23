@@ -176,6 +176,8 @@
     <string name="toast_telephony_not_available">Совершение звонков недуступно для данного устройства.</string>
     <string name="toast_app_not_found_on_device">Целевое приложение на устройстве не обнаружено.</string>
     <string name="toast_close_the_app">Нажмите \'Назад\' еще раз, чтобы закрыть приложение.</string>
+    <string name="toast_popularity">Количество пользователей, которые добавили Вас в список контаты.</string>
+
     <string name="toast_image_size_error_4">Пожалуйста, используйте изображение меньше чем 4 МБ.</string>
     <string name="toast_image_size_error_6">Пожалуйста, используйте изображение меньше чем 6 МБ.</string>
 
