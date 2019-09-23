@@ -69,7 +69,6 @@ public class ProfileFragment extends BaseUserInfoFragment {
         mBinding.setUserInfo(mCurrentUserInfo);
 
         hintsForUsers();
-        setBadgeIfNeed();
         showProgress(false);
     }
 

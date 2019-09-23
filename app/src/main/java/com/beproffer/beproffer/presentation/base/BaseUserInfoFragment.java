@@ -18,7 +18,6 @@ public class BaseUserInfoFragment extends BaseFragment {
 
     protected void initUserData() {
         if (!checkInternetConnection()) {
-            /*сделать здесь переход, на какой нить фрагмент*/
             showToast(R.string.toast_no_internet_connection);
             return;
         }
@@ -82,18 +81,6 @@ public class BaseUserInfoFragment extends BaseFragment {
         });
     }
 
-    protected void setBadgeIfNeed() {
-        if (mCurrentUserInfo.getType().equals(Const.SPEC)) {
-            mUserDataViewModel.getIncomingContactRequests().observe(getViewLifecycleOwner(), list -> {
-                if (list != null) {
-                    if (!list.isEmpty()) {
-                        setBadge(Const.CONTBNBINDEX);
-                    }
-                }
-            });
-        }
-    }
-
     protected void applyUserData() {
         /*предполагается что во фрагментах наследниках, в этом методе будет размещаться логика, которая
          * должна начать совершаться, когда данные юзера получены*/
@@ -101,13 +88,5 @@ public class BaseUserInfoFragment extends BaseFragment {
 
     protected void showErrorMessage(int messageResId) {
         /*разная реализация, для разных фрагментов*/
-    }
-
-    private void setBadge(int index) {
-        ((MainActivity) requireActivity()).setBadgeMain(index);
-    }
-
-    protected void removeBadge(int index) {
-        ((MainActivity) requireActivity()).removeBadge(index);
     }
 }

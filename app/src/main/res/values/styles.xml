@@ -48,8 +48,8 @@
     </style>
 
     <style name="ScrollIcons">
-        <item name="android:layout_width">@dimen/icons_size_normal_height</item>
-        <item name="android:layout_height">@dimen/icons_size_normal_height</item>
+        <item name="android:layout_width">@dimen/icons_height_medium</item>
+        <item name="android:layout_height">@dimen/icons_height_medium</item>
     </style>
 
     <style name="ScrollIcons.Padding">

@@ -7,8 +7,8 @@ android {
         applicationId "com.beproffer.beproffer"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 4
-        versionName '0.9.3'
+        versionCode 5
+        versionName '0.9.4'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     dataBinding {

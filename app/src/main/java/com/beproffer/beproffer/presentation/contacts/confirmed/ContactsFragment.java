@@ -18,10 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.ContactItem;
-import com.beproffer.beproffer.data.models.ContactRequestItem;
 import com.beproffer.beproffer.databinding.ContactsFragmentBinding;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
-import com.beproffer.beproffer.presentation.contacts.adapter.ContactRequestItemAdapter;
 import com.beproffer.beproffer.presentation.contacts.adapter.ContactsItemAdapter;
 import com.beproffer.beproffer.presentation.spec_gallery.CustomerGalleryFragment;
 import com.beproffer.beproffer.util.Const;
@@ -36,13 +34,9 @@ public class ContactsFragment extends BaseUserInfoFragment {
 
     private ContactsItemAdapter mContactsAdapter;
 
-    private ContactRequestItemAdapter mCustomersRequestsAdapter;
-
     private RecyclerView mItemsRecyclerView;
 
-    private List<ContactItem> mContactsList;
-
-    private List<ContactRequestItem> mCustomerRequestsList;
+    private List<ContactItem> mContactsList = new ArrayList<>();
 
     private ContactsFragmentBinding mBinding;
 
@@ -63,79 +57,26 @@ public class ContactsFragment extends BaseUserInfoFragment {
         mBinding.setShowProgress(mShowProgress);
         mBinding.setShowNoContacts(mShowNoContacts);
         mItemsRecyclerView = mBinding.contactsRecyclerView;
-
+        initContactsRecyclerView();
         initUserData();
     }
 
     @Override
     public void applyUserData() {
-        removeBadge(Const.CONTBNBINDEX);
-        /*задумка такова, что специалистам будет больше интересна вкладка входящих запросов от потен-
-         * циалльных клиентов, поэтому есть смысл открывать им этот фрагмент, именно на вкладке запросов.
-         * а клиентам, и вовсе, доступна только вкладка контактов. так что со старта проверяем тип узера,
-         * и настраиваем интерфейс согласно нему.*/
-        switch (mCurrentUserInfo.getType()) {
-            case Const.SPEC:
-                adaptUiForSpecialist();
-                obtainCustomersRequests();
-                break;
-            case Const.CUST:
-                adaptUiForCustomer();
-                obtainContacts();
-                break;
-        }
-    }
-
-    private void adaptUiForCustomer() {
-        mBinding.contactsContacts.setBackgroundResource(R.drawable.button_background_green_stroke_rectangle);
-        mBinding.contactsNoContacts.setText(R.string.toast_no_any_contacts);
-    }
-
-    private void adaptUiForSpecialist() {
-        mBinding.contactsContactRequests.setVisibility(View.VISIBLE);
-        mBinding.contactsNoContacts.setText(R.string.toast_no_any_contact_requests);
-        mBinding.contactsContacts.setOnClickListener(v -> obtainContacts());
-        mBinding.contactsContactRequests.setOnClickListener(v -> obtainCustomersRequests());
-    }
-
-    private void obtainCustomersRequests() {
-        mBinding.contactsContacts.setBackgroundResource(R.drawable.background_transparent);
-        mBinding.contactsContactRequests.setBackgroundResource(R.drawable.button_background_green_stroke_rectangle);
-        mBinding.contactsContacts.setClickable(true);
-        mBinding.contactsContactRequests.setClickable(false);
-        hideErrorMessageView();
-        mUserDataViewModel.getIncomingContactRequests().observe(this, list -> {
-            if (list != null) {
-                initCustomersRequestsRecyclerView();
-                mCustomerRequestsList = new ArrayList<>();
-                for (Map.Entry<String, ContactRequestItem> entry : list.entrySet()) {
-                    mCustomerRequestsList.add(entry.getValue());
-                }
-                mShowNoContacts.set(list.isEmpty());
-            }
-            mCustomersRequestsAdapter.setData(mCustomerRequestsList);
-            mCustomersRequestsAdapter.notifyDataSetChanged();
-        });
+        obtainContacts();
     }
 
     private void obtainContacts() {
-        if (mCurrentUserInfo.getType().equals(Const.SPEC)) {
-            mBinding.contactsContacts.setBackgroundResource(R.drawable.button_background_green_stroke_rectangle);
-            mBinding.contactsContactRequests.setBackgroundResource(R.drawable.background_transparent);
-            mBinding.contactsContacts.setClickable(false);
-            mBinding.contactsContactRequests.setClickable(true);
-        }
         hideErrorMessageView();
         mUserDataViewModel.getContacts().observe(this, contacts -> {
             if (contacts != null) {
-                initContactsRecyclerView();
-                mContactsList = new ArrayList<>();
+                mContactsList.clear();
                 for (Map.Entry<String, ContactItem> entry : contacts.entrySet()) {
                     mContactsList.add(entry.getValue());
                 }
+                mContactsAdapter.notifyDataSetChanged();
                 mShowNoContacts.set(contacts.isEmpty());
             }
-            mContactsAdapter.setData(mContactsList);
         });
     }
 
@@ -143,26 +84,10 @@ public class ContactsFragment extends BaseUserInfoFragment {
         if (mContactsAdapter == null) {
             mContactsAdapter = new ContactsItemAdapter();
         }
-        initContactClickListener();
         mItemsRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         mItemsRecyclerView.setAdapter(mContactsAdapter);
-    }
-
-    private void initCustomersRequestsRecyclerView() {
-        if (mCustomersRequestsAdapter == null) {
-            mCustomersRequestsAdapter = new ContactRequestItemAdapter();
-        }
-        initCustomerRequestClickListener();
-        mItemsRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        mItemsRecyclerView.setAdapter(mCustomersRequestsAdapter);
-    }
-
-    private void initContactClickListener() {
         mContactsAdapter.setOnItemClickListener(this::onContactItemClick);
-    }
-
-    private void initCustomerRequestClickListener() {
-        mCustomersRequestsAdapter.setOnItemClickListener(this::onCustomerRequestItemClick);
+        mContactsAdapter.setData(mContactsList);
     }
 
     private void onContactItemClick(View view, ContactItem item) {
@@ -195,31 +120,6 @@ public class ContactsFragment extends BaseUserInfoFragment {
             return true;
         });
         popupMenu.show();
-    }
-
-    private void onCustomerRequestItemClick(View view, ContactRequestItem item) {
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
-        popupMenu.getMenuInflater().inflate(R.menu.contact_request_menu, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(menuItem -> {
-            switch (menuItem.getItemId()) {
-                case R.id.contact_request_menu_apply:
-                    handleContactRequest(item, true);
-                    break;
-                case R.id.contact_request_menu_deny:
-                    handleContactRequest(item, false);
-                    break;
-            }
-            return true;
-        });
-        popupMenu.show();
-    }
-
-    private void handleContactRequest(ContactRequestItem handledItem, boolean confirm) {
-        if (mCurrentUserInfo.getSpecialization() == null || mCurrentUserInfo.getDescription() == null) {
-            showToast(R.string.toast_add_personal_info_first);
-            return;
-        }
-        mUserDataViewModel.handleIncomingContactRequest(handledItem, confirm);
     }
 
     @Override

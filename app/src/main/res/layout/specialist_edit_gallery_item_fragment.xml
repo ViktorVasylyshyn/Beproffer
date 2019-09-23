@@ -38,9 +38,9 @@
 
         <TextView
             android:id="@+id/specialist_edit_gallery_item_logo"
+            style="@style/BeprofferTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/BeprofferTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -70,7 +70,7 @@
 
         <HorizontalScrollView
             android:id="@+id/specialist_edit_gallery_item_type_scroll"
-            android:layout_width="@dimen/specialist_edit_fragment_scroll_height"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_background_grey_stroke_rectangle"
             app:layout_constraintEnd_toEndOf="parent"
@@ -136,10 +136,11 @@
 
         <HorizontalScrollView
             android:id="@+id/specialist_edit_gallery_item_duration_scroll"
-            android:layout_width="@dimen/specialist_edit_fragment_scroll_height"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/base_margin_extra_small"
             android:background="@drawable/button_background_grey_stroke_rectangle"
+            app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="@+id/specialist_edit_gallery_item_type_scroll"
             app:layout_constraintStart_toStartOf="@+id/specialist_edit_gallery_item_type_scroll"
             app:layout_constraintTop_toBottomOf="@+id/specialist_edit_gallery_item_type_title">
@@ -200,11 +201,13 @@
 
         <LinearLayout
             android:id="@+id/specialist_gallery_edit_gender_scroll"
-            android:layout_width="@dimen/specialist_edit_fragment_scroll_height"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
+            android:layout_marginTop="@dimen/base_margin_small"
+            android:layout_marginBottom="@dimen/base_margin_small"
             android:background="@drawable/button_background_grey_stroke_rectangle"
             android:orientation="horizontal"
+            app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="@+id/specialist_edit_gallery_item_type_scroll"
             app:layout_constraintStart_toStartOf="@+id/specialist_edit_gallery_item_type_scroll"
             app:layout_constraintTop_toBottomOf="@+id/specialist_edit_gallery_item_duration_scroll">
@@ -281,11 +284,12 @@
         <ScrollView
             android:id="@+id/specialist_edit_gallery_item_scroll"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/list_item_image_height"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base_margin_medium"
             android:layout_marginEnd="@dimen/base_margin_medium"
             android:layout_marginBottom="@dimen/base_margin_small"
             android:background="@drawable/button_background_grey_stroke_rectangle"
+            app:layout_constrainedHeight="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/specialist_edit_gallery_item_description">
 
@@ -389,19 +393,19 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base_margin_small"
             android:layout_marginEnd="@dimen/base_margin_small"
+            android:layout_marginBottom="@dimen/base_margin_small"
             android:gravity="center"
             android:paddingStart="@dimen/base_padding_medium"
             android:paddingEnd="@dimen/base_padding_medium"
-            android:layout_marginBottom="@dimen/base_margin_small"
             android:text="@string/string_res_without_text"
             android:textColor="@color/color_red_alpha_85"
             android:textSize="@dimen/base_text_size_medium"
             android:textStyle="italic"
             android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@+id/specialist_edit_gallery_item_description"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_edit_gallery_item_description" />
 
         <ProgressBar
             android:id="@+id/specialist_edit_gallery_item_progress_bar"

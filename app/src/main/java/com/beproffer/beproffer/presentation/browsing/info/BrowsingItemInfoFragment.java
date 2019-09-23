@@ -1,16 +1,18 @@
 package com.beproffer.beproffer.presentation.browsing.info;
 
-import androidx.lifecycle.ViewModelProviders;
-import androidx.databinding.DataBindingUtil;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.PopupMenu;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.BrowsingImageItem;
@@ -28,12 +30,11 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
     private BrowsingImageInfoFragmentBinding mBinding;
     private BrowsingImageItem mItem;
     private Map<String, ContactItem> mContacts;
-    private Map<String, Boolean> mOutgoingContactRequests;
 
     private final BrowsingItemInfoFragmentCallback mCallback = new BrowsingItemInfoFragmentCallback() {
         @Override
-        public void onSendContactRequestClick() {
-            sendContactRequest();
+        public void onAddContactClick() {
+            addContact();
         }
 
         @Override
@@ -44,6 +45,23 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
         @Override
         public void onVoteClick() {
             handleOnVoteClick();
+        }
+
+        @Override
+        public void onCallClick() {
+            /*звонить могут олько зарегистрированные пользователи*/
+            if (!checkUser())
+                return;
+            /*на случай, если приложение установлено на устройство, с которого нельзя позвонить*/
+            if (!requireActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
+                showToast(R.string.toast_telephony_not_available);
+                return;
+            }
+            mUserDataViewModel.getSpecialistPhone(mItem.getId()).observe(getViewLifecycleOwner(), phone -> {
+                if (phone == null)
+                    return;
+                startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone)));
+            });
         }
     };
 
@@ -69,20 +87,9 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
 
     @Override
     public void applyUserData() {
-        Log.d(Const.ERROR, "applyUserData");
         mUserDataViewModel.getContacts().observe(this, contactItems -> {
-            Log.d(Const.ERROR, "applyUserData contactItems");
             if (contactItems != null) {
-                Log.d(Const.ERROR, "applyUserData contactItems != null");
                 mContacts = contactItems;
-                syncDataWithUi();
-            }
-        });
-        mUserDataViewModel.getOutgoingContactRequests().observe(this, contactRequests -> {
-            Log.d(Const.ERROR, "applyUserData contactRequests");
-            if (contactRequests != null) {
-                Log.d(Const.ERROR, "applyUserData contactRequests != null");
-                mOutgoingContactRequests = contactRequests;
                 syncDataWithUi();
             }
         });
@@ -91,11 +98,8 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
     }
 
     private void obtainImageItem() {
-        Log.d(Const.ERROR, "obtainImageItem");
         ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class).getBrowsingItemInfo().observe(getViewLifecycleOwner(), item -> {
-            Log.d(Const.ERROR, "obtainImageItem item");
             if (item != null) {
-                Log.d(Const.ERROR, "obtainImageItem item != null");
                 mItem = item;
                 mBinding.setImageItem(mItem);
                 syncDataWithUi();
@@ -104,55 +108,57 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
     }
 
     private void syncDataWithUi() {
-        Log.d(Const.ERROR, "syncDataWithUi");
         if (mItem != null && mContacts != null) {
-            Log.d(Const.ERROR, "syncDataWithUi all != null");
             if (mItem.getId().equals(mCurrentUserInfo.getId())) {
-                Log.d(Const.ERROR, "syncDataWithUi same password");
-                requestButtonIsInactive(R.string.title_this_is_your_image);
-                return;
-            }
-
-            if (mOutgoingContactRequests != null && mOutgoingContactRequests.containsKey(mItem.getId())) {
-                requestButtonIsInactive(R.string.title_request_already_sent);
-                mBinding.browsingImageInfoBottomHint.setText(R.string.hint_wait_for_confirmation);
-                mBinding.browsingImageInfoBottomHint.setVisibility(View.VISIBLE);
+                contactButtonsInactive(R.string.title_this_is_your_image);
                 return;
             }
 
             if (mContacts != null && mContacts.containsKey(mItem.getId())) {
-                requestButtonIsInactive(R.string.title_contact_already_available);
+                contactButtonsInactive(R.string.title_contact_already_available);
                 return;
             }
 
             if (mContacts != null && mContacts.size() > Const.CONTACTS_NUM) {
-                requestButtonIsInactive(R.string.title_max_num_of_contacts);
+                contactButtonsInactive(R.string.title_max_num_of_contacts);
             }
         }
     }
 
-    private void sendContactRequest() {
-        if (getFirebaseUser() == null || mCurrentUserInfo == null) {
-            /*TODO make message via view not via toast*/
-            showToast(R.string.toast_available_for_registered);
+    private void addContact() {
+        if (!checkUser())
             return;
-        }
 
-        mUserDataViewModel.sendContactRequest(mItem.getId());
-
-        requestButtonIsInactive(R.string.title_request_already_sent);
+        mUserDataViewModel.addContact(mItem.getId());
     }
 
-    private void requestButtonIsInactive(int hintRes) {
-        mBinding.browsingImageInfoSendContactRequestButton.setBackgroundResource(R.drawable.background_rectangle_grey_alpha_85_grey_stroke);
-        mBinding.browsingImageInfoSendContactRequestButton.setText(getResources().getText(hintRes));
-        mBinding.browsingImageInfoSendContactRequestButton.setTextColor(getResources().getColor(R.color.color_base_text_70per));
-        mBinding.browsingImageInfoSendContactRequestButton.setClickable(false);
+    private boolean checkUser() {
+        if (getFirebaseUser() != null || mCurrentUserInfo != null) {
+            return true;
+        } else {
+            showBottomHint(R.string.toast_available_for_registered);
+            return false;
+        }
+    }
+
+    private void showBottomHint(int messageResId) {
+        showToast(messageResId);
+        mBinding.browsingImageInfoBottomHint.setText(messageResId);
+        mBinding.browsingImageInfoBottomHint.setVisibility(View.VISIBLE);
+    }
+
+    private void contactButtonsInactive(int hintRes) {
+        mBinding.browsingImageInfoAddToContactsButton.setBackgroundResource(R.drawable.background_rectangle_grey_alpha_85_grey_stroke);
+        mBinding.browsingImageInfoCallButton.setBackgroundResource(R.drawable.background_rectangle_grey_alpha_85_grey_stroke);
+        mBinding.browsingImageInfoAddToContactsButton.setText(getResources().getText(hintRes));
+        mBinding.browsingImageInfoAddToContactsButton.setTextColor(getResources().getColor(R.color.color_base_text_70per));
+        mBinding.browsingImageInfoCallButton.setImageResource(R.drawable.ic_contacts_inactive);
+        mBinding.browsingImageInfoAddToContactsButton.setClickable(false);
+        mBinding.browsingImageInfoCallButton.setClickable(false);
     }
 
     private void handleOnVoteClick() {
-        if (getFirebaseUser() == null || mCurrentUserInfo == null) {
-            showToast(R.string.toast_available_for_registered);
+        if (!checkUser()) {
             return;
         }
         if (!checkInternetConnection()) {

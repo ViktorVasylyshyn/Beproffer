@@ -13,6 +13,8 @@ public class BrowsingImageItem implements Parcelable {
     private String duration;
     private String description;
     private String gender;
+    private String profileImageUrl;
+    private String name;
 
     public BrowsingImageItem(){
 
@@ -26,7 +28,9 @@ public class BrowsingImageItem implements Parcelable {
                              String price,
                              String duration,
                              String description,
-                             String gender) {
+                             String gender,
+                             String profileImageUrl,
+                             String name) {
         this.url = url;
         this.key = key;
         this.id = id;
@@ -36,6 +40,8 @@ public class BrowsingImageItem implements Parcelable {
         this.duration = duration;
         this.description = description;
         this.gender = gender;
+        this.profileImageUrl = profileImageUrl;
+        this.name = name;
     }
 
     protected BrowsingImageItem(Parcel in) {
@@ -48,6 +54,8 @@ public class BrowsingImageItem implements Parcelable {
         duration = in.readString();
         description = in.readString();
         gender = in.readString();
+        profileImageUrl = in.readString();
+        name = in.readString();
     }
 
     public static final Creator<BrowsingImageItem> CREATOR = new Creator<BrowsingImageItem>() {
@@ -130,6 +138,23 @@ public class BrowsingImageItem implements Parcelable {
         this.gender = gender;
     }
 
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -146,6 +171,8 @@ public class BrowsingImageItem implements Parcelable {
         parcel.writeString(duration);
         parcel.writeString(description);
         parcel.writeString(gender);
+        parcel.writeString(profileImageUrl);
+        parcel.writeString(name);
     }
 
 }

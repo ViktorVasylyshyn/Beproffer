@@ -240,22 +240,28 @@ public class AppBindingAdapter {
         view.setImageResource(resId);
     }
 
-    @BindingAdapter({"showUserType"})
-    public static void showUserType(TextView view, String type) {
-        int resId;
-        if (type == null) {
+    /*загрузка изображения специалиста, имея его id*/
+    @BindingAdapter("loadSpecialistsProfileImage")
+    public static void loadSpecialistsProfileImage(ImageView imageView, String url) {
+        if (url == null)
             return;
-        }
-        switch (type) {
-            case Const.CUST:
-                resId = R.string.title_customer_type;
-                break;
-            case Const.SPEC:
-                resId = R.string.title_specialist_type;
-                break;
-            default:
-                throw new IllegalArgumentException(Const.UNKNSTAT);
-        }
-        view.setText(resId);
+        final RequestOptions options = new RequestOptions()
+                .placeholder(R.drawable.profile_image_ph)
+                .apply(RequestOptions.circleCropTransform())
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
+
+        Glide.with(imageView.getContext())
+                .load(url)
+                .apply(options)
+                .into(imageView);
+
+    }
+
+    @BindingAdapter("loadSpecialistsName")
+    public static void loadSpecialistsName(TextView textView, String name) {
+        if (name == null)
+            return;
+        textView.setText(name);
+
     }
 }
