@@ -11,7 +11,6 @@ import androidx.lifecycle.LiveData;
 import com.beproffer.beproffer.data.firebase.UserDataRepository;
 import com.beproffer.beproffer.data.models.BrowsingImageItem;
 import com.beproffer.beproffer.data.models.ContactItem;
-import com.beproffer.beproffer.data.models.ContactRequestItem;
 import com.beproffer.beproffer.data.models.UserInfo;
 
 import java.util.List;
@@ -62,16 +61,12 @@ public class UserDataViewModel extends AndroidViewModel {
         return mRepository.getContacts();
     }
 
-    public LiveData<Map<String, ContactRequestItem>> getIncomingContactRequests() {
-        return mRepository.getContactRequests();
-    }
-
-    public void handleIncomingContactRequest(ContactRequestItem handledItem, boolean confirm) {
-        mRepository.handleIncomingContactRequest(handledItem, confirm);
-    }
-
     public void deleteContact(ContactItem deletedContact) {
         mRepository.deleteContact(deletedContact);
+    }
+
+    public LiveData<String> getSpecialistPhone(String specialistId){
+        return mRepository.getSpecialistPhone(specialistId);
     }
 
     public LiveData<Boolean> getShowProgress() {
@@ -98,12 +93,8 @@ public class UserDataViewModel extends AndroidViewModel {
         return mRepository.getMessageResId();
     }
 
-    public void sendContactRequest(String specialistId) {
-        mRepository.sendContactRequest(specialistId);
-    }
-
-    public LiveData<Map<String, Boolean>> getOutgoingContactRequests() {
-        return mRepository.getOutgoingContactRequests();
+    public void addContact(String specialistId) {
+        mRepository.addContact(specialistId);
     }
 
     public void resetUserData() {

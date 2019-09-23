@@ -83,8 +83,8 @@
 
         <ImageView
             android:id="@+id/info_fragment_viber"
-            android:layout_width="@dimen/icons_size_normal_width"
-            android:layout_height="@dimen/icons_size_normal_height"
+            android:layout_width="@dimen/icons_width_medium"
+            android:layout_height="@dimen/icons_height_medium"
             android:layout_marginStart="@dimen/base_margin_big"
             android:layout_marginTop="@dimen/base_margin_medium"
             android:layout_marginBottom="@dimen/base_margin_medium"
@@ -98,8 +98,8 @@
 
         <ImageView
             android:id="@+id/info_fragment_telegram"
-            android:layout_width="@dimen/icons_size_normal_width"
-            android:layout_height="@dimen/icons_size_normal_height"
+            android:layout_width="@dimen/icons_width_medium"
+            android:layout_height="@dimen/icons_height_medium"
             android:layout_margin="@dimen/base_margin_medium"
             android:onClick="@{(view)->fragmentCallback.onTelegramClicked()}"
             android:src="@drawable/ic_telegram"
@@ -110,8 +110,8 @@
 
         <ImageView
             android:id="@+id/info_fragment_facebook"
-            android:layout_width="@dimen/icons_size_normal_width"
-            android:layout_height="@dimen/icons_size_normal_height"
+            android:layout_width="@dimen/icons_width_medium"
+            android:layout_height="@dimen/icons_height_medium"
             android:layout_margin="@dimen/base_margin_medium"
             android:onClick="@{(view)->fragmentCallback.onFacebookClicked()}"
             android:src="@drawable/ic_facebook"
@@ -122,8 +122,8 @@
 
         <ImageView
             android:id="@+id/info_fragment_instagram"
-            android:layout_width="@dimen/icons_size_normal_width"
-            android:layout_height="@dimen/icons_size_normal_height"
+            android:layout_width="@dimen/icons_width_medium"
+            android:layout_height="@dimen/icons_height_medium"
             android:onClick="@{(view)->fragmentCallback.onInstagramClicked()}"
             android:layout_marginStart="@dimen/base_margin_medium"
             android:layout_marginTop="@dimen/base_margin_medium"

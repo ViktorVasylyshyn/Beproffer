@@ -11,10 +11,10 @@
 
 
     <!--Text-->
-    <dimen name="base_text_size_huge">36sp</dimen>
-    <dimen name="base_text_size_big">24sp</dimen>
-    <dimen name="base_text_size_medium">16sp</dimen>
-    <dimen name="base_text_size_small">12sp</dimen>
+    <dimen name="base_text_size_huge">30sp</dimen>
+    <dimen name="base_text_size_big">21sp</dimen>
+    <dimen name="base_text_size_medium">15sp</dimen>
+    <dimen name="base_text_size_small">9sp</dimen>
 
 
     <!--Margins-->
@@ -29,10 +29,12 @@
     <dimen name="bnb_icon_size">48dp</dimen>
 
     <!--Icons-->
-    <dimen name="icons_size_normal_width">48dp</dimen>
-    <dimen name="icons_size_normal_height">48dp</dimen>
-    <dimen name="icons_size_small_width">36dp</dimen>
-    <dimen name="icons_size_small_height">36dp</dimen>
+    <dimen name="icons_width_big">60dp</dimen>
+    <dimen name="icons_height_big">60dp</dimen>
+    <dimen name="icons_width_medium">48dp</dimen>
+    <dimen name="icons_height_medium">48dp</dimen>
+    <dimen name="icons_width_small">36dp</dimen>
+    <dimen name="icons_height_small">36dp</dimen>
 
     <!--Padding-->
     <dimen name="base_padding_medium">12dp</dimen>

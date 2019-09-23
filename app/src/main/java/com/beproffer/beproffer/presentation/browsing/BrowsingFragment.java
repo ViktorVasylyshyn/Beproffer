@@ -121,7 +121,6 @@ public class BrowsingFragment extends BaseUserInfoFragment {
 
     @Override
     public void applyUserData() {
-        setBadgeIfNeed();
         connectToRepository();
     }
 

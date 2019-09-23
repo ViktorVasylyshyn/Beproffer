@@ -89,26 +89,6 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemReselectedListener(mOnNavigationItemReselectedListener);
     }
 
-    public void setBadgeMain(int index) {
-        /*создание красной точки, как подсказка, что в этом разделе, что то нужно сделать или доделать*/
-        BottomNavigationMenuView bottomNavigationMenuView =
-                (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
-        View v = bottomNavigationMenuView.getChildAt(index);
-        BottomNavigationItemView itemView = (BottomNavigationItemView) v;
-        if (itemView.getChildCount() == 2) {
-            LayoutInflater.from(this).inflate(R.layout.bnb_badge, itemView, true);
-        }
-    }
-
-    public void removeBadge(int index) {
-        BottomNavigationMenuView bottomNavigationMenuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
-        View v = bottomNavigationMenuView.getChildAt(index);
-        BottomNavigationItemView itemView = (BottomNavigationItemView) v;
-        if (itemView.getChildCount() > 2) {
-            itemView.removeViewAt(itemView.getChildCount() - 1);
-        }
-    }
-
     public void performNavigation(@NonNull Fragment fragment, boolean addToBackStack,
                                   boolean clearBackStack, boolean addToCont, @Nullable Bundle arg) {
         fragmentManager = getSupportFragmentManager();

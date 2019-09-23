@@ -65,7 +65,9 @@ public class SpecialistGalleryFragment extends BaseGalleryFragment {
                 null,
                 null,
                 null,
-                null));
+                null,
+                mCurrentUserInfo.getProfileImageUrl(),
+                mCurrentUserInfo.getName()));
         changeFragment(new SpecialistGalleryEditFragment(), true, false, false, null);
     }
 

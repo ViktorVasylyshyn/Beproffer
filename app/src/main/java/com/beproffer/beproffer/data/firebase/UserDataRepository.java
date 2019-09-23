@@ -15,11 +15,9 @@ import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.data.models.BrowsingImageItem;
 import com.beproffer.beproffer.data.models.BrowsingItemRef;
 import com.beproffer.beproffer.data.models.ContactItem;
-import com.beproffer.beproffer.data.models.ContactRequestItem;
 import com.beproffer.beproffer.data.models.UserInfo;
 import com.beproffer.beproffer.util.Const;
 import com.beproffer.beproffer.util.LocalizationConstants;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -58,7 +56,6 @@ public class UserDataRepository {
     private String mCurrentUserId;
     private String mCurrentUserType;
 
-    private String mRequestsObtained = "user";
     private String mContactsObtained = "user";
 
     private final MutableLiveData<Boolean> mShowProgress = new MutableLiveData<>();
@@ -82,10 +79,8 @@ public class UserDataRepository {
 
     private Map<String, ContactItem> mContactsMap = new HashMap<>();
     private final MutableLiveData<Map<String, ContactItem>> mContactsMapLiveData = new MutableLiveData<>();
-    private Map<String, ContactRequestItem> mContactRequestsMap = new HashMap<>();
-    private final MutableLiveData<Map<String, ContactRequestItem>> mContactRequestsMapLiveData = new MutableLiveData<>();
-    private final Map<String, Boolean> mOutgoingContactRequests = new HashMap<>();
-    private final MutableLiveData<Map<String, Boolean>> mOutgoingContactRequestsLiveData = new MutableLiveData<>();
+
+    private final MutableLiveData<String> mSpecialistPhone = new MutableLiveData<>();
 
     public UserDataRepository(Application application) {
         mApplication = application;
@@ -392,7 +387,7 @@ public class UserDataRepository {
         try {
             /*TODO после введения локализации - формировать этот запрос с учетом локации пользователя.*/
             /*если удаление неактуального объекта сервиса, по каким то причинам не удается - сохраняем
-            * в раздел notdeleted этот объект, чтобы удалить мануально*/
+             * в раздел notdeleted этот объект, чтобы удалить мануально*/
             mDatabaseRef.child(Const.SERVICES)
                     .child(LocalizationConstants.UKRAINE)
                     .child(LocalizationConstants.KYIV_REGION)
@@ -401,12 +396,12 @@ public class UserDataRepository {
                     .child(primordialItemSubtype)
                     .child(updatedItem.getKey())
                     .removeValue().addOnFailureListener(e -> mDatabaseRef.child(Const.SERVICES)
-                            .child(LocalizationConstants.UKRAINE)
-                            .child(LocalizationConstants.KYIV_REGION)
-                            .child(LocalizationConstants.KYIV)
-                            .child("notdeleted")/*однажды сделать константой*/
-                            .child(updatedItem.getKey())
-                            .setValue(updatedItem));
+                    .child(LocalizationConstants.UKRAINE)
+                    .child(LocalizationConstants.KYIV_REGION)
+                    .child(LocalizationConstants.KYIV)
+                    .child("notdeleted")/*однажды сделать константой*/
+                    .child(updatedItem.getKey())
+                    .setValue(updatedItem));
         } catch (NullPointerException e) {
             Log.d(Const.ERROR, "deleteNotRelevantImageData: " + e.getMessage());
         }
@@ -434,43 +429,7 @@ public class UserDataRepository {
          которых нет в бд, но еще есть в слепке - введена переменная mContactsObtained.*/
         if (mUserDataSnapShot.hasChild(Const.CONTACT) && mContactsMap.isEmpty() && !mContactsObtained.equals(mCurrentUserId)) {
             for (DataSnapshot data : mUserDataSnapShot.child(Const.CONTACT).getChildren()) {
-                try {
-                    mDatabaseRef.child(Const.USERS).child(Const.SPEC).child(data.getKey()).child(Const.INFO)
-                            .addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            /*Если при создании объекта ContactItem будет краш у тех специалистов, которые не добавили
-                             изображение, и у них в описании нет profileImageUrl ключа - то обязать их
-                             загружать изображение профайла, перед тем как разрешать подтверждать запросы*/
-                                    if (dataSnapshot.exists()) {
-                                        mShowProgress.setValue(false);
-                                        try {
-                                            mContactsMap.put(dataSnapshot.getValue(ContactItem.class).getId()
-                                                    , dataSnapshot.getValue(ContactItem.class));
-                                        } catch (NullPointerException e) {
-                                            Log.d(Const.ERROR, "getContacts.onDataChange: " + e.getMessage());
-                                        }
-                                        mContactsMapLiveData.setValue(mContactsMap);
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    /*TODO подавать в mContactsMap объект ContactItem только с полем id и отображать.
-                                     * в recycler view этот объект, так, как будто его нет - что то типа:
-                                     * ("не можем получить данные специалиста. возможно они удалены или непрвильны")
-                                     * это должно подталкивать юзера к удалению этого не валидного id*/
-
-                                    feedBackToUi(false, R.string.toast_error_has_occurred,
-                                            false, false, false, null);
-                                    Log.d(Const.ERROR, "getContacts.onCancelled: " + databaseError.getMessage());
-                                }
-                            });
-                } catch (NullPointerException e) {
-                    feedBackToUi(false, R.string.toast_error_has_occurred,
-                            false, false, false, R.string.message_error_has_occurred);
-                    Log.d(Const.ERROR, "getContacts: " + e.getMessage());
-                }
+                obtainContact(data.getKey());
             }
             mContactsObtained = mCurrentUserId;
         } else {
@@ -494,106 +453,101 @@ public class UserDataRepository {
         });
     }
 
-    public LiveData<Map<String, ContactRequestItem>> getContactRequests() {
-        mShowProgress.setValue(true);
-        /*Весь слепок информации данного пользователя находится в mUserDataSnapShot. В том числе и запросы
-         контактов(если текущий пользователь - специалст). Мы, на даном этапе не вешаем слушатель на данные
-         пользователя, а подгружаем их единым слепком при входе в систему. Когда все запросы обработаны - то в базе данных
-         их нет, но в слепке они остались. Чтобы нижестоящее условие не срабоатывало при повторном
-         входе в раздел запросов и не показывались запросы
-         которых нет в бд, но еще есть в слепке - введена переменная mRequestsObtained.*/
-        if (mUserDataSnapShot.hasChild(Const.INREQUEST) && mContactRequestsMap.isEmpty() && !mRequestsObtained.equals(mCurrentUserId)) {
-            for (DataSnapshot data : mUserDataSnapShot.child(Const.INREQUEST).getChildren()) {
-                try {
-                    mDatabaseRef.child(Const.USERS).child(data.getValue().toString()).child(data.getKey()).child(Const.INFO)
-                            .addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    if (dataSnapshot.exists()) {
-                                        mShowProgress.setValue(false);
-                                /*TODO обратить внимание, будет ли крашится, если в инфо
-                                   запрашиваемого пользователя нет ключа с url изображения*/
-                                        mContactRequestsMap.put(dataSnapshot.getValue(ContactRequestItem.class).getId()
-                                                , dataSnapshot.getValue(ContactRequestItem.class));
-                                        mContactRequestsMapLiveData.setValue(mContactRequestsMap);
-                                    }
+    private void obtainContact(String specialistId) {
+        try {
+            mDatabaseRef.child(Const.USERS).child(Const.SPEC).child(specialistId).child(Const.INFO)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            /*Если при создании объекта ContactItem будет краш у тех специалистов, которые не добавили
+                             изображение, и у них в описании нет profileImageUrl ключа - то обязать их
+                             загружать изображение профайла, перед тем как разрешать подтверждать запросы*/
+                            if (dataSnapshot.exists()) {
+                                mShowProgress.postValue(false);
+                                mProcessing.postValue(false);
+                                try {
+                                    mContactsMap.put(dataSnapshot.getValue(ContactItem.class).getId()
+                                            , dataSnapshot.getValue(ContactItem.class));
+                                } catch (NullPointerException e) {
+                                    Log.d(Const.ERROR, "getContacts.onDataChange: " + e.getMessage());
                                 }
+                                mContactsMapLiveData.setValue(mContactsMap);
+                            }
+                        }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    Log.d(Const.ERROR, "getContactRequests.onCancelled: " + databaseError.getMessage());
-                                }
-                            });
-                } catch (NullPointerException e) {
-                    Log.d(Const.ERROR, "getContactRequests: " + e.getMessage());
-                    feedBackToUi(false, R.string.toast_error_has_occurred,
-                            false, false, false, R.string.message_error_has_occurred);
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            /*TODO подавать в mContactsMap объект ContactItem только с полем id и отображать.
+                             * в recycler view этот объект, так, как будто его нет - что то типа:
+                             * ("не можем получить данные специалиста. возможно они удалены или непрвильны")
+                             * это должно подталкивать юзера к удалению этого не валидного id*/
+
+                            feedBackToUi(false, R.string.toast_error_has_occurred,
+                                    false, false, false, null);
+                            Log.d(Const.ERROR, "getContacts.onCancelled: " + databaseError.getMessage());
+                        }
+                    });
+        } catch (NullPointerException e) {
+            feedBackToUi(false, R.string.toast_error_has_occurred,
+                    false, false, false, R.string.message_error_has_occurred);
+            Log.d(Const.ERROR, "getContacts: " + e.getMessage());
+        }
+    }
+
+    public void addContact(String specialistId) {
+        mShowProgress.setValue(true);
+        mProcessing.setValue(true);
+        mDatabaseRef.child(Const.USERS)
+                .child(mCurrentUserType)
+                .child(mCurrentUserId)
+                .child(Const.CONTACT)
+                .child(specialistId)
+                .setValue(true)
+                .addOnSuccessListener(aVoid -> obtainContact(specialistId))
+                .addOnFailureListener(e -> {
+                    mShowProgress.setValue(false);
+                    mProcessing.setValue(false);
+                    mMessageResId.postValue(R.string.message_error_has_occurred);
+                    Log.d(Const.ERROR, "addContact addOnFailureListener: " + e.getMessage());
+                });
+    }
+
+    private String mLastSpecialistId;
+
+    public LiveData<String> getSpecialistPhone(String specialistId) {
+        if (!specialistId.equals(mLastSpecialistId)) {
+            mLastSpecialistId = specialistId;
+            mSpecialistPhone.setValue(null);
+            obtainSpecialistPhone(specialistId);
+        }
+        return mSpecialistPhone;
+    }
+
+    public void obtainSpecialistPhone(String specialistId) {
+        mShowProgress.setValue(true);
+        mProcessing.setValue(true);
+        mDatabaseRef.child(Const.USERS).child(Const.SPEC).child(specialistId).child(Const.INFO).child("phone").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mProcessing.postValue(false);
+                mShowProgress.setValue(false);
+
+                if (dataSnapshot.exists()) {
+                    try {
+                        mSpecialistPhone.postValue(dataSnapshot.getValue().toString());
+                    } catch (NullPointerException e) {
+                        Log.d(Const.ERROR, "obtainSpecialistPhone: " + e.getMessage());
+                    }
                 }
             }
-            mContactRequestsMapLiveData.setValue(mContactRequestsMap);
-            mRequestsObtained = mCurrentUserId;
-        } else {
-            mShowProgress.setValue(false);
-            mContactRequestsMapLiveData.setValue(mContactRequestsMap);
-        }
-        mShowProgress.setValue(false);
-        return mContactRequestsMapLiveData;
-    }
 
-    public void handleIncomingContactRequest(ContactRequestItem handledItem, boolean confirm) {
-        UserInfo currentUserInfo = mUserInfoLiveData.getValue();
-        mShowProgress.setValue(true);
-        if (confirm) {
-            mDatabaseRef.child(Const.USERS).
-                    child(handledItem.getType()).
-                    child(handledItem.getId()).
-                    child(Const.CONTACT).
-                    child(currentUserInfo.getId()).
-                    setValue(true).addOnSuccessListener(aVoid ->
-                    deleteIncomingContactRequestData(handledItem, R.string.toast_contact_confirmed))
-                    .addOnFailureListener(e -> {
-                        feedBackToUi(false, R.string.toast_error_has_occurred,
-                                false, false, false, null);
-                        Log.d(Const.ERROR, "handleIncomingContactRequest: " + e.getMessage());
-                    });
-        } else {
-            deleteIncomingContactRequestData(handledItem, R.string.toast_contact_denied);
-        }
-    }
-
-    private void deleteIncomingContactRequestData(ContactRequestItem handledItem, int toastRes) {
-        mDatabaseRef.child(Const.USERS)
-                .child(Const.SPEC)
-                .child(mCurrentUserId)
-                .child(Const.INREQUEST)
-                .child(handledItem.getId()).removeValue().addOnSuccessListener(aVoid -> {
-                    mContactRequestsMap.remove(handledItem.getId());
-                    mContactRequestsMapLiveData.setValue(mContactRequestsMap);
-                    feedBackToUi(false, toastRes, false, false, false, null);
-                }
-        );
-    }
-
-    public void sendContactRequest(String specialistId) {
-        mShowProgress.setValue(true);
-        try {
-            mDatabaseRef.child(Const.USERS)
-                    .child(Const.SPEC)
-                    .child(specialistId)
-                    .child(Const.INREQUEST)
-                    .child(mCurrentUserId)
-                    .setValue(mCurrentUserType).addOnSuccessListener(aVoid -> {
-                mOutgoingContactRequests.put(specialistId, true);
-                /* TODO история исходящих запросов сохраняется только в течении текущего сеанса.
-                    После перезахода в приложение она сбрасывается. Сделать историю отправленых запросов
-                    не зависящей от перезаходы в приложение*/
-                mOutgoingContactRequestsLiveData.setValue(mOutgoingContactRequests);
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                mProcessing.postValue(false);
                 mShowProgress.setValue(false);
-            });
-        } catch (NullPointerException e) {
-            Log.d(Const.ERROR, "sendContactRequest: " + e.getMessage());
-            mShowProgress.setValue(false);
-        }
+                Log.d(Const.ERROR, "obtainSpecialistPhone - onCancelled: " + databaseError.getMessage());
+            }
+        });
     }
 
     public LiveData<BrowsingImageItem> getEditableGalleryItem() {
@@ -604,18 +558,12 @@ public class UserDataRepository {
         mEditableGalleryItemLiveData.setValue(editableItem);
     }
 
-    public LiveData<Map<String, Boolean>> getOutgoingContactRequests() {
-        return mOutgoingContactRequestsLiveData;
-    }
-
     public void resetLocalUserData() {
         mShowProgress.setValue(true);
         mCurrentUserId = null;
         mCurrentUserType = null;
         mUserInfoLiveData.setValue(null);
         mUserDataSnapShot = null;
-        mContactRequestsMap = new HashMap<>();
-        mContactRequestsMapLiveData.setValue(mContactRequestsMap);
         mContactsMap = new HashMap<>();
         mContactsMapLiveData.setValue(mContactsMap);
         mServiceItemsMap = new HashMap<>();

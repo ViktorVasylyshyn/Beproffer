@@ -110,7 +110,7 @@
             android:id="@+id/browsing_fragment_motion_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/icons_size_normal_height"
+            android:layout_marginTop="@dimen/icons_height_medium"
             android:clipChildren="false"
             android:visibility="gone"
             app:layoutDescription="@xml/motion_scene_swipe"

@@ -23,49 +23,18 @@
         android:paddingBottom="@dimen/base_padding_medium"
         tools:context=".presentation.contacts.confirmed.ContactsFragment">
 
-        <LinearLayout
-            android:id="@+id/contacts_bookmarks_layout"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/contacts_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/base_margin_big"
-            android:layout_marginEnd="@dimen/base_margin_big"
-            android:layout_marginTop="@dimen/base_margin_small"
-            android:background="@drawable/button_background_grey_stroke_rectangle"
-            android:orientation="horizontal"
+            android:layout_margin="@dimen/base_margin_small"
+            android:text="@string/title_contacts"
+            android:textColor="@color/color_base_text"
+            android:textSize="@dimen/base_text_size_big"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/contacts_contacts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:paddingTop="@dimen/base_padding_small"
-                android:paddingBottom="@dimen/base_padding_small"
-                android:paddingStart="@dimen/base_padding_medium"
-                android:paddingEnd="@dimen/base_padding_medium"
-                android:maxLines="1"
-                android:text="@string/title_contacts_to_specialists"
-                android:textSize="@dimen/base_text_size_big" />
-
-            <TextView
-                android:id="@+id/contacts_contact_requests"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingTop="@dimen/base_padding_small"
-                android:gravity="center"
-                android:paddingBottom="@dimen/base_padding_small"
-                android:paddingStart="@dimen/base_padding_medium"
-                android:paddingEnd="@dimen/base_padding_medium"
-                android:maxLines="1"
-                android:visibility="gone"
-                android:text="@string/title_new_customers_title"
-                android:textSize="@dimen/base_text_size_big" />
-
-        </LinearLayout>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/contacts_text_message"
@@ -82,7 +51,8 @@
             android:textSize="@dimen/base_text_size_medium"
             android:textStyle="italic"
             android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@+id/contacts_bookmarks_layout"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintTop_toBottomOf="@+id/contacts_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/contacts_recycler_view"/>
@@ -118,6 +88,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/base_text_size_big"
             android:textStyle="italic"
+            android:text="@string/toast_no_any_contacts"
             android:visibility="@{showNoContacts ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

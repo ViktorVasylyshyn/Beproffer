@@ -22,7 +22,7 @@ public class ContactsItemAdapter extends RecyclerView.Adapter<ContactsItemAdapte
 
     public void setData(List<ContactItem> mConfirmedContactsItemList) {
         this.mConfirmedContactsItemList = mConfirmedContactsItemList;
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
     }
 
     @NonNull

@@ -2,15 +2,10 @@
 <resources>
 
     <!--App's name-->
-    <string name="app_name">Beproffer</string>
-    <string name="app_name_low_case">beproffer</string>
-    <string name="app_version">v 0.9.3</string>
-    <string name="app_all_rights_reserved">Copyright 2019 "Beproffer" LLC. Всі права захищені.</string>
 
 
     <!--Hints-->
     <string name="name_infield">ім\'я</string>
-    <string name="email_infield">email</string>
     <string name="password_infield">пароль</string>
     <string name="password_repeat_infield">повторіть пароль</string>
     <string name="phone_infield">тел</string>
@@ -19,7 +14,7 @@
     <string name="hint_about_me_infield">про мене(до 100 символів)</string>
     <string name="hint_add">додати</string>
 
-    <string name="hint_currency_outfield">грн</string>
+    <string name="hint_currency_outfield">" грн"</string>
     <string name="hint_type_outfield">ВИД</string>
     <string name="hint_outfield_clear_browsing_history">Натисніть \"Обнулити\" якщо хочете обнулити історію перегладів.</string>
     <string name="hint_outfield_delete_profile">Введіть свій email і настисніть \"Видалити\", для видалення цього профайлу з Beproffer. Видалений профайл не можна відновити, але можна буде створити новий.</string>
@@ -46,30 +41,22 @@
     <string name="href_terms_of_service_title_0">Умовами Використання</string>
     <string name="href_terms_of_service_title_1">Умови Використання</string>
     <string name="href_terms_of_service_title_2">Умовах Використання</string>
-    <string name="href_privacy_policy">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0-%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8</string>
     <string name="href_privacy_policy_title_0">Політикою Конфіденційності</string>
     <string name="href_privacy_policy_title_1">Політика Конфіденційності</string>
-    <string name="href_official_site_title">Beproffer.com</string>
-    <string name="href_official_site">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F</string>
     <string name="hint_join_us_on_social">Розкажи нам свої пропозиції зауваження. Посилання на офіційні групи знаходяться в розділі \"info(i)\".</string>
-    <string name="href_telegram_chat_customers">https://t.me/beproffer_c</string>
-    <string name="href_telegram_chat_specialists">https://t.me/beproffer_s</string>
-    <string name="href_viber_chat_customers">https://invite.viber.com/?g2=AQATP13AdMH6M0oUzCUTcg75bBcL4qcWS72dKYPVLOL1fqTuHOB%2FXbsw%2BrHvZSLH</string>
-    <string name="href_viber_chat_specialists">https://invite.viber.com/?g2=AQAJVtpDxpdMMEoU3JqJjwNDXuNOM0GnZu%2FDu82uths%2FRhzGMfzEX7OChNW967CM</string>
-    <string name="href_facebook_page">fb://page/102981521053885</string>
-    <string name="href_instagram_page">https://www.instagram.com/beproffer/</string>
 
     <string name="package_id_telegram">org.telegram.messenger</string>
     <string name="package_id_viber">com.viber.voip</string>
 
 
     <!--Titles-->
-    <string name="title_contacts_to_specialists">Спеціалісти</string>
+    <string name="title_contacts">Контакти</string>
     <string name="title_new_customers_title">Запити</string>
     <string name="title_create_an_acc">або створити новий аккаунт</string>
     <string name="title_customer_registration">НОВИЙ КЛІЄНТ</string>
     <string name="title_specialist_registration">НОВИЙ СПЕЦІАЛІСТ</string>
-    <string name="title_send_contact_request">додати спеціаліста до контактів</string>
+    <string name="title_add_to_contact">додати до контактів</string>
+    <string name="title_call">дзвонити </string>
     <string name="title_request_already_sent">запит відправлений</string>
     <string name="title_contact_already_available">ВЖЕ Є В КОНТАКТАХ</string>
     <string name="title_max_num_of_contacts">МАКСИМУМ</string>
@@ -81,16 +68,15 @@
     <string name="title_clear">Обнулити</string>
     <string name="title_reset_password">Скинути</string>
 
-    <string name="title_gender_male">ЧОЛ</string>
-    <string name="title_gender_female">ЖІН</string>
-    <string name="title_gender_all_genders">ВСІ</string>
+    <string name="title_gender_male">Чол</string>
+    <string name="title_gender_female">Жін</string>
+    <string name="title_gender_all_genders">Усі</string>
 
     <string name="title_gallery_services">ПОСЛУГИ</string>
     <string name="title_search">Шукати</string>
     <string name="title_for">для</string>
 
     <string name="title_try_again">Спробувати знову</string>
-    <string name="title_badge_text">!</string>
     <string name="title_wants_to_contact">Хоче з Вами зв\'язатися.</string>
 
     <!--main specialists' specialization-->
