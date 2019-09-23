@@ -1,32 +1,36 @@
 package com.beproffer.beproffer.presentation.profile.profile;
 
-import androidx.lifecycle.ViewModelProviders;
-import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ObservableBoolean;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.beproffer.beproffer.R;
 import com.beproffer.beproffer.databinding.ProfileFragmentBinding;
 import com.beproffer.beproffer.presentation.activities.MainActivity;
 import com.beproffer.beproffer.presentation.base.BaseUserInfoFragment;
+import com.beproffer.beproffer.presentation.browsing.BrowsingViewModel;
 import com.beproffer.beproffer.presentation.info.InfoFragment;
 import com.beproffer.beproffer.presentation.profile.profile_edit.ProfileEditFragment;
 import com.beproffer.beproffer.presentation.settings.SettingsFragment;
 import com.beproffer.beproffer.presentation.spec_gallery.SpecialistGalleryFragment;
-import com.beproffer.beproffer.presentation.browsing.BrowsingViewModel;
 import com.beproffer.beproffer.util.Const;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileFragment extends BaseUserInfoFragment {
 
     private ProfileFragmentBinding mBinding;
+
+    private ObservableBoolean mUserSpecialist = new ObservableBoolean(false);
 
     private final ProfileFragmentCallback mCallback = new ProfileFragmentCallback() {
 
@@ -38,6 +42,12 @@ public class ProfileFragment extends BaseUserInfoFragment {
         @Override
         public void onLogOutClick() {
             logOut();
+        }
+
+        @Override
+        public void onPopularityClick() {
+            showToast(R.string.toast_popularity);
+            mBinding.profileBottomHint.setText(R.string.toast_popularity);
         }
     };
 
@@ -54,6 +64,7 @@ public class ProfileFragment extends BaseUserInfoFragment {
         super.onActivityCreated(savedInstanceState);
         mBinding.setFragmentCallback(mCallback);
         mBinding.setShowProgress(mShowProgress);
+        mBinding.setUserSpecialist(mUserSpecialist);
         if (getFirebaseUser() == null) {
             ((MainActivity) requireActivity()).onBottomNavigationBarItemClicked(R.id.bnm_images_gallery, R.string.toast_error_has_occurred);
         } else {
@@ -63,17 +74,11 @@ public class ProfileFragment extends BaseUserInfoFragment {
 
     @Override
     public void applyUserData() {
-        if (mCurrentUserInfo.getType().equals(Const.SPEC)) {
-            adaptProfileForSpecialist();
-        }
+        mUserSpecialist.set(mCurrentUserInfo.getType().equals(Const.SPEC));
         mBinding.setUserInfo(mCurrentUserInfo);
 
         hintsForUsers();
         showProgress(false);
-    }
-
-    private void adaptProfileForSpecialist() {
-        mBinding.profileStorage.setVisibility(View.VISIBLE);
     }
 
     private void performNavigation(View view) {
@@ -104,7 +109,7 @@ public class ProfileFragment extends BaseUserInfoFragment {
          * проверяем есть ли описание профиля. предположим, что если описания нет, то профиль заполнен
          * не до концаю для кастомера же проверяем только описание*/
         if (mCurrentUserInfo.getType().equals(Const.SPEC)) {
-            mUserDataViewModel.getServiceItemsList().observe(this, data -> {
+            mUserDataViewModel.getServiceItemsList().observe(getViewLifecycleOwner(), data -> {
                 if (data != null && data.size() < Const.IMAGES_BASE_SET_COUNT) {
                     Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.hint_blinking_icon_anim);
                     mBinding.profileStorage.startAnimation(animation);
@@ -115,6 +120,11 @@ public class ProfileFragment extends BaseUserInfoFragment {
                     } else {
                         joinUsHint();
                     }
+                }
+            });
+            mUserDataViewModel.getPopularity().observe(getViewLifecycleOwner(), popularity -> {
+                if (popularity != null) {
+                    mBinding.profilePopularityValue.setText(popularity);
                 }
             });
         } else {

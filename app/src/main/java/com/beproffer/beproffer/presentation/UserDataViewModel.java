@@ -69,6 +69,10 @@ public class UserDataViewModel extends AndroidViewModel {
         return mRepository.getSpecialistPhone(specialistId);
     }
 
+    public LiveData<String> getPopularity(){
+        return mRepository.getPopularity();
+    }
+
     public LiveData<Boolean> getShowProgress() {
         return mRepository.getShowProgress();
     }

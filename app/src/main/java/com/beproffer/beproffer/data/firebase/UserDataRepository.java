@@ -81,6 +81,7 @@ public class UserDataRepository {
     private final MutableLiveData<Map<String, ContactItem>> mContactsMapLiveData = new MutableLiveData<>();
 
     private final MutableLiveData<String> mSpecialistPhone = new MutableLiveData<>();
+    private final MutableLiveData<String> mPopularity = new MutableLiveData<>();
 
     public UserDataRepository(Application application) {
         mApplication = application;
@@ -143,6 +144,9 @@ public class UserDataRepository {
                     mUserDataSnapShot = dataSnapshot;
                     mUserInfoLiveData.setValue(mUserDataSnapShot.child(Const.INFO).getValue(UserInfo.class));
                     mShowProgress.setValue(false);
+                }
+                if (mCurrentUserType.equals(Const.SPEC) && dataSnapshot.hasChild(Const.POPULARITY)) {
+                    mPopularity.postValue(String.valueOf(dataSnapshot.child(Const.POPULARITY).getChildrenCount()));
                 }
             }
 
@@ -449,6 +453,7 @@ public class UserDataRepository {
             mContactsMap.remove(deletedContact.getId());
             mContactsMapLiveData.setValue(mContactsMap);
             mShowProgress.setValue(false);
+            editPopularity(deletedContact.getId(), false);
             feedBackToUi(false, R.string.toast_contact_deleted, false, false, false, null);
         });
     }
@@ -503,7 +508,10 @@ public class UserDataRepository {
                 .child(Const.CONTACT)
                 .child(specialistId)
                 .setValue(true)
-                .addOnSuccessListener(aVoid -> obtainContact(specialistId))
+                .addOnSuccessListener(aVoid -> {
+                    obtainContact(specialistId);
+                    editPopularity(specialistId, true);
+                })
                 .addOnFailureListener(e -> {
                     mShowProgress.setValue(false);
                     mProcessing.setValue(false);
@@ -550,6 +558,19 @@ public class UserDataRepository {
         });
     }
 
+    /*Популярность - значение валидно только для специалистов и равняется количеству пользователей,
+    которые добавили специалиста в контакты. пока что, настройками базы данных, доступно только для
+    авторизированных пользователей*/
+    private void editPopularity(String specialistId, boolean increaseValue) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Const.USERS)
+                .child(Const.SPEC).child(specialistId).child(Const.POPULARITY);
+        if (increaseValue) {
+            ref.child(mCurrentUserId).setValue(true);
+        } else {
+            ref.child(mCurrentUserId).removeValue();
+        }
+    }
+
     public LiveData<BrowsingImageItem> getEditableGalleryItem() {
         return mEditableGalleryItemLiveData;
     }
@@ -558,17 +579,25 @@ public class UserDataRepository {
         mEditableGalleryItemLiveData.setValue(editableItem);
     }
 
+    public LiveData<String> getPopularity() {
+        return mPopularity;
+    }
+
     public void resetLocalUserData() {
         mShowProgress.setValue(true);
         mCurrentUserId = null;
         mCurrentUserType = null;
         mUserInfoLiveData.setValue(null);
         mUserDataSnapShot = null;
-        mContactsMap = new HashMap<>();
+        mContactsMap.clear();
         mContactsMapLiveData.setValue(mContactsMap);
-        mServiceItemsMap = new HashMap<>();
+        mServiceItemsMap.clear();
         mServiceItemsMapLiveData.setValue(mServiceItemsMap);
         mShowProgress.setValue(false);
+        mPopularity.setValue(null);
+        mServiceItemsListLiveData.setValue(null);
+        mServiceItemsList.clear();
+        mEditableGalleryItemLiveData.setValue(null);
     }
 
     public LiveData<Boolean> getShowProgress() {

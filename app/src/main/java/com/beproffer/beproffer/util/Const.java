@@ -13,7 +13,7 @@ public class Const {
 
     public static final String INFO = "info"; /*global child*/
     public static final String CONTACT = "contact";
-    public static final String INREQUEST = "inrequest";
+    public static final String POPULARITY = "popularity";
     public static final String SERVICES = "services"; /*service image's data*/
 
     public static final String USERTYPE = "userType";
