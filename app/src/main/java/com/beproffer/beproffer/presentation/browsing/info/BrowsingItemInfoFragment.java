@@ -48,10 +48,14 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
         }
 
         @Override
-        public void onCallClick() {
+        public void onCallClick(View view) {
             /*звонить могут олько зарегистрированные пользователи*/
             if (!checkUser())
                 return;
+            if (mProcessing.get()) {
+                showToast(R.string.toast_processing);
+                return;
+            }
             /*на случай, если приложение установлено на устройство, с которого нельзя позвонить*/
             if (!requireActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
                 showToast(R.string.toast_telephony_not_available);
@@ -99,7 +103,8 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
     }
 
     private void obtainImageItem() {
-        ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class).getBrowsingItemInfo().observe(getViewLifecycleOwner(), item -> {
+        ViewModelProviders.of(requireActivity()).get(BrowsingViewModel.class).getBrowsingItemInfo()
+                .observe(getViewLifecycleOwner(), item -> {
             if (item != null) {
                 mItem = item;
                 mBinding.setImageItem(mItem);
@@ -129,7 +134,10 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
     private void addContact() {
         if (!checkUser())
             return;
-
+        if (mProcessing.get()) {
+            showToast(R.string.toast_processing);
+            return;
+        }
         mUserDataViewModel.addContact(mItem.getId());
     }
 

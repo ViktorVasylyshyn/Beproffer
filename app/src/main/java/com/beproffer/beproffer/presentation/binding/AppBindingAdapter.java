@@ -1,8 +1,10 @@
 package com.beproffer.beproffer.presentation.binding;
 
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
 
 import com.beproffer.beproffer.R;
@@ -10,6 +12,10 @@ import com.beproffer.beproffer.util.Const;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /*may be public for binding*/
 public class AppBindingAdapter {
@@ -57,9 +63,6 @@ public class AppBindingAdapter {
                     break;
                 case Const.FEMALE:
                     resId = R.drawable.ic_gender_sign_female;
-                    break;
-                case Const.BOTHGEND:
-                    resId = R.drawable.ic_gender_sign_any;
                     break;
                 default:
                     throw new IllegalArgumentException(Const.UNKNSTAT);
@@ -241,20 +244,30 @@ public class AppBindingAdapter {
     }
 
     /*загрузка изображения специалиста, имея его id*/
-    @BindingAdapter("loadSpecialistsProfileImage")
-    public static void loadSpecialistsProfileImage(ImageView imageView, String url) {
-        if (url == null)
+    @BindingAdapter("loadPopularity")
+    public static void loadPopularity(TextView textView, String id) {
+        if (id == null)
             return;
-        final RequestOptions options = new RequestOptions()
-                .placeholder(R.drawable.profile_image_ph)
-                .apply(RequestOptions.circleCropTransform())
-                .diskCacheStrategy(DiskCacheStrategy.ALL);
+        FirebaseDatabase.getInstance().getReference()
+                .child(Const.USERS)
+                .child(Const.SPEC)
+                .child(id)
+                .child(Const.POPULARITY)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(!dataSnapshot.exists()){
+                            textView.setText(R.string.title_zero);
+                            return;
+                        }
+                        textView.setText(String.valueOf(dataSnapshot.getChildrenCount()));
+                    }
 
-        Glide.with(imageView.getContext())
-                .load(url)
-                .apply(options)
-                .into(imageView);
-
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.d(Const.ERROR, "loadPopularity onCancelled: " + databaseError.getMessage());
+                    }
+                });
     }
 
     @BindingAdapter("loadSpecialistsName")

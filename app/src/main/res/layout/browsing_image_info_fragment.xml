@@ -76,8 +76,35 @@
                 android:layout_margin="@dimen/base_margin_extra_small"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:loadSpecialistsProfileImage="@{imageItem.profileImageUrl}"
+                app:loadProfileImageFromDb="@{imageItem.profileImageUrl}"
                 tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/browsing_image_popularity_icon"
+                android:layout_width="@dimen/base_margin_big"
+                android:layout_height="@dimen/base_margin_big"
+                android:layout_marginTop="@dimen/base_margin_extra_small"
+                android:layout_marginEnd="@dimen/base_margin_medium"
+                android:src="@drawable/ic_star"
+                app:layout_constraintStart_toStartOf="@+id/browsing_image_specialists_photo"
+                app:layout_constraintTop_toBottomOf="@+id/browsing_image_specialists_photo"
+                app:layout_constraintEnd_toEndOf="@+id/browsing_image_specialists_photo"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/browsing_image_popularity_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/title_zero"
+                android:textColor="@color/color_base_text_70per"
+                android:textSize="@dimen/base_text_size_medium"
+                tools:ignore="MissingConstraints"
+                app:loadPopularity="@{imageItem.id}"
+                app:layout_constraintStart_toEndOf="@+id/browsing_image_popularity_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/browsing_image_popularity_icon"
+                app:layout_constraintTop_toTopOf="@+id/browsing_image_popularity_icon"/>
 
             <TextView
                 android:id="@+id/browsing_image_specialists_name"
@@ -206,7 +233,7 @@
             android:layout_height="@dimen/icons_height_big"
             android:layout_marginTop="@dimen/base_margin_extra_small"
             android:background="@drawable/background_rectangle_grey_alpha_85_green_stroke"
-            android:onClick="@{(view)->fragmentCallback.onCallClick()}"
+            android:onClick="@{fragmentCallback::onCallClick}"
             android:src="@drawable/ic_contacts_active"
             app:layout_constraintEnd_toEndOf="@+id/browsing_image_info_constraint_layout_internal"
             app:layout_constraintStart_toEndOf="@+id/browsing_image_info_add_to_contacts_button"
