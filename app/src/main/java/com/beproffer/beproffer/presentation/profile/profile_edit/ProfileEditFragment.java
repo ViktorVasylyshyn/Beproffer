@@ -23,7 +23,7 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
 
     private ProfileEditFragmentBinding mBinding;
 
-    private ObservableBoolean mIsUserSpecialist = new ObservableBoolean();
+    private final ObservableBoolean mIsUserSpecialist = new ObservableBoolean();
 
     private Uri mResultUri;
 
@@ -101,7 +101,7 @@ public class ProfileEditFragment extends BaseUserInfoFragment {
     }
 
     private void saveUserData() {
-        /*ресет textview на случай, если внем отобрабается\лась подсказка о ошибке*/
+        /*ресет TextView на случай, если внем отобрабается\лась подсказка о ошибке*/
         mBinding.editFragmentBottomHint.setText(R.string.string_res_without_text);
         mBinding.editFragmentBottomHint.setTextColor(getResources().getColor(R.color.color_base_text));
 

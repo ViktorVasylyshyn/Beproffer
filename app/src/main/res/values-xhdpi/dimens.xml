@@ -5,7 +5,6 @@
 
     <!--profile user image-->
     <dimen name="profile_image">160dp</dimen>
-    <dimen name="profile_image_three_quarters">120dp</dimen>
     <dimen name="profile_image_half">80dp</dimen>
     <dimen name="profile_image_quarter">40dp</dimen>
 
@@ -14,7 +13,6 @@
     <dimen name="base_text_size_huge">25sp</dimen>
     <dimen name="base_text_size_big">17.5sp</dimen>
     <dimen name="base_text_size_medium">12.5sp</dimen>
-    <dimen name="base_text_size_small">7.5sp</dimen>
 
 
     <!--Margins-->
@@ -44,7 +42,6 @@
     <!--list item image-->
     <dimen name="list_item_image_width">90dp</dimen>
     <dimen name="list_item_image_height">160dp</dimen>
-    <dimen name="list_item_description_width">200dp</dimen>
 
 
     <!--specialists edit fragment image-->

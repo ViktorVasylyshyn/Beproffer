@@ -2,7 +2,7 @@ package com.beproffer.beproffer.util;
 
 import android.os.Build;
 
-public class OsVersionInfo {
+class OsVersionInfo {
 
     private OsVersionInfo() {}
 

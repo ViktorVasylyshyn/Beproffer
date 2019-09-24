@@ -20,7 +20,7 @@ import com.beproffer.beproffer.presentation.spec_gallery.adapter.GalleryImageIte
 
 import java.util.List;
 
-public abstract class BaseGalleryFragment extends BaseUserInfoFragment {
+abstract class BaseGalleryFragment extends BaseUserInfoFragment {
 
     final GalleryImageItemAdapter mImageAdapter = new GalleryImageItemAdapter();
 
@@ -28,7 +28,7 @@ public abstract class BaseGalleryFragment extends BaseUserInfoFragment {
 
     List<BrowsingImageItem> mImageItemsList;
 
-    protected SpecialistGalleryFragmentBinding mBinding;
+    SpecialistGalleryFragmentBinding mBinding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

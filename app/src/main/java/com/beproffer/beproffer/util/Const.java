@@ -84,6 +84,7 @@ public class Const {
 
     public static final String PROHCONT = "prohcont";
     public static final String WRONSECT = "wronsect";
+    public static final String NOT_DELETED = "notdeleted";
 
     /*request code*/
     public static final int REQUEST_CODE_1 = 1;
@@ -103,9 +104,6 @@ public class Const {
     public static final int POPBACKSTACK_WAITING = 500; /*система не успевает сбросить параметр true при
     переходе назад, и иногда происходят перескоки сразу на два шага назад. так как предыдущий фрагмент
     хватает из репозитория значение true, а оно должно было быть false*/
-
-    /*индексы иконок на панели навигации*/
-    public static final int CONTBNBINDEX = 1;/*contacts section(browsing image - 0, profile - 2)*/
 
     public static final int PROFILE_IMAGE_BITMAP_QUALITY = 20;
     public static final int SERVICE_IMAGE_BITMAP_QUALITY = 20;

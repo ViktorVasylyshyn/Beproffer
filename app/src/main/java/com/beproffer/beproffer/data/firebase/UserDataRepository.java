@@ -68,16 +68,16 @@ public class UserDataRepository {
     private final MutableLiveData<UserInfo> mUserInfoLiveData = new MutableLiveData<>();
 
     /*список личных сервисов специалиста*/
-    private Map<String, BrowsingImageItem> mServiceItemsMap = new HashMap<>();
+    private final Map<String, BrowsingImageItem> mServiceItemsMap = new HashMap<>();
     private final MutableLiveData<Map<String, BrowsingImageItem>> mServiceItemsMapLiveData = new MutableLiveData<>();
 
     private final MutableLiveData<BrowsingImageItem> mEditableGalleryItemLiveData = new MutableLiveData<>();
 
     /*список сервисов специалиста который находится в конактах пользователя*/
-    private List<BrowsingImageItem> mServiceItemsList = new ArrayList<>();
+    private final List<BrowsingImageItem> mServiceItemsList = new ArrayList<>();
     private final MutableLiveData<List<BrowsingImageItem>> mServiceItemsListLiveData = new MutableLiveData<>();
 
-    private Map<String, ContactItem> mContactsMap = new HashMap<>();
+    private final Map<String, ContactItem> mContactsMap = new HashMap<>();
     private final MutableLiveData<Map<String, ContactItem>> mContactsMapLiveData = new MutableLiveData<>();
 
     private final MutableLiveData<String> mSpecialistPhone = new MutableLiveData<>();
@@ -89,7 +89,7 @@ public class UserDataRepository {
 
     public LiveData<UserInfo> getUserInfoLiveData() {
 
-        if (mUserInfoLiveData.getValue() == null) {
+        if (mUserInfoLiveData.getValue() == null && FirebaseAuth.getInstance().getCurrentUser() != null) {
             mCurrentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             obtainUserType();
         }
@@ -140,11 +140,11 @@ public class UserDataRepository {
                 .child(mCurrentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChild(Const.INFO)) {
-                    mUserDataSnapShot = dataSnapshot;
-                    mUserInfoLiveData.setValue(mUserDataSnapShot.child(Const.INFO).getValue(UserInfo.class));
-                    mShowProgress.setValue(false);
-                }
+                if (!dataSnapshot.hasChild(Const.INFO))
+                    return;
+                mUserDataSnapShot = dataSnapshot;
+                mUserInfoLiveData.setValue(mUserDataSnapShot.child(Const.INFO).getValue(UserInfo.class));
+                mShowProgress.setValue(false);
                 if (mCurrentUserType.equals(Const.SPEC) && dataSnapshot.hasChild(Const.POPULARITY)) {
                     mPopularity.postValue(String.valueOf(dataSnapshot.child(Const.POPULARITY).getChildrenCount()));
                 }
@@ -201,6 +201,8 @@ public class UserDataRepository {
         }
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
+            if (bitmap == null)
+                return;
             bitmap.compress(Bitmap.CompressFormat.JPEG, bitmapQuality, baos);
         } catch (NullPointerException e) {
             feedBackToUi(false, R.string.toast_error_has_occurred, true,
@@ -245,7 +247,8 @@ public class UserDataRepository {
                         } else {
                             feedBackToUi(false, R.string.toast_error_has_occurred, true,
                                     false, false, R.string.message_error_has_occurred);
-                            Log.d(Const.ERROR, "saveUserInfoToRealTimeDb: " + task.getException().getMessage());
+                            if (task.getException() != null)
+                                Log.d(Const.ERROR, "saveUserInfoToRealTimeDb: " + task.getException().getMessage());
                         }
                     });
     }
@@ -380,7 +383,8 @@ public class UserDataRepository {
             } else {
                 feedBackToUi(false, R.string.toast_error_has_occurred,
                         false, false, false, R.string.message_error_has_occurred);
-                Log.d(Const.ERROR, "saveImageDataToRealtimeDb: " + imgTask.getException().getMessage());
+                if (imgTask.getException() != null)
+                    Log.d(Const.ERROR, "saveImageDataToRealtimeDb: " + imgTask.getException().getMessage());
             }
         });
     }
@@ -391,7 +395,7 @@ public class UserDataRepository {
         try {
             /*TODO после введения локализации - формировать этот запрос с учетом локации пользователя.*/
             /*если удаление неактуального объекта сервиса, по каким то причинам не удается - сохраняем
-             * в раздел notdeleted этот объект, чтобы удалить мануально*/
+             * в раздел "not deleted" этот объект, чтобы удалить мануально*/
             mDatabaseRef.child(Const.SERVICES)
                     .child(LocalizationConstants.UKRAINE)
                     .child(LocalizationConstants.KYIV_REGION)
@@ -403,7 +407,7 @@ public class UserDataRepository {
                     .child(LocalizationConstants.UKRAINE)
                     .child(LocalizationConstants.KYIV_REGION)
                     .child(LocalizationConstants.KYIV)
-                    .child("notdeleted")/*однажды сделать константой*/
+                    .child(Const.NOT_DELETED)
                     .child(updatedItem.getKey())
                     .setValue(updatedItem));
         } catch (NullPointerException e) {
@@ -420,7 +424,6 @@ public class UserDataRepository {
         mServiceItemsMapLiveData.setValue(mServiceItemsMap);
         feedBackToUi(false, R.string.toast_image_data_updated, true,
                 true, false, null);
-
     }
 
     public LiveData<Map<String, ContactItem>> getContacts() {
@@ -531,7 +534,7 @@ public class UserDataRepository {
         return mSpecialistPhone;
     }
 
-    public void obtainSpecialistPhone(String specialistId) {
+    private void obtainSpecialistPhone(String specialistId) {
         mShowProgress.setValue(true);
         mProcessing.setValue(true);
         mDatabaseRef.child(Const.USERS).child(Const.SPEC).child(specialistId).child(Const.INFO).child("phone").addListenerForSingleValueEvent(new ValueEventListener() {

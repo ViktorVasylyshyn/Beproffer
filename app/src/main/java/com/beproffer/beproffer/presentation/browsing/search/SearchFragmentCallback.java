@@ -12,5 +12,6 @@ public interface SearchFragmentCallback {
 
     void onDenyClicked();
 
+    @SuppressWarnings("EmptyMethod")
     void onFreeAreaClicked();
 }

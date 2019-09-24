@@ -135,6 +135,8 @@ public class SignInFragment extends BaseFragment {
             } else {
                 showProgress(false);
                 processing(false);
+                if (task.getException() == null)
+                    return;
                 try {
                     throw task.getException();
                 } catch (FirebaseAuthInvalidUserException weakPassword) {

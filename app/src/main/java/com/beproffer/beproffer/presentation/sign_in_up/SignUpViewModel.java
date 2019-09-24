@@ -13,7 +13,7 @@ public class SignUpViewModel extends AndroidViewModel {
     private final SignUpRepository mRepository;
 
     /*автозаполнение поля email SignInFragment, после регистрации на SignUpFragment и popBackStack*/
-    private MutableLiveData<String> mSignUpEmailLiveData = new MutableLiveData<>();
+    private final MutableLiveData<String> mSignUpEmailLiveData = new MutableLiveData<>();
 
     public SignUpViewModel(@NonNull Application application) {
         super(application);

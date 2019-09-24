@@ -30,11 +30,7 @@
     <string name="hint_any_image_size">Для лучшего отображения используйте изображения до 2 мб.</string>
     <string name="hint_any_add_more_personal_info">Добавьте больше информации о себе, чтобы ваш профиль выглядел привлекательно.</string>
     <string name="hint_specialist_add_more_images">Добавьте больше изображений своих услуг, чтобы найти клиентов.</string>
-    <string name="hint_outfield_confirm">принять</string>
-    <string name="hint_outfield_deny">отклонить</string>
-    <string name="hint_wait_for_confirmation">Когда пециалист подтвердит запрос, его номер появится у Вас в контактах.</string>
     <string name="hint_choose_main_specialization">Пожалуйста, укажите свою основную специализацию.</string>
-    <string name="hint_specialist_no_services">У Вас, еще нет опубликованных сервисов. Нажмите \"Добавить\" чтобы опубликовать первый.</string>
 
     <string name="href_terms_of_service">https://sites.google.com/view/beproffer/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5-%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-beproffer</string>
     <string name="href_terms_of_service_title_0">Пользовательским соглашением</string>
@@ -49,19 +45,14 @@
 
     <!--Titles-->
     <string name="title_contacts">Контакты</string>
-    <string name="title_new_customers_title">Запросы</string>
     <string name="title_create_an_acc">или создать новый аккаунт</string>
     <string name="title_customer_registration">НОВЫЙ КЛИЕНТ</string>
     <string name="title_specialist_registration">НОВЫЙ МАСТЕР</string>
     <string name="title_add_to_contact">добавить в контакты</string>
-    <string name="title_call">позвонить </string>
-    <string name="title_request_already_sent">запрос отправлен</string>
     <string name="title_contact_already_available">УЖЕ ЕСТЬ В КОНТАКТАХ</string>
     <string name="title_max_num_of_contacts">МАКСИМУМ</string>
     <string name="title_this_is_your_image">ЭТО ВАШЕ ИЗОБРАЖЕНИЕ</string>
 
-    <string name="title_specialist_type">МАСТЕР</string>
-    <string name="title_customer_type">КЛИЕНТ</string>
     <string name="title_service_type">ВИД УСЛУГИ</string>
     <string name="title_delete">Удалить</string>
     <string name="title_clear">Очистить</string>
@@ -75,7 +66,6 @@
 
     <string name="title_search">Искать</string>
     <string name="title_try_again">Попробовать снова</string>
-    <string name="title_wants_to_contact">Хочет с Вами связаться.</string>
     <string name="title_main_specialization">Ваша основная специализация.</string>
     <string name="menu_vote_wrong_section">Неподходящий раздел</string>
     <string name="menu_vote_prohibited_content">Запрещенный контент</string>
@@ -91,8 +81,6 @@
 
     <!--/*Start/SignIn/Registration/e.t.s.*/-->
     <string name="app_availability">Приложение доступно, пока что, только в г.Киев(Украина).</string>
-    <string name="register_as_customer">Новый клиент</string>
-    <string name="register_as_specialist">Новый мастер</string>
 
 
     <!--Menu Titles-->
@@ -160,19 +148,14 @@
     <string name="toast_sign_in_verify_email_first">Вам сначала нужно подтвердить адрес своей электронной почты.</string>
     <string name="toast_reset_password_check_your_email">Сообщение для смены пароля отправлено. Проверте свою электронную почту для завершения смены пароля.</string>
     <string name="toast_no_internet_connection">Подключитесь пожалуйста к интерету.</string>
-    <string name="toast_contact_confirmed">Контакт подтвержден.</string>
-    <string name="toast_contact_denied">Контакт отклонен.</string>
     <string name="toast_would_you_like_to_donate">Пока что, можно загрузить 5 изображений максимум.</string>
     <string name="toast_no_any_contacts">У Вас, пока что, нет контактов.</string>
-    <string name="toast_no_any_contact_requests">У Вас, пока что, нет запросов.</string>
     <string name="toast_user_data_updated">Данные пользователя успешно изменены.</string>
     <string name="toast_image_data_updated">Данные изображения успешно изменены.</string>
     <string name="toast_guest_mode">Вы вошли как гость.</string>
     <string name="toast_processing">Подождите пожалуйста. Обработка данных…</string>
     <string name="toast_no_any_service_items">Извините, но, пока что по этому запросу, публикаций нет.</string>
-    <string name="toast_add_personal_info_first">Пожалуйста, добавьте информацию о себе в разделе "редактировать профайл", сначала.</string>
     <string name="toast_images_for_guest_mode">Для гостей, изображения могут повторяться. Пожалуйста, зарегистрируйтесь, чтобы иметь возможность использовать историю просмотров.</string>
-    <string name="toast_not_available_yet">Пока не доступно.</string>
     <string name="toast_telephony_not_available">Совершение звонков недуступно для данного устройства.</string>
     <string name="toast_app_not_found_on_device">Целевое приложение на устройстве не обнаружено.</string>
     <string name="toast_close_the_app">Нажмите \'Назад\' еще раз, чтобы закрыть приложение.</string>

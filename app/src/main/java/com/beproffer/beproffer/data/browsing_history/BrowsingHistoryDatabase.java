@@ -44,7 +44,7 @@ public abstract class BrowsingHistoryDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            browsingHistoryDao.insert(new BrowsingHistoryModel("firstdburl"));
+            browsingHistoryDao.insert(new BrowsingHistoryModel("firstDbUrl"));
             return null;
         }
     }
