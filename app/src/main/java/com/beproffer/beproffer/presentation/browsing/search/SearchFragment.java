@@ -29,7 +29,7 @@ public class SearchFragment extends BaseFragment {
 
     private SearchFragmentLayoutBinding mBinding;
 
-    private SearchFragmentCallback mCallback = new SearchFragmentCallback() {
+    private final SearchFragmentCallback mCallback = new SearchFragmentCallback() {
         @Override
         public void onServiceTypeIconClicked(View view) {
             defineServiceType(view);

@@ -11,8 +11,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.beproffer.beproffer.R;
@@ -84,12 +82,6 @@ public class SignUpFragment extends BaseFragment {
 
         if (this.getArguments() != null) {
             mUserType = this.getArguments().getString(Const.USERS, null);
-        } else {
-            showToast(R.string.toast_error_has_occurred);
-            popBackStack();
-        }
-        if (mUserType.equals(Const.CUST) || mUserType.equals(Const.SPEC)) {
-            /*никаих иных значений на фрагмент регистрации, в качестве типа пользователя, поступить не должно*/
         } else {
             showToast(R.string.toast_error_has_occurred);
             popBackStack();

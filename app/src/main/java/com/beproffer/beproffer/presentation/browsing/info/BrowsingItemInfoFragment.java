@@ -78,6 +78,7 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mBinding.setFragmentCallback(mCallback);
+        mBinding.setShowProgress(mShowProgress);
 
         obtainImageItem();
 
@@ -132,6 +133,7 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
         mUserDataViewModel.addContact(mItem.getId());
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean checkUser() {
         if (getFirebaseUser() != null || mCurrentUserInfo != null) {
             return true;
@@ -141,7 +143,7 @@ public class BrowsingItemInfoFragment extends BaseUserInfoFragment {
         }
     }
 
-    private void showBottomHint(int messageResId) {
+    private void showBottomHint(@SuppressWarnings("SameParameterValue") int messageResId) {
         showToast(messageResId);
         mBinding.browsingImageInfoBottomHint.setText(messageResId);
         mBinding.browsingImageInfoBottomHint.setVisibility(View.VISIBLE);

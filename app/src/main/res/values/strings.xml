@@ -36,12 +36,8 @@
     <string name="hint_any_image_size">Please use images up to 2 MB to display correctly.</string>
     <string name="hint_any_add_more_personal_info">Add information about you, to make your profile more attractive.</string>
     <string name="hint_specialist_add_more_images">Add more images to your gallery, to find more customers.</string>
-    <string name="hint_outfield_confirm">confirm</string>
-    <string name="hint_outfield_deny">deny</string>
     <string name="hint_join_us_on_social">Join us in social networks. Share your impressions and wishes. The links to our social networks are in the "info(i)" section.</string>
-    <string name="hint_wait_for_confirmation">Wait until the request is confirmed by the specialist. It\'ll appear in your contacts\' list.</string>
     <string name="hint_choose_main_specialization">Please, choose your main specialization.</string>
-    <string name="hint_specialist_no_services">You have no services yet. Please tap \"Add\" to publish new one.</string>
 
 
     <!--Refs-->
@@ -67,18 +63,13 @@
 
     <!--Titles-->
     <string name="title_contacts">Contacts</string>
-    <string name="title_new_customers_title">Requests</string>
     <string name="title_create_an_acc">or create new account</string>
     <string name="title_customer_registration">NEW CUSTOMER</string>
     <string name="title_specialist_registration">NEW SPECIALIST</string>
     <string name="title_add_to_contact">add to contacts</string>
-    <string name="title_call">call </string>
-    <string name="title_request_already_sent">request sent</string>
     <string name="title_contact_already_available">YOU ALREADY HAVE THIS CONTACT</string>
     <string name="title_max_num_of_contacts">THE MAX NUM OF CONTACTS IS 10</string>
     <string name="title_this_is_your_image">THIS IS YOUR IMAGE</string>
-    <string name="title_specialist_type">SPECIALIST</string>
-    <string name="title_customer_type">CUSTOMER</string>
     <string name="title_service_type">TYPE</string>
     <string name="title_delete">Delete</string>
     <string name="title_clear">Clear</string>
@@ -92,7 +83,6 @@
     <string name="title_search">Search</string>
     <string name="title_for">for</string>
     <string name="title_try_again">Try again</string>
-    <string name="title_wants_to_contact">Wants to contact you.</string>
     <string name="title_main_specialization">Your main specialization.</string>
     <string name="title_zero" translatable="false">0</string>
 
@@ -105,8 +95,6 @@
 
     <!--/*Start/SignIn/Registration/e.t.s.*/-->
     <string name="app_availability">The app is available only in Kyiv(Ukraine) for now.</string>
-    <string name="register_as_customer">Sign up as a customer</string>
-    <string name="register_as_specialist">Sign up as a specialist</string>
 
 
     <!--Menu Titles-->
@@ -180,18 +168,13 @@
     <string name="toast_reset_password_check_your_email">We sent you a message. Please check your inbox and complete the password changing.</string>
     <string name="toast_no_internet_connection">There is no internet connection. :( </string>
     <string name="toast_no_any_contacts">You have no contacts yet.</string>
-    <string name="toast_no_any_contact_requests">You have no contact requests yet.</string>
     <string name="toast_would_you_like_to_donate">You can add only 5 images for now.</string>
     <string name="toast_user_data_updated">User data updated successfully.</string>
     <string name="toast_image_data_updated">Image data updated successfully.</string>
-    <string name="toast_contact_confirmed">Contact confirmed.</string>
-    <string name="toast_contact_denied">Contact denied.</string>
     <string name="toast_guest_mode">Guest mode.</string>
     <string name="toast_processing">Wait a second, please. Processing…</string>
     <string name="toast_no_any_service_items">There are no publications for this request yet. Please, try again later.</string>
-    <string name="toast_add_personal_info_first">Please, add information about you to "edit profile" section first.</string>
     <string name="toast_images_for_guest_mode">The images in \'guest\' mode can be repeated. Please, sign up to have a possibility to use browsing history.</string>
-    <string name="toast_not_available_yet">The function is not available at the moment.</string>
     <string name="toast_telephony_not_available">The calls aren\'t available on current device.</string>
     <string name="toast_app_not_found_on_device">The target app wasn\'t found on your device.</string>
     <string name="toast_close_the_app">Please, tap \'Back\' onсe more, to close the app.</string>

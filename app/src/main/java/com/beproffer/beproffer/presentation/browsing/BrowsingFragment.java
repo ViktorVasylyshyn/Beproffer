@@ -28,7 +28,7 @@ import java.util.List;
 
 public class BrowsingFragment extends BaseUserInfoFragment {
 
-    protected final ObservableBoolean mShowSearchSign = new ObservableBoolean(false);
+    final ObservableBoolean mShowSearchSign = new ObservableBoolean(false);
 
 
     private BrowsingFragmentBinding mBinding;

@@ -51,7 +51,7 @@ public class SpecialistGalleryFragment extends BaseGalleryFragment {
     private void addNewImage() {
         if (mImageItemsList != null && mImageItemsList.size() >= 5) {
             showToast(R.string.toast_would_you_like_to_donate);
-            cooldown(mBinding.specialistGalleryAddImageButton);
+            coolDownTime(mBinding.specialistGalleryAddImageButton);
             return;
         }
 

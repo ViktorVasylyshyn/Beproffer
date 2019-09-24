@@ -36,7 +36,7 @@ public class ContactsFragment extends BaseUserInfoFragment {
 
     private RecyclerView mItemsRecyclerView;
 
-    private List<ContactItem> mContactsList = new ArrayList<>();
+    private final List<ContactItem> mContactsList = new ArrayList<>();
 
     private ContactsFragmentBinding mBinding;
 

@@ -61,7 +61,7 @@ public class BrowsingItemsRepository {
 
     private Map<String, String> mRequestParams;
 
-    private MutableLiveData<BrowsingImageItem> mTargetBrowsingItemLiveData = new MutableLiveData<>();
+    private final MutableLiveData<BrowsingImageItem> mTargetBrowsingItemLiveData = new MutableLiveData<>();
 
     private final List<BrowsingItemRef> mBrowsingItemRefList = new ArrayList<>();
     private final List<BrowsingItemRef> mBrowsingItemRefStorageList = new ArrayList<>();
@@ -202,7 +202,7 @@ public class BrowsingItemsRepository {
         }
     }
 
-    private ValueEventListener mValueEventListener = new ValueEventListener() {
+    private final ValueEventListener mValueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -263,6 +263,8 @@ public class BrowsingItemsRepository {
         for (DataSnapshot snapshot : mCurrentDataSnapshot.getChildren()) {
             BrowsingItemRef itemRef = snapshot.getValue(BrowsingItemRef.class);
             Log.d(Const.ERROR, "filterBrowsingItemRefs DataSnapshot filtration");
+            if (itemRef == null)
+                return;
 
             if (mUser != null && !mActualBrowsingHistory.contains(itemRef.getUrl())) {
                 handleBrowsingItemRef(itemRef);
@@ -386,7 +388,6 @@ public class BrowsingItemsRepository {
             } else {
                 feedBackToUi(false, null, false, null);
                 filterBrowsingItemRefs();
-
             }
         }
     }

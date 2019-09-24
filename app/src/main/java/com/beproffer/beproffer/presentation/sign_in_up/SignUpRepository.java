@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class SignUpRepository {
+class SignUpRepository {
 
     private final Application mApplication;
 
@@ -48,7 +48,7 @@ public class SignUpRepository {
                               @Nullable String userPhone) {
         feedBackToUi(true, null, false, null, true, false);
         mAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(signUpTask -> {
-            if (signUpTask.isSuccessful()) {
+            if (signUpTask.isSuccessful() && mAuth.getCurrentUser() != null) {
                 try {
                     mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(verifyTask -> {
                         if (verifyTask.isSuccessful()) {
@@ -73,6 +73,8 @@ public class SignUpRepository {
                             false, true);
                 }
             } else {
+                if (signUpTask.getException() == null)
+                    return;
                 try {
                     throw signUpTask.getException();
                 } catch (FirebaseAuthWeakPasswordException weakPassword) {
@@ -140,7 +142,7 @@ public class SignUpRepository {
         return mHideKeyboard;
     }
 
-    public LiveData<Boolean> getVerifyEmail(){
+    public LiveData<Boolean> getVerifyEmail() {
         return mVerifyEmail;
     }
 
@@ -161,7 +163,7 @@ public class SignUpRepository {
         if (resetHideKeyboard) {
             mHideKeyboard.setValue(null);
         }
-        if (resetVerifyEmail){
+        if (resetVerifyEmail) {
             mVerifyEmail.setValue(false);
         }
     }

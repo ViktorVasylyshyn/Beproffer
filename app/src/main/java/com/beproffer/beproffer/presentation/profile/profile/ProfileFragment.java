@@ -30,7 +30,7 @@ public class ProfileFragment extends BaseUserInfoFragment {
 
     private ProfileFragmentBinding mBinding;
 
-    private ObservableBoolean mUserSpecialist = new ObservableBoolean(false);
+    private final ObservableBoolean mUserSpecialist = new ObservableBoolean(false);
 
     private final ProfileFragmentCallback mCallback = new ProfileFragmentCallback() {
 

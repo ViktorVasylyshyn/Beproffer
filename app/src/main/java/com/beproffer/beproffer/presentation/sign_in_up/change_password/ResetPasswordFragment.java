@@ -53,6 +53,8 @@ public class ResetPasswordFragment extends BaseFragment {
                 showProgress(false);
                 changeFragment(new SignInFragment(), true, true, false, null);
             } else {
+                if (task.getException() == null)
+                    return;
                 try {
                    throw task.getException();
                 } catch (FirebaseAuthInvalidUserException invalidUser) {

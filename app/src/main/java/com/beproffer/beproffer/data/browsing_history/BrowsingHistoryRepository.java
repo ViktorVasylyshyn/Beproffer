@@ -8,7 +8,7 @@ import java.util.List;
 
 public class BrowsingHistoryRepository {
     private final BrowsingHistoryDao browsingHistoryDao;
-    private LiveData<List<String>> targetBrowsingHistory;
+    private final LiveData<List<String>> targetBrowsingHistory;
 
     public BrowsingHistoryRepository(Application application){
         BrowsingHistoryDatabase database = BrowsingHistoryDatabase.getInstance(application);

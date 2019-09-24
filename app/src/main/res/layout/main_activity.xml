@@ -14,8 +14,7 @@
         app:itemIconSize="@dimen/bnb_icon_size"
         app:itemTextColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_navigation_menu"
-        android:background="@color/color_background_grey"/>
+        app:menu="@menu/bottom_navigation_menu"/>
 
     <FrameLayout
         android:id="@+id/fragment_container"

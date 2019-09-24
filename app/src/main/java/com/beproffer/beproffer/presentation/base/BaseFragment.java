@@ -51,7 +51,8 @@ public class BaseFragment extends Fragment {
     protected void hideKeyboard(Activity activity) {
         if (activity.getCurrentFocus() != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+            if (inputMethodManager != null)
+                inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
         }
     }
 
@@ -82,7 +83,7 @@ public class BaseFragment extends Fragment {
         mProcessing.set(processing);
     }
 
-    protected void cooldown(View view) {
+    protected void coolDownTime(View view) {
         view.setClickable(false);
         Handler handlerWordAnim = new Handler();
         handlerWordAnim.postDelayed(() -> view.setClickable(true), Const.COOLDOWNDUR_LONG);

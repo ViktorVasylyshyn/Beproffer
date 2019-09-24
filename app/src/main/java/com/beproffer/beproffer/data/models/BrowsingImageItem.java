@@ -16,7 +16,7 @@ public class BrowsingImageItem implements Parcelable {
     private String profileImageUrl;
     private String name;
 
-    public BrowsingImageItem(){
+    public BrowsingImageItem() {
 
     }
 

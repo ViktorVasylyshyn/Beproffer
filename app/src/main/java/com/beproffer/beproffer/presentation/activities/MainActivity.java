@@ -2,8 +2,6 @@ package com.beproffer.beproffer.presentation.activities;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,8 +18,6 @@ import com.beproffer.beproffer.presentation.contacts.confirmed.ContactsFragment;
 import com.beproffer.beproffer.presentation.profile.profile.ProfileFragment;
 import com.beproffer.beproffer.presentation.sign_in_up.sign_in.SignInFragment;
 import com.beproffer.beproffer.util.Const;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -121,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    boolean mCloseAppPermit;
+    private boolean mCloseAppPermit;
 
     @Override
     public void onBackPressed() {
