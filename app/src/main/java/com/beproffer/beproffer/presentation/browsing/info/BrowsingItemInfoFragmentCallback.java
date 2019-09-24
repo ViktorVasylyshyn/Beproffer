@@ -1,5 +1,7 @@
 package com.beproffer.beproffer.presentation.browsing.info;
 
+import android.view.View;
+
 /*must be public for binding*/
 public interface BrowsingItemInfoFragmentCallback {
 
@@ -9,5 +11,5 @@ public interface BrowsingItemInfoFragmentCallback {
 
     void onVoteClick();
 
-    void onCallClick();
+    void onCallClick(View view);
 }

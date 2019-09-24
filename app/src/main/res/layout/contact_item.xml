@@ -26,16 +26,53 @@
             android:layout_marginTop="@dimen/base_margin_extra_small"
             android:layout_marginEnd="@dimen/base_margin_small"
             app:loadProfileImageFromDb="@{item.profileImageUrl}"
-            app:layout_constraintBottom_toTopOf="@+id/contact_item_info"
+            app:layout_constraintBottom_toTopOf="@+id/contact_popularity_icon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/contact_popularity_icon"
+            android:layout_width="@dimen/base_margin_big"
+            android:layout_height="@dimen/base_margin_big"
+            android:src="@drawable/ic_star"
+            android:layout_marginEnd="@dimen/base_margin_medium"
+            app:layout_constraintStart_toStartOf="@+id/contact_item_image"
+            app:layout_constraintEnd_toEndOf="@+id/contact_item_image"
+            app:layout_constraintTop_toBottomOf="@+id/contact_item_image"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/contact_popularity_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_padding_small"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/title_zero"
+            android:textColor="@color/color_base_text_70per"
+            android:textSize="@dimen/base_text_size_medium"
+            tools:ignore="MissingConstraints"
+            app:loadPopularity="@{item.id}"
+            app:layout_constraintStart_toEndOf="@+id/contact_popularity_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/contact_popularity_icon"
+            app:layout_constraintTop_toTopOf="@+id/contact_popularity_icon"/>
+
+        <ImageView
+            android:id="@+id/contact_specialization_icon"
+            android:layout_width="@dimen/icons_width_small"
+            android:layout_height="@dimen/icons_height_small"
+            android:layout_margin="@dimen/base_margin_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setSpecialistTypeImage="@{item.specialization}"
             tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/contact_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
+            android:layout_margin="@dimen/base_margin_extra_small"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{item.name}"
@@ -44,24 +81,14 @@
             app:layout_constraintStart_toEndOf="@+id/contact_item_image"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:layout_width="@dimen/icons_width_medium"
-            android:layout_height="@dimen/icons_height_medium"
-            android:layout_margin="@dimen/base_margin_small"
-            app:layout_constraintBottom_toBottomOf="@+id/contact_item_phone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/contact_item_phone"
-            app:setSpecialistTypeImage="@{item.specialization}"
-            tools:ignore="ContentDescription" />
-
         <TextView
             android:id="@+id/contact_item_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
+            android:layout_margin="@dimen/base_margin_extra_small"
             android:text="@{item.phone}"
             android:textColor="@color/color_base_text"
-            android:textSize="@dimen/base_text_size_big"
+            android:textSize="@dimen/base_text_size_medium"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/contact_item_image"
             app:layout_constraintTop_toBottomOf="@+id/contact_item_name" />
@@ -81,10 +108,11 @@
             android:textColor="@color/color_base_text_70per"
             android:textSize="@dimen/base_text_size_medium"
             android:textStyle="italic|bold"
+            app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contact_item_image" />
+            app:layout_constraintStart_toEndOf="@+id/contact_popularity_value"
+            app:layout_constraintTop_toBottomOf="@+id/contact_item_phone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
