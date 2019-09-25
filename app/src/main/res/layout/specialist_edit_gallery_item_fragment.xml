@@ -64,7 +64,7 @@
             android:onClick="@{(view) -> callback.setImage()}"
             app:layout_constraintEnd_toStartOf="@+id/specialist_edit_gallery_item_type_scroll"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/specialist_edit_gallery_item_logo"
+            app:layout_constraintTop_toBottomOf="@+id/specialist_edit_gallery_item_apply_data"
             app:loadServiceImageFromDb="@{item.url}"
             tools:ignore="ContentDescription" />
 
@@ -287,7 +287,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base_margin_medium"
             android:layout_marginEnd="@dimen/base_margin_medium"
-            android:layout_marginBottom="@dimen/base_margin_small"
             android:background="@drawable/button_background_grey_stroke_rectangle"
             app:layout_constrainedHeight="true"
             app:layout_constraintBottom_toBottomOf="parent"

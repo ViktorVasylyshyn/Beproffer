@@ -46,6 +46,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/sign_up_apply_icon"
             android:layout_width="@dimen/bnb_icon_size"
             android:layout_height="@dimen/bnb_icon_size"
             android:layout_margin="@dimen/base_margin_small"
@@ -59,14 +60,14 @@
             android:id="@+id/sign_up_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/base_margin_small"
+            android:layout_margin="@dimen/base_margin_extra_small"
             android:background="@drawable/rectangle_white_background"
             android:hint="@string/name_infield"
             android:maxLength="30"
             android:maxLines="1"
             android:padding="@dimen/base_padding_small"
             android:textSize="@dimen/base_text_size_big"
-            app:layout_constraintTop_toBottomOf="@+id/sign_up_logo"
+            app:layout_constraintTop_toBottomOf="@+id/sign_up_apply_icon"
             tools:ignore="Autofill,TextFields" />
 
         <EditText
